@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yttx.yttxps.mapper.SysDepMapper">
+
+	<resultMap type="SysDep" id="sysDepResultMap">
+		<result property="depNo" column="FI_DEPNO"/>
+		<result property="depName" column="FS_DEPNAME" />
+		<result property="stat" column="FI_STAT" />
+	</resultMap>
+	
+	<select id="findAll"  resultMap="sysDepResultMap"> 
+        <![CDATA[
+            SELECT * from TSYSDEP
+        ]]>  
+    </select> 
+    
+	<select id="findByNo" parameterType="int" resultMap="sysDepResultMap">
+		 <![CDATA[
+		SELECT * from TSYSDEP WHERE FI_DEPNO = #{depNo}
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="SysDep">
+    	insert into TSYSDEP (FI_DEPNO, FS_DEPNAME, FI_STAT)
+    	values (#{depNo}, #{depName},  #{stat})
+	</insert>
+
+
+</mapper> 

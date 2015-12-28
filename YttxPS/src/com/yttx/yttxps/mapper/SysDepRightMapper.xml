@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yttx.yttxps.mapper.SysDepRightMapper">
+
+	<resultMap type="SysDepRight" id="sysDepRightResultMap">
+		<result property="depNo" column="FI_DEPNO"/>
+		<result property="right" column="FS_RIGHT" />
+	</resultMap>
+	
+	<select id="findByNo" parameterType="int" resultMap="sysDepRightResultMap">
+		<![CDATA[
+		SELECT * FROM TSYSDEPRIGHT WHERE FI_DEPNO = #{depNo}
+		 ]]>
+	</select>
+	
+	
+	<insert id ="insertBatch" parameterType="List" > 
+		<![CDATA[
+	    INSERT INTO TSYSDEPRIGHT(FI_DEPNO,FS_RIGHT)
+	    ]]>
+	    <foreach collection ="list" item ="item" index ="index" separator=","> 
+	     (#{item.depNo},#{item.right})  
+	    </foreach > 
+	</insert >
+
+
+</mapper> 

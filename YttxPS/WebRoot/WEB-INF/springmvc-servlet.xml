@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		 <property name="locations">
+             <list>
+                 <value>classpath:resources/*.properties</value>
+             </list>
+         </property>
+	</bean>
+	
+	<bean id="ftpClient"
+		class="com.yttx.yttxps.comm.UPFileClient">
+		<property name="server">
+			<value>${ftp.server}</value>
+		</property>
+		<property name="port" >
+			<value>${ftp.port}</value>
+		</property>
+		<property name="username" >
+			<value>${ftp.username}</value>
+		</property>
+		<property name="password" >
+			<value>${ftp.password}</value>
+		</property>
+		<property name="remotePath" >
+			<value>${ftp.remotePath}</value>
+		</property>
+	</bean>
+	
+	<mvc:annotation-driven />
+	
+	<context:component-scan base-package="com.yttx"></context:component-scan>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="stringHttpMessageConverter" />
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="stringHttpMessageConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 支持上传文件 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
+		<property name="maxUploadSize" value="5242880"></property>
+		<property name="maxInMemorySize" value="40960"></property>
+	</bean>
+	
+	<!-- 异常共通处理 -->
+	<bean id="exceptionResolver" class="com.yttx.yttxps.web.interceptor.ExceptionHandler" />
+
+	<!-- 业务拦截器 -->
+	<mvc:interceptors>
+		<bean class="com.yttx.yttxps.web.interceptor.SessionInterceptor">
+			<property name="excludeMapping" value="index.htm,login.htm" />
+		</bean>
+		<bean class="com.yttx.yttxps.web.interceptor.AuthorityInterceptor">
+			<property name="excludeMapping" value="index.htm,login.htm" />
+		</bean>
+	</mvc:interceptors>
+	
+</beans>

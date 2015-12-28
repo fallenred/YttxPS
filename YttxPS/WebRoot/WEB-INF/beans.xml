@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+						http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd  
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+	default-lazy-init="false">
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!--maxActive: 最大活动连接-->  
+		<property name="maxActive" value="${jdbc.maxActive}"/>  
+        <!--minIdle: 最小空闲连接-->    
+        <property name="minIdle" value="${jdbc.minIdle}"/>  
+        <!--maxIdle: 最大空闲连接-->    
+        <property name="maxIdle" value="${jdbc.maxIdle}"/>  
+        <!--initialSize: 初始化连接-->    
+        <property name="initialSize" value="${jdbc.initialSize}"/>  
+        <!-- 连接被泄露时是否打印 -->  
+        <property name="logAbandoned" value="true"/>  
+        <!--removeAbandoned: 是否自动回收超时连接-->    
+        <property name="removeAbandoned"  value="true"/>  
+        <!--removeAbandonedTimeout: 超时时间(以秒数为单位)-->    
+        <property name="removeAbandonedTimeout" value="10"/>  
+        <!--maxWait: 超时等待时间以毫秒为单位 1000等于60秒-->  
+        <property name="maxWait" value="1000"/>  
+        <!-- 在空闲连接回收器线程运行期间休眠的时间值,以毫秒为单位. -->  
+        <property name="timeBetweenEvictionRunsMillis" value="10000"/>  
+        <!--  在每次空闲连接回收器线程(如果有)运行时检查的连接数量 -->  
+        <property name="numTestsPerEvictionRun" value="10"/>  
+        <!-- 1000 * 60 * 30  连接在池中保持空闲而不被空闲连接回收器线程-->  
+        <property name="minEvictableIdleTimeMillis" value="10000"/>  
+        
+    	<property name="validationQuery" value="SELECT 1 FROM DUAL"/> 
+
+	</bean>
+	
+	<!--dataSource属性指定要用到的连接池 -->
+	<!--configLocation属性指定mybatis的核心配置文件 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:resources/Configuration.xml" />
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.yttx.yttxps.mapper"/>
+	</bean>
+	
+</beans>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 使用说明: debug="true" 启动时输出配置加载信息 scan="true" 默认每分钟自动扫描 scanPeriod="30 
+	seconds" 设置每30秒自动扫描, 若没有指定具体单位则以milliseconds为标准(单位:milliseconds, seconds, 
+	minutes or hours) -->
+<configuration scan="true" scanPeriod="20 seconds">
+	<contextName>pmgr</contextName>
+	<property name="LOGHOME" value="E:/temp/home/applog/" />
+	<property name="PROJECT" value="yttxps" />
+
+	<!--appender 模块 -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder charset="UTF-8">
+			<pattern>[%level]-%date-%logger#%line %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	
+	<appender name="FILE_DEFAULT" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>${LOGHOME}${PROJECT}/default.log</file>
+		
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+        	<fileNamePattern>${LOGHOME}${PROJECT}/default.%d{yyyy-MM-dd}.zip</fileNamePattern>  
+        	<maxHistory>1024</maxHistory>  
+    	</rollingPolicy>  
+    
+		<encoder charset="UTF-8">
+			<pattern>[%level]-%date{HH:mm:ss.SSS}-%logger %msg%n</pattern>
+		</encoder>
+	</appender>
+
+ 
+ 	<appender name="FILE_CNACEX" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>${LOGHOME}${PROJECT}/yttxps.log</file>
+		
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+        	<fileNamePattern>${LOGHOME}${PROJECT}/yttxps.%d{yyyy-MM-dd}.zip</fileNamePattern>  
+        	<maxHistory>1024</maxHistory>  
+    	</rollingPolicy>  
+    
+		<encoder charset="UTF-8">
+			<pattern>[%level]-%date{HH:mm:ss.SSS}-%logger %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.yttx" level="DEBUG"  additivity="false">
+		<appender-ref ref="FILE_CNACEX" />
+		<appender-ref ref="CONSOLE" />	
+	</logger>
+
+
+	<root level="DEBUG">
+		<appender-ref ref="FILE_DEFAULT" />	
+		<appender-ref ref="CONSOLE" />	
+	</root>
+	
+</configuration>

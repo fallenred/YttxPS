@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yttx.yttxps.mapper.SysOperMapper">
+
+	<resultMap type="SysOper" id="sysOperResultMap">
+		<result property="sysOperId" column="FS_SYSOPERID"/>
+		<result property="sysOperName" column="FS_SYSOPERNAME" />
+		<result property="adminType" column="FI_ADMINTYPE" />
+		<result property="depNo" column="FI_DEPNO" />
+		<result property="sysOperPwd" column="FS_SYSOPERPWD" />
+		<result property="pwdStat" column="FI_PWDSTAT" />
+		<result property="stat" column="FI_STAT" />
+	</resultMap>
+	
+	<select id="findById" parameterType="string" resultMap="sysOperResultMap">
+		select * from TSysOper where trim(fs_sysoperid) = #{sysOperId}
+	</select>
+	
+	<insert id="insert" parameterType="SysOper">
+    	insert into TSysOper (FS_SYSOPERID, FS_SYSOPERNAME, FI_ADMINTYPE, FI_DEPNO, FS_SYSOPERPWD, FI_PWDSTAT, FI_STAT)
+    	values (#{sysOperId}, #{sysOperName},  #{adminType}, #{depNo}, #{sysOperPwd}, #{pwdStat}, #{stat})
+	</insert>
+	
+	<update id="update" parameterType="SysOper" flushCache="true">
+    	UPDATE TSYSOPER SET FS_SYSOPERNAME = #{sysOperName}, FI_ADMINTYPE = #{adminType},  FI_DEPNO = #{depNo}, FS_SYSOPERPWD = #{sysOperPwd}, FI_PWDSTAT = #{pwdStat}, FI_STAT = #{stat} 
+    	WHERE FS_SYSOPERID = #{sysOperId}
+	</update>
+
+
+</mapper> 

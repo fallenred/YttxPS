@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yttx.yttxps.mapper.SysOperRightMapper">
+
+	<resultMap type="SysOperRight" id="sysOperRightResultMap">
+		<result property="sysOperId" column="FS_SYSOPERID"/>
+		<result property="right" column="FS_RIGHT" />
+	</resultMap>
+	
+	<select id="findById" parameterType="string" resultMap="sysOperRightResultMap">
+		<![CDATA[
+		select * from TSysOperRight where trim(fs_sysoperid) = #{sysOperId}
+		]]>
+	</select>
+	
+	<insert id ="insertBatch" parameterType="List" > 
+		<![CDATA[
+	    insert into TSysOperRight(FS_SYSOPERID,fs_RIGHT)
+	    ]]>
+	    <foreach collection ="list" item ="item" index ="index" separator=","> 
+	     (#{item.sysOperId},#{item.right})  
+	    </foreach > 
+	</insert > 
+	
+</mapper> 
