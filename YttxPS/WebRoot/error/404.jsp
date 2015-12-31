@@ -9,7 +9,7 @@
 		<jsp:include page="/jsp/comm/css.jsp" flush="true" />
 		<jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
 	</head>
-	<body>
+	<body class="no-skin">
 		<jsp:include page="/jsp/comm/topbar.jsp" flush="true" />
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">

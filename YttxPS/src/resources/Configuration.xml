@@ -39,6 +39,9 @@
         <mapper resource="com/yttx/yttxps/mapper/SysOperRightMapper.xml" />
         <mapper resource="com/yttx/yttxps/mapper/SysDepMapper.xml" />  
         <mapper resource="com/yttx/yttxps/mapper/SysDepRightMapper.xml" />  
+        <mapper resource="com/yttx/yttxps/mapper/PicMapper.xml" />  
+        <mapper resource="com/yttx/yttxps/mapper/RegionMapMapper.xml" />  
+        <mapper resource="com/yttx/yttxps/mapper/ScenicMapper.xml" />  
     </mappers>
 	
 	  

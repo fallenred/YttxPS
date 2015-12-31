@@ -22,7 +22,7 @@
 					<div class="login-container">
 						<div class="center">
 							<h1>
-								<i class="icon-leaf green"></i> <span
+								<i class="fa fa-leaf green"></i> <span
 									class="white">后台管理系统</span>
 							</h1>
 							<h4 class="blue">&copy; YTTX</h4>
@@ -36,7 +36,7 @@
 								<div class="widget-body">
 									<div class="widget-main">
 										<h4 class="header blue lighter bigger">
-											<i class="icon-coffee green"></i> 请输入您的登录信息
+											<i class="fa fa-coffee green"></i> 请输入您的登录信息
 										</h4>
 
 										<div class="space-6"></div>
@@ -44,12 +44,12 @@
 										<form action="login.htm" method="post" id="login-form">
 											<fieldset>
 												<label class="block clearfix"> <span
-													class="block input-icon input-icon-right"> <input
+													class="block input-icon input-fa fa-right"> <input
 														type="text" class="form-control" placeholder="用户名" id="userid" name="userid" />
-														<i class="icon-user"></i> </span> </label> <label class="block clearfix">
-													<span class="block input-icon input-icon-right"> <input
+														<i class="fa fa-user"></i> </span> </label> <label class="block clearfix">
+													<span class="block input-icon input-fa fa-right"> <input
 														type="password" class="form-control"
-														placeholder="密码" id="password" name="password" /> <i class="icon-lock"></i> </span> </label>
+														placeholder="密码" id="password" name="password" /> <i class="fa fa-lock"></i> </span> </label>
 
 												<div class="space"></div>
 
@@ -59,7 +59,7 @@
 
 													<button type="button" id="loginbtn"
 														class="width-35 pull-right btn btn-sm btn-primary">
-														<i class="icon-key"></i> 登录
+														<i class="fa fa-key"></i> 登录
 													</button>
 												</div>
 
@@ -76,7 +76,7 @@
 									<div class="toolbar clearfix">
 										<div>
 											<a href="#" onclick="show_box('forgot-box'); return false;"
-												class="forgot-password-link"> <i class="icon-arrow-left"></i>
+												class="forgot-password-link"> <i class="fa fa-arrow-left"></i>
 												忘记密码?</a>
 										</div>
 
@@ -91,7 +91,7 @@
 								<div class="widget-body">
 									<div class="widget-main">
 										<h4 class="header red lighter bigger">
-											<i class="icon-key"></i> 找回密码
+											<i class="fa fa-key"></i> 找回密码
 										</h4>
 
 										<div class="space-6"></div>
@@ -100,14 +100,14 @@
 										<form method="post" id="forgot-form" action="forgot.htm">
 											<fieldset>
 												<label class="block clearfix"> <span
-													class="block input-icon input-icon-right"> <input
+													class="block input-icon input-fa fa-right"> <input
 														type="email" class="form-control" placeholder="电子邮箱" />
-														<i class="icon-envelope"></i> </span> </label>
+														<i class="fa fa-envelope"></i> </span> </label>
 
 												<div class="clearfix">
 													<button type="button"
 														class="width-35 pull-right btn btn-sm btn-danger">
-														<i class="icon-lightbulb"></i> 找回密码！
+														<i class="fa fa-lightbulb"></i> 找回密码！
 													</button>
 												</div>
 											</fieldset>
@@ -117,7 +117,7 @@
 									<div class="toolbar center">
 										<a href="#" onclick="show_box('login-box'); return false;"
 											class="back-to-login-link"> 返加登录 <i
-											class="icon-arrow-right"></i> </a>
+											class="fa fa-arrow-right"></i> </a>
 									</div>
 								</div>
 								<!-- /widget-body -->

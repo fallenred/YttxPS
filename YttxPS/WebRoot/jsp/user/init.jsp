@@ -93,11 +93,11 @@
 														</div>
 
 														<div class="clearfix form-actions">
-															<div class="col-md-offset-3 col-md-9">
+															<div class="col-md-offset-3 ">
 																<button class="btn btn-info" type="button" id="confirmbtn">
 																	<i class="icon-ok bigger-110"></i> 确认
 																</button>
-																&nbsp; &nbsp; &nbsp;
+																&nbsp; &nbsp; &nbsp; &nbsp;
 																<button class="btn" type="reset" id="resetbtn">
 																	<i class="icon-undo bigger-110"></i> 重置
 																</button>

@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
 		<title>后台管理系统</title>
 		<meta name="keywords" content="" />
@@ -9,7 +10,7 @@
 		<jsp:include page="/jsp/comm/css.jsp" flush="true" />
 		<jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
 	</head>
-	<body>
+	<body class="no-skin">
 		<jsp:include page="/jsp/comm/topbar.jsp" flush="true" />
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -31,7 +32,7 @@
 
 						<ul class="breadcrumb">
 							<li>
-								<i class="icon-home home-icon"></i>
+								<i class="fa fa-home home-icon"></i>
 								<a href="#">Home</a>
 							</li>
 

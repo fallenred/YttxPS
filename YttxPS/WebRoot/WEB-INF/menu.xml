@@ -1,51 +1,52 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <xml>
 	<menu>
-		<item id="0200" name="平台用户管理" icon="icon-user">
+		<item id="0200" name="平台用户管理" icon="menu-icon fa fa-user">
 			<submenu>
 				<item id="02a0" name="部门设置" url="/user/depsetting.htm" />
 				<item id="02b0" name="用户设置" url="/user/opersetting.htm" />
 			</submenu>
 		</item>
 		
-		<item id="0300" name="会员管理" icon="icon-group" >
+		<item id="0300" name="会员管理" icon="menu-icon fa fa-group" >
 			<submenu>
 				<item id="03a0" name="会员审核" url="/member/audit.htm" />
 				<item id="03b0" name="会员设置" url="/member/setting.htm" />
 			</submenu>
 		</item>
 		
-		<item id="0400" name="景区资源管理" icon="icon-table" >
+		<item id="0400" name="景区资源管理" icon="menu-icon fa fa-table" >
 			<submenu>
-				<item id="04a0" name="门票资源管理" url="/scenic/ticket.htm" />
+				<item id="04a0" name="景区管理" url="/jsp/scenic/scenic.jsp" />
+				<item id="04b0" name="门票资源管理" url="/scenic/ticket.htm" />
 			</submenu>
 		</item>
 		
-		<item id="0500" name="娱乐资源管理" icon="icon-table" >
+		<item id="0500" name="娱乐资源管理" icon="menu-icon fa fa-table" >
 			<submenu>
 				<item id="05a0" name="娱乐项目配置" url="/entertain/ticket.htm" />
 			</submenu>
 		</item>
 		
-		<item id="0600" name="餐厅资源管理" icon="icon-table" >
+		<item id="0600" name="餐厅资源管理" icon="menu-icon fa fa-table" >
 			<submenu>
 				<item id="06a0" name="餐厅资源配置" url="/restaurant/project.htm" />
 			</submenu>
 		</item>
 		
-		<item id="0700" name="驾驶员资料管理" icon="icon-table" >
+		<item id="0700" name="驾驶员资料管理" icon="menu-icon fa fa-table" >
 			<submenu>
 				<item id="07a0" name="资料配置" url="/driver/configure.htm" />
 			</submenu>
 		</item>
 		
-		<item id="0800" name="车辆资料管理" icon="icon-table" >
+		<item id="0800" name="车辆资料管理" icon="menu-icon fa fa-table" >
 			<submenu>
 				<item id="08a0" name="资料配置" url="/bus/configure.htm" />
 			</submenu>
 		</item>
 		
-		<item id="0900" name="车型管理配置" icon="icon-table" >
+		<item id="0900" name="车型管理配置" icon="menu-icon fa fa-sitemap" >
 			<submenu>
 				<item id="09a0" name="线路概况维护" url="/bustype/route.htm" />
 			</submenu>

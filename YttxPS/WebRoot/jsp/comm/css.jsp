@@ -13,18 +13,25 @@
 		<![endif]-->
 
 <!-- page specific plugin styles -->
+<link rel="stylesheet" href="/css/jquery-ui.min.css" />
+<link rel="stylesheet" href="/css/datepicker.css" />
+<link rel="stylesheet" href="/css/ui.jqgrid.css" />
 
 <!-- fonts -->
+<link rel="stylesheet" href="/css/ace-fonts.css" />
 
 <!-- ace styles -->
 
-<link rel="stylesheet" href="/css/ace.min.css" />
-<link rel="stylesheet" href="/css/ace-rtl.min.css" />
+
+<link rel="stylesheet" href="/css/ace.min.css" id="main-ace-style" />
 <link rel="stylesheet" href="/css/ace-skins.min.css" />
+<link rel="stylesheet" href="/css/ace-rtl.min.css" />
+
+
 
 <!--[if lte IE 8]>
 		  <link rel="stylesheet" href="/css/ace-ie.min.css" />
 		<![endif]-->
 
 <!-- inline styles related to this page -->
-
+<link rel="stylesheet" href="/css/my.css" />
