@@ -11,8 +11,8 @@ actFormatter = function(cellvalue, options, rawObject) {
 };
 
 function localcallback(index, key, value, fullkey, fullname) {
-	$("#regionName").val(fullname);
-	$("#region").val(key);
+	$("#regionname").val(fullname);
+	$("#regionno").val(key);
 	if(index == 3)
 		$("#selectCity").hide();
 }
@@ -23,7 +23,7 @@ var localsel = $('.localcity').localCity({
 	disturl : "/pub/findcity.htm",
 	callback : localcallback
 });
-$("#regionName").click (function(){
+$("#regionname").click (function(){
 	$("#selectCity").show();
 })
 
@@ -31,12 +31,17 @@ $("#submit").click(function(){
 	$("#collapseOne").collapse('hide');
 	$("#collapseTwo").collapse('show');
 	var postData = $("#grid-table").jqGrid("getGridParam", "postData");
-	postData["no"] = $("#queryfield").find("#no").val();
-	postData["name"] = $("#queryfield").find("#name").val();
-	postData["region"] = $("#queryfield").find("#region").val();
-	postData["lvl"] = $("#queryfield").find("#lvl").val();
-	postData["stat"] = $("#queryfield").find("#stat").val();
+	postData["scenic.no"] = $("#queryfield").find("#no").val();
+	postData["scenic.name"] = $("#queryfield").find("#name").val();
+	postData["scenic.regionno"] = $("#queryfield").find("#regionno").val();
+	postData["scenic.lvl"] = $("#queryfield").find("#lvl").val();
+	postData["scenic.stat"] = $("#queryfield").find("#stat").val();
 	$("#grid-table").jqGrid("setGridParam", { postData: postData }).trigger("reloadGrid");
+})
+
+$("#reset").click(function(){
+	$("#selectCity").hide();
+	$("#regionno").val(null);
 })
 
 jQuery(function($) {
@@ -66,9 +71,9 @@ jQuery(function($) {
 	jQuery(grid_selector).jqGrid({
 		url:"/scenic/findScenic.htm",
 		datatype: "json",
-//		mtype: 'POST',
+		mtype: 'POST',
 		height : 300,
-		colNames : [ '操作', '景点代码', '景点名称', '景点地址', '景点级别', '开放时间', '状态' ],
+		colNames : [ '操作', '景点代码', '景点名称', '所需地区', '景点地址', '景点级别', '开放时间', '状态' ],
 		colModel : [ {
 			name : 'myac',
 			index : '',
@@ -100,6 +105,12 @@ jQuery(function($) {
 			editable : true,
 			sorttype : "char",
 		}, {
+			name : 'regionno',
+			index : 'regionno',
+			width : 1,
+			editable : true,
+			hidden:true,
+		}, {
 			name : 'addr',
 			index : 'addr',
 			width : 150,
@@ -110,8 +121,8 @@ jQuery(function($) {
 			width : 30,
 			editable : true,
 		}, {
-			name : 'openTime',
-			index : 'openTime',
+			name : 'opentime',
+			index : 'opentime',
 			width : 100,
 			editable : true,
 		}, {

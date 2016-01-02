@@ -53,6 +53,11 @@ public interface RegionMapMapper {
      */
     int updateByPrimaryKey(RegionMap record);
     
+    /**
+     * 
+     * @param manageNo
+     * @return
+     */
     List<RegionMap> selectByManageNo(String manageNo);
     
 }

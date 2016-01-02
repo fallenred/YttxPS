@@ -88,10 +88,10 @@
 												<label class="col-sm-1 control-label no-padding-right"
 													for="region">所属地区</label>
 												<div class="col-sm-2">
-													<input type="text" placeholder="请选择行政区域" name="regionName"
+													<input type="text" placeholder="请选择行政区域" name="regionname"
 														data-key="0086" data-idx="0" data-full="中国"
-														id="regionName" class="inp-search" /> <input
-														type="hidden" name="region" id="region" />
+														id="regionname" class="inp-search" /> <input
+														type="hidden" name="region" id="regionno" />
 													<div id="selectCity" class="localcity"></div>
 												</div>
 											</div>
@@ -129,7 +129,7 @@
 													</button>
 
 													&nbsp; &nbsp; &nbsp;
-													<button class="btn" type="reset">
+													<button class="btn" type="reset" id="reset">
 														<i class="ace-icon fa fa-undo bigger-110"></i> 重置
 													</button>
 												</div>

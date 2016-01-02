@@ -111,6 +111,8 @@
       FI_LVL = #{lvl,jdbcType=DECIMAL}
     where FS_NO = #{no,jdbcType=VARCHAR}
   </update>
+  
+  <!-- 查询下级区域 -->
     <select id="selectByManageNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
     <!--
       WARNING - @mbggenerated

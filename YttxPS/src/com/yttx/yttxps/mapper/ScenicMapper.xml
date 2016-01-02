@@ -170,68 +170,77 @@
     where FS_NO = #{no,jdbcType=VARCHAR}
   </update>
   
-  <select id="selectCountSelective" parameterType="com.yttx.yttxps.model.Scenic" resultType="int">
+  <!-- 动态查询总数 -->
+  <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
       select count(*) from TSCENIC
       where 1=1
-      <if test="no != null" >
-        and FS_NO like #{no}
+      <if test="no != null and no != ''" >
+        and FS_NO like '%'||#{no}||'%'
       </if>
-      <if test="name != null" >
-        and FS_NAME like #{name},
+      <if test="name != null and name != ''" >
+        and FS_NAME like '%'||#{name}||'%'
       </if>
-      <if test="regionno != null" >
-        and FS_REGIONNO like #{regionno},
+      <if test="regionno != null and regionno != ''" >
+        and FS_REGIONNO like '%'||#{regionno}||'%'
       </if>
-      <if test="addr != null" >
-        and FS_ADDR like #{addr},
+      <if test="addr != null and addr != ''" >
+        and FS_ADDR like '%'||#{addr}||'%'
       </if>
-      <if test="desc != null" >
-        and FS_DESC like #{desc},
+      <if test="desc != null and desc != ''" >
+        and FS_DESC like '%'||#{desc}||'%'
       </if>
-      <if test="lvl != null" >
-        and FS_LVL = #{lvl},
+      <if test="lvl != null and lvl != ''">
+        and FS_LVL like '%'||#{lvl}||'%'
       </if>
-      <if test="opentime != null" >
-        and FS_OPENTIME like #{opentime},
+      <if test="opentime != null and opentime != ''" >
+        and FS_OPENTIME like '%'||#{opentime}||'%'
       </if>
-      <if test="speciality != null" >
-        and FS_SPECIALITY like #{speciality},
+      <if test="speciality != null and speciality != ''" >
+        and FS_SPECIALITY like '%'||#{speciality}||'%'
       </if>
-      <if test="stat != null" >
+      <if test="stat != null and stat != ''" >
         and FI_STAT = #{stat}
       </if>
   </select>
   
+  <!-- 动态查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
       select * from (select ROWNUM as rowno, t.*  from TSCENIC t
       where 1=1
-      <if test="no != null" >
-        and FS_NO like #{no}
+      <if test="no != null and no != ''" >
+        and FS_NO like '%'||#{no}||'%'
       </if>
-      <if test="name != null" >
-        and FS_NAME like #{name},
+      <if test="name != null and name != ''" >
+        and FS_NAME like '%'||#{name}||'%'
       </if>
-      <if test="regionno != null" >
-        and FS_REGIONNO like #{regionno},
+      <if test="regionno != null and regionno != ''" >
+        and FS_REGIONNO like '%'||#{regionno}||'%'
       </if>
-      <if test="addr != null" >
-        and FS_ADDR like #{addr},
+      <if test="addr != null and addr != ''" >
+        and FS_ADDR like '%'||#{addr}||'%'
       </if>
-      <if test="desc != null" >
-        and FS_DESC like #{desc},
+      <if test="desc != null and desc != ''" >
+        and FS_DESC like '%'||#{desc}||'%'
       </if>
-      <if test="lvl != null" >
-        and FS_LVL = #{lvl},
+      <if test="lvl != null and lvl != ''">
+        and FS_LVL like '%'||#{lvl}||'%'
       </if>
-      <if test="opentime != null" >
-        and FS_OPENTIME like #{opentime},
+      <if test="opentime != null and opentime != ''" >
+        and FS_OPENTIME like '%'||#{opentime}||'%'
       </if>
-      <if test="speciality != null" >
-        and FS_SPECIALITY like #{speciality},
+      <if test="speciality != null and speciality != ''" >
+        and FS_SPECIALITY like '%'||#{speciality}||'%'
       </if>
-      <if test="stat != null" >
+      <if test="stat != null and stat != ''" >
         and FI_STAT = #{stat}
       </if>
-      ) from tt 
+      <if test="endrow != null" >
+        and ROWNUM &lt;= #{endrow}
+      </if>
+      ) tt 
+      where 1=1
+      <if test="startrow != null" >
+        and tt.rowno &gt;= #{startrow}
+      </if>
   </select>
 </mapper>

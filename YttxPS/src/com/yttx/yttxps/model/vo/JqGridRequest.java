@@ -1,8 +1,19 @@
-package com.yttx.comm;
+package com.yttx.yttxps.model.vo;
+
+import java.util.Map;
 
 public class JqGridRequest implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	public void copyPage(Map<String, Object> map) {
+		map.put("page", page);
+		map.put("rows", rows);
+		map.put("sidx", sidx == null?"":sidx);
+		map.put("sord", sord == null?"":sord);
+		map.put("search", search);
+		map.put("nd", nd == null?"":nd);
+	}
 
 	public int getPage() {
 		return page;

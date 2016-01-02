@@ -93,8 +93,6 @@
 
 	<!-- 业务拦截器 -->
 	<mvc:interceptors>
-	    <mvc:mapping path="/*.jsp" />
-	    <mvc:mapping path="/*/*.jsp" />    
 		<bean class="com.yttx.yttxps.web.interceptor.SessionInterceptor">
 			<property name="excludeMapping" value="index.htm,login.htm" />
 		</bean>

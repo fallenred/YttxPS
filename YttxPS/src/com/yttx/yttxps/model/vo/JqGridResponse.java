@@ -1,4 +1,4 @@
-package com.yttx.comm;
+package com.yttx.yttxps.model.vo;
 
 import java.util.List;
 import java.util.Map;
