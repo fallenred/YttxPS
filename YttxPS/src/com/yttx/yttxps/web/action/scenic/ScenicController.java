@@ -24,8 +24,10 @@ import com.yttx.comm.StringUtil;
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Menu;
+import com.yttx.yttxps.model.Scenic;
 import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.SysOper;
+import com.yttx.yttxps.service.IScenicService;
 import com.yttx.yttxps.service.ISysService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.web.action.LoginController;
@@ -39,6 +41,9 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
 	private ISysService sysService;
+	
+	@Autowired
+	private IScenicService scenicService;
 	
 	/**
 	 * 用户修改密码
@@ -96,12 +101,18 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		return url;
 	}
 	
-	@RequestMapping(value="findScenic.htm")
+	/**
+	 * 分页查询景区信息
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="findScenic.htm", method = RequestMethod.GET)
 	@ResponseBody
 	public Object ajaxfindScenic(JqGridRequest req)
     {  
 		logger.debug("当前model {}",req);
-		return "{success:true}";
+		Scenic scenic = new Scenic();
+		int count = scenicService.selectCountSelective(scenic);
+		return "{success:true,total:" + count + "}";
     }
-
 }

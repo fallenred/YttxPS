@@ -38,8 +38,6 @@
 		</property>
 	</bean>
 	
-	<mvc:annotation-driven />
-	
 	<context:component-scan base-package="com.yttx"></context:component-scan>
 
 	<bean id="viewResolver"
@@ -67,6 +65,7 @@
 		<property name="supportedMediaTypes">
 			<list>
 				<value>text/html;charset=UTF-8</value>
+				<value>text/plain;charset=UTF-8</value>
 			</list>
 		</property>
 	</bean>
@@ -76,6 +75,7 @@
 		<property name="supportedMediaTypes">
 			<list>
 				<value>text/html;charset=UTF-8</value>
+				<value>text/plain;charset=UTF-8</value>
 			</list>
 		</property>
 	</bean>
@@ -93,6 +93,8 @@
 
 	<!-- 业务拦截器 -->
 	<mvc:interceptors>
+	    <mvc:mapping path="/*.jsp" />
+	    <mvc:mapping path="/*/*.jsp" />    
 		<bean class="com.yttx.yttxps.web.interceptor.SessionInterceptor">
 			<property name="excludeMapping" value="index.htm,login.htm" />
 		</bean>

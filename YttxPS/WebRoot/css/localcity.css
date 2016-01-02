@@ -1,0 +1,81 @@
+.localcity {
+	width: 306px;
+	position: absolute;
+	background: #FFF;
+	display:none;
+	z-index: 2
+}
+
+.cityactive{
+	display:block;
+}
+
+.localcity .tabs {
+	height: 28px;
+	border: 1px solid #438EB9
+}
+
+.localcity .tabs li {
+	height: 28px;
+	float: left;
+	width: 76px
+}
+.localcity .tabs .close-x{
+	position: absolute;
+	right: 9px;
+	top: 12px;
+	background: url(/images/icon/btn_x.png);
+	background-position: -4px -4px;
+	width: 12px;
+	height: 12px;
+}
+
+.localcity .tabs li a,.localcity .tabs li a:visited {
+	display: block;
+	height: 28px;
+	color: #777777;
+	line-height: 28px;
+	text-align: center;
+	text-decoration: none;
+	float: left;
+	width: 76px
+}
+
+.localcity .tabs li a.current,.localcity .tabs li a.current:visited {
+	background-color: #89C975;
+	color: #FFFFFF
+}
+
+.localcity .con {
+	background:#FFFFFF;
+	position: absolute;
+	min-height: 110px;
+	min-width: 296px;
+	border: 1px solid #89C975;
+	border-top: none;
+	padding: 4px
+}
+
+.localcity .subcon .list {
+	float: left;
+	width: 225px;
+	margin: auto
+}
+
+.localcity .con .list li {
+	float: left;
+	min-width: 65px;
+	text-align: center;
+	overflow: hidden;
+	margin: 0 4px;
+	padding: 3px 0
+}
+
+.localcity .con .list li a,.localcity .con .list li a:visited {
+	color: #777777
+}
+
+.localcity .con .list li a.current,.localcity .con .list li a.current:visited
+	{
+	color: #ff6c00
+}
