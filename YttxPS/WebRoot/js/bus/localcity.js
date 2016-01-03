@@ -107,7 +107,7 @@
             	var acttab = $(this);          	
             	var tabs = $('.tabs').find('li');           	
             	var index = tabs.index(acttab);
-            	                       	
+ console.log("tabs li index:" + index);           	                       	
             	if(that.find('.list').eq(index).find('li').length > 0){
             		that.find('.list').hide();
             		that.find('.list').eq(index).show();
@@ -131,7 +131,7 @@
                 $(this).find('a').eq(0).addClass('current');
                                   
                 index++;       
-                       
+console.log("con li index:" + index + "text:" + text);                      
                 if(index == 1){
                 	selprov = text;
                 	selprovkey = key;

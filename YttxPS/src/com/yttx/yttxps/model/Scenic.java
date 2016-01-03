@@ -290,4 +290,8 @@ public class Scenic {
     public void setStat(BigDecimal stat) {
         this.stat = stat;
     }
+    
+    public String toString() {
+    	return "{no:" + no + ",name:" + name + ",addr" + addr + "}" ;
+    }
 }

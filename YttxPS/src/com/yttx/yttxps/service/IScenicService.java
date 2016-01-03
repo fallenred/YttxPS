@@ -20,4 +20,7 @@ public interface IScenicService {
 	
 	@Transactional(readOnly = true) 
 	List<Scenic> selectSelectivePage(Map<String, Object> map);
+	
+	@Transactional
+	int insert(Scenic scenic);
 }

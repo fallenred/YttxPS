@@ -19,6 +19,12 @@ public interface IPubService<T> {
 	@Transactional(readOnly = true) 
 	public List<RegionMap> findRegionByManageNo(String key);
 	
+	/**
+	 * 公共带分页动态查询，适用于JqGrid
+	 * @param map
+	 * @param mapper
+	 * @return
+	 */
 	@Transactional(readOnly = true) 
 	public List<T> doPage(Map<String, Object> map, IBaseMapper<T> mapper);
 

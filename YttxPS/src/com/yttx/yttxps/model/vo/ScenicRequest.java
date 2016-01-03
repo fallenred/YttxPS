@@ -31,7 +31,7 @@ public class ScenicRequest extends JqGridRequest implements
 					scenic.getRegionno() == null ? "" : scenic.getRegionno());
 			map.put("addr", scenic.getAddr() == null ? "" : scenic.getAddr());
 			map.put("lvl", scenic.getLvl() == null ? "" : scenic.getLvl());
-			map.put("stat", scenic.getStat() == null ? "" : scenic.getStat());
+			map.put("stat", scenic.getStat() == null ? 1 : scenic.getStat());
 			map.put("opentime",
 					scenic.getOpentime() == null ? "" : scenic.getOpentime());
 			map.put("desc", scenic.getDesc() == null ? "" : scenic.getDesc());

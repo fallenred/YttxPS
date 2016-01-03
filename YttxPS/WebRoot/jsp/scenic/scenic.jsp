@@ -61,6 +61,7 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<!-- PAGE CONTENT BEGINS -->
+							<!-- 查询条件 -->
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
@@ -86,12 +87,12 @@
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
-													for="region">所属地区</label>
+													for="regionname">所属地区</label>
 												<div class="col-sm-2">
 													<input type="text" placeholder="请选择行政区域" name="regionname"
 														data-key="0086" data-idx="0" data-full="中国"
 														id="regionname" class="inp-search" /> <input
-														type="hidden" name="region" id="regionno" />
+														type="hidden" name="regionno" id="regionno" />
 													<div id="selectCity" class="localcity"></div>
 												</div>
 											</div>
@@ -115,9 +116,9 @@
 												<label class="col-sm-1 control-label no-padding-right"
 													for="lvl">状态</label>
 												<div class="col-sm-1">
-													<select id="stat" placeholder="状态">
+													<select id="stat">
 														<option value="1">正常</option>
-														<option value="0">失效</option>
+														<option value="2">失效</option>
 													</select>
 												</div>
 											</div>
@@ -139,46 +140,59 @@
 
 								</div>
 							</div>
+							<table id="grid-table"></table>
+							<div id="grid-pager"></div>
 
+							<!-- 模态框（新增） -->
+							<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+								aria-labelledby="addModalLabel" aria-hidden="true">
+								<div class="modal-dialog" style="width:1024px;">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-hidden="true">×</button>
+											<h4 class="modal-title" id="addModalLabel">新增景区</h4>
+										</div>
+										<div class="modal-body">
+											<iframe id="addIframe" width="100%" height="600px"
+												frameborder="0" scrolling="no"></iframe>
 
-
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a class="accordion-toggle collapsed" href="#collapseTwo"
-											data-toggle="collapse" data-parent="#accordion"> <i
-											class="bigger-110 ace-icon fa fa-angle-right"
-											data-icon-show="ace-icon fa fa-angle-right"
-											data-icon-hide="ace-icon fa fa-angle-down"></i> &nbsp;查询结果
-										</a>
-									</h4>
-								</div>
-
-								<div class="panel-collapse collapse" id="collapseTwo"
-									style="height: 0px;">
-									<div class="panel-body">
-										<table id="grid-table"></table>
-										<div id="grid-pager"></div>
+										</div>
+										
+										<!-- /.modal-content -->
 									</div>
+									<!-- /.modal-dialog -->
 								</div>
+								<!-- /.modal -->
 							</div>
-						</div>
-					</div>
-					<!-- PAGE CONTENT ENDS -->
-				</div>
-				<!-- /.col -->
-			</div>
-			<!-- /.row -->
-		</div>
-		<!-- /.page-content -->
-	</div>
-	<!-- /.main-content -->
+							
+							<!-- 模态框（查询） -->
+							<div class="modal fade" id="showModal" tabindex="-1"
+								role="dialog" aria-labelledby="showModalLabel"
+								aria-hidden="false">
+								<div class="modal-dialog" style="width: 1024px;">
+									<div class="modal-content">
 
-	</div>
-	<!-- /.main-container-inner -->
+										<!-- /.modal-content -->
+									</div>
+									<!-- /.modal-dialog -->
+								</div>
+								<!-- /.modal -->
+							</div>
+							<!-- PAGE CONTENT ENDS -->
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.page-content -->
+			</div>
+			<!-- /.main-content -->
+		</div>
+		<!-- /.main-container-inner -->
 
 	</div>
 	<!-- /.main-container -->
-	<script src="/js/bus/scenic.js"></script>
+	<script src="/js/bus/scenic/scenic.js"></script>
 </body>
 </html>

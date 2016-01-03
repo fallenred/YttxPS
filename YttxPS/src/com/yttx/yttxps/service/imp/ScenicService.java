@@ -30,6 +30,11 @@ public class ScenicService implements IScenicService {
 		return pubService.doPage(map, scenicMapper);
 	}
 
+	@Override
+	public int insert(Scenic record) {
+		return scenicMapper.insert(record);
+	}
+
 
 
 

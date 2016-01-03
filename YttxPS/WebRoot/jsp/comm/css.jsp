@@ -13,6 +13,7 @@
 		<![endif]-->
 
 <!-- page specific plugin styles -->
+<link rel="stylesheet" href="/css/colorbox.css" />
 <link rel="stylesheet" href="/css/jquery-ui.min.css" />
 <link rel="stylesheet" href="/css/datepicker.css" />
 <link rel="stylesheet" href="/css/ui.jqgrid.css" />

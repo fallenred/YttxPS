@@ -35,8 +35,10 @@
 <script src="/js/jqGrid/jquery.jqGrid.min.js"></script>
 <script src="/js/jqGrid/i18n/grid.locale-cn.js"></script>
 
-<!-- ace scripts -->
+<!-- colorbox -->
+<script src="/js/jquery.colorbox-min.js"></script>
 
+<!-- ace scripts -->
 
 <script src="/js/ace-elements.min.js"></script>
 <script src="/js/ace.min.js"></script>
