@@ -35,6 +35,16 @@ public class ScenicService implements IScenicService {
 		return scenicMapper.insert(record);
 	}
 
+	@Override
+	public int update(Scenic record) {
+		return scenicMapper.updateByPrimaryKeySelective(record);
+	}
+
+	@Override
+	public int delete(String no) {
+		return scenicMapper.deleteByPrimaryKey(no);
+	}
+
 
 
 

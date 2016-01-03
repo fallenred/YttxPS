@@ -1,7 +1,7 @@
 jQuery(function($) {
 	$("#message").hide();
 	
-	var localsel = $("#selectCity", "#addform").localCity({
+	var localsel = $("#selectCity", "#editform").localCity({
 		
 		provurl : "/pub/findcity.htm",
 		cityurl : "/pub/findcity.htm",
@@ -11,14 +11,14 @@ jQuery(function($) {
 	
 	//城市选择器
 	function localcallback(index, key, value, fullkey, fullname) {
-		$("#regionname", "#addform").val(fullname);
-		$("#regionno", "#addform").val(key);
+		$("#regionname", "#editform").val(fullname);
+		$("#regionno", "#editform").val(key);
 		if (index == 3)
-			$("#selectCity", "#addform").hide();
+			$("#selectCity", "#editform").hide();
 	}
 
-	$("#regionname", "#addform").click(function() {
-		$("#selectCity", "#addform").show();
+	$("#regionname", "#editform").click(function() {
+		$("#selectCity", "#editform").show();
 	});
 
 
@@ -56,18 +56,19 @@ jQuery(function($) {
 			$('#regionno').focus();
 			return false;
 		} 
-		$.post("/scenic/addScenic.htm",
-				$("#addform").serialize(),
+		$.post("/scenic/editScenic.htm",
+				$("#editform").serialize(),
 				function(data){
 			console.log(data)
 			var json = eval("("+data+")");
 					if(json.result == "ok") {
-						$("#message").text("增加记录成功");
+						$("#message").text("修改记录成功");
 						$("#message").show();
+						console.log($("#grid-table", parent.document).html());
 						return true;
 					}
 					else {
-						$("#message").text("增加记录失败:" + json.message );
+						$("#message").text("修改记录失败:" + json.message );
 						$("#message").show();
 						return false;
 					}

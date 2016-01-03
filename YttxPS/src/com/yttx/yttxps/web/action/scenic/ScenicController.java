@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.scenic;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -62,7 +64,45 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		int ret = scenicService.insert(scenic);
 		}
 		catch(Exception e){
-			return (Map<String, Object>) JsonResult.jsonError(e.getMessage());
+			return (Map<String, Object>) JsonResult.jsonError("新增失败");
+		}
+		return (Map<String, Object>) JsonResult.jsonOk();
+    }
+	
+	/**
+	 * 更新景区信息
+	 * @param scenic
+	 * @return
+	 */
+	@RequestMapping(value="editScenic.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ajaxeditScenic(Scenic scenic)
+    {  
+		logger.debug("当前更新对象 {}", scenic);
+		try{
+			int ret = scenicService.update(scenic);
+		}
+		catch(Exception e){
+			return (Map<String, Object>) JsonResult.jsonError("更新失败");
+		}
+		return (Map<String, Object>) JsonResult.jsonOk();
+    }
+	
+	/**
+	 * 删除景区信息
+	 * @param scenic
+	 * @return
+	 */
+	@RequestMapping(value="delScenic.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ajaxdelScenic(@RequestBody String no)
+    {  
+		logger.debug("当前删除key {}", no);
+		try{
+			int ret = scenicService.delete(no);
+		}
+		catch(Exception e){
+			return (Map<String, Object>) JsonResult.jsonError("删除失败");
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
     }

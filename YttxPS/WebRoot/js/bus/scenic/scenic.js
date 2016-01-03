@@ -7,17 +7,71 @@ function showCustom(id) {
 	});
 };
 
+function editCustom(id) {
+	raw = jQuery("#grid-table").jqGrid('getRowData', id);
+	var frameSrc = "/jsp/scenic/edit.jsp";
+    $("#editIframe").attr("src", frameSrc);
+    $('#editModal').modal({ show: true, backdrop: 'static' });
+};
+
+function deleteCustom(id) {
+	raw = jQuery("#grid-table").jqGrid('getRowData', id);
+	var frameSrc = "/jsp/scenic/delete.jsp?no=" + raw.no;
+	$("#delIframe").attr("src", frameSrc);
+    $('#delModal').modal({ show: true, backdrop: 'static' });
+};
+
 $("#showModal").on("shown.bs.modal", function() {
+
 	$(this).find("#reset").click();
 	$(this).find("#no").val(raw.no);
 	$(this).find("#name").val(raw.name);
 	$(this).find("#lvl").val(raw.lvl);
 	$(this).find("#regionno").val(raw.regionno);
+	getregionname(raw.regionno, function(name){
+		$("#showModal").find("#regionname").val(name);
+	});
 	$(this).find("#stat").val(raw.stat);
 	$(this).find("#addr").val(raw.addr);
 	$(this).find("#desc").val(raw.desc);
 	$(this).find("#opentime").val(raw.opentime);
 	$(this).find("#speciality").val(raw.speciality);
+});
+
+$("#editIframe").on("load",function(){
+	$(this).contents().find("#reset").click();
+	$(this).contents().find("#no").val(raw.no);
+	$(this).contents().find("#name").val(raw.name);
+	$(this).contents().find("#lvl").val(raw.lvl);
+	getregionname(raw.regionno, function(name){
+		$("#editIframe").contents().find("#regionname").val(name);
+	});
+	$(this).contents().find("#regionno").val(raw.regionno);
+	$(this).contents().find("#stat").val(raw.stat);
+	$(this).contents().find("#addr").val(raw.addr);
+	$(this).contents().find("#desc").val(raw.desc);
+	$(this).contents().find("#opentime").val(raw.opentime);
+	$(this).contents().find("#speciality").val(raw.speciality);
+});
+
+
+$("#addModal", parent.document).on("hidden.bs.modal", function() {
+    $(this).removeData("bs.modal");
+	$("#grid-table").trigger("reloadGrid");
+});
+
+
+$("#editModal", parent.document).on("hidden.bs.modal", function() {
+    $(this).removeData("bs.modal");
+    $("#grid-table").trigger("reloadGrid");
+});
+
+$("#showModal").on("hidden.bs.modal", function() {
+    $(this).removeData("bs.modal");
+});
+
+$("#delModal").on("hidden.bs.modal", function() {
+    $(this).removeData("bs.modal");
 });
 
 jQuery(function($) {
@@ -74,9 +128,13 @@ jQuery(function($) {
 				+ options.rowId
 				+ ');" data-original-title="查看记录详情"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
 
-		var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editCustom(options.rowId,rawObject);" data-original-title="编辑本条记录"><span class="ui-icon ui-icon-pencil"></span></div>';
+		var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editCustom('
+				+ options.rowId
+				+ ');" data-original-title="编辑本条记录"><span class="ui-icon ui-icon-pencil"></span></div>';
 
-		var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteCustom(options.rowId,rawObject);" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
+		var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteCustom('
+				+ options.rowId
+				+ ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
 
 		return detail + editBtn + deleteBtn;
 	};
@@ -115,7 +173,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '景点代码', '景点名称', '所需地区', '景点地址', '景点描述',
+				colNames : [ '操作', '景点代码', '景点名称', '所选地区', '景点地址', '景点描述',
 						'景点级别', '开放时间', '特产', '状态' ],
 				colModel : [ {
 					name : 'myac',

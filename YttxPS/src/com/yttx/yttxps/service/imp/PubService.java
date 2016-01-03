@@ -45,7 +45,13 @@ public class PubService<T> implements IPubService<T> {
 	}
 
 
-
-
-
+	@Override
+	public String findRegionFullName(String no) {
+		RegionMap r1 = regionMapMapper.selectByPrimaryKey(no);
+		if(r1.getLvl().intValue() == 1) {
+			return r1.getName();
+		} else {
+			return findRegionFullName(r1.getManageno()) + "-" + r1.getName();
+		}
+	}
 }

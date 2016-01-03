@@ -23,4 +23,10 @@ public interface IScenicService {
 	
 	@Transactional
 	int insert(Scenic scenic);
+	
+	@Transactional
+	int update(Scenic scenic);
+	
+	@Transactional
+	int delete(String no);
 }

@@ -27,5 +27,13 @@ public interface IPubService<T> {
 	 */
 	@Transactional(readOnly = true) 
 	public List<T> doPage(Map<String, Object> map, IBaseMapper<T> mapper);
+	
+	/**
+	 * 根据3级城市编码生成全称
+	 * @param no
+	 * @return
+	 */
+	@Transactional(readOnly = true) 
+	public String findRegionFullName(String no);
 
 }
