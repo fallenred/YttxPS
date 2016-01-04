@@ -66,13 +66,16 @@ $("#editModal", parent.document).on("hidden.bs.modal", function() {
     $("#grid-table").trigger("reloadGrid");
 });
 
+$("#delModal").on("hidden.bs.modal", function() {
+    $(this).removeData("bs.modal");
+    $("#grid-table").trigger("reloadGrid");
+});
+
 $("#showModal").on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
 });
 
-$("#delModal").on("hidden.bs.modal", function() {
-    $(this).removeData("bs.modal");
-});
+
 
 jQuery(function($) {
 	
@@ -253,9 +256,9 @@ jQuery(function($) {
 				pager : pager_selector,
 				altRows : true,
 
-				multiselect : true,
-				multiboxonly : true,
-				multipleSearch : true,
+//				multiselect : true,
+//				multiboxonly : true,
+//				multipleSearch : true,
 
 				loadComplete : function() {
 					var table = this;
@@ -291,9 +294,9 @@ jQuery(function($) {
 				editicon : 'ace-icon fa fa-pencil blue',
 				add : false,
 				addicon : 'ace-icon fa fa-plus-circle purple',
-				del : true,
+				del : false,
 				delicon : 'ace-icon fa fa-trash-o red',
-				search : true,
+				search : false,
 				searchicon : 'ace-icon fa fa-search orange',
 				refresh : true,
 				refreshicon : 'ace-icon fa fa-refresh green',

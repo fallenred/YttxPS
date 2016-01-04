@@ -30,6 +30,11 @@ jQuery(function($) {
 			$("#message").text("");
 		});
 	
+	// 关闭
+	$("#close").on("click", function () {
+		$("#editModal", parent.document).find(".close").click();
+	});
+	
 	//	提交
 	$("#submit").on("click", function () {
 		if($("#no").val() == '') {
@@ -59,12 +64,10 @@ jQuery(function($) {
 		$.post("/scenic/editScenic.htm",
 				$("#editform").serialize(),
 				function(data){
-			console.log(data)
 			var json = eval("("+data+")");
 					if(json.result == "ok") {
 						$("#message").text("修改记录成功");
 						$("#message").show();
-						console.log($("#grid-table", parent.document).html());
 						return true;
 					}
 					else {

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
@@ -95,7 +96,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 */
 	@RequestMapping(value="delScenic.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxdelScenic(@RequestBody String no)
+	public Map<String, Object> ajaxdelScenic(@RequestParam(value = "no") String  no)
     {  
 		logger.debug("当前删除key {}", no);
 		try{

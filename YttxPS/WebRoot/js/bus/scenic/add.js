@@ -30,6 +30,11 @@ jQuery(function($) {
 			$("#message").text("");
 		});
 	
+	// 关闭
+	$("#close").on("click", function () {
+		$("#addModal", parent.document).find(".close").click();
+	});
+	
 	//	提交
 	$("#submit").on("click", function () {
 		if($("#no").val() == '') {
@@ -59,7 +64,6 @@ jQuery(function($) {
 		$.post("/scenic/addScenic.htm",
 				$("#addform").serialize(),
 				function(data){
-			console.log(data)
 			var json = eval("("+data+")");
 					if(json.result == "ok") {
 						$("#message").text("增加记录成功");

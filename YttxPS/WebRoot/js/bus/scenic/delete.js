@@ -1,29 +1,27 @@
 jQuery(function($) {
-	$("#message").hide();
-	
 	//	提交
 	$("#submit").on("click", function () {
-		$.post("/scenic/delScenic.htm",
-				"{no:" + $.getUrlParam('no') + "}",
-				function(data){
-			console.log(data)
-			var json = eval("("+data+")");
-					if(json.result == "ok") {
-						$("#message").text("删除记录成功");
-						$("#message").show();
-						$("#grid-table", parent.document).trigger("reloadGrid"); 
-						return true;
-					}
-					else {
-						$("#message").text("删除记录失败:" + json.message );
-						$("#message").show();
+		$.ajax({
+		     type: 'POST',
+		     url: '/scenic/delScenic.htm' ,
+		     data: 'no=' + $.getUrlParam('no'),
+		     success: function(data){
+						if(data.result == "ok") {
+							$("#message").text("删除记录成功");
+							return true;
+						}
+						else {
+							$("#message").text("删除记录失败:" + json.message );
+							return false;
+						}
 						return false;
-					}
-					return false;
-				});
+					} ,
+		    dataType: 'json',
+		});
 	});
 	
-	$("#submit").on("click", function () {
+	// 关闭
+	$("#close").on("click", function () {
 		$("#delModal", parent.document).find(".close").click();
 	});
 });

@@ -206,18 +206,17 @@
 
 							<!-- 删除 -->
 							<!-- 模态框（查询） -->
-							<div class="modal fade" id="delModal" tabindex="-1"
-								role="dialog" aria-labelledby="delModalLabel"
-								aria-hidden="false">
+							<div class="modal fade" id="delModal" tabindex="-1" role="dialog"
+								aria-labelledby="delModalLabel" aria-hidden="false">
 								<div class="modal-dialog" style="width: 400px;">
 									<div class="modal-content">
-									<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">×</button>
-									<h4 class="modal-title" id="delModalLabel">删除警告</h4>
-								</div>
-								<div class="modal-body">
-<iframe id="delIframe" width="100%" height="200px"
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-hidden="true">×</button>
+											<h4 class="modal-title" id="delModalLabel">删除警告</h4>
+										</div>
+										<div class="modal-body">
+											<iframe id="delIframe" width="100%" height="200px"
 												frameborder="0" scrolling="no"></iframe>
 										</div>
 										<!-- /.modal-content -->

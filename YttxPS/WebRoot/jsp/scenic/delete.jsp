@@ -39,13 +39,13 @@
 
 									<div class="space-6"></div>
 
-									<p class="bigger-110 bolder center grey">
+									<p id = "message"  class="bigger-110 bolder center grey">
 										<i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
 										您确定需要删除吗?
 									</p>
 
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default"
+									<button id="close" type="button" class="btn btn-default"
 										data-dismiss="modal">关闭</button>
 									<button id="submit" type="button" class="btn btn-primary">提交</button>
 								</div>
