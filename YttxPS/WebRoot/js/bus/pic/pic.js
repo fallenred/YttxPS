@@ -1,25 +1,17 @@
 //	显示详情
 var raw = {};
+function showCustom(id) {
+	raw = jQuery("#grid-table").jqGrid('getRowData', id);
+	$("#showModal").modal({
+	    remote: "/jsp/scenic/show.jsp"
+	});
+};
 
 function editCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	var frameSrc = "/jsp/scenic/edit.jsp";
     $("#editIframe").attr("src", frameSrc);
     $('#editModal').modal({ show: true, backdrop: 'static' });
-};
-
-function picCustom(id) {
-	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/pic/pic.jsp";
-    $("#picIframe").attr("src", frameSrc);
-    $('#picModal').modal({ show: true, backdrop: 'static' });
-};
-
-function showCustom(id) {
-	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	$("#showModal").modal({
-	    remote: "/jsp/scenic/show.jsp"
-	});
 };
 
 function deleteCustom(id) {
@@ -29,6 +21,10 @@ function deleteCustom(id) {
     $('#delModal').modal({ show: true, backdrop: 'static' });
 };
 
+function picCustom(id) {
+	raw = jQuery("#grid-table").jqGrid('getRowData', id);
+	window.location.href="/jsp/pic/pic.jsp?no=" + raw.no;
+};
 
 $("#showModal").on("shown.bs.modal", function() {
 
@@ -96,7 +92,8 @@ jQuery(function($) {
 	});
 	
 //	jqGrid form提交
-	$("#submit").on("click", function() {
+	$("#submit").click(function() {
+		window.history.back(-1);
 		$("#collapseOne").collapse('hide');
 		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
@@ -106,10 +103,9 @@ jQuery(function($) {
 		postData["scenic.lvl"] = $("#queryfield").find("#lvl").val();
 		postData["scenic.stat"] = $("#queryfield").find("#stat").val();
 		$("#grid-table").jqGrid("setGridParam", {
-			datatype : 'json',
 			postData : postData
 		}).trigger("reloadGrid");
-	});
+	})
 	
 //	城市选择器
 	function localcallback(index, key, value, fullkey, fullname) {
