@@ -10,7 +10,7 @@ function editCustom(id) {
 
 function picCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/pic/pic.jsp";
+	var frameSrc = "/jsp/pic/pic.jsp?no=" + raw.no;
     $("#picIframe").attr("src", frameSrc);
     $('#picModal').modal({ show: true, backdrop: 'static' });
 };
@@ -81,6 +81,10 @@ $("#delModal").on("hidden.bs.modal", function() {
 });
 
 $("#showModal").on("hidden.bs.modal", function() {
+    $(this).removeData("bs.modal");
+});
+
+$("#picModal").on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
 });
 

@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="/css/jquery-ui.min.css" />
 <link rel="stylesheet" href="/css/datepicker.css" />
 <link rel="stylesheet" href="/css/ui.jqgrid.css" />
+<link rel="stylesheet" href="/css/dropzone.css" />
 
 <!-- fonts -->
 <link rel="stylesheet" href="/css/ace-fonts.css" />
