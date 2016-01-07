@@ -35,25 +35,26 @@
 							<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">×</button>
-									<h4 class="modal-title" id="showModalLabel">文件上传</h4>
+									<h4 class="modal-title" id="showModalLabel">文件上传(注意！图片不超过2M)</h4>
 								</div>
 								<div class="modal-body">
-
+								
+								
 								<form action="/jsp/dummy.html" class="dropzone" id="dropzone">
 									<div class="fallback">
 										<input name="file" type="file" multiple="" />
 									</div>
 								</form>
+								<!-- 
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">关闭</button>
 									<button id="reset" type="reset" class="btn"
 										style="display: none;">重置</button>
-									<!--  
-											<button type="button" class="btn btn-primary">提交</button>
-											-->
-								</div> 	
+											</div>
+										-->	
 								</div>
+								 
 							<!-- PAGE CONTENT ENDS -->
 						</div>
 						<!-- /.col -->

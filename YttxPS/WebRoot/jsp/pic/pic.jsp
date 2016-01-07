@@ -83,19 +83,11 @@
 							</div>
 							<!-- 图片TODO： -->
 							<div class="col-xs-12">
-								<ul class="ace-thumbnails clearfix">
-									<li><a class="cboxElement" data-rel="colorbox"
-										href="http://127.0.0.1:81/1.jpg"> <img width="150"
-											height="150" src="http://127.0.0.1:81/2.png" alt="150*150">
-									</a></li>
-									<li><a class="cboxElement" data-rel="colorbox"
-										href="http://127.0.0.1:81/1.jpg"> <img width="150"
-											height="150" src="http://127.0.0.1:81/2.png" alt="150*150">
-									</a></li>
+								<ul class="ace-thumbnails clearfix" id="colorbox">
+									
 								</ul>
 
 							</div>
-							
 							<div id="message" class="alert alert-warning"
 								style="visibility: hidden;"></div>
 							<!-- PAGE CONTENT ENDS -->

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Scenic;
+import com.yttx.yttxps.model.vo.PicRequest;
 import com.yttx.yttxps.model.vo.ScenicRequest;
 import com.yttx.yttxps.service.IScenicService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -31,22 +32,22 @@ public class PicController extends BaseController {
 static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
-	private IScenicService scenicService;
+	private IPicService picService;
 	
 	/**
-	 * 分页查询景区信息
+	 * 分页查询图片信息
 	 * @param req
 	 * @return
 	 */
-	@RequestMapping(value="findScenic.htm", method = RequestMethod.POST)
+	@RequestMapping(value="findPic.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object ajaxfindScenic(ScenicRequest req)
+	public Object ajaxfindPic(PicRequest req)
     {  
-		logger.debug("当前查询条件 {}", req.getScenic());
+		logger.debug("当前查询条件 {}", req.getPic());
 		Map<String, Object> map = new HashMap<String, Object>();
 		req.copyPage(map);
-		req.copyScenic(map);
-		List<Scenic> list = scenicService.selectSelectivePage(map);
+		req.copyPic(map);
+		List<Pic> list = picService.selectSelectivePage(map);
 		map.put("rows", list);
 		return map;
     }
