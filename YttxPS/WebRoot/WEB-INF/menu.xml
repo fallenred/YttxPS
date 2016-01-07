@@ -18,7 +18,7 @@
 		<item id="0400" name="景区资源管理" icon="menu-icon fa fa-table" >
 			<submenu>
 				<item id="04a0" name="景区管理" url="/jsp/scenic/scenic.jsp" />
-				<item id="04b0" name="门票资源管理" url="/jsp/scenic/ticket.jsp" />
+				<item id="04b0" name="门票资源管理"  url="/jsp/scenic/ticket.jsp" />
 			</submenu>
 		</item>
 		
