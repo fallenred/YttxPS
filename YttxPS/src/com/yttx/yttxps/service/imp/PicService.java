@@ -15,7 +15,7 @@ import com.yttx.yttxps.service.IPicService;
 import com.yttx.yttxps.service.IScenicService;
 
 
-@Service("scenicService")
+@Service("picService")
 public class PicService implements IPicService {
 
 	@Autowired

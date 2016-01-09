@@ -1,6 +1,5 @@
 package com.yttx.yttxps.web.action.scenic;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,17 +9,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
-import com.yttx.yttxps.model.Scenic;
 import com.yttx.yttxps.model.Tticket;
-import com.yttx.yttxps.model.vo.ScenicRequest;
-import com.yttx.yttxps.service.IScenicService;
+import com.yttx.yttxps.model.TticketExample;
+import com.yttx.yttxps.model.TticketExample.Criteria;
+import com.yttx.yttxps.model.vo.TicketRequest;
 import com.yttx.yttxps.service.ITicketService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.web.action.LoginController;
@@ -40,14 +39,14 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 * @param req
 	 * @return
 	 */
-	@RequestMapping(value="findScenic.htm", method = RequestMethod.POST)
+	@RequestMapping(value="findTicket.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object ajaxfindScenic(ScenicRequest req)
+	public Object ajaxfindTicket(TicketRequest req)
     {  
-		logger.debug("当前查询条件 {}", req.getScenic());
+		logger.debug("当前查询条件 {}", req.getTicket());
 		Map<String, Object> map = new HashMap<String, Object>();
 		req.copyPage(map);
-		req.copyScenic(map);
+		req.copyTicket(map);
 		List<Tticket> list = ticketService.selectSelectivePage(map);
 		map.put("rows", list);
 		return map;
@@ -55,18 +54,29 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	/**
 	 * 新增景区信息
-	 * @param scenic
+	 * @param Ticket
 	 * @return
 	 */
-	@RequestMapping(value="addScenic.htm", method = RequestMethod.POST)
+	@RequestMapping(value="addTicket.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxaddScenic(Tticket ticket)
+	public Map<String, Object> ajaxaddTicket(Tticket ticket)
     {  
 		logger.debug("当前新增对象 {}", ticket);
 		try{
-		int ret = ticketService.insert(ticket);
+			TticketExample example = new TticketExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andFsScenicnoEqualTo(ticket.getFsScenicno());
+			criteria.andFsTypeEqualTo(ticket.getFsType());
+			int maxSeq = 0;
+			if (!CollectionUtils.isEmpty(ticketService.selectTticket(example))){
+				maxSeq = ticketService.selectMaxSeq(example);
+			}
+			ticket.setFsNo(String.format("%010d", ticketService.selectFsNo()));
+			ticket.setFiSeq(++maxSeq);
+			int ret = ticketService.insert(ticket);
 		}
 		catch(Exception e){
+			e.printStackTrace();
 			return (Map<String, Object>) JsonResult.jsonError("新增失败");
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
@@ -74,12 +84,12 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	/**
 	 * 更新景区信息
-	 * @param scenic
+	 * @param Ticket
 	 * @return
 	 */
-	@RequestMapping(value="editScenic.htm", method = RequestMethod.POST)
+	@RequestMapping(value="editTicket.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxeditScenic(Tticket ticket)
+	public Map<String, Object> ajaxeditTicket(Tticket ticket)
     {  
 		logger.debug("当前更新对象 {}", ticket);
 		try{
@@ -93,12 +103,12 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	/**
 	 * 删除景区信息
-	 * @param scenic
+	 * @param Ticket
 	 * @return
 	 */
-	@RequestMapping(value="delScenic.htm", method = RequestMethod.POST)
+	@RequestMapping(value="delTicket.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxdelScenic(@RequestParam(value = "no") String  no)
+	public Map<String, Object> ajaxdelTicket(@RequestParam(value = "no") String  no)
     {  
 		logger.debug("当前删除key {}", no);
 		try{

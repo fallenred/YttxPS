@@ -31,14 +31,14 @@ public class PicController extends BaseController {
 	
 static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
-	@Autowired
+/*	@Autowired
 	private IPicService picService;
 	
-	/**
+	*//**
 	 * 分页查询图片信息
 	 * @param req
 	 * @return
-	 */
+	 *//*
 	@RequestMapping(value="findPic.htm", method = RequestMethod.POST)
 	@ResponseBody
 	public Object ajaxfindPic(PicRequest req)
@@ -52,11 +52,11 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		return map;
     }
 	
-	/**
+	*//**
 	 * 新增景区信息
 	 * @param scenic
 	 * @return
-	 */
+	 *//*
 	@RequestMapping(value="addScenic.htm", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> ajaxaddScenic(Scenic scenic)
@@ -71,11 +71,11 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		return (Map<String, Object>) JsonResult.jsonOk();
     }
 	
-	/**
+	*//**
 	 * 更新景区信息
 	 * @param scenic
 	 * @return
-	 */
+	 *//*
 	@RequestMapping(value="editScenic.htm", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> ajaxeditScenic(Scenic scenic)
@@ -90,11 +90,11 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		return (Map<String, Object>) JsonResult.jsonOk();
     }
 	
-	/**
+	*//**
 	 * 删除景区信息
 	 * @param scenic
 	 * @return
-	 */
+	 *//*
 	@RequestMapping(value="delScenic.htm", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> ajaxdelScenic(@RequestParam(value = "no") String  no)
@@ -107,5 +107,5 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			return (Map<String, Object>) JsonResult.jsonError("删除失败");
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
-    }
+    }*/
 }
