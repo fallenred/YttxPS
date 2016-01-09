@@ -35,7 +35,7 @@
 							<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">×</button>
-									<h4 class="modal-title" id="showModalLabel">文件上传(注意！图片不超过2M)</h4>
+									<h4 class="modal-title" id="upModalLabel">文件上传(注意！图片不超过2M)</h4>
 								</div>
 								<div class="modal-body">
 								

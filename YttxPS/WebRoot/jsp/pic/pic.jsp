@@ -45,8 +45,8 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="seq">图片序号</label>
 											<div class="col-sm-3">
-												<input maxlength="2" type="text" id="seq" name="seq"
-													class="form-control" placeholder="图片序号" />
+												<input maxlength="10" type="text" id="index" name="index"
+													class="form-control" placeholder="图片序号自动生成" />
 											</div>
 										</div>
 									</div>
@@ -55,7 +55,7 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="belong">归属资源代码</label>
 											<div class="col-sm-3">
-												<input maxlength="4" type="text" id="belong" name="belong"
+												<input maxlength="4" type="text" id="belongtype" name="belong"
 													class="form-control" placeholder="归属资源代码" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
@@ -75,21 +75,21 @@
 							</div>
 							<div class="row">
 								<div class="modal-footer">
+								<div id="message" class="center alert alert-warning"
+								></div>
 									<button id="close" type="button" class="btn btn-default"
 										data-dismiss="modal">关闭</button>
 									<button id="reset" type="reset" class="btn">重置</button>
 									<button id="submit" type="button" class="btn btn-primary">提交</button>
 								</div>
 							</div>
+							
 							<!-- 图片TODO： -->
 							<div class="col-xs-12">
 								<ul class="ace-thumbnails clearfix" id="colorbox">
-									
 								</ul>
-
 							</div>
-							<div id="message" class="alert alert-warning"
-								style="visibility: hidden;"></div>
+							
 							<!-- PAGE CONTENT ENDS -->
 						</div>
 						<!-- /.col -->

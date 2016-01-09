@@ -33,7 +33,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@Autowired
 	private IPicService picService;
 	
-	/**
+	 /**
 	 * 分页查询图片信息
 	 * @param req
 	 * @return

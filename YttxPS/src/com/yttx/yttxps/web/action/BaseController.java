@@ -1,8 +1,17 @@
 package com.yttx.yttxps.web.action;
 
+import java.io.File;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.yttx.yttxps.comm.UPFileClient;
 import com.yttx.yttxps.model.SessionEntity;
 
 public class BaseController {
@@ -14,6 +23,15 @@ public class BaseController {
 	protected Map<String, Object> modelMap;
 	
 	protected HttpServletRequest request;
+	
+	static Logger logger = LoggerFactory.getLogger(BaseController.class);
+	
+	@Autowired
+	private UPFileClient ftpClient;
+	
+	private static final String IMAGEPATH = "pic";
+
+	private static final String RESOURCEIP = "127.0.0.1";
 
 	public String getInput() {
 		return input;
@@ -47,7 +65,61 @@ public class BaseController {
 		this.sessionEntity = sessionEntity;
 	}
 	
+	private String getFileName(String type, String extName) {
+		StringBuffer path = new StringBuffer(type);
+		path.append(String.format("%d", System.currentTimeMillis()));
+		path.append(String.format("%03d", (int) (Math.random() * 1000)));
+		path.append(".");
+		path.append(extName);
+		return path.toString();
+	}
 	
+	protected String resourceConvertURL(String path, MultipartFile imgFile) {
+
+		if(StringUtils.isBlank(imgFile.getOriginalFilename()))
+			return null;
+		
+		
+		String[] token = imgFile.getOriginalFilename().split("[.]");
+		String extname =  token[token.length - 1];
+		String fileName = getFileName("img", extname);
+		
+
+		StringBuffer localPath = new StringBuffer("");
+		localPath.append(IMAGEPATH);
+		localPath.append(path);
+
+		File targetFile = new File(localPath.toString(), fileName);
+		if (!targetFile.exists()) {
+			targetFile.mkdirs();
+		}
+		try {
+			imgFile.transferTo(targetFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			ftpClient.connect();
+			ftpClient.changeDirector(path);
+			ftpClient.upFile(targetFile);
+			ftpClient.closeConnect();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
+		StringBuffer remotePath = new StringBuffer("");
+		remotePath.append("http://");
+		remotePath.append(RESOURCEIP);
+		remotePath.append("/");
+		remotePath.append(path);
+		remotePath.append(fileName);
+
+		logger.debug("目标文件  {} 源文件 {}", targetFile.getAbsolutePath(),
+				remotePath.toString());
+
+		return remotePath.toString();
+	}
 	
 
 }
