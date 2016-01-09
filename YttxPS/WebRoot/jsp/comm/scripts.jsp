@@ -38,6 +38,9 @@
 <!-- colorbox -->
 <script src="/js/jquery.colorbox-min.js"></script>
 
+<!-- dropzone -->
+<script src="/js/dropzone.min.js"></script>
+
 <!-- ace scripts -->
 
 <script src="/js/ace-elements.min.js"></script>

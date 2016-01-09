@@ -1,11 +1,5 @@
 //	显示详情
 var raw = {};
-function showCustom(id) {
-	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	$("#showModal").modal({
-	    remote: "/jsp/scenic/show.jsp"
-	});
-};
 
 function editCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
@@ -14,12 +8,27 @@ function editCustom(id) {
     $('#editModal').modal({ show: true, backdrop: 'static' });
 };
 
+function picCustom(id) {
+	raw = jQuery("#grid-table").jqGrid('getRowData', id);
+	var frameSrc = "/jsp/pic/pic.jsp?no=" + raw.no;
+    $("#picIframe").attr("src", frameSrc);
+    $('#picModal').modal({ show: true, backdrop: 'static' });
+};
+
+function showCustom(id) {
+	raw = jQuery("#grid-table").jqGrid('getRowData', id);
+	$("#showModal").modal({
+	    remote: "/jsp/scenic/show.jsp"
+	});
+};
+
 function deleteCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	var frameSrc = "/jsp/scenic/delete.jsp?no=" + raw.no;
 	$("#delIframe").attr("src", frameSrc);
     $('#delModal').modal({ show: true, backdrop: 'static' });
 };
+
 
 $("#showModal").on("shown.bs.modal", function() {
 
@@ -75,6 +84,10 @@ $("#showModal").on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
 });
 
+$("#picModal").on("hidden.bs.modal", function() {
+    $(this).removeData("bs.modal");
+});
+
 
 
 jQuery(function($) {
@@ -87,7 +100,7 @@ jQuery(function($) {
 	});
 	
 //	jqGrid form提交
-	$("#submit").click(function() {
+	$("#submit").on("click", function() {
 		$("#collapseOne").collapse('hide');
 		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
@@ -97,9 +110,10 @@ jQuery(function($) {
 		postData["scenic.lvl"] = $("#queryfield").find("#lvl").val();
 		postData["scenic.stat"] = $("#queryfield").find("#stat").val();
 		$("#grid-table").jqGrid("setGridParam", {
+			datatype : 'json',
 			postData : postData
 		}).trigger("reloadGrid");
-	})
+	});
 	
 //	城市选择器
 	function localcallback(index, key, value, fullkey, fullname) {
@@ -138,8 +152,10 @@ jQuery(function($) {
 		var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteCustom('
 				+ options.rowId
 				+ ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-
-		return detail + editBtn + deleteBtn;
+		var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" id="picButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="picCustom('
+			+ options.rowId
+			+ ');" data-original-title="编辑资源图片"><span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
+		return detail + editBtn + deleteBtn + picDtn;
 	};
 
 	// resize to fit page size
@@ -181,7 +197,7 @@ jQuery(function($) {
 				colModel : [ {
 					name : 'myac',
 					index : '',
-					width : 70,
+					width : 100,
 					fixed : true,
 					sortable : false,
 					resize : false,
