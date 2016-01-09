@@ -1,7 +1,10 @@
 package com.yttx.yttxps.mapper;
 
 import com.yttx.yttxps.model.Pic;
+
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 public interface PicMapper<T> extends IBaseMapper<T>{
     /**
@@ -51,4 +54,17 @@ public interface PicMapper<T> extends IBaseMapper<T>{
      * @mbggenerated
      */
     int updateByPrimaryKey(Pic record);
+    
+    /**
+     * 
+     * @param record
+     * @return
+     */
+    int selectCountSelective(Map<String, Object> map);
+    
+    /**
+     * @param map
+     * @return List<Object>
+     */
+    List<T> selectSelectivePage(Map<String, Object> map);
 }

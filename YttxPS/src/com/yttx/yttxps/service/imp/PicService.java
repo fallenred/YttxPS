@@ -8,11 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yttx.yttxps.mapper.PicMapper;
-import com.yttx.yttxps.mapper.ScenicMapper;
 import com.yttx.yttxps.model.Pic;
-import com.yttx.yttxps.model.Scenic;
 import com.yttx.yttxps.service.IPicService;
-import com.yttx.yttxps.service.IScenicService;
 
 
 @Service("picService")

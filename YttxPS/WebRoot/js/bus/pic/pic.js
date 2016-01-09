@@ -5,15 +5,31 @@ jQuery(function($) {
 	
 	// 查询该资源对应的所有图片并显示
 	showpics(no);
-
+	
 	//	重置
-	$("#reset", "#queryfield").click(function() {
-		$("#selectCity", "#queryfield").hide();
-		$("#regionno", "#queryfield").val(null);
+	$("#reset").on("click", function() {
+			$("#belongtype").val(null);
+			$("#subtype").val(null);
+			$("#index").val(null);
+			$("#message").hide();
+			$("#message").text("");
+		});
+	
+	// 关闭
+	$("#close").on("click", function () {
+		$("#picModal", parent.document).find(".close").click();
 	});
 
-	//	提交
+	//	文件上传
 	$("#upfileBtn").on("click", function() {
+		console.log($("#message"));
+		if($("#belongtype").val() == "") {
+			$("#message").show();
+			$("#message").text("文件上传必须输入归属资源代码，请检查输入！");
+			$('#belongtype').focus();
+			return;
+		}
+		
 		$("#upfileModal").modal({
 		    remote: "/jsp/pic/add.jsp"
 		});
@@ -49,10 +65,11 @@ jQuery(function($) {
 			"<i class='ace-icon fa fa-spinner orange'></i>");// let's add a custom loading icon
 
 	function showpics(no) {
+		var json = 'page=1&rows=99&pic.no=' + $.getUrlParam('no');
 		$.ajax({
 		     type: 'POST',
 		     url: '/pic/findPic.htm' ,
-		     data: 'no=' + $.getUrlParam('no'),
+		     data: json,
 		     success: function(data){
 						if(data.result == "ok") {
 							$("#message").text("删除记录成功");
