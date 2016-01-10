@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.yttx.yttxps.comm.Config;
 import com.yttx.yttxps.comm.UPFileClient;
 import com.yttx.yttxps.model.SessionEntity;
 
@@ -29,9 +30,9 @@ public class BaseController {
 	@Autowired
 	private UPFileClient ftpClient;
 	
-	private static final String IMAGEPATH = "pic";
+	private static final String IMAGEPATH = Config.getValue("ImagePath");
 
-	private static final String RESOURCEIP = "127.0.0.1";
+	private static final String RESOURCEIP = Config.getValue("ResoureIP");
 
 	public String getInput() {
 		return input;
@@ -111,7 +112,6 @@ public class BaseController {
 		StringBuffer remotePath = new StringBuffer("");
 		remotePath.append("http://");
 		remotePath.append(RESOURCEIP);
-		remotePath.append("/");
 		remotePath.append(path);
 		remotePath.append(fileName);
 

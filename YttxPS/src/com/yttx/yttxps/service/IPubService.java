@@ -4,6 +4,7 @@ package com.yttx.yttxps.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yttx.yttxps.mapper.IBaseMapper;

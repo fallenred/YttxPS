@@ -10,6 +10,7 @@ import org.springframework.util.CollectionUtils;
 import com.yttx.yttxps.mapper.TticketMapper;
 import com.yttx.yttxps.model.Tticket;
 import com.yttx.yttxps.model.TticketExample;
+import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.service.ITicketService;
 
 
@@ -17,7 +18,7 @@ import com.yttx.yttxps.service.ITicketService;
 public class TicketService implements ITicketService {
 
 	@Autowired
-	private PubService<Tticket> pubService;
+	private IPubService<Tticket> pubService;
 	
 	@Autowired
 	private TticketMapper<Tticket> ticketMapper;

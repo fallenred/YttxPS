@@ -1,17 +1,16 @@
 jQuery(function($) {
 	
-	$("#belongtype").val(null);
-	$("#subtype").val(null);
-	$("#index").val(null);
-
+	var url = '/pic/addPic.htm?no=' + $("#no").val() + 
+					'&belongtype=' + $("#belongtype").val() + 
+					'&subtype=' + $("#subtype").val();
 	Dropzone.autoDiscover = false;
 	try {
 		var myDropzone = new Dropzone(
 				"#dropzone",
 				{
+					url : url,
 					paramName : "file", // The name that will be used to transfer the file
 					maxFilesize : 10, // MB
-
 					addRemoveLinks : true,
 					dictDefaultMessage : '<span class="bigger-150 bolder"><i class="ace-icon fa fa-caret-right red"></i> 拖动文件</span>上传 \
 			<span class="smaller-80 grey">(或点击)</span> <br /> \

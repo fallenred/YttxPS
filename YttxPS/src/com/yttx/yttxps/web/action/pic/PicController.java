@@ -61,12 +61,26 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	public Map<String, Object> ajaxaddPic(Pic pic,
 			@RequestParam(value = "file", required = true) MultipartFile file)
     {  
-		logger.debug("当前新增对象 {}", pic);
+		logger.debug("当前新增对象 {}", pic.getNo());
+		
+		StringBuffer path = new StringBuffer();
+		path.append("/").append(pic.getBelongtype()).append("/");
+		if(pic.getSubtype() != null && pic.getSubtype().length() > 0) {
+			path.append(pic.getSubtype()).append("/");
+		}
+		path.append(pic.getNo()).append("/");
+		logger.debug("图片path{}", path.toString());
+		
+		String fileurl = resourceConvertURL(path.toString(), file);
+		logger.debug("图片srcfile{}", fileurl);
+		pic.setSrcfile(fileurl);
+		
 		try{
 			int ret = picService.insert(pic);
 		}
 		catch(Exception e){
-			return (Map<String, Object>) JsonResult.jsonError("新增失败");
+			e.printStackTrace();
+			return (Map<String, Object>) JsonResult.jsonError("新增失败:" + e.getMessage());
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
     }

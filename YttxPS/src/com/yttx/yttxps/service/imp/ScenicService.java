@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.yttx.yttxps.mapper.ScenicMapper;
 import com.yttx.yttxps.model.Scenic;
+import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.service.IScenicService;
 
 
@@ -15,7 +16,7 @@ import com.yttx.yttxps.service.IScenicService;
 public class ScenicService implements IScenicService {
 
 	@Autowired
-	private PubService<Scenic> pubService;
+	private IPubService<Scenic> pubService;
 	
 	@Autowired
 	private ScenicMapper<Scenic> scenicMapper;

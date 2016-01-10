@@ -40,9 +40,9 @@
 								<div class="modal-body">
 								
 								
-								<form action="/jsp/dummy.html" class="dropzone" id="dropzone">
+								<form action="/pic/addPic.htm" class="dropzone" id="dropzone" enctype="multipart/form-data">
 									<div class="fallback">
-										<input name="file" type="file" multiple="" />
+										<input name="file" type="file" multiple="multiple" />
 									</div>
 								</form>
 								<!-- 

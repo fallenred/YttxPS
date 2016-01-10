@@ -13,12 +13,6 @@ import org.slf4j.LoggerFactory;
 import com.yttx.comm.StringUtil;
 
 
-
-
-
-
-
-
 /**
  * 
  * FTP 客户端封装类

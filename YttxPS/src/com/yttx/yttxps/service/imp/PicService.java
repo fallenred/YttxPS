@@ -1,6 +1,7 @@
 package com.yttx.yttxps.service.imp;
 
 import java.math.BigDecimal;
+
 import java.util.List;
 import java.util.Map;
 
@@ -10,13 +11,13 @@ import org.springframework.stereotype.Service;
 import com.yttx.yttxps.mapper.PicMapper;
 import com.yttx.yttxps.model.Pic;
 import com.yttx.yttxps.service.IPicService;
-
+import com.yttx.yttxps.service.IPubService;
 
 @Service("picService")
 public class PicService implements IPicService {
 
 	@Autowired
-	private PubService<Pic> pubService;
+	private IPubService<Pic> pubService;
 	
 	@Autowired
 	private PicMapper<Pic> picMapper;
