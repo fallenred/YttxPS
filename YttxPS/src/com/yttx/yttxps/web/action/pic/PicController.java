@@ -46,8 +46,15 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		Map<String, Object> map = new HashMap<String, Object>();
 		req.copyPage(map);
 		req.copyPic(map);
+		try {
 		List<Pic> list = picService.selectSelectivePage(map);
 		map.put("rows", list);
+		map.put("result", "ok");
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return (Map<String, Object>) JsonResult.jsonError("查询图片失败:" + e.getMessage());
+		}
 		return map;
     }
 	
@@ -92,7 +99,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 */
 	@RequestMapping(value="delPic.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxdelPic(@RequestParam(value = "index") BigDecimal  index)
+	public Map<String, Object> ajaxdelPic(@RequestParam(value = "index") BigDecimal  index, String srcfile)
     {  
 		logger.debug("当前删除key {}", index);
 		try{
@@ -101,6 +108,8 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("删除失败");
 		}
+		// 尝试删除资源服务器的资源
+		deleteResourceByURL(srcfile);
 		return (Map<String, Object>) JsonResult.jsonOk();
     }
 }

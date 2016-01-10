@@ -121,5 +121,19 @@ public class BaseController {
 		return remotePath.toString();
 	}
 	
+	protected boolean deleteResourceByURL(String path) {
+		boolean ret = false;
+		path = path.replace("http://" + RESOURCEIP, "");
+		try {
+			ftpClient.connect();
+			ret = ftpClient.getClient().deleteFile(path);
+			ftpClient.closeConnect();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		logger.debug("删除目标文件  {} {} ", path, ret);
+
+		return ret;
+	}
 
 }

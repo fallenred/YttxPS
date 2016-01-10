@@ -38,8 +38,11 @@
 		</property>
 	</bean>
 	
-	<context:component-scan base-package="com.yttx"></context:component-scan>
-
+	<!-- 扫描业务组件,让spring不扫描带有@Service注解的类(留在root-context.xml中扫描@Service注解的类),防止事务失效 -->
+	<context:component-scan base-package="com.yttx">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan> 
+	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
