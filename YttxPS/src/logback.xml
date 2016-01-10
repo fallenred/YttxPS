@@ -4,7 +4,7 @@
 	minutes or hours) -->
 <configuration scan="true" scanPeriod="20 seconds">
 	<contextName>pmgr</contextName>
-	<property name="LOGHOME" value="E:/temp/home/applog/" />
+	<property name="LOGHOME" value="f:/temp/home/applog/" />
 	<property name="PROJECT" value="yttxps" />
 
 	<!--appender 模块 -->

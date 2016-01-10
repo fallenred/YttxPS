@@ -3,20 +3,20 @@ var raw = {};
 function showCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	$("#showModal").modal({
-	    remote: "/jsp/ticket/show.jsp"
+	    remote: "/jsp/gen/show.jsp"
 	}); 
 };
 
 function editCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/ticket/edit.jsp";
+	var frameSrc = "/jsp/gen/edit.jsp";
     $("#editIframe").attr("src", frameSrc);
     $('#editModal').modal({ show: true, backdrop: 'static' });
 };
 
 function deleteCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/ticket/delete.jsp?no=" + raw.fsNo;
+	var frameSrc = "/jsp/gen/delete.jsp?no=" + raw.fiIndex;
 	$("#delIframe").attr("src", frameSrc);
     $('#delModal').modal({ show: true, backdrop: 'static' });
 };
@@ -30,54 +30,17 @@ function picCustom(id) {
 
 $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#reset").click();
-	$(this).find("#fsNo").val(raw.fsNo);
 	$(this).find("#fsName").val(raw.fsName);
-	$(this).find("#fsScenicno").val(raw.fsScenicno);
-	$(this).find("#fsType").val(raw.fsType);
+	$(this).find("#fiDays").val(raw.fiDays);
 	$(this).find("#fiStat").val(raw.fiStat);
-	$(this).find("#fsDesc").val(raw.fsDesc);
-	$(this).find("#fdFullLowQp").val(raw.fdFullLowQp);
-	$(this).find("#fdHalfLowQp").val(raw.fdHalfLowQp);
-	$(this).find("#fdChildLowQp").val(raw.fdChildLowQp);
-	$(this).find("#fdFreeLowQp").val(raw.fdFreeLowQp);
-	$(this).find("#fdFullLowTp").val(raw.fdFullLowTp);
-	$(this).find("#fdHalfLowTp").val(raw.fdHalfLowTp);
-	$(this).find("#fdChildLowTp").val(raw.fdChildLowTp);
-	$(this).find("#fdFreeLowTp").val(raw.fdFreeLowTp);
-	$(this).find("#fdFullPeakQp").val(raw.fdFullPeakQp);
-	$(this).find("#fdHalfPeakQp").val(raw.fdHalfPeakQp);
-	$(this).find("#fdChildPeakQp").val(raw.fdChildPeakQp);
-	$(this).find("#fdFreePeakQp").val(raw.fdFreePeakQp);
-	$(this).find("#fdFullPeakTp").val(raw.fdFullPeakTp);
-	$(this).find("#fdHalfPeakTp").val(raw.fdHalfPeakTp);
-	$(this).find("#fdChildPeakTp").val(raw.fdChildPeakTp);
-	$(this).find("#fdFreePeakTp").val(raw.fdFreePeakTp);
 });
 
 $("#editIframe").on("load",function(){
 	$(this).contents().find("#reset").click();
-	$(this).contents().find("#fsNo").val(raw.fsNo);
+	$(this).contents().find("#fiIndex").val(raw.fiIndex);
 	$(this).contents().find("#fsName").val(raw.fsName);
-	$(this).contents().find("#fsScenicno").val(raw.fsScenicno);
-	$(this).contents().find("#fsType").val(raw.fsType);
+	$(this).contents().find("#fiDays").val(raw.fiDays);
 	$(this).contents().find("#fiStat").val(raw.fiStat);
-	$(this).contents().find("#fsDesc").val(raw.fsDesc);
-	$(this).contents().find("#fdFullLowQp").val(raw.fdFullLowQp);
-	$(this).contents().find("#fdHalfLowQp").val(raw.fdHalfLowQp);
-	$(this).contents().find("#fdChildLowQp").val(raw.fdChildLowQp);
-	$(this).contents().find("#fdFreeLowQp").val(raw.fdFreeLowQp);
-	$(this).contents().find("#fdFullLowTp").val(raw.fdFullLowTp);
-	$(this).contents().find("#fdHalfLowTp").val(raw.fdHalfLowTp);
-	$(this).contents().find("#fdChildLowTp").val(raw.fdChildLowTp);
-	$(this).contents().find("#fdFreeLowTp").val(raw.fdFreeLowTp);
-	$(this).contents().find("#fdFullPeakQp").val(raw.fdFullPeakQp);
-	$(this).contents().find("#fdHalfPeakQp").val(raw.fdHalfPeakQp);
-	$(this).contents().find("#fdChildPeakQp").val(raw.fdChildPeakQp);
-	$(this).contents().find("#fdFreePeakQp").val(raw.fdFreePeakQp);
-	$(this).contents().find("#fdFullPeakTp").val(raw.fdFullPeakTp);
-	$(this).contents().find("#fdHalfPeakTp").val(raw.fdHalfPeakTp);
-	$(this).contents().find("#fdChildPeakTp").val(raw.fdChildPeakTp);
-	$(this).contents().find("#fdFreePeakTp").val(raw.fdFreePeakTp);
 });
 
 
@@ -119,11 +82,11 @@ jQuery(function($) {
 		$("#collapseOne").collapse('hide');
 		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
-		postData["ticket.fsNo"] = $("#queryfield").find("#fsNo").val();
-		postData["ticket.fsScenicno"] = $("#queryfield").find("#fsScenicno").val();
-		postData["ticket.fsName"] = $("#queryfield").find("#fsName").val();
-		postData["ticket.fsType"] = $("#queryfield").find("#fsType").val();
-		postData["ticket.fiStat"] = $("#queryfield").find("#fiStat").val();
+		postData["gen.fsNo"] = $("#queryfield").find("#fsNo").val();
+		postData["gen.fsScenicno"] = $("#queryfield").find("#fsScenicno").val();
+		postData["gen.fsName"] = $("#queryfield").find("#fsName").val();
+		postData["gen.fsType"] = $("#queryfield").find("#fsType").val();
+		postData["gen.fiStat"] = $("#queryfield").find("#fiStat").val();
 		$("#grid-table").jqGrid("setGridParam", {
 			postData : postData
 		}).trigger("reloadGrid");
@@ -195,29 +158,17 @@ jQuery(function($) {
 		1 : '正常',
 		2 : '失效'
 	};
-	var fsTypes = {
-		'01' : '主门票',
-		'02' : '车票',
-		'03' : '小景区'
-	};
 	var s = '';
 	for (k in items)
 		s += ';' + k + ":" + items[k];
 	s = s.substring(1);
-	var t = '';
-	for (k in fsTypes)
-		t += ';' + k + ":" + fsTypes[k];
-	t = t.substring(1);
 	jQuery(grid_selector).jqGrid(
 			{
-				url : "/ticket/findTicket.htm",
+				url : "/gen/findGen.htm",
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '门票代码', '票名称', '所属景区', '门票类型', '淡季挂牌价格全票', '淡季挂牌价格半票', '淡季挂牌价格儿童票', 
-				             '淡季挂牌价格免票', '淡季团队价格全票', '淡季团队价格半票', '淡季团队价格儿童票', '淡季团队价格免票', '旺季挂牌价格全票',
-				             '旺季挂牌价格半票', '旺季挂牌价格儿童票', '旺季挂牌价格免票', '旺季团队价格全票', '旺季团队价格半票', '旺季团队价格儿童票',
-				             '旺季团队价格免票', '状态', '描述' ],
+				colNames : [ '操作', '路线编码', '路线名称', '路线天数', '状态' ],
 				colModel : [ {
 					name : 'myac',
 					index : '',
@@ -227,8 +178,8 @@ jQuery(function($) {
 					resize : false,
 					formatter : actFormatter
 				}, {
-					name : 'fsNo',
-					index : 'fsNo',
+					name : 'fiIndex',
+					index : 'fiIndex',
 					width : 85,
 					sorttype : "int"
 				}, {
@@ -238,126 +189,11 @@ jQuery(function($) {
 					editable : true,
 					sorttype : "char"
 				}, {
-					name : 'fsScenicno',
-					index : 'fsScenicno',
+					name : 'fiDays',
+					index : 'fiDays',
 					width : 100,
 					editable : true,
-					sorttype : "char"
-				}, {
-					name : 'fsType',
-					index : 'fsType',
-					width : 100,
-					sortable : true,
-					editable : true,
-					edittype : 'select',
-					editoptions : {
-						value : t
-					},
-					formatter : function(v, opt, rec) {
-						return fsTypes[v];
-					},
-					unformat : function(v) {
-						for (k in fsTypes)
-							if (fsTypes[k] == v)
-								return k;
-						return '1';
-					}
-				}, {
-					name : 'fdFullLowQp',
-					index : 'fdFullLowQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdHalfLowQp',
-					index : 'fdHalfLowQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdChildLowQp',
-					index : 'fdChildLowQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFreeLowQp',
-					index : 'fdFreeLowQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFullLowTp',
-					index : 'fdFullLowTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdHalfLowTp',
-					index : 'fdHalfLowTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdChildLowTp',
-					index : 'fdChildLowTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFreeLowTp',
-					index : 'fdFreeLowTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFullPeakQp',
-					index : 'fdFullPeakQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdHalfPeakQp',
-					index : 'fdHalfPeakQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdChildPeakQp',
-					index : 'fdChildPeakQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFreePeakQp',
-					index : 'fdFreePeakQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFullPeakTp',
-					index : 'fdFullPeakTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdHalfPeakTp',
-					index : 'fdHalfPeakTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdChildPeakTp',
-					index : 'fdChildPeakTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFreePeakTp',
-					index : 'fdFreePeakTp',
-					width : 100,
-					editable : true,
-					hidden : true
+					sorttype : "int"
 				}, {
 					name : 'fiStat',
 					index : 'fiStat',
@@ -377,14 +213,7 @@ jQuery(function($) {
 								return k;
 						return '1';
 					}
-				}, {
-					name : 'fsDesc',
-					index : 'fsDesc',
-					edittype : 'textarea',
-					width : 300,
-					editable : true,
-					sorttype : "char"
-				} ],
+				}],
 
 				viewrecords : true,
 				rowNum : 10,
@@ -406,7 +235,7 @@ jQuery(function($) {
 					}, 0);
 				},
 
-				editurl : "/ticket/save.htm",
+				editurl : "/gen/save.htm",
 				shrinkToFit : true,
 				autowidth : true
 
@@ -480,7 +309,7 @@ jQuery(function($) {
 				caption : "",
 				buttonicon : "ace-icon fa fa-plus-circle purple",
 				onClickButton : function() {
-					var frameSrc = "/jsp/ticket/add.jsp";
+					var frameSrc = "/jsp/gen/add.jsp";
 			        $("#addIframe").attr("src", frameSrc);
 			        $('#addModal').modal({ show: true, backdrop: 'static' });
 				},

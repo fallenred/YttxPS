@@ -1,6 +1,5 @@
 package com.yttx.yttxps.model.vo;
 
-import java.math.BigDecimal;
 import java.util.Map;
 
 import com.yttx.yttxps.model.Tticket;

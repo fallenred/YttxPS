@@ -48,7 +48,9 @@
 		
 		<item id="0900" name="车型管理配置" icon="menu-icon fa fa-sitemap" >
 			<submenu>
-				<item id="09a0" name="线路概况维护" url="/bustype/route.htm" />
+				<item id="09a0" name="线路概况管理" url="/jsp/gen/gen.jsp" />
+				<item id="09b0" name="车型管理配置" url="/jsp/transport/transport.jsp" />
+				<item id="09c0" name="车型线路管理" url="/jsp/transportArrange/transportArrange.jsp" />
 			</submenu>
 		</item>
 		

@@ -79,43 +79,23 @@
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
-													for="no">门票编码</label>
+													for="fsName">路线名称</label>
 												<div class="col-sm-2">
-													<input maxlength="10" type="text" id="no"
-														placeholder="门票编码" />
+													<input maxlength="10" type="text" id="fsName"
+														placeholder="路线名称" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
-													for="fsScenicno">所属景区</label>
-												<div class="col-sm-2">
-													<input maxlength="150"
-														type="text" id="fsScenicno" placeholder="所属景区" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="name">门票名称</label>
+													for="fiDays">路线天数</label>
 												<div class="col-sm-2">
 													<input maxlength="150"
-														type="text" id="fsName" placeholder="门票名称" />
+														type="text" id="fiDays" placeholder="路线天数" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
-													for="lvl">门票类型</label>
-												<div class="col-sm-1">
-													<select id="fsType">
-														<option value="">----门票类型----</option>
-														<option value="01">主门票</option>
-														<option value="02">车票</option>
-														<option value="03">小景区</option>
-													</select>
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="lvl">状态</label>
+													for="fiStat">状态</label>
 												<div class="col-sm-1">
 													<select id="fiStat">
 														<option value="">----状态----</option>
@@ -153,10 +133,10 @@
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal"
 												aria-hidden="true">×</button>
-											<h4 class="modal-title" id="addModalLabel">新增门票</h4>
+											<h4 class="modal-title" id="addModalLabel">新增路线</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="addIframe" width="100%" height="750px"
+											<iframe id="addIframe" width="100%" height="400px"
 												frameborder="0" scrolling="no"></iframe>
 										</div>
 
@@ -176,10 +156,10 @@
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal"
 												aria-hidden="true">×</button>
-											<h4 class="modal-title" id="addModalLabel">修改门票</h4>
+											<h4 class="modal-title" id="addModalLabel">修改路线</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="editIframe" width="100%" height="750px"
+											<iframe id="editIframe" width="100%" height="400px"
 												frameborder="0" scrolling="no"></iframe>
 										</div>
 
@@ -262,6 +242,6 @@
 
 	</div>
 	<!-- /.main-container -->
-	<script src="/js/bus/ticket/ticket.js"></script>
+	<script src="/js/bus/gen/gen.js"></script>
 </body>
 </html>

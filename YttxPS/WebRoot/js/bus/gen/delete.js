@@ -3,7 +3,7 @@ jQuery(function($) {
 	$("#submit").on("click", function () {
 		$.ajax({
 		     type: 'POST',
-		     url: '/ticket/delTicket.htm' ,
+		     url: '/gen/delGen.htm' ,
 		     data: 'no=' + $.getUrlParam('no'),
 		     success: function(data){
 						if(data.result == "ok") {
