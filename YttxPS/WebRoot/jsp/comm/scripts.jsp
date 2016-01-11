@@ -41,6 +41,9 @@
 <!-- dropzone -->
 <script src="/js/dropzone.min.js"></script>
 
+<!-- ckeditor -->
+<script src="/js/ckeditor/ckeditor.js"></script>
+
 <!-- ace scripts -->
 
 <script src="/js/ace-elements.min.js"></script>

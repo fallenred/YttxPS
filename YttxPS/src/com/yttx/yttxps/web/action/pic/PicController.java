@@ -1,9 +1,14 @@
 package com.yttx.yttxps.web.action.pic;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,6 +95,41 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			return (Map<String, Object>) JsonResult.jsonError("新增失败:" + e.getMessage());
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
+    }
+	
+	/**
+	 * 新图片信息
+	 * @param pic
+	 * @return
+	 */
+	@RequestMapping(value="addLinePic.htm", method = RequestMethod.POST)
+	public void uploadFile(@RequestParam("upload") 
+		MultipartFile file,
+		HttpServletRequest request,
+		HttpServletResponse response)
+    {  
+		logger.debug("当前新增图片对象 {}", file);
+		
+		StringBuffer path = new StringBuffer();
+		path.append("/").append("line").append("/");
+		logger.debug("图片path{}", path.toString());
+		
+		String fileurl = resourceConvertURL(path.toString(), file);
+		logger.debug("图片srcfile{}", fileurl);
+		
+		response.setContentType("text/html;charset=UTF-8");
+//      response.setHeader("X-Frame-Options", "SAMEORIGIN");
+        String CKEditorFuncNum = request.getParameter("CKEditorFuncNum");
+        PrintWriter out;
+        String s = "<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction("+CKEditorFuncNum+", '"+fileurl+"');</script>";
+        try {
+            out = response.getWriter();
+            out.print(s);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+         
     }
 	
 	/**
