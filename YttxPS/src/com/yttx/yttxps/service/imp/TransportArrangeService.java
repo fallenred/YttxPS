@@ -5,12 +5,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import com.yttx.yttxps.mapper.TtransportArrangeMapper;
 import com.yttx.yttxps.model.TtransportArrange;
 import com.yttx.yttxps.model.TtransportArrangeExample;
 import com.yttx.yttxps.model.TtransportArrangeKey;
+import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.service.ITransportArrangeService;
 
 
@@ -18,7 +18,7 @@ import com.yttx.yttxps.service.ITransportArrangeService;
 public class TransportArrangeService implements ITransportArrangeService {
 
 	@Autowired
-	private PubService<TtransportArrange> pubService;
+	private IPubService<TtransportArrange> pubService;
 	
 	@Autowired
 	private TtransportArrangeMapper<TtransportArrange> transportArrangeMapper;

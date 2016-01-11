@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.yttx.yttxps.mapper.TtransportMapper;
 import com.yttx.yttxps.model.Ttransport;
 import com.yttx.yttxps.model.TtransportExample;
+import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.service.ITransportService;
 
 
@@ -16,7 +17,7 @@ import com.yttx.yttxps.service.ITransportService;
 public class TransportService implements ITransportService {
 
 	@Autowired
-	private PubService<Ttransport> pubService;
+	private IPubService<Ttransport> pubService;
 	
 	@Autowired
 	private TtransportMapper<Ttransport> transportMapper;

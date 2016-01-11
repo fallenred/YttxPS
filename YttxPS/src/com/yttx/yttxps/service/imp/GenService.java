@@ -11,13 +11,14 @@ import com.yttx.yttxps.mapper.TgenMapper;
 import com.yttx.yttxps.model.Tgen;
 import com.yttx.yttxps.model.TgenExample;
 import com.yttx.yttxps.service.IGenService;
+import com.yttx.yttxps.service.IPubService;
 
 
 @Service("genService")
 public class GenService implements IGenService {
 
 	@Autowired
-	private PubService<Tgen> pubService;
+	private IPubService<Tgen> pubService;
 	
 	@Autowired
 	private TgenMapper<Tgen> genMapper;
