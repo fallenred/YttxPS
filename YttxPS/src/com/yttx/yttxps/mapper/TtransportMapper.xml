@@ -315,4 +315,48 @@
       FI_STAT = #{fiStat,jdbcType=DECIMAL}
     where FS_NO = #{fsNo,jdbcType=CHAR}
   </update>
+  
+  <!-- 动态查询总数 -->
+  <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
+      select count(*) from TTRANSPORT
+	     where 1=1
+	      <if test="fsName != null and fsName != ''" >
+	        and fs_Name like '%'||#{fsName}||'%'
+	      </if>
+	      <if test="fiLoadMin != null and fiLoadMin != ''" >
+	        and FI_LOAD_MIN = #{fiLoadMin}
+	      </if>
+	      <if test="fsType != null and fsType != ''" >
+	        and FI_LOAD_MAX = #{fiLoadMax}
+	      </if>
+	      <if test="fiStat != null and fiStat != ''" >
+	        and fi_Stat = #{fiStat}
+	      </if>
+  </select>
+  
+  <!-- 动态查询 -->
+  <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
+      select * from (select ROWNUM as rowno, t.* from TTRANSPORT t
+    	where 1=1
+	      <if test="fsName != null and fsName != ''" >
+	        and fs_Name like '%'||#{fsName}||'%'
+	      </if>
+	      <if test="fiLoadMin != null and fiLoadMin != ''" >
+	        and FI_LOAD_MIN = #{fiLoadMin}
+	      </if>
+	      <if test="fsType != null and fsType != ''" >
+	        and FI_LOAD_MAX = #{fiLoadMax}
+	      </if>
+	      <if test="fiStat != null and fiStat != ''" >
+	        and fi_Stat = #{fiStat}
+	      </if>
+	      ) tt where 1=1
+	      <if test="startrow != null" >
+	        and tt.rowno &gt;= #{startrow}
+	      </if>
+  </select>
+  
+  <select id="selectFsNo" resultType="int">
+      select transport_sequence.nextval from dual
+  </select>
 </mapper>

@@ -79,14 +79,6 @@
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
-													for="no">门票编码</label>
-												<div class="col-sm-2">
-													<input maxlength="10" type="text" id="no"
-														placeholder="门票编码" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
 													for="fsScenicno">所属景区</label>
 												<div class="col-sm-2">
 													<input maxlength="150"
@@ -95,7 +87,7 @@
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
-													for="name">门票名称</label>
+													for="fsName">门票名称</label>
 												<div class="col-sm-2">
 													<input maxlength="150"
 														type="text" id="fsName" placeholder="门票名称" />
@@ -103,7 +95,7 @@
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
-													for="lvl">门票类型</label>
+													for="fsType">门票类型</label>
 												<div class="col-sm-1">
 													<select id="fsType">
 														<option value="">----门票类型----</option>

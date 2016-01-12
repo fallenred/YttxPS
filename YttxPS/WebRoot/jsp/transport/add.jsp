@@ -54,138 +54,43 @@
 											<div class="col-sm-2">
 												<input maxlength="10" type="text" id="fsNo" name="fsNo" placeholder="门票代码需唯一" />
 											</div> -->
-											<label class="col-sm-2 control-label no-padding-right" for="fsName">票名称</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fsName">车型名称</label>
 											<div class="col-sm-2">
-												<input type="text" id="fsName" name="fsName" placeholder="票名称"  maxlength="10"/>
+												<input type="text" id="fsName"  class="form-control" name="fsName" placeholder="车型名称"  maxlength="10"/>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fsScenicName">所属景区</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fiLoadMin">准载下限</label>
 											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fsScenicno" name="fsScenicno" placeholder="所属景区" />
+												<input maxlength="10" type="text"  class="form-control" id="fiLoadMin" name="fiLoadMin" placeholder="准载下限" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											
-											<label class="col-sm-2 control-label no-padding-right" for="fsType">门票类型</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fiLoadMax">准载上限</label>
 											<div class="col-sm-2">
-												<select id="type" name="fsType">
-													<option value="01">主门票</option>
-													<option value="02">车票</option>
-													<option value="03">小景区</option>
-												</select>
+												<input maxlength="10" type="text"  class="form-control" id="fiLoadMax" name="fiLoadMax" placeholder="准载上限" />
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fsType">状态</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fiFitMin">适应范围下限</label>
+											<div class="col-sm-2">
+												<input maxlength="10" type="text"  class="form-control" id="fiFitMin" name="fiFitMin" placeholder="适应范围下限" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fiFitMax">适应范围上限</label>
+											<div class="col-sm-2">
+												<input type="text" id="fiFitMax" name="fiFitMax" class="form-control" placeholder="适应范围上限"  />
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fiStat">状态</label>
 											<div class="col-sm-2">
 												<select id="fiStat" name="fiStat">
 													<option value="1">正常</option>
 													<option value="2">失效</option>
 												</select>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsDesc">描述</label>
-											<div class="col-sm-6">
-												<input type="text" id="fsDesc" name="fsDesc" class="form-control"
-													placeholder="描述"  />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdFullLowQp">淡季挂牌价格全票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdFullLowQp" name="fdFullLowQp" placeholder="淡季挂牌价格全票" />
-											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fdHalfLowQp">淡季挂牌价格半票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdHalfLowQp" name="fdHalfLowQp" placeholder="淡季挂牌价格半票" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdChildLowQp">淡季挂牌价格儿童票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdChildLowQp" name="fdChildLowQp" placeholder="淡季挂牌价格儿童票" />
-											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fdFreeLowQp">淡季挂牌价格免票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdFreeLowQp" name="fdFreeLowQp" placeholder="淡季挂牌价格免票" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdFullLowTp">淡季团队价格全票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdFullLowTp" name="fdFullLowTp" placeholder="淡季团队价格全票" />
-											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fdHalfLowTp">淡季团队价格半票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdHalfLowTp" name="fdHalfLowTp" placeholder="淡季团队价格半票" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdChildLowTp">淡季团队价格儿童票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdChildLowTp" name="fdChildLowTp" placeholder="淡季团队价格儿童票" />
-											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fdFreeLowTp">淡季团队价格免票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdFreeLowTp" name="fdFreeLowTp" placeholder="淡季团队价格免票" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdFullPeakQp">旺季挂牌价格全票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdFullPeakQp" name="fdFullPeakQp" placeholder="旺季挂牌价格全票" />
-											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fdHalfPeakQp">旺季挂牌价格半票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdHalfPeakQp" name="fdHalfPeakQp" placeholder="旺季挂牌价格半票" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdChildPeakQp">旺季挂牌价格儿童票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdChildPeakQp" name="fdChildPeakQp" placeholder="旺季挂牌价格儿童票" />
-											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fdFreePeakQp">旺季挂牌价格免票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdFreePeakQp" name="fdFreePeakQp" placeholder="旺季挂牌价格免票" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdFullPeakTp">旺季团队价格全票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdFullPeakTp" name="fdFullPeakTp" placeholder="旺季团队价格全票" />
-											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fdHalfPeakTp">旺季团队价格半票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdHalfPeakTp" name="fdHalfPeakTp" placeholder="旺季团队价格半票" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdChildPeakTp">旺季团队价格儿童票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdChildPeakTp" name="fdChildPeakTp" placeholder="旺季团队价格儿童票" />
-											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fdFreePeakTp">旺季团队价格免票</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fdFreePeakTp" name="fdFreePeakTp" placeholder="旺季团队价格免票" />
 											</div>
 										</div>
 									</div>
@@ -214,7 +119,7 @@
 
 	</div>
 	<!-- /.main-container -->
-	<script src="/js/bus/ticket/add.js"></script>
+	<script src="/js/bus/transport/add.js"></script>
 
 	<c:if test="${!empty succflag && succflag =='1'}">
 

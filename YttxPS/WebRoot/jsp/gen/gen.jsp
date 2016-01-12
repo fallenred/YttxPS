@@ -100,7 +100,7 @@
 													<select id="fiStat">
 														<option value="">----状态----</option>
 														<option value="1">正常</option>
-														<option value="2">失效</option>
+														<option value="-100">已销</option>
 													</select>
 												</div>
 											</div>

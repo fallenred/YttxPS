@@ -3,20 +3,20 @@ var raw = {};
 function showCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	$("#showModal").modal({
-	    remote: "/jsp/gen/show.jsp"
+	    remote: "/jsp/transport/show.jsp"
 	}); 
 };
 
 function editCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/gen/edit.jsp";
+	var frameSrc = "/jsp/transport/edit.jsp";
     $("#editIframe").attr("src", frameSrc);
     $('#editModal').modal({ show: true, backdrop: 'static' });
 };
 
 function deleteCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/gen/delete.jsp?no=" + raw.fiIndex;
+	var frameSrc = "/jsp/transport/delete.jsp?no=" + raw.fsNo;
 	$("#delIframe").attr("src", frameSrc);
     $('#delModal').modal({ show: true, backdrop: 'static' });
 };
@@ -31,15 +31,21 @@ function picCustom(id) {
 $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#reset").click();
 	$(this).find("#fsName").val(raw.fsName);
-	$(this).find("#fiDays").val(raw.fiDays);
+	$(this).find("#fiLoadMin").val(raw.fiLoadMin);
+	$(this).find("#fiLoadMax").val(raw.fiLoadMax);
+	$(this).find("#fiFitMin").val(raw.fiFitMin);
+	$(this).find("#fiFitMax").val(raw.fiFitMax);
 	$(this).find("#fiStat").val(raw.fiStat);
 });
 
 $("#editIframe").on("load",function(){
 	$(this).contents().find("#reset").click();
-	$(this).contents().find("#fiIndex").val(raw.fiIndex);
+	$(this).contents().find("#fsNo").val(raw.fsNo);
 	$(this).contents().find("#fsName").val(raw.fsName);
-	$(this).contents().find("#fiDays").val(raw.fiDays);
+	$(this).contents().find("#fiLoadMin").val(raw.fiLoadMin);
+	$(this).contents().find("#fiLoadMax").val(raw.fiLoadMax);
+	$(this).contents().find("#fiFitMin").val(raw.fiFitMin);
+	$(this).contents().find("#fiFitMax").val(raw.fiFitMax);
 	$(this).contents().find("#fiStat").val(raw.fiStat);
 });
 
@@ -82,11 +88,11 @@ jQuery(function($) {
 		$("#collapseOne").collapse('hide');
 		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
-		postData["gen.fsNo"] = $("#queryfield").find("#fsNo").val();
-		postData["gen.fsScenicno"] = $("#queryfield").find("#fsScenicno").val();
-		postData["gen.fsName"] = $("#queryfield").find("#fsName").val();
-		postData["gen.fsType"] = $("#queryfield").find("#fsType").val();
-		postData["gen.fiStat"] = $("#queryfield").find("#fiStat").val();
+		postData["transport.fsNo"] = $("#queryfield").find("#fsNo").val();
+		postData["transport.fsScenicno"] = $("#queryfield").find("#fsScenicno").val();
+		postData["transport.fsName"] = $("#queryfield").find("#fsName").val();
+		postData["transport.fsType"] = $("#queryfield").find("#fsType").val();
+		postData["transport.fiStat"] = $("#queryfield").find("#fiStat").val();
 		$("#grid-table").jqGrid("setGridParam", {
 			postData : postData
 		}).trigger("reloadGrid");
@@ -164,11 +170,11 @@ jQuery(function($) {
 	s = s.substring(1);
 	jQuery(grid_selector).jqGrid(
 			{
-				url : "/gen/findGen.htm",
+				url : "/transport/findTransport.htm",
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '路线编码', '路线名称', '路线天数', '状态' ],
+				colNames : [ '操作', '车型编码', '车型名称', '准载上限', '准载下限', '适应范围上限', '适应范围下限', '状态' ],
 				colModel : [ {
 					name : 'myac',
 					index : '',
@@ -178,10 +184,11 @@ jQuery(function($) {
 					resize : false,
 					formatter : actFormatter
 				}, {
-					name : 'fiIndex',
+					name : 'fsNo',
 					index : 'fiIndex',
 					width : 85,
-					sorttype : "int"
+					sorttype : "int",
+					hidden : true
 				}, {
 					name : 'fsName',
 					index : 'fsName',
@@ -189,8 +196,26 @@ jQuery(function($) {
 					editable : true,
 					sorttype : "char"
 				}, {
-					name : 'fiDays',
-					index : 'fiDays',
+					name : 'fiLoadMin',
+					index : 'fiLoadMin',
+					width : 100,
+					editable : true,
+					sorttype : "int"
+				}, {
+					name : 'fiLoadMax',
+					index : 'fiLoadMax',
+					width : 100,
+					editable : true,
+					sorttype : "int"
+				}, {
+					name : 'fiFitMin',
+					index : 'fiFitMin',
+					width : 100,
+					editable : true,
+					sorttype : "int"
+				}, {
+					name : 'fiFitMax',
+					index : 'fiFitMax',
 					width : 100,
 					editable : true,
 					sorttype : "int"
@@ -235,7 +260,7 @@ jQuery(function($) {
 					}, 0);
 				},
 
-				editurl : "/gen/save.htm",
+				editurl : "/transport/save.htm",
 				shrinkToFit : true,
 				autowidth : true
 
@@ -309,7 +334,7 @@ jQuery(function($) {
 				caption : "",
 				buttonicon : "ace-icon fa fa-plus-circle purple",
 				onClickButton : function() {
-					var frameSrc = "/jsp/gen/add.jsp";
+					var frameSrc = "/jsp/transport/add.jsp";
 			        $("#addIframe").attr("src", frameSrc);
 			        $('#addModal').modal({ show: true, backdrop: 'static' });
 				},

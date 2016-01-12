@@ -230,7 +230,9 @@ jQuery(function($) {
 					name : 'fsNo',
 					index : 'fsNo',
 					width : 85,
-					sorttype : "int"
+					sorttype : "int",
+					editable : true,
+					hidden : true
 				}, {
 					name : 'fsName',
 					index : 'fsName',

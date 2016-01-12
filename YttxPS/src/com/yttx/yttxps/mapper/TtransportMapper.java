@@ -74,4 +74,6 @@ public interface TtransportMapper<T> extends IBaseMapper<T> {
 	 * @mbggenerated  Sun Jan 10 16:31:14 CST 2016
 	 */
 	int updateByPrimaryKey(Ttransport record);
+	
+    int selectFsNo();
 }

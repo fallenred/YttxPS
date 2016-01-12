@@ -79,38 +79,26 @@
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
-													for="no">门票编码</label>
-												<div class="col-sm-2">
-													<input maxlength="10" type="text" id="no"
-														placeholder="门票编码" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="fsScenicno">所属景区</label>
+													for="fsName">车型名称</label>
 												<div class="col-sm-2">
 													<input maxlength="150"
-														type="text" id="fsScenicno" placeholder="所属景区" />
+														type="text" id="fsName" placeholder=">车型名称" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
-													for="name">门票名称</label>
+													for="fiLoadMin">准载下限</label>
 												<div class="col-sm-2">
 													<input maxlength="150"
-														type="text" id="fsName" placeholder="门票名称" />
+														type="text" id="fiLoadMin" placeholder="准载下限" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
-													for="lvl">门票类型</label>
-												<div class="col-sm-1">
-													<select id="fsType">
-														<option value="">----门票类型----</option>
-														<option value="01">主门票</option>
-														<option value="02">车票</option>
-														<option value="03">小景区</option>
-													</select>
+													for="fiLoadMax">准载上限</label>
+												<div class="col-sm-2">
+													<input maxlength="150"
+														type="text" id="fiLoadMax" placeholder="准载上限" />
 												</div>
 											</div>
 											<div class="form-group">
@@ -156,7 +144,7 @@
 											<h4 class="modal-title" id="addModalLabel">新增门票</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="addIframe" width="100%" height="750px"
+											<iframe id="addIframe" width="100%" height="450px"
 												frameborder="0" scrolling="no"></iframe>
 										</div>
 
@@ -179,7 +167,7 @@
 											<h4 class="modal-title" id="addModalLabel">修改门票</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="editIframe" width="100%" height="750px"
+											<iframe id="editIframe" width="100%" height="450px"
 												frameborder="0" scrolling="no"></iframe>
 										</div>
 
@@ -262,6 +250,6 @@
 
 	</div>
 	<!-- /.main-container -->
-	<script src="/js/bus/ticket/ticket.js"></script>
+	<script src="/js/bus/transport/transport.js"></script>
 </body>
 </html>

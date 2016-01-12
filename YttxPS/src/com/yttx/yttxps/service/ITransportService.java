@@ -28,4 +28,6 @@ public interface ITransportService {
 	int delete(String no);
 	
 	List<Ttransport> selectTtransport(TtransportExample example);
+
+	int selectFsNo();
 }

@@ -52,5 +52,10 @@ public class TransportService implements ITransportService {
 		// TODO Auto-generated method stub
 		return transportMapper.selectByExample(example);
 	}
+	
+	@Override
+	public int selectFsNo() {
+		return transportMapper.selectFsNo();
+	}
 
 }
