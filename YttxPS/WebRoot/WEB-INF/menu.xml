@@ -36,7 +36,7 @@
 		
 		<item id="0700" name="驾驶员资料管理" icon="menu-icon fa fa-table" >
 			<submenu>
-				<item id="07a0" name="资料配置" url="/driver/configure.htm" />
+				<item id="07a0" name="驾驶员信息管理" url="/jsp/driver/driver.jsp" />
 			</submenu>
 		</item>
 		
