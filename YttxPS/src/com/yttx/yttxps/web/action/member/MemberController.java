@@ -43,10 +43,10 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@ResponseBody
 	public Object ajaxfindScenic(CustChgAuRequest req)
     {  
-		logger.debug("当前查询条件 {}", req.getScenic());
+		logger.debug("当前查询条件 {}", req.getCustChgAu());
 		Map<String, Object> map = new HashMap<String, Object>();
 		req.copyPage(map);
-		req.copyScenic(map);
+		req.copyCustChgAu(map);
 		List<Scenic> list = scenicService.selectSelectivePage(map);
 		map.put("rows", list);
 		return map;

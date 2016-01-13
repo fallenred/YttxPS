@@ -26,19 +26,7 @@ public class CustChgAuRequest extends JqGridRequest implements
 
 	public void copyCustChgAu(Map<String, Object> map) {
 		if (custChgAu != null) {
-			map.put("no", scenic.getNo() == null ? "" : scenic.getNo());
-			map.put("name", scenic.getName() == null ? "" : scenic.getName());
-			map.put("regionno",
-					scenic.getRegionno() == null ? "" : scenic.getRegionno());
-			map.put("addr", scenic.getAddr() == null ? "" : scenic.getAddr());
-			map.put("lvl", scenic.getLvl() == null ? "" : scenic.getLvl());
-			map.put("stat", scenic.getStat() == null ? 1 : scenic.getStat());
-			map.put("opentime",
-					scenic.getOpentime() == null ? "" : scenic.getOpentime());
-			map.put("desc", scenic.getDesc() == null ? "" : scenic.getDesc());
-			map.put("speciality",
-					scenic.getSpeciality() == null ? "" : scenic
-							.getSpeciality());
+			map.put("no", custChgAu.getId() == null ? "" : custChgAu.getId());
 		}
 	}
 }
