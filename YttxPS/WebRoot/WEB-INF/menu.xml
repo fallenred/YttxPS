@@ -42,7 +42,7 @@
 		
 		<item id="0800" name="车辆资料管理" icon="menu-icon fa fa-table" >
 			<submenu>
-				<item id="08a0" name="资料配置" url="/bus/configure.htm" />
+				<item id="08a0" name="资料配置" url="/jsp/car/car.jsp" />
 			</submenu>
 		</item>
 		
