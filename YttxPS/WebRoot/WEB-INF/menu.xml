@@ -10,7 +10,7 @@
 		
 		<item id="0300" name="会员管理" icon="menu-icon fa fa-group" >
 			<submenu>
-				<item id="03a0" name="会员审核" url="/member/audit.htm" />
+				<item id="03a0" name="会员审核" url="/jsp/member/audit.jsp" />
 				<item id="03b0" name="会员设置" url="/member/setting.htm" />
 			</submenu>
 		</item>
@@ -36,13 +36,13 @@
 		
 		<item id="0700" name="驾驶员资料管理" icon="menu-icon fa fa-table" >
 			<submenu>
-				<item id="07a0" name="资料配置" url="/driver/configure.htm" />
+				<item id="07a0" name="资料配置" url="/jsp/driver/driver.jsp" />
 			</submenu>
 		</item>
 		
 		<item id="0800" name="车辆资料管理" icon="menu-icon fa fa-table" >
 			<submenu>
-				<item id="08a0" name="资料配置" url="/bus/configure.htm" />
+				<item id="08a0" name="资料配置" url="/jsp/car/car.jsp" />
 			</submenu>
 		</item>
 		
