@@ -82,7 +82,7 @@
 													for="fsName">车型名称</label>
 												<div class="col-sm-2">
 													<input maxlength="150"
-														type="text" id="fsName" placeholder=">车型名称" />
+														type="text" id="fsName" placeholder="车型名称" />
 												</div>
 											</div>
 											<div class="form-group">

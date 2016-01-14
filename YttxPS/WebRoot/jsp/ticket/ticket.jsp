@@ -77,14 +77,14 @@
 								<div class="panel-collapse collapse in" id="collapseOne">
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
-											<div class="form-group">
+											<!-- <div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="fsScenicno">所属景区</label>
 												<div class="col-sm-2">
 													<input maxlength="150"
 														type="text" id="fsScenicno" placeholder="所属景区" />
 												</div>
-											</div>
+											</div> -->
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="fsName">门票名称</label>

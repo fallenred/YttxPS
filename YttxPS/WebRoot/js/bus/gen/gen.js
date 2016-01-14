@@ -83,9 +83,8 @@ jQuery(function($) {
 		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
 		postData["gen.fsNo"] = $("#queryfield").find("#fsNo").val();
-		postData["gen.fsScenicno"] = $("#queryfield").find("#fsScenicno").val();
 		postData["gen.fsName"] = $("#queryfield").find("#fsName").val();
-		postData["gen.fsType"] = $("#queryfield").find("#fsType").val();
+		postData["gen.fiDays"] = $("#queryfield").find("#fiDays").val();
 		postData["gen.fiStat"] = $("#queryfield").find("#fiStat").val();
 		$("#grid-table").jqGrid("setGridParam", {
 			postData : postData
@@ -181,7 +180,8 @@ jQuery(function($) {
 					name : 'fiIndex',
 					index : 'fiIndex',
 					width : 85,
-					sorttype : "int"
+					sorttype : "int",
+					hidden : true
 				}, {
 					name : 'fsName',
 					index : 'fsName',

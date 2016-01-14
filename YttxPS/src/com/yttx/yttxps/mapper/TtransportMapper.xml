@@ -326,7 +326,7 @@
 	      <if test="fiLoadMin != null and fiLoadMin != ''" >
 	        and FI_LOAD_MIN = #{fiLoadMin}
 	      </if>
-	      <if test="fsType != null and fsType != ''" >
+	      <if test="fiLoadMax != null and fiLoadMax != ''" >
 	        and FI_LOAD_MAX = #{fiLoadMax}
 	      </if>
 	      <if test="fiStat != null and fiStat != ''" >
@@ -344,7 +344,7 @@
 	      <if test="fiLoadMin != null and fiLoadMin != ''" >
 	        and FI_LOAD_MIN = #{fiLoadMin}
 	      </if>
-	      <if test="fsType != null and fsType != ''" >
+	      <if test="fiLoadMax != null and fiLoadMax != ''" >
 	        and FI_LOAD_MAX = #{fiLoadMax}
 	      </if>
 	      <if test="fiStat != null and fiStat != ''" >

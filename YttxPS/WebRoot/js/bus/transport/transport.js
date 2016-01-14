@@ -88,10 +88,9 @@ jQuery(function($) {
 		$("#collapseOne").collapse('hide');
 		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
-		postData["transport.fsNo"] = $("#queryfield").find("#fsNo").val();
-		postData["transport.fsScenicno"] = $("#queryfield").find("#fsScenicno").val();
 		postData["transport.fsName"] = $("#queryfield").find("#fsName").val();
-		postData["transport.fsType"] = $("#queryfield").find("#fsType").val();
+		postData["transport.fiLoadMin"] = $("#queryfield").find("#fiLoadMin").val();
+		postData["transport.fiLoadMax"] = $("#queryfield").find("#fiLoadMax").val();
 		postData["transport.fiStat"] = $("#queryfield").find("#fiStat").val();
 		$("#grid-table").jqGrid("setGridParam", {
 			postData : postData
@@ -162,7 +161,7 @@ jQuery(function($) {
 
 	var items = {
 		'1' : '正常',
-		'-100' : '已销'
+		'2' : '已销'
 	};
 	var s = '';
 	for (k in items)
@@ -174,7 +173,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '车型编码', '车型名称', '准载上限', '准载下限', '适应范围上限', '适应范围下限', '状态' ],
+				colNames : [ '操作', '车型编码', '车型名称', '准载下限', '准载上限', '适应范围下限', '适应范围上限', '状态' ],
 				colModel : [ {
 					name : 'myac',
 					index : '',
