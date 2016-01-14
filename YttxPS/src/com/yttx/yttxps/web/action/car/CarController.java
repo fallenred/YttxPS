@@ -1,6 +1,5 @@
-package com.yttx.yttxps.web.action.driver;
+package com.yttx.yttxps.web.action.car;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,28 +21,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.comm.DateEditor;
 import com.yttx.yttxps.comm.JsonResult;
-import com.yttx.yttxps.model.Driver;
-import com.yttx.yttxps.model.vo.DriverRequest;
-import com.yttx.yttxps.service.IDriverService;
+import com.yttx.yttxps.model.Car;
+import com.yttx.yttxps.model.vo.CarRequest;
+import com.yttx.yttxps.service.ICarService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.web.action.LoginController;
 
 /**
  * 
  * @author Lonvoy
- * @createDate 2016年1月12日
+ * @createDate 2016年1月14日
  * @email me@lonvoy.com
  *
  */
 @Controller
 @Scope("prototype")
-@RequestMapping("driver/")
-public class DriverController extends BaseController {
+@RequestMapping("car/")
+public class CarController extends BaseController {
 	
 static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
-	private IDriverService driverService;
+	private ICarService carService;
 	
 	/**
 	 * 视图数据类型转换
@@ -59,38 +58,36 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	}
 	
 	/**
-	 * 分页查询驾驶员信息
+	 * 分页查询车辆信息
 	 * @param req
 	 * @return
 	 */
-	@RequestMapping(value="findDriver.htm", method = RequestMethod.POST)
+	@RequestMapping(value="findCar.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object ajaxfindDriver(DriverRequest req)
+	public Object ajaxfindScenic(CarRequest req)
     {  
-		logger.debug("当前查询条件 {}", req.getDriver());
+		logger.debug("当前查询条件 {}", req.getCar());
 		Map<String, Object> map = new HashMap<String, Object>();
 		req.copyPage(map);
-		req.copyDriver(map);
-		List<Driver> list = driverService.selectSelectivePage(map);
+		req.copyCar(map);
+		List<Car> list = carService.selectSelectivePage(map);
 		map.put("rows", list);
 		return map;
     }
 	
 	/**
-	 * 新增驾驶员信息
-	 * @param driver
+	 * 新增车辆信息
+	 * @param car
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="addDriver.htm", method = RequestMethod.POST)
+	@RequestMapping(value="addCar.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxaddScenic(Driver driver)
+	public Map<String, Object> ajaxaddScenic(Car car)
     {  
-		logger.debug("当前新增对象 {}", driver);
+		logger.debug("当前新增对象 {}", car);
 		try{
-			//注意:此处的唯一不准确，不确定是否使用 oracle sequence 作为唯一
-			driver.setIndex(new BigDecimal(System.currentTimeMillis()));
-			driverService.insert(driver);
+			carService.insert(car);
 		}catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("新增失败");
 		}
@@ -98,18 +95,18 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
     }
 	
 	/**
-	 * 更新驾驶员信息
-	 * @param driver
+	 * 更新车辆信息
+	 * @param car
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="editDriver.htm", method = RequestMethod.POST)
+	@RequestMapping(value="editCar.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxeditScenic(Driver driver)
+	public Map<String, Object> ajaxeditScenic(Car car)
     {  
-		logger.debug("当前更新对象 {}", driver);
+		logger.debug("当前更新对象 {}", car);
 		try{
-			driverService.update(driver);
+			carService.update(car);
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("更新失败");
@@ -118,18 +115,18 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
     }
 	
 	/**
-	 * 删除驾驶员信息
-	 * @param driver
+	 * 删除车辆信息
+	 * @param car
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="delDriver.htm", method = RequestMethod.POST)
+	@RequestMapping(value="delCar.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxdelScenic(@RequestParam(value = "id") BigDecimal  index)
+	public Map<String, Object> ajaxdelScenic(@RequestParam(value = "id") String  no)
     {  
-		logger.debug("当前删除key {}", index);
+		logger.debug("当前删除key {}", no);
 		try{
-			driverService.delete(index);
+			carService.delete(no);
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("删除失败");

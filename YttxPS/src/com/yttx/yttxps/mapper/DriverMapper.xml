@@ -128,10 +128,10 @@
       <if test="name != null and name != ''" >
         and FS_NAME like #{name}||'%'
       </if>
-      <if test="gender != null and gender !=''" >
+      <if test="gender != null" >
         and FI_GENDER = #{gender}
       </if>
-      <if test="stat != null and stat != ''" >
+      <if test="stat != null" >
         and FI_STAT = #{stat}
       </if>
   </select>
@@ -142,10 +142,10 @@
       <if test="name != null and name != ''" >
         and FS_NAME like #{name}||'%'
       </if>
-      <if test="gender != null and gender !=''" >
+      <if test="gender != null" >
         and FI_GENDER = #{gender}
       </if>
-      <if test="stat != null and stat != ''" >
+      <if test="stat != null" >
         and FI_STAT = #{stat}
       </if>
       <if test="endrow != null" >
