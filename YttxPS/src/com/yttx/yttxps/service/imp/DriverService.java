@@ -52,6 +52,12 @@ public class DriverService implements IDriverService {
 		return driverMapper.deleteByPrimaryKey(no);
 	}
 
+	@Override
+	public Driver selectDriverInfo(BigDecimal index) {
+		// TODO Auto-generated method stub
+		return driverMapper.selectByPrimaryKey(index);
+	}
+
 
 
 

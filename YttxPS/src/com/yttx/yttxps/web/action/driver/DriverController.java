@@ -77,6 +77,20 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
     }
 	
 	/**
+	 * 查询驾驶员详情
+	 * @param index
+	 * @return
+	 */
+	@RequestMapping(value="findDriverInfo.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object ajaxfindDriverInfo(@RequestParam(value = "id") BigDecimal  index)
+    {  
+		logger.debug("当前查询条件 {}", index);
+		Driver info = driverService.selectDriverInfo(index);
+		return JsonResult.jsonData(info);
+    }
+	
+	/**
 	 * 新增驾驶员信息
 	 * @param driver
 	 * @return
@@ -85,7 +99,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@RequestMapping(value="addDriver.htm", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> ajaxaddScenic(Driver driver)
-    {  
+    {
 		logger.debug("当前新增对象 {}", driver);
 		try{
 			//注意:此处的唯一不准确，不确定是否使用 oracle sequence 作为唯一

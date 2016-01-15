@@ -20,12 +20,14 @@ function getSelectedRow(table) {
 function editCustom(id) {
     raw = jQuery("#grid-table").jqGrid('getRowData', id);
     loadFormData(raw,$("#editForm"));
+    findDriverInfo(raw.driverindex);
     $('#editModal').modal({ show: true, backdrop: 'static' });
 };
 
 function showCustom(id) {
     raw = jQuery("#grid-table").jqGrid('getRowData', id);
     loadFormData(raw,$("#showForm"));
+    findDriverInfo(raw.driverindex);
     $("#showModal").modal({show: true, backdrop: 'static' });
 };
 
@@ -38,13 +40,32 @@ function deleteCustom(id) {
     $('#delModal').modal({ show: true, backdrop: 'static' });
 };
 
+//查询驾驶员信息
+function findDriverInfo(id){
+    if(id == undefined){
+        console.log("未获取到驾驶员ID");
+        return false;
+    }
+    $.post("/driver/findDriverInfo.htm",{id : id},function(json){
+        if(json.result == "ok") {
+            $(".car_driver_input").val(json.data.index);
+            $(".car_driver_msg").text("您选择了【"+json.data.name+"】为该车驾驶员。");
+            return true;
+        }else{
+            alert('未获取到驾驶员信息，需要重新打开。');
+            $("#editModal", parent.document).find(".close").click();
+            $("#showModal", parent.document).find(".close").click();
+            return false;
+        }
+    },'json');
+}
+
+//绑定指定表单数据
 function loadFormData(raw,from){
     $.each(raw, function( i, n){
-         console.log($(from).find("input[name='"+i+"']").length);
         if ($(from).find("input[name='"+i+"']").length != 0)
             $(from).find("input[name='"+i+"']").val(n);
         else if($(from).find("select[name='"+i+"']").length !=0){
-            console.log($(from).find("select[name='"+i+"']").attr("name"));
             $(from).find("select[name='"+i+"']").find("option[value='" 
                     + n + "']").prop('selected', 'selected');
         }
@@ -70,6 +91,7 @@ $("#showModal").on("hidden.bs.modal", function() {
 
 
 jQuery(function($) {
+    
     //重置
     $("#reset", "#queryfield").click(function() {
         $("#queryfield").val(null);
@@ -334,13 +356,13 @@ jQuery(function($) {
     });
     
     //开启选择驾驶员信息窗口事件
-    $("#carDirverSearchButtom").click(function(){
+    $(".carDirverSearchButtom").click(function(){
         $('#carDirverSearchModal').modal({ show: true, backdrop: 'static' });
         var dirver_grid_table = "#dirver-grid-table";
         var dirver_grid_pager = "#dirver-grid-pager";
         $(dirver_grid_table).jqGrid(
                 {
-                    url : "/driver/findDriver.htm",
+                    url : "/driver/findDriver.htm?stat=1",
                     datatype : "json",
                     mtype : 'POST',
                     colNames : ['ID', '驾驶员姓名', '性别', '出生日期' ],
@@ -391,18 +413,19 @@ jQuery(function($) {
     $("#driver_submit").on("click", function() {
         var postData = $("#dirver-grid-table").jqGrid("getGridParam", "postData");
         postData["driver.name"] = $("#carDirverSearchForm").find("#name").val();
+        postData["driver.stat"] = '1';
         $("#dirver-grid-table").jqGrid("setGridParam", {
             datatype : 'json',
             postData : postData
         }).trigger("reloadGrid");
     });
+    
     //确定选择驾驶员信息事件
     $("#enter_driver_sumit").on("click", function() {
         var row = getSelectedRow($("#dirver-grid-table"));
         if(row == undefined){
             return false;
         }
-        console.log(row);
         $(".car_driver_input").val(row.index);
         $(".car_driver_msg").text("您选择了【"+row.name+"】为该车驾驶员。");
     });

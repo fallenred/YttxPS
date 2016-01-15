@@ -1,5 +1,4 @@
 jQuery(function($) {
-	
     $("#addform #message").hide();
     
     //时间控件
@@ -83,13 +82,14 @@ jQuery(function($) {
 		        $("#addform").serialize(),
 				function(data){
 			        var json = eval("("+data+")");
-			        $("#addform #add_submit").attr("disabled","");
+			        $("#addform #add_submit").attr("disabled",false);
 					if(json.result == "ok") {
 						$("#addform #message").text("增加记录成功");
 						$("#addform #message").show();
 						//清空域信息
 						$("#addform input").val("");
 				        $("#addform select").val("");
+				        $("#addModal .car_driver_msg").text("当前无驾驶员信息！");
 						return true;
 					}else{
 					    $("#addform #message").text("增加记录失败:" + json.message );

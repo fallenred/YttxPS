@@ -13,10 +13,13 @@ import com.yttx.yttxps.model.Driver;
 public interface IDriverService {
 	
 	@Transactional(readOnly = true) 
-	public int selectCountSelective(Map<String, Object> map);
+	int selectCountSelective(Map<String, Object> map);
 	
 	@Transactional(readOnly = true) 
 	List<Driver> selectSelectivePage(Map<String, Object> map);
+	
+	@Transactional(readOnly = true) 
+	Driver selectDriverInfo(BigDecimal index);
 	
 	@Transactional
 	int insert(Driver driver);
@@ -25,5 +28,5 @@ public interface IDriverService {
 	int update(Driver driver);
 	
 	@Transactional
-	int delete(BigDecimal no);
+	int delete(BigDecimal index);
 }
