@@ -1,6 +1,5 @@
 package com.yttx.yttxps.model.vo;
 
-import java.math.BigDecimal;
 import java.util.Map;
 
 import com.yttx.yttxps.model.Scenic;
@@ -12,6 +11,11 @@ public class ScenicRequest extends JqGridRequest implements
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public ScenicRequest() {
+		super();
+		scenic = new Scenic();
+	}
 
 	public Scenic getScenic() {
 		return scenic;
