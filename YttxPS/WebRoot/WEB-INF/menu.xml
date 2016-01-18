@@ -31,6 +31,7 @@
 		<item id="0600" name="餐厅资源管理" icon="menu-icon fa fa-table" >
 			<submenu>
 				<item id="06a0" name="餐厅资源配置" url="/restaurant/project.htm" />
+				<item id="06b0" name="酒店资源配置" url="/jsp/accomadation/accomadation.jsp" />
 			</submenu>
 		</item>
 		
