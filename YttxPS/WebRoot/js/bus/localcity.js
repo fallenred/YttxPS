@@ -140,7 +140,7 @@ console.log("con li index:" + index + "text:" + text);
                     seldistkey = '';
                     pager(key, text, index);
                     $(this).parents('.list').hide();
-                    $('.tabs').find('a').removeClass('current');
+                    that.find('.tabs').find('a').removeClass('current');
                     if(tabs.eq(index).find('a').length>0) tabs.eq(index).find('a').addClass('current');
                     loadCity(key);
                 }else if(index == 2){
@@ -150,7 +150,7 @@ console.log("con li index:" + index + "text:" + text);
                     seldistkey = '';
                     pager(key, text, index);
                     $(this).parents('.list').hide();  
-                    $('.tabs').find('a').removeClass('current');
+                    that.find('.tabs').find('a').removeClass('current');
                     if(tabs.eq(index).find('a').length>0) tabs.eq(index).find('a').addClass('current');
                     loadCounty(key);
                 }else{
