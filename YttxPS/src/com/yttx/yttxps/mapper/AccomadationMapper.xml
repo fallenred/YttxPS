@@ -209,7 +209,7 @@
       </if>
   </select>
   
-  <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
     select * from ( 
       select ROWNUM as rowno, t.*  from TACCOMADATION t where 1=1 
       <if test="regionno != null and regionno !='' " >

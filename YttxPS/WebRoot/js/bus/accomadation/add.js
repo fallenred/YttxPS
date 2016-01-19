@@ -25,8 +25,12 @@ jQuery(function($) {
     $("#addModal #reset").on("click", function() {
         $("#addModal #message").hide();
         $("#addModal #message").text("");
-        $("#addModal input").val("");
+        $("#addModal input[type='text']").val("");
+        $("#addModal input[type='hidden']").val("");
+        $("#addModal input").prop("checked", false);
         $("#addModal select").val("");
+        $("#addModal textarea").text("");
+        CKEDITOR.instances["desc_add"].setData('');
     });
     
 	// 关闭
@@ -73,7 +77,9 @@ jQuery(function($) {
             $('#addform #stat').focus();
             return false;
         }
-
+		
+		$("#addform textarea[name='desc']").val(CKEDITOR.instances["desc_add"].getData());
+		
 		$.post("/accomadation/addAccomadation.htm",
 		        $("#addform").serialize(),
 				function(data){

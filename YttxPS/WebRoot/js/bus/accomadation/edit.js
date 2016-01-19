@@ -2,7 +2,7 @@ jQuery(function($) {
     $("#editForm #message").hide();
     $("#editForm #edit_submit").attr("disabled", false);
 
-    //新增窗口-城市初始化
+    //编辑窗口-城市初始化
     var addlocalsec = $("#editModal #editSelectCity").localCity({
         provurl : "/pub/findcity.htm",
         cityurl : "/pub/findcity.htm",
@@ -16,7 +16,7 @@ jQuery(function($) {
         }
     });
 
-    //新增窗口-触发城市选择器
+    //编辑窗口-触发城市选择器
     $("#editModal input[name='regionname']").click(function() {
         $("#editModal").find(".selectCity").show();
     });
@@ -25,6 +25,12 @@ jQuery(function($) {
     $("#editForm #reset").on("click", function() {
         $("#editForm #message").hide();
         $("#editForm #message").text("");
+        $("#editForm input[type='text']").val("");
+        $("#editForm input[type='hidden']").val("");
+        $("#editForm input").prop("checked", false);
+        $("#editForm select").val("");
+        $("#editForm textarea").text("");
+        CKEDITOR.instances["desc_edit"].setData('');
     });
 
     // 关闭
@@ -72,8 +78,8 @@ jQuery(function($) {
                     $("#editForm #message").text("状态不能为空，请选择");
                     $('#editForm #stat').focus();
                     return false;
-                }
-                
+                }2
+                $("#editForm textarea[name='desc']").val(CKEDITOR.instances["desc_edit"].getData());
                 $("#editForm #edit_submit").attr("disabled", "disabled");
                 $.post("/accomadation/editAccomadation.htm", $("#editForm")
                                 .serialize(),

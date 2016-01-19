@@ -182,7 +182,7 @@
 									<label class="col-sm-2 control-label no-padding-right"
 										for="regdate">酒店介绍</label>
 									<div class="col-sm-8">
-										<textarea id="desc_add" rows="4" cols="30" placeholder="酒店介绍" name="desc"
+										<textarea title="ckeditor" id="desc_add" rows="4" cols="30" placeholder="酒店介绍" name="desc"
 											class="form-control"></textarea>
 									</div>
 								</div>
@@ -297,7 +297,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label no-padding-right" for="no">酒店代码</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="no" class="form-control"
+                                        <input type="text" name="no" class="form-control" disabled="disabled"
                                             placeholder="酒店代码" />
                                     </div>
                                     <label class="col-sm-2 control-label no-padding-right"
@@ -331,7 +331,7 @@
                                     <label class="col-sm-2 control-label no-padding-right"
                                         for="regdate">酒店介绍</label>
                                     <div class="col-sm-8">
-                                        <textarea id="desc_edit" rows="4" cols="30" placeholder="酒店介绍" name="desc"
+                                        <textarea title="ckeditor" id="desc_edit" rows="4" cols="30" placeholder="酒店介绍" name="desc"
                                             class="form-control"></textarea>
                                     </div>
                                 </div>
@@ -442,83 +442,126 @@
 					</div>
 					<form class="form-horizontal" id="showForm">
 						<div class="modal-body">
-							<div class="row">
-								<div class="form-group">
-									<label class="col-sm-2 control-label no-padding-right" for="no">车牌号</label>
-									<div class="col-sm-3">
-										<input type="text" name="no" class="form-control"
-											placeholder="车牌号" disabled="disabled" />
-									</div>
-									<label class="col-sm-2 control-label no-padding-right"
-										for="brand">品牌</label>
-									<div class="col-sm-3">
-										<input type="text" name="brand" class="form-control"
-											placeholder="品牌" disabled="disabled" />
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group">
-									<label class="col-sm-2 control-label no-padding-right"
-										for="load">准载数</label>
-									<div class="col-sm-3">
-										<input type="text" name="load" class="form-control"
-											placeholder="准载数" disabled="disabled" />
-									</div>
-									<label class="col-sm-2 control-label no-padding-right"
-										for="regdate">注册日期</label>
-									<div class="col-sm-3">
-										<input type="text" placeholder="注册日期" name="regdate"
-											class="form-control date-picker"
-											data-date-format="yyyy-mm-dd" disabled="disabled"></input>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group">
-									<label class="col-sm-2 control-label no-padding-right"
-										for="company">所属公司</label>
-									<div class="col-sm-3">
-										<input type="text" name="company" class="form-control"
-											placeholder="所属公司" disabled="disabled" />
-									</div>
-									<label class="col-sm-2 control-label no-padding-right"
-										for="tel">联系电话</label>
-									<div class="col-sm-3">
-										<input type="text" name="tel" class="form-control"
-											placeholder="联系电话" disabled="disabled" />
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group">
-									<label class="col-xs-2 col-sm-2 control-label no-padding-right"
-										for="driverindex">驾驶员</label>
-									<div class=" col-xs-8 col-sm-6">
-										<h6>
-											<strong class="car_driver_msg">当前无驾驶员信息！</strong>
-										</h6>
-										<input type="hidden" class="car_driver_input"
-											name="driverindex" width="100%" class="form-control"
-											placeholder="驾驶员信息展示" disabled="disabled" />
-									</div>
-									<a
-										class="col-xs-3 col-sm-2 control-label carDirverSearchButtom"
-										style="display: none;"></a>
-								</div>
-							</div>
-							<div class="row">
-								<label class="col-xs-2 col-sm-2 control-label no-padding-right"
-									for="stat">状态</label>
-								<div class="col-xs-4 col-sm-3">
-									<select name="stat" disabled="disabled">
-										<option value="">&nbsp;&nbsp;请选择&nbsp;&nbsp;</option>
-										<option value="1">&nbsp;&nbsp;正常&nbsp;&nbsp;</option>
-										<option value="2">&nbsp;&nbsp;失效&nbsp;&nbsp;</option>
-									</select>
-								</div>
-							</div>
-						</div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="no">酒店代码</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="no" class="form-control"
+                                            placeholder="酒店代码" disabled="disabled" />
+                                    </div>
+                                    <label class="col-sm-2 control-label no-padding-right"
+                                        for="brand">所属地区</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" placeholder="忽略行政区域" name="regionname" disabled="disabled"
+                                            data-key="0086" data-idx="0" data-full="中国" class="form-control inp-search" />
+                                        <input type="hidden" name="regionno" disabled="disabled" />
+                                        <div class="localcity selectCity" id="editSelectCity"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right"
+                                        for="load">酒店名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="name" class="form-control"
+                                            placeholder="酒店名称" disabled="disabled"/>
+                                    </div>
+                                    <label class="col-sm-2 control-label no-padding-right"
+                                        for="company">酒店地址</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="addr" class="form-control"
+                                            placeholder="酒店地址" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right"
+                                        for="regdate">酒店介绍</label>
+                                    <div class="col-sm-8">
+                                        <textarea title="ckeditor" id="desc_show" rows="4" cols="30" placeholder="酒店介绍" name="desc"
+                                            class="form-control" disabled="disabled"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right"
+                                        for="regdate">酒店星级</label>
+                                    <div class="col-sm-8">
+                                        <div class="checkbox-inline">
+                                            <label> <input name="starlvl" type="radio" disabled="disabled"
+                                                class="ace" value="01"><span class="lbl">5星级</span>
+                                            </label>
+                                        </div>
+                                        <div class="checkbox-inline">
+                                            <label> <input name="starlvl" type="radio" disabled="disabled"
+                                                class="ace" value="02"><span class="lbl">4星级</span>
+                                            </label>
+                                        </div>
+                                        <div class="checkbox-inline">
+                                            <label> <input name="starlvl" type="radio" disabled="disabled"
+                                                class="ace" value="03"><span class="lbl">3星级</span>
+                                            </label>
+                                        </div>
+                                        <div class="checkbox-inline">
+                                            <label> <input name="starlvl" type="radio" disabled="disabled"
+                                                class="ace" value="04"><span class="lbl">一线准4</span>
+                                            </label>
+                                        </div>
+                                        <div class="checkbox-inline">
+                                            <label> <input name="starlvl" type="radio" disabled="disabled"
+                                                class="ace" value="05"><span class="lbl">二线准4</span>
+                                            </label>
+                                        </div>
+                                        <div class="checkbox-inline">
+                                            <label> <input name="starlvl" type="radio" disabled="disabled"
+                                                class="ace" value="06"><span class="lbl">乡村酒店</span>
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right"
+                                        for="regdate">酒店设施</label>
+                                    <div class="col-sm-8">
+                                        <label> <input name="speciality"
+                                            class="ace ace-switch ace-switch-2" type="checkbox" disabled="disabled"
+                                            value="01:WIFI"> <span class="lbl">&nbsp;WIFI</span>
+                                        </label> <label> <input name="speciality"
+                                            class="ace ace-switch ace-switch-2" type="checkbox" disabled="disabled"
+                                            value="02:空调"> <span class="lbl">&nbsp;空调</span>
+                                        </label> <label> <input name="speciality"
+                                            class="ace ace-switch ace-switch-2" type="checkbox" disabled="disabled"
+                                            value="03:一体电脑"> <span class="lbl">&nbsp;一体电脑</span>
+                                        </label> <label> <input name="speciality"
+                                            class="ace ace-switch ace-switch-2" type="checkbox" disabled="disabled"
+                                            value="04:棋牌"> <span class="lbl">&nbsp;棋牌</span>
+                                        </label> <label> <input name="speciality"
+                                            class="ace ace-switch ace-switch-2" type="checkbox" disabled="disabled"
+                                            value="05:其它"> <span class="lbl">&nbsp;其它</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-xs-2 col-sm-2 control-label no-padding-right"
+                                        for="stat">状态</label>
+                                    <div class="col-xs-4 col-sm-4">
+                                        <select name="stat" disabled="disabled">
+                                            <option value="">&nbsp;&nbsp;请选择状态&nbsp;&nbsp;</option>
+                                            <option value="1">&nbsp;&nbsp;正常&nbsp;&nbsp;</option>
+                                            <option value="2">&nbsp;&nbsp;失效&nbsp;&nbsp;</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 						<div class="modal-footer">
 							<button id="close" type="button" class="btn btn-default"
 								data-dismiss="modal">关闭</button>
@@ -564,7 +607,11 @@
 
 	</div>
 	<!-- /.main-container -->
-	<script type="text/javascript">CKEDITOR.replace('desc_add');CKEDITOR.replace('desc_edit');</script>
+	<script type="text/javascript">
+        CKEDITOR.replace('desc_add', {uiColor:'#E2E2E2'});
+        CKEDITOR.replace('desc_edit', {uiColor:'#E2E2E2'});
+        CKEDITOR.replace('desc_show', {uiColor:'#E2E2E2'});
+    </script>
 	<script src="/js/bus/accomadation/accomadation.js"></script>
 	<script src="/js/bus/accomadation/add.js"></script>
 	<script src="/js/bus/accomadation/edit.js"></script>

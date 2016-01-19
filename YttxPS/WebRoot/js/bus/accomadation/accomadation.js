@@ -50,29 +50,82 @@ function deleteCustom(id) {
 
 // 绑定指定表单数据
 function loadFormData(raw, from) {
-    $.each(raw, function(i, n) {
-        if ($(from).find("input[name='" + i + "']").length != 0)
-            $(from).find("input[name='" + i + "']").val(n);
-        else if ($(from).find("select[name='" + i + "']").length != 0) {
-            $(from).find("select[name='" + i + "']").find(
-                    "option[value='" + n + "']").prop('selected', 'selected');
-        }
+    // 设置radio域
+    $(from).find("input[type='radio']").each(function(i, n) {
+        if (raw[$(n).attr('name')] == $(n).val())
+            $(n).prop('checked', true);
+    });
+    // 设置checkbox域
+    $(from).find("input[type='checkbox']").each(function(i, n) {
+        var valstr = raw[$(n).attr('name')];
+        var vals = ( valstr != null && valstr != "" ) ? valstr.split(",") : "";
+        $(vals).each(function(j, d){
+            if ($(n).val() == d)
+                $(n).prop('checked', true);
+        });
+    });
+    // 设置text、hidden域
+    $(from).find("input[type!='radio'][type!='checkbox']").each(function(i, n) {
+        $(n).val(raw[$(n).attr('name')]);
+    });
+    // 设置select域
+    $(from).find("select").each(function(i, n) {
+        $(n).find("option[value='" + raw[$(n).attr('name')] + "']")
+            .prop('selected', true);
+    });
+    // 设置textarea域
+    $(from).find("textarea").each(function(i, n) {
+        if($(n).attr('title') == 'ckeditor'){
+            CKEDITOR.instances[$(n).attr('id')].setData(raw[$(n).attr('name')]);
+        }else
+            $(n).text(raw[$(n).attr('name')]);
+    });
+    //查询地区名称
+    queryRegionName(from);
+}
+
+//查询地区名称
+function queryRegionName(from){
+    var no = $(from).find("input[name='regionno']").val();
+    $.get("/pub/findcityname.htm", {no : no}, function(data){
+        var json = eval("(" + data + ")");
+        if (json.result == "ok")
+            $(from).find("input[name='regionname']").val(json.name);
     });
 }
 
 /** 模式窗口关闭时触发事件 */
 $("#addModal", parent.document).on("hidden.bs.modal", function() {
+    
+    $("#addModal #message").hide();
+    $("#addModal input[type='text']").val("");
+    $("#addModal input[type='hidden']").val("");
+    $("#addModal input").prop("checked", false);
+    $("#addModal select").val("");
+    $("#addModal textarea").text("");
+    CKEDITOR.instances["desc_add"].setData('');
+    
     $(this).removeData("bs.modal");
     $("#grid-table").trigger("reloadGrid");
 });
+
 $("#editModal", parent.document).on("hidden.bs.modal", function() {
+    $("#editModal #message").hide();
+    $("#editForm input[type='text']").val("");
+    $("#editForm input[type='hidden']").val("");
+    $("#editForm input").prop("checked", false);
+    $("#editForm select").val("");
+    $("#editForm textarea").text("");
+    CKEDITOR.instances["desc_edit"].setData('');
     $(this).removeData("bs.modal");
     $("#grid-table").trigger("reloadGrid");
 });
+
 $("#delModal").on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
     $("#grid-table").trigger("reloadGrid");
 });
+
 $("#showModal").on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
 });
@@ -175,6 +228,20 @@ jQuery(function($) {
         stat_val += ';' + k + ":" + stat_items[k];
     stat_val = stat_val.substring(1);
 
+    //酒店等级
+    var lvl_items = {
+            '01':'5星',
+            '02':'4星',
+            '03':'3星',
+            '04':'一线准4',
+            '05':'二线准4',
+            '06':'乡村酒店'
+    };
+        var lvl_val = '';
+        for (k in lvl_items)
+            lvl_val += ';' + k + ":" + lvl_items[k];
+        lvl_val = lvl_val.substring(1);
+    
     $(grid_selector).jqGrid(
             {
                 url : "/accomadation/findAccomadation.htm",
@@ -206,8 +273,23 @@ jQuery(function($) {
                     name : 'starlvl',
                     index : 'starlvl',
                     width : 50,
+                    sortable : false,
                     editable : false,
-                    sorttype : "char"
+                    edittype : 'select',
+                    sorttype : "char",
+                    editoptions : {
+                        value : lvl_val
+                    },
+                    formatter : function(v, opt, rec) {
+                        console.log(v);
+                        return lvl_items[v];
+                    },
+                    unformat : function(v) {
+                        for (k in lvl_items)
+                            if (lvl_items[k] == v)
+                                return k;
+                        return '03';
+                    }
                 }, {
                     name : 'name',
                     index : 'name',
