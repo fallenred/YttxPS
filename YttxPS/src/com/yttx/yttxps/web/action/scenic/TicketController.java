@@ -63,20 +63,9 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
     {  
 		logger.debug("当前新增对象 {}", ticket);
 		try{
-			TticketExample example = new TticketExample();
-			Criteria criteria = example.createCriteria();
-			criteria.andFsScenicnoEqualTo(ticket.getFsScenicno());
-			criteria.andFsTypeEqualTo(ticket.getFsType());
-			int maxSeq = 0;
-			if (!CollectionUtils.isEmpty(ticketService.selectTticket(example))){
-				maxSeq = ticketService.selectMaxSeq(example);
-			}
-			ticket.setFsNo(String.format("%010d", ticketService.selectFsNo()));
-			ticket.setFiSeq(++maxSeq);
-			int ret = ticketService.insert(ticket);
+			ticketService.insert(ticket);
 		}
 		catch(Exception e){
-			e.printStackTrace();
 			return (Map<String, Object>) JsonResult.jsonError("新增失败");
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
@@ -93,7 +82,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
     {  
 		logger.debug("当前更新对象 {}", ticket);
 		try{
-			int ret = ticketService.update(ticket);
+			ticketService.update(ticket);
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("更新失败");
