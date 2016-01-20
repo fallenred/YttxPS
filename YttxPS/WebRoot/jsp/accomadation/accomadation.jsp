@@ -604,6 +604,25 @@
 			</div>
 			<!-- /.modal -->
 		</div>
+		
+		<div class="modal fade" id="roomModal" tabindex="-1" role="dialog"
+            aria-labelledby="showModalLabel" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="editModalLabel">酒店房型配置</h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe id="roomIframe" width="100%" frameborder="0" scrolling="auto"></iframe>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+        </div>
 
 	</div>
 	<!-- /.main-container -->

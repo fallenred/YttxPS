@@ -26,7 +26,6 @@ import com.yttx.yttxps.model.Driver;
 import com.yttx.yttxps.model.vo.DriverRequest;
 import com.yttx.yttxps.service.IDriverService;
 import com.yttx.yttxps.web.action.BaseController;
-import com.yttx.yttxps.web.action.LoginController;
 
 /**
  * 
@@ -40,7 +39,7 @@ import com.yttx.yttxps.web.action.LoginController;
 @RequestMapping("driver/")
 public class DriverController extends BaseController {
 	
-static Logger logger = LoggerFactory.getLogger(LoginController.class);
+static Logger logger = LoggerFactory.getLogger(DriverController.class);
 	
 	@Autowired
 	private IDriverService driverService;
@@ -102,8 +101,11 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
     {
 		logger.debug("当前新增对象 {}", driver);
 		try{
-			//注意:此处的唯一不准确，不确定是否使用 oracle sequence 作为唯一
-			driver.setIndex(new BigDecimal(System.currentTimeMillis()));
+			//注意:此处的唯一不准确，使用 oracle sequence 作为唯一
+			if(logger.isDebugEnabled())
+				driver.setIndex(new BigDecimal(System.currentTimeMillis()));
+			else
+				driver.setIndex(driverService.selectSequence());
 			driverService.insert(driver);
 		}catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("新增失败");

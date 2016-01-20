@@ -58,6 +58,11 @@ public class DriverService implements IDriverService {
 		return driverMapper.selectByPrimaryKey(index);
 	}
 
+	@Override
+	public BigDecimal selectSequence() {
+		return driverMapper.selectSequence();
+	}
+
 
 
 

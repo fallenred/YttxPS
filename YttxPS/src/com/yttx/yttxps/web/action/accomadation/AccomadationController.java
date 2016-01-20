@@ -26,12 +26,11 @@ import com.yttx.yttxps.model.Accomadation;
 import com.yttx.yttxps.model.vo.AccomadationRequest;
 import com.yttx.yttxps.service.IAccomadationService;
 import com.yttx.yttxps.web.action.BaseController;
-import com.yttx.yttxps.web.action.LoginController;
 
 /**
  * 
  * @author Lonvoy
- * @createDate 2016年1月12日
+ * @createDate 2016年1月18日
  * @email me@lonvoy.com
  *
  */
@@ -40,7 +39,7 @@ import com.yttx.yttxps.web.action.LoginController;
 @RequestMapping("accomadation/")
 public class AccomadationController extends BaseController {
 	
-static Logger logger = LoggerFactory.getLogger(LoginController.class);
+static Logger logger = LoggerFactory.getLogger(AccomadationController.class);
 	
 	@Autowired
 	private IAccomadationService accomadationService;

@@ -29,4 +29,7 @@ public interface IDriverService {
 	
 	@Transactional
 	int delete(BigDecimal index);
+	
+	@Transactional(readOnly = true)
+	BigDecimal selectSequence();
 }

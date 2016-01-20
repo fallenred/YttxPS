@@ -1,109 +1,3 @@
-
-/**
- * 选择表格行事件
- * 
- * @param grid对象
- * @return 表格选中行数据
- */
-function getSelectedRow(table) {
-    var grid = $(table);
-    var rowKey = grid.jqGrid('getGridParam', "selrow");
-    var raw = undefined;
-    if (!rowKey)
-        alert("您未选中行！");
-    else
-        raw = grid.jqGrid('getRowData', rowKey);
-    return raw;
-}
-
-function editCustom(id) {
-    var raw = jQuery("#grid-table").jqGrid('getRowData', id);
-    loadFormData(raw, $("#editForm"));
-    $('#editModal').modal({
-        show : true,
-        backdrop : 'static'
-    });
-};
-
-function showCustom(id) {
-    var raw = jQuery("#grid-table").jqGrid('getRowData', id);
-    loadFormData(raw, $("#showForm"));
-    $("#showModal").modal({
-        show : true,
-        backdrop : 'static'
-    });
-};
-
-function deleteCustom(id) {
-    var raw = jQuery("#grid-table").jqGrid('getRowData', id);
-    $("#delForm input[name='id']").val(raw.no);
-    $("#delForm #message").text("");
-    $("#delForm #submit").attr("disabled", false);
-    $("#delForm #question").show();
-    $('#delModal').modal({
-        show : true,
-        backdrop : 'static'
-    });
-};
-
-//酒店房型配置
-function roomConfigCustom(id) {
-    var raw = jQuery("#grid-table").jqGrid('getRowData', id);
-    var frameSrc = "/jsp/room/room.jsp?no=" + raw.no;
-    $("#roomIframe").attr("src", frameSrc);
-    $("#roomIframe").attr("height", screen.height);
-    $('#roomModal').modal({
-        show : true,
-        backdrop : 'static'
-    });
-};
-
-// 绑定指定表单数据
-function loadFormData(raw, from) {
-    // 设置radio域
-    $(from).find("input[type='radio']").each(function(i, n) {
-        if (raw[$(n).attr('name')] == $(n).val())
-            $(n).prop('checked', true);
-    });
-    // 设置checkbox域
-    $(from).find("input[type='checkbox']").each(function(i, n) {
-        var valstr = raw[$(n).attr('name')];
-        var vals = ( valstr != null && valstr != "" ) ? valstr.split(",") : "";
-        $(vals).each(function(j, d){
-            if ($(n).val() == d)
-                $(n).prop('checked', true);
-        });
-    });
-    // 设置text、hidden域
-    $(from).find("input[type!='radio'][type!='checkbox']").each(function(i, n) {
-        $(n).val(raw[$(n).attr('name')]);
-    });
-    // 设置select域
-    $(from).find("select").each(function(i, n) {
-        $(n).find("option[value='" + raw[$(n).attr('name')] + "']")
-            .prop('selected', true);
-    });
-    // 设置textarea域
-    $(from).find("textarea").each(function(i, n) {
-        if($(n).attr('title') == 'ckeditor'){
-            CKEDITOR.instances[$(n).attr('id')].setData(raw[$(n).attr('name')]);
-        }else
-            $(n).text(raw[$(n).attr('name')]);
-    });
-    //查询地区名称
-    queryRegionName(from);
-}
-
-//查询地区名称
-function queryRegionName(from){
-    var no = $(from).find("input[name='regionno']").val();
-    $.get("/pub/findcityname.htm", {no : no}, function(data){
-        var json = eval("(" + data + ")");
-        if (json.result == "ok")
-            $(from).find("input[name='regionname']").val(json.name);
-    });
-}
-
 /** 模式窗口关闭时触发事件 */
 $("#addModal", parent.document).on("hidden.bs.modal", function() {
     
@@ -112,8 +6,6 @@ $("#addModal", parent.document).on("hidden.bs.modal", function() {
     $("#addModal input[type='hidden']").val("");
     $("#addModal input").prop("checked", false);
     $("#addModal select").val("");
-    $("#addModal textarea").text("");
-    CKEDITOR.instances["desc_add"].setData('');
     
     $(this).removeData("bs.modal");
     $("#grid-table").trigger("reloadGrid");
@@ -125,8 +17,6 @@ $("#editModal", parent.document).on("hidden.bs.modal", function() {
     $("#editForm input[type='hidden']").val("");
     $("#editForm input").prop("checked", false);
     $("#editForm select").val("");
-    $("#editForm textarea").text("");
-    CKEDITOR.instances["desc_edit"].setData('');
     $(this).removeData("bs.modal");
     $("#grid-table").trigger("reloadGrid");
 });
@@ -141,7 +31,14 @@ $("#showModal").on("hidden.bs.modal", function() {
 });
 
 jQuery(function($) {
-
+    
+    var accomno = $.getUrlParam('no');
+    
+    if(accomno == null || accomno == "" || accomno == undefined){
+        alert("无酒店编号！");
+        $("#roomModal", parent.document).find(".close").click();
+    }
+    
     // 查询条件-城市初始化
     var localsel = $("#queryfield #selectCity").localCity({
         provurl : "/pub/findcity.htm",
@@ -158,6 +55,7 @@ jQuery(function($) {
             $("#queryfield #selectCity").hide();
         }
     }
+    
     // 查询条件-触发城市选择器
     $("#queryfield #regionname").click(function() {
         $("#queryfield #selectCity").show();
@@ -176,31 +74,26 @@ jQuery(function($) {
                 $("#collapseOne").collapse('hide');
                 var postData = $("#grid-table").jqGrid("getGridParam",
                         "postData");
-                postData["accomadation.no"] = $("#queryfield").find("#no")
+                postData["room.type"] = $("#queryfield").find("#type")
                         .val();
-                postData["accomadation.regionno"] = $("#queryfield").find(
-                        "#regionno").val();
-                postData["accomadation.stat"] = $("#queryfield").find("#stat")
+                postData["room.stat"] = $("#queryfield").find("#stat")
                         .val();
                 $("#grid-table").jqGrid("setGridParam", {
                     datatype : 'json',
                     postData : postData
                 }).trigger("reloadGrid");
             });
-
+    
     // jqgrid
     var grid_selector = "#grid-table";
     var pager_selector = "#grid-pager";
 
     // 定义按钮列
     actFormatter = function(cellvalue, options, rawObject) {
-        
-        var roomBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="roomButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="roomConfigCustom('
+        var detail = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showCustom('
                 + options.rowId
-                + ');" data-original-title="酒店房型配置"><span class="ui-icon ace-icon fa fa-cog red"></span></div>';
-        var detailBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="roomButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showCustom('
-            + options.rowId
-            + ');" data-original-title="查看记录详情"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
+                + ');" data-original-title="查看记录详情"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
+
         var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editCustom('
                 + options.rowId
                 + ');" data-original-title="编辑本条记录"><span class="ui-icon ui-icon-pencil"></span></div>';
@@ -208,7 +101,7 @@ jQuery(function($) {
         var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteCustom('
                 + options.rowId
                 + ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-        return roomBtn + detailBtn + editBtn + deleteBtn;
+        return detail + editBtn + deleteBtn;
     };
 
     // resize to fit page size
@@ -240,29 +133,53 @@ jQuery(function($) {
     for (k in stat_items)
         stat_val += ';' + k + ":" + stat_items[k];
     stat_val = stat_val.substring(1);
-
-    //酒店等级
-    var lvl_items = {
-            '01':'5星',
-            '02':'4星',
-            '03':'3星',
-            '04':'一线准4',
-            '05':'二线准4',
-            '06':'乡村酒店'
-    };
-        var lvl_val = '';
-        for (k in lvl_items)
-            lvl_val += ';' + k + ":" + lvl_items[k];
-        lvl_val = lvl_val.substring(1);
     
+    //三餐情况
+    var meal_items = {
+            1 : '早餐',
+            2 : '中餐',
+            3 : '晚餐',
+            4 : '宵夜'
+        };
+        var meal_val = '';
+        for (k in meal_items)
+            meal_val += ';' + k + ":" + meal_items[k];
+        meal_val = meal_val.substring(1);
+    
+    //房型类型
+    var type_items = {'':'未取到房型类型列表，请刷新！'};
+    //获取房型类型列表
+    $.ajax({ 
+        type : "get", 
+        url : "/room/getRoomType.htm", 
+        async : false, 
+        success : function(data){ 
+            var json = eval("(" + data + ")"); 
+            if(json.result == "ok"){
+                type_items = json.data;
+            }
+        } 
+    }); 
+    var room_type_val = '';
+    var room_type_option = '<option value="">请选择房型类型</option>';
+    for (k in type_items){
+        room_type_val += ';' + k + ":" + type_items[k];
+        room_type_option += '<option value="'+k+'">'+type_items[k]+'</option>';
+    }
+    room_type_val = room_type_val.substring(1);
+    //查询-房型类型数据绑定
+    $("#queryfield").find("select[name='type']").html(room_type_option);
+    $("#addModal").find("select[name='type']").html(room_type_option);
+    $("#editModal").find("select[name='type']").html(room_type_option);
+    //表格
     $(grid_selector).jqGrid(
             {
-                url : "/accomadation/findAccomadation.htm",
+                url : "/room/findRoom.htm",
+                postData:{ "room.accomno": accomno},
                 datatype : "json",
                 mtype : 'POST',
                 height : 400,
-                colNames : [ '操作', '酒店代码', '所属地区编号', '等级', '酒店名称', '地址',
-                        '酒店介绍', '酒店相关设施', '状态' ],
+                colNames : [ '操作', '编号','房型名称','房型类型','酒店代码','三餐情况','房型价格','状态'],
                 colModel : [ {
                     name : 'myaction',
                     index : '',
@@ -272,58 +189,82 @@ jQuery(function($) {
                     resize : false,
                     formatter : actFormatter
                 }, {
-                    name : 'no',
-                    index : 'no',
+                    name : 'index',
+                    index : 'index',
+                    width : 30,
+                    sorttype : "char"
+                }, {
+                    name : 'name',
+                    index : 'name',
                     width : 100,
-                    sorttype : "char"
+                    editable : false
                 }, {
-                    name : 'regionno',
-                    index : 'regionno',
-                    width : 80,
-                    editable : true,
-                    sorttype : "char"
-                }, {
-                    name : 'starlvl',
-                    index : 'starlvl',
+                    name : 'type',
+                    index : 'type',
                     width : 50,
                     sortable : false,
                     editable : false,
                     edittype : 'select',
                     sorttype : "char",
                     editoptions : {
-                        value : lvl_val
+                        value : room_type_val
                     },
                     formatter : function(v, opt, rec) {
-                        console.log(v);
-                        return lvl_items[v];
+                        return type_items[v];
                     },
                     unformat : function(v) {
-                        for (k in lvl_items)
-                            if (lvl_items[k] == v)
+                        for (k in type_items)
+                            if (type_items[k] == v)
                                 return k;
                         return '03';
                     }
                 }, {
-                    name : 'name',
-                    index : 'name',
+                    name : 'accomno',
+                    index : 'accomno',
                     width : 80,
-                    editable : false
+                    editable : true,
+                    sorttype : "char"
                 }, {
-                    name : 'addr',
-                    index : 'addr',
-                    width : 80,
-                    editable : true
+                    name : 'meal',
+                    index : 'meal',
+                    width : 100,
+                    sortable : false,
+                    editable : false,
+                    edittype : 'select',
+                    editoptions : {
+                        value : meal_val
+                    },
+                    formatter : function(v, opt, rec) {
+                        var vals ="";
+                        if(v != null && v != ""  && v!= undefined ){
+                            for(var t_i =0; t_i < v.length; t_i ++){
+                                vals += meal_items[v.substring(t_i,t_i+1)]+","
+                            }
+                            vals = vals.length>0?vals.substring(0,vals.length-1):vals;
+                        }
+                        return vals;
+                    },
+                    unformat : function(v) {
+                        if(v != null && v != ""  && v!= undefined ){
+                            debugger;
+                             var vals = v.split(",");
+                             var texts ="";
+                             for(index in vals){
+                                 for (k in meal_items){
+                                     if (meal_items[k] == vals[index])
+                                         texts +=k+","
+                                 }
+                             }
+                             return texts.length>0?texts.substring(0,texts.length-1):texts;
+                        }
+                        return '';
+                    }
                 }, {
-                    name : 'desc',
-                    index : 'desc',
+                    name : 'price',
+                    index : 'price',
                     width : 80,
                     editable : false,
                     hidden : true
-                }, {
-                    name : 'speciality',
-                    index : 'speciality',
-                    width : 0,
-                    editable : false,
                 }, {
                     name : 'stat',
                     index : 'stat',
@@ -350,9 +291,6 @@ jQuery(function($) {
                 rowList : [ 10, 20, 30 ],
                 pager : pager_selector,
                 altRows : true,
-                // multiselect : true,
-                // multiboxonly : true,
-                // multipleSearch : true,
                 loadComplete : function() {
                     var table = this;
                     setTimeout(function() {
@@ -360,7 +298,7 @@ jQuery(function($) {
                         enableTooltips(table);
                     }, 0);
                 },
-                editurl : "/accomadation/save.htm",
+                editurl : "/room/save.htm",
                 shrinkToFit : true,
                 autowidth : true
             });
@@ -386,13 +324,14 @@ jQuery(function($) {
                 caption : "",
                 buttonicon : "ace-icon fa fa-plus-circle purple",
                 onClickButton : function() {
+                    $("#addModal").find("input[name='accomno']").val(accomno);
                     $('#addModal').modal({
                         show : true,
                         backdrop : 'static'
                     });
                 },
                 position : "first",
-                title : "新增酒店",
+                title : "新增房型",
                 cursor : "focus",
             });
 
@@ -459,5 +398,64 @@ jQuery(function($) {
         $(grid_selector).jqGrid('GridUnload');
         $('.ui-jqdialog').remove();
     });
-
+    
 });
+
+function editCustom(id) {
+    var raw = jQuery("#grid-table").jqGrid('getRowData', id);
+    $("#editForm #message").hide();
+    loadFormData(raw, $("#editForm"));
+    $('#editModal').modal({
+        show : true,
+        backdrop : 'static'
+    });
+};
+
+function showCustom(id) {
+    var raw = jQuery("#grid-table").jqGrid('getRowData', id);
+    loadFormData(raw, $("#showForm"));
+    $("#showModal").modal({
+        show : true,
+        backdrop : 'static'
+    });
+};
+
+function deleteCustom(id) {
+    var raw = jQuery("#grid-table").jqGrid('getRowData', id);
+    $("#delForm input[name='id']").val(raw.index);
+    $("#delForm #message").text("");
+    $("#delForm #submit").attr("disabled", false);
+    $("#delForm #question").show();
+    $('#delModal').modal({
+        show : true,
+        backdrop : 'static'
+    });
+};
+
+// 绑定指定表单数据
+function loadFormData(raw, from) {
+    // 设置radio域
+    $(from).find("input[type='radio']").each(function(i, n) {
+        if (raw[$(n).attr('name')] == $(n).val())
+            $(n).prop('checked', true);
+    });
+    // 设置checkbox域
+    $(from).find("input[type='checkbox']").each(function(i, n) {
+        var valstr = raw[$(n).attr('name')];
+        var vals = ( valstr != null && valstr != "" ) ? valstr.split(",") : "";
+        $(vals).each(function(j, d){
+            if ($(n).val() == d)
+                $(n).prop('checked', true);
+        });
+    });
+    // 设置text、hidden域
+    $(from).find("input[type!='radio'][type!='checkbox']").each(function(i, n) {
+        $(n).val(raw[$(n).attr('name')]);
+    });
+    // 设置select域
+    $(from).find("select").each(function(i, n) {
+        $(n).find("option[value='" + raw[$(n).attr('name')] + "']")
+            .prop('selected', true);
+    });
+}
+

@@ -53,4 +53,5 @@ public interface DriverMapper<T> extends IBaseMapper<T> {
 	 */
 	int updateByPrimaryKey(Driver record);
 
+	BigDecimal selectSequence();
 }

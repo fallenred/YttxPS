@@ -13,7 +13,7 @@ import com.yttx.yttxps.service.IPubService;
 
 /**
  * @author Lonvoy
- * @createDate 2016年1月14日
+ * @createDate 2016年1月18日
  * @email me@lonvoy.com
  * 
  */
@@ -54,8 +54,7 @@ public class AccomadationService implements IAccomadationService {
 
 	@Override
 	public Accomadation selectAccomadationInfo(String no) {
-		// TODO Auto-generated method stub
-		return null;
+		return accomadationMapper.selectByPrimaryKey(no);
 	}
 
 

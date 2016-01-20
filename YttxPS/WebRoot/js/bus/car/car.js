@@ -362,7 +362,8 @@ jQuery(function($) {
         var dirver_grid_pager = "#dirver-grid-pager";
         $(dirver_grid_table).jqGrid(
                 {
-                    url : "/driver/findDriver.htm?stat=1",
+                    url : "/driver/findDriver.htm",
+                    postData:{"driver.stat":1},
                     datatype : "json",
                     mtype : 'POST',
                     colNames : ['ID', '驾驶员姓名', '性别', '出生日期' ],

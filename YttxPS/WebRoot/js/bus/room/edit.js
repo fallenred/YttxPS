@@ -2,25 +2,6 @@ jQuery(function($) {
     $("#editForm #message").hide();
     $("#editForm #edit_submit").attr("disabled", false);
 
-    //编辑窗口-城市初始化
-    var addlocalsec = $("#editModal #editSelectCity").localCity({
-        provurl : "/pub/findcity.htm",
-        cityurl : "/pub/findcity.htm",
-        disturl : "/pub/findcity.htm",
-        callback : function(index, key, value, fullkey, fullname) {
-            $("#editModal input[name='regionname']").val(fullname);
-            $("#editModal input[name='regionno']").val(key);
-            if (index == 3) {
-                $("#editModal").find(".selectCity").hide();
-            }
-        }
-    });
-
-    //编辑窗口-触发城市选择器
-    $("#editModal input[name='regionname']").click(function() {
-        $("#editModal").find(".selectCity").show();
-    });
-    
     // 重置
     $("#editForm #reset").on("click", function() {
         $("#editForm #message").hide();
@@ -29,48 +10,37 @@ jQuery(function($) {
         $("#editForm input[type='hidden']").val("");
         $("#editForm input").prop("checked", false);
         $("#editForm select").val("");
-        $("#editForm textarea").text("");
-        CKEDITOR.instances["desc_edit"].setData('');
     });
 
     // 关闭
-    $("#editForm #close").on("click", function() {
-        $("#editForm", parent.document).find(".close").click();
+    $("#editModal #room_close").on("click", function() {
+        //$("#editModal", parent.document).find(".close").click();
+        $(this).removeData("bs.modal");
+        $("#grid-table").trigger("reloadGrid");
     });
 
     // 提交
-    $("#editForm #edit_submit").on(
+    $("#editModal #room_edit_submit").on(
             "click",
             function() {
                 $("#editForm #message").hide();
-                if($("#editForm input[name='no']").val() == '') {
-                    $("#editForm #message").show();
-                    $("#editForm #message").text("酒店代码不能为空，请输入");
-                    $('#editForm #no').focus();
-                    return false;
-                } 
+                
                 if($("#editForm input[name='name']").val() == '') {
                     $("#editForm #message").show();
-                    $("#editForm #message").text("酒店名称不能为空，请输入");
+                    $("#editForm #message").text("房型名称不能为空，请输入");
                     $('#editForm #name').focus();
                     return false;
                 }
-                if($("#editForm input[name='regionno']").val() == '') {
+                if($("#editForm select[name='type']").val() == '') {
                     $("#editForm #message").show();
-                    $("#editForm #message").text("酒店所属地区不能为空，请输入");
-                    $('#editForm #regionname').focus();
+                    $("#editForm #message").text("房型类型不能为空，请选择");
+                    $('#editForm #type').focus();
                     return false;
                 }
-                if($("#editForm input[name='starlvl']").val() == '') {
+                if($("#editForm input[name='accomno']").val() == '') {
                     $("#editForm #message").show();
-                    $("#editForm #message").text("酒店等级不能为空，请输入");
-                    $('#editForm #starlvl').focus();
-                    return false;
-                }
-                if($("#editForm input[name='addr']").val() == '') {
-                    $("#editForm #message").show();
-                    $("#editForm #message").text("酒店地址不能为空，请输入");
-                    $('#editForm #addr').focus();
+                    $("#editForm #message").text("酒店代码不能为空，请输入");
+                    $('#editForm #accomno').focus();
                     return false;
                 }
                 if($("#editForm select[name='stat']").val() == '') {
@@ -79,9 +49,9 @@ jQuery(function($) {
                     $('#editForm #stat').focus();
                     return false;
                 }
-                $("#editForm textarea[name='desc']").val(CKEDITOR.instances["desc_edit"].getData());
+                
                 $("#editForm #edit_submit").attr("disabled", "disabled");
-                $.post("/accomadation/editAccomadation.htm", $("#editForm")
+                $.post("/room/editRoom.htm", $("#editForm")
                                 .serialize(),
                                 function(data) {
                                     var json = eval("(" + data + ")");

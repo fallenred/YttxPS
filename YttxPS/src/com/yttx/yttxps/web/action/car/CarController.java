@@ -25,7 +25,6 @@ import com.yttx.yttxps.model.Car;
 import com.yttx.yttxps.model.vo.CarRequest;
 import com.yttx.yttxps.service.ICarService;
 import com.yttx.yttxps.web.action.BaseController;
-import com.yttx.yttxps.web.action.LoginController;
 
 /**
  * 
@@ -39,7 +38,7 @@ import com.yttx.yttxps.web.action.LoginController;
 @RequestMapping("car/")
 public class CarController extends BaseController {
 	
-static Logger logger = LoggerFactory.getLogger(LoginController.class);
+static Logger logger = LoggerFactory.getLogger(CarController.class);
 	
 	@Autowired
 	private ICarService carService;
