@@ -173,7 +173,8 @@ jQuery(function($) {
                     name : 'index',
                     index : 'index',
                     width : 30,
-                    sorttype : "char"
+                    sorttype : "char",
+                    hidden : true
                 }, {
                     name : 'name',
                     index : 'name',
