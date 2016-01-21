@@ -26,7 +26,7 @@ $("#delModal").on("hidden.bs.modal", function() {
     $("#grid-table").trigger("reloadGrid");
 });
 
-$("#showModal").on("hidden.bs.modal", function() {
+$("#showRoomModal").on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
 });
 
@@ -39,28 +39,6 @@ jQuery(function($) {
         $("#roomModal", parent.document).find(".close").click();
     }
     
-    // 查询条件-城市初始化
-    var localsel = $("#queryfield #selectCity").localCity({
-        provurl : "/pub/findcity.htm",
-        cityurl : "/pub/findcity.htm",
-        disturl : "/pub/findcity.htm",
-        callback : localcallback
-    });
-
-    // 查询条件-城市选择器回调
-    function localcallback(index, key, value, fullkey, fullname) {
-        $("#queryfield #regionname").val(fullname);
-        $("#queryfield #regionno").val(key);
-        if (index == 3) {
-            $("#queryfield #selectCity").hide();
-        }
-    }
-    
-    // 查询条件-触发城市选择器
-    $("#queryfield #regionname").click(function() {
-        $("#queryfield #selectCity").show();
-    })
-
     // 重置
     $("#reset", "#queryfield").click(function() {
         $("#queryfield").val(null);
@@ -170,7 +148,9 @@ jQuery(function($) {
     //查询-房型类型数据绑定
     $("#queryfield").find("select[name='type']").html(room_type_option);
     $("#addModal").find("select[name='type']").html(room_type_option);
+    $("#showRoomModal").find("select[name='type']").html(room_type_option);
     $("#editModal").find("select[name='type']").html(room_type_option);
+    
     //表格
     $(grid_selector).jqGrid(
             {
@@ -414,7 +394,7 @@ function editCustom(id) {
 function showCustom(id) {
     var raw = jQuery("#grid-table").jqGrid('getRowData', id);
     loadFormData(raw, $("#showForm"));
-    $("#showModal").modal({
+    $("#showRoomModal").modal({
         show : true,
         backdrop : 'static'
     });

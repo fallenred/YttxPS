@@ -267,8 +267,8 @@
 		</div>
 
 		<!-- 模态框（查询） -->
-		<div class="modal fade" id="showModal" tabindex="-1" role="dialog"
-			aria-labelledby="showModalLabel" aria-hidden="false">
+		<div class="modal fade" id="showRoomModal" tabindex="-1" role="dialog"
+			aria-labelledby="showModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -289,7 +289,7 @@
 									<label class="col-sm-2 control-label no-padding-right"
 										for="load">房型类型</label>
 									<div class="col-sm-4">
-										<select name="type">
+										<select id="type" name="type"  disabled="disabled">
 											<option value="">&nbsp;&nbsp;忽略房型类型&nbsp;&nbsp;</option>
 										</select>
 									</div>
@@ -314,13 +314,13 @@
 									<label class="col-sm-2 control-label no-padding-right"
 										for="regdate">三餐情况</label>
 									<div class="col-sm-8">
-										<label> <input name="meal"
+										<label> <input name="meal" disabled="disabled"
 											class="ace ace-switch ace-switch-2" type="checkbox" value="1">
 											<span class="lbl">&nbsp;早餐</span>
-										</label> <label> <input name="meal"
+										</label> <label> <input name="meal" disabled="disabled"
 											class="ace ace-switch ace-switch-2" type="checkbox" value="2">
 											<span class="lbl">&nbsp;中餐</span>
-										</label> <label> <input name="meal"
+										</label> <label> <input name="meal" disabled="disabled"
 											class="ace ace-switch ace-switch-2" type="checkbox" value="3">
 											<span class="lbl">&nbsp;晚餐</span>
 										</label>
@@ -332,7 +332,7 @@
 									<label class="col-xs-2 col-sm-2 control-label no-padding-right"
 										for="stat">状态</label>
 									<div class="col-xs-4 col-sm-4">
-										<select name="stat">
+										<select name="stat" disabled="disabled">
 											<option value="">&nbsp;&nbsp;请选择状态&nbsp;&nbsp;</option>
 											<option value="1">&nbsp;&nbsp;正常&nbsp;&nbsp;</option>
 											<option value="2">&nbsp;&nbsp;失效&nbsp;&nbsp;</option>
