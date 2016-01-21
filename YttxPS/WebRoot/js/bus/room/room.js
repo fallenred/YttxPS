@@ -33,12 +33,12 @@ $("#showRoomModal").on("hidden.bs.modal", function() {
 jQuery(function($) {
     
     var accomno = $.getUrlParam('no');
-    
+    var accomname = $.getUrlParam('name');
+
     if(accomno == null || accomno == "" || accomno == undefined){
-        alert("无酒店编号！");
+        alert("未取到该酒店编号！");
         $("#roomModal", parent.document).find(".close").click();
     }
-    
     
     // 重置
     $("#reset", "#queryfield").click(function() {
@@ -159,7 +159,7 @@ jQuery(function($) {
                 postData:{ "room.accomno": accomno},
                 datatype : "json",
                 mtype : 'POST',
-                height : 400,
+                height : 395,
                 colNames : [ '操作', '编号','房型名称','房型类型','酒店代码','三餐情况','房型价格','状态'],
                 colModel : [ {
                     name : 'myaction',
@@ -204,11 +204,12 @@ jQuery(function($) {
                     index : 'accomno',
                     width : 80,
                     editable : true,
-                    sorttype : "char"
+                    sorttype : "char",
+                    hidden : true
                 }, {
                     name : 'meal',
                     index : 'meal',
-                    width : 100,
+                    width : 90,
                     sortable : false,
                     editable : false,
                     edittype : 'select',
@@ -243,9 +244,9 @@ jQuery(function($) {
                 }, {
                     name : 'price',
                     index : 'price',
-                    width : 80,
-                    editable : false,
-                    hidden : true
+                    width : 30,
+                    editable : true,
+                    sorttype : "char"
                 }, {
                     name : 'stat',
                     index : 'stat',
@@ -280,8 +281,8 @@ jQuery(function($) {
                     }, 0);
                 },
                 editurl : "/room/save.htm",
-                shrinkToFit : true,
-                autowidth : true
+                autowidth : true,
+                caption: (accomname!=null && accomname!="")?(accomname+"—房型配置列表"):"酒店房型列表"
             });
     $(window).triggerHandler('resize.jqGrid');// trigger window resize to make
     // the grid get the correct size
@@ -305,6 +306,11 @@ jQuery(function($) {
                 caption : "",
                 buttonicon : "ace-icon fa fa-plus-circle purple",
                 onClickButton : function() {
+                    $("#addModal #message").hide();
+                    $("#addModal input[type='text']").val("");
+                    $("#addModal input[type='hidden']").val("");
+                    $("#addModal input").prop("checked", false);
+                    $("#addModal select").val("");
                     $("#addModal").find("input[name='accomno']").val(accomno);
                     $('#addModal').modal({
                         show : true,

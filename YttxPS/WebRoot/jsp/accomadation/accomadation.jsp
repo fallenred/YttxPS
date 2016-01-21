@@ -297,7 +297,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label no-padding-right" for="no">酒店代码</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="no" class="form-control" disabled="disabled"
+                                        <input type="text" name="no" class="form-control" readonly="readonly"
                                             placeholder="酒店代码" />
                                     </div>
                                     <label class="col-sm-2 control-label no-padding-right"

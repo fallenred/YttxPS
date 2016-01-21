@@ -49,7 +49,7 @@ function deleteCustom(id) {
 //酒店房型配置
 function roomConfigCustom(id) {
     var raw = jQuery("#grid-table").jqGrid('getRowData', id);
-    var frameSrc = "/jsp/room/room.jsp?no=" + raw.no;
+    var frameSrc = "/jsp/room/room.jsp?no=" + raw.no+"&name="+escape(raw.name);
     $("#roomIframe").attr("src", frameSrc);
     $('#roomModal').modal({
         backdrop : 'static'
