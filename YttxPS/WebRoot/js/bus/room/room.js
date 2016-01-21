@@ -39,6 +39,7 @@ jQuery(function($) {
         $("#roomModal", parent.document).find(".close").click();
     }
     
+    
     // 重置
     $("#reset", "#queryfield").click(function() {
         $("#queryfield").val(null);

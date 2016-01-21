@@ -51,11 +51,9 @@ function roomConfigCustom(id) {
     var raw = jQuery("#grid-table").jqGrid('getRowData', id);
     var frameSrc = "/jsp/room/room.jsp?no=" + raw.no;
     $("#roomIframe").attr("src", frameSrc);
-    $("#roomIframe").attr("height", screen.height);
     $('#roomModal').modal({
-        show : true,
         backdrop : 'static'
-    });
+    }).show();
 };
 
 // 绑定指定表单数据
@@ -141,7 +139,10 @@ $("#showModal").on("hidden.bs.modal", function() {
 });
 
 jQuery(function($) {
-
+    
+    //酒店房型配置 iframe 高度适配
+    $("#roomIframe").css({"height": screen.height});
+    
     // 查询条件-城市初始化
     var localsel = $("#queryfield #selectCity").localCity({
         provurl : "/pub/findcity.htm",
