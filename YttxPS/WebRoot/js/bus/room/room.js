@@ -26,41 +26,20 @@ $("#delModal").on("hidden.bs.modal", function() {
     $("#grid-table").trigger("reloadGrid");
 });
 
-$("#showModal").on("hidden.bs.modal", function() {
+$("#showRoomModal").on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
 });
 
 jQuery(function($) {
     
     var accomno = $.getUrlParam('no');
-    
+    var accomname = $.getUrlParam('name');
+
     if(accomno == null || accomno == "" || accomno == undefined){
-        alert("无酒店编号！");
+        alert("未取到该酒店编号！");
         $("#roomModal", parent.document).find(".close").click();
     }
     
-    // 查询条件-城市初始化
-    var localsel = $("#queryfield #selectCity").localCity({
-        provurl : "/pub/findcity.htm",
-        cityurl : "/pub/findcity.htm",
-        disturl : "/pub/findcity.htm",
-        callback : localcallback
-    });
-
-    // 查询条件-城市选择器回调
-    function localcallback(index, key, value, fullkey, fullname) {
-        $("#queryfield #regionname").val(fullname);
-        $("#queryfield #regionno").val(key);
-        if (index == 3) {
-            $("#queryfield #selectCity").hide();
-        }
-    }
-    
-    // 查询条件-触发城市选择器
-    $("#queryfield #regionname").click(function() {
-        $("#queryfield #selectCity").show();
-    })
-
     // 重置
     $("#reset", "#queryfield").click(function() {
         $("#queryfield").val(null);
@@ -170,7 +149,9 @@ jQuery(function($) {
     //查询-房型类型数据绑定
     $("#queryfield").find("select[name='type']").html(room_type_option);
     $("#addModal").find("select[name='type']").html(room_type_option);
+    $("#showRoomModal").find("select[name='type']").html(room_type_option);
     $("#editModal").find("select[name='type']").html(room_type_option);
+    
     //表格
     $(grid_selector).jqGrid(
             {
@@ -178,7 +159,7 @@ jQuery(function($) {
                 postData:{ "room.accomno": accomno},
                 datatype : "json",
                 mtype : 'POST',
-                height : 400,
+                height : 395,
                 colNames : [ '操作', '编号','房型名称','房型类型','酒店代码','三餐情况','房型价格','状态'],
                 colModel : [ {
                     name : 'myaction',
@@ -192,7 +173,8 @@ jQuery(function($) {
                     name : 'index',
                     index : 'index',
                     width : 30,
-                    sorttype : "char"
+                    sorttype : "char",
+                    hidden : true
                 }, {
                     name : 'name',
                     index : 'name',
@@ -223,11 +205,12 @@ jQuery(function($) {
                     index : 'accomno',
                     width : 80,
                     editable : true,
-                    sorttype : "char"
+                    sorttype : "char",
+                    hidden : true
                 }, {
                     name : 'meal',
                     index : 'meal',
-                    width : 100,
+                    width : 90,
                     sortable : false,
                     editable : false,
                     edittype : 'select',
@@ -262,9 +245,9 @@ jQuery(function($) {
                 }, {
                     name : 'price',
                     index : 'price',
-                    width : 80,
-                    editable : false,
-                    hidden : true
+                    width : 30,
+                    editable : true,
+                    sorttype : "char"
                 }, {
                     name : 'stat',
                     index : 'stat',
@@ -299,8 +282,8 @@ jQuery(function($) {
                     }, 0);
                 },
                 editurl : "/room/save.htm",
-                shrinkToFit : true,
-                autowidth : true
+                autowidth : true,
+                caption: (accomname!=null && accomname!="")?(accomname+"—房型配置列表"):"酒店房型列表"
             });
     $(window).triggerHandler('resize.jqGrid');// trigger window resize to make
     // the grid get the correct size
@@ -324,6 +307,11 @@ jQuery(function($) {
                 caption : "",
                 buttonicon : "ace-icon fa fa-plus-circle purple",
                 onClickButton : function() {
+                    $("#addModal #message").hide();
+                    $("#addModal input[type='text']").val("");
+                    $("#addModal input[type='hidden']").val("");
+                    $("#addModal input").prop("checked", false);
+                    $("#addModal select").val("");
                     $("#addModal").find("input[name='accomno']").val(accomno);
                     $('#addModal').modal({
                         show : true,
@@ -414,7 +402,7 @@ function editCustom(id) {
 function showCustom(id) {
     var raw = jQuery("#grid-table").jqGrid('getRowData', id);
     loadFormData(raw, $("#showForm"));
-    $("#showModal").modal({
+    $("#showRoomModal").modal({
         show : true,
         backdrop : 'static'
     });
