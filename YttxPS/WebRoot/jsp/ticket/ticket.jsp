@@ -148,7 +148,7 @@
 											<h4 class="modal-title" id="addModalLabel">新增门票</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="addIframe" width="100%" height="750px"
+											<iframe id="addIframe" width="100%" height="800px"
 												frameborder="0" scrolling="no"></iframe>
 										</div>
 
@@ -171,7 +171,7 @@
 											<h4 class="modal-title" id="addModalLabel">修改门票</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="editIframe" width="100%" height="750px"
+											<iframe id="editIframe" width="100%" height="800px"
 												frameborder="0" scrolling="no"></iframe>
 										</div>
 

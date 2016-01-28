@@ -36,6 +36,8 @@ $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#fsType").val(raw.fsType);
 	$(this).find("#fiStat").val(raw.fiStat);
 	$(this).find("#fsDesc").val(raw.fsDesc);
+	$(this).find("#ftStartdate").val(raw.ftStartdate);
+	$(this).find("#ftEnddate").val(raw.ftEnddate);
 	$(this).find("#fdFullLowQp").val(raw.fdFullLowQp);
 	$(this).find("#fdHalfLowQp").val(raw.fdHalfLowQp);
 	$(this).find("#fdChildLowQp").val(raw.fdChildLowQp);
@@ -62,6 +64,8 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fsType").val(raw.fsType);
 	$(this).contents().find("#fiStat").val(raw.fiStat);
 	$(this).contents().find("#fsDesc").val(raw.fsDesc);
+	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
+	$(this).contents().find("#ftEnddate").val(raw.ftEnddate);
 	$(this).contents().find("#fdFullLowQp").val(raw.fdFullLowQp);
 	$(this).contents().find("#fdHalfLowQp").val(raw.fdHalfLowQp);
 	$(this).contents().find("#fdChildLowQp").val(raw.fdChildLowQp);
@@ -217,7 +221,7 @@ jQuery(function($) {
 				colNames : [ '操作', '门票代码', '票名称', '所属景区', '门票类型', '淡季挂牌价格全票', '淡季挂牌价格半票', '淡季挂牌价格儿童票', 
 				             '淡季挂牌价格免票', '淡季团队价格全票', '淡季团队价格半票', '淡季团队价格儿童票', '淡季团队价格免票', '旺季挂牌价格全票',
 				             '旺季挂牌价格半票', '旺季挂牌价格儿童票', '旺季挂牌价格免票', '旺季团队价格全票', '旺季团队价格半票', '旺季团队价格儿童票',
-				             '旺季团队价格免票', '状态', '描述' ],
+				             '旺季团队价格免票', '状态', '淡季开始日期', '淡季结束日期', '描述' ],
 				colModel : [ {
 					name : 'myac',
 					index : '',
@@ -236,7 +240,7 @@ jQuery(function($) {
 				}, {
 					name : 'fsName',
 					index : 'fsName',
-					width : 100,
+					width : 70,
 					editable : true,
 					sorttype : "char"
 				}, {
@@ -244,11 +248,12 @@ jQuery(function($) {
 					index : 'fsScenicno',
 					width : 100,
 					editable : true,
-					sorttype : "char"
+					sorttype : "char",
+					hidden : true
 				}, {
 					name : 'fsType',
 					index : 'fsType',
-					width : 100,
+					width : 30,
 					sortable : true,
 					editable : true,
 					edittype : 'select',
@@ -380,10 +385,38 @@ jQuery(function($) {
 						return '1';
 					}
 				}, {
+					name : 'ftStartdate',
+					index : 'ftStartdate',
+					edittype : 'textarea',
+					width : 50,
+					editable : true,
+					sorttype : "char",
+					formatter : function(value){
+						var timestamp = "";
+						if(value != ''){//rData[7]表示日期列
+							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+						}
+						return timestamp;
+					}
+				}, {
+					name : 'ftEnddate',
+					index : 'ftEnddate',
+					edittype : 'textarea',
+					width : 50,
+					editable : true,
+					sorttype : "char",
+					formatter : function(value){
+						var timestamp = "";
+						if(value != ''){//rData[7]表示日期列
+							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+						}
+						return timestamp;
+					}
+				}, {
 					name : 'fsDesc',
 					index : 'fsDesc',
 					edittype : 'textarea',
-					width : 300,
+					width : 100,
 					editable : true,
 					sorttype : "char"
 				} ],
