@@ -1,7 +1,7 @@
 package com.yttx.yttxps.service.imp;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +53,7 @@ public class TicketService implements ITicketService {
 	public void insert(Tticket record) {
 		record.setFsNo(String.format("%010d", ticketMapper.selectFsNo()));
 		ticketMapper.insert(record);
+		//新增景区资源对照数据
 		TResourceScenic resourceScenic = new TResourceScenic();
 		resourceScenic.setFiIndex(BigDecimal.valueOf(resourceScenicMapper.getSeq()));
 		resourceScenic.setFsResno(record.getFsNo());
@@ -62,8 +63,23 @@ public class TicketService implements ITicketService {
 		//插入资源消费选项定价表
 		if (CollectionUtils.isEmpty(record.getTccPrices())) return;
 		for (TCCPrice price : record.getTccPrices()) {
+			Calendar calendar = Calendar.getInstance();
+			//淡季处理
+			if (record.getTccPrices().indexOf(price) < 8) {
+				price.setFtStartdate(record.getFtStartdate());
+				price.setFtEnddate(record.getFtEnddate());
+			} else {
+				//旺季结束日期  = 淡季开始日期 -1
+				calendar.setTime(record.getFtStartdate());
+				calendar.add(Calendar.YEAR, 1);
+				calendar.add(Calendar.DAY_OF_YEAR, -1);
+				price.setFtEnddate(calendar.getTime());
+				//旺季开始日期 = 淡季结束日期 +1
+				calendar.setTime(record.getFtEnddate());
+				calendar.add(Calendar.DAY_OF_YEAR, 1);
+				price.setFtStartdate(calendar.getTime());
+			}
 			price.setFsRestype("mp");
-			price.setFtDate(new Date());
 			price.setFsResno(record.getFsNo());
 			tccPriceMapper.insertSelective(price);
 		}
@@ -75,6 +91,22 @@ public class TicketService implements ITicketService {
 		ticketMapper.updateByPrimaryKeySelective(record);
 		if (CollectionUtils.isEmpty(record.getTccPrices())) return;
 		for (TCCPrice price : record.getTccPrices()) {
+			Calendar calendar = Calendar.getInstance();
+			//淡季处理
+			if (record.getTccPrices().indexOf(price) < 8) {
+				price.setFtStartdate(record.getFtStartdate());
+				price.setFtEnddate(record.getFtEnddate());
+			} else {
+				//旺季结束日期  = 淡季开始日期 -1
+				calendar.setTime(record.getFtStartdate());
+				calendar.add(Calendar.YEAR, 1);
+				calendar.add(Calendar.DAY_OF_YEAR, -1);
+				price.setFtEnddate(calendar.getTime());
+				//旺季开始日期 = 淡季结束日期 +1
+				calendar.setTime(record.getFtEnddate());
+				calendar.add(Calendar.DAY_OF_YEAR, 1);
+				price.setFtStartdate(calendar.getTime());
+			}
 			TCCPriceExample example = new TCCPriceExample();
 			Criteria criteria = example.createCriteria();
 			criteria.andFsRestypeEqualTo("mp");
@@ -85,8 +117,13 @@ public class TicketService implements ITicketService {
 	}
 
 	@Override
-	public int delete(String no) {
-		return ticketMapper.deleteByPrimaryKey(no);
+	@Transactional(rollbackFor = Exception.class)
+	public void delete(String no) {
+		ticketMapper.deleteByPrimaryKey(no);
+		TCCPriceExample example = new TCCPriceExample();
+		Criteria criteriac = example.createCriteria();
+		criteriac.andFsResnoEqualTo(no);
+		tccPriceMapper.deleteByExample(example);
 	}
 
 	@Override

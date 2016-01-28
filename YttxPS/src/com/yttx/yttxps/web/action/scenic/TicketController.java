@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Tticket;
-import com.yttx.yttxps.model.TticketExample;
-import com.yttx.yttxps.model.TticketExample.Criteria;
 import com.yttx.yttxps.model.vo.TicketRequest;
 import com.yttx.yttxps.service.ITicketService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -101,7 +98,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
     {  
 		logger.debug("当前删除key {}", no);
 		try{
-			int ret = ticketService.delete(no);
+			ticketService.delete(no);
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("删除失败");

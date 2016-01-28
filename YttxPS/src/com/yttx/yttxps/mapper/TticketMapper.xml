@@ -333,10 +333,12 @@
   <!-- 分页查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
       select * from (select ROWNUM as rowno, t.* from 
-		(select t.fs_no, t.fs_name, t.fs_scenicno, t.fs_type, t.fs_desc, t.fi_stat, fdFullLowQp, fdHalfLowQp, fdChildLowQp, fdFreeLowQp, fdFullLowTp,
+		(select t.fs_no, t.fs_name, t.fs_scenicno, t.fs_type, t.fs_desc, t.fi_stat, ftStartdate, ftEnddate, fdFullLowQp, fdHalfLowQp, fdChildLowQp, fdFreeLowQp, fdFullLowTp,
        fdHalfLowTp, fdChildLowTp, fdFreeLowTp, fdFullPeakQp, fdHalfPeakQp, fdChildPeakQp, fdFreePeakQp, fdFullPeakTp, fdHalfPeakTp, fdChildPeakTp, fdFreePeakTp
 		  from tticket t, (
-		select c.fs_resno, max(case when c.fs_ccno='000001' then c.fd_price end) fdFullLowQp, max(case when c.fs_ccno='000002' then c.fd_price end) fdHalfLowQp,
+		select c.fs_resno,
+			   max(case when c.fs_ccno='000001' then c.ft_startdate end) ftStartdate, max(case when c.fs_ccno='000001' then c.ft_enddate end) ftEnddate,
+			   max(case when c.fs_ccno='000001' then c.fd_price end) fdFullLowQp, max(case when c.fs_ccno='000002' then c.fd_price end) fdHalfLowQp,
 		       max(case when c.fs_ccno='000003' then c.fd_price end) fdChildLowQp, max(case when c.fs_ccno='000004' then c.fd_price end) fdFreeLowQp,
 		       max(case when c.fs_ccno='000005' then c.fd_price end) fdFullLowTp, max(case when c.fs_ccno='000006' then c.fd_price end) fdHalfLowTp,
 		       max(case when c.fs_ccno='000007' then c.fd_price end) fdChildLowTp, max(case when c.fs_ccno='000008' then c.fd_price end) fdFreeLowTp,

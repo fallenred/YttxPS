@@ -25,7 +25,7 @@ public interface ITicketService {
 	void update(Tticket ticket);
 	
 	@Transactional
-	int delete(String no);
+	void delete(String no);
 
 	List<Tticket> selectTticket(TticketExample example);
 	
