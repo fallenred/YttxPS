@@ -15,8 +15,20 @@
 		<result property="stat" column="FI_STAT" />
 	</resultMap>
 	
+	<sql id="opercolums">
+		TRIM(FS_SYSOPERID) AS FS_SYSOPERID,
+		TRIM(FS_SYSOPERNAME) AS FS_SYSOPERNAME,
+		FI_ADMINTYPE,
+		FI_DEPNO,
+		FS_SYSOPERPWD,
+		FI_PWDSTAT,
+		FI_STAT
+	</sql>
+	
 	<select id="findById" parameterType="string" resultMap="sysOperResultMap">
-		select * from TSysOper where trim(fs_sysoperid) = #{sysOperId}
+		SELECT 
+		<include refid="opercolums"/>
+		FROM TSysOper WHERE TRIM(FS_SYSOPERID) = #{sysOperId}
 	</select>
 	
 	<insert id="insert" parameterType="SysOper">
@@ -28,6 +40,9 @@
     	UPDATE TSYSOPER SET FS_SYSOPERNAME = #{sysOperName}, FI_ADMINTYPE = #{adminType},  FI_DEPNO = #{depNo}, FS_SYSOPERPWD = #{sysOperPwd}, FI_PWDSTAT = #{pwdStat}, FI_STAT = #{stat} 
     	WHERE FS_SYSOPERID = #{sysOperId}
 	</update>
-
-
+	
+	<update id="updateOperStatByDepNo" parameterType="SysOper">
+    	UPDATE TSYSOPER SET FI_STAT = #{stat} 
+    	WHERE FI_DEPNO = #{depNo}
+	</update>
 </mapper> 

@@ -10,7 +10,7 @@ public interface SysOperMapper {
 	public int  insert(SysOper sysOper);
 	
 	public int  update(SysOper sysOper);
-	
 
+	public void updateOperStatByDepNo(SysOper oper);
 
 }

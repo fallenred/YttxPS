@@ -13,20 +13,97 @@
 	
 	<select id="findAll"  resultMap="sysDepResultMap"> 
         <![CDATA[
-            SELECT * from TSYSDEP
+            SELECT
+            	FI_DEPNO,
+            	TRIM(FS_DEPNAME) AS	FS_DEPNAME,
+             	FI_STAT 
+             FROM TSYSDEP
         ]]>  
     </select> 
     
 	<select id="findByNo" parameterType="int" resultMap="sysDepResultMap">
 		 <![CDATA[
-		SELECT * from TSYSDEP WHERE FI_DEPNO = #{depNo}
+		 SELECT
+            	FI_DEPNO,
+            	TRIM(FS_DEPNAME) AS	FS_DEPNAME,
+             	FI_STAT 
+         FROM TSYSDEP
+         WHERE FI_DEPNO = #{depNo}
 		]]>
 	</select>
 	
-	<insert id="insert" parameterType="SysDep">
+	<select id="findByDepName" parameterType="string" resultMap="sysDepResultMap">
+		 <![CDATA[
+		 SELECT
+            	FI_DEPNO,
+            	TRIM(FS_DEPNAME) AS	FS_DEPNAME,
+             	FI_STAT 
+         FROM TSYSDEP
+         WHERE  FS_DEPNAME = #{depName}
+		]]>
+	</select>
+	
+	<sql id='TABLE_SEQUENCE'>SEQ_TEST_USER_ID.nextval</sql>
+	
+	<insert id="insert" parameterType="SysDep" useGeneratedKeys="false">
+		<selectKey resultType="long"  keyProperty="depNo" order="BEFORE">
+    		select DEP_SEQ.nextval 	as depNo from dual
+   		</selectKey>
     	insert into TSYSDEP (FI_DEPNO, FS_DEPNAME, FI_STAT)
-    	values (#{depNo}, #{depName},  #{stat})
+    	values (#{depNo,jdbcType=INTEGER}, #{depName,jdbcType=VARCHAR}, #{stat,jdbcType=INTEGER}) 	
 	</insert>
-
-
+	
+	<update id="update" parameterType="SysDep">
+    	update TSYSDEP 
+    	<set>
+      		<if test="depNo != null" >
+        		FI_DEPNO = #{depNo,jdbcType=INTEGER},
+      		</if>
+      		<if test="depName != null and depName != ''" >
+       	 		FS_DEPNAME = #{depName,jdbcType=VARCHAR},
+      		</if>
+      		<if test="stat != null" >
+               	FI_STAT = #{stat,jdbcType=INTEGER}
+     		</if>
+    	</set>
+    	where FI_DEPNO = #{depNo,jdbcType = INTEGER}
+	</update>
+	
+	  <!-- 动态查询总数 -->
+  <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
+      select count(*) from TSYSDEP
+      where 1=1
+      <if test="depno != null and depno != ''" >
+        and FI_DEPNo = #{depno}
+      </if>
+      <if test="depname != null and depname != ''" >
+        and FS_DEPNAME like '%'||#{depname}||'%'
+      </if>
+      <if test="stat != null and stat != ''" >
+        and FI_STAT like '%'||#{stat}||'%'
+      </if>
+  </select>
+  
+  <!-- 动态查询 -->
+  <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="sysDepResultMap">
+      select * from (select ROWNUM as rowno, d.*  from TSYSDEP d
+      where 1=1
+      <if test="depno != null and depno != ''" >
+        and FI_DEPNo = #{depno}
+      </if>
+      <if test="depname != null and depname != ''" >
+        and FS_DEPNAME like '%'||#{depname}||'%'
+      </if>
+      <if test="stat != null and stat != ''" >
+        and FI_STAT like '%'||#{stat}||'%'
+      </if>
+      <if test="endrow != null" >
+        and ROWNUM &lt;= #{endrow}
+      </if>
+      ) tt 
+      where 1=1
+      <if test="startrow != null" >
+        and tt.rowno &gt;= #{startrow}
+      </if>
+  </select>
 </mapper> 
