@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.transport;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Ttransport;
+import com.yttx.yttxps.model.TtransportExample;
+import com.yttx.yttxps.model.vo.GenRequest;
 import com.yttx.yttxps.model.vo.TransportRequest;
 import com.yttx.yttxps.service.ITransportService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -30,7 +33,7 @@ import com.yttx.yttxps.web.action.LoginController;
 @Scope("prototype")
 @RequestMapping("transport/")
 public class TransportController extends BaseController {
-static Logger logger = LoggerFactory.getLogger(LoginController.class);
+static Logger logger = LoggerFactory.getLogger(TransportController.class);
 	
 	@Autowired
 	private ITransportService transportService;
@@ -51,6 +54,22 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		List<Ttransport> list = transportService.selectSelectivePage(map);
 		map.put("rows", list);
 		return map;
+    }
+	
+	/**
+	 * 获取车型列表
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="selectTransport.htm", method = RequestMethod.GET)
+	@ResponseBody
+	public Object ajaxSelectTransport(GenRequest req)
+    {  
+		logger.debug("当前查询条件 {}", req.getGen());
+		TtransportExample example = new TtransportExample();
+		example.createCriteria().andFiStatEqualTo(new BigDecimal(1));
+		List<Ttransport> list = transportService.selectTtransport(example);
+		return list;
     }
 	
 	/**
