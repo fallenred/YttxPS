@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Tgen;
+import com.yttx.yttxps.model.TgenExample;
 import com.yttx.yttxps.model.vo.GenRequest;
 import com.yttx.yttxps.service.IGenService;
 import com.yttx.yttxps.web.action.BaseController;
-import com.yttx.yttxps.web.action.LoginController;
 
 /**
  * 线路管理
@@ -31,7 +31,7 @@ import com.yttx.yttxps.web.action.LoginController;
 @Scope("prototype")
 @RequestMapping("gen/")
 public class GenController extends BaseController {
-static Logger logger = LoggerFactory.getLogger(LoginController.class);
+static Logger logger = LoggerFactory.getLogger(GenController.class);
 	
 	@Autowired
 	private IGenService genService;
@@ -55,10 +55,27 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
     }
 	
 	/**
+	 * 获取路线列表
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="selectGen.htm", method = RequestMethod.GET)
+	@ResponseBody
+	public Object ajaxSelectGen(GenRequest req)
+    {  
+		logger.debug("当前查询条件 {}", req.getGen());
+		TgenExample example = new TgenExample();
+		example.createCriteria().andFiStatEqualTo(new BigDecimal(1));
+		List<Tgen> list = genService.selectTgen(example);
+		return list;
+    }
+	
+	/**
 	 * 新增线路信息
 	 * @param Gen
 	 * @return
 	 */
+	@SuppressWarnings({ "unchecked" })
 	@RequestMapping(value="addGen.htm", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> ajaxaddGen(Tgen gen)
@@ -66,7 +83,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		logger.debug("当前新增对象 {}", gen);
 		try{
 			gen.setFiIndex(new BigDecimal(genService.selectFiIndex()));
-			int ret = genService.insert(gen);
+			genService.insert(gen);
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -80,13 +97,14 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 * @param Gen
 	 * @return
 	 */
+	@SuppressWarnings({ "unchecked" })
 	@RequestMapping(value="editGen.htm", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> ajaxeditGen(Tgen gen)
     {  
 		logger.debug("当前更新对象 {}", gen);
 		try{
-			int ret = genService.update(gen);
+			genService.update(gen);
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("更新失败");
@@ -99,13 +117,14 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 * @param Gen
 	 * @return
 	 */
+	@SuppressWarnings({ "unchecked" })
 	@RequestMapping(value="delGen.htm", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> ajaxdelGen(@RequestParam(value = "no") String  no)
     {  
 		logger.debug("当前删除key {}", no);
 		try{
-			int ret = genService.delete(no);
+			genService.delete(no);
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("删除失败");
