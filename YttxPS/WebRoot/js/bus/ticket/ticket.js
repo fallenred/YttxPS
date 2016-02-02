@@ -1,27 +1,27 @@
 //	显示详情
 var raw = {};
-function showCustom(id) {
+function showTicket(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	$("#showModal").modal({
 	    remote: "/jsp/ticket/show.jsp"
 	}); 
 };
 
-function editCustom(id) {
+function editTicket(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	var frameSrc = "/jsp/ticket/edit.jsp";
     $("#editIframe").attr("src", frameSrc);
     $('#editModal').modal({ show: true, backdrop: 'static' });
 };
 
-function deleteCustom(id) {
+function deleteTicket(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	var frameSrc = "/jsp/ticket/delete.jsp?no=" + raw.fsNo;
 	$("#delIframe").attr("src", frameSrc);
     $('#delModal').modal({ show: true, backdrop: 'static' });
 };
 
-function picCustom(id) {
+function picTicket(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	var frameSrc = "/jsp/pic/pic.jsp?no=" + raw.fsNo;
     $("#picIframe").attr("src", frameSrc);
@@ -32,28 +32,10 @@ $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#reset").click();
 	$(this).find("#fsNo").val(raw.fsNo);
 	$(this).find("#fsName").val(raw.fsName);
-	$(this).find("#fsScenicno").val(raw.fsScenicno);
+	$(this).find("#fsScenicno").val(raw.fsScenicname);
 	$(this).find("#fsType").val(raw.fsType);
 	$(this).find("#fiStat").val(raw.fiStat);
 	$(this).find("#fsDesc").val(raw.fsDesc);
-	$(this).find("#ftStartdate").val(raw.ftStartdate);
-	$(this).find("#ftEnddate").val(raw.ftEnddate);
-	$(this).find("#fdFullLowQp").val(raw.fdFullLowQp);
-	$(this).find("#fdHalfLowQp").val(raw.fdHalfLowQp);
-	$(this).find("#fdChildLowQp").val(raw.fdChildLowQp);
-	$(this).find("#fdFreeLowQp").val(raw.fdFreeLowQp);
-	$(this).find("#fdFullLowTp").val(raw.fdFullLowTp);
-	$(this).find("#fdHalfLowTp").val(raw.fdHalfLowTp);
-	$(this).find("#fdChildLowTp").val(raw.fdChildLowTp);
-	$(this).find("#fdFreeLowTp").val(raw.fdFreeLowTp);
-	$(this).find("#fdFullPeakQp").val(raw.fdFullPeakQp);
-	$(this).find("#fdHalfPeakQp").val(raw.fdHalfPeakQp);
-	$(this).find("#fdChildPeakQp").val(raw.fdChildPeakQp);
-	$(this).find("#fdFreePeakQp").val(raw.fdFreePeakQp);
-	$(this).find("#fdFullPeakTp").val(raw.fdFullPeakTp);
-	$(this).find("#fdHalfPeakTp").val(raw.fdHalfPeakTp);
-	$(this).find("#fdChildPeakTp").val(raw.fdChildPeakTp);
-	$(this).find("#fdFreePeakTp").val(raw.fdFreePeakTp);
 });
 
 $("#editIframe").on("load",function(){
@@ -64,24 +46,6 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fsType").val(raw.fsType);
 	$(this).contents().find("#fiStat").val(raw.fiStat);
 	$(this).contents().find("#fsDesc").val(raw.fsDesc);
-	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
-	$(this).contents().find("#ftEnddate").val(raw.ftEnddate);
-	$(this).contents().find("#fdFullLowQp").val(raw.fdFullLowQp);
-	$(this).contents().find("#fdHalfLowQp").val(raw.fdHalfLowQp);
-	$(this).contents().find("#fdChildLowQp").val(raw.fdChildLowQp);
-	$(this).contents().find("#fdFreeLowQp").val(raw.fdFreeLowQp);
-	$(this).contents().find("#fdFullLowTp").val(raw.fdFullLowTp);
-	$(this).contents().find("#fdHalfLowTp").val(raw.fdHalfLowTp);
-	$(this).contents().find("#fdChildLowTp").val(raw.fdChildLowTp);
-	$(this).contents().find("#fdFreeLowTp").val(raw.fdFreeLowTp);
-	$(this).contents().find("#fdFullPeakQp").val(raw.fdFullPeakQp);
-	$(this).contents().find("#fdHalfPeakQp").val(raw.fdHalfPeakQp);
-	$(this).contents().find("#fdChildPeakQp").val(raw.fdChildPeakQp);
-	$(this).contents().find("#fdFreePeakQp").val(raw.fdFreePeakQp);
-	$(this).contents().find("#fdFullPeakTp").val(raw.fdFullPeakTp);
-	$(this).contents().find("#fdHalfPeakTp").val(raw.fdHalfPeakTp);
-	$(this).contents().find("#fdChildPeakTp").val(raw.fdChildPeakTp);
-	$(this).contents().find("#fdFreePeakTp").val(raw.fdFreePeakTp);
 });
 
 
@@ -158,18 +122,18 @@ jQuery(function($) {
 
 	// 定义按钮列
 	actFormatter = function(cellvalue, options, rawObject) {
-		var detail = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showCustom('
+		var detail = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showTicket('
 			+ options.rowId
 			+ ');" data-original-title="查看记录详情"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
 
-	var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editCustom('
+	var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editTicket('
 			+ options.rowId
 			+ ');" data-original-title="编辑本条记录"><span class="ui-icon ui-icon-pencil"></span></div>';
 
-	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteCustom('
+	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteTicket('
 			+ options.rowId
 			+ ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-	var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" id="picButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="picCustom('
+	var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" id="picButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="picTicket('
 		+ options.rowId
 		+ ');" data-original-title="编辑资源图片"><span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
 	return detail + editBtn + deleteBtn + picDtn;
@@ -218,10 +182,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '门票代码', '票名称', '所属景区', '门票类型', '淡季挂牌价格全票', '淡季挂牌价格半票', '淡季挂牌价格儿童票', 
-				             '淡季挂牌价格免票', '淡季团队价格全票', '淡季团队价格半票', '淡季团队价格儿童票', '淡季团队价格免票', '旺季挂牌价格全票',
-				             '旺季挂牌价格半票', '旺季挂牌价格儿童票', '旺季挂牌价格免票', '旺季团队价格全票', '旺季团队价格半票', '旺季团队价格儿童票',
-				             '旺季团队价格免票', '状态', '淡季开始日期', '淡季结束日期', '描述' ],
+				colNames : [ '操作', '门票代码', '景区代码', '所属景区', '票名称',  '门票类型', '状态', '描述' ],
 				colModel : [ {
 					name : 'myac',
 					index : '',
@@ -238,18 +199,24 @@ jQuery(function($) {
 					editable : true,
 					hidden : true
 				}, {
-					name : 'fsName',
-					index : 'fsName',
-					width : 70,
-					editable : true,
-					sorttype : "char"
-				}, {
 					name : 'fsScenicno',
 					index : 'fsScenicno',
 					width : 100,
 					editable : true,
 					sorttype : "char",
 					hidden : true
+				}, {
+					name : 'fsScenicname',
+					index : 'fsScenicname',
+					width : 50,
+					editable : true,
+					sorttype : "char"
+				}, {
+					name : 'fsName',
+					index : 'fsName',
+					width : 50,
+					editable : true,
+					sorttype : "char"
 				}, {
 					name : 'fsType',
 					index : 'fsType',
@@ -270,102 +237,6 @@ jQuery(function($) {
 						return '1';
 					}
 				}, {
-					name : 'fdFullLowQp',
-					index : 'fdFullLowQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdHalfLowQp',
-					index : 'fdHalfLowQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdChildLowQp',
-					index : 'fdChildLowQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFreeLowQp',
-					index : 'fdFreeLowQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFullLowTp',
-					index : 'fdFullLowTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdHalfLowTp',
-					index : 'fdHalfLowTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdChildLowTp',
-					index : 'fdChildLowTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFreeLowTp',
-					index : 'fdFreeLowTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFullPeakQp',
-					index : 'fdFullPeakQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdHalfPeakQp',
-					index : 'fdHalfPeakQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdChildPeakQp',
-					index : 'fdChildPeakQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFreePeakQp',
-					index : 'fdFreePeakQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFullPeakTp',
-					index : 'fdFullPeakTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdHalfPeakTp',
-					index : 'fdHalfPeakTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdChildPeakTp',
-					index : 'fdChildPeakTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFreePeakTp',
-					index : 'fdFreePeakTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
 					name : 'fiStat',
 					index : 'fiStat',
 					width : 35,
@@ -383,34 +254,6 @@ jQuery(function($) {
 							if (items[k] == v)
 								return k;
 						return '1';
-					}
-				}, {
-					name : 'ftStartdate',
-					index : 'ftStartdate',
-					edittype : 'textarea',
-					width : 50,
-					editable : true,
-					sorttype : "char",
-					formatter : function(value){
-						var timestamp = "";
-						if(value != ''){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
-						}
-						return timestamp;
-					}
-				}, {
-					name : 'ftEnddate',
-					index : 'ftEnddate',
-					edittype : 'textarea',
-					width : 50,
-					editable : true,
-					sorttype : "char",
-					formatter : function(value){
-						var timestamp = "";
-						if(value != ''){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
-						}
-						return timestamp;
 					}
 				}, {
 					name : 'fsDesc',
