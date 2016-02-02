@@ -53,7 +53,7 @@ public class GenService implements IGenService {
 		// TODO Auto-generated method stub
 		return genMapper.selectByExample(example);
 	}
-
+	
 	@Override
 	public int selectFiIndex() {
 		// TODO Auto-generated method stub
