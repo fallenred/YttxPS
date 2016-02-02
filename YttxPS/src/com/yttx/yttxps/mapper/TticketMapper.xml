@@ -13,6 +13,7 @@
     <result column="FS_TYPE" jdbcType="CHAR" property="fsType" />
     <result column="FS_DESC" jdbcType="VARCHAR" property="fsDesc" />
     <result column="FI_STAT" jdbcType="DECIMAL" property="fiStat" />
+    <result column="FS_SCENICNAME" jdbcType="CHAR" property="fsScenicname" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -300,21 +301,10 @@
       FI_STAT = #{fiStat,jdbcType=DECIMAL}
     where FS_NO = #{fsNo,jdbcType=CHAR}
   </update>
+  
   <!-- 分页查询总记录 -->
   <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
-  	select count(*) from 
-  		(select t.fs_no, t.fs_name, t.fs_scenicno, t.fs_type, t.fs_desc, t.fi_stat, fdFullLowQp, fdHalfLowQp, fdChildLowQp, fdFreeLowQp, fdFullLowTp,
-       fdHalfLowTp, fdChildLowTp, fdFreeLowTp, fdFullPeakQp, fdHalfPeakQp, fdChildPeakQp, fdFreePeakQp, fdFullPeakTp, fdHalfPeakTp, fdChildPeakTp, fdFreePeakTp
-		  from tticket t, (
-		select c.fs_resno, max(case when c.fs_ccno='000001' then c.fd_price end) fdFullLowQp, max(case when c.fs_ccno='000002' then c.fd_price end) fdHalfLowQp,
-		       max(case when c.fs_ccno='000003' then c.fd_price end) fdChildLowQp, max(case when c.fs_ccno='000004' then c.fd_price end) fdFreeLowQp,
-		       max(case when c.fs_ccno='000005' then c.fd_price end) fdFullLowTp, max(case when c.fs_ccno='000006' then c.fd_price end) fdHalfLowTp,
-		       max(case when c.fs_ccno='000007' then c.fd_price end) fdChildLowTp, max(case when c.fs_ccno='000008' then c.fd_price end) fdFreeLowTp,
-		       max(case when c.fs_ccno='000009' then c.fd_price end) fdFullPeakQp, max(case when c.fs_ccno='000010' then c.fd_price end) fdHalfPeakQp,
-		       max(case when c.fs_ccno='000011' then c.fd_price end) fdChildPeakQp, max(case when c.fs_ccno='000012' then c.fd_price end) fdFreePeakQp,
-		       max(case when c.fs_ccno='000013' then c.fd_price end) fdFullPeakTp, max(case when c.fs_ccno='000014' then c.fd_price end) fdHalfPeakTp,
-		       max(case when c.fs_ccno='000015' then c.fd_price end) fdChildPeakTp, max(case when c.fs_ccno='000016' then c.fd_price end) fdFreePeakTp
-		 from tccprice c where c.fs_restype = 'mp' group by c.fs_resno) cc where t.fs_no = cc.fs_resno)
+  	select count(*) from VIEW_TTICKET
 	     where 1=1
 	      <if test="fsNo != null and fsNo != ''">
 	        and fs_no = #{fsNo}
@@ -333,21 +323,7 @@
   <!-- 分页查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
       select * from (select ROWNUM as rowno, t.* from 
-		(select t.fs_no, t.fs_name, t.fs_scenicno, t.fs_type, t.fs_desc, t.fi_stat, ftStartdate, ftEnddate, fdFullLowQp, fdHalfLowQp, fdChildLowQp, fdFreeLowQp, fdFullLowTp,
-       fdHalfLowTp, fdChildLowTp, fdFreeLowTp, fdFullPeakQp, fdHalfPeakQp, fdChildPeakQp, fdFreePeakQp, fdFullPeakTp, fdHalfPeakTp, fdChildPeakTp, fdFreePeakTp
-		  from tticket t, (
-		select c.fs_resno,
-			   max(case when c.fs_ccno='000001' then c.ft_startdate end) ftStartdate, max(case when c.fs_ccno='000001' then c.ft_enddate end) ftEnddate,
-			   max(case when c.fs_ccno='000001' then c.fd_price end) fdFullLowQp, max(case when c.fs_ccno='000002' then c.fd_price end) fdHalfLowQp,
-		       max(case when c.fs_ccno='000003' then c.fd_price end) fdChildLowQp, max(case when c.fs_ccno='000004' then c.fd_price end) fdFreeLowQp,
-		       max(case when c.fs_ccno='000005' then c.fd_price end) fdFullLowTp, max(case when c.fs_ccno='000006' then c.fd_price end) fdHalfLowTp,
-		       max(case when c.fs_ccno='000007' then c.fd_price end) fdChildLowTp, max(case when c.fs_ccno='000008' then c.fd_price end) fdFreeLowTp,
-		       max(case when c.fs_ccno='000009' then c.fd_price end) fdFullPeakQp, max(case when c.fs_ccno='000010' then c.fd_price end) fdHalfPeakQp,
-		       max(case when c.fs_ccno='000011' then c.fd_price end) fdChildPeakQp, max(case when c.fs_ccno='000012' then c.fd_price end) fdFreePeakQp,
-		       max(case when c.fs_ccno='000013' then c.fd_price end) fdFullPeakTp, max(case when c.fs_ccno='000014' then c.fd_price end) fdHalfPeakTp,
-		       max(case when c.fs_ccno='000015' then c.fd_price end) fdChildPeakTp, max(case when c.fs_ccno='000016' then c.fd_price end) fdFreePeakTp
-		 from tccprice c where c.fs_restype = 'mp' group by c.fs_resno) cc where t.fs_no = cc.fs_resno) t
-
+		VIEW_TTICKET t
     	where 1=1
 	      <if test="fsNo != null and fsNo != ''">
 	        and fs_no = #{fsNo}
