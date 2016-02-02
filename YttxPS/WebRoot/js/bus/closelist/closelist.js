@@ -165,7 +165,7 @@ jQuery(function($) {
 	var items = {
 		'0' : '客户待确认',
 		'1' : '结算单已确认',
-		'2' : '已经结算完毕'
+		'2' : '结算完毕'
 	};
 	var s = '';
 	for (k in items)
@@ -245,7 +245,14 @@ jQuery(function($) {
 					index : 'ftCreatdate',
 					width : 100,
 					editable : true,
-					sorttype : "char"
+					sorttype : "char",
+					formatter : function(value){
+						var timestamp = "";
+						if(value != ''){//rData[7]表示日期列
+							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+						}
+						return timestamp;
+					}
 				}, {
 					name : 'fcContent',
 					index : 'fcContent',
