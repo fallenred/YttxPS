@@ -13,6 +13,7 @@ import org.springframework.util.CollectionUtils;
 import com.yttx.yttxps.mapper.TCCPriceMapper;
 import com.yttx.yttxps.mapper.TResourceScenicMapper;
 import com.yttx.yttxps.mapper.TticketMapper;
+import com.yttx.yttxps.mapper.TticketPriceMapper;
 import com.yttx.yttxps.model.TCCPrice;
 import com.yttx.yttxps.model.TCCPriceExample;
 import com.yttx.yttxps.model.TCCPriceExample.Criteria;
@@ -31,6 +32,9 @@ public class TicketService implements ITicketService {
 
 	@Autowired
 	private TticketMapper<Tticket> ticketMapper;
+	
+	@Autowired
+	private TticketPriceMapper<Tticket> ticketPriceMapper;
 
 	@Autowired
 	private TResourceScenicMapper<TResourceScenic> resourceScenicMapper;
@@ -47,7 +51,26 @@ public class TicketService implements ITicketService {
 	public List<Tticket> selectSelectivePage(Map<String, Object> map) {
 		return pubService.doPage(map, ticketMapper);
 	}
+	
+	/**
+	 * 查询门票价格总数
+	 */
+	@Override
+	public int selectCountTicketPrice(Map<String, Object> map) {
+		return ticketPriceMapper.selectCountSelective(map);
+	}
 
+	/**
+	 * 分页查询票价
+	 */
+	@Override
+	public List<Tticket> selectTicketPricePage(Map<String, Object> map) {
+		return pubService.doPage(map, ticketPriceMapper);
+	}
+	
+	/**
+	 * 新增门票资源信息
+	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void insert(Tticket record) {
@@ -60,60 +83,12 @@ public class TicketService implements ITicketService {
 		resourceScenic.setFsRestype("mp");
 		resourceScenic.setFsScenicno(record.getFsScenicno());
 		resourceScenicMapper.insert(resourceScenic);
-		//插入资源消费选项定价表
-		if (CollectionUtils.isEmpty(record.getTccPrices())) return;
-		for (TCCPrice price : record.getTccPrices()) {
-			Calendar calendar = Calendar.getInstance();
-			//淡季处理
-			if (record.getTccPrices().indexOf(price) < 8) {
-				price.setFtStartdate(record.getFtStartdate());
-				price.setFtEnddate(record.getFtEnddate());
-			} else {
-				//旺季结束日期  = 淡季开始日期 -1
-				calendar.setTime(record.getFtStartdate());
-				calendar.add(Calendar.YEAR, 1);
-				calendar.add(Calendar.DAY_OF_YEAR, -1);
-				price.setFtEnddate(calendar.getTime());
-				//旺季开始日期 = 淡季结束日期 +1
-				calendar.setTime(record.getFtEnddate());
-				calendar.add(Calendar.DAY_OF_YEAR, 1);
-				price.setFtStartdate(calendar.getTime());
-			}
-			price.setFsRestype("mp");
-			price.setFsResno(record.getFsNo());
-			tccPriceMapper.insertSelective(price);
-		}
 	}
-
+	
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void update(Tticket record) {
 		ticketMapper.updateByPrimaryKeySelective(record);
-		if (CollectionUtils.isEmpty(record.getTccPrices())) return;
-		for (TCCPrice price : record.getTccPrices()) {
-			Calendar calendar = Calendar.getInstance();
-			//淡季处理
-			if (record.getTccPrices().indexOf(price) < 8) {
-				price.setFtStartdate(record.getFtStartdate());
-				price.setFtEnddate(record.getFtEnddate());
-			} else {
-				//旺季结束日期  = 淡季开始日期 -1
-				calendar.setTime(record.getFtStartdate());
-				calendar.add(Calendar.YEAR, 1);
-				calendar.add(Calendar.DAY_OF_YEAR, -1);
-				price.setFtEnddate(calendar.getTime());
-				//旺季开始日期 = 淡季结束日期 +1
-				calendar.setTime(record.getFtEnddate());
-				calendar.add(Calendar.DAY_OF_YEAR, 1);
-				price.setFtStartdate(calendar.getTime());
-			}
-			TCCPriceExample example = new TCCPriceExample();
-			Criteria criteria = example.createCriteria();
-			criteria.andFsRestypeEqualTo("mp");
-			criteria.andFsResnoEqualTo(record.getFsNo());
-			criteria.andFsCcnoEqualTo(price.getFsCcno());
-			tccPriceMapper.updateByExampleSelective(price, example);
-		}
 	}
 
 	@Override
@@ -130,6 +105,67 @@ public class TicketService implements ITicketService {
 	public List<Tticket> selectTticket(TticketExample example) {
 		// TODO Auto-generated method stub
 		return ticketMapper.selectByExample(example);
+	}
+
+	@Override
+	public void insertTicketPrice(Tticket record) {
+		// TODO Auto-generated method stub
+		if (CollectionUtils.isEmpty(record.getTccPrices())) return;
+		for (TCCPrice price : record.getTccPrices()) {
+			//如果价格为空则不作处理
+			if (price.getFdPrice() == null) continue;
+			//票价类型为淡季时不对旺季价格进行保存
+			if("1".equals(record.getPriceType())) {
+				if(record.getTccPrices().indexOf(price) > 7)
+					continue;
+			} 
+			//票价类型为旺季时不对淡季价格进行保存
+			else if ("2".equals(record.getPriceType())) {
+				if(record.getTccPrices().indexOf(price) < 8)
+					continue;
+			}
+			price.setFtStartdate(record.getFtStartdate());
+			price.setFtEnddate(record.getFtEnddate());
+			price.setFsRestype("mp");
+			price.setFsResno(record.getFsNo());
+			tccPriceMapper.insertSelective(price);
+		}
+	}
+
+	@Override
+	public void updateTicketPrice(Tticket record) {
+		if (CollectionUtils.isEmpty(record.getTccPrices())) return;
+		for (TCCPrice price : record.getTccPrices()) {
+			//如果价格为空则不作处理
+			if (price.getFdPrice() == null) continue;
+			//票价类型为淡季时不对旺季价格进行保存
+			if("1".equals(record.getPriceType())) {
+				if(record.getTccPrices().indexOf(price) > 7)
+					continue;
+			} 
+			//票价类型为旺季时不对淡季价格进行保存
+			else if ("2".equals(record.getPriceType())) {
+				if(record.getTccPrices().indexOf(price) < 8)
+					continue;
+			}
+			price.setFtStartdate(record.getFtStartdate());
+			price.setFtEnddate(record.getFtEnddate());
+			price.setFsRestype("mp");
+			price.setFsResno(record.getFsNo());
+			tccPriceMapper.updateByPrimaryKey(price);
+		}
+	}
+
+	@Override
+	public void deleteTicketPrice(TCCPrice price) {
+		// TODO Auto-generated method stub
+		TCCPriceExample example = new TCCPriceExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFtStartdateEqualTo(price.getFtStartdate());
+		criteria.andFtEnddateEqualTo(price.getFtEnddate());
+		criteria.andFsRestypeEqualTo("mp");
+		criteria.andFsResnoEqualTo(price.getFsResno());
+		tccPriceMapper.deleteByExample(example);
 	}
 
 }
