@@ -75,6 +75,24 @@
 											</div>
 										</div>
 									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsType">景区</label>
+											<div class="col-sm-2">
+												<select name="list" multiple  size="5"   >
+													<option   value= "1 "   > 爱情片 </option>
+													<option   value= "2 "   > 动作片 </option>
+													<option   value= "3 "   > 战争片 </option>
+													<option   value= "4 "   > 恐怖片 </option>
+													<option   value= "5 "   > 喜剧片 </option>
+													<option   value= "6 "   > 伦理片 </option>
+													<option   value= "7 "   > 电视剧 </option>
+													<option   value= "8 "   > 动画片 </option>
+													<option   value= "9 "   > 其它 </option>
+												</select>
+											</div>
+										</div>
+									</div>
 									<div id = "message" class="alert alert-warning">
 										
 									</div>
