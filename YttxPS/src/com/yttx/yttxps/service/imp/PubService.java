@@ -33,7 +33,11 @@ public class PubService<T> implements IPubService<T> {
 		int rows = (Integer) map.get("rows");
 		int page = (Integer)map.get("page");
 		if(records  > 0) {
-			total = records/rows + 1;
+			if(records%rows==0){
+				total = records/rows ;
+			}else{
+				total = records/rows + 1;
+			}
 			map.put("total", total);
 		}
 		if(page > total) {

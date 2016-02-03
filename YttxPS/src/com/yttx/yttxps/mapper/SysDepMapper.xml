@@ -101,24 +101,35 @@
   
   <!-- 动态查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="sysDepResultMap">
-      select * from (select ROWNUM as rowno, d.*  from TSYSDEP d
-      where 1=1
-      <if test="depno != null and depno != ''" >
-        and FI_DEPNo = #{depno}
-      </if>
-      <if test="depname != null and depname != ''" >
-        and FS_DEPNAME like '%'||#{depname}||'%'
-      </if>
-      <if test="stat != null and stat != ''" >
-        and FI_STAT like '%'||#{stat}||'%'
-      </if>
-      <if test="endrow != null" >
-        and ROWNUM &lt;= #{endrow}
-      </if>
-      ) tt 
-      where 1=1
+  	SELECT 
+  		* 
+  	FROM
+		(SELECT 
+			ROWNUM AS rowno,
+			dep.* 
+		 FROM(
+			SELECT  
+				d.* 
+			FROM 
+				TSYSDEP d
+	      	WHERE 1=1
+	      	<if test="depno != null and depno != ''" >
+	        	AND FI_DEPNO = #{depno}
+	      	</if>
+	      	<if test="depname != null and depname != ''" >
+	        	AND FS_DEPNAME like '%'||#{depname}||'%'
+	      	</if>
+	      	<if test="stat != null and stat != ''" >
+	        	AND FI_STAT like '%'||#{stat}||'%'
+	      	</if>
+	      	ORDER BY FI_DEPNO
+	      ) dep
+	      <if test="endrow != null" >
+	        WHERE ROWNUM &lt;= #{endrow}
+	      </if>
+	      )
       <if test="startrow != null" >
-        and tt.rowno &gt;= #{startrow}
+        WHERE rowno &gt; #{startrow}
       </if>
   </select>
 </mapper> 

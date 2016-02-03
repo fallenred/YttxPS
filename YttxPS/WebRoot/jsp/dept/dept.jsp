@@ -95,8 +95,9 @@
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="stat">状态</label>
-												<div class="col-sm-1">
-													<select id="stat">
+												<div class="col-sm-10">
+													<select id="stat" class="col-sm-6 col-xs-6">
+														<option value="">请选择状态......</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>
