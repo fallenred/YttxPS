@@ -1,6 +1,7 @@
 package com.yttx.yttxps.web.action;
 
 import java.io.File;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +10,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.yttx.comm.DateEditor;
 import com.yttx.yttxps.comm.Config;
 import com.yttx.yttxps.comm.UPFileClient;
 import com.yttx.yttxps.model.SessionEntity;
@@ -134,6 +138,19 @@ public class BaseController {
 		logger.debug("删除目标文件  {} {} ", path, ret);
 
 		return ret;
+	}
+	
+	/**
+	 * 视图数据类型转换
+	 * @param request
+	 * @param binder
+	 * @throws Exception
+	 */
+	@InitBinder
+	protected void initBinder(HttpServletRequest request,  
+            ServletRequestDataBinder binder) throws Exception {
+		//对于需要转换为Date类型的属性，使用DateEditor进行处理  
+	    binder.registerCustomEditor(Date.class, new DateEditor()); 
 	}
 
 }
