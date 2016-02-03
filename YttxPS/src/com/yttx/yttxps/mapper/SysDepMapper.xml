@@ -17,8 +17,23 @@
             	FI_DEPNO,
             	TRIM(FS_DEPNAME) AS	FS_DEPNAME,
              	FI_STAT 
-             FROM TSYSDEP
+             FROM TSYSDEP 	
         ]]>  
+    </select> 
+    
+    <!-- 找出特定状态的部门 -->
+	<select id="findDepsByStat"  parameterType="java.lang.Long" resultMap="sysDepResultMap"> 
+        <![CDATA[
+            SELECT
+            	FI_DEPNO,
+            	TRIM(FS_DEPNAME) AS	FS_DEPNAME,
+             	FI_STAT 
+             FROM TSYSDEP 
+             WHERE 1=1	
+        ]]>  
+        <if test="stat != null">
+        	AND FI_STAT = #{stat,jdbcType = INTEGER}
+        </if>
     </select> 
     
 	<select id="findByNo" parameterType="int" resultMap="sysDepResultMap">

@@ -10,19 +10,39 @@
 		<result property="right" column="FS_RIGHT" />
 	</resultMap>
 	
+	<!-- 通过id找权限 -->
 	<select id="findById" parameterType="string" resultMap="sysOperRightResultMap">
 		<![CDATA[
-		select * from TSysOperRight where trim(fs_sysoperid) = #{sysOperId}
+		SELECT
+			 TRIM(FS_SYSOPERID) AS FS_SYSOPERID,
+			 TRIM(FS_RIGHT) AS FS_RIGHT
+		FROM TSYSOPERRIGHT 
+		WHERE TRIM(FS_SYSOPERID) = #{sysOperId}
 		]]>
 	</select>
 	
-	<insert id ="insertBatch" parameterType="List" > 
+	<!-- 批量插入权限 -->
+	<insert id ="insertBatch" parameterType="List" useGeneratedKeys="false"> 
 		<![CDATA[
-	    insert into TSysOperRight(FS_SYSOPERID,fs_RIGHT)
+	    INSERT INTO TSYSOPERRIGHT(
+	    	FS_SYSOPERID,
+	    	FS_RIGHT
+	    )
 	    ]]>
-	    <foreach collection ="list" item ="item" index ="index" separator=","> 
-	     (#{item.sysOperId},#{item.right})  
-	    </foreach > 
-	</insert > 
+	    <foreach open="("  separator="union" close=")" collection="list" item="item" index="index"> 
+			SELECT
+				#{item.sysOperId,jdbcType =INTEGER},
+				#{item.right,jdbcType =	VARCHAR}
+			FROM dual
+		</foreach>
+	</insert> 
 	
+	<!-- 通过id找权限 -->
+	<delete id="deleteByOperId" parameterType="string">
+		DELETE
+		FROM 
+			TSYSOPERRIGHT 
+		WHERE 
+			TRIM(FS_SYSOPERID) = #{sysOperId}
+	</delete>
 </mapper> 

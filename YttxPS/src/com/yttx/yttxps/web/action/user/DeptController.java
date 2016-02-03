@@ -1,14 +1,11 @@
 package com.yttx.yttxps.web.action.user;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,16 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yttx.comm.StringUtil;
-import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
-import com.yttx.yttxps.model.Menu;
 import com.yttx.yttxps.model.SysDep;
-import com.yttx.yttxps.model.SysDepRight;
 import com.yttx.yttxps.model.SysOper;
 import com.yttx.yttxps.model.vo.DeptAddRequest;
 import com.yttx.yttxps.model.vo.SysDeptRequest;
-import com.yttx.yttxps.service.ISysService;
-import com.yttx.yttxps.web.action.BaseController;
 
 /**
  * 类描述：用户机构管理控制器
@@ -38,11 +30,9 @@ import com.yttx.yttxps.web.action.BaseController;
 @Controller
 @Scope("prototype")
 @RequestMapping("user/")
-public class DeptController extends BaseController{
+public class DeptController extends UserBasicController{
 	static Logger logger = LoggerFactory.getLogger(DeptController.class);
 	
-	@Autowired
-	private ISysService sysService;
 	/**
 	 * 打开用户机构管理页面
 	 * @return String 
@@ -59,7 +49,6 @@ public class DeptController extends BaseController{
 			return new ModelAndView("dept/deptinfo",model);
 		}	
 	}
-	
 	
 	/**
 	 * 分页查询用户机构信息
@@ -98,12 +87,7 @@ public class DeptController extends BaseController{
 	 */
 	@RequestMapping(value="dept/addpage.htm")
 	public String openDeptAddpage(Model model){
-		@SuppressWarnings("unchecked")
-		//获取原始的menulist
-		List<Menu> orList = (List<Menu>) request.getSession()
-                .getServletContext().getAttribute(Constants.SYSMENUTREE);
-		List<HashMap<String,Object>> menulist=new ArrayList<HashMap<String, Object>>();
-		menuTreeToList(orList,null,menulist,null);
+		List<HashMap<String,Object>> menulist = superManagerRights();
 		model.addAttribute("menulist", menulist);
 		return "dept/add";
 	}
@@ -115,17 +99,15 @@ public class DeptController extends BaseController{
 	@RequestMapping(value="dept/addsubmit.htm",method = RequestMethod.POST)
 	@ResponseBody
 	public Object addDept(DeptAddRequest req){
-		
 		if(null==req.getSysDep()||StringUtil.nullOrBlank(req.getSysDep().getDepName())){//验证部门名称是否为空
 			return JsonResult.jsonError("部门名称为空");
 		}
-		
 		try{
 			sysService.addSysDep(req);
+			return JsonResult.jsonOk();
 		}catch(Exception e){
 			return JsonResult.jsonError(e.getMessage());
 		}
-		return JsonResult.jsonOk();
 	}
 	
 	/**
@@ -135,16 +117,11 @@ public class DeptController extends BaseController{
 	public String openDeptEditpage(@RequestParam(value="depNo") long depNo,Model model){
 		SysDep dep = sysService.findDepByNo(depNo);
 		model.addAttribute("depInfo", dep);
-		@SuppressWarnings("unchecked")
-		//获取原始的menulist
-		List<Menu> orList = (List<Menu>) request.getSession()
-                .getServletContext().getAttribute(Constants.SYSMENUTREE);
 		
-		List<SysDepRight> rights=sysService.findDepRight(depNo);
-		List<String> rightIdList = getRightIdList(rights);
+		List<HashMap<String, Object>> menulist = superManagerRights();//所有的权限
+		List<String> depRightIdList = depRightIdList(depNo);//部门权限id组成的list
+		rightListChecked(menulist,depRightIdList);
 		
-		List<HashMap<String,Object>> menulist=new ArrayList<HashMap<String, Object>>();
-		menuTreeToList(orList,rightIdList,menulist,null);
 		model.addAttribute("menulist", menulist);
 		return "dept/edit";
 	}
@@ -155,24 +132,19 @@ public class DeptController extends BaseController{
 	@RequestMapping(value="dept/editsubmit.htm",method=RequestMethod.POST)
 	@ResponseBody
 	public Object updateDept(DeptAddRequest req){
-		logger.debug(req.getSysDep().getDepNo().toString());
-		logger.debug(req.getRights().toString());
-		
 		SysDep dep =req.getSysDep();
 		if(null == dep || null == dep.getDepNo()){//验证部门名称是否为空
 			return JsonResult.jsonError("部门编号为空");
 		}
-
 		if(null == dep.getDepName()){//验证部门名称是否为空
 			return JsonResult.jsonError("部门名称为空");
 		}
-		
 		try{
 			sysService.updateSysDep(req);
+			return JsonResult.jsonOk();
 		}catch(Exception e){
 			return JsonResult.jsonError(e.getMessage());
 		}
-		return JsonResult.jsonOk();
 	}
 	
 	/**
@@ -184,85 +156,24 @@ public class DeptController extends BaseController{
 		if(depNo == null){
 			JsonResult.jsonError("缺少部门编号");
 		}
-		
 		try{
 			sysService.cancelDeptByDepNo(depNo);
+			return JsonResult.jsonOk();
 		}catch(Exception e){
 			return JsonResult.jsonError(e.getMessage());
 		}
-		return JsonResult.jsonOk();
-	}
-	
-	/**
-	 * 将树形的菜单转化成一个扁平化的菜单,
-	 */
-	private List<HashMap<String, Object>> menuTreeToList(List<Menu> allMenu,List<String> rights,List<HashMap<String, Object>> targetList,String pId){
-		//如果targetList为空，就创建一个list
-		if(targetList==null){
-			targetList=new ArrayList<HashMap<String, Object>>();
-		}
 		
-		if(allMenu!=null){
-			for(Menu menu : allMenu){
-				HashMap<String,Object> map=new HashMap<String ,Object>();
-				map.put("id",menu.getId());
-				map.put("name", menu.getName());
-				map.put("pId", pId);
-				
-				if(null!=rights&&rights.contains(menu.getId())){
-					map.put("checked", true);
-				}
-				targetList.add(map);
-				
-				if(menu.isHasChild()&&null!=menu.getSubMenu()){
-					menuTreeToList(menu.getSubMenu(),rights,targetList,menu.getId());
-				}
-			}
-		}
-		return targetList;
-	}		
-	
-	/**
-	 * 获取rights中的right的id，并组成一个list
-	 */
-	private List<String> getRightIdList(List<SysDepRight> rights){
-		List<String> rightIdList = null;
-		if(rights!=null&&rights.size()>0){
-			rightIdList = new ArrayList<String>();
-			for(SysDepRight depRight:rights){
-				rightIdList.add(""+depRight.getRight());
-			}
-		}
-		return rightIdList;
 	}
 	
+	//将部门信息封装成一个map，包括部门信息和部门权限
 	private Map<String,Object> fullDepInfo(Long depNo){
 		Map<String, Object> model = new HashMap<String ,Object>();
-		
 		//添加部门信息
 		SysDep sysDep = sysService.findDepByNo(depNo);
 		model.put("depInfo", sysDep);
 		
-		@SuppressWarnings("unchecked")
-		List<Menu> orList = (List<Menu>) request.getSession()
-                .getServletContext().getAttribute(Constants.SYSMENUTREE);
-		
-		//获取部门权限
-		List<SysDepRight> rights=sysService.findDepRight(depNo);
-		List<String> rightIdList  = getRightIdList(rights);
-		
-		
-		List<HashMap<String,Object>> menulist=new ArrayList<HashMap<String, Object>>();
-		menuTreeToList(orList,rightIdList,menulist,null);
-		
-		Iterator<HashMap<String, Object>> iterator =menulist.iterator();
-		while (iterator.hasNext()){
-			HashMap<String, Object> next = iterator.next();
-			if(next.get("checked")==null){
-				iterator.remove();
-			}
-		}
-		
+		//部门权限
+		List<HashMap<String, Object>> menulist = depManagerRights(depNo);
 		model.put("menulist", menulist);
 		return model;
 	}

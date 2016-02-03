@@ -34,6 +34,6 @@
 	</insert>
 	
 	<delete id="deleteRightsByDepNo" parameterType="java.lang.Long">
-		delete from TSYSDEPRIGHT where FI_DEPNO=#{depNo}
+		DELETE FROM  TSYSDEPRIGHT WHERE FI_DEPNO=#{depNo}
 	</delete>
 </mapper> 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -9,6 +10,9 @@
 <meta name="description" content="" />
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
+<link rel="stylesheet" type="text/css" href="/css/zTreeStyle/zTreeStyle.css">
+<script type="text/javascript" src="/js/jquery.ztree.core-3.0.js"></script>
+<script type="text/javascript" src="/js/jquery.ztree.excheck-3.0.js"></script>
 </head>
 <body class="no-skin">
 	<jsp:include page="/jsp/comm/topbar.jsp" flush="true" />
@@ -57,82 +61,47 @@
 				</div>
 
 				<div class="page-content">
+					<h4>部门信息</h4>
 					<div class="row">
-						<div class="col-xs-12">
-							<!-- PAGE CONTENT BEGINS -->
-							<!-- 查询条件 -->
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a class="accordion-toggle" href="#collapseOne"
-											data-toggle="collapse" data-parent="#accordion"> <i
-											class="bigger-110 ace-icon fa fa-angle-down"
-											data-icon-show="ace-icon fa fa-angle-right"
-											data-icon-hide="ace-icon fa fa-angle-down"></i> &nbsp;查询条件
-										</a>
-									</h4>
-								</div>
-
-								<div class="panel-collapse collapse in" id="collapseOne">
-									<div class="panel-body">
-										<form class="form-horizontal" role="form" id="queryfield">
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="depno">部门编号</label>
-												<div class="col-sm-10">
-													<input class="col-sm-6 col-xs-6" maxlength="10"
-														type="text" id="depno" placeholder="部门编号" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="depname">部门名称</label>
-												<div class="col-sm-10">
-													<input class="col-sm-6 col-xs-6" maxlength="128" type="text" id="depname"
-														placeholder="部门名称" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="stat">状态</label>
-												<div class="col-sm-1">
-													<select id="stat">
-														<option value="1">正常</option>
-														<option value="2">失效</option>
-													</select>
-												</div>
-											</div>
-
-											<div class="clearfix form-actions">
-												<div class="col-md-offset-3 col-md-9">
-													<button class="btn btn-info" type="button" id="submit">
-														<i class="ace-icon fa fa-check bigger-110"></i> 提交
-													</button>
-
-													&nbsp; &nbsp; &nbsp;
-													<button class="btn" type="reset" id="reset">
-														<i class="ace-icon fa fa-undo bigger-110"></i> 重置
-													</button>
-												</div>
-											</div>
-										</form>
-									</div>
-
-								</div>
+						<div class="form-group">
+							<label class="col-sm-1 control-label no-padding-right" for="depNo">部门编号</label>
+							<div class="col-sm-2">
+								<input type="text" id="depNo" class="form-control"
+									placeholder="部门编号" readonly="readonly" value="${depInfo.depNo}"/>
 							</div>
-							<table id="grid-table"></table>
-							<div id="grid-pager"></div>
-							<!-- PAGE CONTENT ENDS -->
+							
+							<label class="col-sm-1 control-label no-padding-right" for="depName">部门名称</label>
+							<div class="col-sm-2">
+								<input type="text" id="depName" class="form-control"
+									placeholder="部门名称" readonly="readonly" value="${depInfo.depName}"/>
+							</div>
+							<label class="col-sm-2 control-label no-padding-right" for="stat">部门状态</label>
+							<div class="col-sm-1">
+								<select id="stat" disabled="disabled">
+									<option value="1" <c:if test="${depInfo.stat==1}">selected</c:if>>正常</option>
+									<option value="2" <c:if test="${depInfo.stat==2}">selected</c:if>>失效</option>
+								</select>
+							</div>
 						</div>
-						<!-- /.col -->
 					</div>
-					<!-- /.row -->
+					<h4>部门权限</h4>
+					<div class="row">
+						<div id="info_tree_div" class="ztree"></div>
+					</div>
 				</div>
-				<!-- /.page-content -->
+				<!-- /.row -->
 			</div>
-			<!-- /.main-content -->
+			<!-- /.page-content -->
 		</div>
 	</div>
-	<!-- /.main-container -->
+	<script type="text/javascript">
+		var menuList =[
+     	    <c:forEach items="${menulist}" var="data" varStatus="status">
+     	            {id:'${data.id}', pId:'${data.pId}', name:'${data.name}'},
+     	    </c:forEach>
+		    {}
+		 ];
+	</script>
+	<script src="/js/bus/sys/sysdept.info.js"></script>
 </body>
 </html>

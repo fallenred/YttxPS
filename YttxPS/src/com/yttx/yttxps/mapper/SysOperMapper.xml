@@ -4,45 +4,168 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yttx.yttxps.mapper.SysOperMapper">
-
 	<resultMap type="SysOper" id="sysOperResultMap">
 		<result property="sysOperId" column="FS_SYSOPERID"/>
 		<result property="sysOperName" column="FS_SYSOPERNAME" />
 		<result property="adminType" column="FI_ADMINTYPE" />
 		<result property="depNo" column="FI_DEPNO" />
+		<result property="depName" column="FI_DEPNAME" />
 		<result property="sysOperPwd" column="FS_SYSOPERPWD" />
 		<result property="pwdStat" column="FI_PWDSTAT" />
 		<result property="stat" column="FI_STAT" />
 	</resultMap>
 	
-	<sql id="opercolums">
-		TRIM(FS_SYSOPERID) AS FS_SYSOPERID,
-		TRIM(FS_SYSOPERNAME) AS FS_SYSOPERNAME,
-		FI_ADMINTYPE,
-		FI_DEPNO,
-		FS_SYSOPERPWD,
-		FI_PWDSTAT,
-		FI_STAT
-	</sql>
 	
 	<select id="findById" parameterType="string" resultMap="sysOperResultMap">
 		SELECT 
-		<include refid="opercolums"/>
-		FROM TSysOper WHERE TRIM(FS_SYSOPERID) = #{sysOperId}
+      		TRIM(o.FS_SYSOPERID) AS FS_SYSOPERID,
+       		TRIM(o.FS_SYSOPERNAME) AS FS_SYSOPERNAME,
+       		o.FI_DEPNO as FI_DEPNO,
+       		TRIM(d.FS_DEPNAME) as FI_DEPNAME,
+       		o.FI_ADMINTYPE ,
+       		o.FS_SYSOPERPWD,
+       		o.FI_PWDSTAT,
+       		o.FI_STAT
+      	FROM 
+      		TSYSOPER o,TSYSDEP d
+      	WHERE 
+      		TRIM(FS_SYSOPERID) = #{sysOperId} 
+      		AND 
+      		o.FI_DEPNO = d.FI_DEPNO(+)
 	</select>
 	
+	
 	<insert id="insert" parameterType="SysOper">
-    	insert into TSysOper (FS_SYSOPERID, FS_SYSOPERNAME, FI_ADMINTYPE, FI_DEPNO, FS_SYSOPERPWD, FI_PWDSTAT, FI_STAT)
-    	values (#{sysOperId}, #{sysOperName},  #{adminType}, #{depNo}, #{sysOperPwd}, #{pwdStat}, #{stat})
+    	INSERT INTO TSysOper(
+    		FS_SYSOPERID,
+			FS_SYSOPERNAME,
+			FI_ADMINTYPE, 
+			FI_DEPNO, 
+			FS_SYSOPERPWD, 
+			FI_PWDSTAT, 
+			FI_STAT)
+    	VALUES (
+    		#{sysOperId,jdbcType = VARCHAR}, 
+    		#{sysOperName,jdbcType = VARCHAR},  
+    		#{adminType,jdbcType = INTEGER}, 
+    		#{depNo,jdbcType = INTEGER}, 
+    		#{sysOperPwd,jdbcType = VARCHAR}, 
+    		#{pwdStat,jdbcType = INTEGER}, 
+    		#{stat,jdbcType = INTEGER}
+    	)
 	</insert>
+	
 	
 	<update id="update" parameterType="SysOper" flushCache="true">
     	UPDATE TSYSOPER SET FS_SYSOPERNAME = #{sysOperName}, FI_ADMINTYPE = #{adminType},  FI_DEPNO = #{depNo}, FS_SYSOPERPWD = #{sysOperPwd}, FI_PWDSTAT = #{pwdStat}, FI_STAT = #{stat} 
     	WHERE FS_SYSOPERID = #{sysOperId}
 	</update>
 	
-	<update id="updateOperStatByDepNo" parameterType="SysOper">
-    	UPDATE TSYSOPER SET FI_STAT = #{stat} 
-    	WHERE FI_DEPNO = #{depNo}
+	
+	<update id="updateOperByOperId"  parameterType="map" flushCache="true">
+    	UPDATE 
+    		TSYSOPER 
+    	<set>
+    		<if test="operId !=null and operId !=''">
+	    		FS_SYSOPERID = #{operId,jdbcType=VARCHAR},
+    		</if>
+    		<if test="operName != null and operName!=''">
+    			FS_SYSOPERNAME = #{operName,jdbcType=VARCHAR}, 
+    		</if>
+    		<if test="depNo != null">
+    			FI_DEPNO = #{depNo,jdbcType=INTEGER}, 
+    		</if>
+    		<if test="adminType != null">
+    			FI_ADMINTYPE = #{adminType,jdbcType=INTEGER},  
+    		</if>
+    		<if test="pwd != null and pwd !=''">
+    			FI_ADMINTYPE = #{pwd,jdbcType=VARCHAR},  
+    		</if>
+    		<if test="pwdStat != null">
+    			FI_PWDSTAT = #{pwdStat,jdbcType=INTEGER}, 
+    		</if>
+    		<if test="stat != null">
+    			FI_STAT = #{stat,jdbcType=INTEGER}, 
+    		</if>
+    	</set>
+    	WHERE 
+    		TRIM(FS_SYSOPERID) = #{oldOperId,jdbcType=VARCHAR}
 	</update>
+	
+	
+	<update id="updateOperStatByDepNo" parameterType="SysOper">
+    	UPDATE 
+    		TSYSOPER 
+    	SET 
+    		FI_STAT = #{stat} 
+    	WHERE 
+    		FI_DEPNO = #{depNo}
+	</update>
+	
+	
+	<!-- 动态查询总数 -->
+	<select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
+		SELECT 
+   			COUNT(*)
+   		FROM 
+   			TSYSOPER o,TSYSDEP d
+   		WHERE 
+			o.FI_DEPNO =d.FI_DEPNO(+)
+ 		<if test="sysOperId != null and sysOperId != ''" >
+        	AND o.FS_SYSOPERID like '%'||#{sysOperId}||'%'
+   		</if>
+   		<if test="sysOperName != null and sysOperName != ''" >
+     		AND o.FS_SYSOPERNAME like '%'||#{sysOperName}||'%'
+   		</if>
+   		<if test="depNo != null" >
+     		AND o.FI_DEPNO = #{depNo}
+   		</if>
+   		<if test="stat != null" >
+     		AND o.FI_STAT = #{stat}
+   		</if>
+  	</select>
+  
+  
+  	<!-- 动态查询 -->
+  	<select id="selectSelectivePage" parameterType="java.util.Map" resultMap="sysOperResultMap">
+		SELECT * FROM (
+      		SELECT 
+      			ROWNUM  as  rowno,
+      		 	TRIM(o.FS_SYSOPERID) AS FS_SYSOPERID,
+       			TRIM(o.FS_SYSOPERNAME) AS FS_SYSOPERNAME,
+       			o.FI_DEPNO as FI_DEPNO,
+       			TRIM(d.FS_DEPNAME) as FI_DEPNAME,
+       			o.FI_STAT,
+       			o.FI_ADMINTYPE 
+      		FROM 
+      			TSYSOPER o,TSYSDEP d
+      		WHERE  o.FI_DEPNO =d.FI_DEPNO(+)
+ 	  		<if test="sysOperId != null and sysOperId != ''" >
+        		AND o.FS_SYSOPERID like '%'||#{sysOperId}||'%'
+      		</if>
+      		<if test="sysOperName != null and sysOperName != ''" >
+        		AND o.FS_SYSOPERNAME like '%'||#{sysOperName}||'%'
+      		</if>
+      		<if test="depNo != null" >
+        		AND o.FI_DEPNO = #{depNo}
+      		</if>
+      		<if test="stat != null" >
+        		AND o.FI_STAT = #{stat}
+      		</if>
+      		ORDER BY FI_DEPNO
+     	 ) os 
+      	WHERE 1=1
+      	<if test="startrow != null" >
+        	AND os.rowno &gt;= #{startrow}
+      	</if>
+      	<if test="endrow != null" >
+        	AND os.rowno &lt;= #{endrow}
+      	</if>
+  	</select>
+  	
+  	<delete id="deleteOperByOperId" parameterType="string">
+  		DELETE FROM
+  			TSYSOPER
+  		WHERE TRIM(FS_SYSOPERID)=#{sysOperId}
+  	</delete>
 </mapper> 
