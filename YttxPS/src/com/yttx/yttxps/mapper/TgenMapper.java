@@ -1,10 +1,12 @@
 package com.yttx.yttxps.mapper;
 
-import com.yttx.yttxps.model.Tgen;
 import java.math.BigDecimal;
-import com.yttx.yttxps.model.TgenExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
+import com.yttx.yttxps.model.Tgen;
+import com.yttx.yttxps.model.TgenExample;
 
 public interface TgenMapper<T> extends IBaseMapper<T>  {
 
@@ -81,4 +83,5 @@ public interface TgenMapper<T> extends IBaseMapper<T>  {
 	 * @return
 	 */
     int selectFiIndex();
+    
 }

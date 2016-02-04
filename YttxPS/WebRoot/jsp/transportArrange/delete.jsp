@@ -65,7 +65,7 @@
 
 	</div>
 	<!-- /.main-container -->
-	<script src="/js/bus/ticket/delete.js"></script>
+	<script src="/js/bus/transportArrange/delete.js"></script>
 
 	<c:if test="${!empty succflag && succflag =='1'}">
 

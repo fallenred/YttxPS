@@ -16,6 +16,21 @@ jQuery(function($) {
 		if (index == 3)
 			$("#selectCity", "#addform").hide();
 	}
+	
+	//获取景点列表
+	$.ajax({
+        type: "POST",
+        url: "/scenic/findAllScenic.htm",
+        data: '',
+        dataType: "json",
+        success: function(data){
+        		var html = ''; 
+        		$.each(data, function(commentIndex, comment){
+        			html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
+        		});
+        		$("#fsScenicno").html(html);
+        }
+    });
 
 	$("#regionname", "#addform").click(function() {
 		$("#selectCity", "#addform").show();

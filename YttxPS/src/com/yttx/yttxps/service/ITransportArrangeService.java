@@ -20,13 +20,15 @@ public interface ITransportArrangeService {
 	List<TtransportArrange> selectSelectivePage(Map<String, Object> map);
 	
 	@Transactional
-	int insert(TtransportArrange transportArrange);
+	void insert(TtransportArrange transportArrange);
 	
 	@Transactional
-	int update(TtransportArrange transportArrange);
+	void update(TtransportArrange record);
 	
 	@Transactional
-	int delete(TtransportArrangeKey key);
+	int deleteByNo(String no);
 	
-	List<TtransportArrange> selectTtransportArrange(TtransportArrangeExample example);
+	List<TtransportArrangeKey> selectTtransportArrange(TtransportArrangeExample example);
+	
+	public int selectFsNo();
 }

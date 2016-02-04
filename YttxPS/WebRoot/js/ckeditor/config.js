@@ -23,7 +23,7 @@ CKEDITOR.editorConfig = function( config ) {
 	];
 
 	config.removeButtons = 'Language';
-	config.uiColor = '#33cccc';
+	config.uiColor = '#E6E6FA';
 	config.height = 300;
 	config.toolbarCanCollapse = true;
 	
