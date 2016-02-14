@@ -3,6 +3,8 @@ package com.yttx.yttxps.model.vo;
 import java.util.Map;
 
 import com.yttx.yttxps.model.Tguide;
+import com.yttx.yttxps.model.TguideExample;
+import com.yttx.yttxps.model.TguideExample.Criteria;
 
 public class GuideRequest extends JqGridRequest implements
 		java.io.Serializable {
@@ -39,6 +41,14 @@ public class GuideRequest extends JqGridRequest implements
 			map.put("weeksale",guide.getWeeksale() == null ? "" : guide.getWeeksale());
 			map.put("monthsale",guide.getMonthsale() == null ? "" : guide.getMonthsale());
 			map.put("stat",guide.getStat() == null ? "" : guide.getStat());
+		}
+	}
+	
+	public void copyTguide(TguideExample example) {
+		if (guide != null) {
+			Criteria criteria = example.createCriteria();
+			if (guide.getLvl() != null)
+				criteria.andFsLvlEqualTo(guide.getLvl());
 		}
 	}
 }

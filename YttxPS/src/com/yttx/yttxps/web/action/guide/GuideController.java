@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Tguide;
+import com.yttx.yttxps.model.TguideExample;
 import com.yttx.yttxps.model.vo.GuideRequest;
 import com.yttx.yttxps.service.IGuideService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -33,7 +34,7 @@ public class GuideController extends BaseController {
 	private IGuideService guideService;
 
 	/**
-	 * 分页查询景区信息
+	 * 分页查询导游信息
 	 * @param req
 	 * @return
 	 */
@@ -49,9 +50,24 @@ public class GuideController extends BaseController {
 		map.put("rows", list);
 		return map;
 	}
+	
+	/**
+	 * 获取导游列表
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="selectGuide.htm", method = RequestMethod.GET)
+	@ResponseBody
+	public Object ajaxSelectGuide(GuideRequest req)
+    {  
+		TguideExample example = new TguideExample();
+		req.copyTguide(example);
+		List<Tguide> list = guideService.selectTguide(example);
+		return list;
+    }
 
 	/**
-	 * 新增景区信息
+	 * 新增导游信息
 	 * @param Guide
 	 * @return
 	 */
@@ -74,7 +90,7 @@ public class GuideController extends BaseController {
 	}
 
 	/**
-	 * 更新景区信息
+	 * 更新导游信息
 	 * @param Guide
 	 * @return
 	 */
@@ -93,7 +109,7 @@ public class GuideController extends BaseController {
 	}
 
 	/**
-	 * 删除景区信息
+	 * 删除导游信息
 	 * @param Guide
 	 * @return
 	 */

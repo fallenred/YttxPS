@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.yttx.yttxps.mapper.TguideMapper;
 import com.yttx.yttxps.model.Tguide;
+import com.yttx.yttxps.model.TguideExample;
 import com.yttx.yttxps.service.IGuideService;
 import com.yttx.yttxps.service.IPubService;
-import com.yttx.yttxps.service.IShopService;
 
 
 @Service("guideService")
@@ -30,6 +30,11 @@ public class GuideService implements IGuideService {
 	@Override
 	public List<Tguide> selectSelectivePage(Map<String, Object> map) {
 		return pubService.doPage(map, guideMapper);
+	}
+	
+	@Override
+	public List<Tguide> selectTguide(TguideExample example) {
+		return guideMapper.selectByExample(example);
 	}
 
 	@Override
