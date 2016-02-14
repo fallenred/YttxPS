@@ -5,13 +5,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.yttx.yttxps.mapper.ScenicMapper;
 import com.yttx.yttxps.mapper.TshopMapper;
-import com.yttx.yttxps.model.Scenic;
 import com.yttx.yttxps.model.Tshop;
+import com.yttx.yttxps.model.TshopExample;
 import com.yttx.yttxps.service.IPubService;
-import com.yttx.yttxps.service.IScenicService;
 import com.yttx.yttxps.service.IShopService;
 
 
@@ -29,6 +28,11 @@ public class ShopService implements IShopService {
 		return shopMapper.selectCountSelective(map);
 	}
 
+	@Transactional(readOnly = true) 
+	public List<Tshop> selectTshop(TshopExample example){
+		return shopMapper.selectByExample(example);
+	}
+	
 	@Override
 	public List<Tshop> selectSelectivePage(Map<String, Object> map) {
 		return pubService.doPage(map, shopMapper);

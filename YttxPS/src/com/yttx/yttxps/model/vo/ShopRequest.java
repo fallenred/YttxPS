@@ -2,7 +2,9 @@ package com.yttx.yttxps.model.vo;
 
 import java.util.Map;
 
+import com.yttx.yttxps.model.TshopExample;
 import com.yttx.yttxps.model.Tshop;
+import com.yttx.yttxps.model.TshopExample.Criteria;
 
 public class ShopRequest extends JqGridRequest implements
 		java.io.Serializable {
@@ -37,6 +39,13 @@ public class ShopRequest extends JqGridRequest implements
 			map.put("staytime",shop.getStaytime() == null ? "" : shop.getStaytime());
 			map.put("policy",shop.getPolicy() == null ? "" : shop.getPolicy());
 			map.put("stat",shop.getStat() == null ? "" : shop.getStat());
+		}
+	}
+	public void copyTshop(TshopExample example) {
+		if (shop != null) {
+			Criteria criteria = example.createCriteria();
+			//if (shop.getLvl() != null)
+			//	criteria.andFsLvlEqualTo(shop.getLvl());
 		}
 	}
 }
