@@ -2,43 +2,52 @@ package com.yttx.yttxps.model;
 
 public class SysDep {
 	
-	private long depNo;
+	private Long depNo;
 	
 	private String depName;
 	
-	private long stat;
+	private Long stat;
 
-	public long getDepNo() {
+	
+
+	public Long getDepNo() {
 		return depNo;
 	}
 
-	public void setDepNo(long depNo) {
+
+
+	public void setDepNo(Long depNo) {
 		this.depNo = depNo;
 	}
+
+
 
 	public String getDepName() {
 		return depName;
 	}
 
+
+
 	public void setDepName(String depName) {
 		this.depName = depName;
 	}
 
-	public long getStat() {
+
+
+	public Long getStat() {
 		return stat;
 	}
 
-	public void setStat(long stat) {
+
+
+	public void setStat(Long stat) {
 		this.stat = stat;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "SysDep [depNo=" + depNo + ", depName=" + depName + ", stat="
-				+ stat + "]";
+		return "SysDep [depNo=" + depNo + ", depName=" + depName + ", stat=" + stat + "]";
 	}
-	
-	
-	
-
 }

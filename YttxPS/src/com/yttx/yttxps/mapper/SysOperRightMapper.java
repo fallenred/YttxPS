@@ -10,8 +10,9 @@ public interface SysOperRightMapper {
 	public List<SysOperRight> findById(String  sysOperId);
 	
 	
-	public void insertbatch(List<SysOperRight> sysOperRights);
+	public void insertBatch(List<SysOperRight> sysOperRights);
 	
 	
-
+	public boolean deleteByOperId(String sysOperId);
+	
 }
