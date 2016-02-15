@@ -1,5 +1,8 @@
 package com.yttx.yttxps.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import com.yttx.yttxps.model.Accomadation;
 
 public interface AccomadationMapper<T>  extends IBaseMapper<T> {
@@ -58,4 +61,13 @@ public interface AccomadationMapper<T>  extends IBaseMapper<T> {
      * @mbggenerated
      */
     int updateByPrimaryKey(Accomadation record);
+    
+    /**
+	 * 查询宾馆列表（线路配置时使用）
+	 * add by huangtao
+	 * 2016-02-14
+     * @param map
+     * @return
+     */
+    List<T> selectSelective(Map map);
 }

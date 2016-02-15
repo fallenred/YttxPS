@@ -23,6 +23,16 @@ public interface IAccomadationService {
 	@Transactional(readOnly = true)
 	List<Accomadation> selectSelectivePage(Map<String, Object> map);
 	
+	/**
+	 * 查询宾馆列表（线路配置时使用）
+	 * add by huangtao
+	 * 2016-02-14
+	 * @param map
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	List<Accomadation> selectSelective(Map<String, Object> map);
+	
 	@Transactional(readOnly = true)
 	Accomadation selectAccomadationInfo(String no);
 	
@@ -34,4 +44,5 @@ public interface IAccomadationService {
 	
 	@Transactional
 	int delete(String no);
+	
 }

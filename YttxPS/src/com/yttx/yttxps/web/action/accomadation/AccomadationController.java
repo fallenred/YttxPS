@@ -76,6 +76,24 @@ static Logger logger = LoggerFactory.getLogger(AccomadationController.class);
     }
 	
 	/**
+	 * 查询宾馆列表（线路配置时使用）
+	 * add by huangtao
+	 * 2016-02-14
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="selectAccomadation.htm", method = RequestMethod.GET)
+	@ResponseBody
+	public Object ajaxselectAccomadation(AccomadationRequest req)
+    {
+		logger.debug("当前查询条件 {}", req.getAccomadation());
+		Map<String, Object> map = new HashMap<String, Object>();
+		req.copyAccomadation(map);
+		List<Accomadation> list = accomadationService.selectSelective(map);
+		return list;
+    }
+	
+	/**
 	 * 查询宾馆详情
 	 * @param index
 	 * @return

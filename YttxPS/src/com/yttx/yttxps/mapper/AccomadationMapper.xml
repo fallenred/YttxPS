@@ -240,4 +240,35 @@
       </if>
   </select>
   
+  <!-- 查询宾馆列表（线路配置时使用） -->
+  <select id="selectSelective" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from (select a.* from (select m.fs_accomno from tresourcescenic r, troom m where r.fs_resno = m.fs_roomno group by m.fs_accomno) t, taccomadation a where t.fs_accomno = a.fs_no) 
+    where 1=1 
+    <if test="regionno != null and regionno !='' " >
+       and FS_REGIONNO = #{regionno,jdbcType=VARCHAR}
+      </if>
+      <if test="starlvl != null" >
+       and FS_STARLVL = #{starlvl,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null and name != '' " >
+       and FS_NAME like like #{name,jdbcType=VARCHAR}||'%'
+      </if>
+      <if test="addr != null and addr != '' " >
+       and FS_ADDR = #{addr,jdbcType=VARCHAR}
+      </if>
+      <if test="speciality != null and speciality != '' " >
+       and FS_SPECIALITY = #{speciality,jdbcType=VARCHAR}
+      </if>
+      <if test="stat != null" >
+       and FI_STAT = #{stat,jdbcType=DECIMAL}
+      </if>
+  </select>
+  
 </mapper>

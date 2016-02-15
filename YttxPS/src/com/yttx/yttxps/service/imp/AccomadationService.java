@@ -35,6 +35,11 @@ public class AccomadationService implements IAccomadationService {
 	public List<Accomadation> selectSelectivePage(Map<String, Object> map) {
 		return pubService.doPage(map, accomadationMapper);
 	}
+	
+	@Override
+	public List<Accomadation> selectSelective(Map<String, Object> map) {
+		return accomadationMapper.selectSelective(map);
+	}
 
 	@Override
 	public int insert(Accomadation record) {
