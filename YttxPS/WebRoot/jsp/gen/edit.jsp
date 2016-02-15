@@ -50,26 +50,22 @@
 
 									<div class="row">
 										<div class="form-group">
-											<!-- <label class="col-sm-2 control-label no-padding-right" for="fsNo">门票代码</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fsNo" name="fsNo" placeholder="门票代码需唯一" />
-											</div> -->
 											<input type="hidden" id="fiIndex" name="fiIndex"/>
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">路线名称</label>
-											<div class="col-sm-2">
-												<input type="text" id="fsName" name="fsName" placeholder="路线名称"  maxlength="10"/>
+											<div class="col-sm-3">
+												<input class="form-control" type="text" id="fsName" name="fsName" placeholder="路线名称"  maxlength="10"/>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiDays">路线天数</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fiDays" name="fiDays" placeholder="路线天数" />
+											<div class="col-sm-3">
+												<input class="form-control" maxlength="10" type="text" id="fiDays" name="fiDays" placeholder="路线天数" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsType">状态</label>
-											<div class="col-sm-2">
-												<select id="fiStat" name="fiStat">
+											<div class="col-sm-3">
+												<select id="fiStat" name="fiStat" class="form-control">
 													<option value="1">正常</option>
 													<option value="-100">已销</option>
 												</select>

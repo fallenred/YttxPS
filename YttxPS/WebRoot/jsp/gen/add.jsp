@@ -50,25 +50,21 @@
 
 									<div class="row">
 										<div class="form-group">
-											<!-- <label class="col-sm-2 control-label no-padding-right" for="fsNo">门票代码</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fsNo" name="fsNo" placeholder="门票代码需唯一" />
-											</div> -->
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">路线名称</label>
-											<div class="col-sm-2">
-												<input type="text" id="fsName" name="fsName" placeholder="路线名称"  maxlength="10"/>
+											<div class="col-sm-3">
+												<input class="form-control" type="text" id="fsName" name="fsName" placeholder="路线名称"  maxlength="10"/>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiDays">路线天数</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fiDays" name="fiDays" placeholder="路线天数" />
+											<div class="col-sm-3">
+												<input class="form-control" maxlength="10" type="text" id="fiDays" name="fiDays" placeholder="路线天数" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsType">状态</label>
-											<div class="col-sm-2">
-												<select id="fiStat" name="fiStat">
+											<div class="col-sm-3">
+												<select id="fiStat" name="fiStat" class="form-control">
 													<option value="1">正常</option>
 													<option value="-100">已销</option>
 												</select>
@@ -78,17 +74,8 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsType">景区</label>
-											<div class="col-sm-2">
-												<select name="list" multiple  size="5"   >
-													<option   value= "1 "   > 爱情片 </option>
-													<option   value= "2 "   > 动作片 </option>
-													<option   value= "3 "   > 战争片 </option>
-													<option   value= "4 "   > 恐怖片 </option>
-													<option   value= "5 "   > 喜剧片 </option>
-													<option   value= "6 "   > 伦理片 </option>
-													<option   value= "7 "   > 电视剧 </option>
-													<option   value= "8 "   > 动画片 </option>
-													<option   value= "9 "   > 其它 </option>
+											<div class="col-sm-3">
+												<select name="list" multiple  size="5" class="form-control" >
 												</select>
 											</div>
 										</div>
