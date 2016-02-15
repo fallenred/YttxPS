@@ -1,7 +1,10 @@
 package com.yttx.yttxps.mapper;
 
-import com.yttx.yttxps.model.Room;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+
+import com.yttx.yttxps.model.Room;
 
 public interface RoomMapper<T> extends IBaseMapper<T> {
     /**
@@ -53,4 +56,13 @@ public interface RoomMapper<T> extends IBaseMapper<T> {
     int updateByPrimaryKey(Room record);
     
     BigDecimal selectSequence();
+    
+    /**
+     * 查询酒店房型（线路配置时使用）
+     * add by huangtao
+     * 2016-02-14
+     * @param map
+     * @return
+     */
+    List<Room> selectSelective(Map map);
 }

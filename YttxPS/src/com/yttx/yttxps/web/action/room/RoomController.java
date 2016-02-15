@@ -74,6 +74,23 @@ public class RoomController extends BaseController {
 		map.put("rows", list);
 		return map;
 	}
+	
+	/**
+     * 查询酒店房型（线路配置时使用）
+     * add by huangtao
+     * 2016-02-14
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value = "selectRoom.htm", method = RequestMethod.GET)
+	@ResponseBody
+	public Object ajaxselectRoom(RoomRequest req) {
+		logger.debug("当前查询条件 {}", req.getRoom());
+		Map<String, Object> map = new HashMap<String, Object>();
+		req.copyRoom(map);
+		List<Room> list = rootService.selectSelective(map);
+		return list;
+	}
 
 	/**
 	 * 查询房型详情
@@ -103,9 +120,9 @@ public class RoomController extends BaseController {
 		try {
 			//注意:此处的唯一不准确，使用 oracle sequence 作为唯一
 			if(logger.isDebugEnabled())
-				root.setIndex(new BigDecimal(System.currentTimeMillis()));
+				root.setRoomno(System.currentTimeMillis()+"");
 			else
-				root.setIndex(rootService.selectSequence());
+				root.setRoomno(rootService.selectSequence().toString());
 			if(root.getMeal()!=null)
 				root.setMeal(root.getMeal().replaceAll(",", ""));
 			rootService.insert(root);

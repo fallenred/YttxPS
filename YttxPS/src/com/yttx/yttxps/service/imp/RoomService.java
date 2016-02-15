@@ -36,6 +36,11 @@ public class RoomService implements IRoomService {
 	public List<Room> selectSelectivePage(Map<String, Object> map) {
 		return pubService.doPage(map, roomMapper);
 	}
+	
+	@Override
+	public List<Room> selectSelective(Map<String, Object> map) {
+		return roomMapper.selectSelective(map);
+	}
 
 	@Override
 	public int insert(Room record) {

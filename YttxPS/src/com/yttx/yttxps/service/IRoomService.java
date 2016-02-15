@@ -38,5 +38,14 @@ public interface IRoomService {
 	
 	@Transactional(readOnly = true)
 	BigDecimal selectSequence();
+
+	/**
+     * 查询酒店房型（线路配置时使用）
+     * add by huangtao
+     * 2016-02-14
+     * @param map
+     * @return
+     */
+	List<Room> selectSelective(Map<String, Object> map);
 	
 }
