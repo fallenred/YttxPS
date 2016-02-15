@@ -3,6 +3,8 @@ package com.yttx.yttxps.model.vo;
 import java.util.Map;
 
 import com.yttx.yttxps.model.TtransportArrange;
+import com.yttx.yttxps.model.TtransportArrangeExample;
+import com.yttx.yttxps.model.TtransportArrangeExample.Criteria;
 
 public class TransportArrangeRequest extends JqGridRequest implements
 		java.io.Serializable {
@@ -26,6 +28,14 @@ public class TransportArrangeRequest extends JqGridRequest implements
 		if (transportArrange != null) {
 			map.put("fiGenName", transportArrange.getFiGenName() == null ? "" : transportArrange.getFiGenName());
 			map.put("fsTransName", transportArrange.getFsTransName() == null ? "" : transportArrange.getFsTransName());
+		}
+	}
+	
+	public void copyTransportArrange(TtransportArrangeExample example) {
+		if (transportArrange != null) {
+			Criteria criteria = example.createCriteria();
+			if (transportArrange.getFiGenindex() != null)
+				criteria.andFiGenindexEqualTo(transportArrange.getFiGenindex());
 		}
 	}
 }

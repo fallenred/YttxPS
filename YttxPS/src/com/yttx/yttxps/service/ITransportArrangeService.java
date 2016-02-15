@@ -30,5 +30,7 @@ public interface ITransportArrangeService {
 	
 	List<TtransportArrangeKey> selectTtransportArrange(TtransportArrangeExample example);
 	
+	List<TtransportArrange> selectTtransportArrangeView(TtransportArrangeExample example);
+	
 	public int selectFsNo();
 }

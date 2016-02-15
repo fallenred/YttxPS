@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.yttx.yttxps.model.TtransportArrange;
 import com.yttx.yttxps.model.TtransportArrangeExample;
 import com.yttx.yttxps.model.TtransportArrangeKey;
 
@@ -60,4 +61,6 @@ public interface TtransportArrangeMapper<T> extends IBaseMapper<T>  {
 			@Param("example") TtransportArrangeExample example);
 
 	int selectFsNo();
+	
+	List<TtransportArrange> selectViewByExample(TtransportArrangeExample example);
 }

@@ -102,7 +102,8 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from TTICKET
+    ,FS_SCENICNAME 
+    from view_tticket
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -301,7 +302,6 @@
       FI_STAT = #{fiStat,jdbcType=DECIMAL}
     where FS_NO = #{fsNo,jdbcType=CHAR}
   </update>
-  
   <!-- 分页查询总记录 -->
   <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
   	select count(*) from VIEW_TTICKET

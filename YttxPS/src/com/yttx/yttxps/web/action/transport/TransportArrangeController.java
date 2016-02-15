@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.TtransportArrange;
+import com.yttx.yttxps.model.TtransportArrangeExample;
 import com.yttx.yttxps.model.vo.TransportArrangeRequest;
 import com.yttx.yttxps.service.ITransportArrangeService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -50,6 +51,22 @@ static Logger logger = LoggerFactory.getLogger(TransportArrangeController.class)
 		List<TtransportArrange> list = transportArrangeService.selectSelectivePage(map);
 		map.put("rows", list);
 		return map;
+    }
+	
+	/**
+	 * 获取路线列表
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="selectTransportArrange.htm", method = RequestMethod.GET)
+	@ResponseBody
+	public Object ajaxSelectRouteArrange(TransportArrangeRequest req)
+    {  
+		logger.debug("当前查询条件 {}", req.getTransportArrange());
+		TtransportArrangeExample example = new TtransportArrangeExample();
+		req.copyTransportArrange(example);
+		List<TtransportArrange> list = transportArrangeService.selectTtransportArrangeView(example);
+		return list;
     }
 	
 	/**

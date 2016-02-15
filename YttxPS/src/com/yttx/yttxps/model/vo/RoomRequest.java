@@ -28,7 +28,7 @@ public class RoomRequest extends JqGridRequest implements java.io.Serializable {
 
 	public void copyRoom(Map<String, Object> map) {
 		if (room != null) {
-			map.put("index", room.getIndex());
+			map.put("roomno", room.getRoomno());
 			map.put("accomno", room.getAccomno());
 			map.put("meal", room.getMeal());
 			map.put("price", room.getPrice());

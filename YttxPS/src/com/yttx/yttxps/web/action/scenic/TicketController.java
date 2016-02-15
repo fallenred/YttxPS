@@ -1,10 +1,13 @@
 package com.yttx.yttxps.web.action.scenic;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +22,6 @@ import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.TCCPrice;
 import com.yttx.yttxps.model.Tticket;
 import com.yttx.yttxps.model.TticketExample;
-import com.yttx.yttxps.model.vo.GenRequest;
 import com.yttx.yttxps.model.vo.TicketRequest;
 import com.yttx.yttxps.service.ITicketService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -77,10 +79,15 @@ static Logger logger = LoggerFactory.getLogger(TicketController.class);
 	 */
 	@RequestMapping(value="selectTicket.htm", method = RequestMethod.GET)
 	@ResponseBody
-	public Object ajaxSelectGen(GenRequest req)
+	public Object ajaxSelectTicket(TicketRequest req, String scenicno)
     {  
-		logger.debug("当前查询条件 {}", req.getGen());
 		TticketExample example = new TticketExample();
+		req.copyTicket(example);
+		if (StringUtils.isNotEmpty(scenicno)) {
+			List<String> li = new ArrayList<String>();
+			CollectionUtils.addAll(li, scenicno.split(","));
+			example.createCriteria().andFsScenicnoIn(li);
+		}
 		List<Tticket> list = ticketService.selectTticket(example);
 		return list;
     }
@@ -130,7 +137,7 @@ static Logger logger = LoggerFactory.getLogger(TicketController.class);
 	 * @param Ticket
 	 * @return
 	 */
-	@RequestMapping(value="editTicket.htm", method = RequestMethod.POST)
+	@RequestMapping(value="editTicket.htm", method = (RequestMethod.POST))
 	@ResponseBody
 	public Map<String, Object> ajaxeditTicket(Tticket ticket)
     {  

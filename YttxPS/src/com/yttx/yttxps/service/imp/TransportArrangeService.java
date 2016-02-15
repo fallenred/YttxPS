@@ -95,6 +95,12 @@ public class TransportArrangeService implements ITransportArrangeService {
 	}
 	
 	@Override
+	public List<TtransportArrange> selectTtransportArrangeView(TtransportArrangeExample example) {
+		// TODO Auto-generated method stub
+		return transportArrangeMapper.selectViewByExample(example);
+	}
+	
+	@Override
 	public int selectFsNo() {
 		return transportArrangeMapper.selectFsNo();
 	}

@@ -3,6 +3,8 @@ package com.yttx.yttxps.model.vo;
 import java.util.Map;
 
 import com.yttx.yttxps.model.Tticket;
+import com.yttx.yttxps.model.TticketExample;
+import com.yttx.yttxps.model.TticketExample.Criteria;
 
 public class TicketRequest extends JqGridRequest implements
 		java.io.Serializable {
@@ -29,6 +31,14 @@ public class TicketRequest extends JqGridRequest implements
 			map.put("fsScenicno", ticket.getFsScenicno() == null ? "" : ticket.getFsScenicno());
 			map.put("fsType", ticket.getFsType() == null ? "" : ticket.getFsType());
 			map.put("fiStat", ticket.getFiStat() == null ? "" : ticket.getFiStat());
+		}
+	}
+	
+	public void copyTicket(TticketExample example) {
+		if (ticket != null) {
+			Criteria criteria = example.createCriteria();
+			if (ticket.getFsScenicno() != null)
+				criteria.andFsScenicnoEqualTo(ticket.getFsScenicno());
 		}
 	}
 }
