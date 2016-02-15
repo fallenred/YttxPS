@@ -1,10 +1,7 @@
 package com.yttx.yttxps.mapper;
 
 import java.util.List;
-<<<<<<< HEAD
-=======
 import java.util.Map;
->>>>>>> e676f2094b2536cce8e7d215d00f4e564100e959
 
 import com.yttx.yttxps.model.Tguide;
 import com.yttx.yttxps.model.TguideExample;
