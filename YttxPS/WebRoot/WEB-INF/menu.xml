@@ -55,5 +55,17 @@
 			</submenu>
 		</item>
 		
+		<item id="1000" name="购物管理" icon="menu-icon fa fa-table" >
+			<submenu>
+				<item id="10a0" name="购物管理" url="/jsp/shop/shop.jsp" />
+			</submenu>
+		</item>
+		
+		<item id="1100" name="导游管理" icon="menu-icon fa fa-table" >
+			<submenu>
+				<item id="11a0" name="导游管理" url="/jsp/guide/guide.jsp" />
+			</submenu>
+		</item>
+		
 	</menu>
 </xml>

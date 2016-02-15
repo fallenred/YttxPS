@@ -105,7 +105,7 @@ public class LoginController extends BaseController{
      {  
 		
 		String hostIp = request.getRemoteAddr();
-		logger.info("用户登录, IP:{} ID:{} 密码{} ", hostIp, userid, password);
+		logger.info("用户登录, IP:{} ID:{} 密码{} ", hostIp+ userid+ password);
 		
 		SysOper sysOper = sysService.findOperById(userid);
 		if(sysOper != null)

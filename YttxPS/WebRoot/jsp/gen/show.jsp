@@ -56,24 +56,24 @@
 									<div class="row">
 										<div class="form-group">
 											<!-- <label class="col-sm-2 control-label no-padding-right" for="fsNo">路线代码</label>
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<input maxlength="10" type="text" class="form-control" class="form-control" id="fsNo" name="fsNo" placeholder="路线代码需唯一" />
 											</div> -->
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">路线名称</label>
-											<div class="col-sm-2">
-												<input type="text" class="form-control" class="form-control" id="fsName" name="fsName" placeholder="路线名称"  maxlength="50" readonly="readonly"/>
+											<div class="col-sm-3">
+												<input class="form-control" type="text" class="form-control" class="form-control" id="fsName" name="fsName" placeholder="路线名称"  maxlength="50" readonly="readonly"/>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiDays">路线天数</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" class="form-control" class="form-control" id="fiDays" name="fiDays" placeholder="路线天数" readonly="readonly" />
+											<div class="col-sm-3">
+												<input class="form-control" maxlength="10" type="text" class="form-control" class="form-control" id="fiDays" name="fiDays" placeholder="路线天数" readonly="readonly" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsType">状态</label>
-											<div class="col-sm-2">
-												<select id="fiStat" name="fiStat" disabled="disabled">
+											<div class="col-sm-3">
+												<select id="fiStat" name="fiStat" disabled="disabled" class="form-control">
 													<option value="1">正常</option>
 													<option value="-100">已销</option>
 												</select>

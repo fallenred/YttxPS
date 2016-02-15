@@ -59,7 +59,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			url = "user/init";
 		}
 		
-		logger.debug("{} {} {}", origpwd, targpwd, confpwd);
+		logger.debug("{} {} {}", origpwd+targpwd+confpwd);
 		
 		HttpSession session = request.getSession();
 		SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
