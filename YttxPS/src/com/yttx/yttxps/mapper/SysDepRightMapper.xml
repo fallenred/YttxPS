@@ -12,19 +12,28 @@
 	
 	<select id="findByNo" parameterType="int" resultMap="sysDepRightResultMap">
 		<![CDATA[
-		SELECT * FROM TSYSDEPRIGHT WHERE FI_DEPNO = #{depNo}
+		SELECT 
+			FI_DEPNO,
+			TRIM(FS_RIGHT) AS FS_RIGHT
+		FROM TSYSDEPRIGHT WHERE FI_DEPNO = #{depNo}
 		 ]]>
 	</select>
 	
 	
-	<insert id ="insertBatch" parameterType="List" > 
+	<insert id ="insertBatch" parameterType="List" useGeneratedKeys="false"> 
 		<![CDATA[
-	    INSERT INTO TSYSDEPRIGHT(FI_DEPNO,FS_RIGHT)
-	    ]]>
-	    <foreach collection ="list" item ="item" index ="index" separator=","> 
-	     (#{item.depNo},#{item.right})  
-	    </foreach > 
-	</insert >
-
-
+		INSERT INTO TSYSDEPRIGHT(FI_DEPNO,FS_RIGHT)
+		 ]]>
+		 
+		<foreach open="("  separator="union" close=")" collection="list" item="item" index="index"> 
+			select
+				#{item.depNo,jdbcType =INTEGER},
+				#{item.right,jdbcType =CHAR}
+			from dual
+		</foreach>
+	</insert>
+	
+	<delete id="deleteRightsByDepNo" parameterType="java.lang.Long">
+		DELETE FROM  TSYSDEPRIGHT WHERE FI_DEPNO=#{depNo}
+	</delete>
 </mapper> 
