@@ -19,12 +19,14 @@
 			<submenu>
 				<item id="04a0" name="景区管理" url="/jsp/scenic/scenic.jsp" />
 				<item id="04b0" name="门票资源管理" url="/jsp/ticket/ticket.jsp" />
+				<item id="04c0" name="门票价格管理" url="/jsp/ticketPrice/ticketPrice.jsp" />
 			</submenu>
 		</item>
 		
 		<item id="0500" name="娱乐资源管理" icon="menu-icon fa fa-table" >
 			<submenu>
-				<item id="05a0" name="娱乐项目配置" url="/entertain/ticket.htm" />
+				<item id="05a0" name="娱乐项目资源管理" url="/jsp/entertainment/entertainment.jsp" />
+				<item id="05b0" name="娱乐项目价格管理" url="/jsp/entertainmentPrice/entertainmentPrice.jsp" />
 			</submenu>
 		</item>
 		
