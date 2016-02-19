@@ -234,6 +234,9 @@
 	      <if test="fsTransName != null and fsTransName != ''">
 	        and FS_TRANSNAME like '%'||#{fsTransName}||'%'
 	      </if>
+	       <if test="ftStartdate != null and ftStartdate != ''">
+	        and ft_Startdate &gt;= #{ftStartdate}
+	      </if>
   </select>
   
   <!-- 分页查询 -->
@@ -245,6 +248,9 @@
 	      </if>
 	      <if test="fsTransName != null and fsTransName != ''">
 	        and FS_TRANSNAME like '%'||#{fsTransName}||'%'
+	      </if>
+	       <if test="ftStartdate != null and ftStartdate != ''">
+	        and ft_Startdate &gt;= #{ftStartdate}
 	      </if>
 	      ) tt where 1=1
 	      <if test="startrow != null">

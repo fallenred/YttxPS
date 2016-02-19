@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.transport;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,7 @@ static Logger logger = LoggerFactory.getLogger(TransportArrangeController.class)
 		Map<String, Object> map = new HashMap<String, Object>();
 		req.copyPage(map);
 		req.copyTransportArrange(map);
+		map.put("ftStartdate", new Date());
 		List<TtransportArrange> list = transportArrangeService.selectSelectivePage(map);
 		map.put("rows", list);
 		return map;
