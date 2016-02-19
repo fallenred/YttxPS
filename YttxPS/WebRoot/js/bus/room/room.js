@@ -32,10 +32,10 @@ $("#showRoomModal").on("hidden.bs.modal", function() {
 
 jQuery(function($) {
     
-    var accomno = $.getUrlParam('no');
+    var fsAccomno = $.getUrlParam('no');
     var accomname = $.getUrlParam('name');
 
-    if(accomno == null || accomno == "" || accomno == undefined){
+    if(fsAccomno == null || fsAccomno == "" || fsAccomno == undefined){
         alert("未取到该酒店编号！");
         $("#roomModal", parent.document).find(".close").click();
     }
@@ -51,12 +51,9 @@ jQuery(function($) {
             "click",
             function() {
                 $("#collapseOne").collapse('hide');
-                var postData = $("#grid-table").jqGrid("getGridParam",
-                        "postData");
-                postData["room.type"] = $("#queryfield").find("#type")
-                        .val();
-                postData["room.stat"] = $("#queryfield").find("#stat")
-                        .val();
+                var postData = $("#grid-table").jqGrid("getGridParam", "postData");
+                postData["room.fsType"] = $("#queryfield").find("#fsType").val();
+                postData["room.fiStat"] = $("#queryfield").find("#fiStat").val();
                 $("#grid-table").jqGrid("setGridParam", {
                     datatype : 'json',
                     postData : postData
@@ -92,13 +89,11 @@ jQuery(function($) {
     $(document).on(
             'settings.ace.jqGrid',
             function(ev, event_name, collapsed) {
-                if (event_name === 'sidebar_collapsed'
-                        || event_name === 'main_container_fixed') {
+                if (event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed') {
                     // setTimeout is for webkit only to give time for DOM
                     // changes and then redraw!!!
                     setTimeout(function() {
-                        $(grid_selector).jqGrid('setGridWidth',
-                                parent_column.width());
+                        $(grid_selector).jqGrid('setGridWidth', parent_column.width());
                     }, 0);
                 }
             });
@@ -108,6 +103,7 @@ jQuery(function($) {
         1 : '正常',
         2 : '失效'
     };
+    
     var stat_val = '';
     for (k in stat_items)
         stat_val += ';' + k + ":" + stat_items[k];
@@ -128,7 +124,7 @@ jQuery(function($) {
     //房型类型
     var type_items = {'':'未取到房型类型列表，请刷新！'};
     //获取房型类型列表
-    $.ajax({ 
+    $.ajax({
         type : "get", 
         url : "/room/getRoomType.htm", 
         async : false, 
@@ -147,16 +143,16 @@ jQuery(function($) {
     }
     room_type_val = room_type_val.substring(1);
     //查询-房型类型数据绑定
-    $("#queryfield").find("select[name='type']").html(room_type_option);
-    $("#addModal").find("select[name='type']").html(room_type_option);
-    $("#showRoomModal").find("select[name='type']").html(room_type_option);
-    $("#editModal").find("select[name='type']").html(room_type_option);
+    $("#queryfield").find("select[name='fsType']").html(room_type_option);
+    $("#addModal").find("select[name='fsType']").html(room_type_option);
+    $("#showRoomModal").find("select[name='fsType']").html(room_type_option);
+    $("#editModal").find("select[name='fsType']").html(room_type_option);
     
     //表格
     $(grid_selector).jqGrid(
             {
                 url : "/room/findRoom.htm",
-                postData:{ "room.accomno": accomno},
+                postData:{ "room.fsAccomno": fsAccomno},
                 datatype : "json",
                 mtype : 'POST',
                 height : 395,
@@ -170,19 +166,19 @@ jQuery(function($) {
                     resize : false,
                     formatter : actFormatter
                 }, {
-                    name : 'index',
-                    index : 'index',
+                    name : 'fsRoomno',
+                    index : 'fsRoomno',
                     width : 30,
                     sorttype : "char",
                     hidden : true
                 }, {
-                    name : 'name',
-                    index : 'name',
+                    name : 'fsName',
+                    index : 'fsName',
                     width : 100,
                     editable : false
                 }, {
-                    name : 'type',
-                    index : 'type',
+                    name : 'fsType',
+                    index : 'fsType',
                     width : 50,
                     sortable : false,
                     editable : false,
@@ -201,15 +197,15 @@ jQuery(function($) {
                         return '03';
                     }
                 }, {
-                    name : 'accomno',
-                    index : 'accomno',
+                    name : 'fsAccomno',
+                    index : 'fsAccomno',
                     width : 80,
                     editable : true,
                     sorttype : "char",
                     hidden : true
                 }, {
-                    name : 'meal',
-                    index : 'meal',
+                    name : 'fsMeal',
+                    index : 'fsMeal',
                     width : 90,
                     sortable : false,
                     editable : false,
@@ -229,7 +225,6 @@ jQuery(function($) {
                     },
                     unformat : function(v) {
                         if(v != null && v != ""  && v!= undefined ){
-                            debugger;
                              var vals = v.split(",");
                              var texts ="";
                              for(index in vals){
@@ -249,8 +244,8 @@ jQuery(function($) {
                     editable : true,
                     sorttype : "char"
                 }, {
-                    name : 'stat',
-                    index : 'stat',
+                    name : 'fiStat',
+                    index : 'fiStat',
                     width : 40,
                     sortable : false,
                     editable : false,
@@ -312,7 +307,7 @@ jQuery(function($) {
                     $("#addModal input[type='hidden']").val("");
                     $("#addModal input").prop("checked", false);
                     $("#addModal select").val("");
-                    $("#addModal").find("input[name='accomno']").val(accomno);
+                    $("#addModal").find("input[name='fsAccomno']").val(fsAccomno);
                     $('#addModal').modal({
                         show : true,
                         backdrop : 'static'
@@ -325,12 +320,9 @@ jQuery(function($) {
 
     function style_delete_form(form) {
         var buttons = form.next().find('.EditButton .fm-button');
-        buttons.addClass('btn btn-sm btn-white btn-round').find(
-                '[class*="-icon"]').hide();// ui-icon, s-icon
-        buttons.eq(0).addClass('btn-danger').prepend(
-                '<i class="ace-icon fa fa-trash-o"></i>');
-        buttons.eq(1).addClass('btn-default').prepend(
-                '<i class="ace-icon fa fa-times"></i>')
+        buttons.addClass('btn btn-sm btn-white btn-round').find('[class*="-icon"]').hide();// ui-icon, s-icon
+        buttons.eq(0).addClass('btn-danger').prepend('<i class="ace-icon fa fa-trash-o"></i>');
+        buttons.eq(1).addClass('btn-default').prepend('<i class="ace-icon fa fa-times"></i>');
     }
 
     function style_search_filters(form) {
@@ -345,8 +337,7 @@ jQuery(function($) {
         if (form.data('styled'))
             return false;
 
-        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner(
-                '<div class="widget-header" />')
+        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
         style_delete_form(form);
 
         form.data('styled', true);
@@ -410,7 +401,7 @@ function showCustom(id) {
 
 function deleteCustom(id) {
     var raw = jQuery("#grid-table").jqGrid('getRowData', id);
-    $("#delForm input[name='id']").val(raw.index);
+    $("#delForm input[name='fsRoomno']").val(raw.fsRoomno);
     $("#delForm #message").text("");
     $("#delForm #submit").attr("disabled", false);
     $("#delForm #question").show();

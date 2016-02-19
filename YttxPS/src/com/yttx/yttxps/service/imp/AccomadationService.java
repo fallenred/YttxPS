@@ -43,7 +43,6 @@ public class AccomadationService implements IAccomadationService {
 
 	@Override
 	public int insert(Accomadation record) {
-		System.out.println(record.getDesc());
 		return accomadationMapper.insert(record);
 	}
 

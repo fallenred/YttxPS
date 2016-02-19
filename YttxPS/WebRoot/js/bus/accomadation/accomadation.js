@@ -78,8 +78,7 @@ function loadFormData(raw, from) {
     });
     // 设置select域
     $(from).find("select").each(function(i, n) {
-        $(n).find("option[value='" + raw[$(n).attr('name')] + "']")
-            .prop('selected', true);
+        $(n).find("option[value='" + raw[$(n).attr('name')] + "']").prop('selected', true);
     });
     // 设置textarea域
     $(from).find("textarea").each(function(i, n) {
@@ -139,7 +138,6 @@ $("#showModal").on("hidden.bs.modal", function() {
 });
 
 jQuery(function($) {
-    
     //酒店房型配置 iframe 高度适配
     $("#roomIframe").css({"height": screen.height});
     
@@ -175,19 +173,15 @@ jQuery(function($) {
             "click",
             function() {
                 $("#collapseOne").collapse('hide');
-                var postData = $("#grid-table").jqGrid("getGridParam",
-                        "postData");
-                postData["accomadation.no"] = $("#queryfield").find("#no")
-                        .val();
-                postData["accomadation.regionno"] = $("#queryfield").find(
-                        "#regionno").val();
-                postData["accomadation.stat"] = $("#queryfield").find("#stat")
-                        .val();
+                var postData = $("#grid-table").jqGrid("getGridParam", "postData");
+                postData["accomadation.no"] = $("#queryfield").find("#no").val();
+                postData["accomadation.regionno"] = $("#queryfield").find("#regionno").val();
+                postData["accomadation.stat"] = $("#queryfield").find("#stat").val();
                 $("#grid-table").jqGrid("setGridParam", {
                     datatype : 'json',
                     postData : postData
                 }).trigger("reloadGrid");
-            });
+    });
 
     // jqgrid
     var grid_selector = "#grid-table";
@@ -399,12 +393,9 @@ jQuery(function($) {
 
     function style_delete_form(form) {
         var buttons = form.next().find('.EditButton .fm-button');
-        buttons.addClass('btn btn-sm btn-white btn-round').find(
-                '[class*="-icon"]').hide();// ui-icon, s-icon
-        buttons.eq(0).addClass('btn-danger').prepend(
-                '<i class="ace-icon fa fa-trash-o"></i>');
-        buttons.eq(1).addClass('btn-default').prepend(
-                '<i class="ace-icon fa fa-times"></i>')
+        buttons.addClass('btn btn-sm btn-white btn-round').find('[class*="-icon"]').hide();// ui-icon, s-icon
+        buttons.eq(0).addClass('btn-danger').prepend('<i class="ace-icon fa fa-trash-o"></i>');
+        buttons.eq(1).addClass('btn-default').prepend('<i class="ace-icon fa fa-times"></i>');
     }
 
     function style_search_filters(form) {
@@ -419,8 +410,7 @@ jQuery(function($) {
         if (form.data('styled'))
             return false;
 
-        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner(
-                '<div class="widget-header" />')
+        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
         style_delete_form(form);
 
         form.data('styled', true);
@@ -438,12 +428,10 @@ jQuery(function($) {
                 .each(
                         function() {
                             var icon = $(this);
-                            var $class = $.trim(icon.attr('class').replace(
-                                    'ui-icon', ''));
+                            var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
 
                             if ($class in replacement)
-                                icon.attr('class', 'ui-icon '
-                                        + replacement[$class]);
+                                icon.attr('class', 'ui-icon ' + replacement[$class]);
                         })
     }
 

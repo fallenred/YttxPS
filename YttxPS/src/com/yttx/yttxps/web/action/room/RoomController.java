@@ -1,6 +1,5 @@
 package com.yttx.yttxps.web.action.room;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -100,9 +99,9 @@ public class RoomController extends BaseController {
 	 */
 	@RequestMapping(value = "findRoomInfo.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object ajaxfindRoomInfo(@RequestParam(value = "id") BigDecimal index) {
-		logger.debug("当前查询条件 {}", index);
-		Room info = rootService.selectRoomInfo(index);
+	public Object ajaxfindRoomInfo(@RequestParam(value = "id") String fsRoomno) {
+		logger.debug("当前查询条件 {}", fsRoomno);
+		Room info = rootService.selectRoomInfo(fsRoomno);
 		return JsonResult.jsonData(info);
 	}
 
@@ -119,12 +118,8 @@ public class RoomController extends BaseController {
 		logger.debug("当前新增对象 {}", root);
 		try {
 			//注意:此处的唯一不准确，使用 oracle sequence 作为唯一
-			if(logger.isDebugEnabled())
-				root.setRoomno(System.currentTimeMillis()+"");
-			else
-				root.setRoomno(rootService.selectSequence().toString());
-			if(root.getMeal()!=null)
-				root.setMeal(root.getMeal().replaceAll(",", ""));
+			if(root.getFsMeal() != null)
+				root.setFsMeal(root.getFsMeal().replaceAll(",", ""));
 			rootService.insert(root);
 		} catch (Exception e) {
 			return (Map<String, Object>) JsonResult.jsonError("新增失败");
@@ -144,8 +139,8 @@ public class RoomController extends BaseController {
 	public Map<String, Object> ajaxeditRoom(Room root) {
 		logger.debug("当前更新对象 {}", root);
 		try {
-			if(root.getMeal()!=null)
-				root.setMeal(root.getMeal().replaceAll(",", ""));
+			if(root.getFsMeal() != null)
+				root.setFsMeal(root.getFsMeal().replaceAll(",", ""));
 			rootService.update(root);
 		} catch (Exception e) {
 			return (Map<String, Object>) JsonResult.jsonError("更新失败");
@@ -162,10 +157,10 @@ public class RoomController extends BaseController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "delRoom.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxdelRoom(@RequestParam(value = "id") BigDecimal index) {
-		logger.debug("当前删除key {}", index);
+	public Map<String, Object> ajaxdelRoom(@RequestParam(value = "fsRoomno") String fsRoomno) {
+		logger.debug("当前删除key {}", fsRoomno);
 		try {
-			rootService.delete(index);
+			rootService.delete(fsRoomno);
 		} catch (Exception e) {
 			return (Map<String, Object>) JsonResult.jsonError("删除失败");
 		}

@@ -51,8 +51,7 @@ jQuery(function($) {
                 }
                 
                 $("#editForm #edit_submit").attr("disabled", "disabled");
-                $.post("/room/editRoom.htm", $("#editForm")
-                                .serialize(),
+                $.post("/room/editRoom.htm", $("#editForm").serialize(),
                                 function(data) {
                                     var json = eval("(" + data + ")");
                                     $("#editForm #edit_submit").attr(
