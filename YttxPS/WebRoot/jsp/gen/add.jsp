@@ -33,7 +33,7 @@
 
 							<!-- 模态框（新增） -->
 
-							<form class="form-horizontal" id="addform">
+							<form class="form-horizontal" id="addform" >
 
 								<div class="modal-body">
 									<!-- 图片TODO： -->
@@ -43,58 +43,26 @@
 												<li><a class="cboxElement" data-rel="colorbox"
 													href="http://127.0.0.1:81/1.jpg"> <img width="0"
 														height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
-												</a>
-												</li>
+												</a></li>
 											</div>
 										</ul>
 									</div>
 
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="fsName">路线名称</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fsName">路线名称</label>
 											<div class="col-sm-3">
-												<input class="form-control" type="text" id="fsName"
-													name="fsName" placeholder="路线名称" maxlength="10" />
+												<input class="form-control" type="text" id="fsName" name="fsName" placeholder="路线名称"  maxlength="10"/>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
-												for="fiDays">路线天数</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fiDays">路线天数</label>
 											<div class="col-sm-3">
-												<input class="form-control" maxlength="10" type="text"
-													id="fiDays" name="fiDays" placeholder="路线天数" />
+												<input class="form-control" maxlength="10" type="text" id="fiDays" name="fiDays" placeholder="路线天数" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="fsRegions">景区</label>
-											<div class="col-sm-3">
-												<select id="scenic" name="scenic" class="form-control">
-												</select>
-											</div>
-											<div class="col-sm-3">
-												<button type="button" class="btn btn-success pull-right"
-													id="addScenicBtn">添加</button>
-											</div>
-											<div class="col-sm-3">
-												<button type="button" class="btn btn-success pull-left"
-													id="rmScenicBtn">删除</button>
-											</div>
-										</div>
-									</div>
-										
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsProperty"></label>
-											<div class="col-sm-8" id="div_scenics">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="fsType">状态</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fsType">状态</label>
 											<div class="col-sm-3">
 												<select id="fiStat" name="fiStat" class="form-control">
 													<option value="1">正常</option>
@@ -103,22 +71,22 @@
 											</div>
 										</div>
 									</div>
-								<!-- 	<div class="row">
+									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="fsType">景区</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fsType">景区</label>
 											<div class="col-sm-3">
-												<select name="list" multiple size="5" class="form-control">
+												<select name="list" multiple  size="5" class="form-control" >
 												</select>
 											</div>
 										</div>
-									</div> -->
-									<div id="message" class="alert alert-warning"></div>
+									</div>
+									<div id = "message" class="alert alert-warning">
+										
+									</div>
 								</div>
-								<div class="modal-footer">
-									<button id="close" type="button" class="btn btn-default"
-										data-dismiss="modal">关闭</button>
-									<button id="reset" type="reset" class="btn">重置</button>
+									<div class="modal-footer">
+									<button id="close" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button id="reset" type="reset" class="btn" >重置</button>
 									<button id="submit" type="button" class="btn btn-primary">提交</button>
 								</div>
 							</form>
@@ -142,11 +110,12 @@
 	<c:if test="${!empty succflag && succflag =='1'}">
 
 		<script type="text/javascript">
-			$('.jump-step').removeClass('hide');
-			setTimeout('window.location="/home.htm"', 5000);
-		</script>
+	          $('.jump-step').removeClass('hide');
+	          setTimeout('window.location="/home.htm"',5000);
+	    </script>
 
 	</c:if>
 
 </body>
 </html>
+
