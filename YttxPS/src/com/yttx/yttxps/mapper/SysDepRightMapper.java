@@ -9,7 +9,12 @@ public interface SysDepRightMapper {
 	public List<SysDepRight> findByNo(long  depNo);
 	
 	
-	public void insertbatch(List<SysDepRight> sysDepRights);
+	public void insertBatch(List<SysDepRight> list);
+
+	/**
+	 *删除部门权限
+	 */
+	public void deleteRightsByDepNo(Long depNo);
 	
 
 }
