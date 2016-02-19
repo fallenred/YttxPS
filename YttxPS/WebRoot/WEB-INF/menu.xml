@@ -19,6 +19,7 @@
 			<submenu>
 				<item id="04a0" name="景区管理" url="/jsp/scenic/scenic.jsp" />
 				<item id="04b0" name="门票资源管理" url="/jsp/ticket/ticket.jsp" />
+				<item id="04c0" name="门票价格管理" url="/jsp/ticketPrice/ticketPrice.jsp" />
 			</submenu>
 		</item>
 		
@@ -30,7 +31,7 @@
 		
 		<item id="0600" name="餐厅资源管理" icon="menu-icon fa fa-table" >
 			<submenu>
-				<item id="06a0" name="餐厅资源配置" url="/restaurant/project.htm" />
+				<item id="06a0" name="餐厅资源配置" url="/restaurant/page.htm" />
 				<item id="06b0" name="酒店资源配置" url="/jsp/accomadation/accomadation.jsp" />
 			</submenu>
 		</item>

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.yttx.yttxps.mapper.IBaseMapper;
 import com.yttx.yttxps.model.RegionMap;
+import com.yttx.yttxps.model.ResoucePrice;
 import com.yttx.yttxps.model.SysDep;
 import com.yttx.yttxps.model.SysDepRight;
 import com.yttx.yttxps.model.SysOper;
@@ -36,5 +37,12 @@ public interface IPubService<T> {
 	 */
 	@Transactional(readOnly = true) 
 	public String findRegionFullName(String no);
+	
+	
+	/**
+	 * 找到资源的定价
+	 */
+	@Transactional(readOnly = true) 
+	public List<ResoucePrice> findResoucePrice(ResoucePrice resQue);
 
 }
