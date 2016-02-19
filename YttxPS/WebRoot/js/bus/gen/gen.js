@@ -41,8 +41,28 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fsName").val(raw.fsName);
 	$(this).contents().find("#fiDays").val(raw.fiDays);
 	$(this).contents().find("#fiStat").val(raw.fiStat);
+	getScenicGen(this, raw.fiIndex);
 });
 
+function getScenicGen(obj, fiIndex) {
+	//获取线路景区
+	var num = '';
+	$.ajax({
+		type:"GET",
+		url:"/scenicGen/selectScenicGen.htm",
+		data:"scenicGen.fiGenindex="+fiIndex,
+		dataType:"json",
+		success:function(data){
+			var html ='线路景区：';
+			$.each(data,function(commentIndex,comment){
+				html += '<input type="hidden" name="scenicGen" value="'+comment['fsScenicno']+'">'+ '&nbsp;&nbsp;<label>' + comment['fsScenicname'] + '</label>&nbsp;&nbsp;';;
+			    if(commentIndex==0)
+			    	num = comment['fiDays'];
+			});
+			$(obj).contents().find("#div_scenics").html(html);
+		}
+	});
+}
 
 $("#addModal", parent.document).on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");

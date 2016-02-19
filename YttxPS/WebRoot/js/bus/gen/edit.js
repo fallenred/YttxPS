@@ -28,30 +28,8 @@ jQuery(function($) {
 				html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 			});
 			$("#scenic").html(html);
-			getScenicGen();
 		}
 	});
-
-	function getScenicGen() {
-		//获取线路景区
-		var num = '';
-		$.ajax({
-			type:"GET",
-			url:"/scenicGen/selectScenicGen.htm",
-			data:"scenicGen.fiGenindex="+$("#fiGenindex").val(),
-			dataType:"json",
-			success:function(){
-				var html ='线路景区';
-				$.each(data,function(commentIndex,comment){
-					html += '<input type="hidden" name="scenicGen" value="'+comment['fsScenicno']+'">'+ '&nbsp;&nbsp;<label>' + comment['fsScenicname'] + '</label>&nbsp;&nbsp;';;
-				    if(commentIndex==0)
-				    	num = comment['fiDays'];
-				});
-				$("#div_scenics").html(html);
-			}
-
-		});
-	}
 
 	$("#regionname", "#editform").click(function() {
 		$("#selectCity", "#editform").show();
