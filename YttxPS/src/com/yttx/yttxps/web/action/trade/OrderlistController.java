@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
+import com.yttx.yttxps.model.TOrderlistExample;
 import com.yttx.yttxps.model.TOrderlistWithBLOBs;
 import com.yttx.yttxps.model.vo.OrderlistRequest;
 import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.web.action.LoginController;
+import com.yttx.yttxps.xml.Body;
+import com.yttx.yttxps.xml.CommFuzzySnapshotXMLConverter;
+import com.yttx.yttxps.xml.CommResSnapshotXMLConverter;
+import com.yttx.yttxps.xml.ScheduleXMLConverter;
 
 @Controller
 @Scope("prototype")
@@ -38,7 +44,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 */
 	@RequestMapping(value="findOrderlist.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object ajaxfindTicket(OrderlistRequest req)
+	public Object ajaxfindOrderlist(OrderlistRequest req)
     {  
 		logger.debug("当前查询条件 {}", req.getOrderlist());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -50,13 +56,68 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
     }
 	
 	/**
+	 * 查询日程快照
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="findResSnapshot.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object ajaxfindResSnapshot(String no)
+    {  
+		logger.debug("当前查询条件 {}", no);
+		TOrderlistExample example = new TOrderlistExample();
+		example.createCriteria().andFsNoEqualTo(no);
+		List<TOrderlistWithBLOBs> list = orderlistService.selectTOrderlist(example);
+		Body body = null;
+		if (CollectionUtils.isNotEmpty(list))
+			body = ScheduleXMLConverter.convert2Msg(list.get(0).getFcSchedule());
+		return body;
+    }
+	/**
+	 * 查询公共模糊字段
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="findCommFuzzySnapshot.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object ajaxfindCommFuzzySnapshot(String no)
+    {  
+		logger.debug("当前查询条件 {}", no);
+		TOrderlistExample example = new TOrderlistExample();
+		example.createCriteria().andFsNoEqualTo(no);
+		List<TOrderlistWithBLOBs> list = orderlistService.selectTOrderlist(example);
+		Body body = null;
+		if (CollectionUtils.isNotEmpty(list))
+			body = CommFuzzySnapshotXMLConverter.convert2Msg(list.get(0).getFcCommfuzzysnapshot());
+		return body;
+    }
+	/**
+	 * 查询公共精确字段
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="findCommResSnapshot.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object ajaxfindCommResSnapshot(String no)
+    {  
+		logger.debug("当前查询条件 {}", no);
+		TOrderlistExample example = new TOrderlistExample();
+		example.createCriteria().andFsNoEqualTo(no);
+		List<TOrderlistWithBLOBs> list = orderlistService.selectTOrderlist(example);
+		Body body = null;
+		if (CollectionUtils.isNotEmpty(list))
+			body = CommResSnapshotXMLConverter.convert2Msg(list.get(0).getFcCommressnapshot());
+		return body;
+    }
+	
+	/**
 	 * 新增订单信息
-	 * @param Ticket
+	 * @param Orderlist
 	 * @return
 	 */
 	@RequestMapping(value="addOrderlist.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxaddTicket(TOrderlistWithBLOBs orderlist)
+	public Map<String, Object> ajaxaddOrderlist(TOrderlistWithBLOBs orderlist)
     {  
 		logger.debug("当前新增对象 {}", orderlist);
 		try{
@@ -70,12 +131,12 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	/**
 	 * 更新订单信息
-	 * @param Ticket
+	 * @param Orderlist
 	 * @return
 	 */
 	@RequestMapping(value="editOrderlist.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxeditTicket(TOrderlistWithBLOBs orderlist)
+	public Map<String, Object> ajaxeditOrderlist(TOrderlistWithBLOBs orderlist)
     {  
 		logger.debug("当前更新对象 {}", orderlist);
 		try{
@@ -89,12 +150,12 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	/**
 	 * 删除订单信息
-	 * @param Ticket
+	 * @param Orderlist
 	 * @return
 	 */
 	@RequestMapping(value="delOrderlist.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxdelTicket(@RequestParam(value = "no") String  no)
+	public Map<String, Object> ajaxdelOrderlist(@RequestParam(value = "no") String  no)
     {  
 		logger.debug("当前删除key {}", no);
 		try{

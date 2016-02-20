@@ -1,10 +1,10 @@
 //	显示详情
 var raw = {};
-function addCloselist(id) {
+function showOrderlist(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/closelist/add.jsp";
-    $("#addIframe").attr("src", frameSrc);
-    $('#addModal').modal({ show: true, backdrop: 'static' });
+	$("#showModal").modal({
+	    remote: "/jsp/routeCC/show.jsp"
+	}); 
 };
 
 function editOrderlist(id) {
@@ -21,34 +21,117 @@ function deleteOrderlist(id) {
     $('#delModal').modal({ show: true, backdrop: 'static' });
 };
 
-function picOrderlist(id) {
-	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/pic/pic.jsp?no=" + raw.fsNo;
-    $("#picIframe").attr("src", frameSrc);
-    $('#picModal').modal({ show: true, backdrop: 'static' });
-};
-
-$("#showModal").on("shown.bs.modal", function() {
-	$(this).find("#reset").click();
-	$(this).find("#fsName").val(raw.fsName);
-	$(this).find("#fiDays").val(raw.fiDays);
-	$(this).find("#fiStat").val(raw.fiStat);
+$("#addIframe").on("load",function(){
+	$(this).contents().find("#reset").click();
+	$(this).contents().find("#fiIndex").val(raw.fiIndex);
+	$(this).contents().find("#fsOrderName").val(raw.fsName);
+	$(this).contents().find("#fdTotalFee").val(raw.fdTotalFee);
+	$(this).contents().find("#fdPaidAmt").val(raw.fdPaidAmt);
 });
+
 
 $("#editIframe").on("load",function(){
 	$(this).contents().find("#reset").click();
-	$(this).contents().find("#fiIndex").val(raw.fiIndex);
+	$(this).contents().find("#fsNo").val(raw.fsNo);
+	$(this).contents().find("#fiGenindex").val(raw.fiGenindex);
+	$(this).contents().find("#genindex").val(raw.fiGenindex);
 	$(this).contents().find("#fsName").val(raw.fsName);
+	$(this).contents().find("#fsUserId").val(raw.fsUserId);
+	$(this).contents().find("#fsUserSubid").val(raw.fsUserSubid);
+	$(this).contents().find("#fsOperId").val(raw.fsOperId);
+	$(this).contents().find("#ftCreatdate").val(raw.ftCreatdate);
+	$(this).contents().find("#fsType").val(raw.fsType);
+	$(this).contents().find("#fsRouteId").val(raw.fsRouteId);
+	$(this).contents().find("#fsProperty").val(raw.fsProperty);
 	$(this).contents().find("#fiDays").val(raw.fiDays);
+	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
+	$(this).contents().find("#fsStartplace").val(raw.fsStartplace);
+	$(this).contents().find("#fdPrice").val(raw.fdPrice);
+	$(this).contents().find("#fsSummary").val(raw.fsSummary);
+	$(this).contents().find("#fdTotalfee").val(raw.fdTotalfee);
+	$(this).contents().find("#fdPaidamt").val(raw.fdPaidamt);
+	$(this).contents().find("#fsRemark").val(raw.fsRemark);
 	$(this).contents().find("#fiStat").val(raw.fiStat);
+	$(this).contents().find("#fsDac").val(raw.fsDac);
+	$(this).contents().find("#fcSchedule").html(raw.fcSchedule);
+	if (raw.fsNo != null) 
+		findCommFuzzySnapshot(this, raw.fsNo);
+	if (raw.fiGenindex != null)
+		getTransportArrange(this, raw.fiGenindex);
 });
 
+function getTccPrice(obj, fsResno, id){
+	$.ajax({
+        type: "GET",
+        url: "/tccPrice/findTccPrice.htm",
+        data: 'fsResno='+fsResno+'&ftStartdate='+$(obj).contents().find("#ftStartdate").val()+'&fsCcno=000000&fsRestype=cx',
+        dataType: "json",
+        success: function(data){
+        	$(obj).contents().find("#"+id).val(data.fdPrice);
+        }
+    });
+}
+
+//获取模糊字段
+function findCommFuzzySnapshot(obj, no){
+	$.ajax({
+		type: "POST",
+		url: "/orderlist/findCommFuzzySnapshot.htm",
+		data: 'no='+no,
+		dataType: "json",
+		success: function(data){
+			var html = ''; 
+			$.each(data.reslist, function(commentIndex, comment){
+				if(comment['restype'] == 'cx'){
+					$(obj).contents().find("#transName").val(comment['resname']);
+				}
+				if(comment['restype'] == 'dy'){
+					$(obj).contents().find("#custGuideLvl").val(comment['resname']);
+				}
+			});
+		}
+	});
+}
+
+//获取车型列表
+function getTransportArrange(obj, index){
+	$.ajax({
+		type: "GET",
+		url: "/transportArrange/selectTransportArrange.htm",
+		data: "transportArrange.fiGenindex="+index,
+		dataType: "json",
+		success: function(data){
+			var html = ''; 
+			$.each(data, function(commentIndex, comment){
+				html += '<option value=' + comment['fsNo'] + '>' + comment['fsTransName'] + '</option>';
+			});
+			$(obj).contents().find("#transType").html(html);
+			getTccPrice(obj, $(obj).contents().find("#transType").val(), 'transPrice');
+		}
+	});
+}
+
+function getGuide(obj, Lvl){
+	//获取导游列表
+	$.ajax({
+		type: "GET",
+		url: "/guide/selectGuide.htm",
+		data: "guide.lvl="+Lvl,
+		dataType: "json",
+		success: function(data){
+			var html = ''; 
+			$.each(data, function(commentIndex, comment){
+				html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
+			});
+			$("#guideFsNo").html(html);
+		}
+	});
+}
 
 $("#addModal", parent.document).on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
-	$("#grid-table").trigger("reloadGrid");
+    $("#grid-table").trigger("reloadGrid");
 });
-
 
 $("#editModal", parent.document).on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
@@ -58,14 +141,6 @@ $("#editModal", parent.document).on("hidden.bs.modal", function() {
 $("#delModal").on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
     $("#grid-table").trigger("reloadGrid");
-});
-
-$("#showModal").on("hidden.bs.modal", function() {
-    $(this).removeData("bs.modal");
-});
-
-$("#picModal").on("hidden.bs.modal", function() {
-    $(this).removeData("bs.modal");
 });
 
 jQuery(function($) {
@@ -109,31 +184,28 @@ jQuery(function($) {
 		$("#selectCity", "#queryfield").hide();
 		$("#regionno", "#queryfield").val(null);
 	});
-
+	
 	//	jqgrid
 	var grid_selector = "#grid-table";
 	var pager_selector = "#grid-pager";
 
 	// 定义按钮列
 	actFormatter = function(cellvalue, options, rawObject) {
-		var detail = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="addCloselist('
-			+ options.rowId
-			+ ');" data-original-title="订单结算"><span class="ace-icon fa fa-plus-circle purple"></span></div>';
 
 	var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editOrderlist('
 			+ options.rowId
-			+ ');" data-original-title="编辑订单信息"><span class="ui-icon ui-icon-pencil"></span></div>';
+			+ ');" data-original-title="计调订单"><span class="ui-icon ui-icon-pencil"></span></div>';
 
 	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteOrderlist('
 			+ options.rowId
-			+ ');" data-original-title="删除订单记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-	return detail + editBtn + deleteBtn;
+			+ ');" data-original-title="删除订单"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
+	return editBtn + deleteBtn;
 	};
 
 	// resize to fit page size
 	$(window).on('resize.jqGrid', function() {
 		$(grid_selector).jqGrid('setGridWidth', $(".page-content").width());
-	})
+	});
 	// resize on sidebar collapse/expand
 	var parent_column = $(grid_selector).closest('[class*="col-"]');
 	$(document).on(
@@ -161,13 +233,32 @@ jQuery(function($) {
 	for (k in items)
 		s += ';' + k + ":" + items[k];
 	s = s.substring(1);
+	//线路类型
+	var fsType = {
+			'02' : '衍生线路',
+			'03' : '定制线路'
+		};
+	var s1 = '';
+	for (k in fsType)
+			s1 += ';' + k + ":" + fsType[k];
+	s1 = s1.substring(1);
+	//线路类型
+	var fsProperty = {
+			'01' : '独立成团',
+			'02' : '散客拼团'
+		};
+	var s2 = '';
+	for (k in fsProperty)
+			s1 += ';' + k + ":" + fsProperty[k];
+	s2 = s2.substring(1);	
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/orderlist/findOrderlist.htm",
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '订单id', '订单名称', '用户名称', '路线名称', '发团日期', '路线天数', '状态' ],
+				colNames : ['操作', '订单id', '线路统称Idx', '订单名称', '用户ID', '用户子ID', '计调ID', '创建时间', '线路类型', 'fs_Route_ID', '组团类型', '线路天数',
+				            '发团日期', '发团地', '线路初始报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照',],
 				colModel : [ {
 					name : 'myac',
 					index : '',
@@ -183,6 +274,13 @@ jQuery(function($) {
 					sorttype : "int",
 					hidden : true
 				}, {
+					name : 'fiGenindex',
+					index : 'fiGenindex',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					hidden : true
+				}, {
 					name : 'fsName',
 					index : 'fsName',
 					width : 100,
@@ -193,25 +291,137 @@ jQuery(function($) {
 					index : 'fsUserId',
 					width : 100,
 					editable : true,
-					sorttype : "int"
+					sorttype : "int",
+					hidden : true
 				}, {
-					name : 'fiGenindex',
-					index : 'fiGenindex',
+					name : 'fsUserSubid',
+					index : 'fsUserSubid',
 					width : 100,
+					editable : true,
+					sorttype : "int",
+					hidden : true
+				}, {
+					name : 'fsOperId',
+					index : 'fsOperId',
+					width : 100,
+					editable : true,
+					sorttype : "int",
+					hidden : true
+				}, {
+					name : 'ftCreatdate',
+					index : 'ftCreatdate',
+					width : 50,
+					editable : true,
+					sorttype : "date",
+					formatter : function(value){
+						var timestamp = "";
+						if(value != ''){//rData[7]表示日期列
+							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+						}
+						return timestamp;
+					}
+				}, {
+					name : 'fsType',
+					index : 'fsType',
+					width : 45,
+					sortable : true,
+					editable : true,
+					edittype : 'select',
+					editoptions : {
+						value : s1
+					},
+					formatter : function(v, opt, rec) {
+						return fsType[v];
+					},
+					unformat : function(v) {
+						for (k in fsType)
+							if (fsType[k] == v)
+								return k;
+						return '1';
+					}
+				}, {
+					name : 'fsRouteId',
+					index : 'fsRouteId',
+					width : 100,
+					editable : true,
+					sorttype : "int",
+					hidden : true
+				}, {
+					name : 'fsProperty',
+					index : 'fsProperty',
+					width : 45,
+					sortable : true,
+					editable : true,
+					edittype : 'select',
+					editoptions : {
+						value : s2
+					},
+					formatter : function(v, opt, rec) {
+						return fsProperty[v];
+					},
+					unformat : function(v) {
+						for (k in fsProperty)
+							if (fsProperty[k] == v)
+								return k;
+						return '1';
+					}
+				}, {
+					name : 'fiDays',
+					index : 'fiDays',
+					width : 50,
 					editable : true,
 					sorttype : "int"
 				}, {
 					name : 'ftStartdate',
 					index : 'ftStartdate',
-					width : 100,
+					width : 50,
+					editable : true,
+					sorttype : "date",
+					formatter : function(value){
+						var timestamp = "";
+						if(value != ''){//rData[7]表示日期列
+							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+						}
+						return timestamp;
+					}
+				}, {
+					name : 'fsStartplace',
+					index : 'fsStartplace',
+					width : 50,
 					editable : true,
 					sorttype : "int"
 				}, {
-					name : 'fiDays',
-					index : 'fiDays',
-					width : 100,
+					name : 'fdPrice',
+					index : 'fdPrice',
+					width : 60,
 					editable : true,
 					sorttype : "int"
+				}, {
+					name : 'fsSummary',
+					index : 'fsSummary',
+					width : 100,
+					editable : true,
+					sorttype : "int",
+					hidden : true
+				}, {
+					name : 'fdTotalfee',
+					index : 'fdTotalfee',
+					width : 50,
+					editable : true,
+					sorttype : "int"
+				}, {
+					name : 'fdPaidamt',
+					index : 'fdPaidamt',
+					width : 50,
+					editable : true,
+					sorttype : "int"
+				}, {
+					name : 'fsRemark',
+					index : 'fsRemark',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					hidden : true
 				}, {
 					name : 'fiStat',
 					index : 'fiStat',
@@ -231,6 +441,27 @@ jQuery(function($) {
 								return k;
 						return '1';
 					}
+				}, {
+					name : 'fsDac',
+					index : 'fsDac',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					hidden : true
+				}, {
+					name : 'fcSchedule',
+					index : 'fcSchedule',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					hidden : true
+				}, {
+					name : 'fcRessnapshot',
+					index : 'fcRessnapshot',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					hidden : true
 				}],
 
 				viewrecords : true,
@@ -414,4 +645,5 @@ jQuery(function($) {
 		$(grid_selector).jqGrid('GridUnload');
 		$('.ui-jqdialog').remove();
 	});
+	
 });
