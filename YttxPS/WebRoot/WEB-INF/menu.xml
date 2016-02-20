@@ -25,7 +25,8 @@
 		
 		<item id="0500" name="娱乐资源管理" icon="menu-icon fa fa-table" >
 			<submenu>
-				<item id="05a0" name="娱乐项目配置" url="/entertain/ticket.htm" />
+				<item id="05a0" name="娱乐项目资源管理" url="/jsp/entertainment/entertainment.jsp" />
+				<item id="05b0" name="娱乐项目价格管理" url="/jsp/entertainmentPrice/entertainmentPrice.jsp" />
 			</submenu>
 		</item>
 		

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yttx.yttxps.mapper.TEntertainmentPriceMapper">
+<!-- 
+  <resultMap id="BaseResultMap" type="com.yttx.yttxps.model.EntertainmentPrice" >
+    <result column="FS_NO" property="fsNo" jdbcType="CHAR" />
+    <result column="FS_NAME" property="fsName" jdbcType="VARCHAR" />
+    <result column="FS_REGIONNO" property="fsRegionno" jdbcType="CHAR" />
+    <result column="FS_ADDR" property="fsAddr" jdbcType="VARCHAR" />
+    <result column="FS_TYPE" property="fsType" jdbcType="CHAR" />
+    <result column="FS_DESC" property="fsDesc" jdbcType="VARCHAR" />
+    <result column="FS_LVL" property="fsLvl" jdbcType="CHAR" />
+    <result column="FS_OPENTIME" property="fsOpentime" jdbcType="VARCHAR" />
+    <result column="FI_STAT" property="fiStat" jdbcType="DECIMAL" />
+    <result column="FTSTARTDATE" property="ftstartdate" jdbcType="TIMESTAMP" />
+    <result column="FTENDDATE" property="ftenddate" jdbcType="TIMESTAMP" />
+    <result column="FS_RESNO" property="fsResno" jdbcType="CHAR" />
+    <result column="FDFULLLOWQP" property="fdfulllowqp" jdbcType="DECIMAL" />
+    <result column="FDHALFLOWQP" property="fdhalflowqp" jdbcType="DECIMAL" />
+    <result column="FDCHILDLOWQP" property="fdchildlowqp" jdbcType="DECIMAL" />
+    <result column="FDFREELOWQP" property="fdfreelowqp" jdbcType="DECIMAL" />
+    <result column="FDFULLLOWTP" property="fdfulllowtp" jdbcType="DECIMAL" />
+    <result column="FDHALFLOWTP" property="fdhalflowtp" jdbcType="DECIMAL" />
+    <result column="FDCHILDLOWTP" property="fdchildlowtp" jdbcType="DECIMAL" />
+    <result column="FDFREELOWTP" property="fdfreelowtp" jdbcType="DECIMAL" />
+    <result column="FDFULLPEAKQP" property="fdfullpeakqp" jdbcType="DECIMAL" />
+    <result column="FDHALFPEAKQP" property="fdhalfpeakqp" jdbcType="DECIMAL" />
+    <result column="FDCHILDPEAKQP" property="fdchildpeakqp" jdbcType="DECIMAL" />
+    <result column="FDFREEPEAKQP" property="fdfreepeakqp" jdbcType="DECIMAL" />
+    <result column="FDFULLPEAKTP" property="fdfullpeaktp" jdbcType="DECIMAL" />
+    <result column="FDHALFPEAKTP" property="fdhalfpeaktp" jdbcType="DECIMAL" />
+    <result column="FDCHILDPEAKTP" property="fdchildpeaktp" jdbcType="DECIMAL" />
+    <result column="FDFREEPEAKTP" property="fdfreepeaktp" jdbcType="DECIMAL" />
+    <result column="FDTRANSCOSTSTP" property="fdtranscoststp" jdbcType="DECIMAL" />
+  </resultMap>
+   -->
+  
+  <resultMap id="BaseResultMap" type="com.yttx.yttxps.model.TEntertainment" >
+    <id column="FS_NO" property="fsNo" jdbcType="CHAR" />
+    <result column="FS_NAME" property="fsName" jdbcType="VARCHAR" />
+    <result column="FS_REGIONNO" property="fsRegionno" jdbcType="CHAR" />
+    <result column="FS_ADDR" property="fsAddr" jdbcType="VARCHAR" />
+    <result column="FS_TYPE" property="fsType" jdbcType="CHAR" />
+    <result column="FS_DESC" property="fsDesc" jdbcType="VARCHAR" />
+    <result column="FS_LVL" property="fsLvl" jdbcType="CHAR" />
+    <result column="FS_OPENTIME" property="fsOpentime" jdbcType="VARCHAR" />
+    <result column="FI_STAT" property="fiStat" jdbcType="DECIMAL" />
+    <result column="FS_SCENICNO" property="fsScenicno" jdbcType="VARCHAR" />
+    <result column="FS_SCENICNAME" property="fsScenicname" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <!-- 分页查询总记录 -->
+  <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
+  	select count(*) from view_entertainmentprice
+	     where 1=1
+	      <if test="fsNo != null and fsNo != ''">
+	        and fs_no = #{fsNo}
+	      </if>
+	      <if test="fsName != null and fsName != ''">
+	        and fs_Name like '%'||#{fsName}||'%'
+	      </if>
+	      <if test="fsType != null and fsType != ''">
+	        and fs_Type = #{fsType}
+	      </if>
+	      <if test="fiStat != null and fiStat != ''">
+	        and fi_Stat = #{fiStat}
+	      </if>
+  </select>
+  
+  <!-- 分页查询 -->
+  <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
+      select * from (select ROWNUM as rowno, t.* from 
+		view_entertainmentprice t
+    	where 1=1
+	      <if test="fsNo != null and fsNo != ''">
+	        and fs_no = #{fsNo}
+	      </if>
+	      <if test="fsName != null and fsName != ''">
+	        and fs_Name like '%'||#{fsName}||'%'
+	      </if>
+	      <if test="fsType != null and fsType != ''">
+	        and fs_Type = #{fsType}
+	      </if>
+	      <if test="fiStat != null and fiStat != ''">
+	        and fi_Stat = #{fiStat}
+	      </if>
+	      ) tt where 1=1
+	      <if test="startrow != null">
+	        and tt.rowno &gt;= #{startrow}
+	      </if>
+  </select>
+  
+  <select id="selectFsNo" resultType="int">
+      select TENTERTAINMENT_SEQUENCE.nextval from dual
+  </select>
+  
+</mapper>
