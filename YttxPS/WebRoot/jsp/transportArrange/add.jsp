@@ -51,16 +51,16 @@
 									<div class="row">
 										<div class="form-group">
 											<!-- <label class="col-sm-2 control-label no-padding-right" for="fsNo">门票代码</label>
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<input maxlength="10" type="text" id="fsNo" name="fsNo" placeholder="门票代码需唯一" />
 											</div> -->
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">线路</label>
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<select id="fiGenindex" name="fiGenindex" class="form-control">
 												</select>
 											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsScenicName">车型</label>
-											<div class="col-sm-2">
+											<label class="col-sm-2 control-label no-padding-right" for="fsScenicName">车型</label>
+											<div class="col-sm-3">
 												<select id="fsTransno" name="fsTransno" class="form-control">
 												</select>
 											</div>
@@ -70,11 +70,11 @@
 										<div class="form-group">
 											
 											<label class="col-sm-2 control-label no-padding-right" for="fsType">日期</label>
-											<div class="col-sm-2" >
+											<div class="col-sm-3">
 												<input class="form-control" type="text" id="ftStartdate" name="ftStartdate" placeholder="起始日期" />
 											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsType">价格</label>
-											<div class="col-sm-2">
+											<label class="col-sm-2 control-label no-padding-right" for="fsType">价格</label>
+											<div class="col-sm-3">
 												<input class="form-control" type="text" id="fdPrice" name="fdPrice" placeholder="价格" />
 											</div>
 										</div>

@@ -78,19 +78,16 @@
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="no">线路名称</label>
+												<label class="col-sm-1 control-label no-padding-right" for="no">线路名称</label>
 												<div class="col-sm-2">
-													<input maxlength="10" type="text" id="fiGenName"
-														placeholder="线路名称" />
+													<input class="form-control" maxlength="10" type="text" id="fiGenName" placeholder="线路名称" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="fsScenicno">车型名称</label>
 												<div class="col-sm-2">
-													<input maxlength="150"
-														type="text" id="fsTransName" placeholder="所属景区" />
+													<input class="form-control" maxlength="150" type="text" id="fsTransName" placeholder="车型名称" />
 												</div>
 											</div>
 

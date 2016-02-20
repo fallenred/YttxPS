@@ -42,41 +42,100 @@
 								</div>
 								<div class="modal-body">
 									<!-- 图片TODO： -->
-									<div>
-										<ul class="ace-thumbnails clearfix">
-											<div style="visibility: hidden;">
-												<li><a class="cboxElement" data-rel="colorbox"
-													href="http://127.0.0.1:81/1.jpg"> <img width="0"
-														height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
-												</a></li>
-											</div>
-										</ul>
-									</div>
-
 									<div class="row">
 										<div class="form-group">
-											<!-- <label class="col-sm-2 control-label no-padding-right" for="fsNo">路线代码</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" class="form-control" class="form-control" id="fsNo" name="fsNo" placeholder="路线代码需唯一" />
-											</div> -->
-											<label class="col-sm-2 control-label no-padding-right" for="fsName">路线名称</label>
-											<div class="col-sm-2">
-												<input type="text" class="form-control" class="form-control" id="fsName" name="fsName" placeholder="路线名称"  maxlength="50" readonly="readonly"/>
+											<label class="col-sm-2 control-label no-padding-right" for="fiGenIndex">所属线路</label>
+											<div class="col-sm-3">
+												<select id="fiGenindex" name="fiGenindex" class="form-control">
+												</select>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fiDays">路线天数</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" class="form-control" class="form-control" id="fiDays" name="fiDays" placeholder="路线天数" readonly="readonly" />
+											<label class="col-sm-2 control-label no-padding-right" for="fsName">路线名称</label>
+											<div class="col-sm-3">
+												<input type="text" id="fsName" name="fsName" class="form-control" placeholder="路线名称"  />
+											</div>
+											
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">所属地区</label>
+											<div class="col-sm-3">
+												<input type="text" id="fsRegions" name="fsRegions" class="form-control" placeholder="所属地区"  />
+											</div>
+											<label class="col-sm-2 control-label no-padding-right" for="fsStartplace">发团地</label>
+											<div class="col-sm-3">
+												<input type="text" id="fsStartplace" name="fsStartplace" class="form-control" placeholder="发团地"  />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsType">状态</label>
-											<div class="col-sm-2">
-												<select id="fiStat" name="fiStat" disabled="disabled">
-													<option value="1">正常</option>
-													<option value="-100">已销</option>
+											<label class="col-sm-2 control-label no-padding-right" for="fsProperty">线路类型</label>
+											<div class="col-sm-3">
+												<select class="form-control" id="fsProperty" name="fsProperty">
+													<option value="01">专家推荐</option>
+													<option value="02">热门线路</option>
+													<option value="03">特价线路</option>
 												</select>
+											</div>
+											<label class="col-sm-2 control-label no-padding-right" for="fiDays">线路天数</label>
+											<div class="col-sm-3">
+												<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="线路天数"  />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="ftStartdate">出发日期</label>
+											<div class="col-sm-2">
+												<input type="text" id="ftStartdate" name="ftStartdate" class="form-control" placeholder=""/>
+											</div>
+											<label class="col-sm-1 control-label" style="width: 10px;">至</label>
+											<div class="col-sm-2">
+												<input type="text" id="ftEnddate" name="ftEnddate" class="form-control" placeholder=""/>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fiStat">线路状态</label>
+											<div class="col-sm-3">
+												<select class="form-control" id="fiStat" name="fiStat">
+													<option value="1">正常</option>
+													<option value="-100">注销</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsTitle">线路标题</label>
+											<div class="col-sm-8">
+												<input type="text" id="fsTitle" name="fsTitle" class="form-control" placeholder="线路标题"/>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsTitlepic">线路缩略图</label>
+											<div class="col-sm-8">
+												<input type="text" id="fsTitlepic" name="fsTitlepic" class="form-control" placeholder=""/>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsSummary">线路摘要</label>
+											<div class="col-sm-8">
+												<textarea class="form-control" id="fsSummary" name="fsSummary" rows="3" placeholder="线路摘要"></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsSummary">日程快照</label>
+											<div class="col-sm-8">
+												<textarea class="ckeditor form-control" id="fcSchedule" name="fcSchedule"></textarea>
 											</div>
 										</div>
 									</div>

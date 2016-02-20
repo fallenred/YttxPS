@@ -16,6 +16,21 @@ jQuery(function($) {
 		if (index == 3)
 			$("#selectCity", "#editform").hide();
 	}
+	
+	//获取线路列表
+	$.ajax({
+        type: "GET",
+        url: "/gen/selectGen.htm",
+        data: '',
+        dataType: "json",
+        success: function(data){
+        		var html = ''; 
+        		$.each(data, function(commentIndex, comment){
+        			html += '<option value=' + comment['fiIndex'] + '>' + comment['fsName'] + '</option>';
+        		});
+        		$("#fiGenindex").html(html);
+        }
+    });
 
 	$("#regionname", "#editform").click(function() {
 		$("#selectCity", "#editform").show();
@@ -49,7 +64,8 @@ jQuery(function($) {
 			$('#name').focus();
 			return false;
 		} 
-		$.post("/gen/editGen.htm",
+		$("#fcSchedule").val(CKEDITOR.instances["fcSchedule"].getData());
+		$.post("/routeArrange/editRouteArrange.htm",
 				$("#editform").serialize(),
 				function(data){
 			var json = eval("("+data+")");

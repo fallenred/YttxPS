@@ -24,6 +24,24 @@ jQuery(function($) {
 			$.colorbox.resize();
 		}
 	};
+	//获取线路列表
+	$.ajax({
+        type: "GET",
+        url: "/gen/selectGen.htm",
+        data: '',
+        dataType: "json",
+        success: function(data){
+        		var html = ''; 
+        		$.each(data, function(commentIndex, comment){
+        			html += '<option value=' + comment['fiIndex'] + '>' + comment['fsName'] + '</option>';
+        		});
+        		$("#fiGenindex").html(html);
+        }
+    });
+	//$(".row input").attr("readonly", "readonly");
+	//$(".row select").attr("disabled", "disabled");
+	//$(".row #fsSummary").attr("readonly", "readonly");
+	//CKEDITOR.instances['fcSchedule'].setReadOnly("readonly","readonly");
 
 	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
 	$("#cboxLoadingGraphic").html(
