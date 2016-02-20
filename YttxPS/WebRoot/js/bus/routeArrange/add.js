@@ -9,6 +9,7 @@ jQuery(function($) {
 		callback : localcallback
 	});
 	
+	//获取线路列表
 	$.ajax({
         type: "GET",
         url: "/gen/selectGen.htm",
@@ -19,9 +20,53 @@ jQuery(function($) {
         		$.each(data, function(commentIndex, comment){
         			html += '<option value=' + comment['fiIndex'] + '>' + comment['fsName'] + '</option>';
         		});
-        		$("#fiGenIndex").html(html);
+        		$("#fiGenindex").html(html);
+        		getTransportArrange();
         }
     });
+	
+	function getTransportArrange(){
+		//获取车型列表
+		$.ajax({
+			type: "GET",
+			url: "/transportArrange/selectTransportArrange.htm",
+			data: "transportArrange.fiGenindex="+$("#fiGenindex").val(),
+			dataType: "json",
+			success: function(data){
+				var html = ''; 
+				$.each(data, function(commentIndex, comment){
+					html += '<option value=' + comment['fsTransno'] + '>' + comment['fsTransName'] + '</option>';
+				});
+				$("#transportArrange").html(html);
+			}
+		});
+	}
+	
+	function getGuide(){
+		//获取导游列表
+		$.ajax({
+			type: "GET",
+			url: "/guide/selectGuide.htm",
+			data: "guide.lvl="+$("#guideLvl").val(),
+			dataType: "json",
+			success: function(data){
+				var html = ''; 
+				$.each(data, function(commentIndex, comment){
+					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
+				});
+				$("#guideFsNo").html(html);
+			}
+		});
+	}
+	
+	$("#fiGenindex").change(function(){
+		getTransportArrange();
+	});
+	
+	getGuide();
+	$("#guideLvl").change(function(){
+		getGuide();
+	});
 	
 	//城市选择器
 	function localcallback(index, key, value, fullkey, fullname) {
@@ -63,7 +108,8 @@ jQuery(function($) {
 			$('#name').focus();
 			return false;
 		} 
-		$.post("/gen/addGen.htm",
+		$("#fcSchedule").val(CKEDITOR.instances["fcSchedule"].getData());
+		$.post("/routeArrange/addRouteArrange.htm",
 				$("#addform").serialize(),
 				function(data){
 			var json = eval("("+data+")");

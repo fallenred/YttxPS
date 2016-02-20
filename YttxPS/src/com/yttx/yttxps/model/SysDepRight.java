@@ -21,5 +21,7 @@ public class SysDepRight {
 	public void setRight(String right) {
 		this.right = right;
 	}
+	
+	
 
 }

@@ -49,7 +49,7 @@ public class TransportArrangeService implements ITransportArrangeService {
 		price.setFtStartdate(record.getFtStartdate());
 		price.setFsRestype("cx");
 		price.setFsResno(record.getFsNo());
-		price.setFsCcno("000023");
+		price.setFsCcno("000000");
 		price.setFdPrice(record.getFdPrice());
 		priceMapper.insert(price);
 		
@@ -65,10 +65,10 @@ public class TransportArrangeService implements ITransportArrangeService {
 		Criteria criteria1 = priceExample.createCriteria();
 		criteria1.andFsResnoEqualTo(record.getFsNo());
 		criteria1.andFsRestypeEqualTo("cx");
-		criteria1.andFsCcnoEqualTo("000023");
+		criteria1.andFsCcnoEqualTo("000000");
 		TCCPrice price = new TCCPrice();
 		price.setFsRestype("cx");
-		price.setFsCcno("000023");
+		price.setFsCcno("000000");
 		price.setFdPrice(record.getFdPrice());
 		priceMapper.updateByExampleSelective(price, priceExample);
 	}
@@ -79,7 +79,7 @@ public class TransportArrangeService implements ITransportArrangeService {
 		Criteria criteria1 = priceExample.createCriteria();
 		criteria1.andFsResnoEqualTo(no);
 		criteria1.andFsRestypeEqualTo("cx");
-		criteria1.andFsCcnoEqualTo("000023");
+		criteria1.andFsCcnoEqualTo("000000");
 		priceMapper.deleteByExample(priceExample);
 		TtransportArrangeExample example = new TtransportArrangeExample();
 		TtransportArrangeExample.Criteria criteria= example.createCriteria();
@@ -97,7 +97,7 @@ public class TransportArrangeService implements ITransportArrangeService {
 	@Override
 	public List<TtransportArrange> selectTtransportArrangeView(TtransportArrangeExample example) {
 		// TODO Auto-generated method stub
-		return transportArrangeMapper.selectViewByExample(example);
+		return transportArrangeMapper.selectTtransportArrangeByExample(example);
 	}
 	
 	@Override

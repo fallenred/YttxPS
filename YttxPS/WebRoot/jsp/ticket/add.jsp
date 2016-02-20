@@ -51,15 +51,15 @@
 									<div class="row">
 										<div class="form-group">
 											<!-- <label class="col-sm-2 control-label no-padding-right" for="fsNo">门票代码</label>
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<input maxlength="10" type="text" id="fsNo" name="fsNo" placeholder="门票代码需唯一" />
 											</div> -->
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">票名称</label>
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<input class="form-control" type="text" id="fsName" name="fsName" placeholder="票名称"  maxlength="10"/>
 											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsScenicName">所属景区</label>
-											<div class="col-sm-2">
+											<label class="col-sm-2 control-label no-padding-right" for="fsScenicName">所属景区</label>
+											<div class="col-sm-3">
 												<select class="form-control" id="fsScenicno" name="fsScenicno">
 												</select>
 											</div>
@@ -67,17 +67,16 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											
 											<label class="col-sm-2 control-label no-padding-right" for="fsType">门票类型</label>
-											<div class="col-sm-2" >
+											<div class="col-sm-3">
 												<select id="fsType" name="fsType" class="form-control">
 													<option value="01">主门票</option>
 													<option value="02">车票</option>
 													<option value="03">小景区</option>
 												</select>
 											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsType">状态</label>
-											<div class="col-sm-2">
+											<label class="col-sm-2 control-label no-padding-right" for="fsType">状态</label>
+											<div class="col-sm-3">
 												<select id="fiStat" name="fiStat" class="form-control">
 													<option value="1">正常</option>
 													<option value="2">失效</option>

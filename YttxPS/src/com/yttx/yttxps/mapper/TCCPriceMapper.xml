@@ -135,6 +135,17 @@
       and FS_RESTYPE = #{fsRestype,jdbcType=CHAR}
       and FT_STARTDATE = #{ftStartdate,jdbcType=DATE}
   </delete>
+  
+  <!-- 删除某一类资源下某一个资源的所有信息 -->
+  <delete id="deleteByResTypeAndNo">
+    DELETE FROM 
+    	TCCPrice
+    WHERE
+		FS_RESTYPE = #{resType,jdbcType=CHAR} AND
+		FS_RESNO   = #{resNo,jdbcType=CHAR}
+  </delete>
+  
+  
   <delete id="deleteByExample" parameterType="com.yttx.yttxps.model.TCCPriceExample">
     <!--
       WARNING - @mbggenerated
@@ -300,4 +311,49 @@
       and FS_RESTYPE = #{fsRestype,jdbcType=CHAR}
       and FT_STARTDATE = #{ftStartdate,jdbcType=DATE}
   </update>
+  
+  <resultMap id="resPriceResultMap" type="com.yttx.yttxps.model.ResoucePrice">
+    <result column="FI_DATE"    property="date"     jdbcType="CHAR" />
+    <result column="FS_RESTYPE" property="resType"  jdbcType="CHAR" />
+    <result column="FS_RESNO"   property="resNo"    jdbcType="CHAR" />
+    <result column="FS_CCNO"    property="costNo"   jdbcType="CHAR" />
+    <result column="FD_PRICE"   property="price"    jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <select id="selectOneDaySelective" parameterType="com.yttx.yttxps.model.ResoucePrice"
+  	resultMap="resPriceResultMap">
+	  	SELECT 
+	  		#{date} FI_DATE,
+	 	   	FS_RESTYPE,
+	 	   	FS_RESNO,
+	 	   	FS_CCNO,
+	 	   	FD_PRICE
+		FROM 
+			TCCPrice 
+		WHERE 
+			To_Date(#{date},'yyyy-mm-dd') BETWEEN FT_STARTDATE AND FT_ENDDATE
+	      	AND TRIM(FS_RESTYPE) = #{resType}
+	      	<if test="resNo != null and resNo !=''">
+	      		AND TRIM(FS_RESNO)  = #{resNo}
+	      	</if>
+	      	<if test="costNo != null and costNo!=''">
+	      		AND  TRIM(FS_CCNO) = #{costNo}
+	      	</if>
+	    ORDER BY FS_CCNO
+  </select>
+  
+  <select id="insertPrice" statementType="CALLABLE" parameterType="com.yttx.yttxps.model.TCCPrice">  
+	<![CDATA[  
+	    {call pkg_common.prc_insertPrice(
+	    	#{ftStartdate,mode=IN,jdbcType=DATE},
+	    	#{ftEnddate,mode=IN,jdbcType=DATE},
+	    	#{fsRestype,mode=IN,jdbcType=VARCHAR},
+	    	#{fsResno,mode=IN,jdbcType=VARCHAR},
+	    	#{fsCcno,mode=IN,jdbcType=VARCHAR},
+	    	#{fdPrice,mode=IN,jdbcType=DECIMAL},
+	    	#{excuteCode,mode=OUT,jdbcType=VARCHAR},
+	    	#{errorMsg,mode=OUT,jdbcType=VARCHAR})
+	    }  
+	]]>  
+</select>  
 </mapper>

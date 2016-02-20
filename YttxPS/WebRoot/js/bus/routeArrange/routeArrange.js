@@ -16,7 +16,7 @@ function editCustom(id) {
 
 function deleteCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/routeArrange/delete.jsp?no=" + raw.fiIndex;
+	var frameSrc = "/jsp/routeArrange/delete.jsp?no=" + raw.fsId;
 	$("#delIframe").attr("src", frameSrc);
     $('#delModal').modal({ show: true, backdrop: 'static' });
 };
@@ -30,17 +30,41 @@ function picCustom(id) {
 
 $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#reset").click();
+	$(this).find("#reset").click();
+	$(this).find("#fsId").val(raw.fsId);
+	$(this).find("#fiGenindex").val(raw.fiGenindex);
 	$(this).find("#fsName").val(raw.fsName);
+	$(this).find("#fsRegions").val(raw.fsRegions);
 	$(this).find("#fiDays").val(raw.fiDays);
+	$(this).find("#fsProperty").val(raw.fsProperty);
+	$(this).find("#ftStartdate").val(raw.ftStartdate);
+	$(this).find("#ftEnddate").val(raw.ftEnddate);
+	$(this).find("#fsStartplace").val(raw.fsStartplace);
+	$(this).find("#fsTitle").val(raw.fsTitle);
+	$(this).find("#fsTitlepic").val(raw.fsTitlepic);
+	$(this).find("#fsSummary").val(raw.fsSummary);
 	$(this).find("#fiStat").val(raw.fiStat);
+	$(this).find("#fcSchedule").val(raw.fcSchedule);
+	$(this).find("#fcRessnapshot").val(raw.fcRessnapshot);
 });
 
 $("#editIframe").on("load",function(){
 	$(this).contents().find("#reset").click();
-	$(this).contents().find("#fiIndex").val(raw.fiIndex);
+	$(this).contents().find("#fsId").val(raw.fsId);
+	$(this).contents().find("#fiGenindex").val(raw.fiGenindex);
 	$(this).contents().find("#fsName").val(raw.fsName);
+	$(this).contents().find("#fsRegions").val(raw.fsRegions);
 	$(this).contents().find("#fiDays").val(raw.fiDays);
+	$(this).contents().find("#fsProperty").val(raw.fsProperty);
+	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
+	$(this).contents().find("#ftEnddate").val(raw.ftEnddate);
+	$(this).contents().find("#fsStartplace").val(raw.fsStartplace);
+	$(this).contents().find("#fsTitle").val(raw.fsTitle);
+	$(this).contents().find("#fsTitlepic").val(raw.fsTitlepic);
+	$(this).contents().find("#fsSummary").val(raw.fsSummary);
 	$(this).contents().find("#fiStat").val(raw.fiStat);
+	$(this).contents().find("#fcSchedule").val(raw.fcSchedule);
+	$(this).contents().find("#fcRessnapshot").val(raw.fcRessnapshot);
 });
 
 
@@ -161,13 +185,23 @@ jQuery(function($) {
 	for (k in items)
 		s += ';' + k + ":" + items[k];
 	s = s.substring(1);
+	
+	var fsProperty = {
+			'01' : '专家推荐',
+			'02' : '热门线路',
+			'03' : '特价线路'
+		};
+	var s1 = '';
+	for (k in items)
+		s1 += ';' + k + ":" + items[k];
 	jQuery(grid_selector).jqGrid(
 			{
-				url : "/routeArrange/findGen.htm",
+				url : "/routeArrange/findRouteArrange.htm",
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '路线编码', '路线名称', '路线天数', '状态' ],
+				colNames : [ '操作', '路线编码', '路线统称编码', '路线名称', '所属地区', '线路天数', '线路类型', '有效起始日期', '有效截止日期', '发团地',
+				             '线路标题', '线路缩略图', '摘要', '日程快照', '状态', '模糊快照'],
 				colModel : [ {
 					name : 'myac',
 					index : '',
@@ -177,23 +211,115 @@ jQuery(function($) {
 					resize : false,
 					formatter : actFormatter
 				}, {
-					name : 'fiIndex',
-					index : 'fiIndex',
+					name : 'fsId',
+					index : 'fsId',
 					width : 85,
 					sorttype : "int",
+					hidden : true,
+					hidden : true
+				}, {
+					name : 'fiGenindex',
+					index : 'fiGenindex',
+					width : 100,
+					editable : true,
+					sorttype : "char",
 					hidden : true
 				}, {
 					name : 'fsName',
 					index : 'fsName',
-					width : 100,
+					width : 80,
+					editable : true,
+					sorttype : "char"
+				}, {
+					name : 'fsRegions',
+					index : 'fsRegions',
+					width : 70,
 					editable : true,
 					sorttype : "char"
 				}, {
 					name : 'fiDays',
 					index : 'fiDays',
-					width : 100,
+					width : 70,
 					editable : true,
 					sorttype : "int"
+				}, {
+					name : 'fsProperty',
+					index : 'fsProperty',
+					width : 70,
+					editable : true,
+					edittype : 'select',
+					editoptions : {
+						value : s1
+					},
+					formatter : function(v, opt, rec) {
+						return fsProperty[v];
+					},
+					unformat : function(v) {
+						for (k in fsProperty)
+							if (fsProperty[k] == v)
+								return k;
+						return '1';
+					}
+				}, {
+					name : 'ftStartdate',
+					index : 'ftStartdate',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					formatter : function(value){
+						var timestamp = "";
+						if(value != null){//rData[7]表示日期列
+							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+						}
+						return timestamp;
+					}
+				}, {
+					name : 'ftEnddate',
+					index : 'ftEnddate',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					formatter : function(value){
+						var timestamp = "";
+						if(value != null){//rData[7]表示日期列
+							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+						}
+						return timestamp;
+					}
+				}, {
+					name : 'fsStartplace',
+					index : 'fsStartplace',
+					width : 70,
+					editable : true,
+					sorttype : "char"
+				}, {
+					name : 'fsTitle',
+					index : 'fsTitle',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					hidden : true
+				}, {
+					name : 'fsTitlepic',
+					index : 'fsTitlepic',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					hidden : true
+				}, {
+					name : 'fsSummary',
+					index : 'fsSummary',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					hidden : true
+				}, {
+					name : 'fcSchedule',
+					index : 'fcSchedule',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					hidden : true
 				}, {
 					name : 'fiStat',
 					index : 'fiStat',
@@ -213,6 +339,13 @@ jQuery(function($) {
 								return k;
 						return '1';
 					}
+				}, {
+					name : 'fcRessnapshot',
+					index : 'fcRessnapshot',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					hidden : true
 				}],
 
 				viewrecords : true,

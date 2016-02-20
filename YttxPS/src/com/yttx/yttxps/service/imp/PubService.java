@@ -1,14 +1,18 @@
 package com.yttx.yttxps.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yttx.comm.DateUtil;
 import com.yttx.yttxps.mapper.IBaseMapper;
 import com.yttx.yttxps.mapper.RegionMapMapper;
+import com.yttx.yttxps.mapper.TCCPriceMapper;
 import com.yttx.yttxps.model.RegionMap;
+import com.yttx.yttxps.model.ResoucePrice;
 import com.yttx.yttxps.service.IPubService;
 
 
@@ -17,6 +21,9 @@ public class PubService<T> implements IPubService<T> {
 	
 	@Autowired
 	private RegionMapMapper regionMapMapper;
+	
+	@Autowired
+	private TCCPriceMapper tCCPriceMapper;
 
 	@Override
 	public List<RegionMap> findRegionByManageNo(String key) {
@@ -33,11 +40,7 @@ public class PubService<T> implements IPubService<T> {
 		int rows = (Integer) map.get("rows");
 		int page = (Integer)map.get("page");
 		if(records  > 0) {
-			if(records%rows==0){
-				total = records/rows ;
-			}else{
-				total = records/rows + 1;
-			}
+			total = records/rows + 1;
 			map.put("total", total);
 		}
 		if(page > total) {
@@ -57,5 +60,22 @@ public class PubService<T> implements IPubService<T> {
 		} else {
 			return findRegionFullName(r1.getManageno()) + "-" + r1.getName();
 		}
+	}
+
+
+	@Override
+	public List<ResoucePrice> findResoucePrice(ResoucePrice resQue){
+		List<ResoucePrice> rps = null;
+		List<String> days = DateUtil.getPerDayOfPeriodTime(resQue.getStartDate(), resQue.getEndDate());
+		if(days!=null&&days.size()>0){
+			rps=new ArrayList<ResoucePrice>();
+			for(String day:days){
+				resQue.setDate(day);
+				List<ResoucePrice> subRps = tCCPriceMapper.selectOneDaySelective(resQue);
+				if(subRps != null)
+					rps.addAll(subRps);
+			}
+		}
+		return rps;
 	}
 }

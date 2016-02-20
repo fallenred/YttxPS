@@ -63,6 +63,32 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right"
+												for="fsRegions">景区</label>
+											<div class="col-sm-3">
+												<select id="scenic" name="scenic" class="form-control">
+												</select>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-success pull-right"
+													id="addScenicBtn">添加</button>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-success pull-left"
+													id="rmScenicBtn">删除</button>
+											</div>
+										</div>
+									</div>
+										
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsProperty"></label>
+											<div class="col-sm-8" id="div_scenics">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsType">状态</label>
 											<div class="col-sm-3">
 												<select id="fiStat" name="fiStat" class="form-control">
