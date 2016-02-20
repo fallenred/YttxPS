@@ -74,7 +74,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 				model.addAttribute("message", "用户原密码错误");
 			}else{
 				sysOper.setSysOperPwd(confpwd);
-				sysOper.setPwdStat(1);
+				sysOper.setPwdStat(1L);
 				
 				int rs = sysService.updateSysOper(sysOper);
 				if(rs != 1){
