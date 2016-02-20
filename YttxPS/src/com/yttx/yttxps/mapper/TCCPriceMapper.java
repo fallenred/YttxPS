@@ -86,4 +86,9 @@ public interface TCCPriceMapper {
 	 * 查询某一天的价格
 	 */
 	List<ResoucePrice> selectOneDaySelective(ResoucePrice resQue);
+	
+	/**
+	 * 资源定价
+	 */
+	List<ResoucePrice> insertPrice(TCCPrice price);
 }

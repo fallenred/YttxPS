@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yttx.yttxps.model.TRestaurant;
+import com.yttx.yttxps.model.vo.RestaurantPriceReq;
 
 /**
  * 类描述：餐厅资源配置Service
@@ -52,4 +53,12 @@ public interface IRestaurantService {
 	 */
 	@Transactional
 	boolean deleteRestaurant(String no);
+
+	/**
+	 * 提交餐厅价格
+	 * @param String no
+	 * @return boolean
+	 */
+	@Transactional
+	boolean submitPrice(RestaurantPriceReq rpReq);
 }

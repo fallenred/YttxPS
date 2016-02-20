@@ -341,4 +341,19 @@
 	      	</if>
 	    ORDER BY FS_CCNO
   </select>
+  
+  <select id="insertPrice" statementType="CALLABLE" parameterType="com.yttx.yttxps.model.TCCPrice">  
+	<![CDATA[  
+	    {call pkg_common.prc_insertPrice(
+	    	#{ftStartdate,mode=IN,jdbcType=DATE},
+	    	#{ftEnddate,mode=IN,jdbcType=DATE},
+	    	#{fsRestype,mode=IN,jdbcType=VARCHAR},
+	    	#{fsResno,mode=IN,jdbcType=VARCHAR},
+	    	#{fsCcno,mode=IN,jdbcType=VARCHAR},
+	    	#{fdPrice,mode=IN,jdbcType=DECIMAL},
+	    	#{excuteCode,mode=OUT,jdbcType=VARCHAR},
+	    	#{errorMsg,mode=OUT,jdbcType=VARCHAR})
+	    }  
+	]]>  
+</select>  
 </mapper>

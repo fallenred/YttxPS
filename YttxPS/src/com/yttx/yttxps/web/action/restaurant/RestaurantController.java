@@ -238,14 +238,7 @@ public class RestaurantController extends BaseController {
 			return JsonResult.jsonError((String)validMap.get("message"));
 		}
 		try {
-			List<TCCPrice> tPrices =rpReq.getPrices();
-			for(TCCPrice price:tPrices){
-				price.setFsRestype("ct");
-				price.setFsResno(rpReq.getNo());
-				price.setFtStartdate(rpReq.getStartDate());
-				price.setFtEnddate(rpReq.getEndDate());
-				//TODO 调用函数
-			}
+			restaurantService.submitPrice(rpReq);
 		} catch (Exception e) {
 			return JsonResult.jsonError(e.getMessage());
 		}

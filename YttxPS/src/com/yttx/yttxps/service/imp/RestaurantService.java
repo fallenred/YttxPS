@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.yttx.yttxps.mapper.TCCPriceMapper;
 import com.yttx.yttxps.mapper.TRestaurantMapper;
+import com.yttx.yttxps.model.TCCPrice;
 import com.yttx.yttxps.model.TRestaurant;
+import com.yttx.yttxps.model.vo.RestaurantPriceReq;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.service.IRestaurantService;
 
@@ -95,5 +97,22 @@ public class RestaurantService implements IRestaurantService{
 		return no.toString();
 	}
 
-	
+	/**
+	 * 提交餐厅价格选型
+	 */
+	@Override
+	public boolean submitPrice(RestaurantPriceReq rpReq) {
+		List<TCCPrice> tPrices =rpReq.getPrices();
+		for(TCCPrice price:tPrices){
+			price.setFsRestype("ct");
+			price.setFsResno(rpReq.getNo());
+			price.setFtStartdate(rpReq.getStartDate());
+			price.setFtEnddate(rpReq.getEndDate());
+			tCCPriceMapper.insertPrice(price);
+			if("ERROR".equalsIgnoreCase(price.getExcuteCode())){
+				throw new RuntimeException(price.getErrorMsg());
+			}
+		}
+		return true;
+	}
 }

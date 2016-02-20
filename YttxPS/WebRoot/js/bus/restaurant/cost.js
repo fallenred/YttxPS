@@ -4,6 +4,7 @@ var cost_item ={
 	"000019":"午餐费用",
 	"000020":"晚餐费用"
 }
+var calendar=null;
 /**
  * 
  * 格式化金额
@@ -69,11 +70,20 @@ $("#configPrice").click(function(){
     $('#priceModal').modal({ show: true, backdrop: 'static' });
 })
 
+/**
+ * 弹出框-->"新增"弹出框-->重新加载数据
+ */
+$("#addModal", parent.document).on("hidden.bs.modal", function() {
+	
+});
+
+
+
 $(function(){
 	/**
 	 * 初始化日历表
 	 */
-	var calendar = $('#calendar').fullCalendar({
+	calendar = $('#calendar').fullCalendar({
 		 buttonText: {
 			prev: '上一月',
 			next: '下一月'
@@ -115,7 +125,6 @@ $(function(){
 							}
 						}
 					}
-					console.log(dataArray);
 					for(var k in dataArray){
 						console.log(dataArray[k]);
 						events.push({
