@@ -50,273 +50,127 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsProperty">路线类型</label>
-											<div class="col-sm-2">
-												<select id="fsProperty" name="fsProperty">
-													<option value="01">专家推荐</option>
-													<option value="02">热门路线</option>
-													<option value="03">特价路线</option>
+											<label class="col-sm-2 control-label no-padding-right" for="fiGenIndex">所属线路</label>
+											<div class="col-sm-3">
+												<select id="fiGenindex" name="fiGenindex" class="form-control">
 												</select>
 											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fiGenIndex">路线标题</label>
-											<div class="col-sm-2">
-												<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="线路标题"  />
+											<label class="col-sm-2 control-label no-padding-right" for="fsName">路线名称</label>
+											<div class="col-sm-3">
+												<input type="text" id="fsName" name="fsName" class="form-control" placeholder="路线名称"  />
 											</div>
 											
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsProperty">路线名称</label>
-											<div class="col-sm-2">
-												<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="线路名称"  />
+											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">所属地区</label>
+											<div class="col-sm-3">
+												<input type="text" id="fsRegions" name="fsRegions" class="form-control" placeholder="所属地区"  />
 											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fiGenIndex">行程天数</label>
-											<div class="col-sm-2">
-												<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="行程天数"  />
-											</div>
-											
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="regionname">所属地区</label>
-											<div class="col-sm-2">
-												<input type="text" placeholder="请选择行政区域" name="regionname"
-													data-key="0086" data-idx="0" data-full="中国"
-													id="regionname" class="inp-search" /> <input
-													type="hidden" name="regionno" id="regionno" />
-												<div id="selectCity" class="localcity"></div>
-											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="regionname">出发地点</label>
-											<div class="col-sm-2">
-												<input type="text" placeholder="请选择行政区域" name="regionname"
-													data-key="0086" data-idx="0" data-full="中国"
-													id="regionname" class="inp-search" /> <input
-													type="hidden" name="regionno" id="regionno" />
-												<div id="selectCity" class="localcity"></div>
+											<label class="col-sm-2 control-label no-padding-right" for="fsStartplace">发团地</label>
+											<div class="col-sm-3">
+												<input type="text" id="fsStartplace" name="fsStartplace" class="form-control" placeholder="发团地"  />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="regionname">出发日期</label>
-											<div class="col-sm-2">
-												<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder=""/>
+											<label class="col-sm-2 control-label no-padding-right" for="fsProperty">线路类型</label>
+											<div class="col-sm-3">
+												<select class="form-control" id="fsProperty" name="fsProperty">
+													<option value="01">专家推荐</option>
+													<option value="02">热门线路</option>
+													<option value="03">特价线路</option>
+												</select>
 											</div>
-											<div class="col-sm-2">
-												<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder=""/>
+											<label class="col-sm-2 control-label no-padding-right" for="fiDays">线路天数</label>
+											<div class="col-sm-3">
+												<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="线路天数"  />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="regionname">路线摘要</label>
+											<label class="col-sm-2 control-label no-padding-right" for="ftStartdate">有效日期</label>
+											<div class="col-sm-2">
+												<input type="text" id="ftStartdate" name="ftStartdate" class="form-control" placeholder=""/>
+											</div>
+											<label class="col-sm-1 control-label" style="width: 10px;">至</label>
+											<div class="col-sm-2">
+												<input type="text" id="ftEnddate" name="ftEnddate" class="form-control" placeholder=""/>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fiStat">线路状态</label>
+											<div class="col-sm-3">
+												<select class="form-control" id="fiStat" name="fiStat">
+													<option value="1">正常</option>
+													<option value="-100">注销</option>
+												</select>
+											</div>
+											<label class="col-sm-2 control-label no-padding-right" for="transportArrange">车型选择</label>
+											<div class="col-sm-3">
+												<select id="transportArrange" name="transportArrange" class="form-control">
+												</select>
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">导游星级</label>
+											<div class="col-sm-3">
+												<select id="guideLvl" name="guideLvl" class="form-control">
+													<option value="05">5星导游</option>
+													<option value="04">4星导游</option>
+													<option value="03">3星导游</option>
+													<option value="02">2星导游</option>
+													<option value="01">1星导游</option>
+												</select>
+											</div>
+											<label class="col-sm-2 control-label no-padding-right" for="fiDays">导游选择</label>
+											<div class="col-sm-3">
+												<select id="guideFsNo" name="guideFsNo" class="form-control">
+												</select>
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsTitle">线路标题</label>
 											<div class="col-sm-8">
-												<textarea class="form-control" rows="3" placeholder="路线摘要"></textarea>
+												<input type="text" id="fsTitle" name="fsTitle" class="form-control" placeholder="线路标题"/>
 											</div>
 										</div>
 									</div>
-									<div>
-										<div class="row" style="margin-top: 10px;">
-											<div class="col-sm-10 col-md-offset-1" style="border: 1px solid #999;padding: 0px;">
-												<h4 style="margin-left: 10px;">第一天</h5>
-												<div class="row">
-													<div class="form-group">
-														<label class="col-sm-2 control-label" for="regionname">路线</label>
-														<div class="col-sm-3">
-															<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="路线"/>
-														</div>
-														<label class="col-sm-2 control-label" for="regionname">住宿</label>
-														<div class="col-sm-3">
-															<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="住宿"/>
-														</div>
-													</div>
-												</div>
-												<div class="row col-sm-11">
-													<div class="form-group" style="padding: 0px;">
-														<label class="col-sm-2 control-label" for="regionname">早餐</label>
-														<div class="col-sm-2">
-															<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="早餐"/>
-														</div>
-														<label class="col-sm-2 control-label" for="regionname">中餐</label>
-														<div class="col-sm-2">
-															<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="中餐"/>
-														</div>
-														<label class="col-sm-2 control-label" for="regionname">晚餐</label>
-														<div class="col-sm-2">
-															<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="晚餐"/>
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="form-group" style="padding: 0px;">
-														<label class="col-sm-2 control-label" for="regionname">景区</label>
-														<div class="col-sm-2">
-															<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="景区"/>
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="form-group" style="padding: 0px;">
-														<label class="col-sm-2 control-label" for="regionname">景区介绍</label>
-														<div class="col-sm-9">
-															<textarea class="form-control" rows="3" placeholder="景区介绍"></textarea>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row" style="margin-top: 10px;">
-											<div class="col-sm-10 col-md-offset-1" style="border: 1px solid #999;padding: 0px;">
-												<h4 style="margin-left: 10px;">第二天</h5>
-												<div class="row">
-													<div class="form-group">
-														<label class="col-sm-2 control-label" for="regionname">路线</label>
-														<div class="col-sm-3">
-															<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="路线"/>
-														</div>
-														<label class="col-sm-2 control-label" for="regionname">住宿</label>
-														<div class="col-sm-3">
-															<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="住宿"/>
-														</div>
-													</div>
-												</div>
-												<div class="row col-sm-11">
-													<div class="form-group" style="padding: 0px;">
-														<label class="col-sm-2 control-label" for="regionname">早餐</label>
-														<div class="col-sm-2">
-															<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="早餐"/>
-														</div>
-														<label class="col-sm-2 control-label" for="regionname">中餐</label>
-														<div class="col-sm-2">
-															<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="中餐"/>
-														</div>
-														<label class="col-sm-2 control-label" for="regionname">晚餐</label>
-														<div class="col-sm-2">
-															<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="晚餐"/>
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="form-group" style="padding: 0px;">
-														<label class="col-sm-2 control-label" for="regionname">景区</label>
-														<div class="col-sm-2">
-															<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="景区"/>
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="form-group" style="padding: 0px;">
-														<label class="col-sm-2 control-label" for="regionname">景区介绍</label>
-														<div class="col-sm-9">
-															<textarea class="form-control" rows="3" placeholder="景区介绍"></textarea>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row col-sm-2 col-md-offset-9" style="margin-top: 10px;">
-											<button type="button" class="btn btn-success" data-dismiss="modal">新增天数</button>
-										</div>
-									</div>
-									
-									<div class="row" style="margin-top: 10px;">
-										<div class="col-sm-10 col-md-offset-1">
-											<h4 style="margin-left: 10px;">费用说明</h4>
-											<hr style="border: none; background-color: #999; height: 1px;"/>
-											<div class="row">
-												<div class="form-group">
-													<label class="col-sm-2 control-label" for="regionname">交通</label>
-													<div class="col-sm-9">
-														<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="交通"/>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="form-group">
-													<label class="col-sm-2 control-label" for="regionname">门票</label>
-													<div class="col-sm-9">
-														<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="门票"/>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="form-group">
-													<label class="col-sm-2 control-label" for="regionname">住宿</label>
-													<div class="col-sm-9">
-														<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="住宿"/>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="form-group">
-													<label class="col-sm-2 control-label" for="regionname">用餐</label>
-													<div class="col-sm-9">
-														<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="用餐"/>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="form-group">
-													<label class="col-sm-2 control-label" for="regionname">导游</label>
-													<div class="col-sm-9">
-														<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="导游"/>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="form-group">
-													<label class="col-sm-2 control-label" for="regionname">其他</label>
-													<div class="col-sm-9">
-														<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="其他"/>
-													</div>
-												</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsTitlepic">线路缩略图</label>
+											<div class="col-sm-8">
+												<input type="text" id="fsTitlepic" name="fsTitlepic" class="form-control" placeholder=""/>
 											</div>
 										</div>
 									</div>
-									
-									<div class="row" style="margin-top: 10px;">
-										<div class="col-sm-10 col-md-offset-1">
-											<h4 style="margin-left: 10px;">预定须知</h4>
-											<hr style="border: none; background-color: #999; height: 1px;"/>
-											<div class="row">
-												<div class="form-group">
-													<div class="col-md-offset-1 col-sm-10">
-														<textarea class="form-control" rows="3" placeholder="预订须知"></textarea>
-													</div>
-												</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsSummary">线路摘要</label>
+											<div class="col-sm-8">
+												<textarea class="form-control" id="fsSummary" name="fsSummary" rows="3" placeholder="线路摘要"></textarea>
 											</div>
 										</div>
 									</div>
-									<div class="row" style="margin-top: 10px;">
-										<div class="col-sm-10 col-md-offset-1">
-											<h4 style="margin-left: 10px;">优惠活动</h4>
-											<hr style="border: none; background-color: #999; height: 1px;"/>
-											<div class="row">
-												<div class="form-group">
-													<div class="col-md-offset-1 col-sm-10">
-														<textarea class="form-control" rows="3" placeholder="优惠活动"></textarea>
-													</div>
-												</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsSummary">日程快照</label>
+											<div class="col-sm-8">
+												<textarea class="ckeditor" id="fcSchedule" name="fcSchedule"></textarea>
 											</div>
 										</div>
 									</div>
-									<div class="row" style="margin-top: 10px;">
-										<div class="col-sm-10 col-md-offset-1">
-											<h4 style="margin-left: 10px;">重要提示</h4>
-											<hr style="border: none; background-color: #999; height: 1px;"/>
-											<div class="row">
-												<div class="form-group">
-													<div class="col-md-offset-1 col-sm-10">
-														<textarea class="form-control" rows="3" placeholder="重要提示"></textarea>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									
 									<div id = "message" class="alert alert-warning">
 										
 									</div>
