@@ -29,6 +29,7 @@ jQuery(function($) {
 	//车型变更
 	$("#transType").change(function(){
 		getTccPrice($("#transType").val(), 'transPrice');
+		$("#resTransName").attr("value", $("#transType").find("option:selected").text());
 	});
 	//导游级别变更
 	$("#guideLvl").change(function(){
@@ -40,6 +41,7 @@ jQuery(function($) {
 			if (key == $("#guideNo").val())
 				$("#guidePrice").val(value);
 	    });
+		$("#guideName").attr("value", $("#guideNo").find("option:selected").text());
 	});
 	
 	//获取资源价格
@@ -87,6 +89,7 @@ jQuery(function($) {
 					}
 				});
 				$("#guideNo").html(html);
+				$("#guideName").attr("value", $("#guideNo").find("option:selected").text());
 			}
 		});
 	}
@@ -134,6 +137,7 @@ jQuery(function($) {
 			$('#name').focus();
 			return false;
 		} 
+		$("#fcSchedule").val(CKEDITOR.instances["fcSchedule"].getData());
 		$.post("/orderlist/editOrderlist.htm",
 				$("#editform").serialize(),
 				function(data){

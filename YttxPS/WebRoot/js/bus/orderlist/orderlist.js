@@ -54,10 +54,11 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fiStat").val(raw.fiStat);
 	$(this).contents().find("#fsDac").val(raw.fsDac);
 	$(this).contents().find("#fcSchedule").html(raw.fcSchedule);
-	if (raw.fsNo != null) 
-		findCommFuzzySnapshot(this, raw.fsNo);
 	if (raw.fiGenindex != null)
 		getTransportArrange(this, raw.fiGenindex);
+	if (raw.fsNo != null) {
+		findCommSnapshot(this, raw.fsNo);
+	}
 });
 
 function getTccPrice(obj, fsResno, id){
@@ -67,26 +68,41 @@ function getTccPrice(obj, fsResno, id){
         data: 'fsResno='+fsResno+'&ftStartdate='+$(obj).contents().find("#ftStartdate").val()+'&fsCcno=000000&fsRestype=cx',
         dataType: "json",
         success: function(data){
-        	$(obj).contents().find("#"+id).val(data.fdPrice);
+        	if ($(obj).contents().find("#"+id).val() == '')
+        		$(obj).contents().find("#"+id).val(data.fdPrice);
         }
     });
 }
 
-//获取模糊字段
-function findCommFuzzySnapshot(obj, no){
+//获取资源快照
+function findCommSnapshot(obj, no){
 	$.ajax({
 		type: "POST",
-		url: "/orderlist/findCommFuzzySnapshot.htm",
+		url: "/orderlist/findCommSnapshot.htm",
 		data: 'no='+no,
 		dataType: "json",
 		success: function(data){
 			var html = ''; 
-			$.each(data.reslist, function(commentIndex, comment){
+			//模糊字段处理
+			$.each(data.commFuzzySnapshot.reslist, function(commentIndex, comment){
 				if(comment['restype'] == 'cx'){
 					$(obj).contents().find("#transName").val(comment['resname']);
 				}
 				if(comment['restype'] == 'dy'){
 					$(obj).contents().find("#custGuideLvl").val(comment['resname']);
+				}
+			});
+			//精确字段处理
+			$.each(data.commResSnapshot.reslist, function(commentIndex, comment){
+				if(comment['restype'] == 'cx'){
+					$(obj).contents().find("#transType").val(comment['resno']);
+					$(obj).contents().find("#resTransName").attr("value", comment['resname']);
+					$(obj).contents().find("#transPrice").attr("value", comment['cclist'].price);
+				}
+				if(comment['restype'] == 'dy'){
+					$(obj).contents().find("#guideNo").val(comment['resno']);
+					$(obj).contents().find("#guideName").attr("value", comment['resname']);
+					$(obj).contents().find("#guidePrice").attr("value", comment['cclist'].price);
 				}
 			});
 		}
@@ -107,6 +123,7 @@ function getTransportArrange(obj, index){
 			});
 			$(obj).contents().find("#transType").html(html);
 			getTccPrice(obj, $(obj).contents().find("#transType").val(), 'transPrice');
+			$(obj).contents().find("#resTransName").attr("value", $(obj).contents().find("#transType").find("option:selected").text());
 		}
 	});
 }

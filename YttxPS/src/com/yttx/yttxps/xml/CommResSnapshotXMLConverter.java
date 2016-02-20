@@ -20,7 +20,7 @@ public class CommResSnapshotXMLConverter {
 	  static
 	  {
 	    xStream.alias("body", Body.class);
-	    xStream.addImplicitArray(Body.class, "reslist", Reslist.class);
+	    xStream.addImplicitCollection(Body.class, "reslist", "reslist", Reslist.class);
 	    
 	    xStream.aliasField("restype", Reslist.class, "restype");
 	    xStream.aliasField("resprop", Reslist.class, "resprop");
@@ -37,7 +37,7 @@ public class CommResSnapshotXMLConverter {
 	  {
 	    StringWriter sw = new StringWriter();
 	    xStream.marshal(input, new CompactWriter(sw));
-	    return XML_DECLARATION + sw.toString();
+	    return XML_DECLARATION + XML_ROOT + sw.toString() + "</u:root>";
 	  }
 	  
 	  public static Body convert2Msg(String xml)

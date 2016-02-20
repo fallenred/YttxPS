@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,40 +75,27 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		return body;
     }
 	/**
-	 * 查询公共模糊字段
+	 * 查询资源快照
 	 * @param req
 	 * @return
 	 */
-	@RequestMapping(value="findCommFuzzySnapshot.htm", method = RequestMethod.POST)
+	@RequestMapping(value="findCommSnapshot.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object ajaxfindCommFuzzySnapshot(String no)
+	public Object ajaxfindCommSnapshot(String no)
     {  
 		logger.debug("当前查询条件 {}", no);
 		TOrderlistExample example = new TOrderlistExample();
 		example.createCriteria().andFsNoEqualTo(no);
 		List<TOrderlistWithBLOBs> list = orderlistService.selectTOrderlist(example);
-		Body body = null;
-		if (CollectionUtils.isNotEmpty(list))
-			body = CommFuzzySnapshotXMLConverter.convert2Msg(list.get(0).getFcCommfuzzysnapshot());
-		return body;
-    }
-	/**
-	 * 查询公共精确字段
-	 * @param req
-	 * @return
-	 */
-	@RequestMapping(value="findCommResSnapshot.htm", method = RequestMethod.POST)
-	@ResponseBody
-	public Object ajaxfindCommResSnapshot(String no)
-    {  
-		logger.debug("当前查询条件 {}", no);
-		TOrderlistExample example = new TOrderlistExample();
-		example.createCriteria().andFsNoEqualTo(no);
-		List<TOrderlistWithBLOBs> list = orderlistService.selectTOrderlist(example);
-		Body body = null;
-		if (CollectionUtils.isNotEmpty(list))
-			body = CommResSnapshotXMLConverter.convert2Msg(list.get(0).getFcCommressnapshot());
-		return body;
+		if (CollectionUtils.isEmpty(list))
+			return null;
+		Map<String, Body> map = new HashMap<String, Body>();
+		//模糊快照
+		map.put("commFuzzySnapshot", CommFuzzySnapshotXMLConverter.convert2Msg(list.get(0).getFcCommfuzzysnapshot()));
+		//精确快照
+		if (StringUtils.isNotBlank(list.get(0).getFcCommressnapshot()));
+			map.put("commResSnapshot", CommResSnapshotXMLConverter.convert2Msg(list.get(0).getFcCommressnapshot()));
+		return map;
     }
 	
 	/**

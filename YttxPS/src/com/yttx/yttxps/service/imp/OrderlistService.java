@@ -11,6 +11,8 @@ import com.yttx.yttxps.model.TOrderlistExample;
 import com.yttx.yttxps.model.TOrderlistWithBLOBs;
 import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.service.IPubService;
+import com.yttx.yttxps.xml.Body;
+import com.yttx.yttxps.xml.CommResSnapshotXMLConverter;
 
 
 @Service("orderlistService")
@@ -39,6 +41,10 @@ public class OrderlistService implements IOrderlistService {
 
 	@Override
 	public int update(TOrderlistWithBLOBs record) {
+		Body body = new Body();
+		body.setReslist(record.getReslist());
+		String fcCommressnapshot = CommResSnapshotXMLConverter.convert2XML(body);
+		record.setFcCommressnapshot(fcCommressnapshot);
 		return orderlistMapper.updateByPrimaryKeySelective(record);
 	}
 
