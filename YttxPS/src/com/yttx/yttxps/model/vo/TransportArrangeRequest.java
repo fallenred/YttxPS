@@ -36,6 +36,12 @@ public class TransportArrangeRequest extends JqGridRequest implements
 			Criteria criteria = example.createCriteria();
 			if (transportArrange.getFiGenindex() != null)
 				criteria.andFiGenindexEqualTo(transportArrange.getFiGenindex());
+			if (transportArrange.getFiGenindex() != null)
+				criteria.andFiGenindexEqualTo(transportArrange.getFiGenindex());
+			if (transportArrange.getFiGenindex() != null)
+				criteria.andFiGenindexEqualTo(transportArrange.getFiGenindex());
+			if (transportArrange.getFiGenindex() != null)
+				criteria.andFiGenindexEqualTo(transportArrange.getFiGenindex());
 		}
 	}
 }

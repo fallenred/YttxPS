@@ -89,16 +89,15 @@
 												<label class="col-sm-1 control-label no-padding-right"
 													for="fsName">门票名称</label>
 												<div class="col-sm-2">
-													<input maxlength="150"
-														type="text" id="fsName" placeholder="门票名称" />
+													<input class="form-control" maxlength="150" type="text" id="fsName" placeholder="门票名称" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="fsType">门票类型</label>
-												<div class="col-sm-1">
-													<select id="fsType">
-														<option value="">----门票类型----</option>
+												<div class="col-sm-2">
+													<select class="form-control" id="fsType">
+														<option value="">----类型----</option>
 														<option value="01">主门票</option>
 														<option value="02">车票</option>
 														<option value="03">小景区</option>
@@ -108,8 +107,8 @@
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="lvl">状态</label>
-												<div class="col-sm-1">
-													<select id="fiStat">
+												<div class="col-sm-2">
+													<select class="form-control" id="fiStat">
 														<option value="">----状态----</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
