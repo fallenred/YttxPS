@@ -1,6 +1,5 @@
 package com.yttx.yttxps.web.action.trade;
 
-import java.awt.image.RescaleOp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,8 +23,6 @@ import com.yttx.yttxps.model.vo.OrderlistRequest;
 import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.web.action.LoginController;
-import com.yttx.yttxps.xml.CommFuzzySnapshotXMLConverter;
-import com.yttx.yttxps.xml.CommResSnapshotXMLConverter;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
 import com.yttx.yttxps.xml.bean.Body;
 
