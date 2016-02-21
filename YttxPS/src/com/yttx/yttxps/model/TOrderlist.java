@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import com.yttx.yttxps.xml.Reslist;
+import com.yttx.yttxps.xml.bean.Reslist;
 
 public class TOrderlist {
 
