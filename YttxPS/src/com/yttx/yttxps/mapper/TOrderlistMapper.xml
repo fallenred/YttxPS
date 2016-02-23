@@ -682,7 +682,7 @@
     where FS_NO = #{fsNo,jdbcType=CHAR}
   </update>
   
-   <!-- 分页查询总记录-->
+  <!-- 分页查询总记录-->
   <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
   	select count(*) from TORDERLIST
 	     where 1=1

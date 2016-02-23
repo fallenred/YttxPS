@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,8 @@ import com.yttx.yttxps.model.vo.OrderlistRequest;
 import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.web.action.LoginController;
-import com.yttx.yttxps.xml.Body;
-import com.yttx.yttxps.xml.CommFuzzySnapshotXMLConverter;
-import com.yttx.yttxps.xml.CommResSnapshotXMLConverter;
-import com.yttx.yttxps.xml.ScheduleXMLConverter;
+import com.yttx.yttxps.xml.ResScheduleXMLConverter;
+import com.yttx.yttxps.xml.bean.Body;
 
 @Controller
 @Scope("prototype")
@@ -56,58 +55,30 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
     }
 	
 	/**
-	 * 查询日程快照
+	 * 查询资源快照
 	 * @param req
 	 * @return
 	 */
-	@RequestMapping(value="findResSnapshot.htm", method = RequestMethod.POST)
+	@RequestMapping(value="findCommSnapshot.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object ajaxfindResSnapshot(String no)
+	public Object ajaxfindCommSnapshot(String no)
     {  
 		logger.debug("当前查询条件 {}", no);
 		TOrderlistExample example = new TOrderlistExample();
 		example.createCriteria().andFsNoEqualTo(no);
 		List<TOrderlistWithBLOBs> list = orderlistService.selectTOrderlist(example);
-		Body body = null;
-		if (CollectionUtils.isNotEmpty(list))
-			body = ScheduleXMLConverter.convert2Msg(list.get(0).getFcSchedule());
-		return body;
-    }
-	/**
-	 * 查询公共模糊字段
-	 * @param req
-	 * @return
-	 */
-	@RequestMapping(value="findCommFuzzySnapshot.htm", method = RequestMethod.POST)
-	@ResponseBody
-	public Object ajaxfindCommFuzzySnapshot(String no)
-    {  
-		logger.debug("当前查询条件 {}", no);
-		TOrderlistExample example = new TOrderlistExample();
-		example.createCriteria().andFsNoEqualTo(no);
-		List<TOrderlistWithBLOBs> list = orderlistService.selectTOrderlist(example);
-		Body body = null;
-		if (CollectionUtils.isNotEmpty(list))
-			body = CommFuzzySnapshotXMLConverter.convert2Msg(list.get(0).getFcCommfuzzysnapshot());
-		return body;
-    }
-	/**
-	 * 查询公共精确字段
-	 * @param req
-	 * @return
-	 */
-	@RequestMapping(value="findCommResSnapshot.htm", method = RequestMethod.POST)
-	@ResponseBody
-	public Object ajaxfindCommResSnapshot(String no)
-    {  
-		logger.debug("当前查询条件 {}", no);
-		TOrderlistExample example = new TOrderlistExample();
-		example.createCriteria().andFsNoEqualTo(no);
-		List<TOrderlistWithBLOBs> list = orderlistService.selectTOrderlist(example);
-		Body body = null;
-		if (CollectionUtils.isNotEmpty(list))
-			body = CommResSnapshotXMLConverter.convert2Msg(list.get(0).getFcCommressnapshot());
-		return body;
+		if (CollectionUtils.isEmpty(list))
+			return null;
+		Map<String, Body> map = new HashMap<String, Body>();
+		//模糊快照
+		if (StringUtils.isNotBlank(list.get(0).getFcCommfuzzysnapshot())){
+			map.put("commFuzzySnapshot", ResScheduleXMLConverter.convert2Body(list.get(0).getFcCommfuzzysnapshot()));
+		}
+		//精确快照
+		if (StringUtils.isNotBlank(list.get(0).getFcCommressnapshot())){
+			map.put("commResSnapshot", ResScheduleXMLConverter.convert2Body(list.get(0).getFcCommressnapshot()));
+		}
+		return map;
     }
 	
 	/**

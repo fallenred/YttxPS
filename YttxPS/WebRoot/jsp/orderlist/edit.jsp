@@ -196,13 +196,16 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="transType">计调车型</label>
 											<div class="col-sm-3">
+												<input type="hidden" name="reslist[0].restype" value="cx"/>
+												<input type="hidden" name="reslist[0].resprop" value="comm"/>
+												<input type="hidden" id="resTransName" name="reslist[0].resname" value=""/>
 												<select class="form-control" id="transType" name="reslist[0].resno"></select>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="transPrice">车型价格</label>
 											<div class="col-sm-3">
-												<input type="hidden" name="reslist[0].cclist.ccno" readonly="readonly" value="000000"/>
-												<input type="hidden" name="reslist[0].cclist.ccname" readonly="readonly" value="价格(通用)"/>
+												<input type="hidden" name="reslist[0].cclist.ccno" value="000000"/>
+												<input type="hidden" name="reslist[0].cclist.ccname" value="价格(通用)"/>
 												<input type="text" id="transPrice" name="reslist[0].cclist.price" readonly="readonly" class="form-control"/>
 											</div>
 										</div>
@@ -232,6 +235,9 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="guideNo">计调导游选择</label>
 											<div class="col-sm-3">
+												<input type="hidden" name="reslist[1].restype" value="dy"/>
+												<input type="hidden" name="reslist[1].resprop" value="comm"/>
+												<input type="hidden" id="guideName" name="reslist[1].resname" value=""/>
 												<select class="form-control" id="guideNo" name="reslist[1].resno"></select>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"

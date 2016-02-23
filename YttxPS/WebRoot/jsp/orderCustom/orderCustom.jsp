@@ -78,22 +78,19 @@
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="fsName">路线名称</label>
+												<label class="col-sm-1 control-label no-padding-right" for="fsName">路线名称</label>
 												<div class="col-sm-2">
 													<input class="form-control" maxlength="10" type="text" id="fsName" placeholder="路线名称" />
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="fiDays">路线天数</label>
+												<label class="col-sm-1 control-label no-padding-right" for="fiDays">路线天数</label>
 												<div class="col-sm-2">
 													<input class="form-control" maxlength="150" type="text" id="fiDays" placeholder="路线天数" />
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="fiStat">状态</label>
+												<label class="col-sm-1 control-label no-padding-right" for="fiStat">状态</label>
 												<div class="col-sm-2">
 													<select class="form-control" id="fiStat">
 														<option value="">----状态----</option>
@@ -131,7 +128,7 @@
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal"
 												aria-hidden="true">×</button>
-											<h4 class="modal-title" id="addModalLabel">订单结算</h4>
+											<h4 class="modal-title" id="addModalLabel">订单批次新增</h4>
 										</div>
 										<div class="modal-body">
 											<iframe id="addIframe" width="100%" height="500px"
@@ -154,10 +151,10 @@
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal"
 												aria-hidden="true">×</button>
-											<h4 class="modal-title" id="addModalLabel">计调订单</h4>
+											<h4 class="modal-title" id="addModalLabel">订单批次修改</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="editIframe" width="100%" height="1400px"
+											<iframe id="editIframe" width="100%" height="1300px"
 												frameborder="0" scrolling="no"></iframe>
 										</div>
 
@@ -203,6 +200,6 @@
 
 	</div>
 	<!-- /.main-container -->
-	<script src="/js/bus/orderlist/orderlist.js"></script>
+	<script src="/js/bus/orderCustom/orderCustom.js"></script>
 </body>
 </html>
