@@ -297,4 +297,46 @@
 			WHERE rowno &gt; #{startrow}
 		</if>
 	</select>
+	
+	<!-- 查询景区下所有餐厅信息 add by huangtao 2016-02-23 -->
+	<select id="selectRestaurant" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT 
+			* 
+		FROM (
+			SELECT res.* FROM 
+				(select t.*, s.fs_scenicno from trestaurant t left join TResourceScenic s on t.fs_no = s.fs_resno and s.fs_restype = 'ct') res
+			WHERE
+				1=1
+			<if test="name != null and name != ''">
+				AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
+			</if>
+			<if test="regionno != null and regionno != ''">
+				AND FS_REGIONNO like '%'||#{regionno,jdbcType = VARCHAR}||'%'
+			</if>
+			<if test="minScale != null">
+				AND FI_SCALE &gt;= #{minScale,jdbcType = INTEGER}
+			</if>
+			<if test="maxScale != null">
+				AND FI_SCALE &lt;= #{maxScale,jdbcType = INTEGER}
+			</if>
+			<if test="special != null and special !=''">
+				AND FS_SPECIAL = #{special,jdbcType = VARCHAR}
+			</if>
+			<if test="lvl != null and lvl !=''">
+				AND FS_LVL = #{special,jdbcType = VARCHAR}
+			</if>
+			<if test="stat != null">
+				AND FI_STAT = #{stat,jdbcType=INTEGER}
+			</if>
+			<choose>
+                <when test="scenicNo">
+                  and fs_scenicno in 
+                  <foreach close=")" collection="scenicNo" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+            </choose>
+		)
+	</select>
+	
 </mapper>

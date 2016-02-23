@@ -1,6 +1,7 @@
 package com.yttx.yttxps.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yttx.yttxps.model.TRestaurant;
 
@@ -33,6 +34,13 @@ public interface TRestaurantMapper<T> extends IBaseMapper<T>{
      * 通过主键获取餐厅信息
      */
     TRestaurant selectByPrimaryKey(String no);
+    
+    /**
+     * 查询餐厅列表
+     * add by huangtao
+     * 2016-02-23
+     */
+    List<TRestaurant> selectRestaurant(Map<String, Object> map);
 
     /**
      * 动态更新餐厅信息(餐厅属性不为空或不为''的更新)
