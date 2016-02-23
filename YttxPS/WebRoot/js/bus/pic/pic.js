@@ -7,7 +7,7 @@ var delpic=function(index, path) {
 	$.ajax({
 	     type: 'POST',
 	     url: '/pic/delPic.htm' ,
-	     data: 'index=' + index + '&srcfile=' + path,
+	     data: 'index=' + index + '&srcFile=' + path,
 	     success: function(data){
 					if(data.result == "ok") {
 						$("#message").text("删除记录成功");
@@ -76,13 +76,30 @@ jQuery(function($) {
 	//	文件上传
 	$("#upfileBtn").on("click", function() {
 		$("#colorbox").hide();
-		if($("#belongtype").val() == "") {
+		if($("#resType").val() == "") {
 			$("#message").show();
 			$("#message").text("文件上传必须输入归属资源代码，请检查输入！");
-			$('#belongtype').focus();
+			$('#resType').focus();
 			return;
 		}
-		
+		if($("#resNo").val() == "") {
+			$("#message").show();
+			$("#message").text("文件上传必须输入资源代码，请检查输入！");
+			$('#resNo').focus();
+			return;
+		}
+		if($("#seq").val() == "") {
+			$("#message").show();
+			$("#message").text("文件上传必须输入序号，请检查输入！");
+			$('#seq').focus();
+			return;
+		}
+		if($("#main").val() == "") {
+			$("#message").show();
+			$("#message").text("文件上传必须输入是否主图，请检查输入！");
+			$('#main').focus();
+			return;
+		}
 		$("#upfileModal").modal({
 		    remote: "/jsp/pic/add.jsp"
 		});
@@ -115,9 +132,9 @@ jQuery(function($) {
 	}
 	var showpics=function(pics) {
 		for(var i=0;i<pics.length;i++){
-			var item = '<li><a class="cboxElement" data-rel="colorbox" href="' + pics[i]["srcfile"] + '">' +
-				'<img width="150" height="150" src="' + pics[i]["srcfile"] + '" alt="150*150"></a>' +
-				'<div class="tools tools-bottom"><a href="#" onclick="delpic(' + pics[i]["index"] + ',\'' + pics[i]["srcfile"] + '\')' +  
+			var item = '<li><a class="cboxElement" data-rel="colorbox" href="' + pics[i]["srcFile"] + '">' +
+				'<img width="150" height="150" src="' + pics[i]["srcFile"] + '" alt="150*150"></a>' +
+				'<div class="tools tools-bottom"><a href="#" onclick="delpic(' + pics[i]["index"] + ',\'' + pics[i]["srcFile"] + '\')' +  
 				'"><i class="ace-icon fa fa-times red"></i></a></div></li>';
 			$("#colorbox").append(item);
 		}

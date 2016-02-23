@@ -25,12 +25,12 @@ public class PicRequest extends JqGridRequest implements
 	public void copyPic(Map<String, Object> map) {
 		if (pic != null) {
 			map.put("index", pic.getIndex() == null ? 0:pic.getIndex());
-			map.put("belongtype", pic.getBelongtype() == null ? "" : pic.getBelongtype());
-			map.put("subtype", pic.getSubtype() == null ? "" : pic.getSubtype());
-			map.put("no", pic.getNo() == null ? "" : pic.getNo());
+			map.put("resType", pic.getResType() == null ? "" : pic.getResType());
+			map.put("resNo", pic.getResNo() == null ? "" : pic.getResNo());
 			map.put("seq", pic.getSeq() == null ? 0: pic.getSeq());
-			map.put("srcfile",
-					pic.getSrcfile() == null ? "" : pic.getSrcfile());
+			map.put("main", pic.getMain() == null ? "" : pic.getMain());
+			map.put("srcfile",pic.getSrcFile() == null ? "" : pic.getSrcFile());
+			map.put("desc",pic.getDesc() == null ? "" : pic.getDesc());
 		}
 	}
 }
