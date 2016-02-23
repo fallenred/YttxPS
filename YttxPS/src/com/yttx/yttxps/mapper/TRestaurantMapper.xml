@@ -29,6 +29,18 @@
 		FS_LVL,
 		FI_STAT
 	</sql>
+	
+	<!-- 找到满足特定状态的餐厅 -->
+	<select id="findRestaurantByStat" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM
+			TRestaurant
+		<if test="stat!=null">
+			WHERE 
+				FI_STAT = #{stat,jdbcType=INTEGER}
+		</if>
+	</select>
 
 
 	<!-- 通过主键查询详细信息 -->

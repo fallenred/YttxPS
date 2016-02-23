@@ -67,7 +67,12 @@
 			<submenu>
 				<item id="11a0" name="导游管理" url="/jsp/guide/guide.jsp" />
 			</submenu>
-		</item>
+		</item>	
 		
+		<item id="1200" name="结算管理管理" icon="menu-icon fa fa-table" >
+			<submenu>
+				<item id="12a0" name="结算管理" url="/cOrder/page.htm" />
+			</submenu>
+		</item>	
 	</menu>
 </xml>
