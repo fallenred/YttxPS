@@ -4,7 +4,7 @@
 <html lang="zh">
 <head>
 <meta charset="utf-8" />
-<title>后台管理系统</title>
+<title></title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />

@@ -30,6 +30,16 @@ $("#showRoomModal").on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
 });
 
+/**
+ * 酒店房型价格
+ * @param id
+ */
+function roomPriceCustom(id) {
+    var raw = jQuery("#grid-table").jqGrid('getRowData', id);
+    var page = "/jsp/roomPrice/roomPrice.jsp?no=" + raw.fsRoomno + "&name=" + escape(raw.fsName);
+    window.open(page);
+};
+
 jQuery(function($) {
     
     var fsAccomno = $.getUrlParam('no');
@@ -39,6 +49,8 @@ jQuery(function($) {
         alert("未取到该酒店编号！");
         $("#roomModal", parent.document).find(".close").click();
     }
+    
+    $("title").html(accomname + "房型维护");
     
     // 重置
     $("#reset", "#queryfield").click(function() {
@@ -66,6 +78,9 @@ jQuery(function($) {
 
     // 定义按钮列
     actFormatter = function(cellvalue, options, rawObject) {
+    	var roomBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="roomButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="roomPriceCustom('
+            + options.rowId
+            + ');" data-original-title="房型价格配置"><span class="ui-icon ace-icon fa fa-cog red"></span></div>';
         var detail = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showCustom('
                 + options.rowId
                 + ');" data-original-title="查看记录详情"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
@@ -77,7 +92,7 @@ jQuery(function($) {
         var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteCustom('
                 + options.rowId
                 + ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-        return detail + editBtn + deleteBtn;
+        return roomBtn + detail + editBtn + deleteBtn;
     };
 
     // resize to fit page size

@@ -22,7 +22,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yttx.comm.DateEditor;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Room;
+import com.yttx.yttxps.model.RoomPrice;
+import com.yttx.yttxps.model.TCCPrice;
+import com.yttx.yttxps.model.vo.RoomPriceRequest;
 import com.yttx.yttxps.model.vo.RoomRequest;
+import com.yttx.yttxps.service.IRoomPriceService;
 import com.yttx.yttxps.service.IRoomService;
 import com.yttx.yttxps.web.action.BaseController;
 
@@ -42,6 +46,9 @@ public class RoomController extends BaseController {
 
 	@Autowired
 	private IRoomService rootService;
+	
+	@Autowired
+	private IRoomPriceService roomPriceService;
 
 	/**
 	 * 视图数据类型转换
@@ -189,5 +196,61 @@ public class RoomController extends BaseController {
 		Map<String, Object> result = (Map<String, Object>)JsonResult.jsonOk();
 		result.put("data", data);
 		return result;
+	}
+	
+	/**
+	 * 分页查询房型信息
+	 * 
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value = "findRoomPrice.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object ajaxfindRoomPrice(RoomPriceRequest req) {
+		logger.debug("当前查询条件 {}", req.getRoomPrice());
+		Map<String, Object> map = new HashMap<String, Object>();
+		req.copyPage(map);
+		req.copyRoom(map);
+		List<RoomPrice> list = roomPriceService.selectSelectivePage(map);
+		map.put("rows", list);
+		return map;
+	}
+	
+	/**
+	 * 新增房型信息
+	 * 
+	 * @param root
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "addRoomPrice.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ajaxaddRoomPrice(TCCPrice price) {
+		logger.debug("当前新增对象 {}", price);
+		try {
+			roomPriceService.insertRoomPrice(price);
+		} catch (Exception e) {
+			return (Map<String, Object>) JsonResult.jsonError("新增失败");
+		}
+		return (Map<String, Object>) JsonResult.jsonOk();
+	}
+	
+	/**
+	 * 删除房型价格信息
+	 * 
+	 * @param root
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "delRoomPrice.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ajaxdelRoomPrice(TCCPrice price) {
+		logger.debug("当前删除key {}", price);
+		try {
+			roomPriceService.delRoomPrice(price);
+		} catch (Exception e) {
+			return (Map<String, Object>) JsonResult.jsonError("删除失败");
+		}
+		return (Map<String, Object>) JsonResult.jsonOk();
 	}
 }
