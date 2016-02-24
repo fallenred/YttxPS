@@ -1,4 +1,4 @@
-package com.yttx.yttxps.xml;
+package com.yttx.yttxps.xml.bean;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ public class Body {
 	@XStreamImplicit(itemFieldName="daylist")
 	private List<Daylist> daylist;
 
+	@XStreamImplicit(itemFieldName="reslist")
 	private List<Reslist> reslist;
 
 	public List<Daylist> getDaylist() {

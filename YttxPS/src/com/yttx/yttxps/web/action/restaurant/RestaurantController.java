@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.restaurant;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -84,6 +86,22 @@ public class RestaurantController extends BaseController {
 		map.put("rows", list);
 		return map;
     }
+	
+	/**
+	 * 根据景区查询餐厅
+	 */
+	@RequestMapping(value="selectRestaurant.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object selectRestaurant(@RequestParam(value = "scenicNo[]") String[] scenicNo)
+	{  
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (scenicNo == null || scenicNo.length < 1){
+			return null;
+		}
+		map.put("scenicNo", Arrays.asList(scenicNo));
+		return restaurantService.selectRestaurant(map);
+    }
+	
 	/**
 	 * 新增餐厅--打开新增页面
 	 */

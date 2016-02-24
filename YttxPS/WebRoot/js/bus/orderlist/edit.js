@@ -16,11 +16,99 @@ jQuery(function($) {
 		if (index == 3)
 			$("#selectCity", "#editform").hide();
 	}
-
+	
 	$("#regionname", "#editform").click(function() {
 		$("#selectCity", "#editform").show();
 	});
+	
+	//获取导游下拉列表
+	getGuide();
+	//用于存放导游对应价格
+	var guideMap = new Map();
+	
+	//车型变更
+	$("#transType").change(function(){
+		getTccPrice($("#transType").val(), 'transPrice');
+		$("#resTransName").attr("value", $("#transType").find("option:selected").text());
+	});
+	//导游级别变更
+	$("#guideLvl").change(function(){
+		getGuide();
+	});
+	//导游变更后修改价格
+	$("#guideNo").change(function(){
+		guideMap.each(function(key,value,index){
+			if (key == $("#guideNo").val())
+				$("#guidePrice").val(value);
+	    });
+		$("#guideName").attr("value", $("#guideNo").find("option:selected").text());
+	});
+	
+	//获取资源价格
+	function getTccPrice(fsResno, id){
+		$.ajax({
+	        type: "GET",
+	        url: "/tccPrice/findTccPriceByKey.htm",
+	        data: 'fsResno='+fsResno+'&ftStartdate='+$("#ftStartdate").val()+'&fsCcno=000000&fsRestype=cx',
+	        dataType: "json",
+	        success: function(data){
+	        	$("#"+id).val(data.fdPrice);
+	        }
+	    });
+	}
+	
+	//获取线路列表
+	$.ajax({
+        type: "GET",
+        url: "/gen/selectGen.htm",
+        data: '',
+        dataType: "json",
+        success: function(data){
+        	var html = ''; 
+        	$.each(data, function(commentIndex, comment){
+        		html += '<option value=' + comment['fiIndex'] + '>' + comment['fsName'] + '</option>';
+        	});
+        	$("#genindex").html(html);
+        }
+    });
+	
+	//获取导游列表
+	function getGuide(){
+		$.ajax({
+			type: "GET",
+			url: "/guide/selectGuide.htm",
+			data: "guide.lvl="+$("#guideLvl").val(),
+			dataType: "json",
+			success: function(data){
+				var html = ''; 
+				$.each(data, function(commentIndex, comment){
+					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
+					guideMap.put(comment['no'], comment['salary']);
+					if (commentIndex == 0) {
+						$("#guidePrice").attr("value", comment['salary']);
+					}
+				});
+				$("#guideNo").html(html);
+				$("#guideName").attr("value", $("#guideNo").find("option:selected").text());
+			}
+		});
+	}
+	
+	$("#regionname", "#addform").click(function() {
+		$("#selectCity", "#addform").show();
+	});
 
+	//重置iframe高度
+	function resetIframeHeight(type){
+		var height = $(window.parent.document).find("#addIframe").attr("height");
+		height = height.substring(0,height.length - 2);
+		if ("add" == type) {
+			height = (parseInt(height)+21);
+		} else {
+			height = (parseInt(height)-21);
+		}
+		$(window.parent.document).find("#addIframe").attr("height", height+"px");
+	}
 
 	//	重置
 	$("#reset").on("click", function() {
@@ -49,7 +137,8 @@ jQuery(function($) {
 			$('#name').focus();
 			return false;
 		} 
-		$.post("/gen/editGen.htm",
+		$("#fcSchedule").val(CKEDITOR.instances["fcSchedule"].getData());
+		$.post("/orderlist/editOrderlist.htm",
 				$("#editform").serialize(),
 				function(data){
 			var json = eval("("+data+")");

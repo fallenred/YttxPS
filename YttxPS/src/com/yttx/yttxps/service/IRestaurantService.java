@@ -61,4 +61,11 @@ public interface IRestaurantService {
 	 */
 	@Transactional
 	boolean submitPrice(RestaurantPriceReq rpReq);
+	
+	/**
+	 * 查询餐厅列表
+	 * @param map
+	 * @return
+	 */
+	List<TRestaurant> selectRestaurant(Map<String, Object> map);
 }

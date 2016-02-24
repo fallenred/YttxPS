@@ -1,4 +1,4 @@
-package com.yttx.yttxps.xml;
+package com.yttx.yttxps.xml.bean;
 
 import java.util.List;
 

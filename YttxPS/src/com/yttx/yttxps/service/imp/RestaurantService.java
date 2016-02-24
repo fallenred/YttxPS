@@ -39,6 +39,16 @@ public class RestaurantService implements IRestaurantService{
 	public List<TRestaurant> selectSelectivePage(Map<String, Object> map) {
 		return pubService.doPage(map, restaurantMapper);
 	}
+	
+	/**
+	 * 查询餐厅列表
+	 * add by huangtao
+	 * 2012-02-23
+	 */
+	@Override
+	public List<TRestaurant> selectRestaurant(Map<String, Object> map) {
+		return restaurantMapper.selectRestaurant(map);
+	}
 
 	/**
 	 * 新增一个餐厅
