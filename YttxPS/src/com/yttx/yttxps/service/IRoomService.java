@@ -25,7 +25,7 @@ public interface IRoomService {
 	List<Room> selectSelectivePage(Map<String, Object> map);
 	
 	@Transactional(readOnly = true)
-	Room selectRoomInfo(BigDecimal index);
+	Room selectRoomInfo(String fsRoomno);
 	
 	@Transactional
 	int insert(Room room);
@@ -34,7 +34,7 @@ public interface IRoomService {
 	int update(Room room);
 	
 	@Transactional
-	int delete(BigDecimal index);
+	int delete(String fsRoomno);
 	
 	@Transactional(readOnly = true)
 	BigDecimal selectSequence();

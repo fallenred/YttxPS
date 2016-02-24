@@ -62,5 +62,5 @@ public interface TtransportArrangeMapper<T> extends IBaseMapper<T>  {
 
 	int selectFsNo();
 	
-	List<TtransportArrange> selectViewByExample(TtransportArrangeExample example);
+	List<TtransportArrange> selectTtransportArrangeByExample(TtransportArrangeExample example);
 }

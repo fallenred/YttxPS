@@ -168,7 +168,7 @@
 	</div>
 	<!-- /.main-container -->
 	<script src="/js/bus/closelist/edit.js"></script>
-
+	
 	<c:if test="${!empty succflag && succflag =='1'}">
 
 		<script type="text/javascript">

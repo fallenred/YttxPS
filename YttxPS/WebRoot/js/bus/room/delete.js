@@ -4,12 +4,12 @@ jQuery(function($) {
 		$.ajax({
 		     type: 'POST',
 		     url: '/room/delRoom.htm' ,
-		     data: 'id=' + $("#delForm input[name='id']").val(),
+		     data: 'fsRoomno=' + $("#delForm input[name='fsRoomno']").val(),
 		     success: function(data){
 						if(data.result == "ok") {
 						    $("#delForm #question").hide();
 							$("#delForm #message").text("删除记录成功");
-							$("#delForm #submit").attr("disabled","disabled");
+							$("#delForm #submit").attr("disabled", "disabled");
 							return true;
 						}
 						else {

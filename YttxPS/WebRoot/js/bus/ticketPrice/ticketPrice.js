@@ -220,7 +220,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '门票代码', '票名称', '价格类型', '淡季挂牌价格全票', '淡季挂牌价格半票', '淡季挂牌价格儿童票', 
+				colNames : [ '操作', '门票代码', '票名称', '价格类型' ,'团队全票价格', '淡季挂牌价格全票', '淡季挂牌价格半票', '淡季挂牌价格儿童票', 
 				             '淡季挂牌价格免票', '淡季团队价格全票', '淡季团队价格半票', '淡季团队价格儿童票', '淡季团队价格免票', '旺季挂牌价格全票',
 				             '旺季挂牌价格半票', '旺季挂牌价格儿童票', '旺季挂牌价格免票', '旺季团队价格全票', '旺季团队价格半票', '旺季团队价格儿童票',
 				             '旺季团队价格免票', '开始日期', '结束日期' ],
@@ -269,6 +269,12 @@ jQuery(function($) {
 								return k;
 						return '1';
 					}
+				}, {
+					name : 'fdFullTp',
+					index : 'fdFullTp',
+					width : 35,
+					sortable : true,
+					editable : true
 				}, {
 					name : 'fdFullLowQp',
 					index : 'fdFullLowQp',

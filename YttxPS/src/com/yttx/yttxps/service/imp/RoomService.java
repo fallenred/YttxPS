@@ -44,6 +44,7 @@ public class RoomService implements IRoomService {
 
 	@Override
 	public int insert(Room record) {
+		record.setFsRoomno(String.format("%010d", roomMapper.selectSequence().intValue()));
 		return roomMapper.insert(record);
 	}
 
@@ -53,13 +54,13 @@ public class RoomService implements IRoomService {
 	}
 
 	@Override
-	public int delete(BigDecimal index) {
-		return roomMapper.deleteByPrimaryKey(index);
+	public int delete(String fsRoomno) {
+		return roomMapper.deleteByPrimaryKey(fsRoomno);
 	}
 
 	@Override
-	public Room selectRoomInfo(BigDecimal index) {
-		return roomMapper.selectByPrimaryKey(index);
+	public Room selectRoomInfo(String fsRoomno) {
+		return roomMapper.selectByPrimaryKey(fsRoomno);
 	}
 
 	public BigDecimal selectSequence(){

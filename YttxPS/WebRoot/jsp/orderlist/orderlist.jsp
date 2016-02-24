@@ -81,23 +81,21 @@
 												<label class="col-sm-1 control-label no-padding-right"
 													for="fsName">路线名称</label>
 												<div class="col-sm-2">
-													<input maxlength="10" type="text" id="fsName"
-														placeholder="路线名称" />
+													<input class="form-control" maxlength="10" type="text" id="fsName" placeholder="路线名称" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="fiDays">路线天数</label>
 												<div class="col-sm-2">
-													<input maxlength="150"
-														type="text" id="fiDays" placeholder="路线天数" />
+													<input class="form-control" maxlength="150" type="text" id="fiDays" placeholder="路线天数" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="fiStat">状态</label>
-												<div class="col-sm-1">
-													<select id="fiStat">
+												<div class="col-sm-2">
+													<select class="form-control" id="fiStat">
 														<option value="">----状态----</option>
 														<option value="1">正常</option>
 														<option value="-100">已销</option>
@@ -156,10 +154,10 @@
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal"
 												aria-hidden="true">×</button>
-											<h4 class="modal-title" id="addModalLabel">修改订单</h4>
+											<h4 class="modal-title" id="addModalLabel">计调订单</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="editIframe" width="100%" height="800px"
+											<iframe id="editIframe" width="100%" height="1400px"
 												frameborder="0" scrolling="no"></iframe>
 										</div>
 

@@ -1,8 +1,4 @@
-
-
-;(function($){
-
-    
+(function($){
     $.fn.localCity = function(options,fn){
         $.fn.localCity.defaults = {  
             defaultcity:null, 
@@ -56,7 +52,7 @@
             
             function loadProv(){            
                 if(that.find('.list').eq(0).find('li').length == 0)             
-                    render('0086', opts.provurl, 0);    
+                    render('000086', opts.provurl, 0);    
             }
             
             that.delegate('.close-x','click',function(e){
