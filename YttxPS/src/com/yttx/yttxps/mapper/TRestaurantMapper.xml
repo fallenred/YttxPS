@@ -36,7 +36,7 @@
 			<include refid="Base_Column_List" />
 		FROM
 			TRestaurant
-		<if test="stat!=null">
+		<if test="stat!= null">
 			WHERE 
 				FI_STAT = #{stat,jdbcType=INTEGER}
 		</if>

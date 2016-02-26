@@ -34,10 +34,10 @@ public class MyBatisSpringDemo {
 		
 		SysOper sysOper = new SysOper();
 		
-		sysOper.setAdminType(1);
+		/*sysOper.setAdminType(1);
 		sysOper.setDepNo(0);
 		sysOper.setPwdStat(1);
-		sysOper.setStat(1);
+		sysOper.setStat(1);*/
 		sysOper.setSysOperId("00003");
 		sysOper.setSysOperName("测试管理员");
 		sysOper.setSysOperPwd("PU8r8H3BvjiyDNbkaUmhBx+dDj0=");

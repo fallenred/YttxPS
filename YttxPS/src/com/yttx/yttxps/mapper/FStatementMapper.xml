@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yttx.yttxps.mapper.FStatementMapper">
+	
+			
+	<!-- ResultMap:简单订单对象simpleOrder的对应map -->
+	<resultMap id="fsResultMap"  type="com.yttx.yttxps.model.corder.FStatement">
+		<id      column="fs_No"              property="statmentId"       jdbcType="VARCHAR" />
+		<result  column="fs_Route_ID"        property="routeID"          jdbcType="INTEGER" />
+		<result  column="fs_RouteName"       property="routeName"        jdbcType="VARCHAR" />
+		<result  column="fs_Name"            property="statmentName"     jdbcType="VARCHAR" />
+		<result  column="fs_Order_ID"        property="orderId"          jdbcType="VARCHAR" />
+		<result  column="fs_User_ID"         property="userID"           jdbcType="VARCHAR" />
+		<result  column="fs_User_SubID"      property="userSubID"        jdbcType="VARCHAR" />
+		<result  column="fs_Oper_ID"         property="OperId"           jdbcType="VARCHAR" />
+		<result  column="ft_CreatDate"       property="creatDateDesc"    jdbcType="VARCHAR" />
+		<result  column="fc_Content"         property="orderContent"     jdbcType="CLOB" />
+		<result  column="fd_TotalFee"        property="totalFee"         jdbcType="DECIMAL" />
+		<result  column="fd_PaidAmt"         property="paidAmt"          jdbcType="DECIMAL" />
+		<result  column="fd_Amt"             property="amt"              jdbcType="DECIMAL" />
+		<result  column="fs_Remark"          property="remark"           jdbcType="VARCHAR" />
+		<result  column="fi_Stat"            property="stat"             jdbcType="INTEGER" />
+	</resultMap>
+	
+	
+	<!--select：找到满足条件的订单的总数  -->
+	<select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
+		SELECT 
+			COUNT(FS_NO) 
+		FROM 
+			TCloselist
+		WHERE
+			 1=1
+		<if test="statementId != null and statementId !=''">
+			AND 
+				fs_No  like '%'||#{statementId,jdbcType = VARCHAR}||'%'
+		</if>
+		<if test="orderId != null and orderId !=''">
+			AND
+				fs_Order_ID like '%'||#{orderId,jdbcType = VARCHAR}||'%'
+		</if>
+		<if test="userId != null and userId !=''">
+			AND
+				fs_User_ID like '%'||#{userId,jdbcType = VARCHAR}||'%'
+		</if>
+		<if test="operId != null and operId !=''">
+			AND
+				Trim(FS_OPER_ID) = Trim(#{operId,jdbcType=VARCHAR})
+		</if>
+		<if test="startDate != null and startDate !=''">
+			AND
+				TRUNC(FT_CREATDATE,'dd') &gt;= TO_DATE(#{startDate,jdbcType=VARCHAR},'yyyy/mm/dd')
+		</if>
+		<if test="endDate != null and endDate !=''">
+			AND
+				TRUNC(FT_CREATDATE,'dd') &lt;= TO_DATE(#{endDate,jdbcType=VARCHAR},'yyyy/mm/dd')
+		</if>
+		<if test="stat != null">
+			AND
+				fi_Stat = #{stat,jdbcType=INTEGER}
+		</if>
+	</select>
+
+
+	<!--select：找到满足条件的某页订单的总数  -->
+	<select id="selectSelectivePage" parameterType="java.util.Map" resultMap="fsResultMap">
+		SELECT 
+			* 
+		FROM(		
+			SELECT
+		        ROWNUM AS rowno,
+		        fs_No,
+				fs_Route_ID,
+				fs_RouteName,
+				fs_Name,
+				fs_Order_ID,
+				fs_User_ID,
+				fs_User_SubID,
+				fs_Oper_ID,
+				to_char(ft_CreatDate,'yyyy-mm-dd hh24:mi:ss') ft_CreatDate,
+				fc_Content,
+				fd_TotalFee,
+				fd_PaidAmt,
+				fd_Amt,
+				fs_Remark,
+				fi_Stat
+		    FROM 
+		        TCloselist
+			WHERE
+				1=1
+				<if test="statementId != null and statementId !=''">
+					AND 
+						fs_No  like '%'||#{statementId,jdbcType = VARCHAR}||'%'
+				</if>
+				<if test="orderId != null and orderId !=''">
+					AND
+						fs_Order_ID like '%'||#{orderId,jdbcType = VARCHAR}||'%'
+				</if>
+				<if test="userId != null and userId !=''">
+					AND
+						fs_User_ID like '%'||#{userId,jdbcType = VARCHAR}||'%'
+				</if>
+				<if test="operId != null and operId !=''">
+					AND
+						Trim(FS_OPER_ID) = Trim(#{operId,jdbcType=VARCHAR})
+				</if>
+				<if test="startDate != null and startDate !=''">
+					AND
+						TRUNC(FT_CREATDATE,'dd') &gt;= TO_DATE(#{startDate,jdbcType=VARCHAR},'yyyy/mm/dd')
+				</if>
+				<if test="endDate != null and endDate !=''">
+					AND
+						TRUNC(FT_CREATDATE,'dd') &lt;= TO_DATE(#{endDate,jdbcType=VARCHAR},'yyyy/mm/dd')
+				</if>
+				<if test="stat != null">
+					AND
+						fi_Stat = #{stat,jdbcType=INTEGER}
+				</if>
+				<if test="endrow != null">
+					AND ROWNUM &lt;= #{endrow}
+				</if>
+			)
+		<if test="startrow != null">
+			WHERE rowno &gt; #{startrow}
+		</if>
+	</select>
+	
+	
+	<!-- select:从序列中生成一个id -->
+	<select id="generateFSId" parameterType="string" resultType="int">
+		SELECT FSTATEMENT_SEQ.NEXTVAL FROM dual
+	</select>
+	
+	
+	<!-- 通过订单号找到一条记录 -->
+	<select id="selectFSByOrderId" parameterType="string" resultMap="fsResultMap">
+		SELECT
+		    fs_No,
+			fs_Route_ID,
+			fs_RouteName,
+			fs_Name,
+			fs_Order_ID,
+			fs_User_ID,
+			fs_User_SubID,
+			fs_Oper_ID,
+			to_char(ft_CreatDate,'yyyy-mm-dd hh24:mi:ss') ft_CreatDate,
+			fc_Content,
+			fd_TotalFee,
+			fd_PaidAmt,
+			fd_Amt,
+			fs_Remark,
+			fi_Stat	
+		FROM 
+			TCloseList
+		WHERE 
+			TRIM(fs_Order_ID)=TRIM(#{orderId,jdbcType=VARCHAR})
+	</select>
+	
+	
+	<!-- 通过结算单号找到一条记录 -->
+	<select id="selectFSById" parameterType="string" resultMap="fsResultMap">
+		SELECT
+		    fs_No,
+			fs_Route_ID,
+			fs_RouteName,
+			fs_Name,
+			fs_Order_ID,
+			fs_User_ID,
+			fs_User_SubID,
+			fs_Oper_ID,
+			to_char(ft_CreatDate,'yyyy-mm-dd hh24:mi:ss') ft_CreatDate,
+			fc_Content,
+			fd_TotalFee,
+			fd_PaidAmt,
+			fd_Amt,
+			fs_Remark,
+			fi_Stat	
+		FROM 
+			TCloseList
+		WHERE 
+			TRIM(fs_No)=TRIM(#{fsId,jdbcType=VARCHAR})
+	</select>
+	
+	<!-- 向数据库中插入一条数据 -->
+	<insert id="insert" parameterType="com.yttx.yttxps.model.corder.FStatement">
+		INSERT INTO TCloseList(
+			fs_No,
+			fs_Route_ID,
+			fs_RouteName,
+			fs_Name,
+			fs_Order_ID,
+			fs_User_ID,
+			fs_User_SubID,
+			fs_Oper_ID,
+			ft_CreatDate,
+			fc_Content,
+			fd_TotalFee,
+			fd_PaidAmt,
+			fd_Amt,
+			fs_Remark,
+			fi_Stat	
+		)VALUES(
+			#{statmentId,jdbcType=VARCHAR},
+			#{routeID,jdbcType=VARCHAR},
+			#{routeName,jdbcType=VARCHAR},
+			#{statmentName,jdbcType=VARCHAR},
+			#{orderId,jdbcType=VARCHAR},
+			#{userID,jdbcType=VARCHAR},
+			#{userSubID,jdbcType=VARCHAR},
+			#{OperId,jdbcType=VARCHAR},
+			#{creatDate,jdbcType=DATE},
+			#{orderContent,jdbcType=CLOB},
+			#{totalFee,jdbcType=DECIMAL},
+			#{paidAmt,jdbcType=DECIMAL},
+			#{amt,jdbcType=DECIMAL},
+			#{remark,jdbcType=VARCHAR},
+			#{stat,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<!-- 动态的更新一条记录 -->
+	<update id="updateFSSelective" parameterType="com.yttx.yttxps.model.corder.FStatement">
+		UPDATE 
+			TCloseList
+		 <set>
+		      <if test="statmentId != null and statmentId !=''">
+		      		fs_No=#{statmentId,jdbcType=VARCHAR},
+		      </if>
+		      <if test="routeID != null and routeID !=''">
+		      		fs_Route_ID=#{routeID,jdbcType=VARCHAR},
+		      </if>
+		      <if test="routeName != null and routeName !=''">
+		      		fs_RouteName=#{routeName,jdbcType=VARCHAR},
+		      </if>
+		      <if test="statmentName != null and statmentName !=''">
+		      		fs_Name=#{statmentName,jdbcType=VARCHAR},
+		      </if>
+		      <if test="orderId != null and orderId !=''">
+		      		fs_Order_ID=#{orderId,jdbcType=VARCHAR},
+		      </if>
+		      <if test="userID != null and userID !=''">
+		      		fs_User_ID=#{userID,jdbcType=VARCHAR},
+		      </if>
+		      <if test="userSubID != null and userSubID !=''">
+		      		fs_User_SubID=#{userSubID,jdbcType=VARCHAR},
+		      </if>
+		      <if test="creatDate != null and creatDate !=''">
+		      		ft_CreatDate=#{creatDate,jdbcType=DATE},
+		      </if>
+		      <if test="orderContent != null and orderContent !=''">
+		      		fc_Content=#{orderContent,jdbcType=CLOB},
+		      </if>
+		      <if test="totalFee != null">
+		      		fd_TotalFee=#{totalFee,jdbcType=DECIMAL},
+		      </if>
+		      <if test="paidAmt != null">
+		      		fd_PaidAmt=#{paidAmt,jdbcType=DECIMAL},
+		      </if>
+		      <if test="amt != null">
+		      		fd_Amt=#{amt,jdbcType=DECIMAL},
+		      </if>
+		      <if test="remark != null and remark !=''">
+		      		fs_Remark=#{remark,jdbcType=VARCHAR},
+		      </if>
+		      <if test="stat != null">
+		      		fi_Stat=#{stat,jdbcType=INTEGER},
+		      </if>
+	    </set>
+		WHERE 
+			Trim(fs_no)=Trim(#{statmentId,jdbcType=VARCHAR})
+	</update>
+</mapper>
