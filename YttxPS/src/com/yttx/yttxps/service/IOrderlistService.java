@@ -22,7 +22,7 @@ public interface IOrderlistService {
 	int insert(TOrderlistWithBLOBs orderlist);
 	
 	@Transactional
-	int update(TOrderlistWithBLOBs orderlist);
+	int update(TOrderlistWithBLOBs orderlist) throws Exception;
 	
 	@Transactional
 	int delete(String no);

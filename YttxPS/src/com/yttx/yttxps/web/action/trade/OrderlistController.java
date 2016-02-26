@@ -25,6 +25,7 @@ import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.web.action.LoginController;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
 import com.yttx.yttxps.xml.bean.Body;
+import com.yttx.yttxps.xml.bean.Root;
 
 @Controller
 @Scope("prototype")
@@ -72,11 +73,13 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		Map<String, Body> map = new HashMap<String, Body>();
 		//模糊快照
 		if (StringUtils.isNotBlank(list.get(0).getFcCommfuzzysnapshot())){
-			map.put("commFuzzySnapshot", ResScheduleXMLConverter.convert2Body(list.get(0).getFcCommfuzzysnapshot()));
+			Root root = ResScheduleXMLConverter.fromXml("http://www.cnacex.com/" ,list.get(0).getFcCommfuzzysnapshot(), Root.class);
+			map.put("commFuzzySnapshot", root.getBody());
 		}
 		//精确快照
 		if (StringUtils.isNotBlank(list.get(0).getFcCommressnapshot())){
-			map.put("commResSnapshot", ResScheduleXMLConverter.convert2Body(list.get(0).getFcCommressnapshot()));
+			Root root = ResScheduleXMLConverter.fromXml("http://www.cnacex.com/", list.get(0).getFcCommressnapshot(), Root.class);
+			map.put("commResSnapshot", root.getBody());
 		}
 		return map;
     }
