@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,9 @@ import com.yttx.yttxps.model.TOrderCustomExample;
 import com.yttx.yttxps.model.TOrderCustomWithBLOBs;
 import com.yttx.yttxps.service.IOrderCustomService;
 import com.yttx.yttxps.service.IPubService;
+import com.yttx.yttxps.xml.ResScheduleXMLConverter;
+import com.yttx.yttxps.xml.bean.Body;
+import com.yttx.yttxps.xml.bean.Root;
 
 
 @Service("orderCustomService")
@@ -39,7 +43,14 @@ public class OrderCustomService implements IOrderCustomService {
 	}
 
 	@Override
-	public int update(TOrderCustomWithBLOBs record) {
+	public int update(TOrderCustomWithBLOBs record) throws Exception {
+		Body body = record.getBody();
+		String fcResSnapshot = "";
+		if (body != null) {
+			Root root = new Root(record.getBody());
+			fcResSnapshot = ResScheduleXMLConverter.toXml("http://www.yttx.com/", root);
+		}
+		record.setFcRessnapshot(fcResSnapshot);
 		return orderCustomMapper.updateByPrimaryKeySelective(record);
 	}
 

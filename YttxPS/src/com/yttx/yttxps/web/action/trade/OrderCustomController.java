@@ -26,6 +26,7 @@ import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.web.action.LoginController;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
 import com.yttx.yttxps.xml.bean.Body;
+import com.yttx.yttxps.xml.bean.Root;
 
 @Controller
 @Scope("prototype")
@@ -71,13 +72,15 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		if (CollectionUtils.isEmpty(list))
 			return null;
 		Map<String, Body> map = new HashMap<String, Body>();
-		//模糊快照
-		if (StringUtils.isNotEmpty(list.get(0).getFcRessnapshot())){
-			map.put("resSnapshot", ResScheduleXMLConverter.convert2Body(list.get(0).getFcRessnapshot()));
-		}
 		//精确快照
+		if (StringUtils.isNotEmpty(list.get(0).getFcRessnapshot())){
+			Root root = ResScheduleXMLConverter.fromXml("http://www.yttx.com/", list.get(0).getFcRessnapshot(), Root.class);
+			map.put("resSnapshot", root.getBody());
+		}
+		//模糊快照
 		if (StringUtils.isNotEmpty(list.get(0).getFcFuzzysnapshot())){
-			map.put("fuzzySnapshot", ResScheduleXMLConverter.convert2Body(list.get(0).getFcFuzzysnapshot()));
+			Root root = ResScheduleXMLConverter.fromXml("http://www.yttx.com/", list.get(0).getFcFuzzysnapshot(), Root.class);
+			map.put("fuzzySnapshot", root.getBody());
 		}
 		return map;
     }
