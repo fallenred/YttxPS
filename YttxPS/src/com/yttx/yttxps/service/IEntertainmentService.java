@@ -42,4 +42,13 @@ public interface IEntertainmentService {
 	void deleteEntertainmentPrice(TCCPrice price);
 
 	List<TEntertainment> selectEntertainment(TEntertainmentExample example);
+	
+	/**
+     * 查询娱乐项目列表
+     * add by huangtao
+     * 2016-02-24
+     * @param map
+     * @return
+     */
+	List<TEntertainment> selectEntertainment(Map<String, Object> map);
 }

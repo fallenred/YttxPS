@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.entertainment;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,6 @@ import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.TCCPrice;
 import com.yttx.yttxps.model.TEntertainment;
 import com.yttx.yttxps.model.TEntertainmentExample;
-import com.yttx.yttxps.model.Tticket;
 import com.yttx.yttxps.model.vo.EntertainmentRequest;
 import com.yttx.yttxps.model.vo.GenRequest;
 import com.yttx.yttxps.service.IEntertainmentService;
@@ -51,6 +51,23 @@ public class EntertainmentController extends BaseController {
 		map.put("rows", list);
 		return map;
 	}
+	
+	/**
+	 * 根据景区查询娱乐项目
+	 * add by huangtao
+	 * 2016-02-24
+	 */
+	@RequestMapping(value="selectEntertainment.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object selectRestaurant(@RequestParam(value = "scenicNo[]") String[] scenicNo)
+	{  
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (scenicNo == null || scenicNo.length < 1){
+			return null;
+		}
+		map.put("scenicNo", Arrays.asList(scenicNo));
+		return entertainmentService.selectEntertainment(map);
+    }
 	
 	/**
 	 * 新增娱乐项目信息

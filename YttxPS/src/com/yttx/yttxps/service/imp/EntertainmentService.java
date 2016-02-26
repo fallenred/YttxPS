@@ -176,4 +176,17 @@ public class EntertainmentService implements IEntertainmentService {
 		return entertainmentMapper.selectByExample(example);
 	}
 
+	/**
+     * 查询娱乐项目列表
+     * add by huangtao
+     * 2016-02-24
+     * @param map
+     * @return
+     */
+	@Override
+	public List<TEntertainment> selectEntertainment(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return entertainmentMapper.selectEntertainment(map);
+	}
+
 }
