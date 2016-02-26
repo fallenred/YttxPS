@@ -7,6 +7,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 
 
+@XStreamAlias("daylist")
 public class Daylist {
 	/**
 	 * 日期标识
@@ -26,10 +27,10 @@ public class Daylist {
 	public void setDayflag(String dayflag) {
 		this.dayflag = dayflag;
 	}
-	public List<Reslist> getReslists() {
+	public List<Reslist> getReslist() {
 		return reslist;
 	}
-	public void setReslists(List<Reslist> reslist) {
+	public void setReslist(List<Reslist> reslist) {
 		this.reslist = reslist;
 	}
 	
