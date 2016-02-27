@@ -52,6 +52,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">所属订单</label>
 											<div class="col-sm-3">
+												<input type="hidden" id="fiId" name="fiId" placeholder="批次id" /> 
 												<input type="hidden" id="fsOrderId" name="fsOrderId" placeholder="订单id" /> 
 												<input type="text" id="fsName" class="form-control" placeholder="所属订单" />
 											</div>
@@ -162,7 +163,7 @@
 											<div class="col-md-offset-2 col-sm-6" id="div_scenics"></div>
 										</div>
 									</div>
-									<input type="text" id="ftStartdate"/>
+									<input type="hidden" id="ftStartdate"/>
 									<div class="row">
 										<!-- <input type="hidden" id="fiDays" name="fiDays" class="form-control" placeholder="线路天数" /> -->
 										<ul id="myTab" class="nav nav-tabs">
@@ -170,17 +171,16 @@
 										</ul>
 										<div id="myTabContent" class="tab-content">
 											<div class="tab-pane fade in active" id="day0">
-												<input type="text" class="fiDays" name="body.daylist[0].dayflag" value="0"/>
-												<input type="text" class="reslistIndex" value="0"/>
+												<input type="hidden" class="fiDays" name="body.daylist[0].dayflag" value="0"/>
+												<input type="hidden" id="day0_resIndex" class="reslistIndex" value="0"/>
 												<div class="row" style="margin-top: 10px;">
 													<div class="col-sm-12" style="padding: 10 0 0 0px;">
 														<div class="row">
 															<div class="form-group">
-																<label class="col-sm-4 pull-left" for="fsRegions">&nbsp;&nbsp;客户需求：<span id="span_ticket"></span></label>
+																<label class="col-sm-4 pull-left" for="fsRegions">&nbsp;&nbsp;<span class="span_mp"></span></label>
 																<label class="col-sm-2 control-label no-padding-right" for="fsRegions">门票选择</label>
 																<div class="col-sm-3">
-																	<select class="select_ticket form-control">
-																	</select>
+																	<select class="select_ticket form-control"></select>
 																</div>
 																<div class="col-sm-1">
 																	<button type="button" class="btn addTicketBtn btn-success pull-right" onclick="javascript:addTicket(this);">添加</button>
@@ -190,72 +190,59 @@
 																</div>
 																<div class="row">
 																	<div class="form-group">
-																		<div class="col-md-offset-6 col-sm-6"></div>
+																		<div class="col-md-offset-1 col-sm-8" id="div_0_mp"></div>
 																	</div>
 																</div>
 															</div>
 														</div>
 														<div class="row">
 															<div class="form-group">
-																<label class="col-sm-4 pull-left" for="fsRegions">&nbsp;&nbsp;客户需求：<span id="span_restaurant"></span></label>
+																<label class="col-sm-4 pull-left" for="fsRegions">&nbsp;&nbsp;<span class="span_ct"></span></label>
 																<label class="col-sm-2 control-label no-padding-right" for="fsRegions">餐厅选择</label>
 																<div class="col-sm-3">
-																	<select id="restaurant" class="form-control">
-																	</select>
+																	<select class="select_restaurant form-control"></select>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn btn-success pull-right" id="addTransportBtn">添加</button>
+																	<button type="button" class="btn btn-success pull-right" onclick="javascript:addRestaurant(this);">添加</button>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn btn-success pull-left" id="rmTransportBtn">删除</button>
+																	<button type="button" class="btn btn-success pull-left" onclick="javascript:rmRestaurant(this);">删除</button>
 																</div>
-															</div>
-														</div>
-														<div class="row">
-															<div class="form-group">
-																<div class="col-md-offset-6 col-sm-6">
-																	<input name="" type="checkbox" /> 早餐&nbsp;&nbsp;&nbsp;
-																	<input name="" type="checkbox" /> 午餐&nbsp;&nbsp;&nbsp;
-																	<input name="" type="checkbox" /> 晚餐&nbsp;&nbsp;&nbsp;
+																<div class="row">
+																	<div class="form-group">
+																		<div class="col-md-offset-1 col-sm-8" id="div_0_ct"> </div>
+																	</div>
 																</div>
 															</div>
 														</div>
 
 														<div class="row">
 															<div class="form-group">
-																<label class="col-sm-4 pull-left" for="fsRegions">&nbsp;&nbsp;客户需求：<span id="span_ticket"></span></label>
+																<label class="col-sm-4 pull-left" for="fsRegions">&nbsp;&nbsp;<span class="span_yl"></span></label>
 																<label class="col-sm-2 control-label no-padding-right" for="fsRegions">娱乐项目选择</label>
 																<div class="col-sm-3">
-																	<select id="transportArrange" name="transportArrange"
-																		class="form-control">
-																	</select>
+																	<select class="select_entertainment form-control"></select>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn btn-success pull-right" id="addTransportBtn">添加</button>
+																	<button type="button" class="btn btn-success pull-right" onclick="javascript:addEntertainment(this);">添加</button>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn btn-success pull-left" id="rmTransportBtn">删除</button>
+																	<button type="button" class="btn btn-success pull-left" onclick="javascript:rmEntertainment(this);">删除</button>
 																</div>
-															</div>
-														</div>
-														<div class="row">
-															<div class="form-group">
-																<label class="col-sm-2 control-label no-padding-right"
-																	for="fsProperty"></label>
-																<div class="col-md-offset-6 col-sm-6">
-																	<input name="" type="checkbox" />全价票&nbsp;&nbsp;&nbsp;
-																	<input name="" type="checkbox" /> 半价票
+																<div class="row">
+																	<div class="form-group">
+																		<div class="col-md-offset-1 col-sm-8" id="div_0_yl"></div>
+																	</div>
 																</div>
 															</div>
 														</div>
 
 														<div class="row">
 															<div class="form-group">
-																<label class="col-sm-4 pull-left" for="fsRegions">&nbsp;&nbsp;客户需求：<span id="span_ticket"></span></label>
+																<label class="col-sm-4 pull-left" for="fsRegions">&nbsp;&nbsp;<span class="span_bg"></span></label>
 																<label class="col-sm-2 control-label no-padding-right" for="fsRegions">酒店标准</label>
 																<div class="col-sm-3">
-																	<select onchange="javascript:getAccomadation(this);" class="fsStarLvl form-control">
-																	</select>
+																	<select onchange="javascript:getAccomadation(this);" class="fsStarLvl form-control"></select>
 																</div>
 															</div>
 														</div>
@@ -263,8 +250,7 @@
 															<div class="form-group">
 																<label class="col-sm-2 col-md-offset-4 control-label no-padding-right" for="fsRegions">酒店选择</label>
 																<div class="col-sm-3">
-																	<select onchange="javascript:getRoom(this);" class="accomadationNo form-control">
-																	</select>
+																	<select onchange="javascript:getRoom(this);" class="accomadationNo1 form-control"></select>
 																</div>
 															</div>
 														</div>
@@ -273,30 +259,28 @@
 																
 																<label class="col-sm-2 col-md-offset-4 control-label no-padding-right" for="fsRegions">房型选择</label>
 																<div class="col-sm-3">
-																	<select class="roomno form-control">
-																	</select>
+																	<select class="room form-control"></select>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn btn-success pull-right" id="addRoomBtn">添加</button>
+																	<button type="button" class="btn btn-success pull-right" onclick="javascript:addRoom(this);">添加</button>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn btn-success pull-left" id="rmRoomBtn">删除</button>
+																	<button type="button" class="btn btn-success pull-left" onclick="javascript:rmRoom(this);">删除</button>
 																</div>
-															</div>
-														</div>
-														<div class="row">
-															<div class="form-group">
-																<div class="col-md-offset-6 col-sm-6" id="div_room"></div>
+																<div class="row">
+																	<div class="form-group">
+																		<div class="col-md-offset-1 col-sm-8" id="div_0_bg"></div>
+																	</div>
+																</div>
 															</div>
 														</div>
 
 														<div class="row">
 															<div class="form-group">
-																<label class="col-sm-4 pull-left" for="fsRegions">&nbsp;&nbsp;客户需求：<span id="span_ticket"></span></label>
+																<label class="col-sm-4 pull-left" for="fsRegions">&nbsp;&nbsp;<span class="span_gw"></span></label>
 																<label class="col-sm-2 control-label no-padding-right" for="fsRegions">购物店选择</label>
 																<div class="col-sm-3">
-																	<select class="shop form-control">
-																	</select>
+																	<select class="shop form-control"></select>
 																</div>
 																<div class="col-sm-1">
 																	<button type="button" class="btn btn-success pull-right" onclick="javascript:addShop(this);">添加</button>
@@ -306,7 +290,7 @@
 																</div>
 																<div class="row">
 																	<div class="form-group">
-																		<div class="col-md-offset-6 col-sm-6"></div>
+																		<div class="col-md-offset-1 col-sm-8" id="div_0_gw"></div>
 																	</div>
 																</div>
 															</div>
@@ -352,25 +336,88 @@
 	    </script>
 
 	</c:if>
+	<script>
+	 $(function() {
+		   $(document).on('change key', '.usernum', function(event){
+				countPrice = 0;
+				$(".usernum").each(function(){
+					usernum = $(this).val();
+					if (usernum != ''){
+						$(this).parent().parent().find(".price").each(function(){
+							price = '';
+							if (!$(this).prop("disabled")) {
+								price = $(this).val();
+							}
+							if (price != '') {
+								countPrice = parseInt(countPrice) + parseInt(usernum) * parseInt(price);
+							}
+						});
+					}
+				});
+				$("#fdAmt").val(countPrice);
+		   });
+	   });
+	</script>
 	<script type="text/javascript">
 		//重置iframe高度
 		function resetIframeHeight(type){
 			var height = $(window.parent.document).find("#editIframe").attr("height");
 			height = height.substring(0,height.length - 2);
 			if ("add" == type) {
-				height = (parseInt(height)+21);
+				height = (parseInt(height)+42);
 			} else {
-				height = (parseInt(height)-21);
+				height = (parseInt(height)-42);
 			}
 			$(window.parent.document).find("#editIframe").attr("height", height+"px");
 		}
 		
+		function getDate(d, num){
+			date=new Date(d);
+			date.setDate(date.getDate() + parseInt(num));
+	        return date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate();
+	    }
+		
+		function handleRestaurantPrice(obj){
+			if($(obj).is(':checked')){
+				//选项编号
+				$(obj).prev().attr("disabled", false);
+				//选项类型
+				$(obj).prev().prev().attr("disabled", false);
+				//选项名称
+				$(obj).next().attr("disabled", false);
+				//选项价格
+				$(obj).next().next().attr("disabled", false);
+			}else {
+				$(obj).prev().attr("disabled", true);
+				$(obj).prev().prev().attr("disabled", true);
+				$(obj).next().attr("disabled", true);
+				$(obj).next().next().attr("disabled", true);
+			}
+			
+		}
+		
+		function handlePrice(obj){
+			resno = $(obj).attr("class");
+			$(obj).parent().parent().find(".price").attr("value", $(obj).next().attr("id"));
+			$(obj).parent().find("input:radio").each(function(){
+				$(this).prev().attr("disabled", true);
+				$(this).next().attr("disabled", true);
+				if($(this).is(':checked')){
+					$(this).prev().attr("disabled", false);
+					$(this).next().attr("disabled", false);
+				}
+			});
+		}
+		
 		//增加门票
 		function addTicket(obj){
-			//数组下标
+			//div块，用于存放计调选择的资源
 			ticketDiv = $(obj).parent().next().next().children().children();
+			//资源select下拉列表
 			ticketSelect = $(obj).parent().prev().children();
+			//同一行程日下reslist的总数
 			reslistIndex = $(obj).parent().parent().parent().parent().parent().prev();
+			//行程日，表示第几天
 			dayIndex = reslistIndex.prev().val();
 			index = reslistIndex.val();
 			var val = ticketSelect.val();
@@ -382,8 +429,8 @@
 				}
 			});
 			if (flag) {
-				reslistIndex.attr("value", parseInt(index)+1);
-				params = 'ftStartdate='+$("#ftStartdate").val()+'&fsResno='+ticketSelect.val()+'&fsRestype=mp';
+				var date = getDate($("#ftStartdate").val(), dayIndex);
+				params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+ticketSelect.val()+'&fsRestype=mp';
 				//查询门票价格
 				$.ajax({
 			        type: "GET",
@@ -391,26 +438,37 @@
 			        data: params,
 			        dataType: "json",
 			        success: function(data){
-						html = ticketDiv.html() + '<span class="'+val+'">' +ticketSelect.find("option:selected").text()+'：</span>';
+						html = ticketDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +ticketSelect.find("option:selected").text()+'：</span>'+
+												  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+ticketSelect.find("option:selected").text()+'" type="hidden"/>'+
+												  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
 						$.each(data, function(commentIndex, comment){
 							//团队全票
 							if (comment['fsCcno'] == '000005' || comment['fsCcno'] == '000013') {
-								html += '<span class="'+val+'"><!-- 选项编号--></span><input class="'+val+'" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist.ccno" value="'+comment['fsCcno']+'" type="checkbox"/><span class="'+val+'">&nbsp;团队全价票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-								html += '<span class="'+val+'"><!-- 选项价格 --></span><input type="hidden" class="'+val+'" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist.price" value="'+comment['fdPrice']+'"/>';
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
+										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
+										'<span>&nbsp;团队全价票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							}
 							//团队半票
 							if (comment['fsCcno'] == '000006' || comment['fsCcno'] == '000014') {
-								html += '<span class="'+val+'"><!-- 选项编号--></span><input class="'+val+'" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="'+comment['fsCcno']+'" type="checkbox"/><span class="'+val+'">&nbsp;团队半价票('+comment['fdPrice']+'￥)<br></span>';
-								html += '<span class="'+val+'"><!-- 选项价格 --></span><input type="hidden" class="'+val+'" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist.price" value="'+comment['fdPrice']+'"/>';
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
+										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
+										'<span id="'+comment['fdPrice']+'">&nbsp;团队半价票('+comment['fdPrice']+'￥)</span></div>'+
+										'<label class="col-sm-2 control-label no-padding-right">数量：</label><div class="col-sm-1 no-padding-left">'+
+										'<input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>';
 							}
 			        	});
-						html += '<span class="'+val+'"><!-- 日期标识--></span><input type="hidden" class="'+val+'" name="body.daylist['+dayIndex+'].dayflag" value="' + dayIndex + '"/>' +
-								'<span class="'+val+'"><!-- 资源大类 --></span><input type="hidden" class="'+val+'" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="mp"/>' +
-								'<span class="'+val+'"><!-- 资源编号 --></span><input type="hidden" class="ticketid" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="'+val+'"/>';
-						$(obj).parent().parent().find(".row").children().children().html(html);
+						 html += '<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
+							 	 '<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="mp"/>' +
+								 '<span><!-- 资源编号 --></span><input type="hidden" class="ticketid" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>';
+						if (data != '') {
+							$(obj).parent().parent().find(".row").children().children().html(html);
+							reslistIndex.attr("value", parseInt(index)+1);
+							resetIframeHeight("add");
+						}
 			        }
 			    });
-				resetIframeHeight("add");
 			}
 		}
 		//删除门票
@@ -422,8 +480,229 @@
 			val = ticketSelect.val();
 			ticketDiv.find("input[class='ticketid']").each(function(){
 				if (val == $(this).val()) {
-					$(this).remove();
-					$("."+val).remove();
+					$(this).parent().parent().remove();
+					day_index.attr("value",parseInt(index)-1);
+					resetIframeHeight("sub");
+				} 
+			});
+		}
+		
+		//增加餐厅
+		function addRestaurant(obj){
+			restaurantDiv = $(obj).parent().next().next().children().children();
+			restaurantSelect = $(obj).parent().prev().children();
+			reslistIndex = $(obj).parent().parent().parent().parent().parent().prev();
+			dayIndex = reslistIndex.prev().val();
+			index = reslistIndex.val();
+			var val = restaurantSelect.val();
+			var text = restaurantSelect.find("option:selected").text();
+			var flag = true;
+			$(restaurantDiv).find("input[class='restaurantNo']").each(function(){
+				if (val == $(this).val()) { 
+					flag = false;
+				}
+			});
+			if (flag) {
+				var date = getDate($("#ftStartdate").val(), dayIndex);
+				params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+restaurantSelect.val()+'&fsRestype=ct';
+				//查询餐厅价格
+				$.ajax({
+			        type: "GET",
+			        url: "/tccPrice/findTccPrice.htm",
+			        data: params,
+			        dataType: "json",
+			        success: function(data){
+						html = restaurantDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +restaurantSelect.find("option:selected").text()+'：</span>'+
+						  							  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+restaurantSelect.find("option:selected").text()+'" type="hidden"/>'+
+						    						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
+						$.each(data, function(commentIndex, comment){
+							//早餐
+							if (comment['fsCcno'] == '000018') {
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1" type="hidden" disabled="disabled"/>'+
+										'<input type="checkbox" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'"/>'+
+										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
+										'<span id="'+comment['fdPrice']+'">&nbsp;早餐费用('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;</span>';
+							}
+							//午餐
+							if (comment['fsCcno'] == '000019') {
+								html +=	'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+ 
+										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].cctype" value="1" type="hidden" disabled="disabled"/>'+
+										'<input type="checkbox" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'"/>'+
+										'<input class="price" type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
+										'<span id="'+comment['fdPrice']+'">&nbsp;午餐费用('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;</span>';
+							}
+							//晚餐
+							if (comment['fsCcno'] == '000020') {
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].cctype" value="1" type="hidden" disabled="disabled"/>'+
+										'<input type="checkbox" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'"/>'+
+										'<input class="price" type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
+										'<span id="'+comment['fdPrice']+'">&nbsp;晚餐费用('+comment['fdPrice']+'￥)</span></div>'+
+										'<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
+										'<div class="col-sm-1 no-padding-left"><input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>'+
+										'<span><!-- 资源编号 --></span><input type="hidden" class="restaurantNo" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>'+
+										'<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="ct"/>';
+							}
+			        	});
+						if (data != '') {
+							$(obj).parent().parent().find(".row").children().children().html(html);
+							reslistIndex.attr("value", parseInt(index)+3);
+							resetIframeHeight("add");
+						}
+			        }
+			    });
+			}
+		}
+		//删除餐厅
+		function rmRestaurant(obj){
+			restaurantDiv = $(obj).parent().next().children().children();
+			restaurantSelect = $(obj).parent().prev().prev().children();
+			day_index = $(obj).parent().parent().parent().parent().parent().prev();
+			index = day_index.val();
+			val = restaurantSelect.val();
+			restaurantDiv.find("input[class='restaurantNo']").each(function(){
+				if (val == $(this).val()) {
+					$(this).parent().parent().remove();
+					day_index.attr("value",parseInt(index)-1);
+					resetIframeHeight("sub");
+				} 
+			});
+		}
+		
+		//增加娱乐项目
+		function addEntertainment(obj){
+			//div块，用于存放计调选择的资源
+			entertainmentDiv = $(obj).parent().next().next().children().children();
+			//资源select下拉列表
+			entertainmentSelect = $(obj).parent().prev().children();
+			//同一行程日下reslist的总数
+			reslistIndex = $(obj).parent().parent().parent().parent().parent().prev();
+			//行程日，表示第几天
+			dayIndex = reslistIndex.prev().val();
+			index = reslistIndex.val();
+			var val = entertainmentSelect.val();
+			var text = entertainmentSelect.find("option:selected").text();
+			var flag = true;
+			$(entertainmentDiv).find("input[class='entertainmentid']").each(function(){
+				if (val == $(this).val()) { 
+					flag = false;
+				}
+			});
+			if (flag) {
+				var date = getDate($("#ftStartdate").val(), dayIndex);
+				params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+entertainmentSelect.val()+'&fsRestype=yl';
+				//查询娱乐项目价格
+				$.ajax({
+			        type: "GET",
+			        url: "/tccPrice/findTccPrice.htm",
+			        data: params,
+			        dataType: "json",
+			        success: function(data){
+						html = entertainmentDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +entertainmentSelect.find("option:selected").text()+'：</span>'+
+						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+entertainmentSelect.find("option:selected").text()+'" type="hidden"/>'+
+						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
+						$.each(data, function(commentIndex, comment){
+							//团队全票
+							if (comment['fsCcno'] == '000005' || comment['fsCcno'] == '000013') {
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
+										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
+										'<span>&nbsp;团队全价票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							}
+							//团队半票
+							if (comment['fsCcno'] == '000006' || comment['fsCcno'] == '000014') {
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
+										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
+										'<span>&nbsp;团队半价票('+comment['fdPrice']+'￥)</span></div>'+
+										'<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
+										'<div class="col-sm-1 no-padding-left"><input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>';
+							}
+			        	});
+						 html += '<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
+							 	 '<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="yl"/>' +
+								 '<span><!-- 资源编号 --></span><input type="hidden" class="entertainmentid" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>';
+						if (data != '') {
+							$(obj).parent().parent().find(".row").children().children().html(html);
+							reslistIndex.attr("value", parseInt(index)+1);
+							resetIframeHeight("add");
+						}
+			        }
+			    });
+			}
+		}
+		//删除娱乐项目
+		function rmEntertainment(obj){
+			entertainmentDiv = $(obj).parent().next().children().children();
+			entertainmentSelect = $(obj).parent().prev().prev().children();
+			day_index = $(obj).parent().parent().parent().parent().parent().prev();
+			index = day_index.val();
+			val = entertainmentSelect.val();
+			entertainmentDiv.find("input[class='entertainmentid']").each(function(){
+				if (val == $(this).val()) {
+					$(this).parent().parent().remove();
+					day_index.attr("value",parseInt(index)-1);
+					resetIframeHeight("sub");
+				} 
+			});
+		}
+		
+		
+		
+		//增加房间
+		function addRoom(obj){
+			roomDiv = $(obj).parent().next().next().children().children();
+			roomSelect = $(obj).parent().prev().children();
+			reslistIndex = $(obj).parent().parent().parent().parent().parent().prev();
+			dayIndex = reslistIndex.prev().val();
+			index = reslistIndex.val();
+			var val = roomSelect.val();
+			var text = roomSelect.find("option:selected").text();
+			var flag = true;
+			$(roomDiv).find("input[class='roomNo']").each(function(){
+				if (val == $(this).val()) { 
+					flag = false;
+				}
+			});
+			if (flag) {
+				var date = getDate($("#ftStartdate").val(), dayIndex);
+				params = 'ftStartdate='+date+'&fsResno='+roomSelect.val()+'&fsRestype=bg&fsCcno=000024';
+				//查询酒店房间价格
+				$.ajax({
+			        type: "GET",
+			        url: "/tccPrice/findTccPriceByKey.htm",
+			        data: params,
+			        dataType: "json",
+			        success: function(data){
+						html = roomDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +roomSelect.find("option:selected").text()+'：</span>'+
+						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+roomSelect.find("option:selected").text()+'" type="hidden"/>'+
+						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
+						html += '<span><!-- 选项编号 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" value="'+data.fsCcno+'"/><span>&nbsp;房间消费('+data.fdPrice+'￥)</span></div>'+
+								'<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
+								'<div class="col-sm-1 no-padding-left"><input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>'+
+								'<span><!-- 选项价格 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+data.fdPrice+'"/>'+
+								'<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
+								'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+data.ccname+'" type="hidden"/>'+
+								'<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="bg"/>' +
+								'<span><!-- 资源编号 --></span><input type="hidden" class="roomNo" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>';
+						$(obj).parent().parent().find(".row").children().children().html(html);
+						reslistIndex.attr("value", parseInt(index)+1);
+			        }
+			    });
+				resetIframeHeight("add");
+			}
+		}
+		//删除房间
+		function rmRoom(obj){
+			roomDiv = $(obj).parent().next().children().children();
+			roomSelect = $(obj).parent().prev().prev().children();
+			day_index = $(obj).parent().parent().parent().parent().parent().prev();
+			index = day_index.val();
+			val = roomSelect.val();
+			roomDiv.find("input[class='roomNo']").each(function(){
+				if (val == $(this).val()) {
+					$(this).parent().parent().remove();
 					day_index.attr("value",parseInt(index)-1);
 					resetIframeHeight("sub");
 				} 
@@ -432,7 +711,6 @@
 		
 		//增加购物店
 		function addShop(obj){
-			//数组下标
 			shopDiv = $(obj).parent().next().next().children().children();
 			shopSelect = $(obj).parent().prev().children();
 			reslistIndex = $(obj).parent().parent().parent().parent().parent().prev();
@@ -447,8 +725,8 @@
 				}
 			});
 			if (flag) {
-				reslistIndex.attr("value", parseInt(index)+1);
-				params = 'ftStartdate='+$("#ftStartdate").val()+'&fsResno='+shopSelect.val()+'&fsRestype=gw&fsCcno=000021';
+				var date = getDate($("#ftStartdate").val(), dayIndex);
+				params = 'ftStartdate='+date+'&fsResno='+shopSelect.val()+'&fsRestype=gw&fsCcno=000021';
 				//查询购物店价格
 				$.ajax({
 			        type: "GET",
@@ -456,19 +734,21 @@
 			        data: params,
 			        dataType: "json",
 			        success: function(data){
-						html = shopDiv.html() + '<span class="'+val+'">' +shopSelect.find("option:selected").text()+'：</span>';
-						html += '<span class="'+val+'"><!-- 选项编号 --></span><input type="hidden" class="'+val+'" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="'+data.fsCcno+'"/><span class="'+val+'">&nbsp;人头消费('+data.fdPrice+'￥)<br></span>'+
-								'<span class="'+val+'"><!-- 选项价格 --></span><input type="hidden" class="'+val+'" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist.price" value="'+data.fdPrice+'"/>'+
-								'<span class="'+val+'"><!-- 日期标识 --></span><input type="hidden" class="'+val+'" name="body.daylist['+dayIndex+'].dayflag" value="' + dayIndex + '"/>' +
-								'<span class="'+val+'"><!-- 资源大类 --></span><input type="hidden" class="'+val+'" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="mp"/>' +
-								'<span class="'+val+'"><!-- 资源编号 --></span><input type="hidden" class="shopid" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="'+val+'"/>';
+						html = shopDiv.html() + '<span>' +shopSelect.find("option:selected").text()+'</span>'+
+						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+shopSelect.find("option:selected").text()+'" type="hidden"/>'+
+						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
+						html += '<span><!-- 选项编号 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" value="'+data.fsCcno+'"/><span><br></span>'+
+								'<span><!-- 选项价格 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="0"/>'+
+								'<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="gw"/>' +
+								'<span><!-- 资源编号 --></span><input type="hidden" class="shopid" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>';
 						$(obj).parent().parent().find(".row").children().children().html(html);
+						reslistIndex.attr("value", parseInt(index)+1);
 			        }
 			    });
 				resetIframeHeight("add");
 			}
 		};
-		//删除门票
+		//删除购物店
 		function rmShop(obj){
 			shopDiv = $(obj).parent().next().children().children();
 			shopSelect = $(obj).parent().prev().prev().children();
@@ -477,14 +757,14 @@
 			val = shopSelect.val();
 			shopDiv.find("input[class='shopid']").each(function(){
 				if (val == $(this).val()) {
-					$(this).remove();
-					$("."+val).remove();
+					$(this).parent().parent().remove();
 					day_index.attr("value",parseInt(index)-1);
 					resetIframeHeight("sub");
 				} 
 			});
 		}
 	</script>
+	
 	<script type="text/javascript">
 		//获取酒店列表
 		function getAccomadation(obj){
@@ -499,8 +779,8 @@
 					$.each(data, function(commentIndex, comment){
 						html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 					});
-					$(".accomadationNo").html(html);
-					getRoom($(obj).parent().parent().parent().next().find(".accomadationNo"));
+					$(obj).parent().parent().parent().next().children().find(".col-sm-3").children().html(html);
+					getRoom($(obj).parent().parent().parent().next().children().find(".col-sm-3").children());
 				}
 			});
 		}
@@ -517,9 +797,46 @@
 					$.each(data, function(commentIndex, comment){
 						html += '<option value=' + comment['roomno'] + '>' + comment['name'] + '</option>';
 					});
-					$(".roomno").html(html);
+					$(obj).parent().parent().parent().next().children().find(".col-sm-3").children().html(html);
 				}
 			});
+		}
+		//获取餐厅列表
+		function getRestaurant(obj){
+			$.ajax({
+				type: "GET",
+				traditional: true,
+				url: "/restaurant/selectRestaurant.htm",
+				data: "room.accomno=" + $(obj).val(),
+				dataType: "json",
+				success: function(data){
+					var html = ''; 
+					$.each(data, function(commentIndex, comment){
+						html += '<option value=' + comment['roomno'] + '>' + comment['name'] + '</option>';
+					});
+					$(".room").html(html);
+				}
+			});
+		}
+
+		function countPrice(){
+			alert("计算总金额");
+			countPrice = 0;
+			$(".usernum").each(function(){
+				usernum = $(this).val();
+				if (usernum != ''){
+					$(this).parent().parent().find(".price").each(function(){
+						price = '';
+						if (!$(this).prop("disabled")) {
+							price = $(this).val();
+						}
+						if (price != '') {
+							countPrice = parseInt(countPrice) + parseInt(usernum) * parseInt(price);
+						}
+					});
+				}
+			});
+			alert(countPrice);
 		}
 	</script>
 </body>

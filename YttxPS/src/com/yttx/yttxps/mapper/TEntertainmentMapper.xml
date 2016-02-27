@@ -353,4 +353,36 @@
   <select id="selectFsNo" resultType="int">
       select tentertainment_sequence.nextval from dual
   </select>
+  
+  <!-- 查询景区下所有娱乐项目信息 add by huangtao 2016-02-23 -->
+	<select id="selectEntertainment" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT 
+			* 
+		FROM (
+			SELECT res.* FROM 
+				(select t.*, s.fs_scenicno from TENTERTAINMENT t left join TResourceScenic s on t.fs_no = s.fs_resno and s.fs_restype = 'yl') res
+			WHERE
+				1=1
+		  <if test="fsNo != null and fsNo != ''">
+	        and fs_no = #{fsNo}
+	      </if>
+	      <if test="fsName != null and fsName != ''">
+	        and fs_Name like '%'||#{fsName}||'%'
+	      </if>
+	      <if test="fsType != null and fsType != ''">
+	        and fs_Type = #{fsType}
+	      </if>
+	      <if test="fiStat != null and fiStat != ''">
+	        and fi_Stat = #{fiStat}
+	      </if>
+			<choose>
+                <when test="scenicNo">
+                  and fs_scenicno in 
+                  <foreach close=")" collection="scenicNo" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+            </choose>
+		)
+	</select>
 </mapper>

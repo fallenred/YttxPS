@@ -181,7 +181,7 @@
 					</div>
 					
 					<div class="modal-body">
-						<iframe id="addIframe" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
+						<iframe id="addIframe" width="100%" height="700px" frameborder="0" scrolling="no"></iframe>
 					</div>
 				</div>
 			</div>

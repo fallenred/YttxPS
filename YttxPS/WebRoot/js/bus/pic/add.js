@@ -1,8 +1,10 @@
 jQuery(function($) {
 	
-	var url = '/pic/addPic.htm?no=' + $("#no").val() + 
-					'&belongtype=' + $("#belongtype").val() + 
-					'&subtype=' + $("#subtype").val();
+	var url = '/pic/addPic.htm?resType=' + $("#resType").val() + 
+					'&resNo=' + $("#resNo").val() + 
+					'&seq=' + $("#seq").val()+ 
+					'&main=' + $("#main").val()+ 
+					'&desc=' + $("#desc").val();
 	Dropzone.autoDiscover = false;
 	try {
 		var myDropzone = new Dropzone(

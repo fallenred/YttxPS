@@ -73,22 +73,25 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	public Map<String, Object> ajaxaddPic(Pic pic,
 			@RequestParam(value = "file", required = true) MultipartFile file)
     {  
-		logger.debug("当前新增对象 {}", pic.getNo());
+		logger.debug("当前新增对象 {}", pic.getSeq());
 		
 		StringBuffer path = new StringBuffer();
-		path.append("/").append(pic.getBelongtype()).append("/");
-		if(pic.getSubtype() != null && pic.getSubtype().length() > 0) {
-			path.append(pic.getSubtype()).append("/");
+		path.append("/").append(pic.getResType()).append("/");
+		if(pic.getResNo() != null && pic.getResNo().length() > 0) {
+			path.append(pic.getResNo()).append("/");
 		}
-		path.append(pic.getNo()).append("/");
+		path.append(pic.getSeq()).append("/");
 		logger.debug("图片path{}", path.toString());
 		
 		String fileurl = resourceConvertURL(path.toString(), file);
 		logger.debug("图片srcfile{}", fileurl);
-		pic.setSrcfile(fileurl);
+		pic.setSrcFile(fileurl);
 		
+		pic.setIndex(picService.selectSequence());
+//		pic.setIndex(new BigDecimal(101));
 		try{
 			int ret = picService.insert(pic);
+			System.out.println(ret);
 		}
 		catch(Exception e){
 			e.printStackTrace();

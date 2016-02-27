@@ -13,6 +13,7 @@ import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
 import com.yttx.yttxps.xml.bean.Body;
+import com.yttx.yttxps.xml.bean.Root;
 
 
 @Service("orderlistService")
@@ -40,10 +41,10 @@ public class OrderlistService implements IOrderlistService {
 	}
 
 	@Override
-	public int update(TOrderlistWithBLOBs record) {
+	public int update(TOrderlistWithBLOBs record) throws Exception {
 		Body body = new Body();
 		body.setReslist(record.getReslist());
-		String fcCommressnapshot = ResScheduleXMLConverter.convert2XML(body);
+		String fcCommressnapshot = ResScheduleXMLConverter.toXml("http://www.cnacex.com/", new Root(body));
 		record.setFcCommressnapshot(fcCommressnapshot);
 		return orderlistMapper.updateByPrimaryKeySelective(record);
 	}

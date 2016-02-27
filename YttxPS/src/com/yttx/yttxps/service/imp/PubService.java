@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import com.yttx.comm.DateUtil;
 import com.yttx.yttxps.mapper.IBaseMapper;
 import com.yttx.yttxps.mapper.RegionMapMapper;
+import com.yttx.yttxps.mapper.ScenicMapper;
 import com.yttx.yttxps.mapper.TCCPriceMapper;
 import com.yttx.yttxps.model.RegionMap;
 import com.yttx.yttxps.model.ResoucePrice;
+import com.yttx.yttxps.model.Scenic;
 import com.yttx.yttxps.service.IPubService;
 
 
@@ -24,6 +26,9 @@ public class PubService<T> implements IPubService<T> {
 	
 	@Autowired
 	private TCCPriceMapper tCCPriceMapper;
+	
+	@Autowired  
+	private ScenicMapper<Scenic> scenicMapper;
 
 	@Override
 	public List<RegionMap> findRegionByManageNo(String key) {
@@ -40,7 +45,7 @@ public class PubService<T> implements IPubService<T> {
 		int rows = (Integer) map.get("rows");
 		int page = (Integer)map.get("page");
 		if(records  > 0) {
-			total = records/rows + 1;
+			total =(records%rows==0)? (records/rows):(records/rows+ 1);
 			map.put("total", total);
 		}
 		if(page > total) {
@@ -77,5 +82,11 @@ public class PubService<T> implements IPubService<T> {
 			}
 		}
 		return rps;
+	}
+
+
+	@Override
+	public List<Scenic> findAllScennic() {
+		return scenicMapper.findAll();
 	}
 }

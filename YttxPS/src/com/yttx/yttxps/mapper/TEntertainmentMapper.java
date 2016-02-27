@@ -1,11 +1,12 @@
 package com.yttx.yttxps.mapper;
 
-import com.yttx.yttxps.model.TEntertainment;
-import com.yttx.yttxps.model.TEntertainmentExample;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+
+import com.yttx.yttxps.model.TEntertainment;
+import com.yttx.yttxps.model.TEntertainmentExample;
 
 public interface TEntertainmentMapper<T> extends IBaseMapper<T> {
     int countByExample(TEntertainmentExample example);
@@ -19,6 +20,15 @@ public interface TEntertainmentMapper<T> extends IBaseMapper<T> {
     int insertSelective(TEntertainment record);
 
     List<TEntertainment> selectByExample(TEntertainmentExample example);
+    
+    /**
+     * 查询娱乐项目列表
+     * add by huangtao
+     * 2016-02-24
+     * @param map
+     * @return
+     */
+    List<TEntertainment> selectEntertainment(Map<String, Object> map);
 
     TEntertainment selectByPrimaryKey(String fsNo);
 

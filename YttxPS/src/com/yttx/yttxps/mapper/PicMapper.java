@@ -67,4 +67,6 @@ public interface PicMapper<T> extends IBaseMapper<T>{
      * @return List<Object>
      */
     List<T> selectSelectivePage(Map<String, Object> map);
+    
+	BigDecimal selectSequence();
 }

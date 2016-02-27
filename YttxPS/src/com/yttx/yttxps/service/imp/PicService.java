@@ -42,6 +42,12 @@ public class PicService implements IPicService {
 		return picMapper.deleteByPrimaryKey(index);
 	}
 
+	@Override
+	public BigDecimal selectSequence() {
+		// TODO Auto-generated method stub
+		return picMapper.selectSequence();
+	}
+
 
 
 

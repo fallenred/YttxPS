@@ -180,4 +180,16 @@ public class EntertainmentService implements IEntertainmentService {
 	public List<TEntertainment> selectEntertainmentDynamic(Map<String, Object> map) {
 		return entertainmentMapper.selectEntertainmentDynamic(map);
 	}
+
+	/**
+     * 查询娱乐项目列表
+     * add by huangtao
+     * 2016-02-24
+     * @param map
+     * @return
+     */
+	@Override
+	public List<TEntertainment> selectEntertainment(Map<String, Object> map) {
+		return entertainmentMapper.selectEntertainment(map);
+	}
 }

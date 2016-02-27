@@ -24,4 +24,7 @@ public interface IPicService {
 	
 	@Transactional
 	int delete(BigDecimal index);
+	
+	@Transactional(readOnly = true)
+	BigDecimal selectSequence();
 }

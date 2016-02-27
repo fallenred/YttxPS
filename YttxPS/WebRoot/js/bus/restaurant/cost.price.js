@@ -34,7 +34,7 @@ jQuery(function($) {
 	 * 隐藏message div
 	 */
 	$("#message").hide();
-	
+	$('#date_range').daterangepicker();
 	/*
 	 * 按钮-->"关闭"按钮的响应函数
 	 */
@@ -57,27 +57,13 @@ jQuery(function($) {
 		var resNo = $("#no").val();//餐厅名称
 		
 	
-		var startDate = $.trim($("#startdate").val())//开始时间
-		if( !validDateFormat(startDate)) {
+		var dRange = $.trim($("#date_range").val())
+		if( dRange=='') {
 			$("#message").show();
-			$("#message").text("开始时间未录入或录入格式不正确");
-			$("#startdate").focus();
+			$("#message").text("请录入日期范围");
+			$("#dRange").focus();
 			return false;
 		} 
-		
-		var endDate = $.trim($("#enddate").val())//结束时间
-		if(!validDateFormat(endDate)) {
-			$("#message").show();
-			$("#message").text("结束时间未录入或录入格式不正确");
-			$("#enddate").focus();
-			return false;
-		} 
-		if(!compareDate(startDate,endDate)){
-			$("#message").show();
-			$("#message").text("结束时间小于开始时间");
-			$("#startdate").focus();
-			return false;
-		}
 		var breakfast = $.trim($("#breakfast").val())//早餐价格
 		if( !validMoney(breakfast)) {
 			$("#message").show();
@@ -107,10 +93,16 @@ jQuery(function($) {
 			$("#breakfast").focus();
 			return false;
 		}
+		
+		//获取开始时间和结束时间
+		function getDate(range,index){
+			var dates = range.split("-")
+			return dates[index].replace(/\//g,'-');
+		}
 		var postData = {};
 		postData["no"]         = resNo;
-		postData["startDate"]  = startDate;
-		postData["endDate"]    = endDate;
+		postData["startDate"]  = getDate(dRange,0);
+		postData["endDate"]    = getDate(dRange,1);
 		
 		var i=0;
 		if(breakfast!=''){
@@ -128,7 +120,6 @@ jQuery(function($) {
 			postData["prices["+i+"].fdPrice"]= dinner;
 			i++;
 		}
-		console.log(postData);
 		$.post(
 			"/restaurant/submitPrice.htm",
 			postData,

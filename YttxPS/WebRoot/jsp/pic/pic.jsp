@@ -37,32 +37,42 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="no">资源编码</label>
+												for="resType">归属资源代码</label>
 											<div class="col-sm-3">
-												<input type="text" id="no" name="no" class="form-control"
-													placeholder="资源编码" maxlength="10" readonly="readonly" />
+												<input type="text" id="resType" name="resType"
+													class="form-control" placeholder="归属资源代码" maxlength="2" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
-												for="seq">图片序号</label>
+												for="resNo">资源编码</label>
 											<div class="col-sm-3">
-												<input maxlength="10" type="text" id="index" name="index"
-													class="form-control" placeholder="图片序号自动生成" />
+												<input maxlength="10" type="text" id="resNo" name="resNo"
+													class="form-control" placeholder="资源编码" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="belong">归属资源代码</label>
+												for="seq">序号</label>
 											<div class="col-sm-3">
-												<input maxlength="4" type="text" id="belongtype" name="belong"
-													class="form-control" placeholder="归属资源代码" />
+												<input maxlength="4" type="text" id="seq" name="seq"
+													class="form-control" placeholder="序号" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
-												for="subtype">归属资源子码</label>
+												for="main">是否主图</label>
 											<div class="col-sm-3">
-												<input maxlength="2" type="text" id="subtype" name="subtype"
-													class="form-control" placeholder="归属资源子码" />
+												<input maxlength="1" type="text" id="main" name="main"
+													class="form-control" placeholder="是否主图" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right"
+												for="desc">图片简述</label>
+											<div class="col-sm-3">
+												<input maxlength="500" type="text" id="desc" name="desc"
+													class="form-control" placeholder="图片简述" />
 											</div>
 										</div>
 									</div>
@@ -75,21 +85,20 @@
 							</div>
 							<div class="row">
 								<div class="modal-footer">
-								<div id="message" class="center alert alert-warning"
-								></div>
+									<div id="message" class="center alert alert-warning"></div>
 									<button id="close" type="button" class="btn btn-default"
 										data-dismiss="modal">关闭</button>
 									<button id="reset" type="reset" class="btn">重置</button>
 									<button id="submit" type="button" class="btn btn-primary">提交</button>
 								</div>
 							</div>
-							
+
 							<!-- 图片TODO： -->
 							<div class="col-xs-12">
 								<ul class="ace-thumbnails clearfix" id="colorbox">
 								</ul>
 							</div>
-							
+
 							<!-- PAGE CONTENT ENDS -->
 						</div>
 						<!-- /.col -->
@@ -114,9 +123,9 @@
 	<c:if test="${!empty succflag && succflag =='1'}">
 
 		<script type="text/javascript">
-					$('.jump-step').removeClass('hide');
-					setTimeout('window.location="/home.htm"', 5000);
-				</script>
+			$('.jump-step').removeClass('hide');
+			setTimeout('window.location="/home.htm"', 5000);
+		</script>
 
 	</c:if>
 </body>

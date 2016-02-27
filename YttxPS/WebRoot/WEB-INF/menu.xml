@@ -79,13 +79,7 @@
 			<submenu>
 				<item id="13a0" name="订单管理" url="/jsp/orderlist/orderlist.jsp" />
 				<item id="13b0" name="订单批次管理" url="/jsp/closelist/closelist.jsp" />
-				<item id="13c0" name="结算管理" url="/jsp/closelist/closelist.jsp" />
-			</submenu>
-		</item>	
-		
-		<item id="1200" name="结算管理管理" icon="menu-icon fa fa-table" >
-			<submenu>
-				<item id="12a0" name="结算管理" url="/cOrder/page.htm" />
+				<item id="13c0" name="结算管理" url="/cOrder/page.htm" />
 			</submenu>
 		</item>	
 	</menu>

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+@XStreamAlias("cclist")
 public class Cclist {
 	/**
 	 * 选项编号

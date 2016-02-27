@@ -46,4 +46,13 @@ public interface IEntertainmentService {
 	
 	@Transactional
 	List<TEntertainment> selectEntertainmentDynamic(Map<String, Object> map);
+	
+	/**
+     * 查询娱乐项目列表
+     * add by huangtao
+     * 2016-02-24
+     * @param map
+     * @return
+     */
+	List<TEntertainment> selectEntertainment(Map<String, Object> map);
 }

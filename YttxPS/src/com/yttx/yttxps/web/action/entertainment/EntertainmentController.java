@@ -53,6 +53,23 @@ public class EntertainmentController extends BaseController {
 	}
 	
 	/**
+	 * 根据景区查询娱乐项目
+	 * add by huangtao
+	 * 2016-02-24
+	 */
+	@RequestMapping(value="selectEntertainment.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object selectRestaurant(@RequestParam(value = "scenicNo[]") String[] scenicNo)
+	{  
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (scenicNo == null || scenicNo.length < 1){
+			return null;
+		}
+		map.put("scenicNo", Arrays.asList(scenicNo));
+		return entertainmentService.selectEntertainment(map);
+    }
+	
+	/**
 	 * 新增娱乐项目信息
 	 * @param Ticket
 	 * @return

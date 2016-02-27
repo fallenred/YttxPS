@@ -22,7 +22,7 @@ public interface IOrderCustomService {
 	int insert(TOrderCustomWithBLOBs orderCustom);
 	
 	@Transactional
-	int update(TOrderCustomWithBLOBs orderCustom);
+	int update(TOrderCustomWithBLOBs orderCustom) throws Exception;
 	
 	@Transactional
 	int delete(String no);

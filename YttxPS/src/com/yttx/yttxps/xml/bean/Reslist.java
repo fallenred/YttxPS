@@ -1,7 +1,11 @@
 package com.yttx.yttxps.xml.bean;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+import java.util.List;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
+
+@XStreamAlias("reslist")
 public class Reslist {
 	/**
 	 * 资源大类
@@ -30,8 +34,8 @@ public class Reslist {
 	/**
 	 * 消费选项
 	 */
-	@XStreamAlias("cclist")
-	private Cclist cclist;
+	@XStreamImplicit(itemFieldName="cclist")
+	private List<Cclist> cclist;
 	
 	public String getRestype() {
 		return restype;
@@ -57,10 +61,10 @@ public class Reslist {
 	public void setResname(String resname) {
 		this.resname = resname;
 	}
-	public Cclist getCclist() {
+	public List<Cclist> getCclist() {
 		return cclist;
 	}
-	public void setCclist(Cclist cclist) {
+	public void setCclist(List<Cclist> cclist) {
 		this.cclist = cclist;
 	}
 }
