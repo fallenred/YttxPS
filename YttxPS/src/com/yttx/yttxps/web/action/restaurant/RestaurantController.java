@@ -24,6 +24,7 @@ import com.yttx.comm.DateEditor;
 import com.yttx.comm.StringUtil;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.ResoucePrice;
+import com.yttx.yttxps.model.Scenic;
 import com.yttx.yttxps.model.TCCPrice;
 import com.yttx.yttxps.model.TRestaurant;
 import com.yttx.yttxps.model.vo.RestaurantPriceReq;
@@ -88,8 +89,10 @@ public class RestaurantController extends BaseController {
 	 * 新增餐厅--打开新增页面
 	 */
 	@RequestMapping(value = "addPage.htm")
-	public String openAddPage()
+	public String openAddPage(Model model)
 	{
+		List<Scenic> scenics =pubService.findAllScennic();
+		model.addAttribute("scenics", scenics);
 		return "restaurant/add";
 	}
 	
@@ -139,6 +142,8 @@ public class RestaurantController extends BaseController {
 		if(restaurant.getRegionno()!=null)
 			restaurant.setRegionname(pubService.findRegionFullName(restaurant.getRegionno()));
 		model.addAttribute("res", restaurant);
+		List<Scenic> scenics =pubService.findAllScennic();
+		model.addAttribute("scenics", scenics);
 		return "restaurant/edit";
 	}
 	
@@ -310,11 +315,17 @@ public class RestaurantController extends BaseController {
 		}
 		Boolean succFlag = true;
 		String message = "";
+		
 		if("edit".equalsIgnoreCase(type)){//如果是修改餐厅信息，要验证餐厅编号
 			if(StringUtil.nullOrBlank(restaurant.getNo())){
 				succFlag = succFlag && false;
 				message += "餐厅编号为空<br/>";
 			}
+		}
+		
+		if(StringUtil.nullOrBlank(restaurant.getScenicNo())){
+			succFlag = succFlag && false;
+			message += "所属景区为空<br/>";
 		}
 		//非空 餐厅名称
 		if(StringUtil.nullOrBlank(restaurant.getName())){

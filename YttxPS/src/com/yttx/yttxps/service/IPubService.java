@@ -4,16 +4,12 @@ package com.yttx.yttxps.service;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yttx.yttxps.mapper.IBaseMapper;
 import com.yttx.yttxps.model.RegionMap;
 import com.yttx.yttxps.model.ResoucePrice;
-import com.yttx.yttxps.model.SysDep;
-import com.yttx.yttxps.model.SysDepRight;
-import com.yttx.yttxps.model.SysOper;
-import com.yttx.yttxps.model.SysOperRight;
+import com.yttx.yttxps.model.Scenic;
 
 
 public interface IPubService<T> {
@@ -44,5 +40,9 @@ public interface IPubService<T> {
 	 */
 	@Transactional(readOnly = true) 
 	public List<ResoucePrice> findResoucePrice(ResoucePrice resQue);
-
+	
+	/**
+	 * 找到所有的景区
+	 */
+	public List<Scenic> findAllScennic();
 }

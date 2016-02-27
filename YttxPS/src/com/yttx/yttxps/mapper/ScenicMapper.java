@@ -66,4 +66,9 @@ public interface ScenicMapper<T> extends IBaseMapper<T>{
      * @return List<Object>
      */
     List<T> selectSelectivePage(Map<String, Object> map);
+
+    /**
+     * 找到所有的景区代码和名称
+     */
+	List<Scenic> findAll();
 }
