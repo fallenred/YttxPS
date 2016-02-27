@@ -11,8 +11,8 @@ jQuery(function($) {
 	
 	//城市选择器
 	function localcallback(index, key, value, fullkey, fullname) {
-		$("#regionname", "#editform").val(fullname);
-		$("#regionno", "#editform").val(key);
+		$("#fsStartplaceName", "#editform").val(fullname);
+		$("#fsStartplace", "#editform").val(key);
 		if (index == 3)
 			$("#selectCity", "#editform").hide();
 	}
@@ -32,7 +32,7 @@ jQuery(function($) {
         }
     });
 
-	$("#regionname", "#editform").click(function() {
+	$("#fsStartplaceName", "#editform").click(function() {
 		$("#selectCity", "#editform").show();
 	});
 
@@ -40,7 +40,7 @@ jQuery(function($) {
 	//	重置
 	$("#reset").on("click", function() {
 			$("#selectCity").hide();
-			$("#regionno").val(null);
+			$("#fsStartplace").val(null);
 			$("#message").hide();
 			$("#message").text("");
 		});

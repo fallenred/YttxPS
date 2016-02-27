@@ -235,7 +235,8 @@ jQuery(function($) {
 					index : 'fsRegions',
 					width : 70,
 					editable : true,
-					sorttype : "char"
+					sorttype : "char",
+					hidden : true
 				}, {
 					name : 'fiDays',
 					index : 'fiDays',

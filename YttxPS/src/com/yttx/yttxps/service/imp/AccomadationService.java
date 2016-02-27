@@ -1,5 +1,6 @@
 package com.yttx.yttxps.service.imp;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yttx.yttxps.mapper.AccomadationMapper;
+import com.yttx.yttxps.mapper.TResourceScenicMapper;
 import com.yttx.yttxps.model.Accomadation;
+import com.yttx.yttxps.model.TResourceScenic;
 import com.yttx.yttxps.service.IAccomadationService;
 import com.yttx.yttxps.service.IPubService;
 
@@ -25,6 +28,9 @@ public class AccomadationService implements IAccomadationService {
 	
 	@Autowired
 	private AccomadationMapper<Accomadation> accomadationMapper;
+	
+	@Autowired
+	private TResourceScenicMapper<TResourceScenic> resourceScenicMapper;
 
 	@Override
 	public int selectCountSelective(Map<String, Object> map) {
@@ -43,6 +49,12 @@ public class AccomadationService implements IAccomadationService {
 
 	@Override
 	public int insert(Accomadation record) {
+		TResourceScenic resourceScenic = new TResourceScenic();
+		resourceScenic.setFiIndex(BigDecimal.valueOf(resourceScenicMapper.getSeq()));
+		resourceScenic.setFsResno(record.getNo());   //资源代码
+		resourceScenic.setFsRestype("bg");   //资源类型:房型
+		resourceScenic.setFsScenicno(record.getFsScenicno());   //景区代码
+		resourceScenicMapper.insert(resourceScenic);
 		return accomadationMapper.insert(record);
 	}
 

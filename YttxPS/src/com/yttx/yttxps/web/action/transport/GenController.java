@@ -79,12 +79,12 @@ static Logger logger = LoggerFactory.getLogger(GenController.class);
 	@SuppressWarnings({ "unchecked" })
 	@RequestMapping(value="addGen.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxaddGen(Tgen gen)
+	public Map<String, Object> ajaxaddGen(Tgen tgen)
     {  
-		logger.debug("当前新增对象 {}", gen);
+		logger.debug("当前新增对象 {}", tgen);
 		try{
-			gen.setFiIndex(new BigDecimal(genService.selectFiIndex()));
-			genService.insert(gen);
+			tgen.setFiIndex(new BigDecimal(genService.selectFiIndex()));
+			genService.insert(tgen);
 		}
 		catch(Exception e){
 			e.printStackTrace();

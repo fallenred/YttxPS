@@ -20,7 +20,7 @@ public class GuideService implements IGuideService {
 	private IPubService<Tguide> pubService;
 	
 	@Autowired
-	private TguideMapper guideMapper;
+	private TguideMapper<Tguide> guideMapper;
 
 	@Override
 	public int selectCountSelective(Map<String, Object> map) {

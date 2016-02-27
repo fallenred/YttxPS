@@ -64,13 +64,11 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">所属地区</label>
-											<div class="col-sm-3">
-												<input type="text" id="fsRegions" name="fsRegions" class="form-control" placeholder="所属地区"  />
-											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fsStartplace">发团地</label>
-											<div class="col-sm-3">
-												<input type="text" id="fsStartplace" name="fsStartplace" class="form-control" placeholder="发团地"  />
+											<div class="col-sm-8">
+												<input type="text" placeholder="请选择行政区域" name="fsStartplaceName" data-key="0086" data-idx="0" data-full="中国" id="fsStartplaceName" class="inp-search" /> 
+												<input type="hidden" name="fsStartplace" id="fsStartplace" />
+												<div id="selectCity" class="localcity"></div>
 											</div>
 										</div>
 									</div>

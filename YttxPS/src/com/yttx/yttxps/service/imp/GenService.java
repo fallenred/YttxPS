@@ -7,7 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yttx.yttxps.mapper.TScenicGenMapper;
 import com.yttx.yttxps.mapper.TgenMapper;
+import com.yttx.yttxps.model.TScenicGen;
 import com.yttx.yttxps.model.Tgen;
 import com.yttx.yttxps.model.TgenExample;
 import com.yttx.yttxps.service.IGenService;
@@ -22,6 +24,9 @@ public class GenService implements IGenService {
 	
 	@Autowired
 	private TgenMapper<Tgen> genMapper;
+	
+	@Autowired
+	private TScenicGenMapper<TScenicGen> scenicGenMapper;
 
 	@Override
 	public int selectCountSelective(Map<String, Object> map) {
@@ -35,7 +40,16 @@ public class GenService implements IGenService {
 
 	@Override
 	public int insert(Tgen record) {
-		return genMapper.insert(record);
+		List<TScenicGen> scenicGens = record.getScenicGens();
+		int result = 0;
+		
+		result = genMapper.insert(record);
+		for(TScenicGen scenicGen : scenicGens) {
+			scenicGen.setFiIndex(scenicGenMapper.selectFiIndex());
+			scenicGen.setFiGenindex(record.getFiIndex());
+			result = scenicGenMapper.insert(scenicGen);
+		}
+		return result;
 	}
 
 	@Override

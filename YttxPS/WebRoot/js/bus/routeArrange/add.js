@@ -30,7 +30,7 @@ jQuery(function($) {
 		$.ajax({
 			type: "GET",
 			url: "/transportArrange/selectTransportArrange.htm",
-			data: "transportArrange.fiGenindex="+$("#fiGenindex").val(),
+			data: "transportArrange.fiGenindex=" + $("#fiGenindex").val(),
 			dataType: "json",
 			success: function(data){
 				var html = ''; 
@@ -70,13 +70,13 @@ jQuery(function($) {
 	
 	//城市选择器
 	function localcallback(index, key, value, fullkey, fullname) {
-		$("#regionname", "#addform").val(fullname);
-		$("#regionno", "#addform").val(key);
+		$("#fsStartplaceName", "#addform").val(fullname);
+		$("#fsStartplace", "#addform").val(key);
 		if (index == 3)
 			$("#selectCity", "#addform").hide();
 	}
 
-	$("#regionname", "#addform").click(function() {
+	$("#fsStartplaceName", "#addform").click(function() {
 		$("#selectCity", "#addform").show();
 	});
 
@@ -84,7 +84,7 @@ jQuery(function($) {
 	//	重置
 	$("#reset").on("click", function() {
 			$("#selectCity").hide();
-			$("#regionno").val(null);
+			$("#fsStartplace").val(null);
 			$("#message").hide();
 			$("#message").text("");
 		});
@@ -112,7 +112,7 @@ jQuery(function($) {
 		$.post("/routeArrange/addRouteArrange.htm",
 				$("#addform").serialize(),
 				function(data){
-			var json = eval("("+data+")");
+			var json = eval("(" + data + ")");
 					if(json.result == "ok") {
 						$("#message").text("增加记录成功");
 						$("#message").show();

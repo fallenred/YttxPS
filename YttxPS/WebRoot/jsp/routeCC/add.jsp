@@ -55,7 +55,7 @@
 												<select id="fiGenindex" name="fiGenindex" class="form-control">
 												</select>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fsName">配置线路</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fsResno">配置线路</label>
 											<div class="col-sm-3">
 												<select id="fsResno" name="fsResno" class="form-control">
 												</select>
@@ -66,7 +66,7 @@
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fiGenIndex">日程</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fiDays">日程</label>
 											<div class="col-sm-3">
 												<select id="fiDays" name="fiDays" class="form-control">
 												</select>
@@ -76,7 +76,7 @@
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">景区</label>
+											<label class="col-sm-2 control-label no-padding-right" for="scenic">景区</label>
 											<div class="col-sm-3">
 												<select id="scenic" name="scenic" class="form-control">
 												</select>
@@ -92,7 +92,7 @@
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsProperty"></label>
+											<label class="col-sm-2 control-label no-padding-right" for="div_scenics"></label>
 											<div class="col-sm-8" id="div_scenics">
 											</div>
 										</div>
@@ -100,7 +100,7 @@
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">门票选择</label>
+											<label class="col-sm-2 control-label no-padding-right" for="ticket">门票选择</label>
 											<div class="col-sm-3">
 												<select id="ticket" name="ticket" class="form-control">
 												</select>
@@ -115,7 +115,7 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsProperty"></label>
+											<label class="col-sm-2 control-label no-padding-right" for="div_ticket"></label>
 											<div class="col-sm-8" id="div_ticket">
 											</div>
 										</div>
@@ -123,48 +123,46 @@
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">餐厅选择</label>
+											<label class="col-sm-2 control-label no-padding-right" for="restaurant">餐厅选择</label>
 											<div class="col-sm-3">
-												<select id="transportArrange" name="transportArrange" class="form-control">
+												<select id="restaurant" name="restaurant" class="form-control">
 												</select>
 											</div>
 											<div class="col-sm-3">
-												<button type="button" class="btn btn-success pull-right" id="addTransportBtn">添加</button>
+												<button type="button" class="btn btn-success pull-right" id="addRestaurantBtn">添加</button>
 											</div>
 											<div class="col-sm-3">
-												<button type="button" class="btn btn-success pull-left" id="rmTransportBtn">删除</button>
+												<button type="button" class="btn btn-success pull-left" id="rmRestaurantBtn">删除</button>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsProperty"></label>
-											<div class="col-sm-8">
-												<input name="" type="checkbox"/> 早餐  <input name="" type="checkbox"/> 午餐  <input name="" type="checkbox"/> 晚餐  <input name="" type="checkbox"/> 接送费
+											<div class="col-sm-8" id="div_restaurant">
 											</div>
 										</div>
 									</div>
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">娱乐项目选择</label>
+											<label class="col-sm-2 control-label no-padding-right" for="entertainment">娱乐项目选择</label>
 											<div class="col-sm-3">
-												<select id="transportArrange" name="transportArrange" class="form-control">
+												<select id="entertainment" name="entertainment" class="form-control">
 												</select>
 											</div>
 											<div class="col-sm-3">
-												<button type="button" class="btn btn-success pull-right" id="addTransportBtn">添加</button>
+												<button type="button" class="btn btn-success pull-right" id="addEntertainmentBtn">添加</button>
 											</div>
 											<div class="col-sm-3">
-												<button type="button" class="btn btn-success pull-left" id="rmTransportBtn">删除</button>
+												<button type="button" class="btn btn-success pull-left" id="rmEntertainmentBtn">删除</button>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsProperty"></label>
-											<div class="col-sm-8">
-												<input name="" type="checkbox"/> 全价票  <input name="" type="checkbox"/> 半价票
+											<label class="col-sm-2 control-label no-padding-right" for="div_entertainment"></label>
+											<div class="col-sm-8" id="div_entertainment">
 											</div>
 										</div>
 									</div>

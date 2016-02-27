@@ -176,4 +176,8 @@ public class EntertainmentService implements IEntertainmentService {
 		return entertainmentMapper.selectByExample(example);
 	}
 
+	@Override
+	public List<TEntertainment> selectEntertainmentDynamic(Map<String, Object> map) {
+		return entertainmentMapper.selectEntertainmentDynamic(map);
+	}
 }

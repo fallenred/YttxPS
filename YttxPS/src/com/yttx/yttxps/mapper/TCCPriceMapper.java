@@ -1,11 +1,14 @@
 package com.yttx.yttxps.mapper;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.yttx.yttxps.model.ResoucePrice;
 import com.yttx.yttxps.model.TCCPrice;
 import com.yttx.yttxps.model.TCCPriceExample;
 import com.yttx.yttxps.model.TCCPriceKey;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface TCCPriceMapper {
 
@@ -91,4 +94,11 @@ public interface TCCPriceMapper {
 	 * 资源定价
 	 */
 	List<ResoucePrice> insertPrice(TCCPrice price);
+	
+	/**
+	 * 查询消费选项价格
+	 * @param parameter
+	 * @return
+	 */
+	List<TCCPrice> selectResPrices(Map<String, Object> parameter);
 }

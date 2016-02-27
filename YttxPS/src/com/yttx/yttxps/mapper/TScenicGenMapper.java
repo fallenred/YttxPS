@@ -75,4 +75,6 @@ public interface TScenicGenMapper<T> extends IBaseMapper<T> {
 	 * @mbggenerated  Fri Jan 22 21:17:13 CST 2016
 	 */
 	int updateByPrimaryKey(TScenicGen record);
+	
+	BigDecimal selectFiIndex();
 }

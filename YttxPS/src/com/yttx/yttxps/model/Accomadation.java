@@ -13,6 +13,11 @@ public class Accomadation {
     private String speciality;
     private BigDecimal stat;
     private String desc;
+    
+    /**
+     * 所属景区
+     */
+    private String fsScenicno;
 
     public String getNo() {
         return no;
@@ -197,4 +202,12 @@ public class Accomadation {
     public void setDesc(String desc) {
         this.desc = desc == null ? null : desc.trim();
     }
+
+	public String getFsScenicno() {
+		return fsScenicno;
+	}
+
+	public void setFsScenicno(String fsScenicno) {
+		this.fsScenicno = fsScenicno;
+	}
 }

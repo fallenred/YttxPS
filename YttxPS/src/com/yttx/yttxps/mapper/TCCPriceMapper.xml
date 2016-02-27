@@ -13,6 +13,8 @@
     <id column="FT_STARTDATE" jdbcType="DATE" property="ftStartdate" />
     <result column="FT_ENDDATE" jdbcType="DATE" property="ftEnddate" />
     <result column="FD_PRICE" jdbcType="DECIMAL" property="fdPrice" />
+    <result column="FS_RESNAME" jdbcType="CHAR" property="fsResname" />
+    <result column="FS_CCNAME" jdbcType="CHAR" property="fsCcname" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -355,5 +357,29 @@
 	    	#{errorMsg,mode=OUT,jdbcType=VARCHAR})
 	    }  
 	]]>  
-</select>  
+  </select>
+  
+  <select id="selectResPrices" parameterType="map" resultMap="BaseResultMap">
+    SELECT a.ft_startdate,   <!-- 开始日期 -->
+           a.ft_enddate,     <!-- 结束日期 -->
+           a.fs_restype,     <!-- 资源类型 -->
+           b.fs_resname,     <!-- 资源类型名称 -->
+           a.fs_resno,       <!-- 资源编号 -->
+           a.fs_ccno,        <!-- 消费选项编号 -->
+           c.fs_ccname,      <!-- 消费选项名称 -->
+           a.fd_price        <!-- 定价 -->
+      FROM tccprice a,TResTypeDirc b,TCCDirc c
+     WHERE a.fs_restype = b.fs_restype
+       AND a.fs_ccno = c.fs_ccno
+    <if test="fsResno != null and fsResno != ''">
+	  AND a.fs_resno = #{fsResno,jdbcType=CHAR}
+    </if>
+    <if test="fsRestype != null and fsRestype != ''">
+	  AND a.fs_restype = #{fsRestype,jdbcType=CHAR}
+    </if>
+    <if test="fsDate != null and fsDate != ''">
+	  <![CDATA[ AND a.ft_startdate <= #{fsDate,jdbcType=DATE} ]]>
+      <![CDATA[ AND (a.ft_enddate >= #{fsDate,jdbcType=DATE} OR a.ft_enddate IS NULL) ]]>
+    </if>
+  </select>
 </mapper>

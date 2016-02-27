@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.entertainment;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,6 @@ import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.TCCPrice;
 import com.yttx.yttxps.model.TEntertainment;
 import com.yttx.yttxps.model.TEntertainmentExample;
-import com.yttx.yttxps.model.Tticket;
 import com.yttx.yttxps.model.vo.EntertainmentRequest;
 import com.yttx.yttxps.model.vo.GenRequest;
 import com.yttx.yttxps.service.IEntertainmentService;
@@ -137,6 +137,21 @@ public class EntertainmentController extends BaseController {
 		logger.debug("当前查询条件 {}", req.getGen());
 		TEntertainmentExample example = new TEntertainmentExample();
 		List<TEntertainment> list = entertainmentService.selectEntertainment(example);
+		return list;
+    }
+	
+	/**
+	 * 获取娱乐项目列表
+	 * @param scenicNo
+	 * @return
+	 */
+	@RequestMapping(value="selectEntertainmentDynamic.htm", method = RequestMethod.GET)
+	@ResponseBody
+	public Object selectEntertainmentByScenic(@RequestParam(value = "scenicNo") String[] scenicNo) {  
+		logger.debug("当前查询条件 {}", scenicNo.toString());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("scenicNo", Arrays.asList(scenicNo));
+		List<TEntertainment> list = entertainmentService.selectEntertainmentDynamic(map);
 		return list;
     }
 	

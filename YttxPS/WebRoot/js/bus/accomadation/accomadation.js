@@ -49,17 +49,8 @@ function deleteCustom(id) {
 //酒店房型配置
 function roomConfigCustom(id) {
     var raw = jQuery("#grid-table").jqGrid('getRowData', id);
-    var frameSrc = "/jsp/room/room.jsp?no=" + raw.no+"&name="+escape(raw.name);
-    
     var page = "/jsp/room/room.jsp?no=" + raw.no+"&name="+escape(raw.name);
     window.open(page);
-    
-    /*
-    $("#roomIframe").attr("src", frameSrc);
-    $('#roomModal').modal({
-        backdrop : 'static'
-    }).show();
-    */
 };
 
 // 绑定指定表单数据

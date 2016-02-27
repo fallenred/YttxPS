@@ -11,7 +11,7 @@ jQuery(function($) {
 							return true;
 						}
 						else {
-							$("#message").text("删除记录失败:" + json.message );
+							$("#message").text("删除记录失败:" + data.message );
 							return false;
 						}
 						return false;

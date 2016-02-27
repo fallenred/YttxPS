@@ -53,6 +53,12 @@ jQuery(function($) {
             $('#addform #name').focus();
             return false;
         }
+        if($("#addform input[name='fsScenicno']").val() == '') {
+            $("#addform #message").show();
+            $("#addform #message").text("所属景区不能为空，请输入");
+            $('#addform #fsScenicno').focus();
+            return false;
+        }
 		if($("#addform input[name='regionno']").val() == '') {
 			$("#addform #message").show();
 			$("#addform #message").text("酒店所属地区不能为空，请输入");
@@ -83,7 +89,7 @@ jQuery(function($) {
 		$.post("/accomadation/addAccomadation.htm",
 		        $("#addform").serialize(),
 				function(data){
-			        var json = eval("("+data+")");
+			        var json = eval("(" + data + ")");
 					if(json.result == "ok") {
 						$("#addform #message").text("增加记录成功");
 						$("#addform #message").show();
@@ -98,4 +104,22 @@ jQuery(function($) {
 				});
 	});
 
+	//获取景点列表
+	$.ajax({
+        type: "POST",
+        url: "/scenic/findAllScenic.htm",
+        data: '',
+        dataType: "json",
+        success: function(data){
+        		var html = ''; 
+        		$.each(data, function(commentIndex, comment){
+        			html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
+        		});
+        		$("#fsScenicno").html(html);
+        }
+    });
+
+	$("#fsRegionName", "#addform").click(function() {
+		$("#selectCity", "#addform").show();
+	});
 });

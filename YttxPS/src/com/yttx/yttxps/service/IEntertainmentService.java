@@ -41,5 +41,9 @@ public interface IEntertainmentService {
 	@Transactional
 	void deleteEntertainmentPrice(TCCPrice price);
 
+	@Transactional
 	List<TEntertainment> selectEntertainment(TEntertainmentExample example);
+	
+	@Transactional
+	List<TEntertainment> selectEntertainmentDynamic(Map<String, Object> map);
 }

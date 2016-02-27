@@ -61,22 +61,30 @@ jQuery(function($) {
 			$("#message").text("路线天数不能为空，请输入");
 			$('#name').focus();
 			return false;
-		} 
+		}
+		
+		var tgen = {};
+		tgen.fsName = $("#fsName").val();
+		tgen.fiDays = $("#fiDays").val();
+		tgen.fiStat = $("#fiStat").val();
+		$("#addform input[name='scenicGens']").each(function(idx, e){
+			tgen["scenicGens[" + idx + "].fsScenicno"] = $(e).val();
+		});
+		
 		$.post("/gen/addGen.htm",
-				$("#addform").serialize(),
+				tgen,
 				function(data){
-			var json = eval("("+data+")");
-			if(json.result == "ok") {
-				$("#message").text("增加记录成功");
-				$("#message").show();
-				return true;
-			}
-			else {
-				$("#message").text("增加记录失败:" + json.message );
-				$("#message").show();
-				return false;
-			}
-			return false;
+					var json = eval("(" + data + ")");
+					if(json.result == "ok") {
+						$("#message").text("增加记录成功");
+						$("#message").show();
+						return true;
+					} else {
+						$("#message").text("增加记录失败:" + json.message );
+						$("#message").show();
+						return false;
+					}
+					return false;
 		});
 	});
 	//增加景区
@@ -85,30 +93,26 @@ jQuery(function($) {
 		var val = $("#scenic").val();
 		var text = $("#scenic").find("option:selected").text();
 		var flag = true;
-		$("input[name='scenicGen']").each(function(){
-			if (val == $(this).val()) { 
+		$("input[name='scenicGens']").each(function(index, element){
+			if (val == $(this).val()) {
 				flag = false;
-			} 
+			}
 		});
 		if (flag)
-			html += '<input type="hidden" name="scenicGen" value="' + val + '"/>' + '&nbsp;&nbsp;<label>' + text + '</label>&nbsp;&nbsp;';
+			html += '<input type="hidden" name="scenicGens" value="' + val + '"/>' + '&nbsp;&nbsp;<label>' + text + '</label>&nbsp;&nbsp;';
 		$("#div_scenics").html(html);
-		getTicket();
-		getShop();
 	});
 
 	//删除景区
 	$("#rmScenicBtn").click(function(){
-		var html = '线路景区：';
+		var html = '';
 		var val = $("#scenic").val();
-		$("input[name='scenicGen']").each(function(){
+		$("input[name='scenicGens']").each(function(){
 			if (val != $(this).val()) { 
-				html += '<input type="hidden" name="scenicGen" value="' + $(this).val() + '"/>' + '&nbsp;&nbsp;<label>' + $(this).next().text() + '</label>&nbsp;&nbsp;';
+				html += '<input type="hidden" name="scenicGens" value="' + $(this).val() + '"/>' + '&nbsp;&nbsp;<label>' + $(this).next().text() + '</label>&nbsp;&nbsp;';
 			} 
 		});
 		$("#div_scenics").html(html);
-		getTicket();
-		getShop();
 	});
 	//	colorbox
 	var $overflow = '';

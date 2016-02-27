@@ -29,7 +29,7 @@ public class RoomPriceService implements IRoomPriceService {
 	@Override
 	public void insertRoomPrice(TCCPrice price) {
 		price.setFsCcno("000024");   //房间消费
-		price.setFsRestype("bg");   //宾馆
+		price.setFsRestype("fx");   //宾馆
 		priceMapper.insertPrice(price);
 	}
 

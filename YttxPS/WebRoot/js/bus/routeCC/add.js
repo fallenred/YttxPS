@@ -10,7 +10,7 @@ jQuery(function($) {
 	});
 	
 	//酒店类型下拉列表
-	getDict('bgjb', 'fsStarLvl');
+	getDict('bg', 'fsStarLvl');
 	
 	//获取线路列表
 	$.ajax({
@@ -24,28 +24,32 @@ jQuery(function($) {
         			html += '<option value=' + comment['fiIndex'] + '>' + comment['fsName'] + '</option>';
         		});
         		$("#fiGenindex").html(html);
-        		getRouteArrange()
-        		getSceniceGen();
-        		getScenice();
+        		getRouteArrange();   //获取线路配置列表
+        		getSceniceGen();   //获取线路景区
+        		getScenice();   //获取景区列表
         		$("#ticket").html('');
         }
     });
 	
+	/**
+	 * 生成日程下拉列表
+	 */
 	function getDays(num){
 		var html="";
-		//生成日程下拉列表
 		for (var i = 0; i < num ; i++) {
 			html += '<option value=' + i + '>第' + (parseInt(i)+1) + '天</option>';
 		}
 		$("#fiDays").html(html);
 	}
 	
+	/**
+	 * 获取线路配置列表
+	 */
 	function getRouteArrange(){
-		//获取线路配置列表
 		$.ajax({
 			type: "GET",
 			url: "/routeArrange/selectRouteArrange.htm",
-			data: "arrange.fiGenindex="+$("#fiGenindex").val(),
+			data: "arrange.fiGenindex=" + $("#fiGenindex").val(),
 			dataType: "json",
 			success: function(data){
 				var html = ''; 
@@ -57,8 +61,10 @@ jQuery(function($) {
 		});
 	}
 	
+	/**
+	 * 获取景区列表
+	 */
 	function getScenice(){
-		//获取景区列表
 		$.ajax({
 			type: "POST",
 			url: "/scenic/findAllScenic.htm",
@@ -74,31 +80,37 @@ jQuery(function($) {
 		});
 	}
 	
+	/**
+	 * 获取线路景区
+	 */
 	function getSceniceGen(){
-		//获取线路景区
 		var num = '';
 		$.ajax({
 			type: "GET",
 			url: "/scenicGen/selectScenicGen.htm",
-			data: "scenicGen.fiGenindex="+$("#fiGenindex").val(),
+			data: "scenicGen.fiGenindex=" + $("#fiGenindex").val(),
 			dataType: "json",
 			success: function(data){
 				var html = '线路景区：'; 
 				$.each(data, function(commentIndex, comment){
-					html += '<input type="hidden" name="scenicGen" value="' + comment['fsScenicno'] + '"/>' + '&nbsp;&nbsp;<label>' + comment['fsScenicname']+'</label>';
+					html += '<input type="hidden" name="scenicGen" value="' + comment['fsScenicno'] + '"/>' + '&nbsp;&nbsp;<label>' + comment['fsScenicname'] + '</label>';
 					if(commentIndex == 0)
 						num = comment['fiDays'];
 				});
 				$("#div_scenics").html(html);
-				getTicket();
-				getDays(num);
-				getShop();
+				getTicket();   //获取景区票列表
+				getDays(num);   //生成日程下拉列表
+				getShop();   //获取购物店列表
+				getRestaurant();   //获取餐厅
+				getEntertainment();   //获取娱乐项目
 			}
 		});
 	}
 	
+	/**
+	 * 获取景区票列表
+	 */
 	function getTicket(){
-		//获取景区票列表
 		var scenic = '';
 		$("input[name='scenicGen']").each(function(){
 			scenic += $(this).val() + ",";
@@ -119,8 +131,10 @@ jQuery(function($) {
 		});
 	}
 	
+	/**
+	 * 初始化字典列表
+	 */
 	function getDict(parentno, selectId){
-		//初始化字典列表
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -128,7 +142,7 @@ jQuery(function($) {
 			data: "dict.fsParentno=" + parentno,
 			dataType: "json",
 			success: function(data){
-				var html = '<option value="">'+'--所有类型--' + '</option>'; 
+				var html = '<option value="">' + '-- 请选择 --' + '</option>'; 
 				$.each(data, function(commentIndex, comment){
 					html += '<option value=' + comment['fsDictno'] + '>' + comment['fsDictname'] + '</option>';
 				});
@@ -137,8 +151,10 @@ jQuery(function($) {
 		});
 	}
 	
+	/**
+	 * 获取酒店列表
+	 */
 	function getAccomadation(){
-		//获取酒店列表
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -156,8 +172,10 @@ jQuery(function($) {
 		});
 	}
 	
+	/**
+	 * 获取酒店房型列表
+	 */
 	function getRoom(){
-		//获取酒店房型列表
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -174,8 +192,10 @@ jQuery(function($) {
 		});
 	}
 	
+	/**
+	 * 获取购物店列表
+	 */
 	function getShop(){
-		//获取购物店列表
 		var scenic = '';
 		$("input[name='scenicGen']").each(function(){
 			scenic += $(this).val() + ",";
@@ -196,11 +216,138 @@ jQuery(function($) {
 		});
 	}
 	
+	/**
+	 * 获取餐厅列表
+	 */
+	function getRestaurant() {
+		var scenic = [];
+		$("input[name='scenicGen']").each(function(){
+			scenic.push($(this).val());
+		});
+		
+		$.ajax({
+			type: "POST",
+			traditional: true,
+			url: "/restaurant/selectRestaurant.htm",
+			data: {"scenicNo[]": scenic},
+			dataType: "json",
+			success: function(data){
+				var html = ''; 
+				$.each(data, function(commentIndex, comment){
+					html += '<option value=' + comment['no'] + '>' + comment['regionname'] + '--' + comment['name'] + '</option>';
+				});
+				$("#restaurant").html(html);
+			}
+		});
+	}
+	
+	/**
+	 * 获取娱乐项目列表
+	 */
+	function getEntertainment() {
+		var scenic = [];
+		$("input[name='scenicGen']").each(function(){
+			scenic.push($(this).val());
+		});
+		
+		$.ajax({
+			type: "GET",
+			traditional: true,
+			url: "/entertainment/selectEntertainmentDynamic.htm",
+			data: {"scenicNo": scenic},
+			dataType: "json",
+			success: function(data){
+				var html = ''; 
+				$.each(data, function(commentIndex, comment){
+					html += '<option value=' + comment['fsNo'] + '>' + comment['fsScenicname'] + '--' + comment['fsName'] + '</option>';
+				});
+				$("#entertainment").html(html);
+			}
+		});
+	}
+	
+	//增加娱乐项目
+	$("#addEntertainmentBtn").click(function(){
+		var html = $("#div_entertainment").html();
+		var val = $("#entertainment").val();
+		var text = $("#entertainment").find("option:selected").text();
+		var flag = true;
+		if($(".entertainment-label-" + val) != null && $(".entertainment-label-" + val).length != 0) {
+			flag = false;
+		}
+		
+		if (flag) {
+			$.ajax({
+				type: "POST",
+				traditional: true,
+				data: "fsRestype=yl",
+				url: "/rescc/findResCC.htm",
+				dataType: "json",
+				success: function(data){
+					html += '<label for="form-field-select-2" class="entertainment-label-' + val + '">' + text + '</label>';
+					//html += '<input type="hidden" class="ticketid" name="routecc[' + index + '].fsResno" value="' + val + '"/>';
+					html += '<select class="form-control entertainment-select-' + val + '" id="entertainments_' + val + '" multiple="multiple">';
+					$.each(data.rows, function(i, e){
+						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
+					});
+					
+					resetIframeHeight("add");
+					$("#div_entertainment").html(html);
+				}
+			});
+		}
+	});
+	
+	//删除娱乐项目
+	$("#rmEntertainmentBtn").click(function(){
+		var val = $("#entertainment").val();
+		$(".entertainment-label-" + val).remove();
+		$(".entertainment-select-" + val).remove();
+		resetIframeHeight("sub");
+	});
+	
+	//增加餐厅
+	$("#addRestaurantBtn").click(function() {
+		var html = $("#div_restaurant").html();
+		var val = $("#restaurant").val();
+		var text = $("restaurant").find("option:selected").text();
+		var flag = true;
+		
+		if(flag) {
+			$.ajax({
+				type: "POST",
+				traditional: true,
+				data: "fsRestype=ct",
+				url: "/rescc/findResCC.htm",
+				dataType: "json",
+				success: function(data) {
+					html += '<label for="form-field-select-2" class="restaurant-label-' + val + '">' + text + '</label>';
+					//html += '<input type="hidden" class="restaurantid" name="routecc[' + index + '].fsResno" value="' + val + '"/>';
+					html += '<select class="form-control restaurant-select-' + val + '" id="restaurants_' + val + '" multiple="multiple">';
+					$.each(data.rows, function(i, e){
+						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
+					});
+					
+					resetIframeHeight("add");
+					$("#div_restaurant").html(html);
+				}
+			});
+		}
+	});
+	
+	//删除餐厅
+	$("#rmRestaurantBtn").click(function(){
+		var val = $("#restaurant").val();
+		$(".restaurant-label-" + val).remove();
+		$(".restaurant-select-" + val).remove();
+		resetIframeHeight("sub");
+	});
+	
 	//线路变更
 	$("#fiGenindex").change(function(){
-		getRouteArrange();
-		getSceniceGen();
-		getShop();
+		getRouteArrange();   //获取线路配置列表
+		getSceniceGen();   //获取线路景区
+		getShop();   //获取购物店列表
 	});
 	
 	//酒店标准变更
@@ -247,45 +394,43 @@ jQuery(function($) {
 	
 	//增加门票
 	$("#addTicketBtn").click(function(){
-		//数组下标
-		var index = 0;
-		if($("#index").val() != null){
-			index = $("#index").val();
-		}
 		var html = $("#div_ticket").html();
 		var val = $("#ticket").val();
 		var text = $("#ticket").find("option:selected").text();
 		var flag = true;
-		$("input[class='ticketid']").each(function(){
-			if (val == $(this).val()) { 
-				flag = false;
-			}
-		});
-		if (flag) {
-			$("#index").attr("value",parseInt(index)+1);
-			html += '<input type="hidden" class="ticketid" name="routecc['+index+'].fsResno" value="' + val + '"/>'+
-					'<input type="hidden" class="ticket_'+val+'" name="routecc['+index+'].fsRestype" value="mp"/>' + '<label class="ticket_'+val+'">&nbsp;&nbsp;' + text + '：</label>'+
-					'<input class="ticket_'+val+'" name="routecc['+index+'].fsCcno" value="01" type="checkbox"/><span class="ticket_'+val+'">&nbsp;团队全价票&nbsp;&nbsp;</span>'+
-					'<input class="ticket_'+val+'" name="routecc['+index+'].fsCcno" value="02" type="checkbox"/><span class="ticket_'+val+'">&nbsp;团队半价票&nbsp;&nbsp;<br></span>';
-			resetIframeHeight("add");
+		if($(".ticket-label-" + val) != null && $(".ticket-label-" + val).length != 0) {
+			flag = false;
 		}
-		$("#div_ticket").html(html);
+		
+		if (flag) {
+			//获取门票价格
+			$.ajax({
+				type: "POST",
+				traditional: true,
+				data: "fsRestype=mp",
+				url: "/rescc/findResCC.htm",
+				dataType: "json",
+				success: function(data){
+					html += '<label for="form-field-select-2" class="ticket-label-' + val + '">' + text + '</label>';
+					//html += '<input type="hidden" class="ticketid" name="routecc[' + index + '].fsResno" value="' + val + '"/>';
+					html += '<select class="form-control ticket-select-' + val + '" id="tickets_' + val + '" multiple="multiple">';
+					$.each(data.rows, function(i, e){
+						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
+					});
+					
+					resetIframeHeight("add");
+					$("#div_ticket").html(html);
+				}
+			});
+		}
 	});
 	
 	//删除门票
 	$("#rmTicketBtn").click(function(){
 		var val = $("#ticket").val();
-		if($("#index").val() != null){
-			index = $("#index").val();
-		}
-		$("input[class='ticketid']").each(function(){
-			if (val == $(this).val()) {
-				$(this).remove();
-				$(".ticket_"+val).remove();
-				$("#index").attr("value",parseInt(index)-1);
-				resetIframeHeight("sub");
-			} 
-		});
+		$(".ticket-label-" + val).remove();
+		$(".ticket-select-" + val).remove();
+		resetIframeHeight("sub");
 	});
 	
 	//增加购物店
@@ -305,7 +450,7 @@ jQuery(function($) {
 			}
 		});
 		if (flag) {
-			$("#index").attr("value",parseInt(index)+1);
+			$("#index").attr("value", parseInt(index)+1);
 			html += '<input type="hidden" class="shopid" name="routecc['+index+'].fsResno" value="' + val + '"/>'+
 					'<input type="hidden" class="shop_'+val+'" name="routecc['+index+'].fsRestype" value="gw"/>' + '<label class="shop_'+val+'">&nbsp;&nbsp;' + text + '：</label>'+
 					'<input class="shop_'+val+'" name="routecc['+index+'].fsCcno" value="000021" type="hidden"/><span class="shop_'+val+'">&nbsp;人头消费&nbsp;&nbsp;<br></span>';
@@ -347,12 +492,13 @@ jQuery(function($) {
 				flag = false;
 			}
 		});
+		
 		if (flag) {
-			$("#index").attr("value",parseInt(index)+1);
-			html += '<input type="hidden" class="roomid" name="routecc['+index+'].fsResno" value="' + val + '"/>'+
-					'<input type="hidden" class="room_'+val+'" name="routecc['+index+'].fsRestype" value="bg"/>' + 
-					'<label class="room_'+val+'">&nbsp;&nbsp;' + accomadationName + '-' + roomname + '：</label>'+
-					'<input class="room_'+val+'" name="routecc['+index+'].fsCcno" value="000024" type="hidden"/><span class="room_'+val+'">&nbsp;房间消费&nbsp;&nbsp;<br></span>';
+			$("#index").attr("value", parseInt(index) + 1);
+			html += '<input type="hidden" class="roomid" name="routecc[' + index + '].fsResno" value="' + val + '"/>' +
+					'<input type="hidden" class="room_' + val + '" name="routecc[' + index + '].fsRestype" value="bg"/>' + 
+					'<label class="room_' + val + '">&nbsp;&nbsp;' + accomadationName + '-' + roomname + '：</label>' +
+					'<input class="room_' + val + '" name="routecc[' + index + '].fsCcno" value="000024" type="hidden"/><span class="room_' + val + '">&nbsp;房间消费&nbsp;&nbsp;<br></span>';
 			resetIframeHeight("add");
 		}
 		$("#div_room").html(html);
@@ -367,8 +513,8 @@ jQuery(function($) {
 		$("input[class='roomid']").each(function(){
 			if (val == $(this).val()) {
 				$(this).remove();
-				$(".room_"+val).remove();
-				$("#index").attr("value",parseInt(index)-1);
+				$(".room_" + val).remove();
+				$("#index").attr("value", parseInt(index) - 1);
 				resetIframeHeight("sub");
 			} 
 		});
@@ -391,11 +537,11 @@ jQuery(function($) {
 		var height = $(window.parent.document).find("#addIframe").attr("height");
 		height = height.substring(0,height.length - 2);
 		if ("add" == type) {
-			height = (parseInt(height)+21);
+			height = (parseInt(height) + 21);
 		} else {
-			height = (parseInt(height)-21);
+			height = (parseInt(height) - 21);
 		}
-		$(window.parent.document).find("#addIframe").attr("height", height+"px");
+		$(window.parent.document).find("#addIframe").attr("height", height + "px");
 	}
 
 	//	重置
@@ -404,11 +550,11 @@ jQuery(function($) {
 			$("#regionno").val(null);
 			$("#message").hide();
 			$("#message").text("");
-		});
+	});
 	
 	// 关闭
 	$("#close").on("click", function () {
-		$("#addModal", parent.document).find(".close").click();
+			$("#addModal", parent.document).find(".close").click();
 	});
 	
 //	提交
@@ -416,7 +562,7 @@ jQuery(function($) {
 		$.post("/routeArrange/addRouteCC.htm",
 				$("#addform").serialize(),
 				function(data){
-			var json = eval("("+data+")");
+					var json = eval("(" + data + ")");
 					if(json.result == "ok") {
 						$("#message").text("增加记录成功");
 						$("#message").show();

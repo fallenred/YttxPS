@@ -330,7 +330,7 @@
 			</if>
 			<choose>
                 <when test="scenicNo">
-                  and fs_scenicno in 
+                  and TRIM(fs_scenicno) in 
                   <foreach close=")" collection="scenicNo" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>

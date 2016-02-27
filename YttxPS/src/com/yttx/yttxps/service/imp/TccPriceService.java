@@ -1,6 +1,7 @@
 package com.yttx.yttxps.service.imp;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,14 +21,16 @@ public class TccPriceService implements ITccPriceService {
 
 	@Override
 	public TCCPrice selectTCCPriceByKey(TCCPriceKey key) {
-		// TODO Auto-generated method stub
 		return tccPriceMapper.selectByPrimaryKey(key);
 	}
 
 	@Override
 	public List<TCCPrice> selectTCCPrice(TCCPriceExample example) {
-		// TODO Auto-generated method stub
 		return tccPriceMapper.selectByExample(example);
 	}
 
+	@Override
+	public List<TCCPrice> selectTCCPrice(Map<String, Object> parameter) {
+		return tccPriceMapper.selectResPrices(parameter);
+	}
 }

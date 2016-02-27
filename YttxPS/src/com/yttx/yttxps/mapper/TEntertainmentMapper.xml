@@ -316,6 +316,40 @@
 	      </if>
   </select>
   
+  <select id="selectEntertainmentDynamic" parameterType="map" resultMap="BaseResultMap">
+    SELECT fs_no,
+           fs_name,
+           fs_type,
+           fs_desc,
+           fi_stat,
+           fs_lvl,
+           fs_addr,
+           fs_no   AS fs_scenicno,
+           fs_name AS fs_scenicname
+      FROM view_tentertainment
+     WHERE 1 = 1
+    <if test="fsNo != null and fsNo != ''">
+      and fs_no = #{fsNo}
+    </if>
+    <if test="fsName != null and fsName != ''">
+      and fs_Name like '%'||#{fsName}||'%'
+    </if>
+    <if test="fsType != null and fsType != ''">
+      and fs_Type = #{fsType}
+    </if>
+    <if test="fiStat != null and fiStat != ''">
+	  and fi_Stat = #{fiStat}
+    </if>
+    <choose>
+      <when test="scenicNo">
+        and fs_scenicno in 
+        <foreach close=")" collection="scenicNo" item="listItem" open="(" separator=",">
+          #{listItem}
+        </foreach>
+      </when>
+    </choose>
+  </select>
+  
   <select id="selectFsNo" resultType="int">
       select tentertainment_sequence.nextval from dual
   </select>

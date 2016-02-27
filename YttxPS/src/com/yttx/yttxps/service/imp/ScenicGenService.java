@@ -35,7 +35,6 @@ public class ScenicGenService implements IScenicGenService {
 	
 	@Override
 	public List<TScenicGen> selectScenicGen(TScenicGenExample example) {
-		// TODO Auto-generated method stub
 		return scenicGenMapper.selectByExample(example);
 	}
 
