@@ -205,7 +205,7 @@ public class CustomerBatch{
 			List<HashMap<String, String>> list= new ArrayList<HashMap<String, String>>();
 			HashMap<String, String> map =null;
 			for(Daylist daylist:daylists){
-				map = SnapshotUtil.converResListToDisplay(daylist.getReslists());
+				map = SnapshotUtil.converResListToDisplay(daylist.getReslist());
 				list.add(map);
 			}
 			return list;

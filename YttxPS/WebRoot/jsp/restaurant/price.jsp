@@ -12,6 +12,9 @@
 <meta name="description" content="" />
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
+<link rel="stylesheet" href="/css/daterangepicker.css" />
+<script src="/js/date-time/moment.min.js"></script>
+<script src="/js/date-time/daterangepicker.min.js"></script>
 </head>
 <body>
 	<div class="main-container" id="main-container">
@@ -47,33 +50,31 @@
 											<div class="col-sm-9">
 												<input class="unreset" type="hidden" id="no" value="${res.no}"/>
 												<input class="form-control unreset" type="text" id="name" name="name" 
-													  maxlength="50" value="${res.name}" readOnly/>
+													  maxlength="50" value="${res.name}" class="col-sm-5" readOnly/>
 											</div>
 										</div>
 									</div>
 									
 									<div class="row">
 										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="startdate">日期范围</label>
+											<div class="col-sm-9">
+												<input type="text" id="date_range" placeholder="日期范围"  readonly>
+											</div>
+										<!--  
 											<label class="col-sm-2 control-label no-padding-right" for="startdate">开始时间</label>
 											<div class="col-sm-3">
 												<input type="text" id="startdate" class="form-control hasDatepicker" 
 													placeholder="输入开始时间,格式如:2016-02-19">
-													<!--  
-												<span class="input-group-addon">
-													<i class="icon-calendar"></i>
-												</span>
-												-->
+												
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="enddate">结束时间</label>
 											<div class="col-sm-3">
 												<input type="text" id="enddate" class="form-control hasDatepicker" 
 													placeholder="输入结束时间,格式如:2016-02-19">
-												<!--  
-												<span class="input-group-addon">
-													<i class="icon-calendar"></i>
-												</span>
-												-->
+							
 											</div>
+											-->
 										</div>
 									</div>
 									

@@ -14,6 +14,7 @@ import org.dom4j.io.XMLWriter;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.QNameMap;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
+import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.xml.bean.Body;
 import com.yttx.yttxps.xml.bean.Cclist;
 import com.yttx.yttxps.xml.bean.Daylist;
@@ -31,7 +32,7 @@ public class ResScheduleXMLConverter {
 	static
 	{
 		QNameMap qmap = new QNameMap();
-		qmap.setDefaultNamespace("http://www.cnacex.com/");
+		qmap.setDefaultNamespace(Constants.SNAPSHOT_NAMESPACE);
 		StaxDriver staxDriver = new StaxDriver(qmap); 
 		staxDriver.setQnameMap(qmap);
 		xStream = new XStream(staxDriver);

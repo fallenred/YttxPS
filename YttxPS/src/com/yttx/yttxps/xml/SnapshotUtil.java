@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.yttx.comm.StringUtil;
+import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.xml.bean.Body;
 import com.yttx.yttxps.xml.bean.Cclist;
 import com.yttx.yttxps.xml.bean.Daylist;
 import com.yttx.yttxps.xml.bean.Reslist;
+import com.yttx.yttxps.xml.bean.Root;
 
 /**
  * 类描述：用于将特定格式字符串（快照）转化成相应的对象
@@ -15,20 +17,25 @@ import com.yttx.yttxps.xml.bean.Reslist;
  * @date 2016年2月23日 下午3:32:27
  */
 public class SnapshotUtil{
-	
-	public static List<Daylist> conver2DayList(String xml){
+	/**
+	 * 将一个xml字符串转化成一个对象
+	 */
+	private static Body objectFromXml(String xml){
 		if(StringUtil.nullOrBlank(xml)){
 			return null;
 		}
-		Body body = ResScheduleXMLConverter.convert2Body(xml);
+		String url=Constants.SNAPSHOT_NAMESPACE;
+		Root root = ResScheduleXMLConverter.fromXml(url, xml, Root.class);
+		return root==null?null:root.getBody();
+	}
+	
+	public static List<Daylist> conver2DayList(String xml){
+		Body body = objectFromXml(xml);
 		return  body==null ? null : body.getDaylist();
 	}
 	
 	public static List<Reslist> conver2ResList(String xml){
-		if(StringUtil.nullOrBlank(xml)){
-			return null;
-		}
-		Body body = ResScheduleXMLConverter.convert2Body(xml);
+		Body body = objectFromXml(xml);
 		return  body==null ? null : body.getReslist();
 	}
 	
@@ -37,11 +44,17 @@ public class SnapshotUtil{
 			HashMap<String, String> resMap=new HashMap<String,String>();
 			for(Reslist res:list){
 				String resName=res.getResname();
-				Cclist cclist=res.getCclist();
-				StringBuilder resContent =new StringBuilder("消费选项名称："+cclist.getCcname()+"&nbsp; &nbsp; &nbsp;");
-				resContent.append("价格："+cclist.getPrice()+"&nbsp; &nbsp; &nbsp;");
-				if(cclist.getUsernum()!=null)
-					resContent.append("数量："+cclist.getUsernum());
+				List<Cclist> cclist=res.getCclist();
+				StringBuilder resContent = null;
+				if(cclist!=null){
+					for(Cclist cc:cclist){
+						resContent =new StringBuilder("消费选项名称："+cc.getCcname()+"&nbsp; &nbsp;");
+						resContent.append("价格："+ cc.getPrice()+"&nbsp; &nbsp;");
+						if(cc.getUsernum()!=null)
+							resContent.append("数量："+cc.getUsernum());
+						resContent.append("<br/>");
+					}
+				}
 				resMap.put(resName, resContent.toString());
 			}
 			return resMap;

@@ -9,5 +9,7 @@ public class Constants {
 	public static final String SYSMENUTREE = "sysmenutree";
 	
 	public static final String SYSMENULIST = "sysmenulist";
+	
+	public static final String SNAPSHOT_NAMESPACE = "http://www.yttx.com/";
 
 }
