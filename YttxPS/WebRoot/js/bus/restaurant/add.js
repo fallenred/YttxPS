@@ -71,6 +71,14 @@ jQuery(function($) {
 			return false;
 		} 
 		
+		var scenic = $("#addform #scenic").val();
+		if(scenic == '') {
+			$("#message").show();
+			$("#message").text("所属景区不能为空，请输入");
+			$("#addform #scenic").focus();
+			return false;
+		} 
+		
 		var regionno = $("#addform #regionno").val()//所属地区
 		if( regionno == '') {
 			$("#message").show();
@@ -115,6 +123,7 @@ jQuery(function($) {
 		var postData = {};
 		postData["name"]      = name;
 		postData["regionno"]  = regionno;
+		postData["scenicNo"]    = scenic;
 		postData["addr"]      = $.trim($("#addform #addr").val());
 		postData["special"]   = special;
 		postData["menu"]      = $("#addform #menu").val();
@@ -130,11 +139,11 @@ jQuery(function($) {
 			function(data){
 				var json = eval("("+data+")");
 				if(json.result == "ok") {
-					$("#message").text("新增餐厅成功！");
+					$("#message").html("新增餐厅成功！");
 					$("#message").show();
 					return true;
 				}else {
-					$("#message").text("新增餐厅失败:" + json.message );
+					$("#message").html("新增餐厅失败:" + json.message );
 					$("#message").show();
 					return false;
 				}

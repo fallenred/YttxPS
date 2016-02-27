@@ -12,7 +12,7 @@ import java.util.List;
  * 时间工具类
  */
 public class DateUtil{  
-	
+	private static DateFormat df =new SimpleDateFormat("yyyy-MM-dd");
 	/**
 	 * 获取两个日期中的每一天
 	 * @param String startDate :格式 "yyyy-MM-dd"
@@ -21,7 +21,7 @@ public class DateUtil{
 	 */
 	public static List<String> getPerDayOfPeriodTime(String startDate,String endDate){
 		List<String> days = new ArrayList<String>();
-		DateFormat df =new SimpleDateFormat("yyyy-MM-dd");
+		
         try{
             Date dateOne = df.parse(startDate);
             Date dateTwo = df.parse(endDate);
@@ -38,5 +38,24 @@ public class DateUtil{
             return days;
         }
 		return days;
+	}
+	
+	/**
+	 * 将格式为"2016/05/03-2016/06/21"的字符串切成【2016/05/03，2016/05/03】
+	 * 的数组，并获取下标为index的字符串
+	 */
+	public static String getDateStrFromDateRange(String range,int index){
+		if(range==null){
+			return null;
+		}
+		if(index<0||index>1){
+			return null;
+		}
+		String[] dateStrs = range.split("-");
+		if(dateStrs==null||dateStrs.length!=2){
+			return null;
+		}
+		return dateStrs[index];
+		
 	}
 }  

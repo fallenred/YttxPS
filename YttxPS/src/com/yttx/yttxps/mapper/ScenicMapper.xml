@@ -243,4 +243,11 @@
         and tt.rowno &gt;= #{startrow}
       </if>
   </select>
+  
+  <select id ="findAll" resultMap="BaseResultMap">
+  		SELECT DISTINCT
+    	 	<include refid="Base_Column_List" />
+    	FROM 
+    		TScenic
+  </select>
 </mapper>

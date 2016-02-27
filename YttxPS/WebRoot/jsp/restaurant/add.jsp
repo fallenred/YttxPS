@@ -48,6 +48,20 @@
 												<input class="form-control" type="text" id="name" name="name" 
 													placeholder="餐厅名称"  maxlength="50"/>
 											</div>
+											<label class="col-sm-2 control-label no-padding-right" for="brand">所属景区</label>
+											<div class="col-sm-4">
+												<select id="scenic">
+													<option value="">选择所属景区...</option>
+													<c:forEach items="${scenics}" var="scenic">
+														<option value="${scenic.no}">${scenic.name}</option>
+													</c:forEach>
+												</select>
+											</div>
+										</div>
+									</div>
+											
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="brand">所属地区</label>
 											<div class="col-sm-4">
 												<input type="text" placeholder="忽略行政区域" name="regionname" 
@@ -56,21 +70,22 @@
 												<input type="hidden" id="regionno" name="regionno" />
 												<div class="localcity selectCity" id="selectCity"></div>
 											</div>
-										</div>
-									</div>
-									
-									<div class="row">
-										<div class="form-group">
+				
+								
 											<label class="col-sm-2 control-label no-padding-right" for="addr">餐厅地址</label>
 											<div class="col-sm-4">
 												<input class="form-control" type="text" id="addr" name="addr" 
 													placeholder="餐厅地址"  maxlength="100"/>
 											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="special">特色菜品</label>
 											<div class="col-sm-4">
 											<!-- TODO 从数据字典中读取 -->
 												<select id="special" name="special" class="form-control">
-													<option value="">请选择......</option>
+													<option value="">请选择特色菜品...</option>
 													<option value="01">小吃</option>
 													<option value="02">藏餐</option>
 													<option value="03">火锅</option>
@@ -135,7 +150,7 @@
 											<label class="col-sm-2 control-label no-padding-right" for="stat">状态</label>
 											<div class="col-sm-4">
 												<select id="stat" name="stat" class="form-control">
-													<option value="">请选择......</option>
+													<option value="">请选择状态......</option>
 													<option value="1">正常</option>
 													<option value="2">失效</option>
 												</select>

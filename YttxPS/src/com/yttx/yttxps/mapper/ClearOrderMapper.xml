@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yttx.yttxps.mapper.ClearOrderMapper">
+
+	<!-- ResultMap:简单订单对象simpleOrder的对应map -->
+	<resultMap id="simpleOrderResultMap"  type="com.yttx.yttxps.model.corder.SimpleOrder">
+		<id      column="FS_NO"              property="no"             jdbcType="VARCHAR" />
+		<result  column="FI_GENINDEX"        property="genIndex"       jdbcType="INTEGER" />
+		<result  column="FS_NAME"            property="name"           jdbcType="VARCHAR" />
+		<result  column="FS_USER_ID"         property="userId"         jdbcType="VARCHAR" />
+		<result  column="FS_USER_SUBID"      property="userSubId"      jdbcType="VARCHAR" />
+		<result  column="FS_OPER_ID"         property="operId"         jdbcType="VARCHAR" />
+		<result  column="FT_CREATDATE"      property="createDate"     jdbcType="VARCHAR" />
+		<result  column="FS_TYPE"            property="type"           jdbcType="VARCHAR" />
+		<result  column="FS_ROUTE_ID"        property="routeId"        jdbcType="VARCHAR" />
+		<result  column="FS_PROPERTY"        property="property"       jdbcType="VARCHAR" />
+		<result  column="FI_DAYS"            property="days"            jdbcType="INTEGER" />
+		<result  column="FT_STARTDATE"       property="startDate"      jdbcType="VARCHAR" />
+		<result  column="FS_STARTPLACE"      property="startPlace"     jdbcType="VARCHAR" />
+		<result  column="FD_PRICE"           property="price"          jdbcType="DECIMAL" />
+		<result  column="FS_SUMMARY"         property="summary"        jdbcType="VARCHAR" />
+		<result  column="FC_SCHEDULE"        property="schedule"       jdbcType="VARCHAR" />
+		<result  column="FD_TOTALFEE"        property="totalFee"       jdbcType="DECIMAL" />
+		<result  column="FD_PAIDAMT"         property="paidAmt"        jdbcType="DECIMAL" />
+		<result  column="FS_REMARK"          property="remark"         jdbcType="VARCHAR" />
+		<result  column="FI_STAT"            property="stat"           jdbcType="INTEGER" />
+		<result  column="FC_COMMFUZZYSNAPSHOT"      property="commFuzzySnapshot"  jdbcType="VARCHAR" />
+		<result  column="FC_COMMRESSNAPSHOT"        property="commResSnapshot"    jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- ResultMap:订单中每一个备注对应Map -->
+	<resultMap id="oRemarkResultMap" type="com.yttx.yttxps.model.corder.ORemark" >
+		<id      property="orderId"   column="or_orderId"    jdbcType="VARCHAR" />
+		<result  property="seq"       column="or_seq"        jdbcType="INTEGER" />
+		<result  property="operId"    column="or_operId"     jdbcType="VARCHAR" />
+		<result  property="date"      column="or_date"       jdbcType="DATE" />
+		<result  property="content"   column="or_content"    jdbcType="VARCHAR" />
+		<result  property="amt"       column="or_amt"        jdbcType="DECIMAL" />
+		<result  property="stat"      column="or_stat"       jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!-- ResultMap:复杂订单对象DetailOrder的对应map -->
+	<resultMap id="detailOrderResultMap" type="com.yttx.yttxps.model.corder.DetailOrder">
+		<id      column="orderId"            property="no"             jdbcType="VARCHAR" />
+		<result  column="FI_GENINDEX"        property="genIndex"       jdbcType="INTEGER" />
+		<result  column="FS_NAME"            property="name"           jdbcType="VARCHAR" />
+		<result  column="FS_USER_ID"         property="userId"         jdbcType="VARCHAR" />
+		<result  column="FS_USER_SUBID"      property="userSubId"      jdbcType="VARCHAR" />
+		<result  column="FS_OPER_ID"         property="operId"         jdbcType="VARCHAR" />
+		<result  column="FT_CREATEDATE"      property="createDate"     jdbcType="VARCHAR" />
+		<result  column="FS_TYPE"            property="type"           jdbcType="VARCHAR" />
+		<result  column="FS_ROUTE_ID"        property="routeId"        jdbcType="VARCHAR" />
+		<result  column="FS_PROPERTY"        property="property"       jdbcType="VARCHAR" />
+		<result  column="FI_DAYS"            property="days"           jdbcType="INTEGER" />
+		<result  column="FT_STARTDATE"       property="startDate"      jdbcType="VARCHAR" />
+		<result  column="FT_STARTPLACE"      property="startPlace"     jdbcType="VARCHAR" />
+		<result  column="FD_PRICE"           property="price"          jdbcType="DECIMAL" />
+		<result  column="FS_SUMMARY"         property="summary"        jdbcType="VARCHAR" />
+		<result  column="FC_SCHEDULE"        property="schedule"       jdbcType="VARCHAR" />
+		<result  column="FD_TOTALFEE"        property="totalFee"       jdbcType="DECIMAL" />
+		<result  column="FD_PAIDAMT"         property="paidAmt"        jdbcType="DECIMAL" />
+		<result  column="FS_REMARK"          property="remark"         jdbcType="VARCHAR" />
+		<result  column="FI_STAT"            property="stat"           jdbcType="INTEGER" />
+		<result  column="FC_COMMFUZZYSNAPSHOT"      property="commFuzzySnapshot"  jdbcType="VARCHAR" />
+		<result  column="FC_COMMRESSNAPSHOT"        property="commResSnapshot"    jdbcType="VARCHAR" />
+		<collection property="remarks" javaType="ArrayList" column="orderId" 
+			ofType="com.yttx.yttxps.model.corder.ORemark" select="selectORemarks"/>
+			
+		 <collection property="batches" javaType="ArrayList" column="orderId" 
+			ofType="com.yttx.yttxps.model.corder.CustomerBatch" select="selectCusBatches"/>
+	</resultMap>
+	
+	<!-- ResultMap:订单中每一批次CustomerBatch的对应Map-->
+	<resultMap id="cusBatchResultMap" type="com.yttx.yttxps.model.corder.CustomerBatch" >
+		<id      property="id"            column="batch_id"              jdbcType="INTEGER" />
+		<result  property="orderId"       column="batch_orderId"         jdbcType="VARCHAR" />
+		<result  property="seq"           column="batch_seq"             jdbcType="INTEGER" />
+		<result  property="type"          column="batch_type"            jdbcType="VARCHAR" />
+		<result  property="contactName"   column="batch_cName"           jdbcType="VARCHAR" />
+		<result  property="contactTel"    column="batch_cTel"            jdbcType="VARCHAR" />
+		<result  property="total"         column="batch_total"           jdbcType="INTEGER" />
+		<result  property="older"         column="batch_older"           jdbcType="INTEGER" />
+		<result  property="adult"         column="batch_adult"           jdbcType="INTEGER" />
+		<result  property="children"      column="batch_children"        jdbcType="INTEGER" />
+		<result  property="postscript"    column="batch_postscript"      jdbcType="VARCHAR" />
+		<result  property="amt"           column="batch_amt"             jdbcType="INTEGER" />
+		<result  property="fuzzySnapshot" column="batch_fuzzySnapshot"   jdbcType="VARCHAR" />
+		<result  property="resSnapshot"   column="batch_resSnapshot"     jdbcType="VARCHAR" />
+		
+		<collection property="customers" ofType="com.yttx.yttxps.model.corder.Customer" javaType="ArrayList">
+			<id      property="certId"      column="cus_certId"     jdbcType="VARCHAR" />
+			<result  property="customId"    column="cus_id"         jdbcType="INTEGER" />
+			<result  property="cusSeq"      column="cus_seq"        jdbcType="INTEGER" />
+			<result  property="name"        column="cus_name"       jdbcType="VARCHAR" />
+			<result  property="certIdType"  column="cus_certIdType" jdbcType="VARCHAR" />
+			<result  property="tel"         column="cus_tel"        jdbcType="VARCHAR" />
+			<result  property="mark"        column="cus_mark"       jdbcType="VARCHAR" />
+		</collection>
+	</resultMap>
+
+	
+	<!--select：找到满足条件的订单的总数  -->
+	<select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
+		SELECT 
+			COUNT(FS_NO) 
+		FROM 
+			Torderlist 
+		WHERE
+			 1=1
+		<if test="orderId != null and orderId !=''">
+			AND 
+				FS_NO   like '%'||#{orderId,jdbcType = VARCHAR}||'%'
+		</if>
+		<if test="orderName != null and orderName !=''">
+			AND
+				FS_NAME like '%'||#{orderName,jdbcType = VARCHAR}||'%'
+		</if>
+		<if test="operId != null and operId !=''">
+			AND
+				FS_OPER_ID = #{operId,jdbcType=VARCHAR}
+		</if>
+		<if test="startDate != null and startDate !=''">
+			AND
+				TRUNC(FT_CREATDATE,'dd') &gt;= TO_DATE(#{startDate,jdbcType=VARCHAR},'yyyy/mm/dd')
+		</if>
+		<if test="endDate != null and endDate !=''">
+			AND
+				TRUNC(FT_CREATDATE,'dd') &lt;= TO_DATE(#{endDate,jdbcType=VARCHAR},'yyyy/mm/dd')
+		</if>
+		<if test="routeType != null and routeType != ''">
+			AND
+				FS_TYPE = #{routeType,jdbcType=VARCHAR}
+		</if>
+		<if test="itemProp != null and itemProp != ''">
+			AND
+				FS_PROPERTY = #{itemProp,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+
+	<!--select：找到满足条件的某页订单的总数  -->
+	<select id="selectSelectivePage" parameterType="java.util.Map" resultMap="simpleOrderResultMap">
+		SELECT 
+			* 
+		FROM (		
+		      SELECT
+		        ROWNUM AS rowno,
+		        o.FS_NO,
+		        o.FI_GENINDEX,
+		        o.FS_NAME,
+		        o.FS_USER_ID,
+		        o.FS_USER_SUBID,
+		        o.FS_OPER_ID,
+		        to_char(o.FT_CREATDATE,'yyyy-mm-dd hh24:mi:ss') FT_CREATDATE,
+		        o.FS_TYPE,
+		        o.FS_ROUTE_ID,
+		        o.FS_PROPERTY,
+		        o.FI_DAYS,
+		        o.FT_STARTDATE,
+		        o.FS_STARTPLACE,
+		        o.FD_PRICE,
+		        o.FS_SUMMARY,
+		        o.FC_SCHEDULE,
+		        o.FD_TOTALFEE,
+		        o.FD_PAIDAMT,
+		        o.FS_REMARK,
+		        o.FI_STAT,
+		        o.FC_COMMFUZZYSNAPSHOT,
+		        o.FC_COMMRESSNAPSHOT
+		      FROM 
+		        Torderlist o
+			WHERE
+				1=1
+				<if test="orderId != null and orderId !=''">
+					AND 
+						FS_NO   like '%'||#{orderId,jdbcType = VARCHAR}||'%'
+				</if>
+				<if test="orderName != null and orderName !=''">
+					AND
+						FS_NAME like '%'||#{orderName,jdbcType = VARCHAR}||'%'
+				</if>
+				<if test="operId != null and operId !=''">
+					AND
+						FS_OPER_ID = #{operId,jdbcType=VARCHAR}
+				</if>
+				<if test="startDate != null and startDate !=''">
+					AND
+						TRUNC(FT_CREATDATE,'dd') &gt;= TO_DATE(#{startDate,jdbcType=VARCHAR},'yyyy/mm/dd')
+				</if>
+				<if test="endDate != null and endDate !=''">
+					AND
+						TRUNC(FT_CREATDATE,'dd') &lt;= TO_DATE(#{endDate,jdbcType=VARCHAR},'yyyy/mm/dd')
+				</if>
+				<if test="routeType != null and routeType != ''">
+					AND
+						FS_TYPE = #{routeType,jdbcType=VARCHAR}
+				</if>
+				<if test="itemProp != null and itemProp != ''">
+					AND
+						FS_PROPERTY = #{itemProp,jdbcType=VARCHAR}
+				</if>
+			<if test="endrow != null">
+				AND ROWNUM &lt;= #{endrow}
+			</if>
+			)
+		<if test="startrow != null">
+			WHERE rowno &gt; #{startrow}
+		</if>
+	</select>
+	
+	<!-- select:查询复杂订单对象 -->
+	<select id="findOrderDetail" parameterType="string" resultMap="detailOrderResultMap">
+		SELECT
+			 FS_NO  orderId,
+		     FI_GENINDEX,
+		     FS_NAME,
+		     FS_USER_ID,
+		     FS_USER_SUBID,
+		     FS_OPER_ID,
+		     to_char(FT_CREATDATE,'yyyy-mm-dd hh24:mi:ss') FT_CREATDATE,
+		     FS_TYPE,
+		     FS_ROUTE_ID,
+		     FS_PROPERTY,
+		     FI_DAYS,
+		     FT_STARTDATE,
+		     FS_STARTPLACE,
+		     FD_PRICE,
+		     FS_SUMMARY,
+		     FC_SCHEDULE,
+		     FD_TOTALFEE,
+		     FD_PAIDAMT,
+		     FS_REMARK,
+		     FI_STAT,
+		     FC_COMMFUZZYSNAPSHOT,
+		     FC_COMMRESSNAPSHOT
+		FROM 
+			Torderlist 
+		WHERE
+			TRIM(FS_NO)=TRIM(#{orderId,jdbcType=VARCHAR})
+	</select>
+	
+	<!-- select:查询备注 -->
+	<select id="selectORemarks" parameterType="string" resultMap="oRemarkResultMap">
+		SELECT 
+		    fs_Order_ID    or_orderId,
+		    fi_Seq         or_seq    ,
+		    fs_Oper_ID     or_operId ,
+		    ft_Date        or_date   ,
+		    fs_Content     or_content,
+		    fd_Amt         or_amt    ,
+		    fi_Stat        or_stat 
+		FROM 
+		    Tremarks 
+		WHERE 
+		    TRIM(fs_Order_ID)=TRIM(#{orderId,jdbcType= VARCHAR})
+		ORDER BY 
+		      ft_Date
+	</select>
+	
+	<!-- select:查询批次 -->
+	<select id="selectCusBatches" parameterType="string" resultMap="cusBatchResultMap">
+		SELECT 
+		    b.fi_ID            batch_id ,
+		    b.fs_Order_ID      batch_orderId ,
+		    b.fi_Seq           batch_seq,
+		    b.fi_Type          batch_type ,
+		    b.fs_ContactName   batch_cName,
+		    b.fs_ContactTel    batch_cTel,
+		    b.fi_Total         batch_total,
+		    b.fi_Older         batch_older,
+		    b.fi_Adult         batch_adult,
+		    b.fi_Children      batch_children,
+		    b.fs_Postscript    batch_postscript,
+		    b.fd_Amt           batch_amt,
+		    b.fc_ResSnapshot   batch_resSnapshot,
+		    b.fc_FuzzySnapshot batch_fuzzySnapshot,
+		    
+		    c.fi_Custom_ID     cus_id,
+		    c.fi_Seq           cus_seq,
+		    c.fs_Name          cus_name,
+		    c.fs_IDType        cus_certIdType,
+		    c.fs_ID            cus_certId,
+		    c.fs_Tel           cus_tel,
+		    c.fs_Mark          cus_mark
+		FROM 
+		    TOrderCustom b, TOrderCustomList c
+		WHERE 
+		   TRIM(b.fs_Order_ID) = Trim(#{orderId,jdbcType= VARCHAR})
+		   AND  b.fi_ID = c.fi_Custom_ID(+)
+		ORDER BY
+		   b.fi_Seq,c.fi_Seq	
+	</select>
+	
+	
+	<!-- select:通过线路Id找到线路名称-->
+	<select id="findRouteNameById" parameterType="string" resultType="string">
+		SELECT 
+		   fs_Name routeName
+		FROM 
+		    TRouteArrange
+		WHERE 
+		   TRIM(fs_ID) = TRIM(#{routeId,jdbcType= VARCHAR})
+	</select>
+	
+	<!-- select:通过线路Id找到线路名称-->
+	<update id="updateStatById" parameterType="string">
+		UPDATE
+		   Torderlist
+		SET 
+		   FI_STAT=32
+		WHERE 
+		   TRIM(fs_No) = TRIM(#{orderId,jdbcType= VARCHAR})
+	</update>
+
+</mapper>

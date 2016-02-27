@@ -8,6 +8,8 @@
 		<result column="FS_REGIONNO" property="regionno" jdbcType="VARCHAR" />
 		<result column="FS_ADDR" property="addr" jdbcType="VARCHAR" />
 		<result column="FS_MENU" property="menu" jdbcType="VARCHAR" />
+		<result column="FS_ScenicNo" property="scenicNo" jdbcType="VARCHAR" />
+		<result column="FS_ScenicName" property="scenicName" jdbcType="VARCHAR" />
 		<result column="FI_SCALE" property="scale" jdbcType="DECIMAL" />
 		<result column="FS_SPECIAL" property="special" jdbcType="VARCHAR" />
 		<result column="FS_ATTENTION" property="attention" jdbcType="VARCHAR" />
@@ -15,42 +17,68 @@
 		<result column="FI_STAT" property="stat" jdbcType="DECIMAL" />
 	</resultMap>
 	
-	
-	<!-- 基本的数据列 -->
-	<sql id="Base_Column_List">
-		FS_NO, 
-		FS_NAME, 
-		FS_REGIONNO, 
-		FS_ADDR, 
-		FS_MENU,
-		FI_SCALE, 
-		FS_SPECIAL,
-		FS_ATTENTION,
-		FS_LVL,
-		FI_STAT
-	</sql>
-	
 	<!-- 找到满足特定状态的餐厅 -->
 	<select id="findRestaurantByStat" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
-			<include refid="Base_Column_List" />
+			r.FS_NO, 
+			r.FS_NAME, 
+			r.FS_REGIONNO, 
+			ts.FS_ScenicNo,
+			ts.FS_ScenicName,
+			r.FS_ADDR, 
+			r.FS_MENU,
+			r.FI_SCALE, 
+			r.FS_SPECIAL,
+			r.FS_ATTENTION,
+			r.FS_LVL,
+			r.FI_STAT
 		FROM
-			TRestaurant
-		<if test="stat!=null">
-			WHERE 
-				FI_STAT = #{stat,jdbcType=INTEGER}
+			TRestaurant r,
+			(SELECT 
+				s.fs_No FS_ScenicNo,
+				s.fs_Name FS_ScenicName,
+				rc.fs_ResNo
+			FROM 
+				Tscenic s,TResourceScenic rc
+			WHERE
+				Trim(rc.fs_ScenicNo)=Trim(s.fs_No)
+			) ts
+		WHERE Trim(r.FS_NO) = Trim(ts.fs_ResNo)
+		<if test="stat!= null">
+			AND r.FI_STAT = #{stat,jdbcType=INTEGER}
 		</if>
 	</select>
 
 
 	<!-- 通过主键查询详细信息 -->
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="string">
 		SELECT
-			<include refid="Base_Column_List" />
+			r.FS_NO, 
+			r.FS_NAME, 
+			r.FS_REGIONNO, 
+			ts.FS_ScenicNo,
+			ts.FS_ScenicName,
+			r.FS_ADDR, 
+			r.FS_MENU,
+			r.FI_SCALE, 
+			r.FS_SPECIAL,
+			r.FS_ATTENTION,
+			r.FS_LVL,
+			r.FI_STAT
 		FROM
-			TRestaurant
+			TRestaurant r,
+			(SELECT 
+				s.fs_No FS_ScenicNo,
+				s.fs_Name FS_ScenicName,
+				rc.fs_ResNo
+			FROM 
+				Tscenic s,TResourceScenic rc
+			WHERE
+				Trim(rc.fs_ScenicNo)=Trim(s.fs_No)
+			) ts
 		WHERE 
-			FS_NO = #{no,jdbcType=VARCHAR}
+			Trim(r.FS_NO) = Trim(ts.fs_ResNo)
+			AND Trim(FS_NO) =Trim(#{no,jdbcType=VARCHAR})
 	</select>
 	
 	
@@ -228,7 +256,7 @@
 	<!-- 查询满足该条件的所有记录总数 -->
 	<select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
 		SELECT
-			COUNT(*)
+			COUNT(1)
 		FROM
 			TRestaurant
 		WHERE
@@ -265,7 +293,34 @@
 			SELECT
 				ROWNUM AS rowno,res.*
 			FROM 
-				TRestaurant res
+				(
+					SELECT
+						r.FS_NO, 
+						r.FS_NAME, 
+						r.FS_REGIONNO, 
+						ts.FS_ScenicNo,
+						ts.FS_ScenicName,
+						r.FS_ADDR, 
+						r.FS_MENU,
+						r.FI_SCALE, 
+						r.FS_SPECIAL,
+						r.FS_ATTENTION,
+						r.FS_LVL,
+						r.FI_STAT
+					FROM
+						TRestaurant r,
+						(SELECT 
+							s.fs_No FS_ScenicNo,
+							s.fs_Name FS_ScenicName,
+							rc.fs_ResNo
+						FROM 
+							Tscenic s,TResourceScenic rc
+						WHERE
+							Trim(rc.fs_ScenicNo)=Trim(s.fs_No)
+						) ts
+					WHERE 
+						Trim(r.FS_NO) = Trim(ts.fs_ResNo)
+				) res
 			WHERE
 				1=1
 			<if test="name != null and name != ''">

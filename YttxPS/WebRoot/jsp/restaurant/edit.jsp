@@ -48,6 +48,21 @@
 												<input type="hidden" id="no" name="no" value="${res.no}"/>
 												<input class="form-control" type="text" id="name" name="name" placeholder="餐厅名称"  maxlength="50" value="${res.name}"/>
 											</div>
+											<label class="col-sm-2 control-label no-padding-right" for="brand">所属景区</label>
+											<div class="col-sm-4">
+												<select id="scenic">
+													<option value="">选择所属景区...</option>
+													<c:forEach items="${scenics}" var="scenic">
+														<option value="${scenic.no}"
+															<c:if test="${scenic.no==res.scenicNo}">selected</c:if>>${scenic.name}</option>
+													</c:forEach>
+												</select>
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="brand">所属地区</label>
 											<div class="col-sm-4">
 												<input type="text" placeholder="忽略行政区域" name="regionname" id="regionname" 
@@ -55,16 +70,17 @@
 												<input type="hidden" id="regionno" name="regionno" value="${res.regionno}"/>
 												<div class="localcity selectCity" id="selectCity"></div>
 											</div>
-										</div>
-									</div>
-									
-									<div class="row">
-										<div class="form-group">
+										
 											<label class="col-sm-2 control-label no-padding-right" for="addr">餐厅地址</label>
 											<div class="col-sm-4">
 												<input class="form-control" type="text" id="addr" name="addr" 
 													placeholder="餐厅地址"  maxlength="100" value="${res.addr}"/>
 											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="special">特色菜品</label>
 											<div class="col-sm-4">
 											<!-- TODO 从数据字典中读取 -->

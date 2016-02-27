@@ -1,5 +1,6 @@
 package com.yttx.yttxps.service.imp;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -7,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yttx.yttxps.mapper.TCCPriceMapper;
+import com.yttx.yttxps.mapper.TResourceScenicMapper;
 import com.yttx.yttxps.mapper.TRestaurantMapper;
 import com.yttx.yttxps.model.TCCPrice;
+import com.yttx.yttxps.model.TResourceScenic;
+import com.yttx.yttxps.model.TResourceScenicExample;
+import com.yttx.yttxps.model.TResourceScenicExample.Criteria;
 import com.yttx.yttxps.model.TRestaurant;
 import com.yttx.yttxps.model.vo.RestaurantPriceReq;
 import com.yttx.yttxps.service.IPubService;
@@ -31,6 +36,9 @@ public class RestaurantService implements IRestaurantService{
 	
 	@Autowired
 	private TCCPriceMapper tCCPriceMapper;
+	
+	@Autowired
+	private TResourceScenicMapper<TResourceScenic> resourceScenicMapper ;
 
 	/**
 	 * 分页数据查询
@@ -55,9 +63,16 @@ public class RestaurantService implements IRestaurantService{
 	 */
 	@Override
 	public boolean addRestaurent(TRestaurant restaurant){
-		String no = produceNo();//生成一个部门编号
+		//新增景区资源对照数据
+		String no = "ct"+produceNo();
 		restaurant.setNo(no);
 		restaurantMapper.insertSelective(restaurant);//向数据库中插入数据
+		TResourceScenic resourceScenic = new TResourceScenic();
+		resourceScenic.setFiIndex(BigDecimal.valueOf(resourceScenicMapper.getSeq()));
+		resourceScenic.setFsResno(restaurant.getNo());
+		resourceScenic.setFsRestype("ct");
+		resourceScenic.setFsScenicno(restaurant.getScenicNo());
+		resourceScenicMapper.insert(resourceScenic);
 		return true;
 	}
 
@@ -74,6 +89,17 @@ public class RestaurantService implements IRestaurantService{
 	 */
 	@Override
 	public boolean updateRestaurent(TRestaurant restaurant) {
+		//更新TResourceMapper这张表
+		TResourceScenic resourceScenic = new TResourceScenic();
+		resourceScenic.setFsResno(restaurant.getNo());
+		resourceScenic.setFsScenicno(restaurant.getScenicNo());
+		
+		TResourceScenicExample example= new TResourceScenicExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFsResnoEqualTo(restaurant.getNo());
+	
+		//example.getOredCriteria().add(new cr)
+		resourceScenicMapper.updateByExampleSelective(resourceScenic, example);
 		restaurantMapper.updateByPrimaryKeySelective(restaurant);
 		return true;
 	}
@@ -85,7 +111,11 @@ public class RestaurantService implements IRestaurantService{
 	public boolean deleteRestaurant(String no) {
 		//删除资源表中对应的数据
 		tCCPriceMapper.deleteByResTypeAndNo("ct",no);
-		//TODO 是否删除资源服务器上的图片
+		//删除景区资源对照表的数据
+		TResourceScenicExample example= new TResourceScenicExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFsResnoEqualTo(no);
+		resourceScenicMapper.deleteByExample(example);
 		//删除本条记录
 		restaurantMapper.deleteByPrimaryKey(no);
 		return true;
@@ -95,16 +125,8 @@ public class RestaurantService implements IRestaurantService{
 	 * 生成一个餐厅编号
 	 */
 	private String produceNo() {
-		StringBuilder no = new StringBuilder("ct");
-		String  seq = ""+restaurantMapper.selectNo();
-		int length = seq.length();
-		if(length<8){
-			for(int i=0;i<8-length;i++){
-				no.append("0");
-			}
-		}
-		no.append(seq);
-		return no.toString();
+		int  seq =restaurantMapper.selectNo();
+		return String.format("%08d", seq);
 	}
 
 	/**
