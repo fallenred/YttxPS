@@ -336,15 +336,37 @@
 	    </script>
 
 	</c:if>
+	<script>
+	 $(function() {
+		   $(document).on('change key', '.usernum', function(event){
+				countPrice = 0;
+				$(".usernum").each(function(){
+					usernum = $(this).val();
+					if (usernum != ''){
+						$(this).parent().parent().find(".price").each(function(){
+							price = '';
+							if (!$(this).prop("disabled")) {
+								price = $(this).val();
+							}
+							if (price != '') {
+								countPrice = parseInt(countPrice) + parseInt(usernum) * parseInt(price);
+							}
+						});
+					}
+				});
+				$("#fdAmt").val(countPrice);
+		   });
+	   });
+	</script>
 	<script type="text/javascript">
 		//重置iframe高度
 		function resetIframeHeight(type){
 			var height = $(window.parent.document).find("#editIframe").attr("height");
 			height = height.substring(0,height.length - 2);
 			if ("add" == type) {
-				height = (parseInt(height)+52);
+				height = (parseInt(height)+42);
 			} else {
-				height = (parseInt(height)-52);
+				height = (parseInt(height)-42);
 			}
 			$(window.parent.document).find("#editIframe").attr("height", height+"px");
 		}
@@ -357,11 +379,17 @@
 		
 		function handleRestaurantPrice(obj){
 			if($(obj).is(':checked')){
+				//选项编号
 				$(obj).prev().attr("disabled", false);
+				//选项类型
+				$(obj).prev().prev().attr("disabled", false);
+				//选项名称
 				$(obj).next().attr("disabled", false);
+				//选项价格
 				$(obj).next().next().attr("disabled", false);
 			}else {
 				$(obj).prev().attr("disabled", true);
+				$(obj).prev().prev().attr("disabled", true);
 				$(obj).next().attr("disabled", true);
 				$(obj).next().next().attr("disabled", true);
 			}
@@ -372,9 +400,11 @@
 			resno = $(obj).attr("class");
 			$(obj).parent().parent().find(".price").attr("value", $(obj).next().attr("id"));
 			$(obj).parent().find("input:radio").each(function(){
-				$(this).prev().attr("disabled", "disabled");
+				$(this).prev().attr("disabled", true);
+				$(this).next().attr("disabled", true);
 				if($(this).is(':checked')){
 					$(this).prev().attr("disabled", false);
+					$(this).next().attr("disabled", false);
 				}
 			});
 		}
@@ -416,18 +446,20 @@
 							if (comment['fsCcno'] == '000005' || comment['fsCcno'] == '000013') {
 								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
-										'<span id="'+comment['fdPrice']+'">&nbsp;团队全价票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
+										'<span>&nbsp;团队全价票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							}
 							//团队半票
 							if (comment['fsCcno'] == '000006' || comment['fsCcno'] == '000014') {
 								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
+										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
 										'<span id="'+comment['fdPrice']+'">&nbsp;团队半价票('+comment['fdPrice']+'￥)</span></div>'+
 										'<label class="col-sm-2 control-label no-padding-right">数量：</label><div class="col-sm-1 no-padding-left">'+
-										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>';
+										'<input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>';
 							}
 			        	});
-						 html += '<span><!-- 选项价格 --></span><input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value=""/>'+
+						 html += '<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
 							 	 '<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="mp"/>' +
 								 '<span><!-- 资源编号 --></span><input type="hidden" class="ticketid" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>';
 						if (data != '') {
@@ -480,11 +512,14 @@
 			        data: params,
 			        dataType: "json",
 			        success: function(data){
-						html = restaurantDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +restaurantSelect.find("option:selected").text()+'：</span>';
+						html = restaurantDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +restaurantSelect.find("option:selected").text()+'：</span>'+
+						  							  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+restaurantSelect.find("option:selected").text()+'" type="hidden"/>'+
+						    						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
 						$.each(data, function(commentIndex, comment){
 							//早餐
 							if (comment['fsCcno'] == '000018') {
-								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1" type="hidden" disabled="disabled"/>'+
 										'<input type="checkbox" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'"/>'+
 										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
 										'<span id="'+comment['fdPrice']+'">&nbsp;早餐费用('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;</span>';
@@ -492,17 +527,20 @@
 							//午餐
 							if (comment['fsCcno'] == '000019') {
 								html +=	'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+ 
+										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].cctype" value="1" type="hidden" disabled="disabled"/>'+
 										'<input type="checkbox" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'"/>'+
-										'<input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
+										'<input class="price" type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
 										'<span id="'+comment['fdPrice']+'">&nbsp;午餐费用('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;</span>';
 							}
 							//晚餐
 							if (comment['fsCcno'] == '000020') {
-								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].cctype" value="1" type="hidden" disabled="disabled"/>'+
 										'<input type="checkbox" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'"/>'+
-										'<input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
+										'<input class="price" type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
 										'<span id="'+comment['fdPrice']+'">&nbsp;晚餐费用('+comment['fdPrice']+'￥)</span></div>'+
-										'<label class="col-sm-2 control-label no-padding-right">数量：</label><div class="col-sm-1 no-padding-left"><input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>'+
+										'<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
+										'<div class="col-sm-1 no-padding-left"><input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>'+
 										'<span><!-- 资源编号 --></span><input type="hidden" class="restaurantNo" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>'+
 										'<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="ct"/>';
 							}
@@ -561,23 +599,28 @@
 			        data: params,
 			        dataType: "json",
 			        success: function(data){
-						html = entertainmentDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +entertainmentSelect.find("option:selected").text()+'：</span>';
+						html = entertainmentDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +entertainmentSelect.find("option:selected").text()+'：</span>'+
+						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+entertainmentSelect.find("option:selected").text()+'" type="hidden"/>'+
+						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
 						$.each(data, function(commentIndex, comment){
 							//团队全票
 							if (comment['fsCcno'] == '000005' || comment['fsCcno'] == '000013') {
 								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
-										'<span id="'+comment['fdPrice']+'">&nbsp;团队全价票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
+										'<span>&nbsp;团队全价票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							}
 							//团队半票
 							if (comment['fsCcno'] == '000006' || comment['fsCcno'] == '000014') {
 								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
-										'<span id="'+comment['fdPrice']+'">&nbsp;团队半价票('+comment['fdPrice']+'￥)</span></div>'+
-										'<label class="col-sm-2 control-label no-padding-right">数量：</label><div class="col-sm-1 no-padding-left"><input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>';
+										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
+										'<span>&nbsp;团队半价票('+comment['fdPrice']+'￥)</span></div>'+
+										'<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
+										'<div class="col-sm-1 no-padding-left"><input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>';
 							}
 			        	});
-						 html += '<span><!-- 选项价格 --></span><input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value=""/>'+
+						 html += '<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
 							 	 '<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="yl"/>' +
 								 '<span><!-- 资源编号 --></span><input type="hidden" class="entertainmentid" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>';
 						if (data != '') {
@@ -632,10 +675,14 @@
 			        data: params,
 			        dataType: "json",
 			        success: function(data){
-						html = roomDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +roomSelect.find("option:selected").text()+'：</span>';
+						html = roomDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +roomSelect.find("option:selected").text()+'：</span>'+
+						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+roomSelect.find("option:selected").text()+'" type="hidden"/>'+
+						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
 						html += '<span><!-- 选项编号 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" value="'+data.fsCcno+'"/><span>&nbsp;房间消费('+data.fdPrice+'￥)</span></div>'+
-								'<label class="col-sm-2 control-label no-padding-right">数量：</label><div class="col-sm-1 no-padding-left"><input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>'+
+								'<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
+								'<div class="col-sm-1 no-padding-left"><input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>'+
 								'<span><!-- 选项价格 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+data.fdPrice+'"/>'+
+								'<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
 								'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+data.ccname+'" type="hidden"/>'+
 								'<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="bg"/>' +
 								'<span><!-- 资源编号 --></span><input type="hidden" class="roomNo" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>';
@@ -687,7 +734,9 @@
 			        data: params,
 			        dataType: "json",
 			        success: function(data){
-						html = shopDiv.html() + '<span>' +shopSelect.find("option:selected").text()+'</span>';
+						html = shopDiv.html() + '<span>' +shopSelect.find("option:selected").text()+'</span>'+
+						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+shopSelect.find("option:selected").text()+'" type="hidden"/>'+
+						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
 						html += '<span><!-- 选项编号 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" value="'+data.fsCcno+'"/><span><br></span>'+
 								'<span><!-- 选项价格 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="0"/>'+
 								'<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="gw"/>' +
@@ -768,6 +817,26 @@
 					$(".room").html(html);
 				}
 			});
+		}
+
+		function countPrice(){
+			alert("计算总金额");
+			countPrice = 0;
+			$(".usernum").each(function(){
+				usernum = $(this).val();
+				if (usernum != ''){
+					$(this).parent().parent().find(".price").each(function(){
+						price = '';
+						if (!$(this).prop("disabled")) {
+							price = $(this).val();
+						}
+						if (price != '') {
+							countPrice = parseInt(countPrice) + parseInt(usernum) * parseInt(price);
+						}
+					});
+				}
+			});
+			alert(countPrice);
 		}
 	</script>
 </body>
