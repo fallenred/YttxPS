@@ -86,9 +86,9 @@ public class ShopController extends BaseController {
 		logger.debug("当前新增对象 {}", shop);
 		try{
 			String str ="0000000000";
-			shop.setNo(str.substring(0, 10-shop.getNo().length())+shop.getNo());
+			shop.setNo(str.substring(0, 10 - shop.getNo().length()) + shop.getNo());
 			shop.setStat(new BigDecimal(1));
-			int ret = shopService.insert(shop);
+			shopService.insert(shop);
 		}
 		catch(Exception e){
 			logger.error(e.getMessage());

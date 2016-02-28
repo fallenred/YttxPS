@@ -1057,12 +1057,12 @@ public class TshopExample {
 		}
 
 		public Criteria andFsScenicnoEqualTo(String value) {
-			addCriterion("FS_SCENICNO =", value, "fsScenicno");
+			addCriterion("TRIM(FS_SCENICNO) =", value, "fsScenicno");
 			return (Criteria) this;
 		}
 
 		public Criteria andFsScenicnoNotEqualTo(String value) {
-			addCriterion("FS_SCENICNO <>", value, "fsScenicno");
+			addCriterion("TRIM(FS_SCENICNO) <>", value, "fsScenicno");
 			return (Criteria) this;
 		}
 
@@ -1097,22 +1097,22 @@ public class TshopExample {
 		}
 
 		public Criteria andFsScenicnoIn(List<String> values) {
-			addCriterion("FS_SCENICNO in", values, "fsScenicno");
+			addCriterion("TRIM(FS_SCENICNO) in", values, "fsScenicno");
 			return (Criteria) this;
 		}
 
 		public Criteria andFsScenicnoNotIn(List<String> values) {
-			addCriterion("FS_SCENICNO not in", values, "fsScenicno");
+			addCriterion("TRIM(FS_SCENICNO) not in", values, "fsScenicno");
 			return (Criteria) this;
 		}
 
 		public Criteria andFsScenicnoBetween(String value1, String value2) {
-			addCriterion("FS_SCENICNO between", value1, value2, "fsScenicno");
+			addCriterion("TRIM(FS_SCENICNO) between", value1, value2, "fsScenicno");
 			return (Criteria) this;
 		}
 
 		public Criteria andFsScenicnoNotBetween(String value1, String value2) {
-			addCriterion("FS_SCENICNO not between", value1, value2,
+			addCriterion("TRIM(FS_SCENICNO) not between", value1, value2,
 					"fsScenicno");
 			return (Criteria) this;
 		}

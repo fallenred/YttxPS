@@ -187,7 +187,7 @@ jQuery(function($) {
 	s = s.substring(1);
 	jQuery(grid_selector).jqGrid(
 			{
-				url : "/routeCC/findRouteArrange.htm",
+				url : "/routeArrange/findRouteArrange.htm",
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
@@ -423,6 +423,7 @@ jQuery(function($) {
 				onClickButton : function() {
 					var frameSrc = "/jsp/routeCC/add.jsp";
 			        $("#addIframe").attr("src", frameSrc);
+			        $("#addIframe").attr("scrolling", "auto");
 			        $('#addModal').modal({ show: true, backdrop: 'static' });
 				},
 				position : "first",

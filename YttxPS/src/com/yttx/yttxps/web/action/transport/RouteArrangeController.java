@@ -1,6 +1,5 @@
 package com.yttx.yttxps.web.action.transport;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,6 @@ import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.TRouteArrange;
 import com.yttx.yttxps.model.TRouteArrangeExample;
 import com.yttx.yttxps.model.TRouteArrangeWithBLOBs;
-import com.yttx.yttxps.model.TRouteCCKey;
 import com.yttx.yttxps.model.vo.RouteArrangeRequest;
 import com.yttx.yttxps.service.IRouteArrangeService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -101,15 +99,10 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
 	@SuppressWarnings({ "unchecked" })
 	@RequestMapping(value="addRouteCC.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxaddRouteCC(TRouteArrangeWithBLOBs routeArrange, String fiDays, String fsResno) {
+	public Map<String, Object> ajaxaddRouteCC(TRouteArrangeWithBLOBs routeArrange) {
 		logger.debug("当前新增对象 {}", routeArrange);
-		List<TRouteCCKey> list = routeArrange.getRoutecc();
-		for(TRouteCCKey routecc : list) {
-			routecc.setFiDayflag(new BigDecimal(fiDays));
-			routecc.setFsResno(fsResno);
-		}
 		try{
-//			routeArrangeService.insert(routeArrange);
+			routeArrangeService.insertRouteCC(routeArrange);
 		}
 		catch(Exception e){
 			logger.error(e.getMessage());

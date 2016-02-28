@@ -21,6 +21,20 @@ jQuery(function($) {
 		$("#selectCity", "#addform").show();
 	});
 
+	//获取景点列表
+	$.ajax({
+        type: "POST",
+        url: "/scenic/findAllScenic.htm",
+        data: '',
+        dataType: "json",
+        success: function(data){
+        		var html = ''; 
+        		$.each(data, function(commentIndex, comment){
+        			html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
+        		});
+        		$("#scenicno").html(html);
+        }
+    });
 
 	//	重置
 	$("#reset").on("click", function() {
@@ -58,7 +72,7 @@ jQuery(function($) {
 		$.post("/shop/addShop.htm",
 				$("#addform").serialize(),
 				function(data){
-			var json = eval("("+data+")");
+			var json = eval("(" + data + ")");
 					if(json.result == "ok") {
 						$("#message").text("增加记录成功");
 						$("#message").show();

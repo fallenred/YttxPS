@@ -30,4 +30,7 @@ public interface IRouteArrangeService {
 
 	List<TRouteArrange> selectTRouteArrange(TRouteArrangeExample example);
 	
+	@Transactional(rollbackFor=Exception.class)
+	public void insertRouteCC(TRouteArrangeWithBLOBs record);
+	
 }

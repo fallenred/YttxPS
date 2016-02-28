@@ -29,7 +29,7 @@ public class ShopRequest extends JqGridRequest implements
 			map.put("no", shop.getNo() == null ? "" : shop.getNo());
 			map.put("regionno",shop.getRegionno() == null ? "" : shop.getRegionno());
 			map.put("name", shop.getName() == null ? "" : shop.getName());
-			map.put("desc", shop.getDesr() == null ? "" : shop.getDesr());
+			map.put("desc", shop.getDesc() == null ? "" : shop.getDesc());
 			map.put("opentime",shop.getOpentime() == null ? "" : shop.getOpentime());
 			map.put("tel", shop.getTel()== null ? "" : shop.getTel());
 			map.put("singlereturn", shop.getSinglereturn() == null ? "" : shop.getSinglereturn());

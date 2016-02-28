@@ -266,13 +266,13 @@
         FROM (SELECT R.FS_ROOMNO, 
                      R.FS_ACCOMNO,
                      R.FS_TYPE,
-                     D.FS_DICTNAME AS FS_NAME,
+                     R.FS_NAME,
                      R.FS_MEAL,
                      R.FI_STAT 
-                FROM TROOM R, TACCOMADATION A, TDICT D 
+                FROM TROOM R, TACCOMADATION A, tresourcescenic D 
                WHERE R.FS_ACCOMNO = A.FS_NO 
-                 AND R.FS_TYPE = D.FS_DICTNO 
-                 AND D.FS_PARENTNO = 'fx')
+                 AND R.FS_ROOMNO = D.FS_RESNO 
+                 AND D.FS_RESTYPE = 'fx')
        WHERE 1=1 
       <if test="fsType != null and fsType != ''">
         and FS_TYPE = #{fsType}

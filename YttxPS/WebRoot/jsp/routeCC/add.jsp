@@ -13,7 +13,7 @@
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
 </head>
-<body>
+<body style="overflow-x:auto;">
 	<div class="main-container" id="main-container">
 		<script type="text/javascript">
 			try {
@@ -33,16 +33,14 @@
 
 							<!-- 模态框（新增） -->
 
-							<form class="form-horizontal" id="addform" >
+							<form class="form-horizontal" id="addform">
 
 								<div class="modal-body">
 									<!-- 图片TODO： -->
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
-												<li><a class="cboxElement" data-rel="colorbox"
-													href="http://127.0.0.1:81/1.jpg"> <img width="0"
-														height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
+												<li><a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg"> <img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
 												</a></li>
 											</div>
 										</ul>
@@ -183,9 +181,9 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">房型选择</label>
+											<label class="col-sm-2 control-label no-padding-right" for="room">房型选择</label>
 											<div class="col-sm-3">
-												<select id="roomno" name="roomno" class="form-control">
+												<select id="room" name="room" class="form-control">
 												</select>
 											</div>
 											<div class="col-sm-3">
@@ -198,7 +196,7 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsProperty"></label>
+											<label class="col-sm-2 control-label no-padding-right" for="div_room"></label>
 											<div class="col-sm-8" id="div_room">
 											</div>
 										</div>
@@ -206,7 +204,7 @@
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">购物店选择</label>
+											<label class="col-sm-2 control-label no-padding-right" for="shop">购物店选择</label>
 											<div class="col-sm-3">
 												<select id="shop" name="shop" class="form-control">
 												</select>
@@ -221,7 +219,7 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsProperty"></label>
+											<label class="col-sm-2 control-label no-padding-right" for="div_shop"></label>
 											<div class="col-sm-8" id="div_shop">
 											</div>
 										</div>
@@ -231,7 +229,7 @@
 										
 									</div>
 								</div>
-									<div class="modal-footer">
+								<div class="modal-footer">
 									<button id="close" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 									<button id="reset" type="reset" class="btn" >重置</button>
 									<button id="submit" type="button" class="btn btn-primary">提交</button>

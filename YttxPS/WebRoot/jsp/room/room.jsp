@@ -91,11 +91,11 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label no-padding-right" for="company">酒店代码</label>
+                                    <label class="col-sm-2 control-label no-padding-right" for="fsAccomno">酒店代码</label>
                                     <div class="col-sm-4">
                                         <input type="text" name="fsAccomno" class="form-control" placeholder="酒店代码" readonly="readonly" />
                                     </div>
-                                    <label class="col-sm-2 control-label no-padding-right" for="load">房型类型</label>
+                                    <label class="col-sm-2 control-label no-padding-right" for="fsType">房型类型</label>
                                     <div class="col-sm-4">
                                         <select name="fsType">
                                             <option value="">&nbsp;&nbsp;忽略房型类型&nbsp;&nbsp;</option>

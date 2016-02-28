@@ -180,17 +180,57 @@ jQuery(function($) {
 			type: "GET",
 			traditional: true,
 			url: "/room/selectRoom.htm",
-			data: "room.accomno=" + $("#accomadationNo").val(),
+			data: "room.fsAccomno=" + $("#accomadationNo").val(),
 			dataType: "json",
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['roomno'] + '>' + comment['name'] + '</option>';
+					html += '<option value=' + comment['fsRoomno'] + '>' + comment['fsName'] + '</option>';
 				});
-				$("#roomno").html(html);
+				$("#room").html(html);
 			}
 		});
 	}
+	
+	//增加房型
+	$("#addRoomBtn").click(function(){
+		var html = $("#div_room").html();
+		var val = $("#room").val();
+		var text = $("#room").find("option:selected").text();
+		var flag = true;
+		if($(".room-label-" + val) != null && $(".room-label-" + val).length != 0) {
+			flag = false;
+		}
+		
+		if (flag) {
+			$.ajax({
+				type: "POST",
+				traditional: true,
+				data: "fsRestype=fx",
+				url: "/rescc/findResCC.htm",
+				dataType: "json",
+				success: function(data){
+					html += '<label for="form-field-select-2" class="room-label-' + val + '">' + text + '</label>';
+					//html += '<input type="hidden" class="ticketid" name="routecc[' + index + '].fsResno" value="' + val + '"/>';
+					html += '<select class="form-control room room-select-' + val + '" name="' + val + '" id="rooms_' + val + '" multiple="multiple">';
+					$.each(data.rows, function(i, e){
+						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
+					});
+					
+					resetIframeHeight("add");
+					$("#div_room").html(html);
+				}
+			});
+		}
+	});
+	
+	//删除房型
+	$("#rmRoomBtn").click(function(){
+		var val = $("#room").val();
+		$(".room-label-" + val).remove();
+		$(".room-select-" + val).remove();
+		resetIframeHeight("sub");
+	});
 	
 	/**
 	 * 获取购物店列表
@@ -286,7 +326,7 @@ jQuery(function($) {
 				success: function(data){
 					html += '<label for="form-field-select-2" class="entertainment-label-' + val + '">' + text + '</label>';
 					//html += '<input type="hidden" class="ticketid" name="routecc[' + index + '].fsResno" value="' + val + '"/>';
-					html += '<select class="form-control entertainment-select-' + val + '" id="entertainments_' + val + '" multiple="multiple">';
+					html += '<select class="form-control entertainment entertainment-select-' + val + '" name="' + val + '" id="entertainments_' + val + '" multiple="multiple">';
 					$.each(data.rows, function(i, e){
 						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
 					});
@@ -323,7 +363,7 @@ jQuery(function($) {
 				success: function(data) {
 					html += '<label for="form-field-select-2" class="restaurant-label-' + val + '">' + text + '</label>';
 					//html += '<input type="hidden" class="restaurantid" name="routecc[' + index + '].fsResno" value="' + val + '"/>';
-					html += '<select class="form-control restaurant-select-' + val + '" id="restaurants_' + val + '" multiple="multiple">';
+					html += '<select class="form-control restaurant restaurant-select-' + val + '" name="' + val + '" id="restaurants_' + val + '" multiple="multiple">';
 					$.each(data.rows, function(i, e){
 						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
 					});
@@ -413,7 +453,7 @@ jQuery(function($) {
 				success: function(data){
 					html += '<label for="form-field-select-2" class="ticket-label-' + val + '">' + text + '</label>';
 					//html += '<input type="hidden" class="ticketid" name="routecc[' + index + '].fsResno" value="' + val + '"/>';
-					html += '<select class="form-control ticket-select-' + val + '" id="tickets_' + val + '" multiple="multiple">';
+					html += '<select class="form-control ticket ticket-select-' + val + '" name="' + val + '" id="tickets_' + val + '" multiple="multiple">';
 					$.each(data.rows, function(i, e){
 						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
 					});
@@ -451,9 +491,11 @@ jQuery(function($) {
 		});
 		if (flag) {
 			$("#index").attr("value", parseInt(index)+1);
-			html += '<input type="hidden" class="shopid" name="routecc['+index+'].fsResno" value="' + val + '"/>'+
-					'<input type="hidden" class="shop_'+val+'" name="routecc['+index+'].fsRestype" value="gw"/>' + '<label class="shop_'+val+'">&nbsp;&nbsp;' + text + '：</label>'+
-					'<input class="shop_'+val+'" name="routecc['+index+'].fsCcno" value="000021" type="hidden"/><span class="shop_'+val+'">&nbsp;人头消费&nbsp;&nbsp;<br></span>';
+			html += '<input type="hidden" class="shopid" name="routecc[' + val + '].fsResno" value="' + val + '"/>'+
+					'<input type="hidden" class="shop_' + val + '" name="routecc[' + val + '].fsRestype" value="gw"/>' + 
+					'<label class="shop_' + val + '">&nbsp;&nbsp;' + text + '：</label>' +
+					'<input class="shop_'+ val + '" name="routecc[' + val + '].fsCcno" value="000021" type="hidden"/>' +
+					'<span class="shop_' + val + '">&nbsp;人头消费&nbsp;&nbsp;<br></span>';
 			resetIframeHeight("add");
 		}
 		$("#div_shop").html(html);
@@ -468,52 +510,7 @@ jQuery(function($) {
 		$("input[class='shopid']").each(function(){
 			if (val == $(this).val()) {
 				$(this).remove();
-				$(".shop_"+val).remove();
-				$("#index").attr("value",parseInt(index)-1);
-				resetIframeHeight("sub");
-			} 
-		});
-	});
-	
-	//增加房间消费
-	$("#addRoomBtn").click(function(){
-		//数组下标
-		var index = 0;
-		if($("#index").val() != null){
-			index = $("#index").val();
-		}
-		var html = $("#div_room").html();
-		var val = $("#roomno").val();
-		var accomadationName = $("#accomadationNo").find("option:selected").text();
-		var roomname = $("#roomno").find("option:selected").text();
-		var flag = true;
-		$("input[class='roomid']").each(function(){
-			if (val == $(this).val()) { 
-				flag = false;
-			}
-		});
-		
-		if (flag) {
-			$("#index").attr("value", parseInt(index) + 1);
-			html += '<input type="hidden" class="roomid" name="routecc[' + index + '].fsResno" value="' + val + '"/>' +
-					'<input type="hidden" class="room_' + val + '" name="routecc[' + index + '].fsRestype" value="bg"/>' + 
-					'<label class="room_' + val + '">&nbsp;&nbsp;' + accomadationName + '-' + roomname + '：</label>' +
-					'<input class="room_' + val + '" name="routecc[' + index + '].fsCcno" value="000024" type="hidden"/><span class="room_' + val + '">&nbsp;房间消费&nbsp;&nbsp;<br></span>';
-			resetIframeHeight("add");
-		}
-		$("#div_room").html(html);
-	});
-	
-	//删除房间消费
-	$("#rmRoomBtn").click(function(){
-		var val = $("#roomno").val();
-		if($("#index").val() != null){
-			index = $("#index").val();
-		}
-		$("input[class='roomid']").each(function(){
-			if (val == $(this).val()) {
-				$(this).remove();
-				$(".room_" + val).remove();
+				$(".shop_" + val).remove();
 				$("#index").attr("value", parseInt(index) - 1);
 				resetIframeHeight("sub");
 			} 
@@ -559,8 +556,82 @@ jQuery(function($) {
 	
 //	提交
 	$("#submit").on("click", function () {
+		var index = 0;
+		var routecc = {};
+		var fsRouteno = $("#fsResno").val();
+		var fiDayflag = $("#fiDays").val();
+		
+		//门票
+		$(".ticket").each(function(idx, e){
+			var ticketId = $(e).attr("name");
+			var ticketCC  = $(e).val();
+			$.each(ticketCC, function(ccIdx, cc){
+				routecc["routecc[" + index + "].fiDayflag"] = fiDayflag;
+				routecc["routecc[" + index + "].fsCcno"] = cc;
+				routecc["routecc[" + index + "].fsResno"] = ticketId;
+				routecc["routecc[" + index + "].fsRestype"] = "mp";
+				routecc["routecc[" + index + "].fsRouteno"] = fsRouteno;
+				index ++;
+			});
+		});
+		
+		//餐厅
+		$(".restaurant").each(function(idx, e){
+			var ticketId = $(e).attr("name");
+			var ticketCC  = $(e).val();
+			$.each(ticketCC, function(ccIdx, cc){
+				routecc["routecc[" + index + "].fiDayflag"] = fiDayflag;
+				routecc["routecc[" + index + "].fsCcno"] = cc;
+				routecc["routecc[" + index + "].fsResno"] = ticketId;
+				routecc["routecc[" + index + "].fsRestype"] = "ct";
+				routecc["routecc[" + index + "].fsRouteno"] = fsRouteno;
+				index ++;
+			});
+		});
+		
+		//娱乐项目
+		$(".entertainment").each(function(idx, e){
+			var ticketId = $(e).attr("name");
+			var ticketCC  = $(e).val();
+			$.each(ticketCC, function(ccIdx, cc){
+				routecc["routecc[" + index + "].fiDayflag"] = fiDayflag;
+				routecc["routecc[" + index + "].fsCcno"] = cc;
+				routecc["routecc[" + index + "].fsResno"] = ticketId;
+				routecc["routecc[" + index + "].fsRestype"] = "yl";
+				routecc["routecc[" + index + "].fsRouteno"] = fsRouteno;
+				index ++;
+			});
+		});
+		
+		//房型
+		$(".room").each(function(idx, e){
+			var ticketId = $(e).attr("name");
+			var ticketCC  = $(e).val();
+			$.each(ticketCC, function(ccIdx, cc){
+				routecc["routecc[" + index + "].fiDayflag"] = fiDayflag;
+				routecc["routecc[" + index + "].fsCcno"] = cc;
+				routecc["routecc[" + index + "].fsResno"] = ticketId;
+				routecc["routecc[" + index + "].fsRestype"] = "yl";
+				routecc["routecc[" + index + "].fsRouteno"] = fsRouteno;
+				index ++;
+			});
+		});
+		
+		
+		//购物点
+		$("input[class='shopid']").each(function(idx, e) {
+			var shopId = $(e).attr("value");
+			routecc["routecc[" + index + "].fiDayflag"] = fiDayflag;
+			routecc["routecc[" + index + "].fsCcno"] = $("input[name='routecc[" + shopId + "].fsCcno").val();
+			routecc["routecc[" + index + "].fsResno"] = shopId;
+			routecc["routecc[" + index + "].fsRestype"] = "gw";
+			routecc["routecc[" + index + "].fsRouteno"] = fsRouteno;
+			index ++;
+		});
+		
 		$.post("/routeArrange/addRouteCC.htm",
-				$("#addform").serialize(),
+				//$("#addform").serialize(),
+				routecc,
 				function(data){
 					var json = eval("(" + data + ")");
 					if(json.result == "ok") {

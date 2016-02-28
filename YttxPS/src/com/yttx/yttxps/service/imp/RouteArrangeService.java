@@ -46,6 +46,13 @@ public class RouteArrangeService implements IRouteArrangeService {
 		record.setFsId(String.format("%010d", routeArrangeMapper.selectFsId()));
 		return routeArrangeMapper.insert(record);
 	}
+	
+	@Override
+	public void insertRouteCC(TRouteArrangeWithBLOBs record) {
+		for(TRouteCCKey routeCC : record.getRoutecc()) {
+			routeCCMapper.insert(routeCC);
+		}
+	}
 
 	@Override
 	public int update(TRouteArrangeWithBLOBs record) {
