@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.yttx.comm.StringUtil;
 import com.yttx.yttxps.comm.Constants;
@@ -20,16 +18,13 @@ import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.SysOper;
 import com.yttx.yttxps.service.ISysService;
 import com.yttx.yttxps.web.action.BaseController;
-import com.yttx.yttxps.web.action.LoginController;
 
 @Controller
 @Scope("prototype")
 @RequestMapping("user/")
 public class UserController extends BaseController {
-
 	
-	
-static Logger logger = LoggerFactory.getLogger(LoginController.class);
+	static Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
 	private ISysService sysService;

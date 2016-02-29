@@ -92,7 +92,7 @@
 						<li><a href="#"> <i class="fa fa-cog"></i> 个人设置  </a></li>
 						<li><a href="/jsp/user/init.jsp"> <i class="fa fa-lock"></i> 修改密码  </a></li>
 						<li class="divider"></li>
-						<li><a href="#"> <i class="fa fa-off"></i> 退出系统  </a></li>
+						<li><a href="/logout.htm"> <i class="fa fa-off"></i> 退出系统  </a></li>
 					</ul></li>
 			</ul>
 			<!-- /.ace-nav -->

@@ -1,8 +1,6 @@
 package com.yttx.yttxps.web.action;
 
 
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,13 +35,10 @@ import com.yttx.yttxps.model.SysOperRight;
 import com.yttx.yttxps.service.ISysService;
 
 
-
-
 /**
  * @author kereny
  *
  */
-
 
 @Controller
 @Scope("prototype")
@@ -193,6 +188,15 @@ public class LoginController extends BaseController{
 		return JsonResult.jsonData(treeMenu);
     }
 	
+	/**
+	 * 退出系统
+	 */
+	@RequestMapping(value="logout.htm")
+	public String logout(){
+		HttpSession session = request.getSession();
+		session.setAttribute(Constants.SESSIONID,null);
+		return "index";
+	}
 	
 	public boolean setActionUrl(List<Menu> trees, String key){
 		boolean active = false;
