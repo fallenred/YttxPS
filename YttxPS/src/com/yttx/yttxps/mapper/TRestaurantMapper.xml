@@ -277,7 +277,7 @@
 			AND FS_SPECIAL = #{special,jdbcType = VARCHAR}
 		</if>
 		<if test="lvl != null and lvl !=''">
-			AND FS_LVL = #{special,jdbcType = VARCHAR}
+			AND FS_LVL = #{lvl,jdbcType = VARCHAR}
 		</if>
 		<if test="stat != null">
 			AND FI_STAT = #{stat}
@@ -339,7 +339,7 @@
 				AND FS_SPECIAL = #{special,jdbcType = VARCHAR}
 			</if>
 			<if test="lvl != null and lvl !=''">
-				AND FS_LVL = #{special,jdbcType = VARCHAR}
+				AND FS_LVL = #{lvl,jdbcType = VARCHAR}
 			</if>
 			<if test="stat != null">
 				AND FI_STAT = #{stat,jdbcType=INTEGER}
