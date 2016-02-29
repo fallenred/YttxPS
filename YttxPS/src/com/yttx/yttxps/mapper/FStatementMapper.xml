@@ -128,7 +128,7 @@
 	
 	<!-- select:从序列中生成一个id -->
 	<select id="generateFSId" parameterType="string" resultType="int">
-		SELECT FSTATEMENT_SEQ.NEXTVAL FROM dual
+		SELECT FSTATEMENT_SEQUENCE.NEXTVAL FROM dual
 	</select>
 	
 	

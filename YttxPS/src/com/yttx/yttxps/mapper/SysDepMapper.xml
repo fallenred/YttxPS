@@ -62,7 +62,7 @@
 	
 	<insert id="insert" parameterType="SysDep" useGeneratedKeys="false">
 		<selectKey resultType="long"  keyProperty="depNo" order="BEFORE">
-    		select DEP_SEQ.nextval 	as depNo from dual
+    		select DEP_SEQUENCE.nextval 	as depNo from dual
    		</selectKey>
     	insert into TSYSDEP (FI_DEPNO, FS_DEPNAME, FI_STAT)
     	values (#{depNo,jdbcType=INTEGER}, #{depName,jdbcType=VARCHAR}, #{stat,jdbcType=INTEGER}) 	

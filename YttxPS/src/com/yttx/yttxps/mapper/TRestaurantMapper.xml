@@ -121,7 +121,7 @@
 	
 	<!-- 获取一个编号 用来生成餐厅编号-->
 	<select id="selectNo"  resultType="int">
-		SELECT RESTAURANT_SEQ.NEXTVAL FROM dual
+		SELECT RESTAURANT_SEQUENCE.NEXTVAL FROM dual
 	</select>
 	
 	
