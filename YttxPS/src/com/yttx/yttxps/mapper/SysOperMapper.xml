@@ -57,8 +57,16 @@
 	
 	
 	<update id="update" parameterType="SysOper" flushCache="true">
-    	UPDATE TSYSOPER SET FS_SYSOPERNAME = #{sysOperName}, FI_ADMINTYPE = #{adminType},  FI_DEPNO = #{depNo}, FS_SYSOPERPWD = #{sysOperPwd}, FI_PWDSTAT = #{pwdStat}, FI_STAT = #{stat} 
-    	WHERE FS_SYSOPERID = #{sysOperId}
+    	UPDATE TSYSOPER 
+    	SET 
+    		FS_SYSOPERNAME = #{sysOperName}, 
+    		FI_ADMINTYPE = #{adminType},  
+    		FI_DEPNO = #{depNo}, 
+    		FS_SYSOPERPWD = #{sysOperPwd}, 
+    		FI_PWDSTAT = #{pwdStat}, 
+    		FI_STAT = #{stat} 
+    	WHERE 
+    		Trim(FS_SYSOPERID) = Trim(#{sysOperId})
 	</update>
 	
 	
