@@ -359,7 +359,15 @@
 			* 
 		FROM (
 			SELECT res.* FROM 
-				(select t.*, s.fs_scenicno from trestaurant t left join TResourceScenic s on t.fs_no = s.fs_resno and s.fs_restype = 'ct') res
+				(SELECT t.*, 
+				        s.fs_scenicno,
+				        g.Fs_Name AS fs_scenicname
+				   FROM trestaurant t 
+				   LEFT join TResourceScenic s 
+				     ON t.fs_no = s.fs_resno 
+				    AND s.fs_restype = 'ct'
+				   LEFT JOIN Tscenic g
+                     ON s.fs_scenicno = g.fs_no) res
 			WHERE
 				1=1
 			<if test="name != null and name != ''">

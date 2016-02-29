@@ -37,7 +37,7 @@ jQuery(function($) {
 	function getDays(num){
 		var html="";
 		for (var i = 0; i < num ; i++) {
-			html += '<option value=' + i + '>第' + (parseInt(i)+1) + '天</option>';
+			html += '<option value=' + i + '>第' + (parseInt(i) + 1) + '天</option>';
 		}
 		$("#fiDays").html(html);
 	}
@@ -66,14 +66,14 @@ jQuery(function($) {
 	 */
 	function getScenice(){
 		$.ajax({
-			type: "POST",
-			url: "/scenic/findAllScenic.htm",
-			data: '',
+			type: "GET",
+			url: "/scenicGen/selectScenicGen.htm",
+			data: "scenicGen.fiGenindex=" + $("#fiGenindex").val(),
 			dataType: "json",
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
+					html += '<option value=' + comment['fsScenicno'] + '>' + comment['fsScenicname'] + '</option>';
 				});
 				$("#scenic").html(html);
 			}
@@ -274,7 +274,7 @@ jQuery(function($) {
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' + comment['regionname'] + '--' + comment['name'] + '</option>';
+					html += '<option value=' + comment['no'] + '>' + comment['scenicName'] + '--' + comment['name'] + '</option>';
 				});
 				$("#restaurant").html(html);
 			}
@@ -577,12 +577,12 @@ jQuery(function($) {
 		
 		//餐厅
 		$(".restaurant").each(function(idx, e){
-			var ticketId = $(e).attr("name");
-			var ticketCC  = $(e).val();
-			$.each(ticketCC, function(ccIdx, cc){
+			var restaurantId = $(e).attr("name");
+			var restaurantCC  = $(e).val();
+			$.each(restaurantCC, function(ccIdx, cc){
 				routecc["routecc[" + index + "].fiDayflag"] = fiDayflag;
 				routecc["routecc[" + index + "].fsCcno"] = cc;
-				routecc["routecc[" + index + "].fsResno"] = ticketId;
+				routecc["routecc[" + index + "].fsResno"] = restaurantId;
 				routecc["routecc[" + index + "].fsRestype"] = "ct";
 				routecc["routecc[" + index + "].fsRouteno"] = fsRouteno;
 				index ++;
@@ -591,12 +591,12 @@ jQuery(function($) {
 		
 		//娱乐项目
 		$(".entertainment").each(function(idx, e){
-			var ticketId = $(e).attr("name");
-			var ticketCC  = $(e).val();
-			$.each(ticketCC, function(ccIdx, cc){
+			var entertainmentId = $(e).attr("name");
+			var entertainmentCC  = $(e).val();
+			$.each(entertainmentCC, function(ccIdx, cc){
 				routecc["routecc[" + index + "].fiDayflag"] = fiDayflag;
 				routecc["routecc[" + index + "].fsCcno"] = cc;
-				routecc["routecc[" + index + "].fsResno"] = ticketId;
+				routecc["routecc[" + index + "].fsResno"] = entertainmentId;
 				routecc["routecc[" + index + "].fsRestype"] = "yl";
 				routecc["routecc[" + index + "].fsRouteno"] = fsRouteno;
 				index ++;
@@ -605,13 +605,13 @@ jQuery(function($) {
 		
 		//房型
 		$(".room").each(function(idx, e){
-			var ticketId = $(e).attr("name");
-			var ticketCC  = $(e).val();
-			$.each(ticketCC, function(ccIdx, cc){
+			var roomId = $(e).attr("name");
+			var roomCC  = $(e).val();
+			$.each(roomCC, function(ccIdx, cc){
 				routecc["routecc[" + index + "].fiDayflag"] = fiDayflag;
 				routecc["routecc[" + index + "].fsCcno"] = cc;
-				routecc["routecc[" + index + "].fsResno"] = ticketId;
-				routecc["routecc[" + index + "].fsRestype"] = "yl";
+				routecc["routecc[" + index + "].fsResno"] = roomId;
+				routecc["routecc[" + index + "].fsRestype"] = "fx";
 				routecc["routecc[" + index + "].fsRouteno"] = fsRouteno;
 				index ++;
 			});

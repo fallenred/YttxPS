@@ -119,4 +119,53 @@ public class TRouteCCKey {
 	public void setFsRouteno(String fsRouteno) {
 		this.fsRouteno = fsRouteno;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fiDayflag == null) ? 0 : fiDayflag.hashCode());
+		result = prime * result + ((fsCcno == null) ? 0 : fsCcno.hashCode());
+		result = prime * result + ((fsResno == null) ? 0 : fsResno.hashCode());
+		result = prime * result + ((fsRestype == null) ? 0 : fsRestype.hashCode());
+		result = prime * result + ((fsRouteno == null) ? 0 : fsRouteno.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TRouteCCKey other = (TRouteCCKey) obj;
+		if (fiDayflag == null) {
+			if (other.fiDayflag != null)
+				return false;
+		} else if (!fiDayflag.equals(other.fiDayflag))
+			return false;
+		if (fsCcno == null) {
+			if (other.fsCcno != null)
+				return false;
+		} else if (!fsCcno.equals(other.fsCcno))
+			return false;
+		if (fsResno == null) {
+			if (other.fsResno != null)
+				return false;
+		} else if (!fsResno.equals(other.fsResno))
+			return false;
+		if (fsRestype == null) {
+			if (other.fsRestype != null)
+				return false;
+		} else if (!fsRestype.equals(other.fsRestype))
+			return false;
+		if (fsRouteno == null) {
+			if (other.fsRouteno != null)
+				return false;
+		} else if (!fsRouteno.equals(other.fsRouteno))
+			return false;
+		return true;
+	}
 }
