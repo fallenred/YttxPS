@@ -276,7 +276,14 @@ public class OperController extends UserBasicController{
 		model.put("operinfo", oper);
 		
 		//查找用户权限
-		List<HashMap<String, Object>> operRights = operRights(sysOperId);
+		List<HashMap<String, Object>> operRights=null;
+		Long operAdminType=oper.getAdminType();
+		if(operAdminType==1){
+			operRights = superManagerRights();
+		}
+		
+		operRights=operRights(sysOperId);
+		
 		model.put("operRights", operRights);
 		return model;
 	}

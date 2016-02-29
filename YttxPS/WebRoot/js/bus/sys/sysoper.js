@@ -107,10 +107,11 @@ jQuery(function($){
 	 * 功能：部门查询-->列表(填充数据)-->定义操作列的按钮
 	 */
 	actFormatter = function(cellvalue, options, rawObject) {
+		
 		var detail = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showOper('
 				+ options.rowId
 				+ ');" data-original-title="用户详情"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
-
+		if(rawObject.adminType!=1){}
 		var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editOper('
 				+ options.rowId
 				+ ');" data-original-title="更新用户信息"><span class="ui-icon ui-icon-pencil"></span></div>';
@@ -118,7 +119,7 @@ jQuery(function($){
 		var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="cancelOper('
 				+ options.rowId
 				+ ');" data-original-title="注销用户"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-		return detail + editBtn + deleteBtn ;
+		return rawObject.adminType==1?detail:detail+ editBtn + deleteBtn ;
 	};
 
 	// resize to fit page size

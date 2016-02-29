@@ -1,10 +1,12 @@
 package com.yttx.yttxps.web.action.user;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.model.Menu;
 import com.yttx.yttxps.model.SysDep;
@@ -29,8 +31,14 @@ public class UserBasicController extends BaseController{
 		@SuppressWarnings("unchecked")
 		List<Menu> orList = (List<Menu>) request.getSession()
                 .getServletContext().getAttribute(Constants.SYSMENUTREE);
+		List<Menu> allMenus =new ArrayList<>();
+		for (Menu menu : orList) {
+			if(!"0200".equalsIgnoreCase(menu.getId())){
+				allMenus.add(menu);
+			}
+		}
 		List<HashMap<String,Object>> menulist=new ArrayList<HashMap<String, Object>>();
-		menuTreeToList(orList,menulist,null);
+		menuTreeToList(allMenus,menulist,null);
 		return menulist;
 	}
 	

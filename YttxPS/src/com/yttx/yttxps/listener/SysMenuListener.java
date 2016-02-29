@@ -74,7 +74,7 @@ public class SysMenuListener implements ServletContextListener {
 	private List<Menu> xmlToTree(Element target) {
 		List<Element> items = (List<Element>) target.elements("item");
 		List<Menu> list = new ArrayList<Menu>();
-		for (Element item : items) {
+		for (Element item : items){
 			Menu mainMenu = new Menu();
 			mainMenu.setId(item.attribute("id").getValue());
 			mainMenu.setName(item.attribute("name").getValue());

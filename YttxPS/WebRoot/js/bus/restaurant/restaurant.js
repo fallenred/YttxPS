@@ -175,6 +175,13 @@ jQuery(function($) {
 						'onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" '+
 						'onclick="eidtRestaurant('+ options.rowId+ ');" data-original-title="修改餐厅信息">'+
 						'<span class="ui-icon ui-icon-pencil"></span></div>';
+		
+		var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" '+
+						'id="picButton" style="display: block; cursor: pointer; float: left;" '+
+						'onmouseover="jQuery(this).addClass(\'ui-state-hover\');" '+
+						'onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" '+
+						'onclick="picRestaurant('+ options.rowId+ ');" data-original-title="编辑资源图片">'+
+						'<span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
 
 		
 		var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" '+
@@ -183,7 +190,7 @@ jQuery(function($) {
 						'onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" '+
 						'onclick="deleteRestaurant('+ options.rowId+ ');" data-original-title="删除该餐厅">'
 						+'<span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-		return costBtn + detailBtn + editBtn + deleteBtn;
+		return costBtn + detailBtn + editBtn + picDtn+deleteBtn;
 	};
 
 	// resize to fit page size

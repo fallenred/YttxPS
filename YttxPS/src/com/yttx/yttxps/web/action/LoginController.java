@@ -117,22 +117,21 @@ public class LoginController extends BaseController{
 			}
 			
 			SysDep dep = sysService.findDepByNo(sysOper.getDepNo());
+			
+			
+			Map<String,Menu> sysUrlMap = (Map<String,Menu>) request.getSession().getServletContext().getAttribute(Constants.SYSMENULIST);
 			List<String> rights = new ArrayList<String>();
-			if(sysOper.getAdminType() == 0){
-				//取用户权限
+			if(sysOper.getAdminType()!= 1){//如果是一般用户
 				List<SysOperRight> list = sysService.findOperRight(sysOper.getSysOperId());
 				for(SysOperRight r:list)
 					rights.add(r.getRight());
-				
-			}else if(sysOper.getAdminType() == 2){
-				//取部门权限
-				List<SysDepRight> list = sysService.findDepRight(sysOper.getDepNo());
-				for(SysDepRight r:list)
-					rights.add(r.getRight());		
-			}
-			Map<String,Menu> sysUrlMap = (Map<String,Menu>) request.getSession().getServletContext().getAttribute(Constants.SYSMENULIST);
-						
-			List<Menu> customTree = getCustomTree(request, rights, null);
+				if(sysOper.getAdminType() == 2){//如果是部门管理员
+					rights.add("0200");//平台用户管理相关权限
+					rights.add("02a0");
+					rights.add("02b0");
+				}
+			}		
+			List<Menu> customTree = getCustomTree(request, rights, null,sysOper.getAdminType());
 			Map<String,Menu> customAllowMap = new HashMap<String,Menu>();
 			treeToMap(customTree, customAllowMap);
 			Map<String,Menu> customRejectMap = new HashMap<String,Menu>();
@@ -252,14 +251,14 @@ public class LoginController extends BaseController{
 	 */
 	@SuppressWarnings("unchecked")
 	private List<Menu> getCustomTree(HttpServletRequest request,
-			List<String> rights, List<Menu> sysMenuList) {
+			List<String> rights, List<Menu> sysMenuList,Long adminType) {
 		ServletContext servletContext = request.getSession().getServletContext();
 		
 		List<Menu> list = (List<Menu>) servletContext.getAttribute(Constants.SYSMENUTREE);	
 		Map<String,Boolean> rightsMap = new HashMap<String,Boolean>();
 		for (String right : rights)
 			rightsMap.put(right, true);
-		return getCustomTreeMenu(rightsMap, list, sysMenuList);
+		return getCustomTreeMenu(rightsMap, list, sysMenuList,adminType);
 	}
 
 	/**
@@ -270,7 +269,7 @@ public class LoginController extends BaseController{
 	 * @param rightTreeMenu
 	 * @return
 	 */
-	private List<Menu> getCustomTreeMenu(Map<String,Boolean> map, List<Menu> list, List<Menu> sysMenuList) {
+	private List<Menu> getCustomTreeMenu(Map<String,Boolean> map, List<Menu> list, List<Menu> sysMenuList,Long adminType) {
 		List<Menu> targetList = new ArrayList<Menu>();
 		for (Menu row : list) {
 			Menu targetMenu = new Menu();
@@ -281,7 +280,7 @@ public class LoginController extends BaseController{
 			targetMenu.setHasActive(row.isHasActive());
 			List<Menu> subList = row.getSubMenu();
 			if (subList != null) {
-				List<Menu> targetSubList = getCustomTreeMenu(map, subList, sysMenuList);
+				List<Menu> targetSubList = getCustomTreeMenu(map, subList, sysMenuList,adminType);
 				if(targetSubList != null && targetSubList.size() > 0){
 					targetMenu.setHasChild(true);
 					targetMenu.setSubMenu(targetSubList);
@@ -290,8 +289,7 @@ public class LoginController extends BaseController{
 			}else{
 				if(sysMenuList != null)
 					sysMenuList.add(targetMenu);
-				
-				if ((!map.isEmpty() && map.containsKey(row.getId())) || map.isEmpty()){
+				if ((!map.isEmpty() && map.containsKey(row.getId())) || adminType==1){
 					targetList.add(targetMenu);
 				}
 			}

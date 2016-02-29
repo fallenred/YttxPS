@@ -39,8 +39,8 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="resType">归属资源代码</label>
 											<div class="col-sm-3">
-												<input type="text" id="resType" name="resType"
-													class="form-control" placeholder="归属资源代码" maxlength="2" />
+												<input type="text" id="resType" name="resType" 
+													class="form-control" placeholder="归属资源代码" maxlength="2" value=""/>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="resNo">资源编码</label>
@@ -61,8 +61,10 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="main">是否主图</label>
 											<div class="col-sm-3">
-												<input maxlength="1" type="text" id="main" name="main"
-													class="form-control" placeholder="是否主图" />
+												<select id="main" name="main">
+													<option value="0" selected>否</option>
+													<option value="1">是</option>
+												</select>
 											</div>
 										</div>
 									</div>
@@ -110,7 +112,7 @@
 			<!-- /.main-content -->
 			<div class="modal fade" id="upfileModal" tabindex="-1" role="dialog"
 				aria-labelledby="upfileModalLabel" aria-hidden="false">
-				<div class="modal-dialog" style="width: 75%;height:200px">
+				<div class="modal-dialog" style="width: 75%;height:100px">
 					<div class="modal-content"></div>
 				</div>
 			</div>
