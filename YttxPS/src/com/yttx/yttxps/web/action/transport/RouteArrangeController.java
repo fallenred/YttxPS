@@ -1,9 +1,11 @@
 package com.yttx.yttxps.web.action.transport;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
+import com.yttx.yttxps.model.RouteCCType;
 import com.yttx.yttxps.model.TRouteArrange;
 import com.yttx.yttxps.model.TRouteArrangeExample;
 import com.yttx.yttxps.model.TRouteArrangeWithBLOBs;
+import com.yttx.yttxps.model.TRouteCCExample;
+import com.yttx.yttxps.model.TRouteCCKey;
 import com.yttx.yttxps.model.vo.RouteArrangeRequest;
 import com.yttx.yttxps.service.IRouteArrangeService;
 import com.yttx.yttxps.web.action.BaseController;
+import com.yttx.yttxps.model.TRouteCCExample.Criteria;
 
 /**
  * 线路配置
@@ -149,6 +155,68 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
 		catch(Exception e){
 			logger.error(e.getMessage());
 			return (Map<String, Object>) JsonResult.jsonError("删除失败");
+		}
+		return (Map<String, Object>) JsonResult.jsonOk();
+    }
+	
+	/**
+	 * 获取路线列表
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="findRouteCCType.htm", method = RequestMethod.GET)
+	@ResponseBody
+	public Object ajaxfindRouteCCType(
+			@Param(value = "fsRouteno")String fsRouteno, 
+			@Param(value = "fiDayflag")BigDecimal fiDayflag,
+			@Param(value = "fsRestype")String fsRestype) {
+		
+		logger.debug("当前查询条件 {}", fsRouteno, fiDayflag);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("fsRouteno", fsRouteno);
+		map.put("fiDayflag", fiDayflag);
+		map.put("fsRestype", fsRestype);
+		List<RouteCCType> list = routeArrangeService.findRouteCCType(map);
+		return list;
+    }
+	
+	/**
+	 * 获取路线列表
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="findRouteCC.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object ajaxfindRouteCC(TRouteCCKey routeCCKey) {
+		
+		logger.debug("当前查询条件 {}", routeCCKey);
+		TRouteCCExample example = new TRouteCCExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFiDayflagEqualTo(routeCCKey.getFiDayflag());
+		criteria.andFsRoutenoEqualTo(routeCCKey.getFsRouteno());
+		criteria.andFsRestypeEqualTo(routeCCKey.getFsRestype());
+		criteria.andFsResnoEqualTo(routeCCKey.getFsResno());
+		List<TRouteCCKey> list = routeArrangeService.findTRouteCCKey(example);
+		return list;
+    }
+	
+	/**
+	 * 更新线路信息
+	 * @param Gen
+	 * @return
+	 */
+	@SuppressWarnings({ "unchecked" })
+	@RequestMapping(value="editRouteCC.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ajaxeditRouteCC(TRouteArrangeWithBLOBs routeArrange)
+    {  
+		logger.debug("当前更新对象 {}", routeArrange);
+		try{
+			routeArrangeService.updateRouteCC(routeArrange);
+		}
+		catch(Exception e){
+			logger.error(e.getMessage());
+			return (Map<String, Object>) JsonResult.jsonError("更新失败");
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
     }

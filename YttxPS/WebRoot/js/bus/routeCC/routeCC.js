@@ -9,8 +9,9 @@ function showCustom(id) {
 
 function editCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/routeCC/edit.jsp";
+	var frameSrc = "/jsp/routeCC/edit.jsp?fiGenindex=" + raw.fiGenindex + "&fsRouteno=" + raw.fsId;
     $("#editIframe").attr("src", frameSrc);
+    $("#editIframe").attr("scrolling", "auto");
     $('#editModal').modal({ show: true, backdrop: 'static' });
 };
 
@@ -206,7 +207,6 @@ jQuery(function($) {
 					index : 'fsId',
 					width : 85,
 					sorttype : "int",
-					hidden : true,
 					hidden : true
 				}, {
 					name : 'fiGenindex',

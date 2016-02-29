@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.yttx.yttxps.mapper.TRouteArrangeMapper;
 import com.yttx.yttxps.mapper.TRouteCCMapper;
+import com.yttx.yttxps.model.RouteCCType;
 import com.yttx.yttxps.model.TRouteArrange;
 import com.yttx.yttxps.model.TRouteArrangeExample;
 import com.yttx.yttxps.model.TRouteArrangeWithBLOBs;
@@ -58,6 +59,18 @@ public class RouteArrangeService implements IRouteArrangeService {
 	public int update(TRouteArrangeWithBLOBs record) {
 		return routeArrangeMapper.updateByPrimaryKeySelective(record);
 	}
+	
+	@Override
+	public void updateRouteCC(TRouteArrangeWithBLOBs record) {
+		TRouteCCExample example = new TRouteCCExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFiDayflagEqualTo(record.getFiDayflag());
+		criteria.andFsRoutenoEqualTo(record.getFsId());
+		routeCCMapper.deleteByExample(example);
+		for(TRouteCCKey routeCC : record.getRoutecc()) {
+			routeCCMapper.insert(routeCC);
+		}
+	}
 
 	@Override
 	@Transactional(rollbackFor=Exception.class)
@@ -72,8 +85,14 @@ public class RouteArrangeService implements IRouteArrangeService {
 
 	@Override
 	public List<TRouteArrange> selectTRouteArrange(TRouteArrangeExample example) {
-		// TODO Auto-RouteArrangeerated method stub
 		return routeArrangeMapper.selectByExample(example);
 	}
 	
+	public List<RouteCCType> findRouteCCType(Map<String, Object> map) {
+		return routeArrangeMapper.selectRouteCCType(map);
+	}
+	
+	public List<TRouteCCKey> findTRouteCCKey(TRouteCCExample example) {
+		return routeCCMapper.selectByExample(example);
+	}
 }

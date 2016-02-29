@@ -13,7 +13,7 @@
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
 </head>
-<body>
+<body style="overflow-x:auto;">
 	<div class="main-container" id="main-container">
 		<script type="text/javascript">
 			try {
@@ -31,18 +31,16 @@
 						<div class="col-xs-12">
 							<!-- PAGE CONTENT BEGINS -->
 
-							<!-- 模态框（修改） -->
+							<!-- 模态框（新增） -->
 
-							<form class="form-horizontal" id="editform" >
+							<form class="form-horizontal" id="addform">
 
 								<div class="modal-body">
 									<!-- 图片TODO： -->
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
-												<li><a class="cboxElement" data-rel="colorbox"
-													href="http://127.0.0.1:81/1.jpg"> <img width="0"
-														height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
+												<li><a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg"> <img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
 												</a></li>
 											</div>
 										</ul>
@@ -50,107 +48,188 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fiGenIndex">所属线路</label>
-											<div class="col-sm-2">
-												<select id="fiGenindex" name="fiGenindex" class="form-control">
+											<label class="col-sm-2 control-label no-padding-right" for="fiGenIndex">线路统称</label>
+											<div class="col-sm-3">
+												<select id="fiGenindex" name="fiGenindex" class="form-control" disabled="disabled">
 												</select>
 											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsName">路线名称</label>
-											<div class="col-sm-2">
-												<input type="hidden" id="fsId" name="fsId" class="form-control" />
-												<input type="text" id="fsName" name="fsName" class="form-control" placeholder="路线名称"  />
+											<label class="col-sm-2 control-label no-padding-right" for="fsResno">配置线路</label>
+											<div class="col-sm-3">
+												<select id="fsResno" name="fsResno" class="form-control" disabled="disabled">
+												</select>
 											</div>
 											
 										</div>
 									</div>
+									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">所属地区</label>
-											<div class="col-sm-2">
-												<input type="text" id="fsRegions" name="fsRegions" class="form-control" placeholder="所属地区"  />
-											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsStartplace">发团地</label>
-											<div class="col-sm-2">
-												<input type="text" id="fsStartplace" name="fsStartplace" class="form-control" placeholder="发团地"  />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsProperty">线路类型</label>
-											<div class="col-sm-2">
-												<select class="form-control" id="fsProperty" name="fsProperty">
-													<option value="01">专家推荐</option>
-													<option value="02">热门线路</option>
-													<option value="03">特价线路</option>
-												</select>
-											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fiDays">线路天数</label>
-											<div class="col-sm-2">
-												<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="线路天数"  />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="ftStartdate">出发日期</label>
-											<div class="col-sm-2">
-												<input type="text" id="ftStartdate" name="ftStartdate" class="form-control" placeholder=""/>
-											</div>
-											<label class="col-sm-1 control-label" style="width: 10px;">至</label>
-											<div class="col-sm-2">
-												<input type="text" id="ftEnddate" name="ftEnddate" class="form-control" placeholder=""/>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fiStat">线路状态</label>
-											<div class="col-sm-2">
-												<select class="form-control" id="fiStat" name="fiStat">
-													<option value="1">正常</option>
-													<option value="-100">注销</option>
+											<label class="col-sm-2 control-label no-padding-right" for="fiDays">日程</label>
+											<div class="col-sm-3">
+												<select id="fiDays" name="fiDays" class="form-control">
 												</select>
 											</div>
 										</div>
 									</div>
+									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsTitle">线路标题</label>
-											<div class="col-sm-8">
-												<input type="text" id="fsTitle" name="fsTitle" class="form-control" placeholder="线路标题"/>
+											<label class="col-sm-2 control-label no-padding-right" for="scenic">景区</label>
+											<div class="col-sm-3">
+												<select id="scenic" name="scenic" class="form-control">
+												</select>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-success pull-right" id="addScenicBtn">添加</button>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-success pull-left" id="rmTransportBtn">删除</button>
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="div_scenics"></label>
+											<div class="col-sm-8" id="div_scenics">
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="ticket">门票选择</label>
+											<div class="col-sm-3">
+												<select id="ticket" name="ticket" class="form-control">
+												</select>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-success pull-right" id="addTicketBtn">添加</button>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-success pull-left" id="rmTicketBtn">删除</button>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsTitlepic">线路缩略图</label>
-											<div class="col-sm-8">
-												<input type="text" id="fsTitlepic" name="fsTitlepic" class="form-control" placeholder=""/>
+											<label class="col-sm-2 control-label no-padding-right" for="div_ticket"></label>
+											<div class="col-sm-8" id="div_ticket">
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="restaurant">餐厅选择</label>
+											<div class="col-sm-3">
+												<select id="restaurant" name="restaurant" class="form-control">
+												</select>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-success pull-right" id="addRestaurantBtn">添加</button>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-success pull-left" id="rmRestaurantBtn">删除</button>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsSummary">线路摘要</label>
-											<div class="col-sm-8">
-												<textarea class="form-control" id="fsSummary" name="fsSummary" rows="3" placeholder="线路摘要"></textarea>
+											<label class="col-sm-2 control-label no-padding-right" for="fsProperty"></label>
+											<div class="col-sm-8" id="div_restaurant">
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="entertainment">娱乐项目选择</label>
+											<div class="col-sm-3">
+												<select id="entertainment" name="entertainment" class="form-control">
+												</select>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-success pull-right" id="addEntertainmentBtn">添加</button>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-success pull-left" id="rmEntertainmentBtn">删除</button>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsSummary">日程快照</label>
-											<div class="col-sm-8">
-												<textarea class="ckeditor" id="fcSchedule" name="fcSchedule"></textarea>
+											<label class="col-sm-2 control-label no-padding-right" for="div_entertainment"></label>
+											<div class="col-sm-8" id="div_entertainment">
 											</div>
 										</div>
 									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">酒店标准</label>
+											<div class="col-sm-3">
+												<select id="fsStarLvl" name="fsStarLvl" class="form-control">
+												</select>
+											</div>
+											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">酒店选择</label>
+											<div class="col-sm-3">
+												<select id="accomadationNo" name="accomadationNo" class="form-control">
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="room">房型选择</label>
+											<div class="col-sm-3">
+												<select id="room" name="room" class="form-control">
+												</select>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-success pull-right" id="addRoomBtn">添加</button>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-success pull-left" id="rmRoomBtn">删除</button>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="div_room"></label>
+											<div class="col-sm-8" id="div_room">
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="shop">购物店选择</label>
+											<div class="col-sm-3">
+												<select id="shop" name="shop" class="form-control">
+												</select>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-success pull-right" id="addShopBtn">添加</button>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-success pull-left" id="rmShopBtn">删除</button>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="div_shop"></label>
+											<div class="col-sm-8" id="div_shop">
+											</div>
+										</div>
+									</div>
+									<input type="hidden" id="index" value="0"/>
 									<div id = "message" class="alert alert-warning">
 										
 									</div>
 								</div>
-									<div class="modal-footer">
+								<div class="modal-footer">
 									<button id="close" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 									<button id="reset" type="reset" class="btn" >重置</button>
 									<button id="submit" type="button" class="btn btn-primary">提交</button>
