@@ -5,12 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.management.RuntimeErrorException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yttx.comm.StringUtil;
 import com.yttx.yttxps.mapper.SysDepMapper;
 import com.yttx.yttxps.mapper.SysDepRightMapper;
 import com.yttx.yttxps.mapper.SysOperMapper;
@@ -210,8 +207,11 @@ public class SysService implements ISysService {
 	 * 更新用户信息
 	 */
 	@Override
-	public void updateSysOperbyOperId(SysOperSubRequest req,String operId) {
+	public void updateSysOperbyOperId(SysOperSubRequest req,String operId,String currOperId) {
 		Map<String, Object> map = new HashMap<String,Object>();
+		
+		SysOper currUser = sysOperMapper.findById(currOperId);
+		Long adminType=currUser.getAdminType();
 		
 		//更新用户表中的数据
 		map.put("oldOperId", operId);
@@ -236,7 +236,15 @@ public class SysService implements ISysService {
 		
 		
 		//删除权限表中的数据
-		sysOperRightMapper.deleteByOperId(operId);
+		if(adminType==1){
+			sysOperRightMapper.deleteByOperId(operId);
+		}
+		if(adminType==2){
+			sysOperRightMapper.deleteFromDepRight(operId);
+		}
+		
+		
+		
 		//更新权限表中的数据
 		List<String> rightIdList = req.getRights();
 		if(rightIdList !=null && rightIdList.size()>0){

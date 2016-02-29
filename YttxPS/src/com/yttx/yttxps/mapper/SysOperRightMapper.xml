@@ -45,4 +45,20 @@
 		WHERE 
 			TRIM(FS_SYSOPERID) = #{sysOperId}
 	</delete>
+	
+	<!-- 通过id找权限 -->
+	<delete id="deleteFromDepRight" parameterType="string">
+		delete from 
+      		 TSysOperRight
+		where 
+      		 Trim(fs_sysoperid) = #{operId}
+      		 and Trim(fs_right) in(
+      		 	select Trim(fs_right)
+                    from Tsysdepright
+                   where fi_depno in
+                         (select fi_depno
+                            from Tsysoper
+                           where trim(fs_sysoperId) = #{operId}))
+	</delete>
+	
 </mapper> 

@@ -188,12 +188,13 @@ public class OperController extends UserBasicController{
 	@RequestMapping(value="oper/editsubmit.htm",method=RequestMethod.POST)
 	@ResponseBody
 	public Object updateOper(SysOperSubRequest req, @RequestParam("oldOperId") String oldOperId){
+		String curOperId = sessionEntity.getId();
 		Map<String,Object> validMap = validSubData(req,"edit");
 		if((Boolean)validMap.get("succflag") == false){
 			return JsonResult.jsonError((String)validMap.get("message"));
 		}
 		try{
-			sysService.updateSysOperbyOperId(req,oldOperId);
+			sysService.updateSysOperbyOperId(req,oldOperId,curOperId);
 		}catch(Exception e){
 			return JsonResult.jsonError(e.getMessage());
 		}
@@ -280,10 +281,9 @@ public class OperController extends UserBasicController{
 		Long operAdminType=oper.getAdminType();
 		if(operAdminType==1){
 			operRights = superManagerRights();
+		}else{
+			operRights=operRights(sysOperId);
 		}
-		
-		operRights=operRights(sysOperId);
-		
 		model.put("operRights", operRights);
 		return model;
 	}

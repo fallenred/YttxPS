@@ -1,4 +1,12 @@
 $(document).ready(function(){
+	
+	/**
+	 * 用户管理-->查看弹出框-->"关闭"按钮响应函数
+	 */
+	$("#close").click(function () {
+		$("#showModal", parent.document).find(".close").click();
+	});
+	
 	/**
 	 * 权限--zTree的初始化参数
 	 */
@@ -19,7 +27,9 @@ $(document).ready(function(){
 	var zNodes = menuList;
 	zNodes.splice(zNodes.length-1,1);
 	$.fn.zTree.init($("#show_tree_div"), setting, zNodes).expandAll(true);
-
+	
+	
+	
 	
 	//--------------------------------------------------------------------------------------
 	var $overflow = '';

@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yttx.yttxps.model.Menu;
 import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.SysDep;
-import com.yttx.yttxps.model.SysDepRight;
 import com.yttx.yttxps.model.SysOper;
 import com.yttx.yttxps.model.SysOperRight;
 import com.yttx.yttxps.service.ISysService;

@@ -81,7 +81,7 @@
 
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
-										data-dismiss="modal">关闭</button>
+										data-dismiss="modal" id="close">关闭</button>
 									<button id="reset" type="reset" class="btn"
 										style="display: none;">重置</button>
 									<!--  

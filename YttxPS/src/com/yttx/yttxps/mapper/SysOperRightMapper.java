@@ -14,5 +14,7 @@ public interface SysOperRightMapper {
 	
 	
 	public boolean deleteByOperId(String sysOperId);
+
+	public void deleteFromDepRight(String operId);
 	
 }

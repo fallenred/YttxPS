@@ -83,7 +83,7 @@ public interface ISysService {
 	 * 更新用户信息
 	 */
 	@Transactional
-	public void  updateSysOperbyOperId(SysOperSubRequest req,String operId);
+	public void  updateSysOperbyOperId(SysOperSubRequest req,String operId,String currOperId);
 
 	/**
 	 * 删除用户
