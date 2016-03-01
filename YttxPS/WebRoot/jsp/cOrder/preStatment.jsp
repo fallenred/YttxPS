@@ -253,7 +253,7 @@
 		 * 验证money
 		 */
 		function validMoney(money){
-			if(money!=null&&/^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/.test(money))
+			if(money!=null&&/^(([1-9][0-9]*)|0|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/.test(money))
 				return true
 			return false;
 		}
@@ -267,14 +267,14 @@
 			var totalFee = $.trim($("#totalFee").val())//早餐价格
 			if( !validMoney(totalFee)) {
 				$("#totalFee").focus();
-				alertWarning("结算单预估全价的输入格式(120.99)不正确");
+				alertWarning("结算单预估全价的输入格式(XXX.XX)不正确");
 				return false;
 			}
 			
 			var paidAmt = $.trim($("#paidAmt").val())//早餐价格
 			if( !validMoney(paidAmt)) {
 				$("#paidAmt").focus();
-				alertWarning("已付金额的输入格式(120.99)不正确");
+				alertWarning("已付金额的输入格式(XXX.XX)不正确");
 				return false;
 			}
 			
