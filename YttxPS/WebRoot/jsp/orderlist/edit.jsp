@@ -135,11 +135,10 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="regionname">发团地点</label>
 											<div class="col-sm-3">
-												<input class="form-control" type="text"
-													placeholder="请选择行政区域" name="regionname" data-key="0086  "
-													data-idx="0" data-full="中国" id="regionname"
-													class="inp-search" /> <input type="hidden"
-													name="fsStartplace" id="regionno" />
+												<input class="form-control" type="text" placeholder="请选择行政区域" name="regionname"
+													data-key="0086" data-idx="0" data-full="中国"
+													id="regionname" class="inp-search" /> <input
+													type="hidden" name="fsStartplace" id="regionno" />
 												<div id="selectCity" class="localcity"></div>
 											</div>
 										</div>
@@ -204,9 +203,9 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="transPrice">车型价格</label>
 											<div class="col-sm-3">
-												<input type="hidden" name="reslist[0].cclist.ccno" value="000000"/>
-												<input type="hidden" name="reslist[0].cclist.ccname" value="价格(通用)"/>
-												<input type="text" id="transPrice" name="reslist[0].cclist.price" readonly="readonly" class="form-control"/>
+												<input type="hidden" name="reslist[0].cclist[0].ccno" value="000000"/>
+												<input type="hidden" name="reslist[0].cclist[0].ccname" value="价格(通用)"/>
+												<input type="text" id="transPrice" name="reslist[0].cclist[0].price" readonly="readonly" class="form-control"/>
 											</div>
 										</div>
 									</div>
@@ -243,9 +242,9 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="guidePrice">导游价格</label>
 											<div class="col-sm-3">
-												<input type="hidden" name="reslist[1].cclist.ccno" readonly="readonly" value="000000"/>
-												<input type="hidden" name="reslist[1].cclist.ccname" readonly="readonly" value="价格(通用)"/>
-												<input type="text" id="guidePrice" name="reslist[1].cclist.price" readonly="readonly" class="form-control"/>
+												<input type="hidden" name="reslist[1].cclist[0].ccno" readonly="readonly" value="000000"/>
+												<input type="hidden" name="reslist[1].cclist[0].ccname" readonly="readonly" value="价格(通用)"/>
+												<input type="text" id="guidePrice" name="reslist[1].cclist[0].price" readonly="readonly" class="form-control"/>
 											</div>
 										</div>
 									</div>

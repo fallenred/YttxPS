@@ -33,6 +33,7 @@ $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#fiGenindex").val(raw.fiGenindex);
 	$(this).find("#fsTransno").val(raw.fsTransno);
 	$(this).find("#ftStartdate").val(raw.ftStartdate);
+	$(this).find("#ftEnddate").val(raw.ftEnddate);
 	$(this).find("#fdPrice").val(raw.fdPrice);
 });
 
@@ -42,6 +43,7 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fiGenindex").val(raw.fiGenindex);
 	$(this).contents().find("#fsTransno").val(raw.fsTransno);
 	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
+	$(this).contents().find("#ftEnddate").val(raw.ftEnddate);
 	$(this).contents().find("#fdPrice").val(raw.fdPrice);
 });
 
@@ -167,7 +169,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', 'id', '路线编码', '路线名称', '车型编码', '车型名称', '日期', '价格'],
+				colNames : [ '操作', 'id', '路线编码', '路线名称', '车型编码', '车型名称', '起始日期', '截止日期', '价格'],
 				colModel : [ {
 					name : 'myac',
 					index : '',
@@ -214,7 +216,20 @@ jQuery(function($) {
 					sorttype : "char",
 					formatter : function(value){
 						var timestamp = "";
-						if(value != ''){//rData[7]表示日期列
+						if(value != null){//rData[7]表示日期列
+							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+						}
+						return timestamp;
+					}
+				}, {
+					name : 'ftEnddate',
+					index : 'ftEnddate',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					formatter : function(value){
+						var timestamp = "";
+						if(value != null){//rData[7]表示日期列
 							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
 						}
 						return timestamp;

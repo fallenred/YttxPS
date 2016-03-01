@@ -47,6 +47,7 @@ public class TransportArrangeService implements ITransportArrangeService {
 		transportArrangeMapper.insert(record);
 		TCCPrice price = new TCCPrice();
 		price.setFtStartdate(record.getFtStartdate());
+		price.setFtEnddate(record.getFtEnddate());
 		price.setFsRestype("cx");
 		price.setFsResno(record.getFsNo());
 		price.setFsCcno("000000");
@@ -70,7 +71,10 @@ public class TransportArrangeService implements ITransportArrangeService {
 		price.setFsRestype("cx");
 		price.setFsCcno("000000");
 		price.setFdPrice(record.getFdPrice());
-		priceMapper.updateByExampleSelective(price, priceExample);
+		price.setFtStartdate(record.getFtStartdate());
+		price.setFsResno(record.getFsNo());
+		price.setFtEnddate(record.getFtEnddate());
+		priceMapper.updateByPrimaryKey(price);
 	}
 
 	@Override

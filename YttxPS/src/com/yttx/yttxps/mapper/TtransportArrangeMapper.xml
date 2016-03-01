@@ -16,6 +16,7 @@
     <id column="FI_GENNAME" jdbcType="CHAR" property="fiGenName" />
     <id column="FS_TRANSNAME" jdbcType="CHAR" property="fsTransName" />
     <id column="FT_STARTDATE" jdbcType="DATE" property="ftStartdate" />
+    <id column="FT_ENDDATE" jdbcType="DATE" property="ftEnddate" />
     <id column="FD_PRICE" jdbcType="DECIMAL" property="fdPrice" />
   </resultMap>
   <sql id="Example_Where_Clause">
