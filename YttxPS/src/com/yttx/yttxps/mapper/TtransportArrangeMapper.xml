@@ -15,9 +15,11 @@
   <resultMap id="ExtendResultMap" extends="BaseResultMap" type="com.yttx.yttxps.model.TtransportArrange">
     <id column="FI_GENNAME" jdbcType="CHAR" property="fiGenName" />
     <id column="FS_TRANSNAME" jdbcType="CHAR" property="fsTransName" />
-    <id column="FT_STARTDATE" jdbcType="DATE" property="ftStartdate" />
-    <id column="FT_ENDDATE" jdbcType="DATE" property="ftEnddate" />
     <id column="FD_PRICE" jdbcType="DECIMAL" property="fdPrice" />
+  </resultMap>
+  <resultMap id="ExtendResultMap4Price" extends="ExtendResultMap" type="com.yttx.yttxps.model.TtransportArrange">
+    <id column="FS_TRANSNAME" jdbcType="CHAR" property="fsTransName" />
+    <id column="FT_STARTDATE" jdbcType="DATE" property="ftStartdate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -241,7 +243,7 @@
   </select>
   
   <!-- 分页查询 -->
-  <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="ExtendResultMap">
+  <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="ExtendResultMap4Price">
       select * from (select ROWNUM as rowno, t.* from VIEW_TTRANSPORTARRANGE t
     	where 1=1
 	      <if test="fiGenName != null and fiGenName != ''">

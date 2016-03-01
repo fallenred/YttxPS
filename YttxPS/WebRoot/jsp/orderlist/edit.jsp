@@ -221,11 +221,6 @@
 												for="guideLvl">计调导游类型</label>
 											<div class="col-sm-3">
 												<select id="guideLvl" name="guideLvl" class="form-control">
-													<option value="05">5星导游</option>
-													<option value="04">4星导游</option>
-													<option value="03">3星导游</option>
-													<option value="02">2星导游</option>
-													<option value="01">1星导游</option>
 												</select>
 											</div>
 										</div>

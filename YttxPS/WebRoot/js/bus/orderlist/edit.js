@@ -21,6 +21,8 @@ jQuery(function($) {
 		$("#selectCity", "#editform").show();
 	});
 	
+	//获取导游级别列表
+	getFsStarLvl();
 	//获取导游下拉列表
 	getGuide();
 	//用于存放导游对应价格
@@ -57,6 +59,24 @@ jQuery(function($) {
 				});
 	        }
 	    });
+	}
+	
+	//获取导游列表
+	function getFsStarLvl(){
+		$.ajax({
+			type: "GET",
+			traditional: true,
+			url: "/dict/selectDict.htm",
+			data: "dict.fsParentno=dy",
+			dataType: "json",
+			success: function(data){
+				html = '<option value="">'+'--请选择--' + '</option>'; 
+				$.each(data, function(commentIndex, comment){
+					html += '<option value=' + comment['fsDictno'] + '>' + comment['fsDictname'] + '</option>';
+				});
+				$("#guideLvl").html(html);
+			}
+		});
 	}
 	
 	//获取线路列表

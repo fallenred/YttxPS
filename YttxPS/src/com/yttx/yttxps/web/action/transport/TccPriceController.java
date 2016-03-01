@@ -64,7 +64,11 @@ static Logger logger = LoggerFactory.getLogger(TccPriceController.class);
 		Criteria criteria = example.createCriteria();
 		//如果价格为淡旺季类型，则传入购票日期，查询购票日期大于起始日期小于截止日期的数据
 		criteria.andFtStartdateLessThanOrEqualTo(tccPrice.getFtStartdate());
-		criteria.andFtEnddateGreaterThanOrEqualTo(tccPrice.getFtEnddate());
+		if (tccPrice.getFtEnddate() == null) {
+			criteria.andFtEnddateGreaterThanOrEqualTo(tccPrice.getFtStartdate());
+		} else {
+			criteria.andFtEnddateGreaterThanOrEqualTo(tccPrice.getFtEnddate());
+		}
 		if (StringUtils.isNoneEmpty(tccPrice.getFsRestype()))
 			criteria.andFsRestypeEqualTo(tccPrice.getFsRestype());
 		if (StringUtils.isNoneEmpty(tccPrice.getFsResno()))
