@@ -48,11 +48,13 @@ jQuery(function($) {
 	function getTccPrice(fsResno, id){
 		$.ajax({
 	        type: "GET",
-	        url: "/tccPrice/findTccPriceByKey.htm",
-	        data: 'fsResno='+fsResno+'&ftStartdate='+$("#ftStartdate").val()+'&fsCcno=000000&fsRestype=cx',
+	        url: "/tccPrice/findTccPrice.htm",
+	        data: 'fsResno='+fsResno+'&ftStartdate='+$("#ftStartdate").val()+'&ftEnddate='+$("#ftStartdate").val()+'&fsCcno=000000&fsRestype=cx',
 	        dataType: "json",
 	        success: function(data){
-	        	$("#"+id).val(data.fdPrice);
+	        	$.each(data, function(commentIndex, comment){
+	        		$("#"+id).val(comment['fdPrice']);
+				});
 	        }
 	    });
 	}

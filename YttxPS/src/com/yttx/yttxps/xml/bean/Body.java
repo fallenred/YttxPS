@@ -16,6 +16,9 @@ public class Body {
 
 	@XStreamImplicit(itemFieldName="reslist")
 	private List<Reslist> reslist;
+	
+	@XStreamAlias("dayflag")
+	private String dayflag;
 
 	public List<Daylist> getDaylist() {
 		return daylist;
@@ -31,6 +34,14 @@ public class Body {
 
 	public void setReslist(List<Reslist> reslist) {
 		this.reslist = reslist;
+	}
+
+	public String getDayflag() {
+		return dayflag;
+	}
+
+	public void setDayflag(String dayflag) {
+		this.dayflag = dayflag;
 	}
 	
 }
