@@ -104,8 +104,8 @@
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="lvl">状态</label>
-												<div class="col-sm-1">
-													<select id="fiStat">
+												<div class="col-sm-2">
+													<select class="form-control"  id="fiStat">
 														<option value="">----状态----</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
@@ -141,7 +141,7 @@
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal"
 												aria-hidden="true">×</button>
-											<h4 class="modal-title" id="addModalLabel">新增门票</h4>
+											<h4 class="modal-title" id="addModalLabel">新增车型</h4>
 										</div>
 										<div class="modal-body">
 											<iframe id="addIframe" width="100%" height="450px"
@@ -164,7 +164,7 @@
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal"
 												aria-hidden="true">×</button>
-											<h4 class="modal-title" id="addModalLabel">修改门票</h4>
+											<h4 class="modal-title" id="addModalLabel">修改车型</h4>
 										</div>
 										<div class="modal-body">
 											<iframe id="editIframe" width="100%" height="450px"

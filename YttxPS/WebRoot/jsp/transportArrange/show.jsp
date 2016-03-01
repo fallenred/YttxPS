@@ -74,19 +74,24 @@
 									<div class="row">
 										<div class="form-group">
 											
-											<label class="col-sm-2 control-label no-padding-right" for="fsType">日期</label>
-											<div class="col-sm-3" >
-												<input class="form-control" type="text" id="ftStartdate" name="ftStartdate" placeholder="起始日期" readonly="readonly"/>
-											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fsType">价格</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fsType">起始日期</label>
 											<div class="col-sm-3">
-												<input class="form-control" type="text" id="fdPrice" name="fdPrice" placeholder="价格" readonly="readonly"/>
+												<input class="form-control" type="text" id="ftStartdate" name="ftStartdate" readonly="readonly" placeholder="起始日期" />
+											</div>
+											<label class="col-sm-2 control-label no-padding-right" for="fsType">截止日期</label>
+											<div class="col-sm-3">
+												<input class="form-control" type="text" id="ftStartdate" name="ftEnddate" readonly="readonly" placeholder="截止日期" />
 											</div>
 										</div>
 									</div>
-
-
-
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsType">价格</label>
+											<div class="col-sm-3">
+												<input class="form-control" type="text" id="fdPrice" name="fdPrice" readonly="readonly" placeholder="价格" />
+											</div>
+										</div>
+									</div>
 								</div>
 
 								<div class="modal-footer">

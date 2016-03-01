@@ -7,11 +7,9 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.yttx.yttxps.mapper.TOrderCustomMapper;
 import com.yttx.yttxps.mapper.TOrderlistMapper;
-import com.yttx.yttxps.model.TOrderCustom;
 import com.yttx.yttxps.model.TOrderCustomExample;
 import com.yttx.yttxps.model.TOrderCustomExample.Criteria;
 import com.yttx.yttxps.model.TOrderCustomWithBLOBs;
@@ -53,7 +51,6 @@ public class OrderCustomService implements IOrderCustomService {
 	}
 
 	@Override
-	@Transactional(rollbackFor=Exception.class)
 	public int update(TOrderCustomWithBLOBs record) throws Exception {
 		Body body = record.getBody();
 		String fcResSnapshot = "";

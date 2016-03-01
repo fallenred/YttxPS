@@ -65,9 +65,11 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsStartplace">发团地</label>
-											<div class="col-sm-8">
-												<input type="text" placeholder="请选择行政区域" name="fsStartplaceName" data-key="0086" data-idx="0" data-full="中国" id="fsStartplaceName" class="inp-search" /> 
-												<input type="hidden" name="fsStartplace" id="fsStartplace" />
+											<div class="col-sm-3">
+												<input class="form-control" type="text" placeholder="请选择行政区域" name="regionname"
+													data-key="0086" data-idx="0" data-full="中国"
+													id="regionname" class="inp-search" /> <input
+													type="hidden" name="fsStartPlace" id="regionno" />
 												<div id="selectCity" class="localcity"></div>
 											</div>
 										</div>

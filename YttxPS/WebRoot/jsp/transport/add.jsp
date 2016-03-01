@@ -50,17 +50,13 @@
 
 									<div class="row">
 										<div class="form-group">
-											<!-- <label class="col-sm-2 control-label no-padding-right" for="fsNo">门票代码</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text" id="fsNo" name="fsNo" placeholder="门票代码需唯一" />
-											</div> -->
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">车型名称</label>
-											<div class="col-sm-2">
-												<input type="text" id="fsName"  class="form-control" name="fsName" placeholder="车型名称"  maxlength="10"/>
+											<div class="col-sm-3">
+												<input class="form-control" type="text" id="fsName"  class="form-control" name="fsName" placeholder="车型名称"  maxlength="10"/>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiLoadMin">准载下限</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text"  class="form-control" id="fiLoadMin" name="fiLoadMin" placeholder="准载下限" />
+											<div class="col-sm-3">
+												<input class="form-control" maxlength="10" type="text"  class="form-control" id="fiLoadMin" name="fiLoadMin" placeholder="准载下限" />
 											</div>
 										</div>
 									</div>
@@ -68,26 +64,26 @@
 										<div class="form-group">
 											
 											<label class="col-sm-2 control-label no-padding-right" for="fiLoadMax">准载上限</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text"  class="form-control" id="fiLoadMax" name="fiLoadMax" placeholder="准载上限" />
+											<div class="col-sm-3">
+												<input class="form-control" maxlength="10" type="text"  class="form-control" id="fiLoadMax" name="fiLoadMax" placeholder="准载上限" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiFitMin">适应范围下限</label>
-											<div class="col-sm-2">
-												<input maxlength="10" type="text"  class="form-control" id="fiFitMin" name="fiFitMin" placeholder="适应范围下限" />
+											<div class="col-sm-3">
+												<input class="form-control" maxlength="10" type="text"  class="form-control" id="fiFitMin" name="fiFitMin" placeholder="适应范围下限" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fiFitMax">适应范围上限</label>
-											<div class="col-sm-2">
-												<input type="text" id="fiFitMax" name="fiFitMax" class="form-control" placeholder="适应范围上限"  />
+											<div class="col-sm-3">
+												<input class="form-control" type="text" id="fiFitMax" name="fiFitMax" class="form-control" placeholder="适应范围上限"  />
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fiStat">状态</label>
-											<div class="col-sm-2">
-												<select id="fiStat" name="fiStat">
+											<div class="col-sm-3">
+												<select class="form-control" id="fiStat" name="fiStat">
 													<option value="1">正常</option>
 													<option value="2">失效</option>
 												</select>

@@ -97,12 +97,12 @@ function findCommSnapshot(obj, no){
 				if(comment['restype'] == 'cx'){
 					$(obj).contents().find("#transType").val(comment['resno']);
 					$(obj).contents().find("#resTransName").attr("value", comment['resname']);
-					$(obj).contents().find("#transPrice").attr("value", comment['cclist'].price);
+					$(obj).contents().find("#transPrice").attr("value", comment['cclist'][0].price);
 				}
 				if(comment['restype'] == 'dy'){
 					$(obj).contents().find("#guideNo").val(comment['resno']);
 					$(obj).contents().find("#guideName").attr("value", comment['resname']);
-					$(obj).contents().find("#guidePrice").attr("value", comment['cclist'].price);
+					$(obj).contents().find("#guidePrice").attr("value", comment['cclist'][0].price);
 				}
 			});
 		}

@@ -27,7 +27,8 @@ public interface IResourceScenicService {
 	
 	@Transactional
 	int delete(BigDecimal index);
-
+	
+	@Transactional(readOnly = true) 
 	List<TResourceScenic> selectTResourceScenic(TResourceScenicExample example);
 	
 }
