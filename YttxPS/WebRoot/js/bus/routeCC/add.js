@@ -325,7 +325,6 @@ jQuery(function($) {
 				dataType: "json",
 				success: function(data){
 					html += '<label for="form-field-select-2" class="entertainment-label-' + val + '">' + text + '</label>';
-					//html += '<input type="hidden" class="ticketid" name="routecc[' + index + '].fsResno" value="' + val + '"/>';
 					html += '<select class="form-control entertainment entertainment-select-' + val + '" name="' + val + '" id="entertainments_' + val + '" multiple="multiple">';
 					$.each(data.rows, function(i, e){
 						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
@@ -362,7 +361,6 @@ jQuery(function($) {
 				dataType: "json",
 				success: function(data) {
 					html += '<label for="form-field-select-2" class="restaurant-label-' + val + '">' + text + '</label>';
-					//html += '<input type="hidden" class="restaurantid" name="routecc[' + index + '].fsResno" value="' + val + '"/>';
 					html += '<select class="form-control restaurant restaurant-select-' + val + '" name="' + val + '" id="restaurants_' + val + '" multiple="multiple">';
 					$.each(data.rows, function(i, e){
 						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
@@ -452,7 +450,6 @@ jQuery(function($) {
 				dataType: "json",
 				success: function(data){
 					html += '<label for="form-field-select-2" class="ticket-label-' + val + '">' + text + '</label>';
-					//html += '<input type="hidden" class="ticketid" name="routecc[' + index + '].fsResno" value="' + val + '"/>';
 					html += '<select class="form-control ticket ticket-select-' + val + '" name="' + val + '" id="tickets_' + val + '" multiple="multiple">';
 					$.each(data.rows, function(i, e){
 						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
@@ -630,7 +627,6 @@ jQuery(function($) {
 		});
 		
 		$.post("/routeArrange/addRouteCC.htm",
-				//$("#addform").serialize(),
 				routecc,
 				function(data){
 					var json = eval("(" + data + ")");

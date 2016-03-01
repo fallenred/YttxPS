@@ -39,6 +39,9 @@ public interface IRouteArrangeService {
 	@Transactional(rollbackFor = Exception.class)
 	public void insertRouteCC(TRouteArrangeWithBLOBs record);
 	
+	@Transactional(rollbackFor = Exception.class)
+	public void deleteRouteCC(String no);
+	
 	@Transactional(readOnly = true)
 	public List<RouteCCType> findRouteCCType(Map<String, Object> map);
 	
