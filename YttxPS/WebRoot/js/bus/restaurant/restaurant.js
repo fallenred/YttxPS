@@ -70,6 +70,18 @@ $("#addModal", parent.document).on("hidden.bs.modal", function() {
 	$("#grid-table").trigger("reloadGrid");
 });
 
+/**
+ * 表格行事件 -->上传图片-->打开上传图片弹出框
+ */
+function picRestaurant(id) {
+	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
+	var resType="ct";
+	var resNo=raw.no;
+	var frameSrc = "/pic/picpage.htm?resType="+resType+"&resNo="+resNo;
+    $("#picIframe").attr("src", frameSrc);
+    $('#picModal').modal({ show: true, backdrop: 'static' });
+};
+
 jQuery(function($) {
 	/*
 	 * 查询条件-->行政区划初始化

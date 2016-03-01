@@ -40,13 +40,13 @@
 												for="resType">归属资源代码</label>
 											<div class="col-sm-3">
 												<input type="text" id="resType" name="resType" 
-													class="form-control" placeholder="归属资源代码" maxlength="2" value=""/>
+													class="form-control" placeholder="归属资源代码" maxlength="2" value="${pic.resType}" readonly/>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="resNo">资源编码</label>
 											<div class="col-sm-3">
 												<input maxlength="10" type="text" id="resNo" name="resNo"
-													class="form-control" placeholder="资源编码" />
+													class="form-control" placeholder="资源编码" value="${pic.resNo}" readonly/>
 											</div>
 										</div>
 									</div>

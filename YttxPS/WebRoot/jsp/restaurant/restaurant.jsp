@@ -237,6 +237,24 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- 图片上传 -->
+		<div class="modal fade" id="picModal" tabindex="-1" role="dialog"
+			aria-labelledby="picModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width: auto; height: auto">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+						<h4 class="modal-title" id="picModalLabel">图片管理</h4>
+					</div>
+					<div class="modal-body">
+						<iframe id="picIframe" width="100%" height="500px" frameborder="0"
+							scrolling="yes"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script src="/js/bus/restaurant/restaurant.js"></script>
 </body>

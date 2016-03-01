@@ -1,4 +1,7 @@
-$("#upfileModal").on("hidden.bs.modal", function() {
+/**
+ * 文件上传弹出框（图片选择器）关闭时的响应函数：向后台提交数据
+ */
+$("#upfileModal").on("hidden.bs.modal", function(){
     $(this).removeData("bs.modal");
     $("#submit").click();
 });
@@ -24,12 +27,8 @@ var delpic=function(index, path) {
 	});
 };
 
-jQuery(function($) {
+jQuery(function($){
 	
-	var no = $.getUrlParam('no');
-	$("#no").val(no);
-	
-//	colorbox
 	var $overflow = '';
 	var colorbox_params = {
 		rel : 'colorbox',
@@ -53,9 +52,10 @@ jQuery(function($) {
 			$.colorbox.resize();
 		}
 	};
+	
 	reloadbox();
 	
-	// 查询该资源对应的所有图片并显示
+	//查询图片并且显示出来
 	findpics();
 	
 	//	重置
@@ -113,23 +113,17 @@ jQuery(function($) {
 			$('#no').focus();
 			return false;
 		} 
-//		if($("#belongtype").val() == '') {
-//			$("#message").show();
-//			$("#message").text("图片归属类型不能为空，请输入");
-//			$('#belongtype').focus();
-//			return false;
-//		} 
 		$("#colorbox").children("li").remove();
 		findpics();
 	});
 	
 	
-	
 	function reloadbox() {
 		$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
-		$("#cboxLoadingGraphic").html(
-			"<i class='ace-icon fa fa-spinner orange'></i>");// let's add a custom loading icon
+		$("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange'></i>");
 	}
+	
+	
 	var showpics=function(pics) {
 		for(var i=0;i<pics.length;i++){
 			var item = '<li><a class="cboxElement" data-rel="colorbox" href="' + pics[i]["srcFile"] + '">' +
@@ -141,7 +135,10 @@ jQuery(function($) {
 		reloadbox();
 	}
 	
-	function findpics() {
+	/**
+	 * 找到资源类型和下属资源代码的所有图片并显示出来
+	 */
+	function findpics(){
 		var json = 'page=1&rows=99&pic.no=' + $("#no").val() +
 					'&pic.belongtype=' + $("#belongtype").val() +
 					'&pic.subtype=' + $("#subtype").val();
@@ -164,5 +161,4 @@ jQuery(function($) {
 		    dataType: 'json',
 		});
 	}
-	
 });
