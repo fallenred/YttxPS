@@ -256,11 +256,11 @@ jQuery(function($) {
 				mtype : 'POST',
 				height : 400,
 				colNames : [ '操作', '餐厅编号','餐厅名称','所属景区', '所属地区', 
-				             '餐厅地址', '接待规模(桌)', '菜品特色','等级', '状态' ],
+				             '餐厅地址', '接待规模(桌)', '菜品特色',/*'等级',*/ '状态' ],
 				colModel : [ {
 					name : 'myaction',
 					index : '',
-					width : 100,
+					width : 120,
 					fixed : true,
 					sortable : false,
 					resize : false,
@@ -288,7 +288,7 @@ jQuery(function($) {
 				{
 					name : 'regionname',
 					index : 'regionname',
-					width : 100,
+					width : 150,
 					sortable : false,
 					editable : false,
 				}, {
@@ -323,7 +323,7 @@ jQuery(function($) {
 								return k;
 						return v;
 					}
-				} , 
+				} , /*
 				{
 					name : 'lvl',
 					index : 'lvl',
@@ -343,7 +343,7 @@ jQuery(function($) {
 								return k;
 						return v;
 					}
-				},
+				},*/
 				{
 					name : 'stat',
 					index : 'stat',
