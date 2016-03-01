@@ -46,30 +46,21 @@
 												<input class="form-control" type="text" id="name" name="name" placeholder="餐厅名称"  
 													maxlength="50" readonly="readonly" value="${res.name}"/>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="name">所属景区</label>
-											<div class="col-sm-4">
-												<input class="form-control" type="text" id="name" name="name"  
-													maxlength="50" readonly="readonly" value="${res.scenicName}"/>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
+									
 											<label class="col-sm-2 control-label no-padding-right">所属地区</label>
 											<div class="col-sm-4">
 												<input class="form-control" type="text" id="regionno" name="regionno" 
 													readonly="readonly" value="${res.regionname}"/>
 											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="addr">餐厅地址</label>
 											<div class="col-sm-4">
 												<input class="form-control" type="text" id="addr" name="addr" 
 													placeholder="餐厅地址"  maxlength="100" readonly="readonly" value="${res.addr}"/>
 											</div>
-										</div>
-									</div>
-									
-									<div class="row">
-										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="special">特色菜品</label>
 											<div class="col-sm-4">
 											<!-- TODO 从数据字典中读取 -->

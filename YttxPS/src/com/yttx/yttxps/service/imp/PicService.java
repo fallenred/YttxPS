@@ -44,12 +44,6 @@ public class PicService implements IPicService {
 
 	@Override
 	public BigDecimal selectSequence() {
-		// TODO Auto-generated method stub
 		return picMapper.selectSequence();
 	}
-
-
-
-
-
 }

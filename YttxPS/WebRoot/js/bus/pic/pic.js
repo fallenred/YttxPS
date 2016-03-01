@@ -6,7 +6,59 @@ $("#upfileModal").on("hidden.bs.modal", function(){
     $("#submit").click();
 });
 
-var delpic=function(index, path) {
+/**
+ * 将找到的图片显示出来
+ */
+function showpics(pics){
+	for(var i=0;i<pics.length;i++){
+		var item = '<li>'+
+				   	'<a class="cboxElement" data-rel="colorbox" href="' + pics[i]["srcFile"] + '">' +
+						'<img width="150" height="150" src="' + pics[i]["srcFile"] + '" alt="150*150">'+
+					'</a>' +
+					'<div class="tools tools-bottom">'+
+						'<a href="#" onclick="delpic(' + pics[i]["index"] + ',\'' + pics[i]["srcFile"] + '\')">'+
+							'<i class="ace-icon fa fa-times red"></i>'+
+						'</a>'+
+					'</div>'+
+				'</li>';
+		$("#colorbox").append(item);
+	}
+	reloadbox();
+}
+
+/**
+ * 找到资源类型和该资源代码的所有图片并显示出来
+ */
+function findpics(){
+	//封装查询条件
+	var data={};
+	data["page"]=1;
+	data["rows"]=1000;
+	data["pic.resType"]=$("#resType").val()
+	data["pic.resNo"]=$("#resNo").val()
+	
+	$.ajax({
+	     type: 'POST',
+	     url: '/pic/findPic.htm' ,
+	     data: data,
+	     success: function(data){
+					if(data.result == "ok") {
+						$("#message").text("查询记录成功");
+						$("#colorbox").empty();
+						showpics(data.rows);//将查询出来的图片展示出来
+						return true;
+					}
+					else {
+						$("#message").text("查询记录失败:" + json.message );
+						return false;
+					}
+					return false;
+				} ,
+	    dataType: 'json',
+	});
+}
+
+var delpic=function(index, path){
 	$.ajax({
 	     type: 'POST',
 	     url: '/pic/delPic.htm' ,
@@ -14,7 +66,7 @@ var delpic=function(index, path) {
 	     success: function(data){
 					if(data.result == "ok") {
 						$("#message").text("删除记录成功");
-						$("#submit").click();
+						findpics();
 						return true;
 					}
 					else {
@@ -28,6 +80,11 @@ var delpic=function(index, path) {
 };
 
 jQuery(function($){
+	//从url中获取资源类型和资源代码
+	var resNo = $.getUrlParam('resNo');//归属资源编号
+	var resType = $.getUrlParam('resType');//归属资源类型
+	$("#resType").val(resType);
+	$("#resNo").val(resNo);
 	
 	var $overflow = '';
 	var colorbox_params = {
@@ -58,22 +115,19 @@ jQuery(function($){
 	//查询图片并且显示出来
 	findpics();
 	
-	//	重置
+	//重置
 	$("#reset").on("click", function() {
-			$("#belongtype").val(null);
-			$("#subtype").val(null);
-			$("#index").val(null);
-			$("#message").hide();
-			$("#message").text("");
-			$("#colorbox").hide();
-		});
+		$("#message").hide();
+		$("#message").text("");
+		$("#colorbox").hide();
+	});
 	
 	// 关闭
 	$("#close").on("click", function () {
 		$("#picModal", parent.document).find(".close").click();
 	});
 
-	//	文件上传
+	//文件上传按钮
 	$("#upfileBtn").on("click", function() {
 		$("#colorbox").hide();
 		if($("#resType").val() == "") {
@@ -88,12 +142,14 @@ jQuery(function($){
 			$('#resNo').focus();
 			return;
 		}
+		
 		if($("#seq").val() == "") {
 			$("#message").show();
 			$("#message").text("文件上传必须输入序号，请检查输入！");
 			$('#seq').focus();
 			return;
 		}
+		
 		if($("#main").val() == "") {
 			$("#message").show();
 			$("#message").text("文件上传必须输入是否主图，请检查输入！");
@@ -105,14 +161,14 @@ jQuery(function($){
 		});
 	});
 	
-	$("#submit").on("click", function () {
-		$("#colorbox").show();
+	$("#submit").on("click", function (){
 		if($("#no").val() == '') {
 			$("#message").show();
 			$("#message").text("图片资源编码不能为空，请输入");
 			$('#no').focus();
 			return false;
-		} 
+		}
+		$("#colorbox").show();
 		$("#colorbox").children("li").remove();
 		findpics();
 	});
@@ -121,44 +177,5 @@ jQuery(function($){
 	function reloadbox() {
 		$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
 		$("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange'></i>");
-	}
-	
-	
-	var showpics=function(pics) {
-		for(var i=0;i<pics.length;i++){
-			var item = '<li><a class="cboxElement" data-rel="colorbox" href="' + pics[i]["srcFile"] + '">' +
-				'<img width="150" height="150" src="' + pics[i]["srcFile"] + '" alt="150*150"></a>' +
-				'<div class="tools tools-bottom"><a href="#" onclick="delpic(' + pics[i]["index"] + ',\'' + pics[i]["srcFile"] + '\')' +  
-				'"><i class="ace-icon fa fa-times red"></i></a></div></li>';
-			$("#colorbox").append(item);
-		}
-		reloadbox();
-	}
-	
-	/**
-	 * 找到资源类型和下属资源代码的所有图片并显示出来
-	 */
-	function findpics(){
-		var json = 'page=1&rows=99&pic.no=' + $("#no").val() +
-					'&pic.belongtype=' + $("#belongtype").val() +
-					'&pic.subtype=' + $("#subtype").val();
-		$.ajax({
-		     type: 'POST',
-		     url: '/pic/findPic.htm' ,
-		     data: json,
-		     success: function(data){
-						if(data.result == "ok") {
-							$("#message").text("查询记录成功");
-							showpics(data.rows);
-							return true;
-						}
-						else {
-							$("#message").text("查询记录失败:" + json.message );
-							return false;
-						}
-						return false;
-					} ,
-		    dataType: 'json',
-		});
 	}
 });
