@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,18 +38,6 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@Autowired
 	private IPicService picService;
 	
-	/**
-	 * 打开上传图片的界面
-	 */
-	@RequestMapping(value="picpage.htm")
-	public String openPicPage(Pic pic,Model model)
-	{
-		model.addAttribute("pic", pic);
-		return "pic/pic";
-	}
-	
-	
-	
 	 /**
 	 * 分页查询图片信息
 	 * @param req
@@ -71,46 +58,40 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
-			return (Map<String, Object>) JsonResult.jsonError("查询图片失败:" + e.getMessage());
+			return  JsonResult.jsonError("查询图片失败:" + e.getMessage());
 		}
 		return map;
     }
 	
 	/**
-	 * 新图片信息
-	 * @param pic
-	 * @return
+	 * 新增图片
 	 */
 	@RequestMapping(value="addPic.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxaddPic(Pic pic,
+	public Object ajaxaddPic(Pic pic,
 			@RequestParam(value = "file", required = true) MultipartFile file)
     {  
-		logger.debug("当前新增对象 {}", pic.getSeq());
-		
+		logger.debug("当前新增对象 {}", file.getName());
 		StringBuffer path = new StringBuffer();
-		path.append("/").append(pic.getResType()).append("/");
+		path.append("/").append(pic.getResType()).append("/");///资源类型/资源编号/
 		if(pic.getResNo() != null && pic.getResNo().length() > 0) {
 			path.append(pic.getResNo()).append("/");
 		}
-		path.append(pic.getSeq()).append("/");
 		logger.debug("图片path{}", path.toString());
 		
 		String fileurl = resourceConvertURL(path.toString(), file);
 		logger.debug("图片srcfile{}", fileurl);
 		pic.setSrcFile(fileurl);
-		
 		pic.setIndex(picService.selectSequence());
-//		pic.setIndex(new BigDecimal(101));
 		try{
 			int ret = picService.insert(pic);
 			System.out.println(ret);
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			return (Map<String, Object>) JsonResult.jsonError("新增失败:" + e.getMessage());
+			return JsonResult.jsonError("新增失败:" + e.getMessage());
 		}
-		return (Map<String, Object>) JsonResult.jsonOk();
+		return JsonResult.jsonOk();
     }
 	
 	/**
@@ -155,17 +136,17 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 */
 	@RequestMapping(value="delPic.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxdelPic(@RequestParam(value = "index") BigDecimal  index, String srcfile)
+	public Object ajaxdelPic(@RequestParam(value = "index") BigDecimal  index, String srcfile)
     {  
 		logger.debug("当前删除key {}", index);
 		try{
 			int ret = picService.delete(index);
 		}
 		catch(Exception e){
-			return (Map<String, Object>) JsonResult.jsonError("删除失败");
+			return JsonResult.jsonError("删除失败");
 		}
 		// 尝试删除资源服务器的资源
 		deleteResourceByURL(srcfile);
-		return (Map<String, Object>) JsonResult.jsonOk();
+		return JsonResult.jsonOk();
     }
 }

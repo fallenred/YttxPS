@@ -11,7 +11,7 @@ function showRestaurantCost(id){
  */
 function showRestaurant(id) {
 	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/restaurant/show.htm?no=" + raw.no
+	var frameSrc = "/restaurant/show.htm?no="+raw.no;
     $("#showIframe").attr("src", frameSrc);
     $('#showModal').modal({ show: true, backdrop: 'static' });
 };
@@ -75,9 +75,8 @@ $("#addModal", parent.document).on("hidden.bs.modal", function() {
  */
 function picRestaurant(id) {
 	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var resType="ct";
-	var resNo=raw.no;
-	var frameSrc = "/pic/picpage.htm?resType="+resType+"&resNo="+resNo;
+	var params="resType=ct&resNo="+raw.no
+	var frameSrc = "/jsp/pic/pic.jsp?"+params;
     $("#picIframe").attr("src", frameSrc);
     $('#picModal').modal({ show: true, backdrop: 'static' });
 };

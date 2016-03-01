@@ -7,10 +7,9 @@ import com.yttx.yttxps.model.Pic;
 public class PicRequest extends JqGridRequest implements
 		java.io.Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
+	private Pic pic=new Pic();
 
 	public Pic getPic() {
 		return pic;
@@ -19,8 +18,6 @@ public class PicRequest extends JqGridRequest implements
 	public void setPic(Pic pic) {
 		this.pic = pic;
 	}
-
-	private Pic pic;
 
 	public void copyPic(Map<String, Object> map) {
 		if (pic != null) {
