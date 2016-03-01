@@ -220,4 +220,25 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
     }
+	
+	/**
+	 * 删除线路信息
+	 * @param Gen
+	 * @return
+	 */
+	@SuppressWarnings({ "unchecked" })
+	@RequestMapping(value="delRouteCC.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ajaxdelRouteCC(@RequestParam(value = "no") String  no)
+    {  
+		logger.debug("当前删除key {}", no);
+		try{
+			routeArrangeService.deleteRouteCC(no);
+		}
+		catch(Exception e){
+			logger.error(e.getMessage());
+			return (Map<String, Object>) JsonResult.jsonError("删除失败");
+		}
+		return (Map<String, Object>) JsonResult.jsonOk();
+    }
 }

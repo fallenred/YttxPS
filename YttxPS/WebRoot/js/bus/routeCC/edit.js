@@ -33,7 +33,6 @@ jQuery(function($) {
         		$("#ticket").html('');
         }
     });
-	$("#fiGenindex").val(fiGenindex);
 	
 	/**
 	 * 生成日程下拉列表
@@ -44,6 +43,7 @@ jQuery(function($) {
 			html += '<option value=' + i + '>第' + (parseInt(i) + 1) + '天</option>';
 		}
 		$("#fiDays").html(html);
+		getAllRouteCC($("#fiDays").val(), fiGenindex, fsRouteno);
 	}
 	
 	//
@@ -58,7 +58,7 @@ jQuery(function($) {
 		$.ajax({
 			type: "GET",
 			url: "/routeArrange/selectRouteArrange.htm",
-			data: "arrange.fiGenindex=" + $("#fiGenindex").val(),
+			data: "arrange.fiGenindex=" + fiGenindex,
 			dataType: "json",
 			success: function(data){
 				var html = ''; 
@@ -69,7 +69,6 @@ jQuery(function($) {
 			}
 		});
 	}
-	$("#fsResno").val(fsRouteno);
 	
 	/**
 	 * 获取景区列表
@@ -78,7 +77,7 @@ jQuery(function($) {
 		$.ajax({
 			type: "GET",
 			url: "/scenicGen/selectScenicGen.htm",
-			data: "scenicGen.fiGenindex=" + $("#fiGenindex").val(),
+			data: "scenicGen.fiGenindex=" + fiGenindex,
 			dataType: "json",
 			success: function(data){
 				var html = ''; 
@@ -98,7 +97,7 @@ jQuery(function($) {
 		$.ajax({
 			type: "GET",
 			url: "/scenicGen/selectScenicGen.htm",
-			data: "scenicGen.fiGenindex=" + $("#fiGenindex").val(),
+			data: "scenicGen.fiGenindex=" + fiGenindex,
 			dataType: "json",
 			success: function(data){
 				var html = '线路景区：'; 
