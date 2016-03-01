@@ -66,10 +66,8 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsStartplace">发团地</label>
 											<div class="col-sm-3">
-												<input class="form-control" type="text" placeholder="请选择行政区域" name="regionname"
-													data-key="0086" data-idx="0" data-full="中国"
-													id="regionname" class="inp-search" /> <input
-													type="hidden" name="fsStartPlace" id="regionno" />
+												<input class="form-control" type="text" placeholder="请选择行政区域" name="fsStartplaceName" data-key="0086" data-idx="0" data-full="中国" id="fsStartplaceName" class="inp-search" />
+												<input type="hidden" name="fsStartplace" id="fsStartplace" />
 												<div id="selectCity" class="localcity"></div>
 											</div>
 										</div>
@@ -113,8 +111,11 @@
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="transportArrange">车型选择</label>
 											<div class="col-sm-3">
-												<select id="transportArrange" name="transportArrange" class="form-control">
+												<select id="transportArrange" name="routecc[0].fsResno" class="form-control">
 												</select>
+												<input type="hidden" name="routecc[0].fsRestype" value="cx" />
+												<input type="hidden" name="routecc[0].fiDayflag" value="0" />
+												<input type="hidden" name="routecc[0].fsCcno" value="000023" />
 											</div>
 										</div>
 									</div>
@@ -133,8 +134,11 @@
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiDays">导游选择</label>
 											<div class="col-sm-3">
-												<select id="guideFsNo" name="guideFsNo" class="form-control">
+												<select id="guideFsNo" name="routecc[1].fsResno" class="form-control">
 												</select>
+												<input type="hidden" name="routecc[1].fsRestype" value="dy" />
+												<input type="hidden" name="routecc[1].fiDayflag" value="0" />
+												<input type="hidden" name="routecc[1].fsCcno" value="000000" />
 											</div>
 										</div>
 									</div>

@@ -17,6 +17,10 @@ jQuery(function($) {
 			$("#selectCity", "#addform").hide();
 	}
 	
+	$("#fsRegionName", "#addform").click(function() {
+		$("#selectCity", "#addform").show();
+	});
+	
 	//获取景点列表
 	$.ajax({
         type: "POST",
@@ -32,18 +36,13 @@ jQuery(function($) {
         }
     });
 
-	$("#fsRegionName", "#addform").click(function() {
-		$("#selectCity", "#addform").show();
-	});
-
-
 	//	重置
 	$("#reset").on("click", function() {
 			$("#selectCity").hide();
 			$("#fsRegionno").val(null);
 			$("#message").hide();
 			$("#message").text("");
-		});
+	});
 	
 	// 关闭
 	$("#close").on("click", function () {
