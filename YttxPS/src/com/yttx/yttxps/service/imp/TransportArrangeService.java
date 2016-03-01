@@ -62,11 +62,6 @@ public class TransportArrangeService implements ITransportArrangeService {
 		TtransportArrangeExample.Criteria criteria = example.createCriteria();
 		criteria.andFsNoEqualTo(record.getFsNo());
 		transportArrangeMapper.updateByExample(record, example);
-		TCCPriceExample priceExample = new TCCPriceExample();
-		Criteria criteria1 = priceExample.createCriteria();
-		criteria1.andFsResnoEqualTo(record.getFsNo());
-		criteria1.andFsRestypeEqualTo("cx");
-		criteria1.andFsCcnoEqualTo("000000");
 		TCCPrice price = new TCCPrice();
 		price.setFsRestype("cx");
 		price.setFsCcno("000000");

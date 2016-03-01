@@ -755,7 +755,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : ['操作', '序号', '订单ID','订单名称', '批次顺序号', '创建时间', '批次类型', '联系人', '联系电话',
+				colNames : ['操作', '序号', '订单ID','订单名称', '批次号', '创建时间', '批次类型', '联系人', '联系电话',
 				            '总人数', '老人数', '成年人数', '儿童数', '附言', '预估金额小计', '状态','订单线路','发团日期'],
 				colModel : [ {
 					name : 'myac',
@@ -781,14 +781,13 @@ jQuery(function($) {
 				}, {
 					name : 'fsName',
 					index : 'fsName',
-					width : 100,
+					width : 80,
 					editable : true,
-					sorttype : "char",
-					hidden : true
+					sorttype : "char"
 				}, {
 					name : 'fiSeq',
 					index : 'fiSeq',
-					width : 100,
+					width : 30,
 					editable : true,
 					sorttype : "char"
 				}, {
@@ -846,7 +845,7 @@ jQuery(function($) {
 				}, {
 					name : 'fiOlder',
 					index : 'fiOlder',
-					width : 100,
+					width : 50,
 					editable : true,
 					sorttype : "int",
 					hidden : true

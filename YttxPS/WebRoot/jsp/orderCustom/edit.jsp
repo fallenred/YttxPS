@@ -120,7 +120,7 @@
 											<div class="col-sm-3">
 												<input type="text" id="fdAmt" name="fdAmt" class="form-control" placeholder="预估金额" />
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fiStat">订单状态</label>
+											<!-- <label class="col-sm-2 control-label no-padding-right" for="fiStat">订单状态</label>
 											<div class="col-sm-3">
 												<select id="fiStat" name="fiStat"
 													class="form-control">
@@ -130,7 +130,7 @@
 													<option value="2">客户已确认</option>
 													<option value="32">已入结算单</option>
 												</select>
-											</div>
+											</div> -->
 										</div>
 									</div>
 									<div class="row">
@@ -795,7 +795,7 @@
 				success: function(data){
 					var html = ''; 
 					$.each(data, function(commentIndex, comment){
-						html += '<option value=' + comment['roomno'] + '>' + comment['name'] + '</option>';
+						html += '<option value=' + comment['fsRoomno'] + '>' + comment['fsName'] + '</option>';
 					});
 					$(obj).parent().parent().parent().next().children().find(".col-sm-3").children().html(html);
 				}

@@ -173,10 +173,11 @@
 												<select id="fiStat" name="fiStat"
 													class="form-control">
 													<option value="0">待审核</option>
-													<option value="1">已审核待确认</option>
-													<option value="-1">审核未通过</option>
-													<option value="2">客户已确认</option>
-													<option value="32">已入结算单</option>
+													<option value="1">已审核</option>
+													<option value="2">已确认(待付款)</option>
+													<option value="4">已付首款</option>
+													<option value="8">已付全款(可出团)</option>
+													<option value="32">已完结</option>
 												</select>
 											</div>
 										</div>
