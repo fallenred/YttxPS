@@ -9,6 +9,18 @@ jQuery(function($) {
 		callback : localcallback
 	});
 	
+	//城市选择器
+	function localcallback(index, key, value, fullkey, fullname) {
+		$("#fsStartplaceName", "#addform").val(fullname);
+		$("#fsStartplace", "#addform").val(key);
+		if (index == 3)
+			$("#selectCity", "#addform").hide();
+	}
+
+	$("#fsStartplaceName", "#addform").click(function() {
+		$("#selectCity", "#addform").show();
+	});
+	
 	//获取线路列表
 	$.ajax({
         type: "GET",
@@ -67,19 +79,6 @@ jQuery(function($) {
 	$("#guideLvl").change(function(){
 		getGuide();
 	});
-	
-	//城市选择器
-	function localcallback(index, key, value, fullkey, fullname) {
-		$("#fsStartplaceName", "#addform").val(fullname);
-		$("#fsStartplace", "#addform").val(key);
-		if (index == 3)
-			$("#selectCity", "#addform").hide();
-	}
-
-	$("#fsStartplaceName", "#addform").click(function() {
-		$("#selectCity", "#addform").show();
-	});
-
 
 	//	重置
 	$("#reset").on("click", function() {
@@ -112,19 +111,18 @@ jQuery(function($) {
 		$.post("/routeArrange/addRouteArrange.htm",
 				$("#addform").serialize(),
 				function(data){
-			var json = eval("(" + data + ")");
-					if(json.result == "ok") {
-						$("#message").text("增加记录成功");
-						$("#message").show();
-						return true;
-					}
-					else {
-						$("#message").text("增加记录失败:" + json.message );
-						$("#message").show();
-						return false;
-					}
+				var json = eval("(" + data + ")");
+				if(json.result == "ok") {
+					$("#message").text("增加记录成功");
+					$("#message").show();
+					return true;
+				} else {
+					$("#message").text("增加记录失败:" + json.message );
+					$("#message").show();
 					return false;
-				});
+				}
+				return false;
+		});
 	});
 	
 	//	colorbox
