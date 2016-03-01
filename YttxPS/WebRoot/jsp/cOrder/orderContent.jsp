@@ -19,6 +19,12 @@
 						</div>
 					</div>
 					<div class="profile-info-row">
+						<div class="profile-info-name">订单名称:</div>
+						<div class="profile-info-value">
+							<span class="editable editable-click" id="username">${order.name}</span>
+						</div>
+					</div>
+					<div class="profile-info-row">
 						<div class="profile-info-name">订单类型:</div>
 						<div class="profile-info-value">
 							<c:choose>
@@ -59,7 +65,7 @@
 					<div class="profile-info-row">
 						<div class="profile-info-name">公共资源</div>
 						<div class="profile-info-value">
-							<table id="commres" class="table table-striped table-bordered table-hover">
+							<table id="commres" class="table table-striped table-bordered table-hover" width="100%">
 								<thead>
 									<tr>
 										<th>资源名称</th>
@@ -156,7 +162,7 @@
 									
 									<!-- 每一批次的游客信息-->
 									<div class="table-header">游客名单</div>
-									<table class="table table-striped table-bordered table-hover">
+									<table class="table table-striped table-bordered table-hover" width="100%">
 										<thead>
 											<tr>
 												<th>姓名</th>
@@ -181,7 +187,7 @@
 									<!-- 轮询每一批次的使用资源信息-->
 									<c:forEach items="${bat.resList}" var="day" varStatus="status">
 										<div class="table-header">第${status.index+1}天资源使用描述</div>
-										<table id="prvres" class="table table-striped table-bordered table-hover">
+										<table id="prvres" class="table table-striped table-bordered table-hover" width="100%">
 											<thead>
 												<tr>
 													<th>资源名称</th>
@@ -225,7 +231,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<!--循环遍历订单备注  -->
-						<table id="prvres" class="table table-striped table-bordered table-hover">
+						<table id="prvres" class="table table-striped table-bordered table-hover" width="100%">
 							<c:forEach items="${order.remarks}" var="remark">
 								<tr>
 									<td class="col-xs-2">${remark.dateDesc}</td>
