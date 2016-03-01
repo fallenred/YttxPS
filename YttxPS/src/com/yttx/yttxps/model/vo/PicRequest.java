@@ -24,7 +24,7 @@ public class PicRequest extends JqGridRequest implements
 			map.put("index", pic.getIndex() == null ? 0:pic.getIndex());
 			map.put("resType", pic.getResType() == null ? "" : pic.getResType());
 			map.put("resNo", pic.getResNo() == null ? "" : pic.getResNo());
-			map.put("seq", pic.getSeq() == null ? 0: pic.getSeq());
+			map.put("seq", pic.getSeq() == null ? null: pic.getSeq());
 			map.put("main", pic.getMain() == null ? "" : pic.getMain());
 			map.put("srcfile",pic.getSrcFile() == null ? "" : pic.getSrcFile());
 			map.put("desc",pic.getDesc() == null ? "" : pic.getDesc());

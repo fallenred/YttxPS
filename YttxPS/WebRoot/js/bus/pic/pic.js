@@ -6,7 +6,59 @@ $("#upfileModal").on("hidden.bs.modal", function(){
     $("#submit").click();
 });
 
-var delpic=function(index, path) {
+/**
+ * 将找到的图片显示出来
+ */
+function showpics(pics){
+	for(var i=0;i<pics.length;i++){
+		var item = '<li>'+
+				   	'<a class="cboxElement" data-rel="colorbox" href="' + pics[i]["srcFile"] + '">' +
+						'<img width="150" height="150" src="' + pics[i]["srcFile"] + '" alt="150*150">'+
+					'</a>' +
+					'<div class="tools tools-bottom">'+
+						'<a href="#" onclick="delpic(' + pics[i]["index"] + ',\'' + pics[i]["srcFile"] + '\')">'+
+							'<i class="ace-icon fa fa-times red"></i>'+
+						'</a>'+
+					'</div>'+
+				'</li>';
+		$("#colorbox").append(item);
+	}
+	reloadbox();
+}
+
+/**
+ * 找到资源类型和该资源代码的所有图片并显示出来
+ */
+function findpics(){
+	//封装查询条件
+	var data={};
+	data["page"]=1;
+	data["rows"]=1000;
+	data["pic.resType"]=$("#resType").val()
+	data["pic.resNo"]=$("#resNo").val()
+	
+	$.ajax({
+	     type: 'POST',
+	     url: '/pic/findPic.htm' ,
+	     data: data,
+	     success: function(data){
+					if(data.result == "ok") {
+						$("#message").text("查询记录成功");
+						$("#colorbox").empty();
+						showpics(data.rows);//将查询出来的图片展示出来
+						return true;
+					}
+					else {
+						$("#message").text("查询记录失败:" + json.message );
+						return false;
+					}
+					return false;
+				} ,
+	    dataType: 'json',
+	});
+}
+
+var delpic=function(index, path){
 	$.ajax({
 	     type: 'POST',
 	     url: '/pic/delPic.htm' ,
@@ -14,7 +66,7 @@ var delpic=function(index, path) {
 	     success: function(data){
 					if(data.result == "ok") {
 						$("#message").text("删除记录成功");
-						$("#submit").click();
+						findpics();
 						return true;
 					}
 					else {
@@ -125,56 +177,5 @@ jQuery(function($){
 	function reloadbox() {
 		$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
 		$("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange'></i>");
-	}
-	
-	/**
-	 * 将找到的图片显示出来
-	 */
-	var showpics=function(pics){
-		for(var i=0;i<pics.length;i++){
-			var item = '<li>'+
-					   	'<a class="cboxElement" data-rel="colorbox" href="' + pics[i]["srcFile"] + '">' +
-							'<img width="150" height="150" src="' + pics[i]["srcFile"] + '" alt="150*150">'+
-						'</a>' +
-						'<div class="tools tools-bottom">'+
-							'<a href="#" onclick="delpic(' + pics[i]["index"] + ',\'' + pics[i]["srcFile"] + '\')">'+
-								'<i class="ace-icon fa fa-times red"></i>'+
-							'</a>'+
-						'</div>'+
-					'</li>';
-			$("#colorbox").append(item);
-		}
-		reloadbox();
-	}
-	
-	/**
-	 * 找到资源类型和该资源代码的所有图片并显示出来
-	 */
-	function findpics(){
-		//封装查询条件
-		var data={};
-		data["page"]=1;
-		data["rows"]=1000;
-		data["pic.resType"]=$("#resType").val()
-		data["pic.resNo"]=$("#resNo").val()
-		
-		$.ajax({
-		     type: 'POST',
-		     url: '/pic/findPic.htm' ,
-		     data: data,
-		     success: function(data){
-						if(data.result == "ok") {
-							$("#message").text("查询记录成功");
-							showpics(data.rows);//将查询出来的图片展示出来
-							return true;
-						}
-						else {
-							$("#message").text("查询记录失败:" + json.message );
-							return false;
-						}
-						return false;
-					} ,
-		    dataType: 'json',
-		});
 	}
 });

@@ -136,7 +136,8 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 */
 	@RequestMapping(value="delPic.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object ajaxdelPic(@RequestParam(value = "index") BigDecimal  index, String srcfile)
+	public Object ajaxdelPic(@RequestParam(value = "index") BigDecimal  index, 
+			@RequestParam("srcFile") String srcFile)
     {  
 		logger.debug("当前删除key {}", index);
 		try{
@@ -146,7 +147,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			return JsonResult.jsonError("删除失败");
 		}
 		// 尝试删除资源服务器的资源
-		deleteResourceByURL(srcfile);
+		deleteResourceByURL(srcFile);
 		return JsonResult.jsonOk();
     }
 }

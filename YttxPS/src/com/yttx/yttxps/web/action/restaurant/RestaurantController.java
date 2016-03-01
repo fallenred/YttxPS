@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -109,8 +108,6 @@ public class RestaurantController extends BaseController {
 	@RequestMapping(value = "addPage.htm")
 	public String openAddPage(Model model)
 	{
-		List<Scenic> scenics =pubService.findAllScennic();
-		model.addAttribute("scenics", scenics);
 		return "restaurant/add";
 	}
 	
@@ -160,8 +157,6 @@ public class RestaurantController extends BaseController {
 		if(restaurant.getRegionno()!=null)
 			restaurant.setRegionname(pubService.findRegionFullName(restaurant.getRegionno()));
 		model.addAttribute("res", restaurant);
-		List<Scenic> scenics =pubService.findAllScennic();
-		model.addAttribute("scenics", scenics);
 		return "restaurant/edit";
 	}
 	
@@ -339,11 +334,6 @@ public class RestaurantController extends BaseController {
 				succFlag = succFlag && false;
 				message += "餐厅编号为空<br/>";
 			}
-		}
-		
-		if(StringUtil.nullOrBlank(restaurant.getScenicNo())){
-			succFlag = succFlag && false;
-			message += "所属景区为空<br/>";
 		}
 		//非空 餐厅名称
 		if(StringUtil.nullOrBlank(restaurant.getName())){

@@ -7,10 +7,6 @@ public class TRestaurant {
     private String no;
 
     private String name;
-    
-    private String scenicNo;
-    
-    private String scenicName;
 
     private String regionno;
     
@@ -298,23 +294,6 @@ public class TRestaurant {
     public void setStat(BigDecimal stat) {
         this.stat = stat;
     }
-
-	public String getScenicNo() {
-		return scenicNo;
-	}
-
-	public void setScenicNo(String scenicNo) {
-		this.scenicNo = (scenicNo==null?null:scenicNo.trim());
-	}
-	
-
-	public String getScenicName() {
-		return scenicName;
-	}
-
-	public void setScenicName(String scenicName) {
-		this.scenicName =(scenicName==null?null:scenicName.trim()) ;
-	}
 
 	@Override
 	public String toString() {
