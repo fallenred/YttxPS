@@ -30,7 +30,7 @@ public class UserBasicController extends BaseController{
 		@SuppressWarnings("unchecked")
 		List<Menu> orList = (List<Menu>) request.getSession()
                 .getServletContext().getAttribute(Constants.SYSMENUTREE);
-		List<Menu> allMenus =new ArrayList<>();
+		List<Menu> allMenus =new ArrayList<Menu>();
 		for (Menu menu : orList) {
 			if(!"0200".equalsIgnoreCase(menu.getId())){
 				allMenus.add(menu);
