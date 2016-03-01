@@ -44,5 +44,6 @@ public interface IPubService<T> {
 	/**
 	 * 找到所有的景区
 	 */
+	@Transactional(readOnly = true) 
 	public List<Scenic> findAllScennic();
 }
