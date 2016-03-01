@@ -67,5 +67,6 @@ public interface IRestaurantService {
 	 * @param map
 	 * @return
 	 */
+	@Transactional(readOnly = true) 
 	List<TRestaurant> selectRestaurant(Map<String, Object> map);
 }
