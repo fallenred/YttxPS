@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yttx.comm.DateUtil;
 import com.yttx.comm.StringUtil;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.corder.DetailOrder;
@@ -171,7 +172,7 @@ public class StatementController extends BaseController {
 	{
 		String message=null;
 		if("A".equalsIgnoreCase(oper)){//新增操作
-			fStatement.setCreatDate(new Date());
+			fStatement.setCreatDateDesc(DateUtil.getSysCurrentTime());
 			fStatement.setOperId(sessionEntity.getId());
 			fStatement.setStat(0L);
 			String orderId = fStatement.getOrderId();

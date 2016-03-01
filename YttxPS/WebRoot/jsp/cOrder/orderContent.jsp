@@ -20,11 +20,23 @@
 					</div>
 					<div class="profile-info-row">
 						<div class="profile-info-name">订单类型:</div>
-						<div class="profile-info-value">${order.type}</div>
+						<div class="profile-info-value">
+							<c:choose>
+								<c:when test="${order.type=='02'}">衍生线路</c:when>
+								<c:when test="${order.type=='03'}">定制线路</c:when>
+								<c:otherwise>未知订单类型</c:otherwise>
+							</c:choose>
+						</div>
 					</div>
 					<div class="profile-info-row">
 						<div class="profile-info-name">组团类型:</div>
-						<div class="profile-info-value">${order.property}</div>
+						<div class="profile-info-value">
+							<c:choose>
+								<c:when test="${order.property=='01'}">独立成团</c:when>
+								<c:when test="${order.property=='02'}">散客拼团</c:when>
+								<c:otherwise>未知组团类型</c:otherwise>
+							</c:choose>
+						</div>
 					</div>
 					<div class="profile-info-row">
 						<div class="profile-info-name">创建日期:</div>

@@ -208,7 +208,7 @@
 			#{userID,jdbcType=VARCHAR},
 			#{userSubID,jdbcType=VARCHAR},
 			#{OperId,jdbcType=VARCHAR},
-			#{creatDate,jdbcType=DATE},
+			TO_DATE(#{creatDateDesc,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss'),
 			#{orderContent,jdbcType=CLOB},
 			#{totalFee,jdbcType=DECIMAL},
 			#{paidAmt,jdbcType=DECIMAL},
