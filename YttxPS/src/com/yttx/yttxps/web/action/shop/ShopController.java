@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Tshop;
-import com.yttx.yttxps.model.TshopExample;
 import com.yttx.yttxps.model.vo.ShopRequest;
 import com.yttx.yttxps.service.IShopService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -63,14 +62,13 @@ public class ShopController extends BaseController {
 	@ResponseBody
 	public Object ajaxSelectGuide(ShopRequest req, String scenicno)
     {  
-		TshopExample example = new TshopExample();
-		req.copyTshop(example);
+		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringUtils.isNotEmpty(scenicno)) {
 			List<String> li = new ArrayList<String>();
 			CollectionUtils.addAll(li, scenicno.split(","));
-			example.createCriteria().andFsScenicnoIn(li);
+			map.put("scenicNo", li);
 		}
-		List<Tshop> list = shopService.selectTshop(example);
+		List<Tshop> list = shopService.selectTshopByMap(map);
 		return list;
     }
 

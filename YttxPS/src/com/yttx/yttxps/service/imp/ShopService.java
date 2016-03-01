@@ -64,9 +64,9 @@ public class ShopService implements IShopService {
 	public int delete(String no) {
 		return shopMapper.deleteByPrimaryKey(no);
 	}
-
-
-
-
-
+	
+	@Transactional(readOnly = true) 
+	public List<Tshop> selectTshopByMap(Map<String, Object> map){
+		return shopMapper.selectTshopByMap(map);
+	}
 }

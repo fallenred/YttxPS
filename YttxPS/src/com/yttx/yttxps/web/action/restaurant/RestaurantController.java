@@ -25,7 +25,6 @@ import com.yttx.comm.DateEditor;
 import com.yttx.comm.StringUtil;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.ResoucePrice;
-import com.yttx.yttxps.model.Scenic;
 import com.yttx.yttxps.model.TCCPrice;
 import com.yttx.yttxps.model.TRestaurant;
 import com.yttx.yttxps.model.vo.RestaurantPriceReq;

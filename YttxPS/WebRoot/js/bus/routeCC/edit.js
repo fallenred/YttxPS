@@ -133,7 +133,7 @@ jQuery(function($) {
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['fsNo'] + '>' +comment['fsScenicname'] + '--' + comment['fsName'] + '</option>';
+					html += '<option value=' + comment['fsNo'] + '>' + comment['fsScenicname'] + '--' + comment['fsName'] + '</option>';
 				});
 				$("#ticket").html(html);
 			}
@@ -164,11 +164,20 @@ jQuery(function($) {
 	 * 获取酒店列表
 	 */
 	function getAccomadation(fsStarLvl){
+		var scenic = [];
+		var req = {};
+		var scenicName = $("#scenic").find("option:selected").text();
+		$("input[name='scenicGen']").each(function(){
+			scenic.push($(this).val());
+		});
+		
+		req["accomadation.starlvl"] = $("#fsStarLvl").val();
+		req["scenicNo"] = scenic;
 		$.ajax({
 			type: "GET",
 			traditional: true,
 			url: "/accomadation/selectAccomadation.htm",
-			data: "accomadation.starlvl=" + fsStarLvl,
+			data: req,
 			dataType: "json",
 			success: function(data){
 				var html = ''; 
@@ -245,6 +254,7 @@ jQuery(function($) {
 	 */
 	function getShop(){
 		var scenic = '';
+		var scenicName = $("#scenic").find("option:selected").text();
 		$("input[name='scenicGen']").each(function(){
 			scenic += $(this).val() + ",";
 		});
@@ -257,7 +267,7 @@ jQuery(function($) {
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' +comment['scenicname'] + '--' + comment['name'] + '</option>';
+					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 				});
 				$("#shop").html(html);
 			}
@@ -269,6 +279,7 @@ jQuery(function($) {
 	 */
 	function getRestaurant() {
 		var scenic = [];
+		var scenicName = $("#scenic").find("option:selected").text();
 		$("input[name='scenicGen']").each(function(){
 			scenic.push($(this).val());
 		});
@@ -282,7 +293,7 @@ jQuery(function($) {
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' + comment['scenicName'] + '--' + comment['name'] + '</option>';
+					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 				});
 				$("#restaurant").html(html);
 			}
@@ -294,6 +305,7 @@ jQuery(function($) {
 	 */
 	function getEntertainment() {
 		var scenic = [];
+		var scenicName = $("#scenic").find("option:selected").text();
 		$("input[name='scenicGen']").each(function(){
 			scenic.push($(this).val());
 		});
@@ -307,7 +319,7 @@ jQuery(function($) {
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['fsNo'] + '>' + comment['fsScenicname'] + '--' + comment['fsName'] + '</option>';
+					html += '<option value=' + comment['fsNo'] + '>' + comment['fsName'] + '</option>';
 				});
 				$("#entertainment").html(html);
 			}

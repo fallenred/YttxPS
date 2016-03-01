@@ -29,4 +29,7 @@ public interface IShopService {
 	
 	@Transactional
 	int delete(String no);
+	
+	@Transactional(readOnly = true) 
+	public List<Tshop> selectTshopByMap(Map<String, Object> map);
 }

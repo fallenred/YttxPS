@@ -309,4 +309,21 @@
 	        and tt.rowno &gt;= #{startrow}
 	      </if>
   </select>
+  
+  <select id="selectTshopByMap" parameterType="map" resultMap="BaseResultMap">
+    SELECT A.*
+      FROM tshop A
+     WHERE A.FS_REGIONNO IN(SELECT A.FS_REGIONNO
+                              FROM TSCENIC A
+                             WHERE 1 = 1
+                               <choose>
+                                <when test="scenicNo">
+                                  AND TRIM(A.FS_NO) IN
+                                  <foreach collection="scenicNo" open="(" close=")" separator="," item="listItem">
+                                    #{listItem}
+                                  </foreach>
+                                </when>
+                              </choose>
+                              )
+  </select>
 </mapper>

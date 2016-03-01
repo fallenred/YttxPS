@@ -4,6 +4,8 @@ import java.util.List;
 
 import java.util.Map;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.yttx.yttxps.model.Scenic;
 import com.yttx.yttxps.model.Tshop;
 import com.yttx.yttxps.model.TshopExample;
@@ -70,4 +72,11 @@ public interface TshopMapper<T> extends IBaseMapper<T> {
      * @return List<Object>
      */
     List<T> selectSelectivePage(Map<String, Object> map);
+
+    /**
+     * 
+     * @param map
+     * @return
+     */
+    public List<Tshop> selectTshopByMap(Map<String, Object> map);
 }

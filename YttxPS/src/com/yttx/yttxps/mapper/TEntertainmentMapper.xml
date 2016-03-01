@@ -317,17 +317,20 @@
   </select>
   
   <select id="selectEntertainmentDynamic" parameterType="map" resultMap="BaseResultMap">
-    SELECT fs_no,
-           fs_name,
-           fs_type,
-           fs_desc,
-           fi_stat,
-           fs_lvl,
-           fs_addr,
-           fs_no   AS fs_scenicno,
-           fs_name AS fs_scenicname
-      FROM view_tentertainment
-     WHERE 1 = 1
+    SELECT A.*
+      FROM tentertainment A
+     WHERE A.FS_REGIONNO IN(SELECT A.FS_REGIONNO
+                              FROM TSCENIC A
+                              WHERE 1 = 1
+                              <choose>
+                                <when test="scenicNo">
+                                  AND TRIM(A.FS_NO) IN
+                                  <foreach collection="scenicNo" open="(" close=")" separator="," item="listItem">
+                                    #{listItem}
+                                  </foreach>
+                                </when>
+                              </choose>
+                              )
     <if test="fsNo != null and fsNo != ''">
       and fs_no = #{fsNo}
     </if>
@@ -340,14 +343,6 @@
     <if test="fiStat != null and fiStat != ''">
 	  and fi_Stat = #{fiStat}
     </if>
-    <choose>
-      <when test="scenicNo">
-        and fs_scenicno in 
-        <foreach close=")" collection="scenicNo" item="listItem" open="(" separator=",">
-          #{listItem}
-        </foreach>
-      </when>
-    </choose>
   </select>
   
   <select id="selectFsNo" resultType="int">
