@@ -30,6 +30,17 @@
     <result column="FC_SCHEDULE" jdbcType="CLOB" property="fcSchedule" />
     <result column="FC_RESSNAPSHOT" jdbcType="CLOB" property="fcRessnapshot" />
   </resultMap>
+  
+  <resultMap type="com.yttx.yttxps.model.RouteCCType" id="RouteCCTypeMap">
+    <result column="fs_routeno" jdbcType="VARCHAR" property="fsRouteno" />
+    <result column="fi_dayflag" jdbcType="DECIMAL" property="fiDayflag" />
+    <result column="fs_restype" jdbcType="VARCHAR" property="fsRestype" />
+    <result column="fs_resno" jdbcType="VARCHAR" property="fsResno" />
+    <result column="fs_name" jdbcType="VARCHAR" property="fsName" />
+    <result column="fs_scenicno" jdbcType="VARCHAR" property="fsScenicno" />
+    <result column="fs_scenicname" jdbcType="VARCHAR" property="fsScenicname" />
+  </resultMap>
+  
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbggenerated
@@ -558,6 +569,26 @@
 	      <if test="startrow != null">
 	        and tt.rowno &gt;= #{startrow}
 	      </if>
+  </select>
+  
+  <select id="selectRouteCCType" parameterType="map" resultMap="RouteCCTypeMap">
+    SELECT DISTINCT
+           a.fs_routeno,
+           a.fi_dayflag,
+           a.fs_restype,
+           a.fs_resno,
+           d.fs_name,
+           b.fs_scenicno,
+           c.fs_name AS fs_scenicname
+      FROM TRouteCC a,TResourceScenic b,Tscenic c,view_resource d
+     WHERE a.fs_resno = b.fs_resno
+       AND a.fs_restype = b.fs_restype
+       AND a.fs_resno = d.fs_no
+       AND a.fs_restype = d.restype
+       AND b.fs_scenicno = c.fs_no
+       AND a.fs_routeno = #{fsRouteno,jdbcType=VARCHAR}
+       AND a.fi_dayflag = #{fiDayflag,jdbcType=DECIMAL}
+       AND a.fs_restype = #{fsRestype,jdbcType=VARCHAR}
   </select>
   
   <select id="selectFsId" resultType="int">

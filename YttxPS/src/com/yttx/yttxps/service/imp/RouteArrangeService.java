@@ -1,5 +1,6 @@
 package com.yttx.yttxps.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yttx.yttxps.mapper.TResTypeDircMapper;
 import com.yttx.yttxps.mapper.TRouteArrangeMapper;
 import com.yttx.yttxps.mapper.TRouteCCMapper;
+import com.yttx.yttxps.model.RouteCCType;
+import com.yttx.yttxps.model.TResTypeDirc;
+import com.yttx.yttxps.model.TResTypeDircExample;
 import com.yttx.yttxps.model.TRouteArrange;
 import com.yttx.yttxps.model.TRouteArrangeExample;
 import com.yttx.yttxps.model.TRouteArrangeWithBLOBs;
@@ -30,6 +35,9 @@ public class RouteArrangeService implements IRouteArrangeService {
 	
 	@Autowired
 	private TRouteCCMapper<TRouteCCKey> routeCCMapper;
+	
+	@Autowired
+	private TResTypeDircMapper resTypeDircMapper;
 
 	@Override
 	public int selectCountSelective(Map<String, Object> map) {
@@ -58,9 +66,21 @@ public class RouteArrangeService implements IRouteArrangeService {
 	public int update(TRouteArrangeWithBLOBs record) {
 		return routeArrangeMapper.updateByPrimaryKeySelective(record);
 	}
+	
+	@Override
+	public void updateRouteCC(TRouteArrangeWithBLOBs record) {
+		TRouteCCExample example = new TRouteCCExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFiDayflagEqualTo(record.getFiDayflag());
+		criteria.andFsRoutenoEqualTo(record.getFsId());
+		routeCCMapper.deleteByExample(example);
+		for(TRouteCCKey routeCC : record.getRoutecc()) {
+			routeCCMapper.insert(routeCC);
+		}
+	}
 
 	@Override
-	@Transactional(rollbackFor=Exception.class)
+	@Transactional(rollbackFor = Exception.class)
 	public void delete(String no) {
 		routeArrangeMapper.deleteByPrimaryKey(no);
 		//删除线路产品-资源
@@ -69,11 +89,37 @@ public class RouteArrangeService implements IRouteArrangeService {
 		criteria.andFsRoutenoEqualTo(no);
 		routeCCMapper.deleteByExample(example);
 	}
+	
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void deleteRouteCC(String no) {
+		TResTypeDircExample reesTypeDircExample = new TResTypeDircExample();
+		com.yttx.yttxps.model.TResTypeDircExample.Criteria reesTypeDircCriteria = reesTypeDircExample.createCriteria();
+		reesTypeDircCriteria.andFsRespropEqualTo("comm");
+		List<TResTypeDirc> reesTypeDircList = resTypeDircMapper.selectByExample(reesTypeDircExample);
+		List<String> restTypeList = new ArrayList<String>();
+		for(TResTypeDirc dirc : reesTypeDircList) {
+			restTypeList.add(dirc.getFsRestype());
+		}
+		
+		TRouteCCExample example = new TRouteCCExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFsRoutenoEqualTo(no);
+		criteria.andFsRestypeNotIn(restTypeList);
+		
+		routeCCMapper.deleteByExample(example);
+	}
 
 	@Override
 	public List<TRouteArrange> selectTRouteArrange(TRouteArrangeExample example) {
-		// TODO Auto-RouteArrangeerated method stub
 		return routeArrangeMapper.selectByExample(example);
 	}
 	
+	public List<RouteCCType> findRouteCCType(Map<String, Object> map) {
+		return routeArrangeMapper.selectRouteCCType(map);
+	}
+	
+	public List<TRouteCCKey> findTRouteCCKey(TRouteCCExample example) {
+		return routeCCMapper.selectByExample(example);
+	}
 }

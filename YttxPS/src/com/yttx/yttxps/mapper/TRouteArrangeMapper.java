@@ -1,9 +1,13 @@
 package com.yttx.yttxps.mapper;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.yttx.yttxps.model.RouteCCType;
 import com.yttx.yttxps.model.TRouteArrange;
 import com.yttx.yttxps.model.TRouteArrangeExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import com.yttx.yttxps.model.TRouteArrangeWithBLOBs;
 
 public interface TRouteArrangeMapper<T> extends IBaseMapper<T> {
@@ -96,6 +100,8 @@ public interface TRouteArrangeMapper<T> extends IBaseMapper<T> {
 	 * @mbggenerated  Thu Feb 04 10:26:31 CST 2016
 	 */
 	int updateByPrimaryKey(TRouteArrange record);
+	
+	List<RouteCCType> selectRouteCCType(Map<String, Object> map);
 
 	int selectFsId();
 }

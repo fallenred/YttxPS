@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yttx.yttxps.mapper.TResTypeDircMapper" >
+  <resultMap id="BaseResultMap" type="com.yttx.yttxps.model.TResTypeDirc" >
+    <id column="FS_RESTYPE" property="fsRestype" jdbcType="CHAR" />
+    <result column="FS_RESNAME" property="fsResname" jdbcType="VARCHAR" />
+    <result column="FS_RESPROP" property="fsResprop" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FS_RESTYPE, FS_RESNAME, FS_RESPROP
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yttx.yttxps.model.TResTypeDircExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TRESTYPEDIRC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TRESTYPEDIRC
+    where FS_RESTYPE = #{fsRestype,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TRESTYPEDIRC
+    where FS_RESTYPE = #{fsRestype,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yttx.yttxps.model.TResTypeDircExample" >
+    delete from TRESTYPEDIRC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yttx.yttxps.model.TResTypeDirc" >
+    insert into TRESTYPEDIRC (FS_RESTYPE, FS_RESNAME, FS_RESPROP
+      )
+    values (#{fsRestype,jdbcType=CHAR}, #{fsResname,jdbcType=VARCHAR}, #{fsResprop,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yttx.yttxps.model.TResTypeDirc" >
+    insert into TRESTYPEDIRC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fsRestype != null" >
+        FS_RESTYPE,
+      </if>
+      <if test="fsResname != null" >
+        FS_RESNAME,
+      </if>
+      <if test="fsResprop != null" >
+        FS_RESPROP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fsRestype != null" >
+        #{fsRestype,jdbcType=CHAR},
+      </if>
+      <if test="fsResname != null" >
+        #{fsResname,jdbcType=VARCHAR},
+      </if>
+      <if test="fsResprop != null" >
+        #{fsResprop,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yttx.yttxps.model.TResTypeDircExample" resultType="java.lang.Integer" >
+    select count(*) from TRESTYPEDIRC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TRESTYPEDIRC
+    <set >
+      <if test="record.fsRestype != null" >
+        FS_RESTYPE = #{record.fsRestype,jdbcType=CHAR},
+      </if>
+      <if test="record.fsResname != null" >
+        FS_RESNAME = #{record.fsResname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fsResprop != null" >
+        FS_RESPROP = #{record.fsResprop,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TRESTYPEDIRC
+    set FS_RESTYPE = #{record.fsRestype,jdbcType=CHAR},
+      FS_RESNAME = #{record.fsResname,jdbcType=VARCHAR},
+      FS_RESPROP = #{record.fsResprop,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yttx.yttxps.model.TResTypeDirc" >
+    update TRESTYPEDIRC
+    <set >
+      <if test="fsResname != null" >
+        FS_RESNAME = #{fsResname,jdbcType=VARCHAR},
+      </if>
+      <if test="fsResprop != null" >
+        FS_RESPROP = #{fsResprop,jdbcType=CHAR},
+      </if>
+    </set>
+    where FS_RESTYPE = #{fsRestype,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yttx.yttxps.model.TResTypeDirc" >
+    update TRESTYPEDIRC
+    set FS_RESNAME = #{fsResname,jdbcType=VARCHAR},
+      FS_RESPROP = #{fsResprop,jdbcType=CHAR}
+    where FS_RESTYPE = #{fsRestype,jdbcType=CHAR}
+  </update>
+</mapper>

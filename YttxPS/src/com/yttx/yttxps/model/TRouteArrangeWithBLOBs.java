@@ -1,5 +1,6 @@
 package com.yttx.yttxps.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class TRouteArrangeWithBLOBs extends TRouteArrange {
@@ -18,6 +19,8 @@ public class TRouteArrangeWithBLOBs extends TRouteArrange {
      * @mbggenerated Thu Feb 04 10:26:31 CST 2016
      */
     private String fcRessnapshot;
+    
+    private BigDecimal fiDayflag;
     
     private List<TRouteCCKey> routecc;
 
@@ -75,5 +78,13 @@ public class TRouteArrangeWithBLOBs extends TRouteArrange {
 
 	public void setRoutecc(List<TRouteCCKey> routecc) {
 		this.routecc = routecc;
+	}
+
+	public BigDecimal getFiDayflag() {
+		return fiDayflag;
+	}
+
+	public void setFiDayflag(BigDecimal fiDayflag) {
+		this.fiDayflag = fiDayflag;
 	}
 }
