@@ -250,7 +250,7 @@
 															<div class="form-group">
 																<label class="col-sm-2 col-md-offset-4 control-label no-padding-right" for="fsRegions">酒店选择</label>
 																<div class="col-sm-3">
-																	<select onchange="javascript:getRoom(this);" class="accomadationNo1 form-control"></select>
+																	<select onchange="javascript:getRoom(this);" class="accomadationNo form-control"></select>
 																</div>
 															</div>
 														</div>
@@ -438,20 +438,24 @@
 			        data: params,
 			        dataType: "json",
 			        success: function(data){
+			        	if (data == null || data == '') {
+			        		alert("未配置门票价格，请先配置门票价格再添加！");
+			        	}
+			        	index = parseInt(index)+1;
 						html = ticketDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +ticketSelect.find("option:selected").text()+'：</span>'+
 												  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+ticketSelect.find("option:selected").text()+'" type="hidden"/>'+
 												  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
 						$.each(data, function(commentIndex, comment){
 							//团队全票
 							if (comment['fsCcno'] == '000005' || comment['fsCcno'] == '000013') {
-								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
 										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
 										'<span>&nbsp;团队全价票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							}
 							//团队半票
 							if (comment['fsCcno'] == '000006' || comment['fsCcno'] == '000014') {
-								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
 										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
 										'<span id="'+comment['fdPrice']+'">&nbsp;团队半价票('+comment['fdPrice']+'￥)</span></div>'+
@@ -464,9 +468,11 @@
 								 '<span><!-- 资源编号 --></span><input type="hidden" class="ticketid" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>';
 						if (data != '') {
 							$(obj).parent().parent().find(".row").children().children().html(html);
-							reslistIndex.attr("value", parseInt(index)+1);
+							reslistIndex.attr("value", index);
 							resetIframeHeight("add");
 						}
+			        }, error : function(){
+			        	alert("未配置门票价格，请先配置门票价格再添加！");
 			        }
 			    });
 			}
@@ -512,13 +518,17 @@
 			        data: params,
 			        dataType: "json",
 			        success: function(data){
+			        	if (data == null || data == '') {
+			        		alert("未配置餐厅价格，请先配置餐厅价格再添加！");
+			        	}
+			        	index = parseInt(index)+1;
 						html = restaurantDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +restaurantSelect.find("option:selected").text()+'：</span>'+
 						  							  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+restaurantSelect.find("option:selected").text()+'" type="hidden"/>'+
 						    						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
 						$.each(data, function(commentIndex, comment){
 							//早餐
 							if (comment['fsCcno'] == '000018') {
-								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1" type="hidden" disabled="disabled"/>'+
 										'<input type="checkbox" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'"/>'+
 										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
@@ -526,7 +536,7 @@
 							}
 							//午餐
 							if (comment['fsCcno'] == '000019') {
-								html +=	'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+ 
+								html +=	'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+ 
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].cctype" value="1" type="hidden" disabled="disabled"/>'+
 										'<input type="checkbox" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'"/>'+
 										'<input class="price" type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
@@ -534,7 +544,7 @@
 							}
 							//晚餐
 							if (comment['fsCcno'] == '000020') {
-								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].cctype" value="1" type="hidden" disabled="disabled"/>'+
 										'<input type="checkbox" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'"/>'+
 										'<input class="price" type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
@@ -547,9 +557,11 @@
 			        	});
 						if (data != '') {
 							$(obj).parent().parent().find(".row").children().children().html(html);
-							reslistIndex.attr("value", parseInt(index)+3);
+							reslistIndex.attr("value", index);
 							resetIframeHeight("add");
 						}
+			        }, error : function(){
+			        	alert("未配置餐厅价格，请先配置餐厅价格再添加！");
 			        }
 			    });
 			}
@@ -599,35 +611,49 @@
 			        data: params,
 			        dataType: "json",
 			        success: function(data){
+			        	if (data == null || data == '') {
+			        		alert("未配置娱乐项目价格，请先配置娱乐项目价格再添加！");
+			        	}
+			        	index = parseInt(index)+1;
 						html = entertainmentDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +entertainmentSelect.find("option:selected").text()+'：</span>'+
 						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+entertainmentSelect.find("option:selected").text()+'" type="hidden"/>'+
 						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
 						$.each(data, function(commentIndex, comment){
 							//团队全票
 							if (comment['fsCcno'] == '000005' || comment['fsCcno'] == '000013') {
-								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
 										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
 										'<span>&nbsp;团队全价票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							}
 							//团队半票
 							if (comment['fsCcno'] == '000006' || comment['fsCcno'] == '000014') {
-								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
 										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
-										'<span>&nbsp;团队半价票('+comment['fdPrice']+'￥)</span></div>'+
-										'<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
-										'<div class="col-sm-1 no-padding-left"><input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>';
+										'<span>&nbsp;团队半价票('+comment['fdPrice']+'￥)</span></div>';
+							}
+							//接送费用
+							if (comment['fsCcno'] == '000017') {
+								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
+										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'" type="checkbox"/>'+
+										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'"/>'+
+										'<span>&nbsp;接送费用('+comment['fdPrice']+'￥)</span></div>';
+										
 							}
 			        	});
-						 html += '<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
+						 html += '<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
+								 '<div class="col-sm-1 no-padding-left"><input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>'+
+							 	 '<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
 							 	 '<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="yl"/>' +
 								 '<span><!-- 资源编号 --></span><input type="hidden" class="entertainmentid" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>';
 						if (data != '') {
 							$(obj).parent().parent().find(".row").children().children().html(html);
-							reslistIndex.attr("value", parseInt(index)+1);
+							reslistIndex.attr("value", index);
 							resetIframeHeight("add");
 						}
+			        }, error : function(){
+			        	alert("未配置娱乐项目价格，请先配置娱乐项目价格再添加！");
 			        }
 			    });
 			}
@@ -654,6 +680,7 @@
 		function addRoom(obj){
 			roomDiv = $(obj).parent().next().next().children().children();
 			roomSelect = $(obj).parent().prev().children();
+			regionsSelect = $(obj).parent().parent().parent().prev().find(".accomadationNo");
 			reslistIndex = $(obj).parent().parent().parent().parent().parent().prev();
 			dayIndex = reslistIndex.prev().val();
 			index = reslistIndex.val();
@@ -671,26 +698,36 @@
 				//查询酒店房间价格
 				$.ajax({
 			        type: "GET",
-			        url: "/tccPrice/findTccPriceByKey.htm",
+			        url: "/tccPrice/findTccPrice.htm",
 			        data: params,
 			        dataType: "json",
 			        success: function(data){
-						html = roomDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +roomSelect.find("option:selected").text()+'：</span>'+
-						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+roomSelect.find("option:selected").text()+'" type="hidden"/>'+
-						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
-						html += '<span><!-- 选项编号 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" value="'+data.fsCcno+'"/><span>&nbsp;房间消费('+data.fdPrice+'￥)</span></div>'+
-								'<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
-								'<div class="col-sm-1 no-padding-left"><input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>'+
-								'<span><!-- 选项价格 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+data.fdPrice+'"/>'+
-								'<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
-								'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+data.ccname+'" type="hidden"/>'+
-								'<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="bg"/>' +
-								'<span><!-- 资源编号 --></span><input type="hidden" class="roomNo" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>';
-						$(obj).parent().parent().find(".row").children().children().html(html);
-						reslistIndex.attr("value", parseInt(index)+1);
+			        	if (data == null || data == '') {
+			        		alert("未配置房间价格，请先配置房间价格再添加！");
+			        	}
+			        	
+			        	index = parseInt(index)+1;
+			        	$.each(data, function(commentIndex, comment){
+							html = roomDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +regionsSelect.find("option:selected").text()+'-'+roomSelect.find("option:selected").text()+'：</span>'+
+							  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+regionsSelect.find("option:selected").text()+'-'+roomSelect.find("option:selected").text()+'" type="hidden"/>'+
+							  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
+							html += '<span><!-- 选项编号 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" value="'+comment['fsCcno']+'"/><span>&nbsp;房间消费('+comment['fdPrice']+'￥)</span></div>'+
+									'<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
+									'<div class="col-sm-1 no-padding-left"><input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>'+
+									'<span><!-- 选项价格 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
+									'<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
+									'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
+									'<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="bg"/>' +
+									'<span><!-- 资源编号 --></span><input type="hidden" class="roomNo" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>';
+							$(obj).parent().parent().find(".row").children().children().html(html);
+							reslistIndex.attr("value", index);
+							resetIframeHeight("add");
+							return;
+			        	 });
+			        }, error : function(){
+			        	alert("未配置房型价格，请先配置房型价格再添加！");
 			        }
 			    });
-				resetIframeHeight("add");
 			}
 		}
 		//删除房间
@@ -726,7 +763,7 @@
 			});
 			if (flag) {
 				var date = getDate($("#ftStartdate").val(), dayIndex);
-				params = 'ftStartdate='+date+'&fsResno='+shopSelect.val()+'&fsRestype=gw&fsCcno=000021';
+				/* params = 'ftStartdate='+date+'&fsResno='+shopSelect.val()+'&fsRestype=gw&fsCcno=000021';
 				//查询购物店价格
 				$.ajax({
 			        type: "GET",
@@ -744,7 +781,17 @@
 						$(obj).parent().parent().find(".row").children().children().html(html);
 						reslistIndex.attr("value", parseInt(index)+1);
 			        }
-			    });
+			    }); */
+			    index = parseInt(index)+1;
+			    html = shopDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +shopSelect.find("option:selected").text()+'</span>'+
+				  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+shopSelect.find("option:selected").text()+'" type="hidden"/>'+
+				  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
+				html += '<span><!-- 选项编号 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" value="000021"/><span><br></span>'+
+						'<span><!-- 选项价格 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="0"/>'+
+						'<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="gw"/>' +
+						'<span><!-- 资源编号 --></span><input type="hidden" class="shopid" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>';
+				$(obj).parent().parent().find(".row").children().children().html(html);
+				reslistIndex.attr("value", index);
 				resetIframeHeight("add");
 			}
 		};
@@ -790,7 +837,7 @@
 				type: "GET",
 				traditional: true,
 				url: "/room/selectRoom.htm",
-				data: "room.accomno=" + $(obj).val(),
+				data: "room.fsAccomno=" + $(obj).val(),
 				dataType: "json",
 				success: function(data){
 					var html = ''; 
@@ -807,6 +854,7 @@
 				type: "GET",
 				traditional: true,
 				url: "/restaurant/selectRestaurant.htm",
+				//data: "room.accomno=" + $(obj).val(),
 				data: "room.accomno=" + $(obj).val(),
 				dataType: "json",
 				success: function(data){
@@ -819,8 +867,7 @@
 			});
 		}
 
-		function countPrice(){
-			alert("计算总金额");
+		/* function countPrice(){
 			countPrice = 0;
 			$(".usernum").each(function(){
 				usernum = $(this).val();
@@ -836,8 +883,7 @@
 					});
 				}
 			});
-			alert(countPrice);
-		}
+		} */
 	</script>
 </body>
 </html>

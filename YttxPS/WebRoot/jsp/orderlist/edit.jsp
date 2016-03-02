@@ -168,16 +168,30 @@
 													class="form-control" placeholder="已缴金额" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
-												for="fiStat">订单状态</label>
+												for="fiStat">当前状态</label>
 											<div class="col-sm-3">
-												<select id="fiStat" name="fiStat"
-													class="form-control">
+												<select id="currStat" class="form-control" disabled="disabled">
 													<option value="0">待审核</option>
 													<option value="1">已审核</option>
 													<option value="2">已确认(待付款)</option>
 													<option value="4">已付首款</option>
 													<option value="8">已付全款(可出团)</option>
 													<option value="32">已完结</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right"
+												for="fiStat">订单状态</label>
+											<div class="col-sm-3">
+												<select id="fiStat" name="fiStat"
+													class="form-control">
+													<option value="0">待审核</option>
+													<option value="1">已审核</option>
+													<option value="4">已付首款</option>
+													<option value="8">已付全款(可出团)</option>
 												</select>
 											</div>
 										</div>
@@ -256,6 +270,7 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fcSchedule">日程快照</label>
+											<input type="hidden"  id="hSchedule" name="hSchedule" />
 											<div class="col-sm-8">
 												<textarea class="ckeditor" id="fcSchedule" name="fcSchedule"></textarea>
 											</div>
