@@ -553,8 +553,14 @@
   
   <!-- 分页查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
-      select * from (select ROWNUM as rowno, t.* from 
-		TROUTEARRANGE t
+      select * from (select ROWNUM as rowno,
+                            (select count(1) 
+                               from trouteCC rc,TResTypeDirc td 
+                              where rc.fs_routeno = t.fs_id
+                                and rc.FS_RESTYPE = td.FS_RESTYPE
+                                and td.FS_RESPROP != 'comm') as ccnum,
+                            t.* 
+                       from TROUTEARRANGE t
     	where 1=1
 	      <if test="fsName != null and fsName != ''">
 	        and fs_Name like '%'||#{fsName}||'%'
@@ -569,23 +575,21 @@
 	      <if test="startrow != null">
 	        and tt.rowno &gt;= #{startrow}
 	      </if>
+	      <if test="hasRouteCC == true">
+	        <![CDATA[ and tt.ccnum > 0 ]]>
+	      </if>
   </select>
   
   <select id="selectRouteCCType" parameterType="map" resultMap="RouteCCTypeMap">
     SELECT DISTINCT
-           a.fs_routeno,
-           a.fi_dayflag,
-           a.fs_restype,
-           a.fs_resno,
-           d.fs_name,
-           b.fs_scenicno,
-           c.fs_name AS fs_scenicname
-      FROM TRouteCC a,TResourceScenic b,Tscenic c,view_resource d
-     WHERE a.fs_resno = b.fs_resno
-       AND a.fs_restype = b.fs_restype
-       AND a.fs_resno = d.fs_no
-       AND a.fs_restype = d.restype
-       AND b.fs_scenicno = c.fs_no
+           a.FS_ROUTENO,
+           a.FI_DAYFLAG,
+           a.FS_RESTYPE,
+           a.FS_RESNO,
+           b.fs_name
+      FROM TROUTECC a,VIEW_RESOURCE b
+     WHERE a.fs_resno = b.fs_no
+       AND a.fs_restype = b.restype
        AND a.fs_routeno = #{fsRouteno,jdbcType=VARCHAR}
        AND a.fi_dayflag = #{fiDayflag,jdbcType=DECIMAL}
        AND a.fs_restype = #{fsRestype,jdbcType=VARCHAR}
