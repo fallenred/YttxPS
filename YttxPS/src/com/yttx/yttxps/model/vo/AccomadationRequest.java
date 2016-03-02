@@ -6,7 +6,6 @@ import java.util.Map;
 import com.yttx.yttxps.model.Accomadation;
 
 /**
- * 车辆信息和视图映射
  * @author Lonvoy
  * @createDate 2016年1月14日
  * @email me@lonvoy.com
@@ -47,7 +46,6 @@ public class AccomadationRequest extends JqGridRequest implements
 			map.put("speciality", accomadation.getSpeciality());
 			map.put("stat", accomadation.getStat());
 			map.put("desc", accomadation.getDesc());
-			
 		}
 		
 		if(scenicNo != null) {

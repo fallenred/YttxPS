@@ -170,7 +170,7 @@ function getShop(obj){
 		success: function(data){
 			var html = ''; 
 			$.each(data, function(commentIndex, comment){
-				html += '<option value=' + comment['no'] + '>' +comment['scenicname'] + '--' + comment['name'] + '</option>';
+				html += '<option value=' + comment['no'] + '>'+ comment['name'] + '</option>';
 			});
 			$(obj).contents().find(".shop").html(html);
 		}
@@ -256,6 +256,7 @@ function findSnapshot(obj, no){
 				bg = '';
 				gw = '';
 				$.each(dayComment['reslist'], function(index, resComment){
+					$(obj).contents().find("#day"+dayIndex+"_resIndex").attr("value", parseInt(index)+1);
 					if ('mp' == resComment['restype']) {
 						params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resComment['resno']+'&fsRestype=mp';
 						//查询门票价格
@@ -274,11 +275,11 @@ function findSnapshot(obj, no){
 										html += '<span><!-- 选项编号--></span>';
 										//选中
 										if(comment['fsCcno'] == resComment['cclist'][0].ccno){
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden"/>'+
+											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
 													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio" checked="checked"/>'+
 													'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>';
 										} else {
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
 													'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'" disabled="disabled"/>';
 										}
@@ -289,11 +290,11 @@ function findSnapshot(obj, no){
 										html += '<span><!-- 选项编号--></span>';
 										//选中
 										if(comment['fsCcno'] == resComment['cclist'][0].ccno){
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden"/>'+
+											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
 													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio" checked="checked"/>'+
 													'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>';
 										} else {
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
 													'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'" disabled="disabled"/>';
 										}
@@ -308,7 +309,6 @@ function findSnapshot(obj, no){
 										 '<span><!-- 资源编号 --></span><input type="hidden" class="ticketid" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+resComment['resno']+'"/></div></div>';
 								 if (data != '') {
 									 $(obj).contents().find("#div_"+dayIndex+"_mp").html(html);
-									 $(obj).contents().find("#day"+dayIndex+"_resIndex").attr("value", parseInt(index)+1);
 									 resetIframeHeight("add");
 								}
 					        }
@@ -329,7 +329,7 @@ function findSnapshot(obj, no){
 					        	$.each(data, function(commentIndex, comment){
 						        		//早餐
 										if (comment['fsCcno'] == '000018') {
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1" type="hidden" disabled="disabled"/>'+
 													'<input id="'+comment['fsCcno']+'" type="checkbox" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'"/>'+
 													'<input class="price" type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
@@ -337,7 +337,7 @@ function findSnapshot(obj, no){
 										}
 										//午餐
 										if (comment['fsCcno'] == '000019') {
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].cctype" value="1" type="hidden" disabled="disabled"/>'+
 													'<input id="'+comment['fsCcno']+'" type="checkbox" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'"/>'+
 													'<input class="price" type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
@@ -345,7 +345,7 @@ function findSnapshot(obj, no){
 										}
 										//晚餐
 										if (comment['fsCcno'] == '000020') {
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].cctype" value="1" type="hidden" disabled="disabled"/>'+
 													'<input id="'+comment['fsCcno']+'" type="checkbox" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'"/>'+
 													'<input class="price" type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
@@ -358,7 +358,6 @@ function findSnapshot(obj, no){
 					        			'<span><!-- 资源编号 --></span><input type="hidden" class="restaurantNo" id="'+resComment['resno']+'" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+resComment['resno']+'"/></div></div>';
 					        	if (data != '') {
 					        		$(obj).contents().find("#div_"+dayIndex+"_ct").html(html);
-					        		$(obj).contents().find("#day"+dayIndex+"_resIndex").attr("value", parseInt(index)+1);
 					        		resetIframeHeight("add");
 					        	}
 					        	//遍历精确资源快照资源，对页面checkbox进行选中
@@ -384,17 +383,18 @@ function findSnapshot(obj, no){
 					        	html = $(obj).contents().find("#div_"+dayIndex+"_yl").html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +resComment['resname']+'：</span>'+
 								  						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+resComment['resname']+'" type="hidden"/>'+
 								  						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
+					        	usernum = '';
 					        	$.each(data, function(commentIndex, comment){
 									//团队全票
 									if (comment['fsCcno'] == '000005' || comment['fsCcno'] == '000013') {
 										html += '<span><!-- 选项编号--></span>';
 										//选中
 										if(comment['fsCcno'] == resComment['cclist'][0].ccno){
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden"/>'+
+											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
 													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio" checked="checked"/>'+
 													'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>';
 										} else {
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
 													'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'" disabled="disabled"/>';
 										}
@@ -405,26 +405,39 @@ function findSnapshot(obj, no){
 										html += '<span><!-- 选项编号--></span>';
 										//选中
 										if(comment['fsCcno'] == resComment['cclist'][0].ccno){
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden"/>'+
+											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
 													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio" checked="checked"/>'+
 													'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>';
 										} else {
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden" disabled="disabled"/>'+
+											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
 													'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'" disabled="disabled"/>';
 										}
-										html += '<span id="'+comment['fdPrice']+'">&nbsp;团队半价票('+comment['fdPrice']+'￥)</span></div>'+
-												'<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
-												'<div class="col-sm-1 no-padding-left">'+
-												'<input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" value="'+resComment['cclist'][0].usernum+'" type="text"/></div>';
+										html += '<span id="'+comment['fdPrice']+'">&nbsp;团队半价票('+comment['fdPrice']+'￥)</span></div>';
 									}
+									//团队半票
+									if (comment['fsCcno'] == '000017') {
+										html += '<span><!-- 选项编号--></span>';
+										//选中
+										if(comment['fsCcno'] == resComment['cclist'][2].ccno){
+											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
+													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="checkbox" checked="checked"/>'+
+													'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'"/>';
+										} 
+										html += '<span id="'+comment['fdPrice']+'">&nbsp;接送费用('+comment['fdPrice']+'￥)</span></div>';
+												
+									}
+									usernum = resComment['cclist'][commentIndex].usernum;
+									alert(resComment['cclist'][0].usernum);
 					        	});
-								 html += '<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="yl"/>' +
+								 html += '<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
+										 '<div class="col-sm-1 no-padding-left">'+
+									     '<input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" value="'+usernum+'" type="text"/></div>'+
+									 	 '<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="yl"/>' +
 									 	 '<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
 										 '<span><!-- 资源编号 --></span><input type="hidden" class="entertainmentid" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+resComment['resno']+'"/></div></div>';
 								 if (data != '') {
 									$(obj).contents().find("#div_"+dayIndex+"_yl").html(html);
-									$(obj).contents().find("#day"+dayIndex+"_resIndex").attr("value", parseInt(index)+1);
 									resetIframeHeight("add");
 								}
 					        }
@@ -444,7 +457,7 @@ function findSnapshot(obj, no){
 								  						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
 					        	$.each(data, function(commentIndex, comment){
 									if (comment['fsCcno'] == '000024') {
-										html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['ccname']+'" type="hidden"/>'+
+										html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
 												'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" value="'+comment['fsCcno']+'" type="hidden"/>'+
 												'<span id="'+comment['fdPrice']+'">&nbsp;房间消费('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span></div>'+
 												'<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
@@ -458,7 +471,6 @@ function findSnapshot(obj, no){
 										 '<span><!-- 资源编号 --></span><input type="hidden" class="roomNo" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+resComment['resno']+'"/></div></div>';
 								 if (data != '') {
 									 $(obj).contents().find("#div_"+dayIndex+"_bg").html(html);
-									 $(obj).contents().find("#day"+dayIndex+"_resIndex").attr("value", parseInt(index)+1);
 									 resetIframeHeight("add");
 								}
 					        }
@@ -478,7 +490,6 @@ function findSnapshot(obj, no){
 										 '<span><!-- 资源编号 --></span><input type="hidden" class="shopid" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+resComment['resno']+'"/></div></div>';
 						if (data != '') {
 								$(obj).contents().find("#div_"+dayIndex+"_gw").html(html);
-								$(obj).contents().find("#day"+dayIndex+"_resIndex").attr("value", parseInt(index)+1);
 						}
 					}
 				});
@@ -622,7 +633,7 @@ function getFsStarLvl(obj){
 		type: "GET",
 		traditional: true,
 		url: "/dict/selectDict.htm",
-		data: "dict.fsParentno=bgjb",
+		data: "dict.fsParentno=bg",
 		dataType: "json",
 		success: function(data){
 			html = '<option value="">'+'--请选择--' + '</option>'; 
@@ -776,8 +787,7 @@ jQuery(function($) {
 					index : 'fsOrderId',
 					width : 100,
 					editable : true,
-					sorttype : "char",
-					hidden : true
+					sorttype : "char"
 				}, {
 					name : 'fsName',
 					index : 'fsName',
@@ -810,6 +820,7 @@ jQuery(function($) {
 					sortable : true,
 					editable : true,
 					edittype : 'select',
+					hidden : true,
 					editoptions : {
 						value : s
 					},
@@ -847,8 +858,7 @@ jQuery(function($) {
 					index : 'fiOlder',
 					width : 50,
 					editable : true,
-					sorttype : "int",
-					hidden : true
+					sorttype : "int"
 				}, {
 					name : 'fiAdult',
 					index : 'fiAdult',

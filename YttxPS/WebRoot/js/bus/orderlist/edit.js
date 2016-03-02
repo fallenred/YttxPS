@@ -1,6 +1,12 @@
 jQuery(function($) {
 	$("#message").hide();
-	
+	$.base64.utf8encode = true;
+	setTimeout(loadtext,"3000");
+
+	function loadtext(){
+		var ckEditor = CKEDITOR.instances.fcSchedule;
+		ckEditor.setData($.base64.atob($('#hSchedule').val(), true));
+	}
 	var localsel = $("#selectCity", "#editform").localCity({
 		
 		provurl : "/pub/findcity.htm",

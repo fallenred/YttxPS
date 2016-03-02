@@ -40,13 +40,13 @@
 												for="resType">归属资源代码</label>
 											<div class="col-sm-3">
 												<input type="text" id="resType" name="resType" 
-													class="form-control" placeholder="归属资源代码" maxlength="2"  readonly/>
+													class="form-control" placeholder="归属资源代码" maxlength="2" value="${pic.resType}" readonly/>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="resNo">资源编码</label>
 											<div class="col-sm-3">
 												<input maxlength="10" type="text" id="resNo" name="resNo"
-													class="form-control" placeholder="资源编码" readonly/>
+													class="form-control" placeholder="资源编码" value="${pic.resNo}" readonly/>
 											</div>
 										</div>
 									</div>
@@ -58,7 +58,6 @@
 												<input maxlength="4" type="text" id="seq" name="seq"
 													class="form-control" placeholder="序号" />
 											</div>
-										
 											<label class="col-sm-2 control-label no-padding-right"
 												for="main">是否主图</label>
 											<div class="col-sm-3">
@@ -122,6 +121,7 @@
 		<!-- /.main-container -->
 	</div>
 	<script src="/js/bus/pic/pic.js"></script>
+
 	<c:if test="${!empty succflag && succflag =='1'}">
 
 		<script type="text/javascript">

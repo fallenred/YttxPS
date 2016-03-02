@@ -250,21 +250,22 @@
   </select>
   
   <!-- 查询宾馆列表（线路配置时使用） -->
-  <select id="selectSelective" parameterType="map" resultMap="ResultMapWithBLOBs">
-    SELECT A.*
-      FROM TACCOMADATION A
-     WHERE A.FS_REGIONNO IN(SELECT A.FS_REGIONNO
-                              FROM TSCENIC A
-                              WHERE 1 = 1
-                              <choose>
-                                <when test="scenicNo">
-                                  AND TRIM(A.FS_NO) IN
-                                  <foreach collection="scenicNo" open="(" close=")" separator="," item="listItem">
-                                    #{listItem}
-                                  </foreach>
-                                </when>
-                              </choose>
-                              )
+  <select id="selectSelective" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from (select * from 
+    	(select a.* from (select fs_accomno
+          from troom r, tccprice p
+         where r.fs_roomno = p.fs_resno
+         group by r.fs_accomno) t,
+       taccomadation a
+ 	where t.fs_accomno = a.fs_no)) 
+    where 1=1 
     <if test="regionno != null and regionno !='' " >
       and FS_REGIONNO = #{regionno,jdbcType=VARCHAR}
     </if>

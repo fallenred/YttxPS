@@ -71,6 +71,14 @@ jQuery(function($) {
 			return false;
 		} 
 		
+		var scenic = $("#addform #scenic").val();
+		if(scenic == '') {
+			$("#message").show();
+			$("#message").text("所属景区不能为空，请输入");
+			$("#addform #scenic").focus();
+			return false;
+		} 
+		
 		var regionno = $("#addform #regionno").val()//所属地区
 		if( regionno == '') {
 			$("#message").show();

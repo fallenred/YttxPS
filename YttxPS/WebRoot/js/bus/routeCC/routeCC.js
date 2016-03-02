@@ -84,7 +84,6 @@ jQuery(function($) {
 		postData["routeCC.fsName"] = $("#queryfield").find("#fsName").val();
 		postData["routeCC.fiDays"] = $("#queryfield").find("#fiDays").val();
 		postData["routeCC.fiStat"] = $("#queryfield").find("#fiStat").val();
-		postData["hasRouteCC"] = true;
 		$("#grid-table").jqGrid("setGridParam", {
 			postData : postData
 		}).trigger("reloadGrid");
@@ -162,7 +161,7 @@ jQuery(function($) {
 	s = s.substring(1);
 	jQuery(grid_selector).jqGrid(
 			{
-				url : "/routeArrange/findRouteArrange.htm?hasRouteCC=true",
+				url : "/routeArrange/findRouteArrange.htm",
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,

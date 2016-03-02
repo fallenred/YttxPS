@@ -148,7 +148,7 @@ jQuery(function($) {
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['fsNo'] + '>' +comment['fsScenicname'] + '--' + comment['fsName'] + '</option>';
+					html += '<option value=' + comment['fsNo'] + '>' + comment['fsName'] + '</option>';
 				});
 				$("#ticket").html(html);
 			}
@@ -191,7 +191,7 @@ jQuery(function($) {
 			type: "GET",
 			traditional: true,
 			url: "/accomadation/selectAccomadation.htm",
-			data: req,
+			data: "accomadation.starlvl=" + $("#fsStarLvl").val(),
 			dataType: "json",
 			success: function(data){
 				var html = ''; 
@@ -380,7 +380,7 @@ jQuery(function($) {
 	$("#addRestaurantBtn").click(function() {
 		var html = $("#div_restaurant").html();
 		var val = $("#restaurant").val();
-		var text = $("#restaurant").find("option:selected").text();
+		var text = $("restaurant").find("option:selected").text();
 		var flag = true;
 		
 		if(flag) {

@@ -312,40 +312,33 @@
 	
 	<!-- 查询景区下所有餐厅信息 add by huangtao 2016-02-23 -->
 	<select id="selectRestaurant" parameterType="java.util.Map" resultMap="BaseResultMap">
-	  SELECT A.*
-        FROM trestaurant A
-       WHERE A.FS_REGIONNO IN(SELECT A.FS_REGIONNO
-                                FROM TSCENIC A
-                               WHERE 1 = 1 
-                                 <choose>
-                                   <when test="scenicNo">
-                                     AND TRIM(A.FS_NO) IN
-                                     <foreach collection="scenicNo" open="(" close=")" separator="," item="listItem">
-                                       #{listItem}
-                                     </foreach>
-                                   </when>
-                                 </choose>
-                                 )
-      <if test="name != null and name != ''">
-        AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
-      </if>
-      <if test="regionno != null and regionno != ''">
-        AND FS_REGIONNO like '%'||#{regionno,jdbcType = VARCHAR}||'%'
-      </if>
-      <if test="minScale != null">
-        AND FI_SCALE &gt;= #{minScale,jdbcType = INTEGER}
-      </if>
-      <if test="maxScale != null">
-        AND FI_SCALE &lt;= #{maxScale,jdbcType = INTEGER}
-      </if>
-      <if test="special != null and special !=''">
-        AND FS_SPECIAL = #{special,jdbcType = VARCHAR}
-      </if>
-      <if test="lvl != null and lvl !=''">
-        AND FS_LVL = #{lvl,jdbcType = VARCHAR}
-      </if>
-      <if test="stat != null">
-        AND FI_STAT = #{stat,jdbcType=INTEGER}
-      </if>
+		SELECT 
+			* 
+		FROM (
+			select * from trestaurant t1 where t1.fs_no in (SELECT t.fs_no FROM trestaurant t, tccprice p 
+            where p.fs_restype = 'ct' and t.fs_no = p.fs_resno group by t.fs_no))
+			WHERE
+				1=1
+			<if test="name != null and name != ''">
+				AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
+			</if>
+			<if test="regionno != null and regionno != ''">
+				AND FS_REGIONNO like '%'||#{regionno,jdbcType = VARCHAR}||'%'
+			</if>
+			<if test="minScale != null">
+				AND FI_SCALE &gt;= #{minScale,jdbcType = INTEGER}
+			</if>
+			<if test="maxScale != null">
+				AND FI_SCALE &lt;= #{maxScale,jdbcType = INTEGER}
+			</if>
+			<if test="special != null and special !=''">
+				AND FS_SPECIAL = #{special,jdbcType = VARCHAR}
+			</if>
+			<if test="lvl != null and lvl !=''">
+				AND FS_LVL = #{special,jdbcType = VARCHAR}
+			</if>
+			<if test="stat != null">
+				AND FI_STAT = #{stat,jdbcType=INTEGER}
+			</if>
 	</select>
 </mapper>

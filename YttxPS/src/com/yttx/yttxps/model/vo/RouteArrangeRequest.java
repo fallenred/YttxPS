@@ -23,17 +23,7 @@ public class RouteArrangeRequest extends JqGridRequest implements
 		this.arrange = arrange;
 	}
 
-	public boolean isHasRouteCC() {
-		return hasRouteCC;
-	}
-
-	public void setHasRouteCC(boolean hasRouteCC) {
-		this.hasRouteCC = hasRouteCC;
-	}
-
 	private TRouteArrange arrange;
-	
-	private boolean hasRouteCC = false;
 
 	public void copyTRouteArrange(Map<String, Object> map) {
 		if (arrange != null) {
@@ -41,7 +31,6 @@ public class RouteArrangeRequest extends JqGridRequest implements
 			map.put("fiGenindex", arrange.getFiGenindex() == null ? "" : arrange.getFiGenindex());
 			map.put("fiStat", arrange.getFiStat() == null ? "" : arrange.getFiStat());
 		}
-		map.put("hasRouteCC", hasRouteCC);
 	}
 	
 	public void copyTRouteArrange(TRouteArrangeExample example) {

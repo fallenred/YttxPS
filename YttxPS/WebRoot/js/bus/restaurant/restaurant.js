@@ -11,7 +11,7 @@ function showRestaurantCost(id){
  */
 function showRestaurant(id) {
 	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/restaurant/show.htm?no="+raw.no;
+	var frameSrc = "/restaurant/show.htm?no=" + raw.no
     $("#showIframe").attr("src", frameSrc);
     $('#showModal').modal({ show: true, backdrop: 'static' });
 };
@@ -75,8 +75,9 @@ $("#addModal", parent.document).on("hidden.bs.modal", function() {
  */
 function picRestaurant(id) {
 	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var params="resType=ct&resNo="+raw.no
-	var frameSrc = "/jsp/pic/pic.jsp?"+params;
+	var resType="ct";
+	var resNo=raw.no;
+	var frameSrc = "/pic/picpage.htm?resType="+resType+"&resNo="+resNo;
     $("#picIframe").attr("src", frameSrc);
     $('#picModal').modal({ show: true, backdrop: 'static' });
 };
@@ -146,6 +147,8 @@ jQuery(function($) {
 			postData["restaurant.lvl"] = $("#lvl").val();
 			//状态
 			postData["restaurant.stat"] = $("#stat").val();
+			console.log("查询参数：");
+			console.log(postData);
 			$("#grid-table").jqGrid("setGridParam", {
 				datatype : 'json',
 				postData : postData
@@ -264,7 +267,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '餐厅编号','餐厅名称', '所属地区', 
+				colNames : [ '操作', '餐厅编号','餐厅名称','所属景区', '所属地区', 
 				             '餐厅地址', '接待规模(桌)', '菜品特色',/*'等级',*/ '状态' ],
 				colModel : [ {
 					name : 'myaction',
@@ -284,6 +287,13 @@ jQuery(function($) {
 					name : 'name',
 					index : 'name',
 					width : 180,
+					sortable : false,
+					editable : false,
+				},
+				{
+					name : 'scenicName',
+					index : 'scenicName',
+					width : 120,
 					sortable : false,
 					editable : false,
 				},

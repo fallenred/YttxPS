@@ -27,6 +27,7 @@
 
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/date-time/bootstrap-datepicker.min.js"></script>
+<script src="/js/jquery.base64.js"></script>
 
 
 
