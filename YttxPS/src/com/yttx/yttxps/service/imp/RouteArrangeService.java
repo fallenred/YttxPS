@@ -126,4 +126,8 @@ public class RouteArrangeService implements IRouteArrangeService {
 	public List<TRouteCCKey> findTRouteCCKey(TRouteCCExample example) {
 		return routeCCMapper.selectByExample(example);
 	}
+	
+	public int findRouteCCCount(TRouteCCExample example) {
+		return routeCCMapper.countByExample(example);
+	}
 }

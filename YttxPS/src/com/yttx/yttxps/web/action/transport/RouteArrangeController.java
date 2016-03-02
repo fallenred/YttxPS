@@ -1,6 +1,7 @@
 package com.yttx.yttxps.web.action.transport;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -240,5 +241,23 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
 			return (Map<String, Object>) JsonResult.jsonError("删除失败");
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
+    }
+	
+	/**
+	 * 获取路线列表
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="findRouteCCCount.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object ajaxfindRouteCCCount(TRouteCCKey routeCCKey) {
+		logger.debug("当前查询条件 {}", routeCCKey);
+		TRouteCCExample example = new TRouteCCExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFiDayflagEqualTo(routeCCKey.getFiDayflag());
+		criteria.andFsRoutenoEqualTo(routeCCKey.getFsRouteno());
+		criteria.andFsRestypeNotIn(Arrays.asList(new String[]{"cx","dy"}));
+		int count = routeArrangeService.findRouteCCCount(example);
+		return count;
     }
 }

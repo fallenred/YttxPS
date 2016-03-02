@@ -14,7 +14,6 @@ jQuery(function($) {
     
 	// 关闭
 	$("#addModal #room_close").on("click", function () {
-		//$("#addModal", parent.document).find(".close").click();
 	    $(this).removeData("bs.modal");
         $("#grid-table").trigger("reloadGrid");
 	});
