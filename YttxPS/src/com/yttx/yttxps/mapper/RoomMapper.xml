@@ -269,10 +269,8 @@
                      R.FS_NAME,
                      R.FS_MEAL,
                      R.FI_STAT 
-                FROM TROOM R, TACCOMADATION A, tresourcescenic D 
-               WHERE R.FS_ACCOMNO = A.FS_NO 
-                 AND R.FS_ROOMNO = D.FS_RESNO 
-                 AND D.FS_RESTYPE = 'bg')
+                FROM TROOM R, TACCOMADATION A 
+               WHERE R.FS_ACCOMNO = A.FS_NO)
        WHERE 1=1 
       <if test="fsType != null and fsType != ''">
         and FS_TYPE = #{fsType}
