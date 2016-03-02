@@ -361,7 +361,7 @@ jQuery(function($) {
 	$("#addRestaurantBtn").click(function() {
 		var html = $("#div_restaurant").html();
 		var val = $("#restaurant").val();
-		var text = $("restaurant").find("option:selected").text();
+		var text = $("#restaurant").find("option:selected").text();
 		var flag = true;
 		
 		if(flag) {
