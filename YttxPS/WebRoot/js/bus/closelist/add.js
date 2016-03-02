@@ -48,7 +48,7 @@ jQuery(function($) {
 	$("#close").on("click", function () {
 		$("#addModal", parent.document).find(".close").click();
 	});
-	
+	$("#fcContent").val(CKEDITOR.instances["fcContent"].getData());
 	//	提交
 	$("#submit").on("click", function () {
 		if($("#fsName").val() == '') {

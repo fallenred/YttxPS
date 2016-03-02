@@ -56,7 +56,7 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fdAmt").val(raw.fdAmt);
 	$(this).contents().find("#fsRemark").val(raw.fsRemark);
 	$(this).contents().find("#fiStat").val(raw.fiStat);
-	$(this).contents().find("#fcContent").html(raw.fcContent);
+	$(this).contents().find("#content").val(raw.fcContent);
 });
 
 

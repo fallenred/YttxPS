@@ -19,8 +19,7 @@ jQuery(function($) {
 	$("#regionname", "#editform").click(function() {
 		$("#selectCity", "#editform").show();
 	});
-
-
+	
 	//	重置
 	$("#reset").on("click", function() {
 			$("#selectCity").hide();
@@ -48,11 +47,12 @@ jQuery(function($) {
 			$('#name').focus();
 			return false;
 		} 
-		function CKupdate() {
-            for (instance in CKEDITOR.instances)
-                CKEDITOR.instances[instance].updateElement();
-        }
-		CKupdate(); 
+		//function CKupdate() {
+        //    for (instance in CKEDITOR.instances)
+        //        CKEDITOR.instances[instance].updateElement();
+        //}
+		//CKupdate(); 
+		$("#fcContent").val(CKEDITOR.instances["fcContent"].getData());
 		$.post("/closelist/editCloselist.htm",
 				$("#editform").serialize(),
 				function(data){
