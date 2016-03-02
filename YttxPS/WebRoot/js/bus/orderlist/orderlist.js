@@ -52,8 +52,12 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fdPaidamt").val(raw.fdPaidamt);
 	$(this).contents().find("#fsRemark").val(raw.fsRemark);
 	$(this).contents().find("#fiStat").val(raw.fiStat);
+	$(this).contents().find("#currStat").val(raw.fiStat);
 	$(this).contents().find("#fsDac").val(raw.fsDac);
-	$(this).contents().find("#fcSchedule").html(raw.fcSchedule);
+	//$(this).contents().find("#fcSchedule").html(raw.fcSchedule);
+	$.base64.utf8encode = true;
+	$(this).contents().find('#hSchedule').val($.base64.btoa(raw.fcSchedule));
+
 	if (raw.fiGenindex != null)
 		getTransportArrange(this, raw.fiGenindex);
 	if (raw.fsNo != null) {
@@ -101,6 +105,8 @@ function findCommSnapshot(obj, no){
 				}
 				if(comment['restype'] == 'dy'){
 					$(obj).contents().find("#guideNo").val(comment['resno']);
+					html += '<option value=' + comment['resno'] + '>' + comment['resname'] + '</option>';
+					$(obj).contents().find("#guideNo").html(html);
 					$(obj).contents().find("#guideName").attr("value", comment['resname']);
 					$(obj).contents().find("#guidePrice").attr("value", comment['cclist'][0].price);
 				}
@@ -289,8 +295,7 @@ jQuery(function($) {
 					name : 'fsNo',
 					index : 'fsNo',
 					width : 85,
-					sorttype : "int",
-					hidden : true
+					sorttype : "int"
 				}, {
 					name : 'fiGenindex',
 					index : 'fiGenindex',
