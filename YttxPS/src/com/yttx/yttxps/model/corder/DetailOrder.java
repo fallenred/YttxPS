@@ -22,7 +22,8 @@ public class DetailOrder extends SimpleOrder{
 	private List<Reslist> fuzzyResList;
 	
 	//精确资源快照解析
-	private List<Reslist> resList;*/
+	private List<Reslist> resList;
+	*/
 	private HashMap<String, String> resMap;
 	
 	//每一批次的客户

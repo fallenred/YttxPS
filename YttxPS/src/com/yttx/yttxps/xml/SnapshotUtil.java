@@ -43,6 +43,9 @@ public class SnapshotUtil{
 		if(list!=null){
 			HashMap<String, String> resMap=new HashMap<String,String>();
 			for(Reslist res:list){
+				if(StringUtil.nullOrBlank(res.getRestype())){
+					continue;
+				}
 				String resName=res.getResname();
 				List<Cclist> cclist=res.getCclist();
 				StringBuilder resContent = null;
