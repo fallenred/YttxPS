@@ -65,11 +65,11 @@ public class ShopController extends BaseController {
     {  
 		TshopExample example = new TshopExample();
 		req.copyTshop(example);
-		if (StringUtils.isNotEmpty(scenicno)) {
+		/*if (StringUtils.isNotEmpty(scenicno)) {
 			List<String> li = new ArrayList<String>();
 			CollectionUtils.addAll(li, scenicno.split(","));
 			example.createCriteria().andFsScenicnoIn(li);
-		}
+		}*/
 		List<Tshop> list = shopService.selectTshop(example);
 		return list;
     }

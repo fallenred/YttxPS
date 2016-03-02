@@ -358,16 +358,8 @@
 		SELECT 
 			* 
 		FROM (
-			SELECT res.* FROM 
-				(SELECT t.*, 
-				        s.fs_scenicno,
-				        g.Fs_Name AS fs_scenicname
-				   FROM trestaurant t 
-				   LEFT join TResourceScenic s 
-				     ON t.fs_no = s.fs_resno 
-				    AND s.fs_restype = 'ct'
-				   LEFT JOIN Tscenic g
-                     ON s.fs_scenicno = g.fs_no) res
+			select * from trestaurant t1 where t1.fs_no in (SELECT t.fs_no FROM trestaurant t, tccprice p 
+            where p.fs_restype = 'ct' and t.fs_no = p.fs_resno group by t.fs_no))
 			WHERE
 				1=1
 			<if test="name != null and name != ''">
@@ -391,15 +383,6 @@
 			<if test="stat != null">
 				AND FI_STAT = #{stat,jdbcType=INTEGER}
 			</if>
-			<choose>
-                <when test="scenicNo">
-                  and TRIM(fs_scenicno) in 
-                  <foreach close=")" collection="scenicNo" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-            </choose>
-		)
 	</select>
 	
 </mapper>
