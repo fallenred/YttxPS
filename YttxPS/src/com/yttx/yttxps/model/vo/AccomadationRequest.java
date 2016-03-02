@@ -47,6 +47,10 @@ public class AccomadationRequest extends JqGridRequest implements
 			map.put("speciality", accomadation.getSpeciality());
 			map.put("stat", accomadation.getStat());
 			map.put("desc", accomadation.getDesc());
+			
+		}
+		
+		if(scenicNo != null) {
 			map.put("scenicNo", Arrays.asList(scenicNo));
 		}
 	}

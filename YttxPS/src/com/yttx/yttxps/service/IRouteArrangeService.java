@@ -47,4 +47,7 @@ public interface IRouteArrangeService {
 	
 	@Transactional(readOnly = true)
 	public List<TRouteCCKey> findTRouteCCKey(TRouteCCExample example);
+	
+	@Transactional(readOnly = true)
+	public int findRouteCCCount(TRouteCCExample example);
 }

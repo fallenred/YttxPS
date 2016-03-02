@@ -40,7 +40,31 @@ jQuery(function($) {
 			html += '<option value=' + i + '>第' + (parseInt(i) + 1) + '天</option>';
 		}
 		$("#fiDays").html(html);
+		$("#fiDays").val("");
 	}
+	
+	$(".query-condition").change(function(){
+		var fiDayflag = $("#fiDays").val();
+		var fsRouteno = $("#fsResno").val();
+		var fiGenindex = $("#fiGenindex").val();
+		
+		if(fiDayflag != null && fsRouteno != null && fiGenindex != null) {
+			$.ajax({
+				type: "POST",
+				url: "/routeArrange/findRouteCCCount.htm",
+				data: "fiDayflag=" + fiDayflag + "&fsRouteno=" + fsRouteno,
+				dataType: "json",
+				success: function(data){
+					if(data > 0) {
+						getAllRouteCC(fiDayflag, fiGenindex, fsRouteno);
+						setContentDisable(true);
+					} else {
+						setContentDisable(false);
+					}
+				}
+			});
+		}
+	});
 	
 	/**
 	 * 获取线路配置列表
@@ -157,7 +181,6 @@ jQuery(function($) {
 	function getAccomadation(){
 		var scenic = [];
 		var req = {};
-		var scenicName = $("#scenic").find("option:selected").text();
 		$("input[name='scenicGen']").each(function(){
 			scenic.push($(this).val());
 		});
@@ -220,7 +243,6 @@ jQuery(function($) {
 				dataType: "json",
 				success: function(data){
 					html += '<label for="form-field-select-2" class="room-label-' + val + '">' + text + '</label>';
-					//html += '<input type="hidden" class="ticketid" name="routecc[' + index + '].fsResno" value="' + val + '"/>';
 					html += '<select class="form-control room room-select-' + val + '" name="' + val + '" id="rooms_' + val + '" multiple="multiple">';
 					$.each(data.rows, function(i, e){
 						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
@@ -246,7 +268,6 @@ jQuery(function($) {
 	 */
 	function getShop(){
 		var scenic = '';
-		var scenicName = $("#scenic").find("option:selected").text();
 		$("input[name='scenicGen']").each(function(){
 			scenic += $(this).val() + ",";
 		});
@@ -271,7 +292,6 @@ jQuery(function($) {
 	 */
 	function getRestaurant() {
 		var scenic = [];
-		var scenicName = $("#scenic").find("option:selected").text();
 		$("input[name='scenicGen']").each(function(){
 			scenic.push($(this).val());
 		});
@@ -297,7 +317,6 @@ jQuery(function($) {
 	 */
 	function getEntertainment() {
 		var scenic = [];
-		var scenicName = $("#scenic").find("option:selected").text();
 		$("input[name='scenicGen']").each(function(){
 			scenic.push($(this).val());
 		});
@@ -397,6 +416,7 @@ jQuery(function($) {
 	$("#fiGenindex").change(function(){
 		getRouteArrange();   //获取线路配置列表
 		getSceniceGen();   //获取线路景区
+		getScenice();   //获取景区
 		getShop();   //获取购物店列表
 	});
 	
@@ -538,18 +558,6 @@ jQuery(function($) {
 		$("#selectCity", "#addform").show();
 	});
 
-	//重置iframe高度
-	function resetIframeHeight(type){
-		var height = $(window.parent.document).find("#addIframe").attr("height");
-		height = height.substring(0,height.length - 2);
-		if ("add" == type) {
-			height = (parseInt(height) + 21);
-		} else {
-			height = (parseInt(height) - 21);
-		}
-		$(window.parent.document).find("#addIframe").attr("height", height + "px");
-	}
-
 	//	重置
 	$("#reset").on("click", function() {
 			$("#selectCity").hide();
@@ -563,7 +571,7 @@ jQuery(function($) {
 			$("#addModal", parent.document).find(".close").click();
 	});
 	
-//	提交
+	//	提交
 	$("#submit").on("click", function () {
 		var index = 0;
 		var routecc = {};
@@ -645,6 +653,10 @@ jQuery(function($) {
 					if(json.result == "ok") {
 						$("#message").text("增加记录成功");
 						$("#message").show();
+						setTimeout(function(){
+							$("#message").fadeOut(2000);
+						}, 2000);
+						setContentDisable(true);
 						return true;
 					}
 					else {

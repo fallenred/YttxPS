@@ -277,7 +277,7 @@
   
   <!-- 分页查询总记录 -->
   <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
-  	select count(*) from view_tentertainment
+  	select count(*) from tentertainment
 	     where 1=1
 	      <if test="fsNo != null and fsNo != ''">
 	        and fs_no = #{fsNo}
@@ -296,7 +296,7 @@
   <!-- 分页查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
       select * from (select ROWNUM as rowno, t.* from 
-		view_tentertainment t
+               tentertainment t
     	where 1=1
 	      <if test="fsNo != null and fsNo != ''">
 	        and fs_no = #{fsNo}

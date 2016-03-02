@@ -92,11 +92,11 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="ftStartdate">有效日期</label>
 											<div class="col-sm-2">
-												<input type="text" id="ftStartdate" name="ftStartdate" class="form-control" placeholder=""/>
+												<input type="text" id="ftStartdate" name="ftStartdate" class="form-control" placeholder="" />
 											</div>
 											<label class="col-sm-1 control-label" style="width: 10px;">至</label>
 											<div class="col-sm-2">
-												<input type="text" id="ftEnddate" name="ftEnddate" class="form-control" placeholder=""/>
+												<input type="text" id="ftEnddate" name="ftEnddate" class="form-control" placeholder="" />
 											</div>
 										</div>
 									</div>

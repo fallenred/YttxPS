@@ -50,12 +50,12 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fiGenIndex">线路统称</label>
 											<div class="col-sm-3">
-												<select id="fiGenindex" name="fiGenindex" class="form-control">
+												<select id="fiGenindex" name="fiGenindex" class="form-control query-condition">
 												</select>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fsResno">配置线路</label>
 											<div class="col-sm-3">
-												<select id="fsResno" name="fsResno" class="form-control">
+												<select id="fsResno" name="fsResno" class="form-control query-condition">
 												</select>
 											</div>
 											
@@ -66,7 +66,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fiDays">日程</label>
 											<div class="col-sm-3">
-												<select id="fiDays" name="fiDays" class="form-control">
+												<select id="fiDays" name="fiDays" class="form-control query-condition">
 												</select>
 											</div>
 										</div>
@@ -250,6 +250,7 @@
 
 	</div>
 	<!-- /.main-container -->
+	<script src="/js/bus/routeCC/routeCCCommon.js"></script>
 	<script src="/js/bus/routeCC/add.js"></script>
 
 	<c:if test="${!empty succflag && succflag =='1'}">

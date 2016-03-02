@@ -1,6 +1,5 @@
 package com.yttx.yttxps.service.imp;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -12,14 +11,10 @@ import org.springframework.util.CollectionUtils;
 import com.yttx.yttxps.mapper.TCCPriceMapper;
 import com.yttx.yttxps.mapper.TEntertainmentMapper;
 import com.yttx.yttxps.mapper.TEntertainmentPriceMapper;
-import com.yttx.yttxps.mapper.TResourceScenicMapper;
 import com.yttx.yttxps.model.TCCPrice;
 import com.yttx.yttxps.model.TCCPriceExample;
 import com.yttx.yttxps.model.TEntertainment;
 import com.yttx.yttxps.model.TEntertainmentExample;
-import com.yttx.yttxps.model.TResourceScenic;
-import com.yttx.yttxps.model.TResourceScenicExample;
-import com.yttx.yttxps.model.TResourceScenicExample.Criteria;
 import com.yttx.yttxps.service.IEntertainmentService;
 import com.yttx.yttxps.service.IPubService;
 
@@ -34,9 +29,6 @@ public class EntertainmentService implements IEntertainmentService {
 	
 	@Autowired
 	private IPubService<TEntertainment> pubService;
-	
-	@Autowired
-	private TResourceScenicMapper<TResourceScenic> resourceScenicMapper;
 	
 	@Autowired
 	private TCCPriceMapper tccPriceMapper;
@@ -72,13 +64,6 @@ public class EntertainmentService implements IEntertainmentService {
 	public void insert(TEntertainment record) {
 		record.setFsNo(String.format("%010d", entertainmentMapper.selectFsNo()));
 		entertainmentMapper.insert(record);
-		//新增景区资源对照数据
-		TResourceScenic resourceScenic = new TResourceScenic();
-		resourceScenic.setFiIndex(BigDecimal.valueOf(resourceScenicMapper.getSeq()));
-		resourceScenic.setFsResno(record.getFsNo());
-		resourceScenic.setFsRestype("yl");
-		resourceScenic.setFsScenicno(record.getFsScenicno());
-		resourceScenicMapper.insert(resourceScenic);
 	}
 
 	@Transactional(rollbackFor = Exception.class)
@@ -151,11 +136,6 @@ public class EntertainmentService implements IEntertainmentService {
 	@Override
 	public void delete(String no) {
 		entertainmentMapper.deleteByPrimaryKey(no);
-		TResourceScenicExample example = new TResourceScenicExample();
-		Criteria criteria = example.createCriteria();
-		criteria.andFsResnoEqualTo(no);
-		resourceScenicMapper.deleteByExample(example);
-		
 		//还需要删除价格参数
 	}
 

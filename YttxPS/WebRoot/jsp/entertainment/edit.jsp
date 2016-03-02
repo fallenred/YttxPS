@@ -50,27 +50,26 @@
 
 									<div class="row">
 										<div class="form-group">
-											<input class="form-control" maxlength="10" type="hidden" id="fsNo" name="fsNo" placeholder="娱乐项目代码需唯一" />
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">娱乐项目名称</label>
-											<div class="col-sm-2">
-												<input class="form-control" type="text" id="fsName" name="fsName" placeholder="娱乐项目名称"  maxlength="10" />
+											<div class="col-sm-3">
+												<input class="form-control" type="text" id="fsName" name="fsName" placeholder="娱乐项目名称"  maxlength="10"/>
 											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsScenicno">所属景区</label>
-											<div class="col-sm-2">
-												<input class="form-control" maxlength="10" type="text" id="fsScenicno" name="fsScenicno" placeholder="所属景区" />
+											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsAddr">娱乐项目地址</label>
+											<div class="col-sm-3">
+												<input class="form-control" type="text" id="fsAddr" name="fsAddr" placeholder="娱乐项目地址" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsRegionName">所属地区</label>
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<input type="text" placeholder="请选择行政区域" name="fsRegionName" data-key="0086" data-idx="0" data-full="中国" id="fsRegionName" class="inp-search" /> 
 												<input type="hidden" name="fsRegionno" id="fsRegionno" />
 												<div id="selectCity" class="localcity"></div>
 											</div>
 											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsType">娱乐项目类型</label>
-											<div class="col-sm-2" >
+											<div class="col-sm-3" >
 												<select id="fsType" name="fsType" class="form-control">
 													<option value="01">类型一</option>
 													<option value="02">类型二</option>
@@ -95,14 +94,6 @@
 													<option value="1">正常</option>
 													<option value="2">失效</option>
 												</select>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsAddr">娱乐项目地址</label>
-											<div class="col-sm-8">
-												<input class="form-control" type="text" id="fsAddr" name="fsAddr" placeholder="娱乐项目地址" />
 											</div>
 										</div>
 									</div>
