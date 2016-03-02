@@ -166,7 +166,6 @@ jQuery(function($) {
 	function getAccomadation(fsStarLvl){
 		var scenic = [];
 		var req = {};
-		var scenicName = $("#scenic").find("option:selected").text();
 		$("input[name='scenicGen']").each(function(){
 			scenic.push($(this).val());
 		});
@@ -254,7 +253,6 @@ jQuery(function($) {
 	 */
 	function getShop(){
 		var scenic = '';
-		var scenicName = $("#scenic").find("option:selected").text();
 		$("input[name='scenicGen']").each(function(){
 			scenic += $(this).val() + ",";
 		});
@@ -279,7 +277,6 @@ jQuery(function($) {
 	 */
 	function getRestaurant() {
 		var scenic = [];
-		var scenicName = $("#scenic").find("option:selected").text();
 		$("input[name='scenicGen']").each(function(){
 			scenic.push($(this).val());
 		});
@@ -305,7 +302,6 @@ jQuery(function($) {
 	 */
 	function getEntertainment() {
 		var scenic = [];
-		var scenicName = $("#scenic").find("option:selected").text();
 		$("input[name='scenicGen']").each(function(){
 			scenic.push($(this).val());
 		});
@@ -892,7 +888,7 @@ jQuery(function($) {
 					
 					html += '<input type="hidden" class="shopid" name="routecc[' + type.fsResno + '].fsResno" value="' + type.fsResno + '"/>'+
 					'<input type="hidden" class="shop_' + type.fsResno + '" name="routecc[' + type.fsResno + '].fsRestype" value="gw"/>' + 
-					'<label class="shop_' + type.fsResno + '">&nbsp;&nbsp;' + type.fsScenicname + '--' + type.fsName + '：</label>' +
+					'<label class="shop_' + type.fsResno + '">&nbsp;&nbsp;' + type.fsName + '：</label>' +
 					'<input class="shop_'+ type.fsResno + '" name="routecc[' + type.fsResno + '].fsCcno" value="000021" type="hidden"/>' +
 					'<span class="shop_' + type.fsResno + '">&nbsp;人头消费&nbsp;&nbsp;<br></span>';
 					resetIframeHeight("add");
