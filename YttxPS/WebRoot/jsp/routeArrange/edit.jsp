@@ -80,9 +80,11 @@
 											<label class="col-sm-2 control-label no-padding-right" for="fsProperty">线路类型</label>
 											<div class="col-sm-3">
 												<select class="form-control" id="fsProperty" name="fsProperty">
-													<option value="01">专家推荐</option>
-													<option value="02">热门线路</option>
-													<option value="03">特价线路</option>
+													<option value="1">常规线路</option>
+													<option value="2">纯玩团</option>
+													<option value="3">品质游</option>
+													<option value="4">热门线路</option>
+													<option value="4">特卖线路</option>
 												</select>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiDays">线路天数</label>

@@ -41,6 +41,15 @@
     <result column="fs_scenicname" jdbcType="VARCHAR" property="fsScenicname" />
   </resultMap>
   
+  <resultMap type="com.yttx.yttxps.model.VResSnapshot" id="VResSnapshotMap">
+    <result column="fs_routeno" jdbcType="VARCHAR" property="fsRouteno" />
+    <result column="fi_dayflag" jdbcType="DECIMAL" property="fiDayflag" />
+    <result column="restype" jdbcType="VARCHAR" property="resType" />
+    <result column="resprop" jdbcType="VARCHAR" property="resProp" />
+    <result column="resno" jdbcType="VARCHAR" property="resNo" />
+    <result column="resname" jdbcType="VARCHAR" property="resName" />
+  </resultMap>
+  
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbggenerated
@@ -553,8 +562,14 @@
   
   <!-- 分页查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
-      select * from (select ROWNUM as rowno, t.* from 
-		TROUTEARRANGE t
+      select * from (select ROWNUM as rowno,
+                            (select count(1) 
+                               from trouteCC rc,TResTypeDirc td 
+                              where rc.fs_routeno = t.fs_id
+                                and rc.FS_RESTYPE = td.FS_RESTYPE
+                                and td.FS_RESPROP != 'comm') as ccnum,
+                            t.* 
+                       from TROUTEARRANGE t
     	where 1=1
 	      <if test="fsName != null and fsName != ''">
 	        and fs_Name like '%'||#{fsName}||'%'
@@ -568,6 +583,9 @@
 	      ) tt where 1=1
 	      <if test="startrow != null">
 	        and tt.rowno &gt;= #{startrow}
+	      </if>
+	      <if test="hasRouteCC == true">
+	        <![CDATA[ and tt.ccnum > 0 ]]>
 	      </if>
   </select>
   
@@ -584,6 +602,19 @@
        AND a.fs_routeno = #{fsRouteno,jdbcType=VARCHAR}
        AND a.fi_dayflag = #{fiDayflag,jdbcType=DECIMAL}
        AND a.fs_restype = #{fsRestype,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectRessnapshot" parameterType="map" resultMap="VResSnapshotMap">
+    SELECT fs_routeno,
+           fi_dayflag,
+           restype,
+           resprop,
+           resno,
+           resname
+      FROM view_ressnapshot
+     WHERE 1 = 1
+       AND fs_routeno = #{fsRouteno,jdbcType=VARCHAR}
+       AND fi_dayflag = #{fiDayflag,jdbcType=DECIMAL}
   </select>
   
   <select id="selectFsId" resultType="int">

@@ -9,6 +9,7 @@ import com.yttx.yttxps.model.RouteCCType;
 import com.yttx.yttxps.model.TRouteArrange;
 import com.yttx.yttxps.model.TRouteArrangeExample;
 import com.yttx.yttxps.model.TRouteArrangeWithBLOBs;
+import com.yttx.yttxps.model.VResSnapshot;
 
 public interface TRouteArrangeMapper<T> extends IBaseMapper<T> {
     /**
@@ -102,6 +103,8 @@ public interface TRouteArrangeMapper<T> extends IBaseMapper<T> {
 	int updateByPrimaryKey(TRouteArrange record);
 	
 	List<RouteCCType> selectRouteCCType(Map<String, Object> map);
+	
+	List<VResSnapshot> selectRessnapshot(Map<String, Object> map);
 
 	int selectFsId();
 }

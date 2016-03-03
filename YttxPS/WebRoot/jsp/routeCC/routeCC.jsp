@@ -71,20 +71,26 @@
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
+												<label class="col-sm-1 control-label no-padding-right" for="fsId">路线编码</label>
+												<div class="col-sm-3">
+													<input maxlength="10" type="text" id="fsId" placeholder="路线编码" />
+												</div>
+											</div>
+											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="fsName">路线名称</label>
-												<div class="col-sm-2">
+												<div class="col-sm-3">
 													<input maxlength="10" type="text" id="fsName" placeholder="路线名称" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="fiDays">路线天数</label>
-												<div class="col-sm-2">
+												<div class="col-sm-3">
 													<input maxlength="150" type="text" id="fiDays" placeholder="路线天数" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="fiStat">状态</label>
-												<div class="col-sm-1">
+												<div class="col-sm-3">
 													<select id="fiStat">
 														<option value="">----状态----</option>
 														<option value="1">正常</option>
