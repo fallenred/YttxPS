@@ -108,7 +108,7 @@
 												for="fsType">路线类型</label>
 											<div class="col-sm-3">
 												<input type="hidden" id="fsRouteId" name="fsRouteId" class="form-control" placeholder="线路id" /> 
-												<select id="fsType" name="fsType" class="form-control">
+												<select id="fsType" name="fsType" class="form-control" disabled="disabled">
 													<option value="02">衍生线路</option>
 													<option value="03">定制线路</option>
 												</select>
@@ -116,8 +116,7 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsProperty">组团类型</label>
 											<div class="col-sm-3">
-												<select id="fsProperty" name="fsProperty"
-													class="form-control">
+												<select id="fsProperty" name="fsProperty" class="form-control" disabled="disabled">
 													<option value="01">独立成团</option>
 													<option value="02">散客拼团</option>
 												</select>

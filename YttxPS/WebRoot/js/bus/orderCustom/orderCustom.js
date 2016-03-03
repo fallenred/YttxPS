@@ -428,7 +428,6 @@ function findSnapshot(obj, no){
 												
 									}
 									usernum = resComment['cclist'][commentIndex].usernum;
-									alert(resComment['cclist'][0].usernum);
 					        	});
 								 html += '<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
 										 '<div class="col-sm-1 no-padding-left">'+

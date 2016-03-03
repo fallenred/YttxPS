@@ -71,7 +71,7 @@
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiType">客户类型</label>
 											<div class="col-sm-3">
-												<select id="fsType" name="fsType" class="form-control">
+												<select id="fsType" name="fsType" class="form-control" disabled="disabled">
 													<option value="1">团队客户</option>
 													<option value="2">散客客户</option>
 												</select>
