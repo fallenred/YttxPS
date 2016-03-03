@@ -81,7 +81,7 @@ static Logger logger = LoggerFactory.getLogger(TransportArrangeController.class)
     {  
 		logger.debug("当前新增对象 {}", ttransportArrange);
 		try{
-			ttransportArrange.setFsNo(String.format("%010d", transportArrangeService.selectFsNo()));
+			ttransportArrange.setFsNo("cx"+String.format("%08d", transportArrangeService.selectFsNo()));
 			transportArrangeService.insert(ttransportArrange);
 		}
 		catch(Exception e){

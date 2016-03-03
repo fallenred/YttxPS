@@ -71,11 +71,11 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="ftStartdate">开始日期</label>
 											<div class="col-sm-3" >
-												<input class="form-control" maxlength="10" type="text" id="ftStartdate" name="ftStartdate" placeholder="淡季开始日期" readonly="readonly"/>
+												<input class="form-control" maxlength="10" type="text" id="ftStartdate" name="ftStartdate" placeholder="开始日期" readonly="readonly"/>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="ftEnddate">结束日期</label>
 											<div class="col-sm-3" >
-												<input class="form-control" maxlength="10" type="text" id="ftEnddate" name="ftEnddate" placeholder="淡季结束日期" readonly="readonly"/>
+												<input class="form-control" maxlength="10" type="text" id="ftEnddate" name="ftEnddate" placeholder="结束日期" readonly="readonly"/>
 											</div>
 										</div>
 									</div>

@@ -428,7 +428,6 @@ function findSnapshot(obj, no){
 												
 									}
 									usernum = resComment['cclist'][commentIndex].usernum;
-									alert(resComment['cclist'][0].usernum);
 					        	});
 								 html += '<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
 										 '<div class="col-sm-1 no-padding-left">'+
@@ -675,10 +674,9 @@ jQuery(function($) {
 		$("#collapseOne").collapse('hide');
 		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
-		postData["orderCustom.fsNo"] = $("#queryfield").find("#fsNo").val();
-		postData["orderCustom.fsName"] = $("#queryfield").find("#fsName").val();
-		postData["orderCustom.fiDays"] = $("#queryfield").find("#fiDays").val();
-		postData["orderCustom.fiStat"] = $("#queryfield").find("#fiStat").val();
+		postData["orderCustom.fsOrderID"] = $("#queryfield").find("#fsOrderID").val();
+		postData["orderCustom.fiSeq"] = $("#queryfield").find("#fiSeq").val();
+		postData["orderCustom.ftCreatDate"] = $("#queryfield").find("#ftCreatDate").val();
 		$("#grid-table").jqGrid("setGridParam", {
 			postData : postData
 		}).trigger("reloadGrid");
@@ -809,7 +807,7 @@ jQuery(function($) {
 					formatter : function(value){
 						var timestamp = "";
 						if(value != ''){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd hh:mm:ss");
 						}
 						return timestamp;
 					}

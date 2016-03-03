@@ -24,8 +24,9 @@ public class OrderCustomRequest extends JqGridRequest implements
 
 	public void copyOrderCustom(Map<String, Object> map) {
 		if (orderCustom != null) {
-			map.put("fiId", orderCustom.getFiId() == null ? "" : orderCustom.getFiId());
-			map.put("fiStat", orderCustom.getFiStat() == null ? "" : orderCustom.getFiStat());
+			map.put("fsOrderID", orderCustom.getFsOrderId() == null ? "" : orderCustom.getFsOrderId());
+			map.put("fiSeq", orderCustom.getFiSeq() == null ? "" : orderCustom.getFiSeq());
+			map.put("ftCreatDate", orderCustom.getFtCreatdate() == null ? "" : orderCustom.getFtCreatdate());
 		}
 	}
 }

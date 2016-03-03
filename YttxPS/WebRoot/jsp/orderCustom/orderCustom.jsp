@@ -78,25 +78,21 @@
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="fsName">路线名称</label>
+												<label class="col-sm-2 control-label no-padding-right" for="fsOrderID">订单编号</label>
 												<div class="col-sm-2">
-													<input class="form-control" maxlength="10" type="text" id="fsName" placeholder="路线名称" />
+													<input class="form-control" maxlength="10" type="text" id="fsOrderID" placeholder="订单编号" />
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="fiDays">路线天数</label>
+												<label class="col-sm-2 control-label no-padding-right" for="fiSeq">批次号</label>
 												<div class="col-sm-2">
-													<input class="form-control" maxlength="150" type="text" id="fiDays" placeholder="路线天数" />
+													<input class="form-control" maxlength="150" type="text" id="fiSeq" placeholder="批次号" />
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="fiStat">状态</label>
+												<label class="col-sm-2 control-label no-padding-right" for="ftCreatDate">创建日期</label>
 												<div class="col-sm-2">
-													<select class="form-control" id="fiStat">
-														<option value="">----状态----</option>
-														<option value="1">正常</option>
-														<option value="-100">已销</option>
-													</select>
+													<input class="form-control" maxlength="150" type="text" id="ftCreatDate" placeholder="创建日期" />
 												</div>
 											</div>
 
@@ -155,7 +151,7 @@
 										</div>
 										<div class="modal-body">
 											<iframe id="editIframe" width="100%" height="1300px"
-												frameborder="0" scrolling="no"></iframe>
+												frameborder="0" scrolling="yes"></iframe>
 										</div>
 
 										<!-- /.modal-content -->

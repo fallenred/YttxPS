@@ -22,7 +22,6 @@ import com.yttx.yttxps.model.vo.GenRequest;
 import com.yttx.yttxps.model.vo.TransportRequest;
 import com.yttx.yttxps.service.ITransportService;
 import com.yttx.yttxps.web.action.BaseController;
-import com.yttx.yttxps.web.action.LoginController;
 
 /**
  * 车型管理

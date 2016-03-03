@@ -570,11 +570,14 @@
 		    from view_tordercustom) t
 
     	where 1=1
-	      <if test="fiId != null and fiId != ''">
-	        and fi_id = #{fiId}
+	      <if test="fsOrderID != null and fsOrderID != ''">
+	        and FS_ORDER_ID = #{fsOrderID}
 	      </if>
-	      <if test="fiStat != null and fiStat != ''">
-	        and fi_Stat = #{fiStat}
+	      <if test="fiSeq != null and fiSeq != ''">
+	        and FI_SEQ = #{fiSeq}
+	      </if>
+	      <if test="ftCreatDate != null and ftCreatDate != ''">
+	        and FT_CREATDATE = #{ftCreatDate}
 	      </if>
 	      order by FS_ORDER_ID
 	      ) tt where 1=1

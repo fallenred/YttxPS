@@ -195,7 +195,7 @@ jQuery(function($) {
 				}
 			})
 
-			var items = {
+	var items = {
 		1 : '正常',
 		2 : '失效'
 	};
@@ -203,6 +203,20 @@ jQuery(function($) {
 	for (k in items)
 		s += ';' + k + ":" + items[k];
 	s = s.substring(1);
+	var gender = {
+			1 : '男',
+			0 : '女'
+	};
+	var lvl = {
+			'01' : '金牌',
+			'02' : '银牌',
+			'03' : '铜牌'
+	};
+	var preferTeem = {
+			'01' : '纯玩团',
+			'02' : '散客团',
+			'03' : '购物团'
+	};
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/guide/findGuide.htm",
@@ -218,79 +232,138 @@ jQuery(function($) {
 				            	 fixed : true,
 				            	 sortable : false,
 				            	 resize : false,
-				            	 formatter : actFormatter,
+				            	 formatter : actFormatter
 				             }, {
 				            	 name : 'no',
 				            	 index : 'no',
 				            	 width : 85,
-				            	 sorttype : "int"
+				            	 sorttype : "int",
+				            	 hidden : true
 				             }, {
 				            	 name : 'name',
 				            	 index : 'name',
-				            	 width : 200,
+				            	 width : 80,
 				            	 editable : true,
-				            	 sorttype : "char",
+				            	 sorttype : "char"
 				             }, {
 				            	 name : 'gender',
 				            	 index : 'gender',
+				            	 width : 50,
 				            	 editable : true,
 				            	 sorttype : "char",
+				            	 edittype : 'select',
+				            	 editoptions : {
+				            		 value : s
+				            	 },
+				            	 formatter : function(v, opt, rec) {
+				            		 return gender[v];
+				            	 },
+				            	 unformat : function(v) {
+				            		 for (k in gender)
+				            			 if (gender[k] == v)
+				            				 return k;
+				            		 return '1';
+				            	 }
 				             }, { name : 'idno',
 				            	 index : 'idno',
 				            	 editable : true,
-				            	 sorttype : "char",
+				            	 sorttype : "char"
 				             }, { name : 'workdate',
 				            	 index : 'workdate',
+				            	 width : 90,
 				            	 editable : true,
-				            	 sorttype : "char",
+				            	 sorttype : "date",
+									formatter : function(value){
+										var timestamp = "";
+										if(value != ''){//rData[7]表示日期列
+											timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+										}
+										return timestamp;
+									}
 				             }, { name : 'contactno',
 				            	 index : 'contactno',
 				            	 editable : true,
-				            	 sorttype : "char",
+				            	 width : 100,
+				            	 sorttype : "char"
 				             }, { name : 'mainroute',
 				            	 index : 'mainroute',
+				            	 width : 100,
 				            	 editable : true,
-				            	 sorttype : "char",
+				            	 sorttype : "char"
 				             }, { name : 'preferteem',
 				            	 index : 'preferteem',
 				            	 editable : true,
+				            	 width : 80,
 				            	 sorttype : "char",
+				            	 edittype : 'select',
+				            	 editoptions : {
+				            		 value : s
+				            	 },
+				            	 formatter : function(v, opt, rec) {
+				            		 return preferTeem[v];
+				            	 },
+				            	 unformat : function(v) {
+				            		 for (k in preferTeem)
+				            			 if (preferTeem[k] == v)
+				            				 return k;
+				            		 return '1';
+				            	 }
 				             }, { name : 'speciality',
 				            	 index : 'speciality',
 				            	 editable : true,
-				            	 sorttype : "char",
+				            	 width : 100,
+				            	 sorttype : "char"
 				             }, { name : 'desc',
 				            	 index : 'desc',
 				            	 editable : true,
 				            	 sorttype : "char",
+				            	 hidden : true
 				             }, { name : 'lvl',
 				            	 index : 'lvl',
 				            	 editable : true,
+				            	 width : 70,
 				            	 sorttype : "char",
+				            	 edittype : 'select',
+				            	 editoptions : {
+				            		 value : s
+				            	 },
+				            	 formatter : function(v, opt, rec) {
+				            		 return lvl[v];
+				            	 },
+				            	 unformat : function(v) {
+				            		 for (k in lvl)
+				            			 if (lvl[k] == v)
+				            				 return k;
+				            		 return '1';
+				            	 }
 				             }, { name : 'salary',
 				            	 index : 'salary',
 				            	 editable : true,
 				            	 sorttype : "char",
+				            	 hidden : true
 				             }, {
 				            	 name : 'daysale',
 				            	 index : 'daysale',
 				            	 width : 300,
 				            	 editable : true,
+				            	 hidden : true
 				             }, {
 				            	 name : 'weeksale',
 				            	 index : 'weeksale',
 				            	 edittype : 'textarea',
 				            	 editable : true,
 				            	 hidden : true,
+				            	 hidden : true
 				             }, {
 				            	 name : 'monthsale',
 				            	 index : 'monthsale',
 				            	 width : 70,
 				            	 editable : true,
+				            	 hidden : true
 				             }, {
 				            	 name : 'stat',
 				            	 index : 'stat',
-				            	 width : 35,
+				            	 width : 45,
 				            	 sortable : true,
 				            	 editable : true,
 				            	 edittype : 'select',
@@ -305,7 +378,7 @@ jQuery(function($) {
 				            			 if (items[k] == v)
 				            				 return k;
 				            		 return '1';
-				            	 },
+				            	 }
 				             } ],
 
 				             viewrecords : true,
@@ -330,7 +403,7 @@ jQuery(function($) {
 
 				             editurl : "/guide/save.htm",
 				             shrinkToFit : true,
-				             autowidth : true,
+				             autowidth : true
 
 				             /**
 				              * , grouping:true, groupingView : { groupField : ['name'],
@@ -359,7 +432,7 @@ jQuery(function($) {
 				refresh : true,
 				refreshicon : 'ace-icon fa fa-refresh green',
 				view : false,
-				viewicon : 'ace-icon fa fa-search-plus grey',
+				viewicon : 'ace-icon fa fa-search-plus grey'
 			},
 			{
 				// delete record form
@@ -391,7 +464,7 @@ jQuery(function($) {
 				afterRedraw : function() {
 					style_search_filters($(this));
 				},
-				multipleSearch : true,
+				multipleSearch : true
 				/**
 				 * multipleGroup:true, showQuery: true
 				 */
@@ -408,7 +481,7 @@ jQuery(function($) {
 				},
 				position : "first",
 				title : "新增记录",
-				cursor : "pointer",
+				cursor : "pointer"
 			});
 
 	function style_delete_form(form) {
