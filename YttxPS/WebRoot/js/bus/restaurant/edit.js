@@ -67,14 +67,6 @@ jQuery(function($) {
 			return false;
 		}
 		
-		var scenic = $("#editform #scenic").val();
-		if(scenic == '') {
-			$("#message").show();
-			$("#message").text("所属景区不能为空，请输入");
-			$("#addform #scenic").focus();
-			return false;
-		} 
-		
 		var lvl = $("#editform input[name='lvl']:checked").val()//等级
 		if(lvl ==undefined) {
 			$("#message").show();
@@ -105,7 +97,6 @@ jQuery(function($) {
 		postData["name"]      = name;
 		postData["regionno"]  = regionno;
 		postData["addr"]      = $.trim($("#editform #addr").val());
-		postData["scenicNo"]  = scenic;
 		postData["special"]   = special;
 		postData["menu"]      = $("#editform #menu").val();
 		postData["attention"] = $("#editform #attention").val();

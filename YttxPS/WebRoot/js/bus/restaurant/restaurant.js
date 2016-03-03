@@ -267,7 +267,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '餐厅编号','餐厅名称','所属景区', '所属地区', 
+				colNames : [ '操作', '餐厅编号','餐厅名称', '所属地区', 
 				             '餐厅地址', '接待规模(桌)', '菜品特色',/*'等级',*/ '状态' ],
 				colModel : [ {
 					name : 'myaction',
@@ -287,13 +287,6 @@ jQuery(function($) {
 					name : 'name',
 					index : 'name',
 					width : 180,
-					sortable : false,
-					editable : false,
-				},
-				{
-					name : 'scenicName',
-					index : 'scenicName',
-					width : 120,
 					sortable : false,
 					editable : false,
 				},

@@ -159,8 +159,6 @@ public class RestaurantController extends BaseController {
 		if(restaurant.getRegionno()!=null)
 			restaurant.setRegionname(pubService.findRegionFullName(restaurant.getRegionno()));
 		model.addAttribute("res", restaurant);
-		List<Scenic> scenics =pubService.findAllScennic();
-		model.addAttribute("scenics", scenics);
 		return "restaurant/edit";
 	}
 	
@@ -338,11 +336,6 @@ public class RestaurantController extends BaseController {
 				succFlag = succFlag && false;
 				message += "餐厅编号为空<br/>";
 			}
-		}
-		
-		if(StringUtil.nullOrBlank(restaurant.getScenicNo())){
-			succFlag = succFlag && false;
-			message += "所属景区为空<br/>";
 		}
 		//非空 餐厅名称
 		if(StringUtil.nullOrBlank(restaurant.getName())){
