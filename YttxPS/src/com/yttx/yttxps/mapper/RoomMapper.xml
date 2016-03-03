@@ -276,7 +276,7 @@
         and FS_TYPE = #{fsType}
       </if>
       <if test="fsAccomno != null and fsAccomno !=''">
-        and FS_ACCOMNO = #{fsAccomno, jdbcType=VARCHAR}
+        and TRIM(FS_ACCOMNO) = #{fsAccomno, jdbcType=VARCHAR}
       </if>
       <if test="fiStat != null">
         and FI_STAT = #{fiStat}

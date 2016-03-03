@@ -122,7 +122,7 @@ jQuery(function($) {
 	function getTicket(){
 		var scenic = '';
 		$("input[name='scenicGen']").each(function(){
-			scenic += $(this).val() + ",";
+			scenic += $.trim($(this).val()) + ",";
 		});
 		$.ajax({
 			type: "GET",
@@ -156,47 +156,6 @@ jQuery(function($) {
 					html += '<option value=' + comment['fsDictno'] + '>' + comment['fsDictname'] + '</option>';
 				});
 				$("#"+selectId).html(html);
-			}
-		});
-	}
-	
-	/**
-	 * 获取酒店列表
-	 */
-	function getAccomadation(fsStarLvl){
-		$.ajax({
-			type: "GET",
-			traditional: true,
-			url: "/accomadation/selectAccomadation.htm",
-			data: "accomadation.starlvl=" + fsStarLvl,
-			dataType: "json",
-			success: function(data){
-				var html = ''; 
-				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
-				});
-				$("#accomadationNo").html(html);
-				getRoom($("#accomadationNo").val());
-			}
-		});
-	}
-	
-	/**
-	 * 获取酒店房型列表
-	 */
-	function getRoom(accomadationNo){
-		$.ajax({
-			type: "GET",
-			traditional: true,
-			url: "/room/selectRoom.htm",
-			data: "room.fsAccomno=" + accomadationNo,
-			dataType: "json",
-			success: function(data){
-				var html = ''; 
-				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['fsRoomno'] + '>' + comment['fsName'] + '</option>';
-				});
-				$("#room").html(html);
 			}
 		});
 	}
@@ -246,7 +205,7 @@ jQuery(function($) {
 	function getShop(){
 		var scenic = '';
 		$("input[name='scenicGen']").each(function(){
-			scenic += $(this).val() + ",";
+			scenic += $.trim($(this).val()) + ",";
 		});
 		$.ajax({
 			type: "GET",
@@ -270,7 +229,7 @@ jQuery(function($) {
 	function getRestaurant() {
 		var scenic = [];
 		$("input[name='scenicGen']").each(function(){
-			scenic.push($(this).val());
+			scenic.push($.trim($(this).val()));
 		});
 		
 		$.ajax({
@@ -295,7 +254,7 @@ jQuery(function($) {
 	function getEntertainment() {
 		var scenic = [];
 		$("input[name='scenicGen']").each(function(){
-			scenic.push($(this).val());
+			scenic.push($.trim($(this).val()));
 		});
 		
 		$.ajax({

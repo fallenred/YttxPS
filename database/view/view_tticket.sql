@@ -10,3 +10,5 @@ select c.fs_no,
  where c.fs_no = r.fs_resno 
    and r.fs_restype = 'mp' 
    and r.fs_scenicno = s.fs_no;
+
+exit;

@@ -123,7 +123,6 @@ jQuery(function($) {
 		var postData = {};
 		postData["name"]      = name;
 		postData["regionno"]  = regionno;
-		postData["scenicNo"]    = scenic;
 		postData["addr"]      = $.trim($("#addform #addr").val());
 		postData["special"]   = special;
 		postData["menu"]      = $("#addform #menu").val();

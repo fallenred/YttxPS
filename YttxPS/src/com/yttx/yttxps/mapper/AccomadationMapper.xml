@@ -51,7 +51,7 @@
            a.FC_DESC
       FROM TACCOMADATION a
      WHERE 1 = 1
-       AND FS_NO = #{no,jdbcType=VARCHAR}
+       AND TRIM(FS_NO) = #{no,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     <!--
