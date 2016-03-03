@@ -78,17 +78,25 @@
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="fsName">路线名称</label>
+												<label class="col-sm-1 control-label no-padding-right" for="fsNo">订单编号</label>
 												<div class="col-sm-2">
-													<input class="form-control" maxlength="10" type="text" id="fsName" placeholder="路线名称" />
+													<input class="form-control" maxlength="10" type="text" id="fsNo" placeholder="订单编号" />
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="fiDays">路线天数</label>
+												<label class="col-sm-1 control-label no-padding-right" for="fsName">订单名称</label>
 												<div class="col-sm-2">
-													<input class="form-control" maxlength="150" type="text" id="fiDays" placeholder="路线天数" />
+													<input class="form-control" maxlength="150" type="text" id="fsName" placeholder="订单名称" />
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-1 control-label no-padding-right" for="fsType">线路类型</label>
+												<div class="col-sm-2">
+													<select class="form-control" id="fsType">
+														<option value="">----线路类型----</option>
+														<option value="02">衍生线路</option>
+														<option value="03">定制线路</option>
+													</select>
 												</div>
 											</div>
 											<div class="form-group">
@@ -97,8 +105,12 @@
 												<div class="col-sm-2">
 													<select class="form-control" id="fiStat">
 														<option value="">----状态----</option>
-														<option value="1">正常</option>
-														<option value="-100">已销</option>
+														<option value="0">待审核</option>
+														<option value="1">已审核</option>
+														<option value="2">已确认(待付款)</option>
+														<option value="4">已付首款</option>
+														<option value="8">已付全款(可出团)</option>
+														<option value="32">已完结</option>
 													</select>
 												</div>
 											</div>

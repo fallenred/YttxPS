@@ -75,7 +75,7 @@ Date.prototype.format = function(format) {
         // millisecond  
     }  
    
-    if (/(y+)/.test(format)) {  
+    if (/(y+)/.test(format)) {
         format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4  
                         - RegExp.$1.length));  
     }  

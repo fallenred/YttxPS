@@ -182,7 +182,7 @@ jQuery(function($) {
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
 		postData["orderlist.fsNo"] = $("#queryfield").find("#fsNo").val();
 		postData["orderlist.fsName"] = $("#queryfield").find("#fsName").val();
-		postData["orderlist.fiDays"] = $("#queryfield").find("#fiDays").val();
+		postData["orderlist.fsType"] = $("#queryfield").find("#fsType").val();
 		postData["orderlist.fiStat"] = $("#queryfield").find("#fiStat").val();
 		$("#grid-table").jqGrid("setGridParam", {
 			postData : postData
@@ -281,7 +281,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : ['操作', '订单id', '线路统称Idx', '订单名称', '用户ID', '用户子ID', '计调ID', '创建时间', '线路类型', 'fs_Route_ID', '组团类型', '线路天数',
+				colNames : ['操作', '订单编号', '线路统称Idx', '订单名称', '用户ID', '用户子ID', '计调ID', '创建时间', '线路类型', 'fs_Route_ID', '组团类型', '线路天数',
 				            '发团日期', '发团地', '线路初始报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照',],
 				colModel : [ {
 					name : 'myac',
