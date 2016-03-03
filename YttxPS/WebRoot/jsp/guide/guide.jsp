@@ -143,7 +143,7 @@
 		<!-- 模态框（新增） -->
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
 			aria-labelledby="addModalLabel" aria-hidden="true">
-			<div class="modal-dialog" style="width: auto; height: auto">
+			<div class="modal-dialog" style="width: 1024px; height: auto">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
@@ -155,7 +155,6 @@
 							scrolling="yes"></iframe>
 
 					</div>
-
 					<!-- /.modal-content -->
 				</div>
 				<!-- /.modal-dialog -->

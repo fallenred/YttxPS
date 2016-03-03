@@ -50,13 +50,13 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="no">导游编号</label>
 											<div class="col-sm-3">
 												<input type="text" id="no" name="no" class="form-control"
 													placeholder="导游编号需唯一" />
 											</div>
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="name">姓名</label>
 											<div class="col-sm-3">
 												<input type="text" id="name" name="name"
@@ -66,13 +66,15 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="gender">性别</label>
 											<div class="col-sm-3">
-												<input type="text" id="gender" name="gender"
-													class="form-control" placeholder="性别" />
+												<select class="form-control" id="gender" name="gender">
+													<option value="1">男</option>
+													<option value="0">女</option>
+												</select>
 											</div>
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="gender">身份证号</label>
 											<div class="col-sm-3">
 												<input type="text" id="idno" name="idno"
@@ -82,13 +84,13 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="workdate">开始工作日期</label>
 											<div class="col-sm-3">
 												<input type="text" id="workdate" name="workdate"
 													class="form-control" placeholder="开始工作日期" />
 											</div>
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="contactno">联系方式</label>
 											<div class="col-sm-3">
 												<input type="text" placeholder="联系方式" id="contactno"
@@ -98,29 +100,32 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="mainroute">主带线路</label>
 											<div class="col-sm-3">
 												<input type="text" placeholder="主带线路" id="mainroute"
 													name="mainroute" class="form-control"></input>
 											</div>
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="preferteem">带团意向</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="带团意向" id="preferteem"
-													name="preferteem" class="form-control"></input>
+												<select class="form-control" id="preferteem" name="preferteem">
+													<option value="01">纯玩团</option>
+													<option value="02">散客团</option>
+													<option value="03">购物团</option>
+												</select>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="speciality">特长</label>
 											<div class="col-sm-3">
 												<input type="text" placeholder="特长" id="speciality"
 													name="speciality" class="form-control"></input>
 											</div>
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="desc">介绍</label>
 											<div class="col-sm-3">
 												<input type="text" placeholder="介绍" id="desc" name="desc"
@@ -130,13 +135,13 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="lvl">当前级别</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="当前级别" id="lvl" name="lvl"
-													class="form-control"></input>
+												<select class="form-control" id="lvl" name="lvl">
+												</select>
 											</div>
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="salary">工资</label>
 											<div class="col-sm-3">
 												<input type="text" placeholder="工资" id="salary"
@@ -146,13 +151,13 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="daysale">当日打单金额</label>
 											<div class="col-sm-3">
 												<input placeholder="当日打单金额" id="daysale" name="daysale"
 													class="form-control"></input>
 											</div>
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="weeksale">本周打单金额</label>
 											<div class="col-sm-3">
 												<input type="text" placeholder="本周打单金额" id="weeksale"
@@ -162,7 +167,7 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="monthsale">本月打单金额</label>
 											<div class="col-sm-3">
 												<input placeholder="本月打单金额" id="monthsale" name="monthsale"
@@ -204,6 +209,23 @@
 		</script>
 
 	</c:if>
-
+	<script>
+		//获取导游级别列表
+		$.ajax({
+			type : "GET",
+			traditional : true,
+			url : "/dict/selectDict.htm",
+			data : "dict.fsParentno=dy",
+			dataType : "json",
+			success : function(data) {
+				html = '<option value="">' + '--请选择--' + '</option>';
+				$.each(data, function(commentIndex, comment) {
+					html += '<option value=' + comment['fsDictno'] + '>'
+							+ comment['fsDictname'] + '</option>';
+				});
+				$("#lvl").html(html);
+			}
+		});
+	</script>
 </body>
 </html>

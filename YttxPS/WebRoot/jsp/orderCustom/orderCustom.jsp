@@ -155,7 +155,7 @@
 										</div>
 										<div class="modal-body">
 											<iframe id="editIframe" width="100%" height="1300px"
-												frameborder="0" scrolling="no"></iframe>
+												frameborder="0" scrolling="yes"></iframe>
 										</div>
 
 										<!-- /.modal-content -->
