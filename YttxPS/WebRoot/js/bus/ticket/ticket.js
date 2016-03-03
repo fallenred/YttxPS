@@ -22,8 +22,10 @@ function deleteTicket(id) {
 };
 
 function picTicket(id) {
-	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/pic/pic.jsp?no=" + raw.fsNo;
+	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
+	var resType="mp";
+	var resNo=raw.fsNo;
+	var frameSrc = "/pic/picpage.htm?resType="+resType+"&resNo="+resNo;
     $("#picIframe").attr("src", frameSrc);
     $('#picModal').modal({ show: true, backdrop: 'static' });
 };

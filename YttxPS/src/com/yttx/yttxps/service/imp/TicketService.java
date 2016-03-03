@@ -73,7 +73,7 @@ public class TicketService implements ITicketService {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void insert(Tticket record) {
-		record.setFsNo(String.format("%010d", ticketMapper.selectFsNo()));
+		record.setFsNo("mp"+String.format("%08d", ticketMapper.selectFsNo()));
 		ticketMapper.insert(record);
 		//新增景区资源对照数据
 		TResourceScenic resourceScenic = new TResourceScenic();

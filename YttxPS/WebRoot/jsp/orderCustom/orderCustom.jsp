@@ -78,19 +78,19 @@
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="fsOrderID">订单编号</label>
+												<label class="col-sm-2 control-label no-padding-right" for="fsOrderID">订单编号</label>
 												<div class="col-sm-2">
 													<input class="form-control" maxlength="10" type="text" id="fsOrderID" placeholder="订单编号" />
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="fiSeq">批次号</label>
+												<label class="col-sm-2 control-label no-padding-right" for="fiSeq">批次号</label>
 												<div class="col-sm-2">
 													<input class="form-control" maxlength="150" type="text" id="fiSeq" placeholder="批次号" />
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="fsCreatDate">创建日期</label>
+												<label class="col-sm-2 control-label no-padding-right" for="ftCreatDate">创建日期</label>
 												<div class="col-sm-2">
 													<input class="form-control" maxlength="150" type="text" id="ftCreatDate" placeholder="创建日期" />
 												</div>
