@@ -63,12 +63,13 @@ jQuery(function($) {
 			$('#name').focus();
 			return false;
 		} 
-//		if($("#regionno").val() == '') {
-//			$("#message").show();
-//			$("#message").text("所属地区不能为空，请输入");
-//			$('#regionno').focus();
-//			return false;
-//		} 
+		if($("#regionno").val() == '') {
+			$("#message").show();
+			$("#message").text("所属地区不能为空，请输入");
+			$('#regionno').focus();
+			return false;
+		}
+		
 		$.post("/shop/addShop.htm",
 				$("#addform").serialize(),
 				function(data){

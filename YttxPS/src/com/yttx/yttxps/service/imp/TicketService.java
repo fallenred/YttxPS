@@ -102,13 +102,11 @@ public class TicketService implements ITicketService {
 
 	@Override
 	public List<Tticket> selectTticket(TticketExample example) {
-		// TODO Auto-generated method stub
 		return ticketMapper.selectByExample(example);
 	}
 
 	@Override
 	public void insertTicketPrice(Tticket record) {
-		// TODO Auto-generated method stub
 		if (CollectionUtils.isEmpty(record.getTccPrices())) return;
 		for (TCCPrice price : record.getTccPrices()) {
 			//如果价格为空则不作处理

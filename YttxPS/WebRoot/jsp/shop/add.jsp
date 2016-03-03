@@ -63,20 +63,15 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-1 control-label no-padding-right" for="name">购物店名称</label>
-											<div class="col-sm-3">
+											<div class="col-sm-7">
 												<input type="text" id="name" name="name" class="form-control" placeholder="购物店名称" />
-											</div>
-											<label class="col-sm-1 control-label no-padding-right" for="scenicno">所属景区</label>
-											<div class="col-sm-3">
-												<select class="form-control" id="scenicno" name="scenicno">
-												</select>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-1 control-label no-padding-right" for="desc">经营范围</label>
-											<div class="col-sm-8">
+											<div class="col-sm-7">
 												<input type="text" id="desc" name="desc" class="form-control" placeholder="经营范围" />
 											</div>
 										</div>

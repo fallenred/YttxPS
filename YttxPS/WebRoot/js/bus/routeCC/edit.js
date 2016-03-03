@@ -38,7 +38,7 @@ jQuery(function($) {
 	 * 生成日程下拉列表
 	 */
 	function getDays(num){
-		var html="";
+		var html= "";
 		for (var i = 0; i < num ; i++) {
 			html += '<option value=' + i + '>第' + (parseInt(i) + 1) + '天</option>';
 		}
@@ -122,7 +122,7 @@ jQuery(function($) {
 	function getTicket(){
 		var scenic = '';
 		$("input[name='scenicGen']").each(function(){
-			scenic += $(this).val() + ",";
+			scenic += $.trim($(this).val()) + ",";
 		});
 		$.ajax({
 			type: "GET",
@@ -156,47 +156,6 @@ jQuery(function($) {
 					html += '<option value=' + comment['fsDictno'] + '>' + comment['fsDictname'] + '</option>';
 				});
 				$("#"+selectId).html(html);
-			}
-		});
-	}
-	
-	/**
-	 * 获取酒店列表
-	 */
-	function getAccomadation(fsStarLvl){
-		$.ajax({
-			type: "GET",
-			traditional: true,
-			url: "/accomadation/selectAccomadation.htm",
-			data: "accomadation.starlvl=" + fsStarLvl,
-			dataType: "json",
-			success: function(data){
-				var html = ''; 
-				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
-				});
-				$("#accomadationNo").html(html);
-				getRoom($("#accomadationNo").val());
-			}
-		});
-	}
-	
-	/**
-	 * 获取酒店房型列表
-	 */
-	function getRoom(accomadationNo){
-		$.ajax({
-			type: "GET",
-			traditional: true,
-			url: "/room/selectRoom.htm",
-			data: "room.fsAccomno=" + accomadationNo,
-			dataType: "json",
-			success: function(data){
-				var html = ''; 
-				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['fsRoomno'] + '>' + comment['fsName'] + '</option>';
-				});
-				$("#room").html(html);
 			}
 		});
 	}
@@ -246,7 +205,7 @@ jQuery(function($) {
 	function getShop(){
 		var scenic = '';
 		$("input[name='scenicGen']").each(function(){
-			scenic += $(this).val() + ",";
+			scenic += $.trim($(this).val()) + ",";
 		});
 		$.ajax({
 			type: "GET",
@@ -257,7 +216,7 @@ jQuery(function($) {
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' +comment['scenicname'] + '--' + comment['name'] + '</option>';
+					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 				});
 				$("#shop").html(html);
 			}
@@ -270,7 +229,7 @@ jQuery(function($) {
 	function getRestaurant() {
 		var scenic = [];
 		$("input[name='scenicGen']").each(function(){
-			scenic.push($(this).val());
+			scenic.push($.trim($(this).val()));
 		});
 		
 		$.ajax({
@@ -282,7 +241,7 @@ jQuery(function($) {
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' + comment['scenicName'] + '--' + comment['name'] + '</option>';
+					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 				});
 				$("#restaurant").html(html);
 			}
@@ -295,7 +254,7 @@ jQuery(function($) {
 	function getEntertainment() {
 		var scenic = [];
 		$("input[name='scenicGen']").each(function(){
-			scenic.push($(this).val());
+			scenic.push($.trim($(this).val()));
 		});
 		
 		$.ajax({
@@ -307,7 +266,7 @@ jQuery(function($) {
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['fsNo'] + '>' + comment['fsScenicname'] + '--' + comment['fsName'] + '</option>';
+					html += '<option value=' + comment['fsNo'] + '>' + comment['fsName'] + '</option>';
 				});
 				$("#entertainment").html(html);
 			}
@@ -393,12 +352,13 @@ jQuery(function($) {
 	$("#fiGenindex").change(function(){
 		getRouteArrange();   //获取线路配置列表
 		getSceniceGen();   //获取线路景区
+		getScenice();   //获取景区
 		getShop();   //获取购物店列表
 	});
 	
 	//酒店标准变更
 	$("#fsStarLvl").change(function(){
-		getAccomadation($("#fsStarLvl"));
+		getAccomadation($("#fsStarLvl").val());
 	});
 	
 	//酒店变更
@@ -495,7 +455,7 @@ jQuery(function($) {
 			}
 		});
 		if (flag) {
-			$("#index").attr("value", parseInt(index)+1);
+			$("#index").attr("value", parseInt(index) + 1);
 			html += '<input type="hidden" class="shopid" name="routecc[' + val + '].fsResno" value="' + val + '"/>'+
 					'<input type="hidden" class="shop_' + val + '" name="routecc[' + val + '].fsRestype" value="gw"/>' + 
 					'<label class="shop_' + val + '">&nbsp;&nbsp;' + text + '：</label>' +
@@ -880,7 +840,7 @@ jQuery(function($) {
 					
 					html += '<input type="hidden" class="shopid" name="routecc[' + type.fsResno + '].fsResno" value="' + type.fsResno + '"/>'+
 					'<input type="hidden" class="shop_' + type.fsResno + '" name="routecc[' + type.fsResno + '].fsRestype" value="gw"/>' + 
-					'<label class="shop_' + type.fsResno + '">&nbsp;&nbsp;' + type.fsScenicname + '--' + type.fsName + '：</label>' +
+					'<label class="shop_' + type.fsResno + '">&nbsp;&nbsp;' + type.fsName + '：</label>' +
 					'<input class="shop_'+ type.fsResno + '" name="routecc[' + type.fsResno + '].fsCcno" value="000021" type="hidden"/>' +
 					'<span class="shop_' + type.fsResno + '">&nbsp;人头消费&nbsp;&nbsp;<br></span>';
 					resetIframeHeight("add");
@@ -890,8 +850,6 @@ jQuery(function($) {
 		});
 	}
 
-	//getAllRouteCC(fiDays, fiGenindex, fsRouteno);
-	
 	//	colorbox
 	var $overflow = '';
 	var colorbox_params = {

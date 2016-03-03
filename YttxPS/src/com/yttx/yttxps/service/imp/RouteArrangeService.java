@@ -1,5 +1,6 @@
 package com.yttx.yttxps.service.imp;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.yttx.yttxps.mapper.TResTypeDircMapper;
 import com.yttx.yttxps.mapper.TRouteArrangeMapper;
 import com.yttx.yttxps.mapper.TRouteCCMapper;
+import com.yttx.yttxps.mapper.TRoutePropClassMapper;
 import com.yttx.yttxps.model.RouteCCType;
 import com.yttx.yttxps.model.TResTypeDirc;
 import com.yttx.yttxps.model.TResTypeDircExample;
@@ -20,6 +22,7 @@ import com.yttx.yttxps.model.TRouteArrangeWithBLOBs;
 import com.yttx.yttxps.model.TRouteCCExample;
 import com.yttx.yttxps.model.TRouteCCExample.Criteria;
 import com.yttx.yttxps.model.TRouteCCKey;
+import com.yttx.yttxps.model.TRoutePropClass;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.service.IRouteArrangeService;
 
@@ -38,6 +41,9 @@ public class RouteArrangeService implements IRouteArrangeService {
 	
 	@Autowired
 	private TResTypeDircMapper resTypeDircMapper;
+	
+	@Autowired
+	private TRoutePropClassMapper routePropClassMapper;
 
 	@Override
 	public int selectCountSelective(Map<String, Object> map) {
@@ -56,6 +62,12 @@ public class RouteArrangeService implements IRouteArrangeService {
 			routeCC.setFsRouteno(record.getFsId());
 			routeCCMapper.insert(routeCC);
 		}
+		
+		TRoutePropClass routePropClass = new TRoutePropClass();
+		routePropClass.setFiClass(new BigDecimal(record.getFsProperty()));
+		routePropClass.setFsId(record.getFsId());
+		routePropClass.setFiClasstype(BigDecimal.ONE);
+		routePropClassMapper.insert(routePropClass);
 		return routeArrangeMapper.insert(record);
 	}
 	
@@ -125,5 +137,9 @@ public class RouteArrangeService implements IRouteArrangeService {
 	
 	public List<TRouteCCKey> findTRouteCCKey(TRouteCCExample example) {
 		return routeCCMapper.selectByExample(example);
+	}
+	
+	public int findRouteCCCount(TRouteCCExample example) {
+		return routeCCMapper.countByExample(example);
 	}
 }

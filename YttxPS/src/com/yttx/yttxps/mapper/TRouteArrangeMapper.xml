@@ -577,15 +577,10 @@
            a.fi_dayflag,
            a.fs_restype,
            a.fs_resno,
-           d.fs_name,
-           b.fs_scenicno,
-           c.fs_name AS fs_scenicname
-      FROM TRouteCC a,TResourceScenic b,Tscenic c,view_resource d
-     WHERE a.fs_resno = b.fs_resno
-       AND a.fs_restype = b.fs_restype
-       AND a.fs_resno = d.fs_no
-       AND a.fs_restype = d.restype
-       AND b.fs_scenicno = c.fs_no
+           b.fs_name
+      FROM TRouteCC a,view_resource b
+     WHERE a.fs_resno = b.fs_no
+       AND a.fs_restype = b.restype
        AND a.fs_routeno = #{fsRouteno,jdbcType=VARCHAR}
        AND a.fi_dayflag = #{fiDayflag,jdbcType=DECIMAL}
        AND a.fs_restype = #{fsRestype,jdbcType=VARCHAR}

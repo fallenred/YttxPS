@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -99,7 +98,7 @@ public class RestaurantController extends BaseController {
 		if (scenicNo == null || scenicNo.length < 1){
 			return null;
 		}
-		//map.put("scenicNo", Arrays.asList(scenicNo));
+		map.put("scenicNo", Arrays.asList(scenicNo));
 		return restaurantService.selectRestaurant(map);
     }
 	

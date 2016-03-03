@@ -53,12 +53,6 @@ jQuery(function($) {
             $('#addform #name').focus();
             return false;
         }
-        if($("#addform input[name='fsScenicno']").val() == '') {
-            $("#addform #message").show();
-            $("#addform #message").text("所属景区不能为空，请输入");
-            $('#addform #fsScenicno').focus();
-            return false;
-        }
 		if($("#addform input[name='regionno']").val() == '') {
 			$("#addform #message").show();
 			$("#addform #message").text("酒店所属地区不能为空，请输入");

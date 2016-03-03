@@ -51,26 +51,25 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">娱乐项目名称</label>
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<input class="form-control" type="text" id="fsName" name="fsName" placeholder="娱乐项目名称"  maxlength="10"/>
 											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsScenicName">所属景区</label>
-											<div class="col-sm-2">
-												<select class="form-control" id="fsScenicno" name="fsScenicno">
-												</select>
+											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsAddr">娱乐项目地址</label>
+											<div class="col-sm-3">
+												<input class="form-control" type="text" id="fsAddr" name="fsAddr" placeholder="娱乐项目地址" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsRegionName">所属地区</label>
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<input type="text" placeholder="请选择行政区域" name="fsRegionName" data-key="0086" data-idx="0" data-full="中国" id="fsRegionName" class="inp-search" /> 
 												<input type="hidden" name="fsRegionno" id="fsRegionno" />
 												<div id="selectCity" class="localcity"></div>
 											</div>
 											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsType">娱乐项目类型</label>
-											<div class="col-sm-2" >
+											<div class="col-sm-3" >
 												<select id="fsType" name="fsType" class="form-control">
 													<option value="01">类型一</option>
 													<option value="02">类型二</option>
@@ -82,7 +81,7 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsLvl">娱乐项目级别</label>
-											<div class="col-sm-2" >
+											<div class="col-sm-3" >
 												<select id="fsLvl" name="fsLvl" class="form-control">
 													<option value="01">一级</option>
 													<option value="02">二级</option>
@@ -90,7 +89,7 @@
 												</select>
 											</div>
 											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsType">状态</label>
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<select id="fiStat" name="fiStat" class="form-control">
 													<option value="1">正常</option>
 													<option value="2">失效</option>
@@ -100,16 +99,8 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsAddr">娱乐项目地址</label>
-											<div class="col-sm-8">
-												<input class="form-control" type="text" id="fsAddr" name="fsAddr" placeholder="娱乐项目地址" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsDesc">描述</label>
-											<div class="col-sm-8">
+											<div class="col-sm-10">
 												<input class="form-control" type="text" id="fsDesc" name="fsDesc" placeholder="描述" />
 											</div>
 										</div>

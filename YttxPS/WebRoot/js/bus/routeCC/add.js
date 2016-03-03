@@ -40,7 +40,31 @@ jQuery(function($) {
 			html += '<option value=' + i + '>第' + (parseInt(i) + 1) + '天</option>';
 		}
 		$("#fiDays").html(html);
+		$("#fiDays").val("");
 	}
+	
+	$(".query-condition").change(function(){
+		var fiDayflag = $("#fiDays").val();
+		var fsRouteno = $("#fsResno").val();
+		var fiGenindex = $("#fiGenindex").val();
+		
+		if(fiDayflag != null && fsRouteno != null && fiGenindex != null) {
+			$.ajax({
+				type: "POST",
+				url: "/routeArrange/findRouteCCCount.htm",
+				data: "fiDayflag=" + fiDayflag + "&fsRouteno=" + fsRouteno,
+				dataType: "json",
+				success: function(data){
+					if(data > 0) {
+						getAllRouteCC(fiDayflag, fiGenindex, fsRouteno);
+						setContentDisable(true);
+					} else {
+						setContentDisable(false);
+					}
+				}
+			});
+		}
+	});
 	
 	/**
 	 * 获取线路配置列表
@@ -113,7 +137,7 @@ jQuery(function($) {
 	function getTicket(){
 		var scenic = '';
 		$("input[name='scenicGen']").each(function(){
-			scenic += $(this).val() + ",";
+			scenic += $.trim($(this).val()) + ",";
 		});
 		$.ajax({
 			type: "GET",
@@ -124,7 +148,7 @@ jQuery(function($) {
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['fsNo'] + '>' +comment['fsScenicname'] + '--' + comment['fsName'] + '</option>';
+					html += '<option value=' + comment['fsNo'] + '>' + comment['fsName'] + '</option>';
 				});
 				$("#ticket").html(html);
 			}
@@ -150,48 +174,7 @@ jQuery(function($) {
 			}
 		});
 	}
-	
-	/**
-	 * 获取酒店列表
-	 */
-	function getAccomadation(){
-		$.ajax({
-			type: "GET",
-			traditional: true,
-			url: "/accomadation/selectAccomadation.htm",
-			data: "accomadation.starlvl=" + $("#fsStarLvl").val(),
-			dataType: "json",
-			success: function(data){
-				var html = ''; 
-				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
-				});
-				$("#accomadationNo").html(html);
-				getRoom();
-			}
-		});
-	}
-	
-	/**
-	 * 获取酒店房型列表
-	 */
-	function getRoom(){
-		$.ajax({
-			type: "GET",
-			traditional: true,
-			url: "/room/selectRoom.htm",
-			data: "room.fsAccomno=" + $("#accomadationNo").val(),
-			dataType: "json",
-			success: function(data){
-				var html = ''; 
-				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['fsRoomno'] + '>' + comment['fsName'] + '</option>';
-				});
-				$("#room").html(html);
-			}
-		});
-	}
-	
+
 	//增加房型
 	$("#addRoomBtn").click(function(){
 		var html = $("#div_room").html();
@@ -211,7 +194,6 @@ jQuery(function($) {
 				dataType: "json",
 				success: function(data){
 					html += '<label for="form-field-select-2" class="room-label-' + val + '">' + text + '</label>';
-					//html += '<input type="hidden" class="ticketid" name="routecc[' + index + '].fsResno" value="' + val + '"/>';
 					html += '<select class="form-control room room-select-' + val + '" name="' + val + '" id="rooms_' + val + '" multiple="multiple">';
 					$.each(data.rows, function(i, e){
 						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
@@ -238,7 +220,7 @@ jQuery(function($) {
 	function getShop(){
 		var scenic = '';
 		$("input[name='scenicGen']").each(function(){
-			scenic += $(this).val() + ",";
+			scenic += $.trim($(this).val()) + ",";
 		});
 		$.ajax({
 			type: "GET",
@@ -249,7 +231,7 @@ jQuery(function($) {
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' +comment['scenicname'] + '--' + comment['name'] + '</option>';
+					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 				});
 				$("#shop").html(html);
 			}
@@ -262,7 +244,7 @@ jQuery(function($) {
 	function getRestaurant() {
 		var scenic = [];
 		$("input[name='scenicGen']").each(function(){
-			scenic.push($(this).val());
+			scenic.push($.trim($(this).val()));
 		});
 		
 		$.ajax({
@@ -274,7 +256,7 @@ jQuery(function($) {
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' + comment['scenicName'] + '--' + comment['name'] + '</option>';
+					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 				});
 				$("#restaurant").html(html);
 			}
@@ -287,7 +269,7 @@ jQuery(function($) {
 	function getEntertainment() {
 		var scenic = [];
 		$("input[name='scenicGen']").each(function(){
-			scenic.push($(this).val());
+			scenic.push($.trim($(this).val()));
 		});
 		
 		$.ajax({
@@ -299,7 +281,7 @@ jQuery(function($) {
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['fsNo'] + '>' + comment['fsScenicname'] + '--' + comment['fsName'] + '</option>';
+					html += '<option value=' + comment['fsNo'] + '>' + comment['fsName'] + '</option>';
 				});
 				$("#entertainment").html(html);
 			}
@@ -385,6 +367,7 @@ jQuery(function($) {
 	$("#fiGenindex").change(function(){
 		getRouteArrange();   //获取线路配置列表
 		getSceniceGen();   //获取线路景区
+		getScenice();   //获取景区
 		getShop();   //获取购物店列表
 	});
 	
@@ -526,18 +509,6 @@ jQuery(function($) {
 		$("#selectCity", "#addform").show();
 	});
 
-	//重置iframe高度
-	function resetIframeHeight(type){
-		var height = $(window.parent.document).find("#addIframe").attr("height");
-		height = height.substring(0,height.length - 2);
-		if ("add" == type) {
-			height = (parseInt(height) + 21);
-		} else {
-			height = (parseInt(height) - 21);
-		}
-		$(window.parent.document).find("#addIframe").attr("height", height + "px");
-	}
-
 	//	重置
 	$("#reset").on("click", function() {
 			$("#selectCity").hide();
@@ -551,7 +522,7 @@ jQuery(function($) {
 			$("#addModal", parent.document).find(".close").click();
 	});
 	
-//	提交
+	//	提交
 	$("#submit").on("click", function () {
 		var index = 0;
 		var routecc = {};
@@ -633,6 +604,10 @@ jQuery(function($) {
 					if(json.result == "ok") {
 						$("#message").text("增加记录成功");
 						$("#message").show();
+						setTimeout(function(){
+							$("#message").fadeOut(2000);
+						}, 2000);
+						setContentDisable(true);
 						return true;
 					}
 					else {

@@ -223,7 +223,8 @@ jQuery(function($) {
 					index : 'fsScenicname',
 					width : 50,
 					editable : true,
-					sorttype : "char"
+					sorttype : "char",
+					hidden : true
 				}, {
 					name : 'fsRegionno',
 					index : 'fsRegionno',

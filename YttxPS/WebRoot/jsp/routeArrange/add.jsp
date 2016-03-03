@@ -77,9 +77,11 @@
 											<label class="col-sm-2 control-label no-padding-right" for="fsProperty">线路类型</label>
 											<div class="col-sm-3">
 												<select class="form-control" id="fsProperty" name="fsProperty">
-													<option value="01">专家推荐</option>
-													<option value="02">热门线路</option>
-													<option value="03">特价线路</option>
+													<option value="1">常规线路</option>
+													<option value="2">纯玩团</option>
+													<option value="3">品质游</option>
+													<option value="4">热门线路</option>
+													<option value="4">特卖线路</option>
 												</select>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiDays">线路天数</label>
@@ -92,11 +94,11 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="ftStartdate">有效日期</label>
 											<div class="col-sm-2">
-												<input type="text" id="ftStartdate" name="ftStartdate" class="form-control" placeholder=""/>
+												<input type="text" id="ftStartdate" name="ftStartdate" class="form-control" placeholder="" />
 											</div>
 											<label class="col-sm-1 control-label" style="width: 10px;">至</label>
 											<div class="col-sm-2">
-												<input type="text" id="ftEnddate" name="ftEnddate" class="form-control" placeholder=""/>
+												<input type="text" id="ftEnddate" name="ftEnddate" class="form-control" placeholder="" />
 											</div>
 										</div>
 									</div>

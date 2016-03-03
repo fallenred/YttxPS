@@ -7,12 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yttx.yttxps.mapper.AccomadationMapper;
 import com.yttx.yttxps.mapper.RoomMapper;
-import com.yttx.yttxps.mapper.TResourceScenicMapper;
-import com.yttx.yttxps.model.Accomadation;
 import com.yttx.yttxps.model.Room;
-import com.yttx.yttxps.model.TResourceScenic;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.service.IRoomService;
 
@@ -30,12 +26,6 @@ public class RoomService implements IRoomService {
 	
 	@Autowired
 	private RoomMapper<Room> roomMapper;
-	
-	@Autowired
-	private TResourceScenicMapper<TResourceScenic> resourceScenicMapper;
-	
-	@Autowired
-	private AccomadationMapper<Accomadation> accomadationMapper;
 
 	@Override
 	public int selectCountSelective(Map<String, Object> map) {
@@ -54,14 +44,7 @@ public class RoomService implements IRoomService {
 
 	@Override
 	public int insert(Room record) {
-		Accomadation accomadation = accomadationMapper.selectByPrimaryKey(record.getFsAccomno());
 		record.setFsRoomno(String.format("%010d", roomMapper.selectSequence().intValue()));
-		TResourceScenic resourceScenic = new TResourceScenic();
-		resourceScenic.setFiIndex(BigDecimal.valueOf(resourceScenicMapper.getSeq()));
-		resourceScenic.setFsResno(record.getFsRoomno());
-		resourceScenic.setFsRestype("fx");
-		resourceScenic.setFsScenicno(accomadation.getFsScenicno());
-		resourceScenicMapper.insert(resourceScenic);
 		return roomMapper.insert(record);
 	}
 
