@@ -28,8 +28,8 @@ public class RoomRequest extends JqGridRequest implements java.io.Serializable {
 
 	public void copyRoom(Map<String, Object> map) {
 		if (room != null) {
-			map.put("fsRoomno", room.getFsRoomno());   //序号
-			map.put("fsAccomno", room.getFsAccomno());   //宾馆代码
+			map.put("fsRoomno", room.getFsRoomno() != null ? room.getFsRoomno().trim() : "");   //序号
+			map.put("fsAccomno", room.getFsAccomno() != null ? room.getFsAccomno().trim() : "");   //宾馆代码
 			map.put("fsMeal", room.getFsMeal());   //早中晚三餐情况
 			map.put("fsType", room.getFsType());   //房间类型
 			map.put("fsName", room.getFsName());   //房型名称

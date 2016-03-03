@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yttx.yttxps.mapper.TRoutePropClassMapper" >
+  <resultMap id="BaseResultMap" type="com.yttx.yttxps.model.TRoutePropClass" >
+    <id column="FS_ID" property="fsId" jdbcType="CHAR" />
+    <id column="FI_CLASS" property="fiClass" jdbcType="DECIMAL" />
+    <result column="FI_CLASSTYPE" property="fiClasstype" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FS_ID, FI_CLASS, FI_CLASSTYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yttx.yttxps.model.TRoutePropClassExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TROUTEPROPCLASS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yttx.yttxps.model.TRoutePropClassKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TROUTEPROPCLASS
+    where FS_ID = #{fsId,jdbcType=CHAR}
+      and FI_CLASS = #{fiClass,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.yttx.yttxps.model.TRoutePropClassKey" >
+    delete from TROUTEPROPCLASS
+    where FS_ID = #{fsId,jdbcType=CHAR}
+      and FI_CLASS = #{fiClass,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yttx.yttxps.model.TRoutePropClassExample" >
+    delete from TROUTEPROPCLASS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yttx.yttxps.model.TRoutePropClass" >
+    insert into TROUTEPROPCLASS (FS_ID, FI_CLASS, FI_CLASSTYPE
+      )
+    values (#{fsId,jdbcType=CHAR}, #{fiClass,jdbcType=DECIMAL}, #{fiClasstype,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yttx.yttxps.model.TRoutePropClass" >
+    insert into TROUTEPROPCLASS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fsId != null" >
+        FS_ID,
+      </if>
+      <if test="fiClass != null" >
+        FI_CLASS,
+      </if>
+      <if test="fiClasstype != null" >
+        FI_CLASSTYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fsId != null" >
+        #{fsId,jdbcType=CHAR},
+      </if>
+      <if test="fiClass != null" >
+        #{fiClass,jdbcType=DECIMAL},
+      </if>
+      <if test="fiClasstype != null" >
+        #{fiClasstype,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yttx.yttxps.model.TRoutePropClassExample" resultType="java.lang.Integer" >
+    select count(*) from TROUTEPROPCLASS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TROUTEPROPCLASS
+    <set >
+      <if test="record.fsId != null" >
+        FS_ID = #{record.fsId,jdbcType=CHAR},
+      </if>
+      <if test="record.fiClass != null" >
+        FI_CLASS = #{record.fiClass,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fiClasstype != null" >
+        FI_CLASSTYPE = #{record.fiClasstype,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TROUTEPROPCLASS
+    set FS_ID = #{record.fsId,jdbcType=CHAR},
+      FI_CLASS = #{record.fiClass,jdbcType=DECIMAL},
+      FI_CLASSTYPE = #{record.fiClasstype,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yttx.yttxps.model.TRoutePropClass" >
+    update TROUTEPROPCLASS
+    <set >
+      <if test="fiClasstype != null" >
+        FI_CLASSTYPE = #{fiClasstype,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where FS_ID = #{fsId,jdbcType=CHAR}
+      and FI_CLASS = #{fiClass,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yttx.yttxps.model.TRoutePropClass" >
+    update TROUTEPROPCLASS
+    set FI_CLASSTYPE = #{fiClasstype,jdbcType=DECIMAL}
+    where FS_ID = #{fsId,jdbcType=CHAR}
+      and FI_CLASS = #{fiClass,jdbcType=DECIMAL}
+  </update>
+</mapper>
