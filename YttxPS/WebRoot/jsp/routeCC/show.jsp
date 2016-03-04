@@ -248,6 +248,7 @@
 
 	</div>
 	<!-- /.main-container -->
+	<script src="/js/bus/routeCC/routeCCCommon.js"></script>
 	<script src="/js/bus/routeCC/show.js"></script>
 
 	<c:if test="${!empty succflag && succflag =='1'}">

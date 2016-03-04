@@ -1,12 +1,12 @@
 /**
  * 获取酒店房型列表
  */
-function getRoom(){
+function getRoom(fsAccomno){
 	$.ajax({
 		type: "GET",
 		traditional: true,
 		url: "/room/selectRoom.htm",
-		data: "room.fsAccomno=" + $("#accomadationNo").val(),
+		data: "room.fsAccomno=" + fsAccomno,
 		dataType: "json",
 		success: function(data){
 			var html = ''; 
@@ -21,14 +21,14 @@ function getRoom(){
 /**
  * 获取酒店列表
  */
-function getAccomadation(){
+function getAccomadation(starlvl){
 	var scenic = [];
 	var req = {};
 	$("input[name='scenicGen']").each(function(){
 		scenic.push($.trim($(this).val()));
 	});
 	
-	req["accomadation.starlvl"] = $("#fsStarLvl").val();
+	req["accomadation.starlvl"] = starlvl;
 	req["scenicNo"] = scenic;
 	$.ajax({
 		type: "GET",
@@ -42,7 +42,7 @@ function getAccomadation(){
 				html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 			});
 			$("#accomadationNo").html(html);
-			getRoom();
+			getRoom($("#accomadationNo").val());
 		}
 	});
 }

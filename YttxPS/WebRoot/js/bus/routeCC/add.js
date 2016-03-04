@@ -528,6 +528,7 @@ jQuery(function($) {
 		var routecc = {};
 		var fsRouteno = $("#fsResno").val();
 		var fiDayflag = $("#fiDays").val();
+		routecc["fsId"] = fsRouteno;
 		
 		//门票
 		$(".ticket").each(function(idx, e){

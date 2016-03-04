@@ -255,7 +255,7 @@ jQuery(function($) {
 						value : s1
 					},
 					formatter : function(v, opt, rec) {
-						return fsProperty[v];
+						return fsProperty[$.trim(v)];
 					},
 					unformat : function(v) {
 						for (k in fsProperty)

@@ -2,9 +2,15 @@ package com.yttx.yttxps.service.imp;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.Namespace;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +29,7 @@ import com.yttx.yttxps.model.TRouteCCExample;
 import com.yttx.yttxps.model.TRouteCCExample.Criteria;
 import com.yttx.yttxps.model.TRouteCCKey;
 import com.yttx.yttxps.model.TRoutePropClass;
+import com.yttx.yttxps.model.VResSnapshot;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.service.IRouteArrangeService;
 
@@ -76,6 +83,8 @@ public class RouteArrangeService implements IRouteArrangeService {
 		for(TRouteCCKey routeCC : record.getRoutecc()) {
 			routeCCMapper.insert(routeCC);
 		}
+		TRouteArrangeWithBLOBs routeArrange = routeArrangeMapper.selectByPrimaryKey(record.getFsId());
+		creatFcRessnapshot(routeArrange);
 	}
 
 	@Override
@@ -93,6 +102,9 @@ public class RouteArrangeService implements IRouteArrangeService {
 		for(TRouteCCKey routeCC : record.getRoutecc()) {
 			routeCCMapper.insert(routeCC);
 		}
+		
+		TRouteArrangeWithBLOBs routeArrange = routeArrangeMapper.selectByPrimaryKey(record.getFsId());
+		creatFcRessnapshot(routeArrange);
 	}
 
 	@Override
@@ -141,5 +153,47 @@ public class RouteArrangeService implements IRouteArrangeService {
 	
 	public int findRouteCCCount(TRouteCCExample example) {
 		return routeCCMapper.countByExample(example);
+	}
+	
+	private void creatFcRessnapshot(TRouteArrangeWithBLOBs routeArrange) {
+		Document fcRessnapshot = new Document();
+		Element root = new Element("root");
+		Namespace space = Namespace.getNamespace("h", "http://www.yttx.com/");
+		root.setNamespace(space);
+		Element body = new Element("body");
+		root.addContent(body);
+		fcRessnapshot.setRootElement(root);
+		
+		BigDecimal fiDays = routeArrange.getFiDays();
+		if(fiDays != null) {
+			for(int i = 0; i < fiDays.intValue(); i ++) {
+				Element day = new Element("daylist");
+				Element dayFlag = new Element("dayflag").setText(Integer.toString(i));
+				day.addContent(dayFlag);
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("fsRouteno", routeArrange.getFsId());
+				map.put("fiDayflag", BigDecimal.valueOf(i));
+				List<VResSnapshot> list = routeArrangeMapper.selectRessnapshot(map);
+				for(VResSnapshot v : list) {
+					Element resList = new Element("reslist");
+					resList.addContent(new Element("restype").setText(v.getResType()));
+					resList.addContent(new Element("resprop").setText(v.getResProp()));
+					resList.addContent(new Element("resno").setText(v.getResNo()));
+					resList.addContent(new Element("resname").setText(v.getResName()));
+					day.addContent(resList);
+				}
+				body.addContent(day);
+			}
+		}
+		
+		XMLOutputter output = new XMLOutputter();
+		Format format = Format.getCompactFormat();
+		format.setEncoding("UTF-8");
+		output.setFormat(format);
+		String snapshotString = output.outputString(fcRessnapshot);
+		TRouteArrangeWithBLOBs record = new TRouteArrangeWithBLOBs();
+		record.setFsId(routeArrange.getFsId());
+		record.setFcRessnapshot(snapshotString);
+		routeArrangeMapper.updateByPrimaryKeySelective(record);
 	}
 }

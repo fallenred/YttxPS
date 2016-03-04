@@ -80,10 +80,10 @@ jQuery(function($) {
 	$("#submit").click(function() {
 		$("#collapseOne").collapse('hide');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
-		postData["routeCC.fsNo"] = $("#queryfield").find("#fsNo").val();
-		postData["routeCC.fsName"] = $("#queryfield").find("#fsName").val();
-		postData["routeCC.fiDays"] = $("#queryfield").find("#fiDays").val();
-		postData["routeCC.fiStat"] = $("#queryfield").find("#fiStat").val();
+		postData["arrange.fsId"] = $("#queryfield").find("#fsId").val();
+		postData["arrange.fsName"] = $("#queryfield").find("#fsName").val();
+		postData["arrange.fiDays"] = $("#queryfield").find("#fiDays").val();
+		postData["arrange.fiStat"] = $("#queryfield").find("#fiStat").val();
 		$("#grid-table").jqGrid("setGridParam", {
 			postData : postData
 		}).trigger("reloadGrid");
@@ -161,7 +161,7 @@ jQuery(function($) {
 	s = s.substring(1);
 	jQuery(grid_selector).jqGrid(
 			{
-				url : "/routeArrange/findRouteArrange.htm",
+				url : "/routeArrange/findRouteArrange.htm?hasRouteCC=true",
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
