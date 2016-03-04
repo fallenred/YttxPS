@@ -15,46 +15,48 @@
 			</submenu>
 		</item>
 		
-		<item id="0400" name="景区资源管理" icon="menu-icon fa fa-table" >
+		<item id="0400" name="景区管理" icon="menu-icon fa fa-table" >
 			<submenu>
 				<item id="04a0" name="景区管理" url="/jsp/scenic/scenic.jsp" />
 				<item id="04b0" name="门票资源管理" url="/jsp/ticket/ticket.jsp" />
-				<item id="04c0" name="门票价格管理" url="/jsp/ticketPrice/ticketPrice.jsp" />
+				<item id="04c0" name="门票价格设置" url="/jsp/ticketPrice/ticketPrice.jsp" />
 			</submenu>
 		</item>
 		
-		<item id="0500" name="娱乐资源管理" icon="menu-icon fa fa-table" >
+		<item id="0500" name="娱乐管理" icon="menu-icon fa fa-table" >
 			<submenu>
 				<item id="05a0" name="娱乐项目资源管理" url="/jsp/entertainment/entertainment.jsp" />
-				<item id="05b0" name="娱乐项目价格管理" url="/jsp/entertainmentPrice/entertainmentPrice.jsp" />
+				<item id="05b0" name="娱乐项目价格设置" url="/jsp/entertainmentPrice/entertainmentPrice.jsp" />
 			</submenu>
 		</item>
 		
-		<item id="0600" name="餐厅资源管理" icon="menu-icon fa fa-table" >
+		<item id="0600" name="餐厅管理" icon="menu-icon fa fa-table" >
 			<submenu>
 				<item id="06a0" name="餐厅资源配置" url="/restaurant/page.htm" />
-				<item id="06b0" name="酒店资源配置" url="/jsp/accomadation/accomadation.jsp" />
 			</submenu>
 		</item>
 		
-		<item id="0700" name="驾驶员资料管理" icon="menu-icon fa fa-table" >
+		<item id="0700" name="酒店管理" icon="menu-icon fa fa-table" >
 			<submenu>
-				<item id="07a0" name="资料配置" url="/jsp/driver/driver.jsp" />
+				<item id="07a0" name="酒店资源配置" url="/jsp/accomadation/accomadation.jsp" />
 			</submenu>
 		</item>
 		
-		<item id="0800" name="车辆资料管理" icon="menu-icon fa fa-table" >
+		<item id="0800" name="车调管理" icon="menu-icon fa fa-table" >
 			<submenu>
-				<item id="08a0" name="资料配置" url="/jsp/car/car.jsp" />
+				<item id="08a0" name="驾驶员资料配置" url="/jsp/driver/driver.jsp" />
+				<item id="08b0" name="车辆资料配置" url="/jsp/car/car.jsp" />
+				<item id="08c0" name="车型管理配置" url="/jsp/transport/transport.jsp" />
+				<item id="08d0" name="车型线路管理" url="/jsp/transportArrange/transportArrange.jsp" />
 			</submenu>
 		</item>
 		
-		<item id="0900" name="车型管理配置" icon="menu-icon fa fa-sitemap">
+		<item id="0900" name="购物店管理" icon="menu-icon fa fa-table" >
 			<submenu>
-				<item id="09b0" name="车型管理配置" url="/jsp/transport/transport.jsp" />
-				<item id="09c0" name="车型线路管理" url="/jsp/transportArrange/transportArrange.jsp" />
+				<item id="09a0" name="购物店管理" url="/jsp/shop/shop.jsp" />
 			</submenu>
 		</item>
+		
 		<item id="1000" name="线路管理配置" icon="menu-icon fa fa-sitemap">
 			<submenu>
 				<item id="10a0" name="线路概况管理" url="/jsp/gen/gen.jsp" />
@@ -63,11 +65,7 @@
 			</submenu>
 		</item>
 		
-		<item id="1100" name="购物管理" icon="menu-icon fa fa-table" >
-			<submenu>
-				<item id="11a0" name="购物管理" url="/jsp/shop/shop.jsp" />
-			</submenu>
-		</item>
+		
 		
 		<item id="1200" name="导游管理" icon="menu-icon fa fa-table" >
 			<submenu>
