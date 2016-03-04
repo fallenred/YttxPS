@@ -21,14 +21,14 @@ function getRoom(fsAccomno){
 /**
  * 获取酒店列表
  */
-function getAccomadation(starlvl){
+function getAccomadation(accomadation){
 	var scenic = [];
 	var req = {};
 	$("input[name='scenicGen']").each(function(){
 		scenic.push($.trim($(this).val()));
 	});
 	
-	req["accomadation.starlvl"] = starlvl;
+	req["accomadation.starlvl"] = accomadation.starlvl;
 	req["scenicNo"] = scenic;
 	$.ajax({
 		type: "GET",
@@ -42,6 +42,9 @@ function getAccomadation(starlvl){
 				html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 			});
 			$("#accomadationNo").html(html);
+			if(accomadation.no != undefined && accomadation.no != null) {
+				$("#accomadationNo").find("option[value='" + accomadation.no + "']").attr("selected", "selected");
+			}
 			getRoom($("#accomadationNo").val());
 		}
 	});
@@ -238,7 +241,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 											url: "/accomadation/findAccomadationInfo.htm",
 											dataType: "json",
 											success: function(accomadation) {
-												getAccomadation(accomadation.data.starlvl);
+												getAccomadation(accomadation.data);
 												$("#fsStarLvl").find("option[value='" + accomadation.data.starlvl + "']").attr("selected", "selected");
 											}
 										});

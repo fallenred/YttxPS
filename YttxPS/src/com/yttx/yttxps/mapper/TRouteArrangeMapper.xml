@@ -169,7 +169,7 @@
     </if>
     <include refid="Base_Column_List" />
     ,
-    FS_STARTPLACENAME
+    FS_STARTPLACENAME,
     <include refid="Blob_Column_List" />
     from (
     <include refid="Custom_Table_Columns" />
@@ -213,7 +213,7 @@
     select 
     <include refid="Base_Column_List" />
     ,
-    FS_STARTPLACENAME
+    FS_STARTPLACENAME,
     <include refid="Blob_Column_List" />
     from (
     <include refid="Custom_Table_Columns" />

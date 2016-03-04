@@ -271,6 +271,10 @@ jQuery(function($) {
 			$("#editModal", parent.document).find(".close").click();
 	});
 	
+	//屏蔽部分组件
+	$("select:not(.query-condition)").attr("disabled", "disabled");
+	$("button[id!='close']").attr("disabled", "disabled");
+	
 	//	colorbox
 	var $overflow = '';
 	var colorbox_params = {
