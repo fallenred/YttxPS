@@ -88,7 +88,7 @@
 											</div>
 										</div>
 									</div>
-									<h4>部门权限</h4>
+									<h4>用户权限</h4>
 									<div class="row">
 										<div id="show_tree_div" class="ztree"></div>
 									</div>

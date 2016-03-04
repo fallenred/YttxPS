@@ -96,7 +96,11 @@
 											</div>
 										</div>
 									</div>
-									<h4>部门权限</h4>
+									<h4>用户权限
+										<small>
+											<input type="checkbox" id="add_right_all">全部权限
+										</small>
+									</h4>
 									<div class="row">
 										<div id="edit_tree_div" class="ztree"></div>
 									</div>
