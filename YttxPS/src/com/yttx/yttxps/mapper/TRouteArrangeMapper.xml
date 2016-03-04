@@ -616,7 +616,7 @@
 	      </if>
 	      ) tt where 1=1
 	      <if test="startrow != null">
-	        and tt.rowno &gt;= #{startrow}
+	        and tt.rowno &gt; #{startrow}
 	      </if>
 	      <if test="hasRouteCC == true">
 	        <![CDATA[ and tt.ccnum > 0 ]]>

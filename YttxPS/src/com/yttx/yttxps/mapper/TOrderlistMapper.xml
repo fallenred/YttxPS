@@ -707,8 +707,7 @@
 		    <include refid="Base_Column_List" />
 		    ,
 		    <include refid="Blob_Column_List" />
-		    from TORDERLIST) t
-
+		    from TORDERLIST order by FS_NO) t
     	where 1=1
 	      <if test="fsNo != null and fsNo != ''">
 	        and fs_no = #{fsNo}
@@ -722,10 +721,12 @@
 	      <if test="fiStat != null and fiStat != ''">
 	        and fi_Stat = #{fiStat}
 	      </if>
-	      order by FS_NO
+	      <if test="endrow != null" >
+	        and ROWNUM &lt;= #{endrow}
+	      </if>
 	      ) tt where 1=1
 	      <if test="startrow != null">
-	        and tt.rowno &gt;= #{startrow}
+	        and tt.rowno &gt; #{startrow}
 	      </if>
   </select>
 </mapper>

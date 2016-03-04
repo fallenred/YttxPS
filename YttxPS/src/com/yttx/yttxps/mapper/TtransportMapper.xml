@@ -336,7 +336,7 @@
   
   <!-- 动态查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
-      select * from (select ROWNUM as rowno, t.* from TTRANSPORT t
+      select * from (select ROWNUM as rowno, t.* from (select * from TTRANSPORT order by fs_Name desc) t
     	where 1=1
 	      <if test="fsName != null and fsName != ''" >
 	        and fs_Name like '%'||#{fsName}||'%'
@@ -350,9 +350,12 @@
 	      <if test="fiStat != null and fiStat != ''" >
 	        and fi_Stat = #{fiStat}
 	      </if>
+	      <if test="endrow != null" >
+	        and ROWNUM &lt;= #{endrow}
+	      </if>
 	      ) tt where 1=1
 	      <if test="startrow != null" >
-	        and tt.rowno &gt;= #{startrow}
+	        and tt.rowno &gt; #{startrow}
 	      </if>
   </select>
   

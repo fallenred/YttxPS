@@ -567,7 +567,7 @@
 		    ,
 		    <include refid="Blob_Column_List" />
 		    , fi_genindex, fs_name, ft_startdate
-		    from view_tordercustom) t
+		    from view_tordercustom order by FS_ORDER_ID) t
 
     	where 1=1
 	      <if test="fsOrderID != null and fsOrderID != ''">
@@ -579,10 +579,12 @@
 	      <if test="ftCreatDate != null and ftCreatDate != ''">
 	        and FT_CREATDATE = #{ftCreatDate}
 	      </if>
-	      order by FS_ORDER_ID
+	      <if test="endrow != null" >
+	        and ROWNUM &lt;= #{endrow}
+	      </if>
 	      ) tt where 1=1
 	      <if test="startrow != null">
-	        and tt.rowno &gt;= #{startrow}
+	        and tt.rowno &gt; #{startrow}
 	      </if>
   </select>
 </mapper>

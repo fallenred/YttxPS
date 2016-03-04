@@ -323,7 +323,7 @@
   <!-- 分页查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
       select * from (select ROWNUM as rowno, t.* from 
-		VIEW_TTICKET t
+		(select * from VIEW_TTICKET) t
     	where 1=1
 	      <if test="fsNo != null and fsNo != ''">
 	        and fs_no = #{fsNo}
@@ -337,9 +337,12 @@
 	      <if test="fiStat != null and fiStat != ''">
 	        and fi_Stat = #{fiStat}
 	      </if>
+	      <if test="endrow != null" >
+	        and ROWNUM &lt;= #{endrow}
+	      </if>
 	      ) tt where 1=1
 	      <if test="startrow != null">
-	        and tt.rowno &gt;= #{startrow}
+	        and tt.rowno &gt; #{startrow}
 	      </if>
   </select>
   

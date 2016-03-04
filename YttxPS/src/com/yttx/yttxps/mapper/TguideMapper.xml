@@ -343,9 +343,12 @@
 	      <if test="stat != null and stat != ''">
 	        and fi_Stat = #{stat}
 	      </if>
+	      <if test="endrow != null" >
+	        and ROWNUM &lt;= #{endrow}
+	      </if>
 	      ) tt where 1=1
 	      <if test="startrow != null">
-	        and tt.rowno &gt;= #{startrow}
+	        and tt.rowno &gt; #{startrow}
 	      </if>
   </select>
 </mapper>
