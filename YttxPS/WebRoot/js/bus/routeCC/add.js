@@ -373,12 +373,12 @@ jQuery(function($) {
 	
 	//酒店标准变更
 	$("#fsStarLvl").change(function(){
-		getAccomadation();
+		getAccomadation($("#fsStarLvl").val());
 	});
 	
 	//酒店变更
 	$("#accomadationNo").change(function(){
-		getRoom();
+		getRoom($("#accomadationNo").val());
 	});
 	
 	//增加景区
