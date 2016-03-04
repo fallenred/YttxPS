@@ -40,6 +40,7 @@ public class ShopService implements IShopService {
 
 	@Override
 	public int insert(Tshop record) {
+		record.setNo("gw"+shopMapper.selectFsNo());
 		return shopMapper.insert(record);
 	}
 

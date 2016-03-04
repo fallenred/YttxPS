@@ -129,7 +129,7 @@
 												for="ftStartdate">发团日期</label>
 											<div class="col-sm-3">
 												<input type="text" id="ftStartdate" name="ftStartdate"
-													class="form-control" placeholder="发团日期" />
+													class="form-control datetimepicker" data-date-format="yyyy/mm/dd" readonly="readonly" placeholder="发团日期" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="regionname">发团地点</label>
@@ -311,6 +311,17 @@
 	    </script>
 
 	</c:if>
-
+	<script type="text/javascript">
+		$('.datetimepicker').datetimepicker({
+			language:  'zh-CN',
+	        weekStart: 1,
+	        todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+		});
+	</script>
 </body>
 </html>

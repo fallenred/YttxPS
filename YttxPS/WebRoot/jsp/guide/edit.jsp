@@ -90,7 +90,7 @@
 												for="workdate">开始工作日期</label>
 											<div class="col-sm-3">
 												<input type="text" id="workdate" name="workdate"
-													class="form-control" placeholder="开始工作日期" />
+													class="form-control datetimepicker" data-date-format="yyyy/mm/dd" readonly="readonly" placeholder="开始工作日期" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="contactno">联系方式</label>
@@ -236,6 +236,18 @@
 				});
 				$("#lvl").html(html);
 			}
+		});
+	</script>
+	<script type="text/javascript">
+		$('.datetimepicker').datetimepicker({
+			language:  'zh-CN',
+	        weekStart: 1,
+	        todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
 		});
 	</script>
 </body>

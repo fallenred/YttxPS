@@ -50,33 +50,31 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right"
-												for="no">购物点代码</label>
+											<label class="col-sm-2 control-label no-padding-right"
+												for="no">购物店编号</label>
 											<div class="col-sm-3">
 												<input type="text" id="no" name="no" class="form-control"
 													placeholder="购物点代码需唯一"  maxlength="10" readonly="readonly"/>
 											</div>
-											<label class="col-sm-1 control-label no-padding-right"
-												for="regionname">所属地区</label>
+											<label class="col-sm-2 control-label no-padding-right" for="regionname">所属地区</label>
 											<div class="col-sm-3">
 												<input type="text" placeholder="请选择行政区域" name="regionname"
-													data-key="0086" data-idx="0" data-full="中国" id="regionname"
-													class="inp-search" /> 
-													<input type="hidden" name="regionno"
-													id="regionno" />
+													data-key="0086" data-idx="0" data-full="中国"
+													id="regionname" class="inp-search" /> <input
+													type="hidden" name="regionno" id="regionno" />
 												<div id="selectCity" class="localcity"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="name">购物店名称</label>
 											<div class="col-sm-3">
 												<input type="text" id="name" name="name" class="form-control"
 													placeholder="购物店名称"  />
 											</div>
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="desr">经营范围</label>
 											<div class="col-sm-3">
 												<input type="text" id="desr" name="desr" class="form-control" placeholder="经营范围" />
@@ -85,13 +83,13 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-										<label class="col-sm-1 control-label no-padding-right"
+										<label class="col-sm-2 control-label no-padding-right"
 												for="opentime">开放时间</label>
 											<div class="col-sm-3">
 												<input type="text" placeholder="开放时间" id="opentime"
 													name="opentime" class="form-control"></input>
 											</div>
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="tel">售后电话</label>
 											<div class="col-sm-3">
 												<input type="text" placeholder="售后电话" id="tel"
@@ -101,13 +99,13 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="singlereturn">单价商品返点比例</label>
 											<div class="col-sm-3">
 												<input type="text" placeholder="单价商品返点比例" id="singlereturn"
 													name="singlereturn" class="form-control"></input>
 											</div>
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="totalreturn">总体返点比例</label>
 											<div class="col-sm-3">
 												<input type="text" placeholder="总体返点比例" id="totalreturn"
@@ -117,12 +115,12 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="mantip">人头费用</label>
 											<div class="col-sm-3">
 												<input type="text" placeholder="人头费用" id="mantip" name="mantip"   class="form-control"></input>
 											</div>
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="parktip">停车费</label>
 											<div class="col-sm-3">
 												<input type="text" placeholder="停车费" id="parktip" name="parktip"  class="form-control"></input>
@@ -131,13 +129,13 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="staytime">停留时间</label>
 											<div class="col-sm-3">
 												<input type="text" placeholder="停留时间" id="staytime"
 													name="staytime" class="form-control"></input>
 											</div>
-											<label class="col-sm-1 control-label no-padding-right"
+											<label class="col-sm-2 control-label no-padding-right"
 												for="policy">淡旺季政策</label>
 											<div class="col-sm-3">
 												<input placeholder="淡旺季政策" id="policy" name="policy"
@@ -181,6 +179,17 @@
 	    </script>
 
 	</c:if>
-
+	<script type="text/javascript">
+		$('.datetimepicker').datetimepicker({
+			language:  'zh-CN',
+	        weekStart: 1,
+	        todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+		});
+	</script>
 </body>
 </html>

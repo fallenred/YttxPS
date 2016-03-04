@@ -11,16 +11,15 @@ jQuery(function($) {
 	
 	//城市选择器
 	function localcallback(index, key, value, fullkey, fullname) {
-//		$("#regionname", "#editform").val(fullname);
+		$("#regionname", "#editform").val(fullname);
 		$("#regionno", "#editform").val(key);
 		if (index == 3)
 			$("#selectCity", "#editform").hide();
 	}
-
-//	$("#regionname", "#editform").click(function() {
-//		$("#selectCity", "#editform").show();
-//	});
-
+	
+	$("#regionname", "#editform").click(function() {
+		$("#selectCity", "#editform").show();
+	});
 
 	//	重置
 	$("#reset").on("click", function() {

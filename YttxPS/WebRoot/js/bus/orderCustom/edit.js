@@ -181,18 +181,20 @@ jQuery(function($) {
 	
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#fsName").val() == '') {
-			$("#message").show();
-			$("#message").text("路线名称不能为空，请输入");
-			$('#no').focus();
-			return false;
-		} 
-		if($("#fiDays").val() == '') {
-			$("#message").show();
-			$("#message").text("路线天数不能为空，请输入");
-			$('#name').focus();
-			return false;
-		} 
+		//校验数量不能为空
+		flag = true;
+		$(".usernum").each(function(){
+			if ($(this).val() == null || $(this).val() == '') {
+				$("#message").show();
+				$("#message").text("数量不能为空，请输入");
+				$(this).attr("placeholder", "数量不能为空，请输入");
+				$(this).focus();
+				flag = false;
+			}
+		});
+		if (!flag) {
+			return;
+		}
 		$.post("/orderCustom/editOrderCustom.htm",
 				$("#editform").serialize(),
 				function(data){

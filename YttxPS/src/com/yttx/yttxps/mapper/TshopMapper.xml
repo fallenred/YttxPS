@@ -311,4 +311,7 @@
 	        and tt.rowno &gt; #{startrow}
 	      </if>
   </select>
+    <select id="selectFsNo" resultType="int">
+      select shop_sequence.nextval from dual
+  </select>
 </mapper>

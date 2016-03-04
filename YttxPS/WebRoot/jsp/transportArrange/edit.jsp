@@ -122,17 +122,17 @@
 	    </script>
 
 	</c:if>
-<script type="text/javascript">
-	$('.datetimepicker').datetimepicker({
-		language:  'zh-CN',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		minView: 2,
-		forceParse: 0
-	});
-</script>
+	<script type="text/javascript">
+		$('.datetimepicker').datetimepicker({
+			language:  'zh-CN',
+	        weekStart: 1,
+	        todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+		});
+	</script>
 </body>
 </html>

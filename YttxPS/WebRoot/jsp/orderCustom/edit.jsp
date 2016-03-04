@@ -67,7 +67,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="ftCreatdate">创建日期</label>
 											<div class="col-sm-3">
-												<input type="text" id="ftCreatdate" name="ftCreatdate" class="form-control" placeholder="创建日期" />
+												<input type="text" id="ftCreatdate" readonly="readonly" name="ftCreatdate" class="form-control" placeholder="创建日期" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiType">客户类型</label>
 											<div class="col-sm-3">
@@ -458,12 +458,13 @@
 								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
 										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
-										'<span id="'+comment['fdPrice']+'">&nbsp;团队半价票('+comment['fdPrice']+'￥)</span></div>'+
-										'<label class="col-sm-2 control-label no-padding-right">数量：</label><div class="col-sm-1 no-padding-left">'+
-										'<input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>';
+										'<span id="'+comment['fdPrice']+'">&nbsp;团队半价票('+comment['fdPrice']+'￥)</span>';
 							}
 			        	});
-						 html += '<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
+						 html += '</div>'+
+								 '<label class="col-sm-2 control-label no-padding-right">数量：</label><div class="col-sm-1 no-padding-left">'+
+								 '<input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>'+
+							 	 '<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
 							 	 '<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="mp"/>' +
 								 '<span><!-- 资源编号 --></span><input type="hidden" class="ticketid" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>';
 						if (data != '') {
@@ -548,13 +549,14 @@
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].cctype" value="1" type="hidden" disabled="disabled"/>'+
 										'<input type="checkbox" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'"/>'+
 										'<input class="price" type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
-										'<span id="'+comment['fdPrice']+'">&nbsp;晚餐费用('+comment['fdPrice']+'￥)</span></div>'+
-										'<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
-										'<div class="col-sm-1 no-padding-left"><input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>'+
-										'<span><!-- 资源编号 --></span><input type="hidden" class="restaurantNo" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>'+
-										'<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="ct"/>';
+										'<span id="'+comment['fdPrice']+'">&nbsp;晚餐费用('+comment['fdPrice']+'￥)</span>';
 							}
 			        	});
+						html += '</div>'+
+								'<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
+								'<div class="col-sm-1 no-padding-left"><input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>'+
+								'<span><!-- 资源编号 --></span><input type="hidden" class="restaurantNo" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+val+'"/></div></div>'+
+								'<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="ct"/>';
 						if (data != '') {
 							$(obj).parent().parent().find(".row").children().children().html(html);
 							reslistIndex.attr("value", index);
@@ -885,5 +887,6 @@
 			});
 		} */
 	</script>
+
 </body>
 </html>
