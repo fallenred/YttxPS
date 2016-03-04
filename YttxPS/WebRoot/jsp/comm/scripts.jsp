@@ -26,7 +26,7 @@
 </script>
 
 <script src="/js/bootstrap.min.js"></script>
-<script src="/js/date-time/bootstrap-datepicker.min.js"></script>
+
 <script src="/js/jquery.base64.js"></script>
 
 
@@ -188,6 +188,8 @@ Date.prototype.format = function(format) {
 	    };     
 	}   
 </script>
+<script src="/js/date-time/bootstrap-datetimepicker.min.js"></script>
+<script src="/js/date-time/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
