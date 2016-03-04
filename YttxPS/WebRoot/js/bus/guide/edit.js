@@ -1,6 +1,5 @@
 jQuery(function($) {
 	$("#message").hide();
-
 //	var localsel = $("#selectCity", "#editform").localCity({
 
 //	provurl : "/pub/findcity.htm",

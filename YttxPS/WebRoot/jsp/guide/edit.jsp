@@ -175,6 +175,15 @@
 												<input placeholder="本月打单金额" id="monthsale" name="monthsale"
 													class="form-control"></input>
 											</div>
+											<label class="col-sm-2 control-label no-padding-right"
+													for="lvl">状态</label>
+											<div class="col-sm-3">
+												<select class="form-control" id="stat" name="stat">
+													<option value="1">正常</option>
+													<option value="2">失效</option>
+												</select>
+											</div>
+													
 										</div>
 									</div>
 									<div id="message" class="alert alert-warning"></div>

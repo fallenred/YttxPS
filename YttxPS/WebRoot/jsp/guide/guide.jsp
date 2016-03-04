@@ -84,24 +84,27 @@
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="name">姓名</label>
-												<div class="col-sm-10">
-													<input class="col-sm-5 col-xs-5" maxlength="150"
+												<div class="col-sm-2">
+													<input maxlength="150"
 														type="text" id="name" placeholder="姓名" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="gender">性别</label>
-												<div class="col-sm-10">
-													<input class="col-sm-5 col-xs-5" maxlength="150"
-														type="text" id="gender" placeholder="性别" />
+												<div class="col-sm-2">
+													<select class="form-control" id="gender" >
+														<option value="">--性别--</option>
+														<option value="1">男</option>
+														<option value="0">女</option>
+													</select>
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="lvl">状态</label>
-												<div class="col-sm-1">
-													<select id="stat">
+												<div class="col-sm-2">
+													<select class="form-control" id="stat">
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>
@@ -143,7 +146,7 @@
 		<!-- 模态框（新增） -->
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
 			aria-labelledby="addModalLabel" aria-hidden="true">
-			<div class="modal-dialog" style="width: 1024px; height: auto">
+			<div class="modal-dialog" style="width: auto; height: auto">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
@@ -155,6 +158,7 @@
 							scrolling="yes"></iframe>
 
 					</div>
+
 					<!-- /.modal-content -->
 				</div>
 				<!-- /.modal-dialog -->
