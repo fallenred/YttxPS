@@ -156,65 +156,6 @@ jQuery(function($) {
 	}
 	
 	/**
-	 * 初始化字典列表
-	 */
-	function getDict(parentno, selectId){
-		$.ajax({
-			type: "GET",
-			traditional: true,
-			url: "/dict/selectDict.htm",
-			data: "dict.fsParentno=" + parentno,
-			dataType: "json",
-			success: function(data){
-				var html = '<option value="">' + '-- 请选择 --' + '</option>'; 
-				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['fsDictno'] + '>' + comment['fsDictname'] + '</option>';
-				});
-				$("#"+selectId).html(html);
-			}
-		});
-	}
-
-	//增加房型
-	$("#addRoomBtn").click(function(){
-		var html = $("#div_room").html();
-		var val = $("#room").val();
-		var text = $("#room").find("option:selected").text();
-		var flag = true;
-		if($(".room-label-" + val) != null && $(".room-label-" + val).length != 0) {
-			flag = false;
-		}
-		
-		if (flag) {
-			$.ajax({
-				type: "POST",
-				traditional: true,
-				data: "fsRestype=fx",
-				url: "/rescc/findResCC.htm",
-				dataType: "json",
-				success: function(data){
-					html += '<label for="form-field-select-2" class="room-label-' + val + '">' + text + '</label>';
-					html += '<select class="form-control room room-select-' + val + '" name="' + val + '" id="rooms_' + val + '" multiple="multiple">';
-					$.each(data.rows, function(i, e){
-						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
-					});
-					
-					resetIframeHeight("add");
-					$("#div_room").html(html);
-				}
-			});
-		}
-	});
-	
-	//删除房型
-	$("#rmRoomBtn").click(function(){
-		var val = $("#room").val();
-		$(".room-label-" + val).remove();
-		$(".room-select-" + val).remove();
-		resetIframeHeight("sub");
-	});
-	
-	/**
 	 * 获取购物店列表
 	 */
 	function getShop(){
@@ -331,7 +272,7 @@ jQuery(function($) {
 	$("#addRestaurantBtn").click(function() {
 		var html = $("#div_restaurant").html();
 		var val = $("#restaurant").val();
-		var text = $("restaurant").find("option:selected").text();
+		var text = $("#restaurant").find("option:selected").text();
 		var flag = true;
 		
 		if(flag) {
@@ -369,16 +310,6 @@ jQuery(function($) {
 		getSceniceGen();   //获取线路景区
 		getScenice();   //获取景区
 		getShop();   //获取购物店列表
-	});
-	
-	//酒店标准变更
-	$("#fsStarLvl").change(function(){
-		getAccomadation($("#fsStarLvl").val());
-	});
-	
-	//酒店变更
-	$("#accomadationNo").change(function(){
-		getRoom($("#accomadationNo").val());
 	});
 	
 	//增加景区

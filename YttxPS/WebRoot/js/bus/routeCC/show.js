@@ -246,18 +246,6 @@ jQuery(function($) {
 		$("#selectCity", "#addform").show();
 	});
 
-	//重置iframe高度
-	function resetIframeHeight(type){
-		var height = $(window.parent.document).find("#editIframe").attr("height");
-		height = height.substring(0,height.length - 2);
-		if ("add" == type) {
-			height = (parseInt(height) + 21);
-		} else {
-			height = (parseInt(height) - 21);
-		}
-		$(window.parent.document).find("#editIframe").attr("height", height + "px");
-	}
-
 	//	重置
 	$("#reset").on("click", function() {
 			$("#selectCity").hide();
