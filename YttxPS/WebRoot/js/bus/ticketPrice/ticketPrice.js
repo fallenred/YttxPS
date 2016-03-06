@@ -121,7 +121,15 @@ $("#picModal").on("hidden.bs.modal", function() {
 });
 
 jQuery(function($) {
-	
+	var fsNo = $.getUrlParam('fsNo');
+    var fsName = $.getUrlParam('fsName');
+
+    if(fsNo == null || fsNo == "" || fsNo == undefined){
+        alert("未取到门票编号！");
+        $("#roomModal", parent.document).find(".close").click();
+    }
+    $("title").html(fsName + "-门票价格维护");
+    
 	var localsel = $("#selectCity", "#queryfield").localCity({
 		provurl : "/pub/findcity.htm",
 		cityurl : "/pub/findcity.htm",
@@ -423,8 +431,8 @@ jQuery(function($) {
 
 				editurl : "/ticketPrice/save.htm",
 				shrinkToFit : true,
-				autowidth : true
-
+				autowidth : true,
+				caption: (fsName!=null && fsName!="")?(fsName+"—门票价格配置列表"):"门票价格列表"
 			/**
 			 * , grouping:true, groupingView : { groupField : ['name'],
 			 * groupDataSorted : true, plusicon : 'fa fa-chevron-down

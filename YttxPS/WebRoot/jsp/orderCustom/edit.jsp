@@ -167,7 +167,6 @@
 									<div class="row">
 										<!-- <input type="hidden" id="fiDays" name="fiDays" class="form-control" placeholder="线路天数" /> -->
 										<ul id="myTab" class="nav nav-tabs">
-											<li class="active"><a href="#day0" data-toggle="tab">第1天</a></li>
 										</ul>
 										<div id="myTabContent" class="tab-content">
 											<div class="tab-pane fade in active" id="day0">

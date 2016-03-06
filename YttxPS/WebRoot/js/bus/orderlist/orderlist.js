@@ -1,5 +1,13 @@
 //	显示详情
 var raw = {};
+
+//批次管理配置
+function configOrderCustom(id) {
+    var raw = jQuery("#grid-table").jqGrid('getRowData', id);
+    var page = "/jsp/orderCustom/orderCustom.jsp?fsNo=" + raw.fsNo+"&fsName="+escape(raw.fsName);
+    window.open(page);
+};
+
 function showOrderlist(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	$("#showModal").modal({
@@ -214,7 +222,9 @@ jQuery(function($) {
 
 	// 定义按钮列
 	actFormatter = function(cellvalue, options, rawObject) {
-
+	var configBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="roomButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="configOrderCustom('
+            + options.rowId
+            + ');" data-original-title="订单批次配置"><span class="ui-icon ace-icon fa fa-cog red"></span></div>';
 	var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editOrderlist('
 			+ options.rowId
 			+ ');" data-original-title="计调订单"><span class="ui-icon ui-icon-pencil"></span></div>';
@@ -222,7 +232,7 @@ jQuery(function($) {
 	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteOrderlist('
 			+ options.rowId
 			+ ');" data-original-title="删除订单"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-	return editBtn + deleteBtn;
+	return configBtn + editBtn + deleteBtn;
 	};
 
 	// resize to fit page size

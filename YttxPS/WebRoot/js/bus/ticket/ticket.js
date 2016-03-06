@@ -1,5 +1,20 @@
 //	显示详情
 var raw = {};
+
+/**
+ * 表格行事件 -->门票价格选项配置
+ */
+function showTicketPrice(id){
+	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
+	var page = "/jsp/ticketPrice/ticketPrice.jsp?fsNo=" + raw.fsNo+"&fsName="+escape(raw.fsName);
+	window.open(page);
+};
+//批次管理配置
+function configOrderCustom(id) {
+    var raw = jQuery("#grid-table").jqGrid('getRowData', id);
+    var page = "/jsp/orderCustom/orderCustom.jsp?fsNo=" + raw.fsNo+"&fsName="+escape(raw.fsName);
+    window.open(page);
+};
 function showTicket(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	$("#showModal").modal({
@@ -124,21 +139,27 @@ jQuery(function($) {
 
 	// 定义按钮列
 	actFormatter = function(cellvalue, options, rawObject) {
+		var costBtn = '<div title="" class="ui-pg-div ui-inline-edit" '+
+		'id="roomButton" style="display: block; cursor: pointer; float: left;" '+
+		'onmouseover="jQuery(this).addClass(\'ui-state-hover\');" '+
+		'onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" '+
+		'onclick="showTicketPrice('+ options.rowId+ ');" data-original-title="门票价格配置">'+
+		'<span class="ui-icon ace-icon fa fa-cog red"></span></div>';
 		var detail = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showTicket('
 			+ options.rowId
 			+ ');" data-original-title="查看记录详情"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
 
-	var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editTicket('
+		var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editTicket('
+				+ options.rowId
+				+ ');" data-original-title="编辑本条记录"><span class="ui-icon ui-icon-pencil"></span></div>';
+	
+		var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteTicket('
+				+ options.rowId
+				+ ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
+		var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" id="picButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="picTicket('
 			+ options.rowId
-			+ ');" data-original-title="编辑本条记录"><span class="ui-icon ui-icon-pencil"></span></div>';
-
-	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteTicket('
-			+ options.rowId
-			+ ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-	var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" id="picButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="picTicket('
-		+ options.rowId
-		+ ');" data-original-title="编辑资源图片"><span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
-	return detail + editBtn + deleteBtn + picDtn;
+			+ ');" data-original-title="编辑资源图片"><span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
+		return costBtn + detail + editBtn + deleteBtn + picDtn;
 	};
 
 	// resize to fit page size
@@ -188,7 +209,7 @@ jQuery(function($) {
 				colModel : [ {
 					name : 'myac',
 					index : '',
-					width : 90,
+					width : 120,
 					fixed : true,
 					sortable : false,
 					resize : false,
