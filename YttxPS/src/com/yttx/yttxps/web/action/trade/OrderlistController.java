@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.TOrderlistExample;
 import com.yttx.yttxps.model.TOrderlistWithBLOBs;
+import com.yttx.yttxps.model.TRestaurant;
 import com.yttx.yttxps.model.vo.OrderlistRequest;
 import com.yttx.yttxps.service.IOrderlistService;
+import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.web.action.LoginController;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
@@ -36,6 +38,8 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
 	private IOrderlistService orderlistService;
+	@Autowired
+	private IPubService<?> pubService;
 	
 	/**
 	 * 分页查询订单信息
@@ -51,6 +55,12 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		req.copyPage(map);
 		req.copyOrderlist(map);
 		List<TOrderlistWithBLOBs> list = orderlistService.selectSelectivePage(map);
+		if(list!=null){
+			for(TOrderlistWithBLOBs orderlist:list){
+				if(orderlist.getFsStartplace()!=null)
+					orderlist.setRegionname(pubService.findRegionFullName(orderlist.getFsStartplace()));
+			}
+		}
 		map.put("rows", list);
 		return map;
     }

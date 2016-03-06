@@ -54,6 +54,7 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fiDays").val(raw.fiDays);
 	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
 	$(this).contents().find("#fsStartplace").val(raw.fsStartplace);
+	$(this).contents().find("#regionname").val(raw.regionname);
 	$(this).contents().find("#fdPrice").val(raw.fdPrice);
 	$(this).contents().find("#fsSummary").val(raw.fsSummary);
 	$(this).contents().find("#fdTotalfee").val(raw.fdTotalfee);
@@ -292,7 +293,7 @@ jQuery(function($) {
 				mtype : 'POST',
 				height : 400,
 				colNames : ['操作', '订单编号', '线路统称Idx', '订单名称', '用户ID', '用户子ID', '计调ID', '创建时间', '线路类型', 'fs_Route_ID', '组团类型', '线路天数',
-				            '发团日期', '发团地', '线路初始报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照',],
+				            '发团日期', '发团地id', '发团地', '线路初始报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照',],
 				colModel : [ {
 					name : 'myac',
 					index : '',
@@ -420,6 +421,13 @@ jQuery(function($) {
 				}, {
 					name : 'fsStartplace',
 					index : 'fsStartplace',
+					width : 50,
+					editable : true,
+					sorttype : "int",
+					hidden : true
+				}, {
+					name : 'regionname',
+					index : 'regionname',
 					width : 50,
 					editable : true,
 					sorttype : "int"
