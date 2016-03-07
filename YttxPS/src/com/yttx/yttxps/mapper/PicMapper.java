@@ -69,4 +69,9 @@ public interface PicMapper<T> extends IBaseMapper<T>{
     List<T> selectSelectivePage(Map<String, Object> map);
     
 	BigDecimal selectSequence();
+
+	/**
+	 * 找到resNo下所有图片
+	 */
+	List<Pic> findByResNo(String resNo);
 }

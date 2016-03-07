@@ -20,7 +20,7 @@
 	</bean>
 	
 	<bean id="ftpClient"
-		class="com.yttx.yttxps.comm.UPFileClient">
+		class="com.yttx.yttxps.comm.UPFileClient" scope="prototype">
 		<property name="server">
 			<value>${ftp.server}</value>
 		</property>

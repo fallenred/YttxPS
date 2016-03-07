@@ -77,7 +77,9 @@ function picRestaurant(id) {
 	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	var resType="ct";
 	var resNo=raw.no;
-	var frameSrc = "/pic/picpage.htm?resType="+resType+"&resNo="+resNo;
+	var resName=raw.name;
+	var param="resType="+resType+"&resNo="+resNo+"&resName="+resName;
+	var frameSrc = "/pic/picpage.htm?"+param;
     $("#picIframe").attr("src", frameSrc);
     $('#picModal').modal({ show: true, backdrop: 'static' });
 };

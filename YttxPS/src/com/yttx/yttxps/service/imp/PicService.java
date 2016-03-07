@@ -34,6 +34,9 @@ public class PicService implements IPicService {
 
 	@Override
 	public int insert(Pic record) {
+		record.setIndex(selectSequence());
+		record.setSeq(record.getIndex());
+		record.setMain(new BigDecimal(0));
 		return picMapper.insert(record);
 	}
 
@@ -44,12 +47,21 @@ public class PicService implements IPicService {
 
 	@Override
 	public BigDecimal selectSequence() {
-		// TODO Auto-generated method stub
 		return picMapper.selectSequence();
 	}
 
+	@Override
+	public List<Pic> findByResNo(String resNo) {
+		return picMapper.findByResNo(resNo);
+	}
 
-
-
-
+	@Override
+	public boolean updateSeqs(List<Pic> piclist) {
+		if(piclist!=null){
+			for(Pic pic:piclist){
+				picMapper.updateByPrimaryKeySelective(pic);
+			}
+		}
+		return true;
+	}
 }

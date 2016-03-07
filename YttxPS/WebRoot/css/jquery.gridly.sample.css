@@ -1,0 +1,29 @@
+.imgblock{
+	width:200px;
+	height:150px;
+	display:block;
+	float:left;
+	opacity: 1;
+    cursor: pointer;
+    position: relative;
+}
+
+.imgdelete {
+   display: block;
+   color: #FFF;
+   background: #428BCA;
+   width: 30px;
+   height: 30px;
+   top: 0;
+   right: 0;
+   position: absolute;
+   text-align: center;
+   line-height: 30px; 
+   font-size:20px;
+}
+
+.imgblock img{
+	width:100%;
+	height:auto;
+}
+  

@@ -2,10 +2,9 @@ package com.yttx.yttxps.web.action.pic;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,33 +23,32 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Pic;
-import com.yttx.yttxps.model.vo.PicRequest;
+import com.yttx.yttxps.model.vo.PicListWebRequest;
 import com.yttx.yttxps.service.IPicService;
 import com.yttx.yttxps.web.action.BaseController;
-import com.yttx.yttxps.web.action.LoginController;
+
 
 @Controller
 @Scope("prototype")
 @RequestMapping("pic/")
 public class PicController extends BaseController {
 	
-static Logger logger = LoggerFactory.getLogger(LoginController.class);
+static Logger logger = LoggerFactory.getLogger(PicController.class);
 	
 	@Autowired
 	private IPicService picService;
 	
-	/**
-	 * 打开上传图片的界面
-	 */
 	@RequestMapping(value="picpage.htm")
-	public String openPicPage(Pic pic,Model model)
-	{
-		model.addAttribute("pic", pic);
+	public String  openPicPage(@RequestParam("resNo") String resNo,
+			@RequestParam("resName") String resName,
+			@RequestParam("resType") String resType,
+			Model model) throws UnsupportedEncodingException
+    {  
+		model.addAttribute("resNo", resNo);
+		model.addAttribute("resName",resName);
+		model.addAttribute("resType", resType);
 		return "pic/pic";
-	}
-	
-	
-	
+    }
 	 /**
 	 * 分页查询图片信息
 	 * @param req
@@ -58,22 +56,16 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 */
 	@RequestMapping(value="findPic.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object ajaxfindPic(PicRequest req)
+	public Object ajaxfindPic(Pic pic)
     {  
-		logger.debug("当前查询条件 {}", req.getPic());
-		Map<String, Object> map = new HashMap<String, Object>();
-		req.copyPage(map);
-		req.copyPic(map);
+		List<Pic> list=null;
 		try {
-		List<Pic> list = picService.selectSelectivePage(map);
-		map.put("rows", list);
-		map.put("result", "ok");
-		}
-		catch(Exception e) {
+			list = picService.findByResNo(pic.getResNo());
+		}catch(Exception e) {
 			e.printStackTrace();
-			return (Map<String, Object>) JsonResult.jsonError("查询图片失败:" + e.getMessage());
+			return JsonResult.jsonError("查询图片失败:" + e.getMessage());
 		}
-		return map;
+		return JsonResult.jsonData(list);
     }
 	
 	/**
@@ -83,34 +75,29 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 */
 	@RequestMapping(value="addPic.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxaddPic(Pic pic,
-			@RequestParam(value = "file", required = true) MultipartFile file)
+	public  Object ajaxaddPic(Pic pic,
+			@RequestParam(value = "files", required = true) MultipartFile[] files)
     {  
 		logger.debug("当前新增对象 {}", pic.getSeq());
-		
 		StringBuffer path = new StringBuffer();
 		path.append("/").append(pic.getResType()).append("/");
-		if(pic.getResNo() != null && pic.getResNo().length() > 0) {
-			path.append(pic.getResNo()).append("/");
-		}
-		path.append(pic.getSeq()).append("/");
+		path.append(pic.getResNo()).append("/");
 		logger.debug("图片path{}", path.toString());
-		
-		String fileurl = resourceConvertURL(path.toString(), file);
-		logger.debug("图片srcfile{}", fileurl);
-		pic.setSrcFile(fileurl);
-		
-		pic.setIndex(picService.selectSequence());
-//		pic.setIndex(new BigDecimal(101));
 		try{
-			int ret = picService.insert(pic);
-			System.out.println(ret);
+			for(MultipartFile file:files){
+				if(!file.isEmpty()){
+					String fileurl = resourceConvertURL(path.toString(), file);
+					Thread.sleep(1000);
+					pic.setSrcFile(fileurl);
+					picService.insert(pic);
+				}
+			}
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			return (Map<String, Object>) JsonResult.jsonError("新增失败:" + e.getMessage());
+			return JsonResult.jsonError("新增失败:" + e.getMessage());
 		}
-		return (Map<String, Object>) JsonResult.jsonOk();
+		return  JsonResult.jsonOk();
     }
 	
 	/**
@@ -155,17 +142,32 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 */
 	@RequestMapping(value="delPic.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxdelPic(@RequestParam(value = "index") BigDecimal  index, String srcfile)
+	public Object ajaxdelPic(@RequestParam(value = "index") BigDecimal  index, String srcfile)
     {  
 		logger.debug("当前删除key {}", index);
 		try{
-			int ret = picService.delete(index);
+			picService.delete(index);
 		}
 		catch(Exception e){
-			return (Map<String, Object>) JsonResult.jsonError("删除失败");
+			return JsonResult.jsonError("删除失败");
 		}
 		// 尝试删除资源服务器的资源
 		deleteResourceByURL(srcfile);
-		return (Map<String, Object>) JsonResult.jsonOk();
+		return JsonResult.jsonOk();
     }
+	
+	/**
+	 * 修改图片的显示顺序
+	 */
+	@RequestMapping(value="updateSeqs.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object updatePicsSeq(PicListWebRequest req)
+	{
+		try {
+			picService.updateSeqs(req.getPiclist());
+		} catch (Exception e) {
+			return JsonResult.jsonError(e.getMessage());
+		}
+		return JsonResult.jsonOk();
+	}
 }
