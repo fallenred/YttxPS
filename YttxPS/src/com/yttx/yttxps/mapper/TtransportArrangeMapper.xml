@@ -244,7 +244,7 @@
   
   <!-- 分页查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="ExtendResultMap4Price">
-      select * from (select ROWNUM as rowno, t.* from VIEW_TTRANSPORTARRANGE t
+      select * from (select ROWNUM as rowno, t.* from (select * from VIEW_TTRANSPORTARRANGE order by FI_GENNAME) t
     	where 1=1
 	      <if test="fiGenName != null and fiGenName != ''">
 	        and FI_GENNAME like '%'||#{fiGenName}||'%'
@@ -255,9 +255,12 @@
 	       <if test="ftStartdate != null and ftStartdate != ''">
 	        and ft_Startdate &gt;= #{ftStartdate}
 	      </if>
+	      <if test="endrow != null" >
+	        and ROWNUM &lt;= #{endrow}
+	      </if>
 	      ) tt where 1=1
 	      <if test="startrow != null">
-	        and tt.rowno &gt;= #{startrow}
+	        and tt.rowno &gt; #{startrow}
 	      </if>
   </select>
   

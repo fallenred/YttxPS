@@ -106,6 +106,28 @@ CREATE OR REPLACE PACKAGE BODY pkg_common AS
          RETURN;
    END prc_insertPrice;
    
+   FUNCTION findRegionFullName(fs_id IN CHAR) RETURN VARCHAR2
+   AS
+      var_fsmanageno CHAR(6);
+      var_filvl INTEGER;
+      var_fsname VARCHAR2(200);
+   BEGIN
+      SELECT a.fs_manageno,
+             a.fs_name,
+             a.fi_lvl
+        INTO var_fsmanageno,
+             var_fsname,
+             var_filvl
+        FROM tregionmap a
+       WHERE a.fs_no = fs_id;
+    
+       IF var_filvl = 1 THEN
+          RETURN var_fsname;
+       ELSE
+          RETURN findRegionFullName(var_fsmanageno) || '-' || var_fsname;
+       END IF;
+   END findRegionFullName;
+   
 END pkg_common;
 /
 SHOW ERROR;

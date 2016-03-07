@@ -37,7 +37,7 @@ static Logger logger = LoggerFactory.getLogger(PicController.class);
 	
 	@Autowired
 	private IPicService picService;
-	
+
 	@RequestMapping(value="picpage.htm")
 	public String  openPicPage(@RequestParam("resNo") String resNo,
 			@RequestParam("resName") String resName,
@@ -49,7 +49,8 @@ static Logger logger = LoggerFactory.getLogger(PicController.class);
 		model.addAttribute("resType", resType);
 		return "pic/pic";
     }
-	 /**
+
+	/**
 	 * 分页查询图片信息
 	 * @param req
 	 * @return
@@ -62,8 +63,7 @@ static Logger logger = LoggerFactory.getLogger(PicController.class);
 		try {
 			list = picService.findByResNo(pic.getResNo());
 		}catch(Exception e) {
-			e.printStackTrace();
-			return JsonResult.jsonError("查询图片失败:" + e.getMessage());
+			JsonResult.jsonError(e.getMessage());
 		}
 		return JsonResult.jsonData(list);
     }
@@ -99,6 +99,36 @@ static Logger logger = LoggerFactory.getLogger(PicController.class);
 		}
 		return  JsonResult.jsonOk();
     }
+
+
+	/**
+	 * 资源快照图片上传
+	 * @param pic
+	 * @return
+	 */
+	@RequestMapping(value="addPic4CKEditor.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public void ajaxaddPic4CKEditor(@RequestParam("upload") MultipartFile multipartFile,
+			HttpServletRequest request,HttpServletResponse response) {
+		response.setContentType("text/html;charset=UTF-8");
+		response.setHeader("X-Frame-Options", "SAMEORIGIN");
+		
+		String fileurl = resourceConvertURL("", multipartFile);
+		logger.debug("快照图片上传srcfile{}", fileurl);
+		String CKEditorFuncNum = request.getParameter("CKEditorFuncNum");
+		PrintWriter out = null;
+		String s = "<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction("+CKEditorFuncNum+", '"+fileurl+"');</script>";
+		try {
+			out = response.getWriter();
+			out.print(s);
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally{
+			out.print(s);
+			out.flush();
+		}
+	}
 	
 	/**
 	 * 新图片信息
@@ -107,34 +137,34 @@ static Logger logger = LoggerFactory.getLogger(PicController.class);
 	 */
 	@RequestMapping(value="addLinePic.htm", method = RequestMethod.POST)
 	public void uploadFile(@RequestParam("upload") 
-		MultipartFile file,
-		HttpServletRequest request,
-		HttpServletResponse response)
-    {  
+			MultipartFile file,
+			HttpServletRequest request,
+			HttpServletResponse response)
+	{  
 		logger.debug("当前新增图片对象 {}", file);
-		
+
 		StringBuffer path = new StringBuffer();
 		path.append("/").append("line").append("/");
 		logger.debug("图片path{}", path.toString());
-		
+
 		String fileurl = resourceConvertURL(path.toString(), file);
 		logger.debug("图片srcfile{}", fileurl);
-		
+
 		response.setContentType("text/html;charset=UTF-8");
-//      response.setHeader("X-Frame-Options", "SAMEORIGIN");
-        String CKEditorFuncNum = request.getParameter("CKEditorFuncNum");
-        PrintWriter out;
-        String s = "<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction("+CKEditorFuncNum+", '"+fileurl+"');</script>";
-        try {
-            out = response.getWriter();
-            out.print(s);
-            out.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-         
-    }
-	
+		//      response.setHeader("X-Frame-Options", "SAMEORIGIN");
+		String CKEditorFuncNum = request.getParameter("CKEditorFuncNum");
+		PrintWriter out;
+		String s = "<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction("+CKEditorFuncNum+", '"+fileurl+"');</script>";
+		try {
+			out = response.getWriter();
+			out.print(s);
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	/**
 	 * 删除图片信息
 	 * @param scenic

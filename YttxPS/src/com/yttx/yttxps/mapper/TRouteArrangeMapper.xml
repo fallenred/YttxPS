@@ -20,6 +20,7 @@
     <result column="FS_TITLEPIC" jdbcType="VARCHAR" property="fsTitlepic" />
     <result column="FS_SUMMARY" jdbcType="VARCHAR" property="fsSummary" />
     <result column="FI_STAT" jdbcType="DECIMAL" property="fiStat" />
+    <result column="FS_STARTPLACENAME" jdbcType="VARCHAR" property="fsStartplaceName" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yttx.yttxps.model.TRouteArrangeWithBLOBs">
     <!--
@@ -135,6 +136,27 @@
     -->
     FC_SCHEDULE, FC_RESSNAPSHOT
   </sql>
+  
+  <sql id="Custom_Table_Columns">
+    SELECT FS_ID,
+           FI_GENINDEX,
+           FS_NAME,
+           FS_REGIONS,
+           FI_DAYS,
+           FS_PROPERTY,
+           FT_STARTDATE,
+           FT_ENDDATE,
+           FS_STARTPLACE,
+           pkg_common.findRegionFullName(FS_STARTPLACE) AS FS_STARTPLACENAME,
+           FS_TITLE,
+           FS_TITLEPIC,
+           FS_SUMMARY,
+           FC_SCHEDULE,
+           FI_STAT,
+           FC_RESSNAPSHOT
+      FROM TROUTEARRANGE
+  </sql>
+  
   <select id="selectByExampleWithBLOBs" parameterType="com.yttx.yttxps.model.TRouteArrangeExample" resultMap="ResultMapWithBLOBs">
     <!--
       WARNING - @mbggenerated
@@ -147,8 +169,11 @@
     </if>
     <include refid="Base_Column_List" />
     ,
+    FS_STARTPLACENAME,
     <include refid="Blob_Column_List" />
-    from TROUTEARRANGE
+    from (
+    <include refid="Custom_Table_Columns" />
+    )
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -167,7 +192,11 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from TROUTEARRANGE
+    ,
+    FS_STARTPLACENAME
+    from (
+    <include refid="Custom_Table_Columns" />
+    )
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -184,8 +213,11 @@
     select 
     <include refid="Base_Column_List" />
     ,
+    FS_STARTPLACENAME,
     <include refid="Blob_Column_List" />
-    from TROUTEARRANGE
+    from (
+    <include refid="Custom_Table_Columns" />
+    )
     where FS_ID = #{fsId,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -569,7 +601,9 @@
                                 and rc.FS_RESTYPE = td.FS_RESTYPE
                                 and td.FS_RESPROP != 'comm') as ccnum,
                             t.* 
-                       from TROUTEARRANGE t
+                       from (
+                       <include refid="Custom_Table_Columns" />
+                       ) t
     	where 1=1
 	      <if test="fsName != null and fsName != ''">
 	        and fs_Name like '%'||#{fsName}||'%'
@@ -582,7 +616,7 @@
 	      </if>
 	      ) tt where 1=1
 	      <if test="startrow != null">
-	        and tt.rowno &gt;= #{startrow}
+	        and tt.rowno &gt; #{startrow}
 	      </if>
 	      <if test="hasRouteCC == true">
 	        <![CDATA[ and tt.ccnum > 0 ]]>

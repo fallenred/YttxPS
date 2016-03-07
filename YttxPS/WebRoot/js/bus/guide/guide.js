@@ -1,6 +1,5 @@
 //显示详情
 var raw = {};
-
 function editCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	var frameSrc = "/jsp/guide/edit.jsp";
@@ -36,6 +35,7 @@ $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#name").val(raw.name);
 	$(this).find("#gender").val(raw.gender);
 	$(this).find("#idno").val(raw.idno);
+	$(this).contents().find("#workdate").val(raw.workdate);
 	$(this).find("#contactno").val(raw.contactno);
 	$(this).find("#mainroute").val(raw.mainroute);
 	$(this).find("#preferteem").val(raw.preferteem);
@@ -54,6 +54,7 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#no").val(raw.no);
 	$(this).contents().find("#name").val(raw.name);
 	$(this).contents().find("#gender").val(raw.gender);
+	$(this).contents().find("#workdate").val(raw.workdate);
 	$(this).contents().find("#idno").val(raw.idno);
 	$(this).contents().find("#contactno").val(raw.contactno);
 	$(this).contents().find("#mainroute").val(raw.mainroute);
@@ -67,7 +68,6 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#monthsale").val(raw.monthsale);
 	$(this).contents().find("#stat").val(raw.stat);
 });
-
 
 $("#addModal", parent.document).on("hidden.bs.modal", function() {
 	$(this).removeData("bs.modal");

@@ -208,9 +208,12 @@ function findSnapshot(obj, no){
 			var tab = $(obj).contents().find("#myTab").html();
 			var content = $(obj).contents().find("#myTabContent").html();
 			$.each(data.fuzzySnapshot.daylist, function(commentIndex, comment){
-				if (commentIndex != 0){
+				var date = getDate($(obj).contents().find("#ftStartdate").val(), commentIndex);
+				if (commentIndex = 0){
 					//tab头
-					tab += '<li><a href="#day'+commentIndex+'" data-toggle="tab">第'+(commentIndex+1)+'天</a></li>';
+					tab += '<li class="active"><a href="#day0" data-toggle="tab">'+date+'</a></li>';
+				} else {
+					tab += '<li><a href="#day'+commentIndex+'" data-toggle="tab">'+date+'</a></li>';
 					//tab体
 					getContent(obj, commentIndex);
 				}
@@ -219,6 +222,7 @@ function findSnapshot(obj, no){
 				yl = '';
 				bg = '';
 				gw = '';
+				if (comment['reslist'] == null) return true;
 				$.each(comment['reslist'], function(commentIndex, comment){
 					if ('mp' == comment['restype']) {
 						mp += comment['resname']+"&nbsp;&nbsp;&nbsp;";
@@ -255,6 +259,7 @@ function findSnapshot(obj, no){
 				yl = '';
 				bg = '';
 				gw = '';
+				if (dayComment['reslist'] == null) return true;
 				$.each(dayComment['reslist'], function(index, resComment){
 					$(obj).contents().find("#day"+dayIndex+"_resIndex").attr("value", parseInt(index)+1);
 					if ('mp' == resComment['restype']) {
@@ -349,12 +354,13 @@ function findSnapshot(obj, no){
 													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].cctype" value="1" type="hidden" disabled="disabled"/>'+
 													'<input id="'+comment['fsCcno']+'" type="checkbox" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'"/>'+
 													'<input class="price" type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'" disabled="disabled"/>'+
-													'<span id="'+comment['fdPrice']+'">&nbsp;晚餐费用('+comment['fdPrice']+'￥)</span></div>'+
-													'<label class="col-sm-2 control-label no-padding-right">数量：</label><div class="col-sm-1 no-padding-left">'+
-													'<input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" value="'+resComment['cclist'][0].usernum+'" type="text"/></div>';
+													'<span id="'+comment['fdPrice']+'">&nbsp;晚餐费用('+comment['fdPrice']+'￥)</span>';
 										}
 					        	});
-					        	html += '<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="ct"/>' +
+					        	html += '</div>'+
+										'<label class="col-sm-2 control-label no-padding-right">数量：</label><div class="col-sm-1 no-padding-left">'+
+										'<input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" value="'+resComment['cclist'][0].usernum+'" type="text"/></div>'+
+					        			'<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="ct"/>' +
 					        			'<span><!-- 资源编号 --></span><input type="hidden" class="restaurantNo" id="'+resComment['resno']+'" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+resComment['resno']+'"/></div></div>';
 					        	if (data != '') {
 					        		$(obj).contents().find("#div_"+dayIndex+"_ct").html(html);
@@ -661,6 +667,15 @@ $("#delModal").on("hidden.bs.modal", function() {
 });
 
 jQuery(function($) {
+	var fsNo = $.getUrlParam('fsNo');
+    var fsName = $.getUrlParam('fsName');
+
+    if(fsNo == null || fsNo == "" || fsNo == undefined){
+        alert("未取到订单编号！");
+        $("#roomModal", parent.document).find(".close").click();
+    }
+    
+    $("title").html(fsName + "-订单批次维护");
 	
 	var localsel = $("#selectCity", "#queryfield").localCity({
 		provurl : "/pub/findcity.htm",
@@ -761,8 +776,9 @@ jQuery(function($) {
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/orderCustom/findOrderCustom.htm",
-				datatype : "json",
-				mtype : 'POST',
+				postData:{ "orderCustom.fsOrderId": fsNo},
+                datatype : "json",
+                mtype : 'POST',
 				height : 400,
 				colNames : ['操作', '序号', '订单ID','订单名称', '批次号', '创建时间', '批次类型', '联系人', '联系电话',
 				            '总人数', '老人数', '成年人数', '儿童数', '附言', '预估金额小计', '状态','订单线路','发团日期'],
@@ -945,8 +961,8 @@ jQuery(function($) {
 
 				editurl : "/orderCustom/save.htm",
 				shrinkToFit : true,
-				autowidth : true
-
+				autowidth : true,
+				caption: (fsName!=null && fsName!="")?(fsName+"—订单批次配置列表"):"订单批次列表"
 			/**
 			 * , grouping:true, groupingView : { groupField : ['name'],
 			 * groupDataSorted : true, plusicon : 'fa fa-chevron-down

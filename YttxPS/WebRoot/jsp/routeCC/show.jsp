@@ -66,7 +66,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fiDays">日程</label>
 											<div class="col-sm-3">
-												<select id="fiDays" name="fiDays" class="form-control">
+												<select id="fiDays" name="fiDays" class="form-control query-condition">
 												</select>
 											</div>
 										</div>
@@ -248,7 +248,7 @@
 
 	</div>
 	<!-- /.main-container -->
-	<script src="/js/bus/routeCC/routeCCCommon.js"></script>
+	<script src="/js/bus/routeCC/routeCC.comm.js"></script>
 	<script src="/js/bus/routeCC/show.js"></script>
 
 	<c:if test="${!empty succflag && succflag =='1'}">

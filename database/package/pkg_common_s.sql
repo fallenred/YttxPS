@@ -14,6 +14,8 @@ CREATE OR REPLACE PACKAGE pkg_common AS
 	  PRM_ERRMSG             OUT      VARCHAR2     --¥ÌŒÛ–≈œ¢
    );
    
+   FUNCTION findRegionFullName(fs_id IN CHAR) RETURN VARCHAR2;
+   
 END pkg_common;
 /
 SHOW ERROR;

@@ -122,7 +122,7 @@
 											<h4 class="modal-title" id="addModalLabel">新增线路车型</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="addIframe" width="100%" height="350px"
+											<iframe id="addIframe" width="100%" height="450px"
 												frameborder="0" scrolling="no"></iframe>
 										</div>
 
@@ -145,7 +145,7 @@
 											<h4 class="modal-title" id="addModalLabel">修改线路车型</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="editIframe" width="100%" height="350px"
+											<iframe id="editIframe" width="100%" height="450px"
 												frameborder="0" scrolling="no"></iframe>
 										</div>
 

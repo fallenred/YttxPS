@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,8 +78,6 @@ public class GuideController extends BaseController {
 	{  
 		logger.debug("当前新增对象 {}", guide);
 		try{
-			String str ="0000000000";
-			guide.setNo(str.substring(0, 10-guide.getNo().length())+guide.getNo());
 			guide.setStat(new BigDecimal(1));
 			int ret = guideService.insert(guide);
 		}
@@ -107,7 +106,7 @@ public class GuideController extends BaseController {
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
 	}
-
+	
 	/**
 	 * 删除导游信息
 	 * @param Guide

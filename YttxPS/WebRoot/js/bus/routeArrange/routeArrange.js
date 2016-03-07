@@ -202,7 +202,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '路线编码', '路线统称编码', '路线名称', '所属地区', '线路天数', '线路类型', '有效起始日期', '有效截止日期', '发团地',
+				colNames : [ '操作', '路线编码', '路线统称编码', '路线名称', '所属地区', '线路天数', '线路类型', '有效起始日期', '有效截止日期', '发团地编码', '发团地',
 				             '线路标题', '线路缩略图', '摘要', '日程快照', '状态', '模糊快照'],
 				colModel : [ {
 					name : 'myac',
@@ -292,6 +292,13 @@ jQuery(function($) {
 				}, {
 					name : 'fsStartplace',
 					index : 'fsStartplace',
+					width : 70,
+					editable : true,
+					sorttype : "char",
+					hidden : true
+				}, {
+					name : 'fsStartplaceName',
+					index : 'fsStartplaceName',
 					width : 70,
 					editable : true,
 					sorttype : "char"

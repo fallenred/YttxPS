@@ -19,7 +19,7 @@
 			<submenu>
 				<item id="04a0" name="景区管理" url="/jsp/scenic/scenic.jsp" />
 				<item id="04b0" name="门票资源管理" url="/jsp/ticket/ticket.jsp" />
-				<item id="04c0" name="门票价格设置" url="/jsp/ticketPrice/ticketPrice.jsp" />
+				<!-- <item id="04c0" name="门票价格设置" url="/jsp/ticketPrice/ticketPrice.jsp" /> -->
 			</submenu>
 		</item>
 		
@@ -76,7 +76,7 @@
 		<item id="1300" name="交易管理" icon="menu-icon fa fa-sitemap">
 			<submenu>
 				<item id="13a0" name="订单管理" url="/jsp/orderlist/orderlist.jsp" />
-				<item id="13b0" name="订单批次管理" url="/jsp/orderCustom/orderCustom.jsp" />
+				<!-- <item id="13b0" name="订单批次管理" url="/jsp/orderCustom/orderCustom.jsp" /> -->
 				<item id="13c0" name="结算管理" url="/cOrder/page.htm" />
 			</submenu>
 		</item>	

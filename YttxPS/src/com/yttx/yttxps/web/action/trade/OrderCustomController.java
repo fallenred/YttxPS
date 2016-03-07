@@ -45,9 +45,9 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 */
 	@RequestMapping(value="findOrderCustom.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object ajaxfindOrderCustom(OrderCustomRequest req)
-    {  
+	public Object ajaxfindOrderCustom(OrderCustomRequest req){  
 		logger.debug("当前查询条件 {}", req.getOrderCustom());
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		req.copyPage(map);
 		req.copyOrderCustom(map);

@@ -88,7 +88,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsDesc">描述</label>
 											<div class="col-sm-8">
-												<input class="form-control" type="text" id="fsDesc" name="fsDesc" placeholder="描述" />
+												<textarea class="form-control" id="fsDesc" name="fsDesc" rows="3" placeholder="描述"></textarea>
 											</div>
 										</div>
 									</div>

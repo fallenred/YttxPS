@@ -1,5 +1,13 @@
 //	显示详情
 var raw = {};
+
+//批次管理配置
+function configOrderCustom(id) {
+    var raw = jQuery("#grid-table").jqGrid('getRowData', id);
+    var page = "/jsp/orderCustom/orderCustom.jsp?fsNo=" + raw.fsNo+"&fsName="+escape(raw.fsName);
+    window.open(page);
+};
+
 function showOrderlist(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	$("#showModal").modal({
@@ -46,6 +54,7 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fiDays").val(raw.fiDays);
 	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
 	$(this).contents().find("#fsStartplace").val(raw.fsStartplace);
+	$(this).contents().find("#regionname").val(raw.regionname);
 	$(this).contents().find("#fdPrice").val(raw.fdPrice);
 	$(this).contents().find("#fsSummary").val(raw.fsSummary);
 	$(this).contents().find("#fdTotalfee").val(raw.fdTotalfee);
@@ -214,7 +223,9 @@ jQuery(function($) {
 
 	// 定义按钮列
 	actFormatter = function(cellvalue, options, rawObject) {
-
+	var configBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="roomButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="configOrderCustom('
+            + options.rowId
+            + ');" data-original-title="订单批次配置"><span class="ui-icon ace-icon fa fa-cog red"></span></div>';
 	var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editOrderlist('
 			+ options.rowId
 			+ ');" data-original-title="计调订单"><span class="ui-icon ui-icon-pencil"></span></div>';
@@ -222,7 +233,7 @@ jQuery(function($) {
 	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteOrderlist('
 			+ options.rowId
 			+ ');" data-original-title="删除订单"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-	return editBtn + deleteBtn;
+	return configBtn + editBtn + deleteBtn;
 	};
 
 	// resize to fit page size
@@ -282,7 +293,7 @@ jQuery(function($) {
 				mtype : 'POST',
 				height : 400,
 				colNames : ['操作', '订单编号', '线路统称Idx', '订单名称', '用户ID', '用户子ID', '计调ID', '创建时间', '线路类型', 'fs_Route_ID', '组团类型', '线路天数',
-				            '发团日期', '发团地', '线路初始报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照',],
+				            '发团日期', '发团地id', '发团地', '线路初始报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照',],
 				colModel : [ {
 					name : 'myac',
 					index : '',
@@ -410,6 +421,13 @@ jQuery(function($) {
 				}, {
 					name : 'fsStartplace',
 					index : 'fsStartplace',
+					width : 50,
+					editable : true,
+					sorttype : "int",
+					hidden : true
+				}, {
+					name : 'regionname',
+					index : 'regionname',
 					width : 50,
 					editable : true,
 					sorttype : "int"

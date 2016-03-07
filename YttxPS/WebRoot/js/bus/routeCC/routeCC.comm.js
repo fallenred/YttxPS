@@ -21,14 +21,14 @@ function getRoom(fsAccomno){
 /**
  * 获取酒店列表
  */
-function getAccomadation(starlvl){
+function getAccomadation(accomadation){
 	var scenic = [];
 	var req = {};
 	$("input[name='scenicGen']").each(function(){
 		scenic.push($.trim($(this).val()));
 	});
 	
-	req["accomadation.starlvl"] = starlvl;
+	req["accomadation.starlvl"] = accomadation.starlvl;
 	req["scenicNo"] = scenic;
 	$.ajax({
 		type: "GET",
@@ -42,6 +42,9 @@ function getAccomadation(starlvl){
 				html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 			});
 			$("#accomadationNo").html(html);
+			if(accomadation.no != undefined && accomadation.no != null) {
+				$("#accomadationNo").find("option[value='" + accomadation.no + "']").attr("selected", "selected");
+			}
 			getRoom($("#accomadationNo").val());
 		}
 	});
@@ -238,8 +241,12 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 											url: "/accomadation/findAccomadationInfo.htm",
 											dataType: "json",
 											success: function(accomadation) {
-												getAccomadation(accomadation.data.starlvl);
+												getAccomadation(accomadation.data);
 												$("#fsStarLvl").find("option[value='" + accomadation.data.starlvl + "']").attr("selected", "selected");
+												var roomName = $(".room-label-" + room.data.fsRoomno).text();
+												var accName = accomadation.data.name;
+												var lvl = $("#fsStarLvl").find("option[value='" + accomadation.data.starlvl + "']").text();
+												$(".room-label-" + room.data.fsRoomno).text(lvl + " - " + accName + " - " + roomName);
 											}
 										});
 									}
@@ -268,7 +275,6 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 				'<label class="shop_' + type.fsResno + '">&nbsp;&nbsp;' + type.fsName + '：</label>' +
 				'<input class="shop_'+ type.fsResno + '" name="routecc[' + type.fsResno + '].fsCcno" value="000021" type="hidden"/>' +
 				'<span class="shop_' + type.fsResno + '">&nbsp;人头消费&nbsp;&nbsp;<br></span>';
-				resetIframeHeight("add");
 			});
 			$("#div_shop").html(html);
 		}
@@ -307,3 +313,72 @@ function setContentDisable(isDisable) {
 		$("#div_shop").html("");
 	}
 }
+
+/**
+ * 初始化字典列表
+ */
+function getDict(parentno, selectId){
+	$.ajax({
+		type: "GET",
+		traditional: true,
+		url: "/dict/selectDict.htm",
+		data: "dict.fsParentno=" + parentno,
+		dataType: "json",
+		success: function(data){
+			var html = '<option value="">' + '-- 请选择 --' + '</option>'; 
+			$.each(data, function(commentIndex, comment){
+				html += '<option value=' + comment['fsDictno'] + '>' + comment['fsDictname'] + '</option>';
+			});
+			$("#" + selectId).html(html);
+		}
+	});
+}
+
+//增加房型
+$("#addRoomBtn").click(function(){
+	var html = $("#div_room").html();
+	var val = $("#room").val();
+	var text = $("#fsStarLvl").find("option:selected").text() + " - " + 
+			$("#accomadationNo").find("option:selected").text() + " - " + 
+			$("#room").find("option:selected").text();
+	var flag = true;
+	if($(".room-label-" + val) != null && $(".room-label-" + val).length != 0) {
+		flag = false;
+	}
+	
+	if (flag) {
+		$.ajax({
+			type: "POST",
+			traditional: true,
+			data: "fsRestype=fx",
+			url: "/rescc/findResCC.htm",
+			dataType: "json",
+			success: function(data){
+				html += '<label for="form-field-select-2" class="room-label-' + val + '">' + text + '</label>';
+				html += '<select class="form-control room room-select-' + val + '" name="' + val + '" id="rooms_' + val + '" multiple="multiple">';
+				$.each(data.rows, function(i, e){
+					html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
+				});
+				
+				$("#div_room").html(html);
+			}
+		});
+	}
+});
+
+//删除房型
+$("#rmRoomBtn").click(function(){
+	var val = $("#room").val();
+	$(".room-label-" + val).remove();
+	$(".room-select-" + val).remove();
+});
+
+//酒店标准变更
+$("#fsStarLvl").change(function(){
+	getAccomadation({"starlvl": $("#fsStarLvl").val()});
+});
+
+//酒店变更
+$("#accomadationNo").change(function(){
+	getRoom($("#accomadationNo").val());
+});

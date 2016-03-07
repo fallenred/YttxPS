@@ -81,7 +81,7 @@
 													<option value="2">纯玩团</option>
 													<option value="3">品质游</option>
 													<option value="4">热门线路</option>
-													<option value="4">特卖线路</option>
+													<option value="5">特卖线路</option>
 												</select>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiDays">线路天数</label>

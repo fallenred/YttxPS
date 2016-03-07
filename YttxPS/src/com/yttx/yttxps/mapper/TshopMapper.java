@@ -70,4 +70,10 @@ public interface TshopMapper<T> extends IBaseMapper<T> {
      * @return List<Object>
      */
     List<T> selectSelectivePage(Map<String, Object> map);
+    
+    /**
+     * 获取购物店sequence
+     * @return
+     */
+    int selectFsNo();
 }

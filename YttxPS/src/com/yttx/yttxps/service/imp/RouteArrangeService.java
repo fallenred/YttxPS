@@ -134,8 +134,13 @@ public class RouteArrangeService implements IRouteArrangeService {
 		Criteria criteria = example.createCriteria();
 		criteria.andFsRoutenoEqualTo(no);
 		criteria.andFsRestypeNotIn(restTypeList);
-		
 		routeCCMapper.deleteByExample(example);
+		
+		//清空模糊资源
+		TRouteArrangeWithBLOBs record = new TRouteArrangeWithBLOBs();
+		record.setFsId(no);
+		record.setFcRessnapshot("");
+		routeArrangeMapper.updateByPrimaryKeySelective(record);
 	}
 
 	@Override
