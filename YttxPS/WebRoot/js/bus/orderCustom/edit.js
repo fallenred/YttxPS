@@ -184,7 +184,7 @@ jQuery(function($) {
 		//校验数量不能为空
 		flag = true;
 		$(".usernum").each(function(){
-			if ($(this).val() == null || $(this).val() == '') {
+			if ($(this).val() == null || $(this).val() == ''|| $(this).val() == 'null') {
 				$("#message").show();
 				$("#message").text("数量不能为空，请输入");
 				$(this).attr("placeholder", "数量不能为空，请输入");
