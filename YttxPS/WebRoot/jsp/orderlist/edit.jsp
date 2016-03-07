@@ -65,7 +65,6 @@
 												<select id="genindex" disabled="disabled" class="form-control">
 												</select>
 											</div>
-
 										</div>
 									</div>
 									<!-- <div class="row">

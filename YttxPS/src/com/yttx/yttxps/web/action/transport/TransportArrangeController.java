@@ -94,8 +94,7 @@ static Logger logger = LoggerFactory.getLogger(TransportArrangeController.class)
 	 */
 	@RequestMapping(value="addTransportArrange.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxaddTransportArrange(TtransportArrange ttransportArrange)
-    {  
+	public Map<String, Object> ajaxaddTransportArrange(TtransportArrange ttransportArrange){  
 		logger.debug("当前新增对象 {}", ttransportArrange);
 		try{
 			ttransportArrange.setFsNo("cx" + String.format("%08d", transportArrangeService.selectFsNo()));

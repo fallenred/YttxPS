@@ -245,10 +245,6 @@ jQuery(function($) {
 				pager : pager_selector,
 				altRows : true,
 
-//				multiselect : true,
-//				multiboxonly : true,
-//				multipleSearch : true,
-
 				loadComplete : function() {
 					var table = this;
 					setTimeout(function() {

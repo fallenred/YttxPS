@@ -53,6 +53,7 @@ $("#editIframe").on("load",function(){
 	if (raw.fiId != null) {
 		findSnapshot(this, raw.fiId);
 	}
+	//setTimeout(loadtext,"1000");
 	//获取线路景区
 	if (raw.fiGenindex != null) {
 		getSceniceGen(this, raw.fiGenindex);
@@ -209,7 +210,7 @@ function findSnapshot(obj, no){
 			var content = $(obj).contents().find("#myTabContent").html();
 			$.each(data.fuzzySnapshot.daylist, function(commentIndex, comment){
 				var date = getDate($(obj).contents().find("#ftStartdate").val(), commentIndex);
-				if (commentIndex = 0){
+				if (comment['dayflag'] == 0){
 					//tab头
 					tab += '<li class="active"><a href="#day0" data-toggle="tab">'+date+'</a></li>';
 				} else {
@@ -223,7 +224,7 @@ function findSnapshot(obj, no){
 				bg = '';
 				gw = '';
 				if (comment['reslist'] == null) return true;
-				$.each(comment['reslist'], function(commentIndex, comment){
+				$.each(comment['reslist'], function(index, comment){
 					if ('mp' == comment['restype']) {
 						mp += comment['resname']+"&nbsp;&nbsp;&nbsp;";
 					}
@@ -275,40 +276,52 @@ function findSnapshot(obj, no){
 								  						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+resComment['resname']+'" type="hidden"/>'+
 								  						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
 					        	$.each(data, function(commentIndex, comment){
-									//团队全票
-									if (comment['fsCcno'] == '000005' || comment['fsCcno'] == '000013') {
-										html += '<span><!-- 选项编号--></span>';
-										//选中
-										if(comment['fsCcno'] == resComment['cclist'][0].ccno){
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
-													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio" checked="checked"/>'+
-													'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>';
-										} else {
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
-													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
-													'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'" disabled="disabled"/>';
-										}
-										html += '<span id="'+comment['fdPrice']+'">&nbsp;团队全价票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+					        		html += '<span><!-- 选项编号--></span>';
+					        		//选中
+									if(comment['fsCcno'] == resComment['cclist'][0].ccno){
+										html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
+												'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio" checked="checked"/>'+
+												'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>';
+									} else {
+										html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
+												'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
+												'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'" disabled="disabled"/>';
 									}
-									//团队半票
-									if (comment['fsCcno'] == '000006' || comment['fsCcno'] == '000014') {
-										html += '<span><!-- 选项编号--></span>';
-										//选中
-										if(comment['fsCcno'] == resComment['cclist'][0].ccno){
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
-													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio" checked="checked"/>'+
-													'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>';
-										} else {
-											html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
-													'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
-													'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'" disabled="disabled"/>';
-										}
-										html += '<span id="'+comment['fdPrice']+'">&nbsp;团队半价票('+comment['fdPrice']+'￥)</span></div>'+
-												'<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
+					        		switch(comment['fsCcno']){
+										case '000001':
+											html += '<span>&nbsp;全票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+									 	break;
+										case '000002':
+											html += '<span>&nbsp;半票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+									 	break;
+										case '000003':
+											html += '<span>&nbsp;儿童票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+									 	break;
+										case '000004':
+											html += '<span>&nbsp;免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+											break;
+										case '000005':
+											html += '<span>&nbsp;团队全票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+									 	break;
+										case '000006':
+											html += '<span>&nbsp;团队免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+									 	break;
+										case '000007':
+											html += '<span>&nbsp;团队儿童票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+									 	break;
+										case '000008':
+											html += '<span>&nbsp;团队免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+											break;
+										default:
+											return;
+					        		}
+					        		if (commentIndex == data.length - 1) {
+					        			html += '</div><label class="col-sm-2 control-label no-padding-right">数量：</label>'+
 												'<div class="col-sm-1 no-padding-left">'+
 												'<input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" value="'+resComment['cclist'][0].usernum+'" type="text"/></div>';
-									}
+					        		}
 					        	});
+					        	
 								 html += '<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="mp"/>' +
 									 	 '<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
 										 '<span><!-- 资源编号 --></span><input type="hidden" class="ticketid" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+resComment['resno']+'"/></div></div>';
@@ -391,7 +404,63 @@ function findSnapshot(obj, no){
 								  						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
 					        	usernum = '';
 					        	$.each(data, function(commentIndex, comment){
-									//团队全票
+					        		html += '<span><!-- 选项编号--></span>';
+									//选中
+									if((comment['fsCcno'] == resComment['cclist'][0].ccno) && comment['fsCcno'] != '000017'){
+										html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
+												'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio" checked="checked"/>'+
+												'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>';
+									} else if(comment['fsCcno'] != '000017'){
+										html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
+												'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
+												'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'" disabled="disabled"/>';
+									}
+					        		switch(comment['fsCcno']){
+										case '000001':
+											html += '<span>&nbsp;全票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+									 	break;
+										case '000002':
+											html += '<span>&nbsp;半票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+									 	break;
+										case '000003':
+											html += '<span>&nbsp;儿童票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+									 	break;
+										case '000004':
+											html += '<span>&nbsp;免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+											break;
+										case '000005':
+											html += '<span>&nbsp;团队全票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+									 	break;
+										case '000006':
+											html += '<span>&nbsp;团队免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+									 	break;
+										case '000007':
+											html += '<span>&nbsp;团队儿童票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+									 	break;
+										case '000008':
+											html += '<span>&nbsp;团队免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+											break;
+										case '000017':
+											if(comment['fsCcno'] == resComment['cclist'][2].ccno){
+												html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
+														'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="checkbox" checked="checked"/>'+
+														'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'"/>';
+											} else {
+												html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
+												'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="checkbox"/>'+
+												'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'"/>';
+											}
+											html += '<span>&nbsp;接送费用('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+											break;
+										default:
+											return;
+					        		}
+					        		if (commentIndex == data.length - 1) {
+					        			html += '</div><label class="col-sm-2 control-label no-padding-right">数量：</label>'+
+												'<div class="col-sm-1 no-padding-left">'+
+												'<input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" value="'+resComment['cclist'][0].usernum+'" type="text"/></div>';
+					        		}
+									/*//团队全票
 									if (comment['fsCcno'] == '000005' || comment['fsCcno'] == '000013') {
 										html += '<span><!-- 选项编号--></span>';
 										//选中
@@ -433,12 +502,10 @@ function findSnapshot(obj, no){
 										html += '<span id="'+comment['fdPrice']+'">&nbsp;接送费用('+comment['fdPrice']+'￥)</span></div>';
 												
 									}
+									 */
 									usernum = resComment['cclist'][commentIndex].usernum;
 					        	});
-								 html += '<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
-										 '<div class="col-sm-1 no-padding-left">'+
-									     '<input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" value="'+usernum+'" type="text"/></div>'+
-									 	 '<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="yl"/>' +
+								 html += '<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="yl"/>' +
 									 	 '<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
 										 '<span><!-- 资源编号 --></span><input type="hidden" class="entertainmentid" name="body.daylist['+dayIndex+'].reslist['+index+'].resno" value="'+resComment['resno']+'"/></div></div>';
 								 if (data != '') {
@@ -819,14 +886,7 @@ jQuery(function($) {
 					index : 'ftCreatdate',
 					width : 50,
 					editable : true,
-					sorttype : "date",
-					formatter : function(value){
-						var timestamp = "";
-						if(value != ''){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd hh:mm:ss");
-						}
-						return timestamp;
-					}
+					sorttype : "date"
 				}, {
 					name : 'fiType',
 					index : 'fiType',
@@ -904,6 +964,7 @@ jQuery(function($) {
 					sortable : true,
 					editable : true,
 					edittype : 'select',
+					hidden : true,
 					editoptions : {
 						value : s
 					},

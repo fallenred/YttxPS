@@ -445,7 +445,37 @@
 												  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+ticketSelect.find("option:selected").text()+'" type="hidden"/>'+
 												  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
 						$.each(data, function(commentIndex, comment){
-							//团队全票
+							str = '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
+							'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
+							'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>';
+							switch(comment['fsCcno']){
+								case '000001':
+									html += str + '<span>&nbsp;全票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 	break;
+								case '000002':
+									html += str + '<span>&nbsp;半票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 	break;
+								case '000003':
+									html += str + '<span>&nbsp;儿童票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 	break;
+								case '000005':
+									html += str + '<span>&nbsp;团队全票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 	break;
+								case '000006':
+									html += str + '<span>&nbsp;团队免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 	break;
+								case '000007':
+									html += str + '<span>&nbsp;团队儿童票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 	break;
+								case '000004':
+									html += str + '<span>&nbsp;免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 	break;
+								default:
+									alert("未配置门票消费价格！");
+									throw "未配置门票消费价格！";
+							  
+							}
+							/* //团队全票
 							if (comment['fsCcno'] == '000005' || comment['fsCcno'] == '000013') {
 								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
@@ -458,7 +488,7 @@
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
 										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>'+
 										'<span id="'+comment['fdPrice']+'">&nbsp;团队半价票('+comment['fdPrice']+'￥)</span>';
-							}
+							} */
 			        	});
 						 html += '</div>'+
 								 '<label class="col-sm-2 control-label no-padding-right">数量：</label><div class="col-sm-1 no-padding-left">'+
@@ -616,11 +646,56 @@
 			        		alert("未配置娱乐项目价格，请先配置娱乐项目价格再添加！");
 			        	}
 			        	index = parseInt(index)+1;
-						html = entertainmentDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +entertainmentSelect.find("option:selected").text()+'：</span>'+
-						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+entertainmentSelect.find("option:selected").text()+'" type="hidden"/>'+
-						  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
+						html = entertainmentDiv.html() + 
+								'<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +entertainmentSelect.find("option:selected").text()+'：</span>'+
+						  		'<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+entertainmentSelect.find("option:selected").text()+'" type="hidden"/>'+
+						  		'<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
 						$.each(data, function(commentIndex, comment){
-							//团队全票
+							if (comment['fsCcno'] != '000017') {
+								str = '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
+									  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
+									  '<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>';
+							} else {
+								str = '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
+									  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'" type="checkbox"/>'+
+									  '<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'"/>';
+							}
+							switch(comment['fsCcno']){
+								case '000001':
+									html += str + '<span>&nbsp;全票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 		break;
+								case '000002':
+									html += str + '<span>&nbsp;半票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 		break;
+								case '000003':
+									html += str + '<span>&nbsp;儿童票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 		break;
+								case '000004':
+									html += str + '<span>&nbsp;免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 		break;
+								case '000005':
+									html += str + '<span>&nbsp;团队全票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 		break;
+								case '000006':
+									html += str + '<span>&nbsp;团队免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 		break;
+								case '000007':
+									html += str + '<span>&nbsp;团队儿童票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 		break;
+								case '000008':
+									html += str + '<span>&nbsp;团队免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 		break;
+								case '000017':
+									html += str + '<span>&nbsp;接送费用('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 		break;
+								default:
+									alert("未配置娱乐项目消费价格！");
+									throw "未配置娱乐项目消费价格！";
+							}
+							if (commentIndex == data.length - 1) {
+			        			html += '</div>';
+			        		}
+							/* //团队全票
 							if (comment['fsCcno'] == '000005' || comment['fsCcno'] == '000013') {
 								html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 										'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
@@ -641,7 +716,7 @@
 										'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'"/>'+
 										'<span>&nbsp;接送费用('+comment['fdPrice']+'￥)</span></div>';
 										
-							}
+							} */
 			        	});
 						 html += '<label class="col-sm-2 control-label no-padding-right">数量：</label>'+
 								 '<div class="col-sm-1 no-padding-left"><input class="usernum" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].usernum" type="text"/></div>'+
@@ -681,6 +756,7 @@
 		function addRoom(obj){
 			roomDiv = $(obj).parent().next().next().children().children();
 			roomSelect = $(obj).parent().prev().children();
+			fsStarLvlSelect = $(obj).parent().parent().parent().prev().prev().find(".fsStarLvl");
 			regionsSelect = $(obj).parent().parent().parent().prev().find(".accomadationNo");
 			reslistIndex = $(obj).parent().parent().parent().parent().parent().prev();
 			dayIndex = reslistIndex.prev().val();
@@ -709,7 +785,8 @@
 			        	
 			        	index = parseInt(index)+1;
 			        	$.each(data, function(commentIndex, comment){
-							html = roomDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +regionsSelect.find("option:selected").text()+'-'+roomSelect.find("option:selected").text()+'：</span>'+
+							html = roomDiv.html() + '<div class="row"><div class="form-group"><div class="col-sm-9"><span>' +
+							fsStarLvlSelect.find("option:selected").text() + '-' + regionsSelect.find("option:selected").text()+ '-'+roomSelect.find("option:selected").text()+'：</span>'+
 							  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resname" value="'+regionsSelect.find("option:selected").text()+'-'+roomSelect.find("option:selected").text()+'" type="hidden"/>'+
 							  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].resprop" value="prop" type="hidden"/>';
 							html += '<span><!-- 选项编号 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" value="'+comment['fsCcno']+'"/><span>&nbsp;房间消费('+comment['fdPrice']+'￥)</span></div>'+

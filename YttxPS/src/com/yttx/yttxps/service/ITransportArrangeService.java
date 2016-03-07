@@ -1,6 +1,7 @@
 package com.yttx.yttxps.service;
 
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -20,10 +21,10 @@ public interface ITransportArrangeService {
 	List<TtransportArrange> selectSelectivePage(Map<String, Object> map);
 	
 	@Transactional
-	void insert(TtransportArrange transportArrange);
+	void insert(TtransportArrange transportArrange) throws ParseException;
 	
 	@Transactional
-	void update(TtransportArrange record);
+	void update(TtransportArrange record) throws ParseException;
 	
 	@Transactional
 	int deleteByNo(String no);
