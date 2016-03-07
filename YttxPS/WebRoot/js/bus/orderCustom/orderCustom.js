@@ -776,7 +776,7 @@ jQuery(function($) {
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/orderCustom/findOrderCustom.htm",
-				postData:{ "orderCustom.fsOrderID": fsNo},
+				postData:{ "orderCustom.fsOrderId": fsNo},
                 datatype : "json",
                 mtype : 'POST',
 				height : 400,

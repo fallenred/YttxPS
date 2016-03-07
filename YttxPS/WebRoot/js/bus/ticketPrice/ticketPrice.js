@@ -225,6 +225,8 @@ jQuery(function($) {
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/ticket/findTicketPrice.htm",
+				postData:{ "ticket.fsNo": fsNo},
+                datatype : "json",
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
