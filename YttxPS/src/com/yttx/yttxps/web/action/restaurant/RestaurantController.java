@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.restaurant;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,19 +21,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yttx.comm.DateEditor;
 import com.yttx.comm.StringUtil;
 import com.yttx.yttxps.comm.JsonResult;
+import com.yttx.yttxps.model.Pic;
 import com.yttx.yttxps.model.ResoucePrice;
 import com.yttx.yttxps.model.Scenic;
 import com.yttx.yttxps.model.TCCPrice;
 import com.yttx.yttxps.model.TRestaurant;
 import com.yttx.yttxps.model.vo.RestaurantPriceReq;
 import com.yttx.yttxps.model.vo.RestaurantWebRequest;
+import com.yttx.yttxps.service.IPicService;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.service.IRestaurantService;
 import com.yttx.yttxps.web.action.BaseController;
+
+import oracle.net.aso.f;
 
 /**
  * 类描述：餐厅资源配置Controller
@@ -50,6 +56,9 @@ public class RestaurantController extends BaseController {
 	
 	@Autowired
 	private IPubService<?> pubService;
+	
+	@Autowired
+	private IPicService picService;
 	
 	@RequestMapping(value = "page.htm")
 	public String openPage(){
@@ -127,7 +136,18 @@ public class RestaurantController extends BaseController {
 		}
 		//向数据库中插入数据
 		try{
-			restaurantService.addRestaurent(restaurant);
+			//提交餐厅数据
+			String resno=restaurantService.addRestaurent(restaurant);
+			
+			//向资源服务器上提交图片
+			MultipartFile img = restaurant.getMenuImgFile();
+			if(img!=null && !img.isEmpty()){
+				Pic pic =new Pic();
+				pic.setResType("cd");
+				pic.setResNo(resno);
+				pic.setDesc(restaurant.getMenuDesc());
+				upImgFile(pic, img);
+			}
 		}catch(Exception e){
 			return JsonResult.jsonError(e.getMessage());
 		}
@@ -177,12 +197,55 @@ public class RestaurantController extends BaseController {
 		//向数据库中插入数据
 		try{
 			restaurantService.updateRestaurent(restaurant);
+			MultipartFile img = restaurant.getMenuImgFile();
+			
+			Pic pic =new Pic();
+			pic.setResType("cd");
+			pic.setResNo(restaurant.getNo());
+			deleteByResTypeAndNo(pic);//删除原来的图片
+			pic.setDesc(restaurant.getMenuDesc());
+			if(img==null||img.isEmpty()){
+				pic.setSrcFile(restaurant.getMenuImgFileLoction());
+			}
+			upImgFile(pic,img);	
 		}catch(Exception e){
 			return JsonResult.jsonError(e.getMessage());
 		}
 		return JsonResult.jsonOk();
 	}
 	
+	/*
+	 * 删除图片
+	 */
+	private void deleteByResTypeAndNo(Pic pic){
+		List<Pic> pics = picService.findByResNoAndType(pic);
+		if(pics!=null){
+			for(Pic fPic:pics){
+				String srcFile = fPic.getSrcFile();
+				deleteResourceByURL(srcFile);
+			}
+		}
+		picService.deleteByResTypeAndNo(pic);//删除菜单下的所有图片
+	}
+	
+	/*
+	 * 添加图片
+	 * @param pic
+	 * @param img
+	 */
+	private void upImgFile(Pic pic, MultipartFile img){
+		pic.setMain(new BigDecimal(0));
+		pic.setSeq(new BigDecimal(0));
+		if(!img.isEmpty()){
+			StringBuffer path = new StringBuffer();
+			path.append("/").append("cd").append("/");
+			path.append(pic.getResNo()).append("/");
+			String srcFile = resourceConvertURL(path.toString(),img);
+			pic.setSrcFile(srcFile);
+		}
+		picService.insert(pic);	
+	}
+
 	/**
 	 * 删除餐厅信息-->向后台提交数据
 	 */
@@ -193,6 +256,14 @@ public class RestaurantController extends BaseController {
 		//向数据库中插入数据
 		try{
 			restaurantService.deleteRestaurant(no);
+			
+			Pic pic=new Pic();//删除菜单的图片
+			pic.setResType("cd");
+			pic.setResNo(no);
+			deleteByResTypeAndNo(pic);
+			
+			pic.setResType("ct");//删除餐厅的图片
+			deleteByResTypeAndNo(pic);
 		}catch(Exception e){
 			return JsonResult.jsonError(e.getMessage());
 		}
@@ -264,6 +335,8 @@ public class RestaurantController extends BaseController {
 		}
 		return JsonResult.jsonOk();
 	}
+	
+	
 	/*
 	 * 验证提交的餐厅消费选项的价格是否提交完成
 	 */

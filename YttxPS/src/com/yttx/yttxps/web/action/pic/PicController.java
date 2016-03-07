@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,7 +63,7 @@ static Logger logger = LoggerFactory.getLogger(PicController.class);
     {  
 		List<Pic> list=null;
 		try {
-			list = picService.findByResNo(pic.getResNo());
+			list = picService.findByResNoAndType(pic);
 		}catch(Exception e) {
 			JsonResult.jsonError(e.getMessage());
 		}
@@ -87,7 +89,15 @@ static Logger logger = LoggerFactory.getLogger(PicController.class);
 			for(MultipartFile file:files){
 				if(!file.isEmpty()){
 					String fileurl = resourceConvertURL(path.toString(), file);
-					Thread.sleep(1000);
+					Map<String,Object> map = new HashMap<String,Object>();
+					map.put("resType", pic.getResType());
+					map.put("resNo", pic.getResNo());
+					int num = picService.selectCountSelective(map);//如果第一个添加，主图为其本身
+					if(num==0){
+						pic.setMain(new BigDecimal(1));	
+					}else{
+						pic.setMain(new BigDecimal(0));	
+					}
 					pic.setSrcFile(fileurl);
 					picService.insert(pic);
 				}

@@ -75,9 +75,30 @@
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="menu">餐厅菜单</label>
+											<label class="col-sm-2 control-label no-padding-right" for="menu">菜单名称</label>
 											<div class="col-sm-10">
-												<textarea id="menu" rows="4" cols="20"  name="menu" class="form-control" disabled>${res.menu}</textarea>
+												<input id="menu"  class="form-control" type="text"  name="menu" readonly value="${res.menu}">
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="menu">菜单图片</label>
+											<div class="col-sm-10">
+												<span class="profile-picture"> 
+													<img class="editable img-responsive editable-click editable-empty" alt="菜单图片" 
+														src="${res.menuImgFileLoction}" style="width:160px; height:120px"> 
+												</span>
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="menuDesc">菜单说明</label>
+											<div class="col-sm-10">
+												<textarea id="menuDesc" rows="4" cols="20"  name="menuDesc" class="form-control" disabled>${res.menuDesc}</textarea>
 											</div>
 										</div>
 									</div>

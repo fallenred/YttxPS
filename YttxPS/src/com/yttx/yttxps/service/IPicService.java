@@ -28,8 +28,11 @@ public interface IPicService {
 	BigDecimal selectSequence();
 
 	@Transactional(readOnly = true)
-	public List<Pic> findByResNo(String resNo);
+	public List<Pic> findByResNoAndType(Pic pic);
 
 	@Transactional
 	public boolean updateSeqs(List<Pic> piclist);
+	
+	@Transactional
+	public void deleteByResTypeAndNo(Pic pic);
 }

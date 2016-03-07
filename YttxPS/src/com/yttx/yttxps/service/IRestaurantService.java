@@ -28,7 +28,7 @@ public interface IRestaurantService {
 	 * @return 
 	 */
 	@Transactional
-	boolean addRestaurent(TRestaurant restaurant);
+	String addRestaurent(TRestaurant restaurant);
 	
 	/**
 	 * 查询餐厅信息

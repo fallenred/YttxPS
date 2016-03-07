@@ -112,23 +112,23 @@ jQuery(function($) {
 			return false;
 		}
 		
-		var postData = {};
-		postData["name"]      = name;
-		postData["regionno"]  = regionno;
-		postData["addr"]      = $.trim($("#addform #addr").val());
-		postData["special"]   = special;
-		postData["menu"]      = $("#addform #menu").val();
-		postData["attention"] = $("#addform #attention").val();
-		postData["lvl"]       = lvl;
-		postData["scale"]     = scale;
-		postData["stat"]      = stat;
+		var img = $("#addform #menuImgFile").val();
+		if(img == '') {
+			$("#message").show();
+			$("#message").text("请上传菜单图片");
+			$("#addform  #menuImgFile").focus();
+			return false;
+		}
 		
-		
-		$.post(
-			"/restaurant/add.htm",
-			postData,
-			function(data){
-				var json = eval("("+data+")");
+		 $.ajax({  
+	            url: '/restaurant/add.htm',  
+	            type: 'POST',  
+	            data:new FormData($("#addform")[0]),  
+	            dataType: 'JSON',  
+	            cache: false,  
+	            processData: false,  
+	            contentType: false
+		 }).done(function(json){
 				if(json.result == "ok") {
 					$("#message").html("新增餐厅成功！");
 					$("#message").show();
@@ -139,6 +139,6 @@ jQuery(function($) {
 					return false;
 				}
 				return false;
-			});
+	        }); 	
 	});
 });

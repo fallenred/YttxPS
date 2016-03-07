@@ -8,6 +8,8 @@
 		<result column="FS_REGIONNO" property="regionno" jdbcType="VARCHAR" />
 		<result column="FS_ADDR" property="addr" jdbcType="VARCHAR" />
 		<result column="FS_MENU" property="menu" jdbcType="VARCHAR" />
+		<result column="FS_SRCFILE" property="menuImgFileLoction" jdbcType="VARCHAR" />
+		<result column="FS_DESC" property="menuDesc" jdbcType="VARCHAR" />
 		<result column="FI_SCALE" property="scale" jdbcType="DECIMAL" />
 		<result column="FS_SPECIAL" property="special" jdbcType="VARCHAR" />
 		<result column="FS_ATTENTION" property="attention" jdbcType="VARCHAR" />
@@ -38,21 +40,32 @@
 
 	<!-- 通过主键查询详细信息 -->
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="string">
-		SELECT
-			r.FS_NO, 
-			r.FS_NAME, 
-			r.FS_REGIONNO, 
-			r.FS_ADDR, 
-			r.FS_MENU,
-			r.FI_SCALE, 
-			r.FS_SPECIAL,
-			r.FS_ATTENTION,
-			r.FS_LVL,
-			r.FI_STAT
-		FROM
-			TRestaurant r
-		WHERE 
-			Trim(FS_NO) = Trim(#{no,jdbcType=VARCHAR})
+		SELECT r.FS_NO,
+	       r.FS_NAME,
+	       r.FS_REGIONNO,
+	       r.FS_ADDR,
+	       r.FS_MENU,
+	       p.FS_SRCFILE,
+	       p.FS_DESC,
+	       r.FI_SCALE,
+	       r.FS_SPECIAL,
+	       r.FS_ATTENTION,
+	       r.FS_LVL,
+	       r.FI_STAT
+  		FROM 
+  			TRestaurant r,
+		       (select 
+		       		FS_resNo,
+		       		FS_SRCFILE, 
+		       		FS_DESC
+		         from Tpic
+		         where 
+		         	fs_resType = 'cd'
+		          	 AND FS_resNo = #{no,jdbcType=VARCHAR}
+		      ) p
+ 		WHERE 
+ 			r.FS_NO = p.FS_RESNO(+)
+  			AND r.FS_NO = #{no,jdbcType=VARCHAR}
 	</select>
 	
 	

@@ -36,7 +36,6 @@ public class PicService implements IPicService {
 	public int insert(Pic record) {
 		record.setIndex(selectSequence());
 		record.setSeq(record.getIndex());
-		record.setMain(new BigDecimal(0));
 		return picMapper.insert(record);
 	}
 
@@ -51,8 +50,8 @@ public class PicService implements IPicService {
 	}
 
 	@Override
-	public List<Pic> findByResNo(String resNo) {
-		return picMapper.findByResNo(resNo);
+	public List<Pic> findByResNoAndType(Pic pic) {
+		return picMapper.findByResNoAndType(pic);
 	}
 
 	@Override
@@ -63,5 +62,10 @@ public class PicService implements IPicService {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void deleteByResTypeAndNo(Pic pic) {
+		picMapper.deleteByResTypeAndNo(pic);
 	}
 }

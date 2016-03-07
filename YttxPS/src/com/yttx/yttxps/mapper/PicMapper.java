@@ -72,6 +72,20 @@ public interface PicMapper<T> extends IBaseMapper<T>{
 
 	/**
 	 * 找到resNo下所有图片
+	 * @param resType 
 	 */
-	List<Pic> findByResNo(String resNo);
+	List<Pic> findByResNo(String resNo, String resType);
+
+	/**
+	 * 找到resNo和resType下所有图片
+	 * @param resType 
+	 */
+	List<Pic> findByResNoAndType(Pic pic);
+
+	/**
+	 * 删除某个分类下某个资源的所有图片
+	 * @param pic
+	 * @return
+	 */
+	int deleteByResTypeAndNo(Pic pic);
 }

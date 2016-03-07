@@ -12,6 +12,9 @@
 <meta name="description" content="" />
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
+<script src="/js/fileinput/fileinput.js"></script>
+<script src="/js/fileinput/fileinput_locale_zh.js"></script>
+<link rel="stylesheet" href="/css/fileinput.css" />
 </head>
 <body>
 	<div class="main-container" id="main-container">
@@ -27,20 +30,8 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-							<form class="form-horizontal" id="editform" >
+							<form enctype="multipart/form-data" class="form-horizontal" id="editform" >
 								<div class="modal-body">
-									<div>
-										<ul class="ace-thumbnails clearfix">
-											<div style="visibility: hidden;">
-												<li>
-													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg"> 
-														<img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
-													</a>
-												</li>
-											</div>
-										</ul>
-									</div>
-
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="name">餐厅名称</label>
@@ -82,9 +73,40 @@
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="menu">餐厅菜单</label>
+											<label class="col-sm-2 control-label no-padding-right" for="menu">菜单名称</label>
 											<div class="col-sm-10">
-												<textarea id="menu" rows="4" cols="20"  name="menu" class="form-control">${res.menu}</textarea>
+												<input id="menu" name="menu" type="text" class="form-control" 
+												 	placeholder="菜单名称" value="${res.menu}"/>
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="photo">菜单图片</label>
+											<div class="col-sm-10">
+												<input type="hidden" name="menuImgFileLoction" value="${res.menuImgFileLoction}">
+												<input id="menuImgFile" class="file" type="file" name="menuImgFile"> 
+												<script>
+												$("#menuImgFile").fileinput({
+													showUpload : false,
+													'allowedFileExtensions':[
+														'jpg',
+														'png',
+														'gif' ],
+													'browseLabel' : '选择菜单图片',
+													initialPreview : [ "<img src='${res.menuImgFileLoction}' class='file-preview-image' />" ]
+												});
+											</script>
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="menuDesc">菜单说明</label>
+											<div class="col-sm-10">
+												<textarea id="menuDesc" rows="4" cols="20"  name="menuDesc" class="form-control">${res.menuDesc}</textarea>
 											</div>
 										</div>
 									</div>
