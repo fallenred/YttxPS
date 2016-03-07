@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.yttx.yttxps.mapper.TScenicGenMapper;
 import com.yttx.yttxps.mapper.TgenMapper;
 import com.yttx.yttxps.model.TScenicGen;
+import com.yttx.yttxps.model.TScenicGenExample;
+import com.yttx.yttxps.model.TScenicGenExample.Criteria;
 import com.yttx.yttxps.model.Tgen;
 import com.yttx.yttxps.model.TgenExample;
 import com.yttx.yttxps.service.IGenService;
@@ -54,23 +56,37 @@ public class GenService implements IGenService {
 
 	@Override
 	public int update(Tgen record) {
+		TScenicGenExample example = new TScenicGenExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFiGenindexEqualTo(record.getFiIndex());
+		scenicGenMapper.deleteByExample(example);
+		
+		for(TScenicGen scenicGen : record.getScenicGens()) {
+			scenicGen.setFiIndex(scenicGenMapper.selectFiIndex());
+			scenicGen.setFiGenindex(record.getFiIndex());
+			scenicGenMapper.insert(scenicGen);
+		}
+		
 		return genMapper.updateByPrimaryKeySelective(record);
 	}
 
 	@Override
 	public int delete(String no) {
-		return genMapper.deleteByPrimaryKey(new BigDecimal(no));
+		BigDecimal fiIndex = new BigDecimal(no);
+		TScenicGenExample example = new TScenicGenExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFiGenindexEqualTo(fiIndex);
+		scenicGenMapper.deleteByExample(example);
+		return genMapper.deleteByPrimaryKey(fiIndex);
 	}
 
 	@Override
 	public List<Tgen> selectTgen(TgenExample example) {
-		// TODO Auto-generated method stub
 		return genMapper.selectByExample(example);
 	}
 	
 	@Override
 	public int selectFiIndex() {
-		// TODO Auto-generated method stub
 		return genMapper.selectFiIndex();
 	}
 }
