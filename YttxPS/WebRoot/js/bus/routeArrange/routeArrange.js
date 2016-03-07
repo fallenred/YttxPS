@@ -106,10 +106,9 @@ jQuery(function($) {
 		$("#collapseOne").collapse('hide');
 		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
-		postData["routeArrange.fsNo"] = $("#queryfield").find("#fsNo").val();
-		postData["routeArrange.fsName"] = $("#queryfield").find("#fsName").val();
-		postData["routeArrange.fiDays"] = $("#queryfield").find("#fiDays").val();
-		postData["routeArrange.fiStat"] = $("#queryfield").find("#fiStat").val();
+		postData["arrange.fsName"] = $("#queryfield").find("#fsName").val();
+		postData["arrange.fiDays"] = $("#queryfield").find("#fiDays").val();
+		postData["arrange.fiStat"] = $("#queryfield").find("#fiStat").val();
 		$("#grid-table").jqGrid("setGridParam", {
 			postData : postData
 		}).trigger("reloadGrid");
@@ -272,7 +271,7 @@ jQuery(function($) {
 					formatter : function(value){
 						var timestamp = "";
 						if(value != null){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+							timestamp = (new Date(parseFloat(value))).format("yyyy-MM-dd");
 						}
 						return timestamp;
 					}
@@ -285,7 +284,7 @@ jQuery(function($) {
 					formatter : function(value){
 						var timestamp = "";
 						if(value != null){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+							timestamp = (new Date(parseFloat(value))).format("yyyy-MM-dd");
 						}
 						return timestamp;
 					}

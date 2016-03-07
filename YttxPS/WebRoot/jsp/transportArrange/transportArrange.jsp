@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -21,8 +20,7 @@
 		</script>
 
 		<div class="main-container-inner">
-			<a class="menu-toggler" id="menu-toggler" href="#"> <span
-				class="menu-text"></span>
+			<a class="menu-toggler" id="menu-toggler" href="#"> <span class="menu-text"></span>
 			</a>
 
 			<jsp:include page="/jsp/comm/sidebar.jsp" flush="true" />
@@ -47,9 +45,7 @@
 
 					<div class="nav-search" id="nav-search">
 						<form class="form-search">
-							<span class="input-icon"> <input type="text"
-								placeholder="Search ..." class="nav-search-input"
-								id="nav-search-input" autocomplete="off" /> <i
+							<span class="input-icon"> <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" /> <i
 								class="ace-icon fa fa-search nav-search-icon"></i>
 							</span>
 						</form>
@@ -65,11 +61,8 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a class="accordion-toggle" href="#collapseOne"
-											data-toggle="collapse" data-parent="#accordion"> <i
-											class="bigger-110 ace-icon fa fa-angle-down"
-											data-icon-show="ace-icon fa fa-angle-right"
-											data-icon-hide="ace-icon fa fa-angle-down"></i> &nbsp;查询条件
+										<a class="accordion-toggle" href="#collapseOne" data-toggle="collapse" data-parent="#accordion">
+											<i class="bigger-110 ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down"></i> &nbsp;查询条件
 										</a>
 									</h4>
 								</div>
@@ -84,8 +77,7 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="fsScenicno">车型名称</label>
+												<label class="col-sm-1 control-label no-padding-right" for="fsScenicno">车型名称</label>
 												<div class="col-sm-2">
 													<input class="form-control" maxlength="150" type="text" id="fsTransName" placeholder="车型名称" />
 												</div>
@@ -112,18 +104,15 @@
 							<div id="grid-pager"></div>
 
 							<!-- 模态框（新增） -->
-							<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
-								aria-labelledby="addModalLabel" aria-hidden="true">
+							<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
 								<div class="modal-dialog" style="width: 1024px;">
 									<div class="modal-content">
 										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal"
-												aria-hidden="true">×</button>
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 											<h4 class="modal-title" id="addModalLabel">新增线路车型</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="addIframe" width="100%" height="450px"
-												frameborder="0" scrolling="no"></iframe>
+											<iframe id="addIframe" width="100%" height="450px" frameborder="0" scrolling="no"></iframe>
 										</div>
 
 										<!-- /.modal-content -->
@@ -134,19 +123,15 @@
 							</div>
 
 							<!-- 模态框（修改） -->
-							<div class="modal fade" id="editModal" tabindex="-1"
-								role="dialog" aria-labelledby="editModalLabel"
-								aria-hidden="true">
+							<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
 								<div class="modal-dialog" style="width: 1024px;">
 									<div class="modal-content">
 										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal"
-												aria-hidden="true">×</button>
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 											<h4 class="modal-title" id="addModalLabel">修改线路车型</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="editIframe" width="100%" height="450px"
-												frameborder="0" scrolling="no"></iframe>
+											<iframe id="editIframe" width="100%" height="450px" frameborder="0" scrolling="no"></iframe>
 										</div>
 
 										<!-- /.modal-content -->
@@ -157,9 +142,7 @@
 							</div>
 
 							<!-- 模态框（查询） -->
-							<div class="modal fade" id="showModal" tabindex="-1"
-								role="dialog" aria-labelledby="showModalLabel"
-								aria-hidden="false">
+							<div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel" aria-hidden="false">
 								<div class="modal-dialog" style="width: 1024px;">
 									<div class="modal-content">
 
@@ -169,23 +152,20 @@
 								</div>
 								<!-- /.modal -->
 							</div>
-							
+
 							<!-- 图片上传 -->
-							<div class="modal fade" id="picModal" tabindex="-1" role="dialog"
-								aria-labelledby="picModalLabel" aria-hidden="true">
+							<div class="modal fade" id="picModal" tabindex="-1" role="dialog" aria-labelledby="picModalLabel" aria-hidden="true">
 								<div class="modal-dialog" style="width: auto; height: auto">
 									<div class="modal-content">
 										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal"
-												aria-hidden="true">×</button>
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 											<h4 class="modal-title" id="picModalLabel">图片管理</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="picIframe" width="100%" height="500px" frameborder="0"
-												scrolling="yes"></iframe>
-					
+											<iframe id="picIframe" width="100%" height="500px" frameborder="0" scrolling="yes"></iframe>
+
 										</div>
-					
+
 										<!-- /.modal-content -->
 									</div>
 									<!-- /.modal-dialog -->
@@ -195,18 +175,15 @@
 
 							<!-- 删除 -->
 							<!-- 模态框（查询） -->
-							<div class="modal fade" id="delModal" tabindex="-1" role="dialog"
-								aria-labelledby="delModalLabel" aria-hidden="false">
+							<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="delModalLabel" aria-hidden="false">
 								<div class="modal-dialog" style="width: 400px;">
 									<div class="modal-content">
 										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal"
-												aria-hidden="true">×</button>
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 											<h4 class="modal-title" id="delModalLabel">删除警告</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="delIframe" width="100%" height="200px"
-												frameborder="0" scrolling="no"></iframe>
+											<iframe id="delIframe" width="100%" height="200px" frameborder="0" scrolling="no"></iframe>
 										</div>
 										<!-- /.modal-content -->
 									</div>

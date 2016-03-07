@@ -1,10 +1,17 @@
 jQuery(function($) {
     $("#addform #message").hide();
     
-    //时间控件
-    $('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
-        $(this).prev().focus();
-    });
+    $('.datetimepicker').datetimepicker({
+		language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: true,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+	});
+    
     //  重置
     $("#addModal #reset").on("click", function() {
         $("#addModal #message").hide();

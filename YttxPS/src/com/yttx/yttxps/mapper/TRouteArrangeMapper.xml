@@ -579,16 +579,35 @@
   </update>
   <!-- 分页查询总数 -->
   <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
-  	select count(*) from TROUTEARRANGE
-	     where 1=1
+  	select COUNT(1) from (select ROWNUM as rowno,
+                            (select count(1) 
+                               from trouteCC rc,TResTypeDirc td 
+                              where rc.fs_routeno = t.fs_id
+                                and rc.FS_RESTYPE = td.FS_RESTYPE
+                                and td.FS_RESPROP != 'comm') as ccnum,
+                            t.* 
+                       from (
+                       <include refid="Custom_Table_Columns" />
+                       ) t
+    	where 1=1
 	      <if test="fsName != null and fsName != ''">
 	        and fs_Name like '%'||#{fsName}||'%'
 	      </if>
 	      <if test="fiGenindex != null and fiGenindex != ''">
 	        and FI_GENINDEX = #{fiGenindex}
 	      </if>
+	      <if test="fiDays != null">
+	        and FI_DAYS = #{fiDays}
+	      </if>
 	      <if test="fiStat != null and fiStat != ''">
 	        and fi_Stat = #{fiStat}
+	      </if>
+	      ) tt where 1=1
+	      <if test="startrow != null">
+	        and tt.rowno &gt; #{startrow}
+	      </if>
+	      <if test="hasRouteCC == true">
+	        <![CDATA[ and tt.ccnum > 0 ]]>
 	      </if>
   </select>
   
@@ -610,6 +629,9 @@
 	      </if>
 	      <if test="fiGenindex != null and fiGenindex != ''">
 	        and FI_GENINDEX = #{fiGenindex}
+	      </if>
+	      <if test="fiDays != null">
+	        and FI_DAYS = #{fiDays}
 	      </if>
 	      <if test="fiStat != null and fiStat != ''">
 	        and fi_Stat = #{fiStat}

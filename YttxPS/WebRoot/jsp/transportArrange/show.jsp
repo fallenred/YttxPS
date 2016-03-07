@@ -76,11 +76,11 @@
 											
 											<label class="col-sm-2 control-label no-padding-right" for="fsType">起始日期</label>
 											<div class="col-sm-3">
-												<input class="form-control" type="text" id="ftStartdate" name="ftStartdate" readonly="readonly" placeholder="起始日期" />
+												<input class="form-control datetimepicker" type="text" id="ftStartdate" name="ftStartdate" readonly="readonly" placeholder="起始日期" data-date-format="yyyy-mm-dd" readonly="readonly" disabled="disabled" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fsType">截止日期</label>
 											<div class="col-sm-3">
-												<input class="form-control" type="text" id="ftStartdate" name="ftEnddate" readonly="readonly" placeholder="截止日期" />
+												<input class="form-control datetimepicker" type="text" id="ftStartdate" name="ftEnddate" readonly="readonly" placeholder="截止日期" data-date-format="yyyy-mm-dd" readonly="readonly" disabled="disabled" />
 											</div>
 										</div>
 									</div>
@@ -128,6 +128,17 @@
 	          setTimeout('window.location="/home.htm"',5000);
 	    </script>
 	</c:if>
-
+	<script type="text/javascript">
+		$('.datetimepicker').datetimepicker({
+			language : 'zh-CN',
+			weekStart : 1,
+			todayBtn : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0
+		});
+	</script>
 </body>
 </html>

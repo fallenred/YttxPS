@@ -20,6 +20,7 @@
   <resultMap id="ExtendResultMap4Price" extends="ExtendResultMap" type="com.yttx.yttxps.model.TtransportArrange">
     <id column="FS_TRANSNAME" jdbcType="CHAR" property="fsTransName" />
     <id column="FT_STARTDATE" jdbcType="DATE" property="ftStartdate" />
+    <id column="FT_ENDDATE" jdbcType="DATE" property="ftEnddate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--

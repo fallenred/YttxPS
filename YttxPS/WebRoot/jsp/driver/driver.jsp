@@ -167,7 +167,7 @@
                                             <label class="col-sm-1 control-label no-padding-right"
                                                 for="addr">出生日期</label>
                                             <div class="col-sm-3">
-                                                <input type="text" placeholder="出生日期" name="birth" class="form-control date-picker" data-date-format="yyyy-mm-dd"></input>
+                                                <input type="text" placeholder="出生日期" name="birth" class="form-control datetimepicker" data-date-format="yyyy-mm-dd" readonly="readonly"></input>
                                             </div>
                                             <label class="col-sm-1 control-label no-padding-right"
                                                 for="lvl">状态</label>
@@ -234,10 +234,9 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
-                                            <label class="col-sm-1 control-label no-padding-right"
-                                                for="addr">出生日期</label>
+                                            <label class="col-sm-1 control-label no-padding-right" for="addr">出生日期</label>
                                             <div class="col-sm-3">
-                                                <input type="text" placeholder="出生日期" name="birth" class="form-control date-picker" data-date-format="yyyy-mm-dd"></input>
+                                                <input type="text" placeholder="出生日期" name="birth" class="form-control datetimepicker" data-date-format="yyyy-mm-dd" readonly="readonly"></input>
                                             </div>
                                             <label class="col-sm-1 control-label no-padding-right"
                                                 for="lvl">状态</label>
@@ -305,10 +304,9 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
-                                            <label class="col-sm-1 control-label no-padding-right"
-                                                for="addr">出生日期</label>
+                                            <label class="col-sm-1 control-label no-padding-right" for="addr">出生日期</label>
                                             <div class="col-sm-3">
-                                                <input type="text" placeholder="出生日期" name="birth" class="form-control date-picker" data-date-format="yyyy-mm-dd" disabled="disabled" readonly="readonly"></input>
+                                                <input type="text" placeholder="出生日期" name="birth" class="form-control datetimepicker" data-date-format="yyyy-mm-dd" readonly="readonly"></input>
                                             </div>
                                             <label class="col-sm-1 control-label no-padding-right"
                                                 for="lvl">状态</label>
