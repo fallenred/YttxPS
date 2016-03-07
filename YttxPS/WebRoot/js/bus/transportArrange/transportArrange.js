@@ -210,27 +210,13 @@ jQuery(function($) {
 					index : 'ftStartdate',
 					width : 100,
 					editable : true,
-					sorttype : "char",
-					formatter : function(value){
-						var timestamp = "";
-						if(value != null){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
-						}
-						return timestamp;
-					}
+					sorttype : "char"
 				}, {
 					name : 'ftEnddate',
 					index : 'ftEnddate',
 					width : 100,
 					editable : true,
-					sorttype : "char",
-					formatter : function(value){
-						var timestamp = "";
-						if(value != null){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
-						}
-						return timestamp;
-					}
+					sorttype : "char"
 				}, {
 					name : 'fdPrice',
 					index : 'fdPrice',
