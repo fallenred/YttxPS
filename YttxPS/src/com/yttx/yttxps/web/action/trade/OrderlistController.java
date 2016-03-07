@@ -127,6 +127,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			orderlistService.update(orderlist);
 		}
 		catch(Exception e){
+			logger.error("更新订单失败, 订单编号："+orderlist.getFsNo() + "\n" + e);
 			return (Map<String, Object>) JsonResult.jsonError("更新失败");
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();

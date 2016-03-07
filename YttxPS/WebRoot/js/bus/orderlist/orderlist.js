@@ -346,14 +346,7 @@ jQuery(function($) {
 					index : 'ftCreatdate',
 					width : 50,
 					editable : true,
-					sorttype : "date",
-					formatter : function(value){
-						var timestamp = "";
-						if(value != ''){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
-						}
-						return timestamp;
-					}
+					sorttype : "date"
 				}, {
 					name : 'fsType',
 					index : 'fsType',
@@ -397,7 +390,7 @@ jQuery(function($) {
 						for (k in fsProperty)
 							if (fsProperty[k] == v)
 								return k;
-						return '1';
+						return '';
 					}
 				}, {
 					name : 'fiDays',
