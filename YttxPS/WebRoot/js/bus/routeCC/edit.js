@@ -279,6 +279,9 @@ jQuery(function($) {
 		var val = $("#restaurant").val();
 		var text = $("restaurant").find("option:selected").text();
 		var flag = true;
+		if($(".restaurant-label-" + val) != null && $(".restaurant-label-" + val).length != 0) {
+			flag = false;
+		}
 		
 		if(flag) {
 			$.ajax({

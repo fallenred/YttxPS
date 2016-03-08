@@ -57,8 +57,20 @@ jQuery(function($) {
         	$("#fiStat").val(data.data.routeArrange.fiStat);   //日程快照
         	CKEDITOR.instances["fcSchedule"].setData(data.data.routeArrange.fcSchedule);   //日程快照
         	
-        	getTransportArrange({"fiGenindex": data.data.routeArrange.fiGenindex, "transportArrange": data.data.transport.fsNo});
-        	getGuide(data.data.guide);
+        	var arrange = {};
+        	arrange.fiGenindex = data.data.routeArrange.fiGenindex;
+        	if(data.data.transport != undefined) {
+        		arrange.transportArrange = data.data.transport.fsNo;
+        	} else {
+        		arrange.transportArrange = "";
+        	}
+        	getTransportArrange(arrange);
+        	
+        	if(data.data.guide != undefined) {
+        		getGuide(data.data.guide);
+        	} else {
+        		getGuide({"lvl" : ""});
+        	}
         }
 	});
 	
