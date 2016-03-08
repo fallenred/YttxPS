@@ -69,7 +69,7 @@
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="name">餐厅名称</label>
+												<label class="col-sm-1 control-label no-padding-right" for="name">客户ID</label>
 												<div class="col-sm-5">
 													<input maxlength="50" name="name" type="text" id="name" placeholder="忽略餐厅名称" />
 												</div>

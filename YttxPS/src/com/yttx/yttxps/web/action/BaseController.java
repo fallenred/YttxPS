@@ -122,7 +122,8 @@ public class BaseController {
 	}
 	
 	protected boolean deleteResourceByURL(String path) {
-		boolean ret = false;
+		return true;
+		/*boolean ret = false;
 		path = path.replace("http://" + RESOURCEIP, "");
 		try {
 			ftpClient.connect();
@@ -134,6 +135,7 @@ public class BaseController {
 		logger.debug("删除目标文件  {} {} ", path, ret);
 
 		return ret;
+		*/
 	}
 
 }

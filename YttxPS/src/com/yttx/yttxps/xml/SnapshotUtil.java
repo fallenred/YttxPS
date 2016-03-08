@@ -1,7 +1,9 @@
 package com.yttx.yttxps.xml;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import com.yttx.comm.StringUtil;
 import com.yttx.yttxps.comm.Constants;
@@ -17,6 +19,18 @@ import com.yttx.yttxps.xml.bean.Root;
  * @date 2016年2月23日 下午3:32:27
  */
 public class SnapshotUtil{
+	private static Map<String,String> hashtable = new Hashtable<String,String>();
+	static{
+		hashtable.put("mp","景区门票");
+		hashtable.put("yl","娱乐项目");
+		hashtable.put("ct","餐厅");
+		hashtable.put("cx","车型");
+		hashtable.put("dy","导游");
+		hashtable.put("bg","宾馆");
+		hashtable.put("gw","购物点");	
+	}
+	
+	
 	/**
 	 * 将一个xml字符串转化成一个对象
 	 */
@@ -43,19 +57,29 @@ public class SnapshotUtil{
 		if(list!=null){
 			HashMap<String, String> resMap=new HashMap<String,String>();
 			for(Reslist res:list){
-				String resName=res.getResname();
+				String resType =res.getRestype();
+				if(StringUtil.nullOrBlank(resType)){
+					continue;
+				}
+				String resName=hashtable.get(resType);
+				
 				List<Cclist> cclist=res.getCclist();
 				StringBuilder resContent = null;
+				if(!StringUtil.nullOrBlank(res.getResname())){
+					resContent = new StringBuilder(res.getResname()+":");
+				}
+				
 				if(cclist!=null){
 					for(Cclist cc:cclist){
-						resContent =new StringBuilder("消费选项名称："+cc.getCcname()+"&nbsp; &nbsp;");
-						resContent.append("价格："+ cc.getPrice()+"&nbsp; &nbsp;");
-						if(cc.getUsernum()!=null)
-							resContent.append("数量："+cc.getUsernum());
+						resContent =new StringBuilder((cc.getCcname()==null?"":cc.getCcname())+",&nbsp;");
+						resContent.append((cc.getPrice()==null?"":"价格--"+cc.getPrice())+", &nbsp;");
+						resContent.append(cc.getUsernum()==null?"":"数量--"+cc.getUsernum()+";");
 						resContent.append("<br/>");
 					}
 				}
-				resMap.put(resName, resContent.toString());
+				String content=resMap.get(resName);
+				content=(content==null?resContent.toString():content+resContent.toString());
+				resMap.put(resName, content);
 			}
 			return resMap;
 		}

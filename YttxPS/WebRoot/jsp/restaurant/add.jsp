@@ -12,6 +12,9 @@
 <meta name="description" content="" />
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
+<script src="/js/fileinput/fileinput.js"></script>
+<script src="/js/fileinput/fileinput_locale_zh.js"></script>
+<link rel="stylesheet" href="/css/fileinput.css" />
 </head>
 <body>
 	<div class="main-container" id="main-container">
@@ -27,7 +30,7 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-							<form class="form-horizontal" id="addform" >
+							<form class="form-horizontal" id="addform" enctype="multipart/form-data">
 								<div class="modal-body">
 									<!-- 图片TODO： -->
 									<div>
@@ -49,13 +52,13 @@
 													placeholder="餐厅名称"  maxlength="50"/>
 											</div>
 									
-											<label class="col-sm-2 control-label no-padding-right" for="brand">所属地区</label>
+											<label class="col-sm-2 control-label no-padding-right" for="regionname">所属地区</label>
 											<div class="col-sm-4">
 												<input type="text" placeholder="忽略行政区域" name="regionname" 
 													id="regionname" data-key="0086" data-idx="0" data-full="中国"
 													class="form-control inp-search" /> 
-												<input type="hidden" id="regionno" name="regionno" />
 												<div class="localcity selectCity" id="selectCity"></div>
+												<input type="hidden" id="regionno" name="regionno"/> 
 											</div>
 													
 										</div>
@@ -76,6 +79,8 @@
 													<option value="01">小吃</option>
 													<option value="02">藏餐</option>
 													<option value="03">火锅</option>
+													<option value="04">中餐</option>
+													<option value="05">其他</option>
 												</select>
 											</div>
 										</div>
@@ -83,9 +88,43 @@
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="menu">餐厅菜单</label>
+											<label class="col-sm-2 control-label no-padding-right" for="menu">菜单名称</label>
+											<div class="col-sm-4">
+												<input class="form-control" type="text" id="menu" name="menu" 
+													placeholder="菜单名称"  maxlength="500"/>
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="menuImgFile">菜单图片</label>
 											<div class="col-sm-10">
-												<textarea id="menu" rows="4" cols="20"  name="menu" 
+												<span class="block input-icon"> 
+													<input id="menuImgFile" class="file" type="file" name="menuImgFile"> 
+													<i class="icon-warning-sign red"></i>
+												</span>
+												<script>
+												$("#menuImgFile")
+														.fileinput(
+																{
+																	showUpload : false,
+																	'allowedFileExtensions' : [
+																			'jpg',
+																			'png',
+																			'gif' ],
+																	'browseLabel' : '选择菜单图片',
+														});
+											</script>
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="menuDesc">菜单说明</label>
+											<div class="col-sm-10">
+												<textarea id="menuDesc" rows="4" cols="20"  name="menuDesc" 
 													class="form-control"></textarea>
 											</div>
 										</div>

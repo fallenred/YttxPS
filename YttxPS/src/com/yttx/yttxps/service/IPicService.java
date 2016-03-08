@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yttx.yttxps.model.Pic;
@@ -27,4 +26,13 @@ public interface IPicService {
 	
 	@Transactional(readOnly = true)
 	BigDecimal selectSequence();
+
+	@Transactional(readOnly = true)
+	public List<Pic> findByResNoAndType(Pic pic);
+
+	@Transactional
+	public boolean updateSeqs(List<Pic> piclist);
+	
+	@Transactional
+	public void deleteByResTypeAndNo(Pic pic);
 }

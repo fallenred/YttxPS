@@ -92,33 +92,35 @@ jQuery(function($) {
 			return false;
 		}
 		
-		var postData = {};
-		postData["no"]        = $.trim($("#editform #no").val());
-		postData["name"]      = name;
-		postData["regionno"]  = regionno;
-		postData["addr"]      = $.trim($("#editform #addr").val());
-		postData["special"]   = special;
-		postData["menu"]      = $("#editform #menu").val();
-		postData["attention"] = $("#editform #attention").val();
-		postData["lvl"]       = lvl;
-		postData["scale"]     = scale;
-		postData["stat"]      = stat;
+		var img = $("#editform #menuImgFile").val();
+		var srcFile =$("#editform #menuImgFileLoction").val();
+		if(img == ''&& (srcFile==null||srcFile=='')) {
+			$("#message").show();
+			$("#message").text("请上传菜单图片");
+			$("#editform  #menuImgFile").focus();
+			return false;
+		}
 		
-		$.post(
-			"/restaurant/edit.htm",
-			postData,
-			function(data){
-				var json = eval("("+data+")");
-				if(json.result == "ok") {
-					$("#message").text("修改餐厅成功！");
-					$("#message").show();
-					return true;
-				}else {
-					$("#message").text("修改餐厅失败:" + json.message );
-					$("#message").show();
-					return false;
-				}
+		$.ajax({  
+            url: "/restaurant/edit.htm",  
+            type: 'POST',  
+            data:new FormData($("#editform")[0]),  
+            dataType: 'JSON',  
+            cache: false,  
+            processData: false,  
+            contentType: false
+		}).done(function(json){
+			if(json.result == "ok") {
+				$("#message").text("修改餐厅成功！");
+				$("#message").show();
+				return true;
+			}else {
+				$("#message").text("修改餐厅失败:" + json.message );
+				$("#message").show();
 				return false;
-			});
+			}
+			return false;
+        }); 	
+		
 	});
 });

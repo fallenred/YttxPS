@@ -54,12 +54,12 @@ public class RestaurantService implements IRestaurantService{
 	 * 新增一个餐厅
 	 */
 	@Override
-	public boolean addRestaurent(TRestaurant restaurant){
+	public String addRestaurent(TRestaurant restaurant){
 		//新增景区资源对照数据
 		String no = "ct"+produceNo();
 		restaurant.setNo(no);
 		restaurantMapper.insertSelective(restaurant);//向数据库中插入数据
-		return true;
+		return no;
 	}
 
 	/**

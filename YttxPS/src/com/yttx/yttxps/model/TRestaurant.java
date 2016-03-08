@@ -2,6 +2,8 @@ package com.yttx.yttxps.model;
 
 import java.math.BigDecimal;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class TRestaurant {
     
     private String no;
@@ -15,6 +17,12 @@ public class TRestaurant {
     private String addr;
 
     private String menu;
+    
+    private MultipartFile menuImgFile;
+    
+    private String menuImgFileLoction;
+    
+    private String menuDesc;
 
     private BigDecimal scale;
     
@@ -294,6 +302,33 @@ public class TRestaurant {
     public void setStat(BigDecimal stat) {
         this.stat = stat;
     }
+    
+    
+    
+
+	public MultipartFile getMenuImgFile() {
+		return menuImgFile;
+	}
+
+	public void setMenuImgFile(MultipartFile menuImgFile) {
+		this.menuImgFile = menuImgFile;
+	}
+
+	public String getMenuImgFileLoction() {
+		return menuImgFileLoction;
+	}
+
+	public void setMenuImgFileLoction(String menuImgFileLoction) {
+		this.menuImgFileLoction = (menuImgFileLoction ==null?null:menuImgFileLoction.trim());
+	}
+
+	public String getMenuDesc() {
+		return menuDesc;
+	}
+
+	public void setMenuDesc(String menuDesc) {
+		this.menuDesc = (menuDesc == null?null:menuDesc.trim());
+	}
 
 	@Override
 	public String toString() {
