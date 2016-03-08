@@ -31,8 +31,6 @@
 						<div class="col-xs-12">
 							<!-- PAGE CONTENT BEGINS -->
 
-							<!-- 模态框（新增） -->
-
 							<form class="form-horizontal" id="editform" >
 
 								<div class="modal-body">
@@ -40,10 +38,9 @@
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
-												<li><a class="cboxElement" data-rel="colorbox"
-													href="http://127.0.0.1:81/1.jpg"> <img width="0"
-														height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
-												</a></li>
+												<li>
+													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg"> <img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0"></a>
+												</li>
 											</div>
 										</ul>
 									</div>
@@ -180,7 +177,7 @@
 										
 									</div>
 								</div>
-									<div class="modal-footer">
+								<div class="modal-footer">
 									<button id="close" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 									<button id="reset" type="reset" class="btn" >重置</button>
 									<button id="submit" type="button" class="btn btn-primary">提交</button>
@@ -201,6 +198,7 @@
 
 	</div>
 	<!-- /.main-container -->
+	<script src="/js/bus/routeArrange/routeArrange.comm.js"></script>
 	<script src="/js/bus/routeArrange/edit.js"></script>
 
 	<c:if test="${!empty succflag && succflag =='1'}">

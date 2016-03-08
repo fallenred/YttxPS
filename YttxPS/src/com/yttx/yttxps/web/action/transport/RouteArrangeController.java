@@ -29,11 +29,15 @@ import com.yttx.yttxps.model.TRouteArrange;
 import com.yttx.yttxps.model.TRouteArrangeExample;
 import com.yttx.yttxps.model.TRouteArrangeWithBLOBs;
 import com.yttx.yttxps.model.TRouteCCExample;
-import com.yttx.yttxps.model.TRouteCCKey;
-import com.yttx.yttxps.model.vo.RouteArrangeRequest;
-import com.yttx.yttxps.service.IRouteArrangeService;
-import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.model.TRouteCCExample.Criteria;
+import com.yttx.yttxps.model.TRouteCCKey;
+import com.yttx.yttxps.model.Tguide;
+import com.yttx.yttxps.model.Ttransport;
+import com.yttx.yttxps.model.vo.RouteArrangeRequest;
+import com.yttx.yttxps.service.IGuideService;
+import com.yttx.yttxps.service.IRouteArrangeService;
+import com.yttx.yttxps.service.ITransportService;
+import com.yttx.yttxps.web.action.BaseController;
 
 /**
  * 线路配置
@@ -48,6 +52,12 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
 	
 	@Autowired
 	private IRouteArrangeService routeArrangeService;
+	
+	@Autowired
+	private IGuideService guideService;
+	
+	@Autowired
+	private ITransportService transportService;
 	
 	/**
 	 * 视图数据类型转换
@@ -105,7 +115,35 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
 	public Object findUniqRouteArrange(@RequestParam(value="fsId")String fsId)
     {  
 		logger.debug("当前查询条件 {}", fsId);
-		return routeArrangeService.findTRouteArrange(fsId);
+		Map<String, Object> data = new HashMap<>();
+		JsonResult.jsonData(data);
+		TRouteArrangeWithBLOBs routeArrange = routeArrangeService.findTRouteArrange(fsId);
+		data.put("routeArrange", routeArrange);
+		if(routeArrange != null) {
+			//导游信息
+			TRouteCCExample routeCCExample = new TRouteCCExample();
+			com.yttx.yttxps.model.TRouteCCExample.Criteria guideCriteria = routeCCExample.createCriteria();
+			guideCriteria.andFsRoutenoEqualTo(routeArrange.getFsId());
+			guideCriteria.andFsRestypeEqualTo("dy");
+			guideCriteria.andFiDayflagEqualTo(BigDecimal.ZERO);
+			List<TRouteCCKey> guides = routeArrangeService.findTRouteCCKey(routeCCExample);
+			if(guides != null && guides.size() > 0) {
+				Tguide guide = guideService.findTguide(guides.get(0).getFsResno());
+				data.put("guide", guide);
+			}
+			//车型信息
+			routeCCExample.clear();
+			com.yttx.yttxps.model.TRouteCCExample.Criteria transportCriteria = routeCCExample.createCriteria();
+			transportCriteria.andFsRoutenoEqualTo(routeArrange.getFsId());
+			transportCriteria.andFiDayflagEqualTo(BigDecimal.ZERO);
+			transportCriteria.andFsRestypeEqualTo("cx");
+			List<TRouteCCKey> transports = routeArrangeService.findTRouteCCKey(routeCCExample);
+			if(transports != null && transports.size() > 0) {
+				Ttransport transport = transportService.findTtransport(transports.get(0).getFsResno());
+				data.put("transport", transport);
+			}
+		}
+		return JsonResult.jsonData(data);
     }
 	
 	/**

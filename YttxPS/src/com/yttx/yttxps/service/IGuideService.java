@@ -21,6 +21,9 @@ public interface IGuideService {
 	@Transactional(readOnly = true) 
 	List<Tguide> selectTguide(TguideExample example);
 	
+	@Transactional(readOnly = true) 
+	Tguide findTguide(String fsNo);
+	
 	@Transactional
 	int insert(Tguide guide);
 	

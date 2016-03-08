@@ -2,9 +2,9 @@
 var raw = {};
 function showCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	$("#showModal").modal({
-	    remote: "/jsp/routeArrange/show.jsp"
-	}); 
+	var frameSrc = "/jsp/routeArrange/show.jsp?fsId=" + raw.fsId;
+    $("#showIframe").attr("src", frameSrc);
+    $('#showModal').modal({ show: true, backdrop: 'static' });
 };
 
 function editCustom(id) {
@@ -27,26 +27,6 @@ function picCustom(id) {
     $("#picIframe").attr("src", frameSrc);
     $('#picModal').modal({ show: true, backdrop: 'static' });
 };
-
-$("#showModal").on("shown.bs.modal", function() {
-	$(this).find("#reset").click();
-	$(this).find("#reset").click();
-	$(this).find("#fsId").val(raw.fsId);
-	$(this).find("#fiGenindex").val(raw.fiGenindex);
-	$(this).find("#fsName").val(raw.fsName);
-	$(this).find("#fsRegions").val(raw.fsRegions);
-	$(this).find("#fiDays").val(raw.fiDays);
-	$(this).find("#fsProperty").val(raw.fsProperty);
-	$(this).find("#ftStartdate").val(raw.ftStartdate);
-	$(this).find("#ftEnddate").val(raw.ftEnddate);
-	$(this).find("#fsStartplace").val(raw.fsStartplace);
-	$(this).find("#fsTitle").val(raw.fsTitle);
-	$(this).find("#fsTitlepic").val(raw.fsTitlepic);
-	$(this).find("#fsSummary").val(raw.fsSummary);
-	$(this).find("#fiStat").val(raw.fiStat);
-	$(this).find("#fcSchedule").val(raw.fcSchedule);
-	$(this).find("#fcRessnapshot").val(raw.fcRessnapshot);
-});
 
 $("#addModal", parent.document).on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
@@ -84,7 +64,6 @@ jQuery(function($) {
 //	jqGrid form提交
 	$("#submit").click(function() {
 		$("#collapseOne").collapse('hide');
-		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
 		postData["arrange.fsName"] = $("#queryfield").find("#fsName").val();
 		postData["arrange.fiDays"] = $("#queryfield").find("#fiDays").val();

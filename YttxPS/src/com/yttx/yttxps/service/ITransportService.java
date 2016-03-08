@@ -12,10 +12,10 @@ import com.yttx.yttxps.model.TtransportExample;
 
 public interface ITransportService {
 	
-	@Transactional(readOnly = true) 
+	@Transactional(readOnly = true)
 	public int selectCountSelective(Map<String, Object> map);
 	
-	@Transactional(readOnly = true) 
+	@Transactional(readOnly = true)
 	List<Ttransport> selectSelectivePage(Map<String, Object> map);
 	
 	@Transactional
@@ -28,6 +28,9 @@ public interface ITransportService {
 	int delete(String no);
 	
 	List<Ttransport> selectTtransport(TtransportExample example);
+	
+	@Transactional(readOnly = true)
+	Ttransport findTtransport(String fsNo);
 
 	int selectFsNo();
 }

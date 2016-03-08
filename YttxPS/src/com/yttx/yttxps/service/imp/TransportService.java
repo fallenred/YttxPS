@@ -49,7 +49,6 @@ public class TransportService implements ITransportService {
 
 	@Override
 	public List<Ttransport> selectTtransport(TtransportExample example) {
-		// TODO Auto-generated method stub
 		return transportMapper.selectByExample(example);
 	}
 	
@@ -58,4 +57,8 @@ public class TransportService implements ITransportService {
 		return transportMapper.selectFsNo();
 	}
 
+	@Override
+	public Ttransport findTtransport(String fsNo) {
+		return transportMapper.selectByPrimaryKey(fsNo);
+	}
 }

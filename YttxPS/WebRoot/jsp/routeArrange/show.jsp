@@ -34,12 +34,18 @@
 							<!-- 模态框（查询） -->
 
 							<form class="form-horizontal">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-									<h4 class="modal-title" id="showModalLabel">路线详情</h4>
-								</div>
 								<div class="modal-body">
 									<!-- 图片TODO： -->
+									<div>
+										<ul class="ace-thumbnails clearfix">
+											<div style="visibility: hidden;">
+												<li>
+													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg"> <img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0"></a>
+												</li>
+											</div>
+										</ul>
+									</div>
+
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fiGenIndex">所属线路</label>
@@ -49,17 +55,18 @@
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">路线名称</label>
 											<div class="col-sm-3">
+												<input type="hidden" id="fsId" name="fsId" />
 												<input type="text" id="fsName" name="fsName" class="form-control" placeholder="路线名称" readonly="readonly" />
 											</div>
-
+											
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsStartplace">发团地</label>
-											<div class="col-sm-8">
-												<input type="text" placeholder="请选择行政区域" name="fsStartplaceName" data-key="0086" data-idx="0" data-full="中国" id="fsStartplaceName" class="inp-search" readonly="readonly" /> <input
-													type="hidden" name="fsStartplace" id="fsStartplace" />
+											<div class="col-sm-3">
+												<input class="form-control" type="text" placeholder="请选择行政区域" name="fsStartplaceName" data-key="0086" data-idx="0" data-full="中国" id="fsStartplaceName" class="inp-search" readonly="readonly" />
+												<input type="hidden" name="fsStartplace" id="fsStartplace" />
 												<div id="selectCity" class="localcity"></div>
 											</div>
 										</div>
@@ -69,9 +76,11 @@
 											<label class="col-sm-2 control-label no-padding-right" for="fsProperty">线路类型</label>
 											<div class="col-sm-3">
 												<select class="form-control" id="fsProperty" name="fsProperty" disabled="disabled">
-													<option value="01">专家推荐</option>
-													<option value="02">热门线路</option>
-													<option value="03">特价线路</option>
+													<option value="1">常规线路</option>
+													<option value="2">纯玩团</option>
+													<option value="3">品质游</option>
+													<option value="4">热门线路</option>
+													<option value="5">特卖线路</option>
 												</select>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiDays">线路天数</label>
@@ -82,13 +91,13 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="ftStartdate">出发日期</label>
-											<div class="col-sm-2">
-												<input type="text" id="ftStartdate" name="ftStartdate" class="form-control datetimepicker" placeholder="" data-date-format="yyyy-mm-dd" disabled="disabled" readonly="readonly" />
+											<label class="col-sm-2 control-label no-padding-right" for="ftStartdate">有效日期</label>
+											<div class="col-sm-3">
+												<input type="text" id="ftStartdate" name="ftStartdate" class="form-control datetimepicker" readonly data-date-format="yyyy-mm-dd" maxlength="10" placeholder="" disabled="disabled" />
 											</div>
 											<label class="col-sm-1 control-label" style="width: 10px;">至</label>
-											<div class="col-sm-2">
-												<input type="text" id="ftEnddate" name="ftEnddate" class="form-control datetimepicker" placeholder="" data-date-format="yyyy-mm-dd" disabled="disabled" readonly="readonly" />
+											<div class="col-sm-3">
+												<input type="text" id="ftEnddate" name="ftEnddate" class="form-control datetimepicker" readonly data-date-format="yyyy-mm-dd" maxlength="10" placeholder="" disabled="disabled" />
 											</div>
 										</div>
 									</div>
@@ -101,8 +110,38 @@
 													<option value="-100">注销</option>
 												</select>
 											</div>
+											<label class="col-sm-2 control-label no-padding-right" for="transportArrange">车型选择</label>
+											<div class="col-sm-3">
+												<select id="transportArrange" name="routecc[0].fsResno" class="form-control" disabled="disabled">
+												</select>
+												<input type="hidden" name="routecc[0].fsRestype" value="cx" />
+												<input type="hidden" name="routecc[0].fiDayflag" value="0" />
+												<input type="hidden" name="routecc[0].fsCcno" value="000023" />
+											</div>
 										</div>
 									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">导游星级</label>
+											<div class="col-sm-3">
+												<select id="guideLvl" name="guideLvl" class="form-control" disabled="disabled">
+													<option value="01">金牌</option>
+													<option value="02">银牌</option>
+													<option value="03">铜牌</option>
+												</select>
+											</div>
+											<label class="col-sm-2 control-label no-padding-right" for="fiDays">导游选择</label>
+											<div class="col-sm-3">
+												<select id="guideFsNo" name="routecc[1].fsResno" class="form-control" disabled="disabled">
+												</select>
+												<input type="hidden" name="routecc[1].fsRestype" value="dy" />
+												<input type="hidden" name="routecc[1].fiDayflag" value="0" />
+												<input type="hidden" name="routecc[1].fsCcno" value="000000" />
+											</div>
+										</div>
+									</div>
+									
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsTitle">线路标题</label>
@@ -123,23 +162,25 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsSummary">线路摘要</label>
 											<div class="col-sm-8">
-												<textarea class="form-control" id="fsSummary" name="fsSummary" rows="3" placeholder="线路摘要" readonly="readonly"></textarea>
+												<textarea class="form-control" id="fsSummary" name="fsSummary" rows="3" placeholder="线路摘要" disabled="disabled" readonly="readonly"></textarea>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsSummary">日程快照</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fcSchedule">日程快照</label>
 											<div class="col-sm-8">
-												<textarea class="ckeditor form-control" id="fcSchedule" name="fcSchedule" readonly="readonly"></textarea>
+												<textarea class="ckeditor" id="fcSchedule" name="fcSchedule" disabled="disabled" readonly="readonly"></textarea>
 											</div>
 										</div>
+									</div>
+									<div id = "message" class="alert alert-warning">
+										
 									</div>
 								</div>
 
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button id="reset" type="reset" class="btn" style="display: none;">重置</button>
+									<button id="close" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</form>
 							<!-- PAGE CONTENT ENDS -->
@@ -157,6 +198,7 @@
 
 	</div>
 	<!-- /.main-container -->
+	<script src="/js/bus/routeArrange/routeArrange.comm.js"></script>
 	<script src="/js/bus/routeArrange/show.js"></script>
 
 	<c:if test="${!empty succflag && succflag =='1'}">

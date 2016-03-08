@@ -36,6 +36,11 @@ public class GuideService implements IGuideService {
 	public List<Tguide> selectTguide(TguideExample example) {
 		return guideMapper.selectByExample(example);
 	}
+	
+	@Override
+	public Tguide findTguide(String fsNo) {
+		return guideMapper.selectByPrimaryKey(fsNo);
+	}
 
 	@Override
 	public int insert(Tguide record) {

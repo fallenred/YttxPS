@@ -89,15 +89,43 @@ public class RouteArrangeService implements IRouteArrangeService {
 
 	@Override
 	public int update(TRouteArrangeWithBLOBs record) {
+		TResTypeDircExample reesTypeDircExample = new TResTypeDircExample();
+		com.yttx.yttxps.model.TResTypeDircExample.Criteria reesTypeDircCriteria = reesTypeDircExample.createCriteria();
+		reesTypeDircCriteria.andFsRespropEqualTo("comm");
+		List<TResTypeDirc> reesTypeDircList = resTypeDircMapper.selectByExample(reesTypeDircExample);
+		List<String> restTypeList = new ArrayList<String>();
+		for(TResTypeDirc dirc : reesTypeDircList) {
+			restTypeList.add(dirc.getFsRestype());
+		}
+		
+		TRouteCCExample example = new TRouteCCExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFsRoutenoEqualTo(record.getFsId());
+		criteria.andFsRestypeIn(restTypeList);
+		routeCCMapper.deleteByExample(example);
+		for(TRouteCCKey routeCC : record.getRoutecc()) {
+			routeCC.setFsRouteno(record.getFsId());
+			routeCCMapper.insert(routeCC);
+		}
 		return routeArrangeMapper.updateByPrimaryKeySelective(record);
 	}
 	
 	@Override
 	public void updateRouteCC(TRouteArrangeWithBLOBs record) {
+		TResTypeDircExample reesTypeDircExample = new TResTypeDircExample();
+		com.yttx.yttxps.model.TResTypeDircExample.Criteria reesTypeDircCriteria = reesTypeDircExample.createCriteria();
+		reesTypeDircCriteria.andFsRespropEqualTo("comm");
+		List<TResTypeDirc> reesTypeDircList = resTypeDircMapper.selectByExample(reesTypeDircExample);
+		List<String> restTypeList = new ArrayList<String>();
+		for(TResTypeDirc dirc : reesTypeDircList) {
+			restTypeList.add(dirc.getFsRestype());
+		}
+		
 		TRouteCCExample example = new TRouteCCExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andFiDayflagEqualTo(record.getFiDayflag());
 		criteria.andFsRoutenoEqualTo(record.getFsId());
+		criteria.andFsRestypeNotIn(restTypeList);
 		routeCCMapper.deleteByExample(example);
 		for(TRouteCCKey routeCC : record.getRoutecc()) {
 			routeCCMapper.insert(routeCC);

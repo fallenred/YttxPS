@@ -49,7 +49,7 @@ public class TransportArrangeService implements ITransportArrangeService {
 	public void insert(TtransportArrange record) throws ParseException {
 		transportArrangeMapper.insert(record);
 		TCCPrice price = new TCCPrice();
-		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		price.setFtStartdate(df.parse(record.getFtStartdate()));
 		price.setFtEnddate(df.parse(record.getFtEnddate()));
 		if (StringUtils.isEmpty(record.getFtEnddate())) {
@@ -75,7 +75,7 @@ public class TransportArrangeService implements ITransportArrangeService {
 		price.setFsRestype("cx");
 		price.setFsCcno("000000");
 		price.setFdPrice(record.getFdPrice());
-		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		price.setFtStartdate(df.parse(record.getFtStartdate()));
 		price.setFsResno(record.getFsNo());
 		if (StringUtils.isEmpty(record.getFtEnddate())) {
@@ -103,13 +103,11 @@ public class TransportArrangeService implements ITransportArrangeService {
 	
 	@Override
 	public List<TtransportArrangeKey> selectTtransportArrange(TtransportArrangeExample example) {
-		// TODO Auto-generated method stub
 		return transportArrangeMapper.selectByExample(example);
 	}
 	
 	@Override
 	public List<TtransportArrange> selectTtransportArrangeView(TtransportArrangeExample example) {
-		// TODO Auto-generated method stub
 		return transportArrangeMapper.selectTtransportArrangeByExample(example);
 	}
 	

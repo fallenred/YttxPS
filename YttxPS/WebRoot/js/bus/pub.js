@@ -20,4 +20,9 @@ function getregionname(no, callback) {
 			return unescape(r[2]);
 		return null;
 	}
+	
+	$.setTime = function(milliseconds) {
+		var date = new Date(milliseconds);
+		return date.format("yyyy-MM-dd");
+	}
 })(jQuery);
