@@ -16,7 +16,7 @@ SELECT fs_no,
 UNION
 SELECT fs_roomno AS fs_no,
        fs_name,
-       'fx' AS restype
+       'bg' AS restype
   FROM troom
 UNION
 SELECT fs_no,

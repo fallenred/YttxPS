@@ -197,14 +197,14 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 		type: "GET",
 		traditional: true,
 		url: "/routeArrange/findRouteCCType.htm",
-		data: "fsRouteno=" + fsRouteno + "&fiDayflag=" + day + "&fsRestype=fx",
+		data: "fsRouteno=" + fsRouteno + "&fiDayflag=" + day + "&fsRestype=bg",
 		dataType: "json",
 		success: function(data){
 			$.each(data, function(typeIdx, type){
 				$.ajax({
 					type: "POST",
 					traditional: true,
-					data: "fsRestype=fx",
+					data: "fsRestype=bg",
 					url: "/rescc/findResCC.htm",
 					dataType: "json",
 					success: function(data){
@@ -218,7 +218,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 						$.ajax({
 							type: "POST",
 							traditional: true,
-							data: "fsRouteno=" + fsRouteno + "&fiDayflag=" + day + "&fsRestype=fx&fsResno=" + type.fsResno,
+							data: "fsRouteno=" + fsRouteno + "&fiDayflag=" + day + "&fsRestype=bg&fsResno=" + type.fsResno,
 							url: "/routeArrange/findRouteCC.htm",
 							dataType: "json",
 							success: function(data) {
@@ -350,7 +350,7 @@ $("#addRoomBtn").click(function(){
 		$.ajax({
 			type: "POST",
 			traditional: true,
-			data: "fsRestype=fx",
+			data: "fsRestype=bg",
 			url: "/rescc/findResCC.htm",
 			dataType: "json",
 			success: function(data){

@@ -534,7 +534,7 @@ jQuery(function($) {
 					route["routecc[" + index + "].fiDayflag"] = fiDayflag;
 					route["routecc[" + index + "].fsCcno"] = cc;
 					route["routecc[" + index + "].fsResno"] = ticketId;
-					route["routecc[" + index + "].fsRestype"] = "fx";
+					route["routecc[" + index + "].fsRestype"] = "bg";
 					route["routecc[" + index + "].fsRouteno"] = fsRouteno;
 					index ++;
 				});

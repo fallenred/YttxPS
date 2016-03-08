@@ -577,72 +577,79 @@
       FI_STAT = #{fiStat,jdbcType=DECIMAL}
     where FS_ID = #{fsId,jdbcType=CHAR}
   </update>
+  
   <!-- 分页查询总数 -->
   <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
-  	select COUNT(1) from (select ROWNUM as rowno,
-                            (select count(1) 
-                               from trouteCC rc,TResTypeDirc td 
-                              where rc.fs_routeno = t.fs_id
-                                and rc.FS_RESTYPE = td.FS_RESTYPE
-                                and td.FS_RESPROP != 'comm') as ccnum,
-                            t.* 
-                       from (
-                       <include refid="Custom_Table_Columns" />
-                       ) t
-    	where 1=1
-	      <if test="fsName != null and fsName != ''">
-	        and fs_Name like '%'||#{fsName}||'%'
-	      </if>
-	      <if test="fiGenindex != null and fiGenindex != ''">
-	        and FI_GENINDEX = #{fiGenindex}
-	      </if>
-	      <if test="fiDays != null">
-	        and FI_DAYS = #{fiDays}
-	      </if>
-	      <if test="fiStat != null and fiStat != ''">
-	        and fi_Stat = #{fiStat}
-	      </if>
-	      ) tt where 1=1
-	      <if test="startrow != null">
-	        and tt.rowno &gt; #{startrow}
-	      </if>
-	      <if test="hasRouteCC == true">
-	        <![CDATA[ and tt.ccnum > 0 ]]>
-	      </if>
+  	SELECT COUNT(1)
+      FROM (SELECT (SELECT COUNT(1)
+                      FROM TROUTECC RC, TRESTYPEDIRC TD
+                     WHERE RC.FS_ROUTENO = T.FS_ID
+                       AND RC.FS_RESTYPE = TD.FS_RESTYPE
+                       AND TD.FS_RESPROP != 'comm') AS CCNUM,
+                   T.*
+              FROM (<include refid="Custom_Table_Columns"></include>) T
+             WHERE 1 = 1) TT
+     WHERE 1 = 1
+       <if test="fsName != null and fsName != ''">
+         and fs_Name like '%'||#{fsName}||'%'
+       </if>
+       <if test="fsId != null and fsId != ''">
+         and fs_id = #{fsId}
+       </if>
+       <if test="fiGenindex != null and fiGenindex != ''">
+         and FI_GENINDEX = #{fiGenindex}
+       </if>
+       <if test="fiDays != null">
+         and FI_DAYS = #{fiDays}
+       </if>
+       <if test="fiStat != null and fiStat != ''">
+         and fi_Stat = #{fiStat}
+       </if>
+       <if test="hasRouteCC == true">
+         <![CDATA[ and tt.ccnum > 0 ]]>
+       </if>
   </select>
   
   <!-- 分页查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
-      select * from (select ROWNUM as rowno,
-                            (select count(1) 
-                               from trouteCC rc,TResTypeDirc td 
-                              where rc.fs_routeno = t.fs_id
-                                and rc.FS_RESTYPE = td.FS_RESTYPE
-                                and td.FS_RESPROP != 'comm') as ccnum,
-                            t.* 
-                       from (
-                       <include refid="Custom_Table_Columns" />
-                       ) t
-    	where 1=1
-	      <if test="fsName != null and fsName != ''">
-	        and fs_Name like '%'||#{fsName}||'%'
-	      </if>
-	      <if test="fiGenindex != null and fiGenindex != ''">
-	        and FI_GENINDEX = #{fiGenindex}
-	      </if>
-	      <if test="fiDays != null">
-	        and FI_DAYS = #{fiDays}
-	      </if>
-	      <if test="fiStat != null and fiStat != ''">
-	        and fi_Stat = #{fiStat}
-	      </if>
-	      ) tt where 1=1
-	      <if test="startrow != null">
-	        and tt.rowno &gt; #{startrow}
-	      </if>
-	      <if test="hasRouteCC == true">
-	        <![CDATA[ and tt.ccnum > 0 ]]>
-	      </if>
+    SELECT *
+      FROM (SELECT ROWNUM AS ROWNO, TAB.*
+              FROM (SELECT *
+                      FROM (SELECT (SELECT COUNT(1)
+                                      FROM TROUTECC RC, TRESTYPEDIRC TD
+                                     WHERE RC.FS_ROUTENO = T.FS_ID
+                                       AND RC.FS_RESTYPE = TD.FS_RESTYPE
+                                       AND TD.FS_RESPROP != 'comm') AS CCNUM,
+                                   T.*
+                              FROM (<include refid="Custom_Table_Columns"></include>) T
+                             WHERE 1 = 1) TT
+                     WHERE 1 = 1
+                     <if test="fsName != null and fsName != ''">
+                       and fs_Name like '%'||#{fsName}||'%'
+                     </if>
+                     <if test="fsId != null and fsId != ''">
+                       and fs_id = #{fsId}
+                     </if>
+                     <if test="fiGenindex != null and fiGenindex != ''">
+                       and FI_GENINDEX = #{fiGenindex}
+                     </if>
+                     <if test="fiDays != null">
+                       and FI_DAYS = #{fiDays}
+                     </if>
+                     <if test="fiStat != null and fiStat != ''">
+                       and fi_Stat = #{fiStat}
+                     </if>
+                     <if test="hasRouteCC == true">
+                       <![CDATA[ and tt.ccnum > 0 ]]>
+                     </if>) TAB
+             WHERE 1 = 1
+             <if test="endrow != null">
+               <![CDATA[ AND ROWNUM <= #{endrow} ]]>
+             </if>)
+     WHERE 1 = 1
+     <if test="startrow != null">
+       <![CDATA[ AND rowno >= #{startrow} ]]>
+     </if>
   </select>
   
   <select id="selectRouteCCType" parameterType="map" resultMap="RouteCCTypeMap">

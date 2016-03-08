@@ -511,7 +511,7 @@ jQuery(function($) {
 				routecc["routecc[" + index + "].fiDayflag"] = fiDayflag;
 				routecc["routecc[" + index + "].fsCcno"] = cc;
 				routecc["routecc[" + index + "].fsResno"] = roomId;
-				routecc["routecc[" + index + "].fsRestype"] = "fx";
+				routecc["routecc[" + index + "].fsRestype"] = "bg";
 				routecc["routecc[" + index + "].fsRouteno"] = fsRouteno;
 				index ++;
 			});
