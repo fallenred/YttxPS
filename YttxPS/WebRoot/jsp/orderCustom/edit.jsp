@@ -151,10 +151,10 @@
 												</select>
 											</div>
 											<div class="col-sm-1">
-												<button type="button" class="btn btn-success pull-right" id="addScenicBtn">添加</button>
+												<button type="button" class="btn btn-sm btn-success pull-right" id="addScenicBtn">添加</button>
 											</div>
 											<div class="col-sm-1">
-												<button type="button" class="btn btn-success pull-left" id="rmScenicBtn">删除</button>
+												<button type="button" class="btn btn-sm btn-success pull-left" id="rmScenicBtn">删除</button>
 											</div>
 										</div>
 									</div>
@@ -182,10 +182,10 @@
 																	<select class="select_ticket form-control"></select>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn addTicketBtn btn-success pull-right" onclick="javascript:addTicket(this);">添加</button>
+																	<button type="button" class="btn btn-sm addTicketBtn btn-success pull-right" onclick="javascript:addTicket(this);">添加</button>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn rmTicketBtn btn-success pull-left" onclick="javascript:rmTicket(this);">删除</button>
+																	<button type="button" class="btn btn-sm rmTicketBtn btn-success pull-left" onclick="javascript:rmTicket(this);">删除</button>
 																</div>
 																<div class="row">
 																	<div class="form-group">
@@ -202,10 +202,10 @@
 																	<select class="select_restaurant form-control"></select>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn btn-success pull-right" onclick="javascript:addRestaurant(this);">添加</button>
+																	<button type="button" class="btn btn-sm btn-success pull-right" onclick="javascript:addRestaurant(this);">添加</button>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn btn-success pull-left" onclick="javascript:rmRestaurant(this);">删除</button>
+																	<button type="button" class="btn btn-sm btn-success pull-left" onclick="javascript:rmRestaurant(this);">删除</button>
 																</div>
 																<div class="row">
 																	<div class="form-group">
@@ -223,10 +223,10 @@
 																	<select class="select_entertainment form-control"></select>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn btn-success pull-right" onclick="javascript:addEntertainment(this);">添加</button>
+																	<button type="button" class="btn btn-sm btn-success pull-right" onclick="javascript:addEntertainment(this);">添加</button>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn btn-success pull-left" onclick="javascript:rmEntertainment(this);">删除</button>
+																	<button type="button" class="btn btn-sm btn-success pull-left" onclick="javascript:rmEntertainment(this);">删除</button>
 																</div>
 																<div class="row">
 																	<div class="form-group">
@@ -261,10 +261,10 @@
 																	<select class="room form-control"></select>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn btn-success pull-right" onclick="javascript:addRoom(this);">添加</button>
+																	<button type="button" class="btn btn-sm btn-success pull-right" onclick="javascript:addRoom(this);">添加</button>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn btn-success pull-left" onclick="javascript:rmRoom(this);">删除</button>
+																	<button type="button" class="btn btn-sm btn-success pull-left" onclick="javascript:rmRoom(this);">删除</button>
 																</div>
 																<div class="row">
 																	<div class="form-group">
@@ -282,10 +282,10 @@
 																	<select class="shop form-control"></select>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn btn-success pull-right" onclick="javascript:addShop(this);">添加</button>
+																	<button type="button" class="btn btn-sm btn-success pull-right" onclick="javascript:addShop(this);">添加</button>
 																</div>
 																<div class="col-sm-1">
-																	<button type="button" class="btn btn-success pull-left" onclick="javascript:rmShop(this);">删除</button>
+																	<button type="button" class="btn btn-sm btn-success pull-left" onclick="javascript:rmShop(this);">删除</button>
 																</div>
 																<div class="row">
 																	<div class="form-group">
@@ -304,10 +304,10 @@
 								</div>
 								
 								<div class="modal-footer">
-									<button id="close" type="button" class="btn btn-default"
+									<button id="close" type="button" class="btn btn-sm btn-default"
 										data-dismiss="modal">关闭</button>
 									<button id="reset" type="reset" class="btn">重置</button>
-									<button id="submit" type="button" class="btn btn-primary">提交</button>
+									<button id="submit" type="button" class="btn btn-sm btn-primary">提交</button>
 								</div>
 							</form>
 							<!-- PAGE CONTENT ENDS -->
