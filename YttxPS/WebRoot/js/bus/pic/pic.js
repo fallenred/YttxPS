@@ -39,8 +39,8 @@ $("#upfileModal").on("hidden.bs.modal", function(){
 /**
  * 拖拽插件--删除链接
  */
-$(document).on("click", ".imgdelete", function(event){
-    var $this = $(this);
+function deleteImg(id){
+    var $this = $("#"+id);
     event.preventDefault();
     event.stopPropagation();//阻止时间冒泡
     var $wrapper =  $this.closest('.imgblock');
@@ -76,8 +76,7 @@ $(document).on("click", ".imgdelete", function(event){
 				} ,
 	    dataType: 'json',
 	});
-   
-  });
+}
 
 /**
  * 拖拽插件--拖拽后调用
