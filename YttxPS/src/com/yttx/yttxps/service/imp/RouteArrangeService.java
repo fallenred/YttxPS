@@ -160,6 +160,10 @@ public class RouteArrangeService implements IRouteArrangeService {
 		return routeCCMapper.countByExample(example);
 	}
 	
+	public TRouteArrangeWithBLOBs findTRouteArrange(String fsId) {
+		return routeArrangeMapper.selectByPrimaryKey(fsId);
+	}
+	
 	private void creatFcRessnapshot(TRouteArrangeWithBLOBs routeArrange) {
 		Document fcRessnapshot = new Document();
 		Element root = new Element("root");

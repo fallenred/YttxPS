@@ -143,7 +143,7 @@
            FS_NAME,
            FS_REGIONS,
            FI_DAYS,
-           FS_PROPERTY,
+           TRIM(FS_PROPERTY) AS FS_PROPERTY,
            FT_STARTDATE,
            FT_ENDDATE,
            FS_STARTPLACE,
@@ -612,7 +612,7 @@
   </select>
   
   <!-- 分页查询 -->
-  <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
       select * from (select ROWNUM as rowno,
                             (select count(1) 
                                from trouteCC rc,TResTypeDirc td 

@@ -96,6 +96,19 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
     }
 	
 	/**
+	 * 获取路线列表
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="findUniqRouteArrange.htm", method = RequestMethod.GET)
+	@ResponseBody
+	public Object findUniqRouteArrange(@RequestParam(value="fsId")String fsId)
+    {  
+		logger.debug("当前查询条件 {}", fsId);
+		return routeArrangeService.findTRouteArrange(fsId);
+    }
+	
+	/**
 	 * 新增线路信息
 	 * @param Gen
 	 * @return

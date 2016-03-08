@@ -50,4 +50,7 @@ public interface IRouteArrangeService {
 	
 	@Transactional(readOnly = true)
 	public int findRouteCCCount(TRouteCCExample example);
+	
+	@Transactional(readOnly = true)
+	public TRouteArrangeWithBLOBs findTRouteArrange(String fsId);
 }
