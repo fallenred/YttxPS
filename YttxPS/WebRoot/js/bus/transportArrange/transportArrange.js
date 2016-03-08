@@ -214,7 +214,7 @@ jQuery(function($) {
 					formatter : function(value){
 						var timestamp = "";
 						if(value != null){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+							timestamp = (new Date(parseFloat(value))).format("yyyy-MM-dd");
 						}
 						return timestamp;
 					}
@@ -227,7 +227,7 @@ jQuery(function($) {
 					formatter : function(value){
 						var timestamp = "";
 						if(value != null){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+							timestamp = (new Date(parseFloat(value))).format("yyyy-MM-dd");
 						}
 						return timestamp;
 					}
@@ -244,10 +244,6 @@ jQuery(function($) {
 				rowList : [ 10, 20, 30 ],
 				pager : pager_selector,
 				altRows : true,
-
-//				multiselect : true,
-//				multiboxonly : true,
-//				multipleSearch : true,
 
 				loadComplete : function() {
 					var table = this;

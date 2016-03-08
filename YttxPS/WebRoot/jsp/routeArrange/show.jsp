@@ -84,11 +84,11 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="ftStartdate">出发日期</label>
 											<div class="col-sm-2">
-												<input type="text" id="ftStartdate" name="ftStartdate" class="form-control" placeholder="" readonly="readonly" />
+												<input type="text" id="ftStartdate" name="ftStartdate" class="form-control datetimepicker" placeholder="" data-date-format="yyyy-mm-dd" disabled="disabled" readonly="readonly" />
 											</div>
 											<label class="col-sm-1 control-label" style="width: 10px;">至</label>
 											<div class="col-sm-2">
-												<input type="text" id="ftEnddate" name="ftEnddate" class="form-control" placeholder="" readonly="readonly" />
+												<input type="text" id="ftEnddate" name="ftEnddate" class="form-control datetimepicker" placeholder="" data-date-format="yyyy-mm-dd" disabled="disabled" readonly="readonly" />
 											</div>
 										</div>
 									</div>

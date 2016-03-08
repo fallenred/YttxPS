@@ -65,7 +65,7 @@ public class EntertainmentController extends BaseController {
 		if (scenicNo == null || scenicNo.length < 1){
 			return null;
 		}
-		map.put("scenicNo", Arrays.asList(scenicNo));
+//		map.put("scenicNo", Arrays.asList(scenicNo));
 		return entertainmentService.selectEntertainment(map);
     }
 	

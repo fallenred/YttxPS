@@ -62,11 +62,21 @@ jQuery(function($) {
 			$("#message").text("路线天数不能为空，请输入");
 			$('#name').focus();
 			return false;
-		} 
+		}
+		
+		var tgen = {};
+		tgen.fiIndex = $("#fiIndex").val();
+		tgen.fsName = $("#fsName").val();
+		tgen.fiDays = $("#fiDays").val();
+		tgen.fiStat = $("#fiStat").val();
+		$("#editform input[name='scenicGen']").each(function(idx, e){
+			tgen["scenicGens[" + idx + "].fsScenicno"] = $(e).val();
+		});
+		
 		$.post("/gen/editGen.htm",
-				$("#editform").serialize(),
+				tgen,
 				function(data){
-			var json = eval("("+data+")");
+			var json = eval("(" + data + ")");
 			if(json.result == "ok") {
 				$("#message").text("修改记录成功");
 				$("#message").show();

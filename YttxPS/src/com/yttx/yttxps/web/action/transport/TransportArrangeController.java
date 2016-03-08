@@ -1,19 +1,25 @@
 package com.yttx.yttxps.web.action.transport;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yttx.comm.DateEditor;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.TtransportArrange;
 import com.yttx.yttxps.model.TtransportArrangeExample;
@@ -36,6 +42,18 @@ static Logger logger = LoggerFactory.getLogger(TransportArrangeController.class)
 	private ITransportArrangeService transportArrangeService;
 	
 	/**
+	 * 视图数据类型转换
+	 * @param request
+	 * @param binder
+	 * @throws Exception
+	 */
+	@InitBinder
+	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
+		//对于需要转换为Date类型的属性，使用DateEditor进行处理  
+	    binder.registerCustomEditor(Date.class, new DateEditor()); 
+	}
+	
+	/**
 	 * 分页查询车型线路信息
 	 * @param req
 	 * @return
@@ -48,7 +66,6 @@ static Logger logger = LoggerFactory.getLogger(TransportArrangeController.class)
 		Map<String, Object> map = new HashMap<String, Object>();
 		req.copyPage(map);
 		req.copyTransportArrange(map);
-		//map.put("ftStartdate", new Date());
 		List<TtransportArrange> list = transportArrangeService.selectSelectivePage(map);
 		map.put("rows", list);
 		return map;
@@ -77,11 +94,10 @@ static Logger logger = LoggerFactory.getLogger(TransportArrangeController.class)
 	 */
 	@RequestMapping(value="addTransportArrange.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxaddTransportArrange(TtransportArrange ttransportArrange)
-    {  
+	public Map<String, Object> ajaxaddTransportArrange(TtransportArrange ttransportArrange){  
 		logger.debug("当前新增对象 {}", ttransportArrange);
 		try{
-			ttransportArrange.setFsNo("cx"+String.format("%08d", transportArrangeService.selectFsNo()));
+			ttransportArrange.setFsNo("cx" + String.format("%08d", transportArrangeService.selectFsNo()));
 			transportArrangeService.insert(ttransportArrange);
 		}
 		catch(Exception e){

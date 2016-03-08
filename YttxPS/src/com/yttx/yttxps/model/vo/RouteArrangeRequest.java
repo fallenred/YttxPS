@@ -38,6 +38,7 @@ public class RouteArrangeRequest extends JqGridRequest implements
 	public void copyTRouteArrange(Map<String, Object> map) {
 		if (arrange != null) {
 			map.put("fsName", arrange.getFsName() == null ? "" : arrange.getFsName());
+			map.put("fiDays", arrange.getFiDays());
 			map.put("fiGenindex", arrange.getFiGenindex() == null ? "" : arrange.getFiGenindex());
 			map.put("fiStat", arrange.getFiStat() == null ? "" : arrange.getFiStat());
 		}
