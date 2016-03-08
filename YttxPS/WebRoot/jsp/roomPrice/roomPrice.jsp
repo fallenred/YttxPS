@@ -55,11 +55,11 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label no-padding-right" for="ftStartdate">开始日期</label>
 									<div class="col-sm-4">
-										<input class="form-control" maxlength="10" type="text" id="ftStartdate" name="ftStartdate" placeholder="开始日期" />
+										<input class="form-control datetimepicker" maxlength="10" type="text" id="ftStartdate" data-date-format="yyyy-mm-dd" readonly="readonly" name="ftStartdate" placeholder="开始日期" />
 									</div>
 									<label class="col-sm-2 control-label no-padding-right" for="ftEnddate">结束日期</label>
 									<div class="col-sm-4">
-										<input class="form-control" maxlength="10" type="text" id="ftEnddate" name="ftEnddate" placeholder="结束日期" />
+										<input class="form-control datetimepicker" maxlength="10" type="text" id="ftEnddate" data-date-format="yyyy-mm-dd" readonly="readonly" name="ftEnddate" placeholder="结束日期" />
 									</div>
 								</div>
 							</div>
@@ -126,5 +126,17 @@
 	<script src="/js/bus/roomPrice/roomPrice.js"></script>
 	<script src="/js/bus/roomPrice/add.js"></script>
 	<script src="/js/bus/roomPrice/delete.js"></script>
+	<script type="text/javascript">
+		$('.datetimepicker').datetimepicker({
+			language : 'zh-CN',
+			weekStart : 1,
+			todayBtn : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0
+		});
+	</script>
 </body>
 </html>
