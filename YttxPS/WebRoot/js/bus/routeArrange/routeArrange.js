@@ -139,10 +139,6 @@ jQuery(function($) {
 		'1' : '正常',
 		'-100' : '已销'
 	};
-	var s = '';
-	for (k in items)
-		s += ';' + k + ":" + items[k];
-	s = s.substring(1);
 	
 	var fsProperty = {
 			'1' : '常规线路',
@@ -150,10 +146,8 @@ jQuery(function($) {
 			'3' : '品质游',
 			'4' : '热门线路',
 			'5' : '特卖线路'
-		};
-	var s1 = '';
-	for (k in items)
-		s1 += ';' + k + ":" + items[k];
+	};
+	
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/routeArrange/findRouteArrange.htm",
@@ -207,11 +201,6 @@ jQuery(function($) {
 					name : 'fsProperty',
 					index : 'fsProperty',
 					width : 70,
-					editable : true,
-					edittype : 'select',
-					editoptions : {
-						value : s1
-					},
 					formatter : function(v, opt, rec) {
 						return fsProperty[$.trim(v)];
 					},
@@ -293,11 +282,6 @@ jQuery(function($) {
 					index : 'fiStat',
 					width : 35,
 					sortable : true,
-					editable : true,
-					edittype : 'select',
-					editoptions : {
-						value : s
-					},
 					formatter : function(v, opt, rec) {
 						return items[v];
 					},
@@ -321,10 +305,6 @@ jQuery(function($) {
 				rowList : [ 10, 20, 30 ],
 				pager : pager_selector,
 				altRows : true,
-
-//				multiselect : true,
-//				multiboxonly : true,
-//				multipleSearch : true,
 
 				loadComplete : function() {
 					var table = this;

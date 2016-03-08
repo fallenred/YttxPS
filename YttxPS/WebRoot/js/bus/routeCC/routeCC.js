@@ -159,6 +159,15 @@ jQuery(function($) {
 	for (k in items)
 		s += ';' + k + ":" + items[k];
 	s = s.substring(1);
+	
+	var fsProperty = {
+			'1' : '常规线路',
+			'2' : '纯玩团',
+			'3' : '品质游',
+			'4' : '热门线路',
+			'5' : '特卖线路'
+	};
+	
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/routeArrange/findRouteArrange.htm?hasRouteCC=true",
@@ -211,8 +220,16 @@ jQuery(function($) {
 					name : 'fsProperty',
 					index : 'fsProperty',
 					width : 70,
-					editable : true,
-					sorttype : "char"
+					sorttype : "char",
+					formatter : function(v, opt, rec) {
+						return fsProperty[v];
+					},
+					unformat : function(v) {
+						for (k in items)
+							if (fsProperty[k] == v)
+								return k;
+						return '1';
+					}
 				}, {
 					name : 'ftStartdate',
 					index : 'ftStartdate',
@@ -222,7 +239,7 @@ jQuery(function($) {
 					formatter : function(value){
 						var timestamp = "";
 						if(value != null){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+							timestamp = (new Date(parseFloat(value))).format("yyyy-MM-dd");
 						}
 						return timestamp;
 					}
@@ -235,7 +252,7 @@ jQuery(function($) {
 					formatter : function(value){
 						var timestamp = "";
 						if(value != null){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+							timestamp = (new Date(parseFloat(value))).format("yyyy-MM-dd");
 						}
 						return timestamp;
 					}
@@ -285,11 +302,6 @@ jQuery(function($) {
 					index : 'fiStat',
 					width : 35,
 					sortable : true,
-					editable : true,
-					edittype : 'select',
-					editoptions : {
-						value : s
-					},
 					formatter : function(v, opt, rec) {
 						return items[v];
 					},
@@ -313,10 +325,6 @@ jQuery(function($) {
 				rowList : [ 10, 20, 30 ],
 				pager : pager_selector,
 				altRows : true,
-
-//				multiselect : true,
-//				multiboxonly : true,
-//				multipleSearch : true,
 
 				loadComplete : function() {
 					var table = this;

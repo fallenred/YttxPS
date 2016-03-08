@@ -1,42 +1,52 @@
 package com.yttx.yttxps.model;
 
 import java.math.BigDecimal;
-
+import java.util.Date;
 
 public class TtransportArrange extends TtransportArrangeKey {
 	private String fiGenName;
 	private String fsTransName;
-	private String ftStartdate;
+	private Date ftStartdate;
 	private BigDecimal fdPrice;
-	private String ftEnddate;
+	private Date ftEnddate;
+
 	public String getFiGenName() {
 		return fiGenName;
 	}
+
 	public void setFiGenName(String fiGenName) {
 		this.fiGenName = fiGenName;
 	}
+
 	public String getFsTransName() {
 		return fsTransName;
 	}
+
 	public void setFsTransName(String fsTransName) {
 		this.fsTransName = fsTransName;
 	}
-	public String getFtStartdate() {
-		return ftStartdate;
-	}
-	public void setFtStartdate(String ftStartdate) {
-		this.ftStartdate = ftStartdate;
-	}
+
 	public BigDecimal getFdPrice() {
 		return fdPrice;
 	}
+
 	public void setFdPrice(BigDecimal fdPrice) {
 		this.fdPrice = fdPrice;
 	}
-	public String getFtEnddate() {
+
+	public Date getFtStartdate() {
+		return ftStartdate;
+	}
+
+	public void setFtStartdate(Date ftStartdate) {
+		this.ftStartdate = ftStartdate;
+	}
+
+	public Date getFtEnddate() {
 		return ftEnddate;
 	}
-	public void setFtEnddate(String ftEnddate) {
+
+	public void setFtEnddate(Date ftEnddate) {
 		this.ftEnddate = ftEnddate;
 	}
 }

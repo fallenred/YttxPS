@@ -80,7 +80,7 @@
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fsType">截止日期</label>
 											<div class="col-sm-3">
-												<input class="form-control datetimepicker" type="text" id="ftStartdate" name="ftEnddate" readonly="readonly" placeholder="截止日期" data-date-format="yyyy-mm-dd" readonly="readonly" disabled="disabled" />
+												<input class="form-control datetimepicker" type="text" id="ftEnddate" name="ftEnddate" readonly="readonly" placeholder="截止日期" data-date-format="yyyy-mm-dd" readonly="readonly" disabled="disabled" />
 											</div>
 										</div>
 									</div>

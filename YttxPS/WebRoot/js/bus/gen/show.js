@@ -1,4 +1,18 @@
 jQuery(function($) {
+	//获取景区列表
+	$.ajax({
+		type: "POST",
+		url: "/scenic/findAllScenic.htm",
+		data: '',
+		dataType: "json",
+		success: function(data){
+			var html = ''; 
+			$.each(data, function(commentIndex, comment){
+				html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
+			});
+			$("#scenic").html(html);
+		}
+	});
 
 	//	colorbox
 	var $overflow = '';

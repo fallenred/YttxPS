@@ -68,7 +68,7 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
 	@InitBinder
 	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
 		//对于需要转换为Date类型的属性，使用DateEditor进行处理  
-	    binder.registerCustomEditor(Date.class, new DateEditor()); 
+	    binder.registerCustomEditor(Date.class, new DateEditor());
 	}
 	
 	/**

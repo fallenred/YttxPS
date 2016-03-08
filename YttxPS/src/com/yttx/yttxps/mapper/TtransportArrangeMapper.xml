@@ -245,7 +245,7 @@
   
   <!-- 分页查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="ExtendResultMap4Price">
-      select * from (select ROWNUM as rowno, t.FS_NO, t.FI_GENINDEX, t.FS_TRANSNO, t.fs_transName, t.fi_genName, t.fd_price, to_char(t.ft_startdate, 'yyyy/mm/dd') as ft_startdate, to_char(t.ft_enddate, 'yyyy/mm/dd')as ft_enddate from 
+      select * from (select ROWNUM as rowno, t.FS_NO, t.FI_GENINDEX, t.FS_TRANSNO, t.fs_transName, t.fi_genName, t.fd_price, t.ft_startdate, t.ft_enddate from 
       (select * from VIEW_TTRANSPORTARRANGE order by FI_GENNAME) t
     	where 1=1
 	      <if test="fiGenName != null and fiGenName != ''">

@@ -1,11 +1,9 @@
 package com.yttx.yttxps.service.imp;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,13 +47,11 @@ public class TransportArrangeService implements ITransportArrangeService {
 	public void insert(TtransportArrange record) throws ParseException {
 		transportArrangeMapper.insert(record);
 		TCCPrice price = new TCCPrice();
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		price.setFtStartdate(df.parse(record.getFtStartdate()));
-		price.setFtEnddate(df.parse(record.getFtEnddate()));
-		if (StringUtils.isEmpty(record.getFtEnddate())) {
-			price.setFtEnddate(df.parse(record.getFtStartdate()));
+		price.setFtStartdate(record.getFtStartdate());
+		if (record.getFtEnddate() == null) {
+			price.setFtEnddate(record.getFtStartdate());
 		} else {
-			price.setFtEnddate(df.parse(record.getFtEnddate()));
+			price.setFtEnddate(record.getFtEnddate());
 		}
 		price.setFsRestype("cx");
 		price.setFsResno(record.getFsNo());
@@ -75,13 +71,12 @@ public class TransportArrangeService implements ITransportArrangeService {
 		price.setFsRestype("cx");
 		price.setFsCcno("000000");
 		price.setFdPrice(record.getFdPrice());
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		price.setFtStartdate(df.parse(record.getFtStartdate()));
+		price.setFtStartdate(record.getFtStartdate());
 		price.setFsResno(record.getFsNo());
-		if (StringUtils.isEmpty(record.getFtEnddate())) {
-			price.setFtEnddate(df.parse(record.getFtStartdate()));
+		if (record.getFtEnddate() == null) {
+			price.setFtEnddate(record.getFtStartdate());
 		} else {
-			price.setFtEnddate(df.parse(record.getFtEnddate()));
+			price.setFtEnddate(record.getFtEnddate());
 		}
 		priceMapper.updateByPrimaryKey(price);
 	}

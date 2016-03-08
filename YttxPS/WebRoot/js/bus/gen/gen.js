@@ -29,10 +29,12 @@ function picCustom(id) {
 };
 
 $("#showModal").on("shown.bs.modal", function() {
-	$(this).find("#reset").click();
-	$(this).find("#fsName").val(raw.fsName);
-	$(this).find("#fiDays").val(raw.fiDays);
-	$(this).find("#fiStat").val(raw.fiStat);
+	$(this).contents().find("#reset").click();
+	$(this).contents().find("#fiIndex").val(raw.fiIndex);
+	$(this).contents().find("#fsName").val(raw.fsName);
+	$(this).contents().find("#fiDays").val(raw.fiDays);
+	$(this).contents().find("#fiStat").val(raw.fiStat);
+	getScenicGen(this, raw.fiIndex);
 });
 
 $("#editIframe").on("load",function(){
@@ -50,7 +52,7 @@ function getScenicGen(obj, fiIndex) {
 	$.ajax({
 		type:"GET",
 		url:"/scenicGen/selectScenicGen.htm",
-		data:"scenicGen.fiGenindex="+fiIndex,
+		data:"scenicGen.fiGenindex=" + fiIndex,
 		dataType:"json",
 		success:function(data){
 			var html ='线路景区：';

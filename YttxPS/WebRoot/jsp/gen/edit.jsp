@@ -39,16 +39,16 @@
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
-												<li><a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg"> <img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
-												</a></li>
+												<li>
+													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg"> <img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0"></a>
+												</li>
 											</div>
 										</ul>
 									</div>
 
 									<div class="row">
 										<div class="form-group">
-											<input type="hidden" id="fiIndex" name="fiIndex" />
-											<label class="col-sm-2 control-label no-padding-right" for="fsName">路线名称</label>
+											<input type="hidden" id="fiIndex" name="fiIndex" /> <label class="col-sm-2 control-label no-padding-right" for="fsName">路线名称</label>
 											<div class="col-sm-3">
 												<input class="form-control" type="text" id="fsName" name="fsName" placeholder="路线名称" maxlength="10" />
 											</div>
