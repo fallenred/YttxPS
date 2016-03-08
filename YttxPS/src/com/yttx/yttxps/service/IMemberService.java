@@ -19,4 +19,14 @@ public interface IMemberService{
 	 */
 	List<CustomInfo> selectSelectivePage(Map<String, Object> map);
 
+	/**
+	 * 通过id找到一个会员的详细信息
+	 */
+	CustomInfo selectCusById(String id);
+	
+	/**
+	 * 动态修改客户信息
+	 */
+	boolean updateCusSelective(CustomInfo customInfo);
+
 }

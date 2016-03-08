@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.member;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.CustomInfo;
 import com.yttx.yttxps.model.vo.CostomPageRequest;
 import com.yttx.yttxps.service.IMemberService;
@@ -23,7 +27,7 @@ import com.yttx.yttxps.web.action.BaseController;
  */
 @Controller
 @Scope("prototype")
-@RequestMapping("member/")
+@RequestMapping("member/admin/")
 public class MemberManageController extends BaseController {
 	static Logger logger = LoggerFactory.getLogger(MemberManageController.class);
 	
@@ -51,4 +55,39 @@ public class MemberManageController extends BaseController {
 		map.put("rows", list);
 		return map;
 	}	
+	
+	/**
+	 * 根据id找到一个会员的详细信息
+	 */
+	@RequestMapping(value="show.htm")
+	public String  findCustomerById(@RequestParam("id") String id,
+			Model model){
+		CustomInfo customer = memberService.selectCusById(id);
+		model.addAttribute("cus", customer);
+		return "member/show";
+	}
+	
+	/**
+	 * 修改客户状态 
+	 */
+	@RequestMapping(value="modCusStat")
+	@ResponseBody
+	public Object modCusStat(@RequestParam("id") String id,@RequestParam("oper") String oper ){
+		CustomInfo customInfo = new CustomInfo();
+		if("S".equalsIgnoreCase(oper)){
+			customInfo.setStat(new BigDecimal("-100"));
+		}else if("A".equalsIgnoreCase(oper)){
+			customInfo.setStat(new BigDecimal("1"));
+		}
+		customInfo.setId(id);
+		
+		try {
+			memberService.updateCusSelective(customInfo);
+		} catch (Exception e) {
+			return JsonResult.jsonError(e.getMessage());
+		}
+		
+		return JsonResult.jsonOk();
+	}
+	
 }

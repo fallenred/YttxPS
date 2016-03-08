@@ -32,4 +32,15 @@ public class MemberService implements IMemberService {
 	public List<CustomInfo> selectSelectivePage(Map<String, Object> map) {
 		return pubService.doPage(map, customInfoMapper);
 	}
+
+	@Override
+	public CustomInfo selectCusById(String id) {
+		return customInfoMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public boolean updateCusSelective(CustomInfo customInfo) {
+		customInfoMapper.updateByPrimaryKeySelective(customInfo);
+		return true;
+	}
 }
