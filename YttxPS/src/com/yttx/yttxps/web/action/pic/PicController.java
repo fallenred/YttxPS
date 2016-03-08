@@ -82,7 +82,7 @@ static Logger logger = LoggerFactory.getLogger(PicController.class);
     {  
 		logger.debug("当前新增对象 {}", pic.getSeq());
 		StringBuffer path = new StringBuffer();
-		path.append("/").append(pic.getResType()).append("/");
+		path.append(pic.getResType()).append("/");
 		path.append(pic.getResNo()).append("/");
 		logger.debug("图片path{}", path.toString());
 		try{

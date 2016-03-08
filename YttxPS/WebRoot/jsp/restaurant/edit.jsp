@@ -66,6 +66,8 @@
 													<option value="01" <c:if test="${res.special=='01'}">selected</c:if>>小吃</option>
 													<option value="02" <c:if test="${res.special=='02'}">selected</c:if>>藏餐</option>
 													<option value="03" <c:if test="${res.special=='03'}">selected</c:if>>火锅</option>
+													<option value="04" <c:if test="${res.special=='04'}">selected</c:if>>中餐</option>
+													<option value="05" <c:if test="${res.special=='05'}">selected</c:if>>其他</option>
 												</select>
 											</div>
 										</div>

@@ -240,7 +240,9 @@ jQuery(function($) {
 	var special_items = {
 		'01' : '小吃',
 		'02' : '藏餐',
-		'03' : '火锅'
+		'03' : '火锅',
+		'04' : '中餐',
+		'05' : '其他'
 	}
 	var special_val = contactStr(special_items);
 	

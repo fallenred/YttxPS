@@ -79,6 +79,8 @@
 													<option value="01">小吃</option>
 													<option value="02">藏餐</option>
 													<option value="03">火锅</option>
+													<option value="04">中餐</option>
+													<option value="05">其他</option>
 												</select>
 											</div>
 										</div>

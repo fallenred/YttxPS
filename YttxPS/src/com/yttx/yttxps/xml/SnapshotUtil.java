@@ -5,8 +5,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.scripting.xmltags.VarDeclSqlNode;
-
 import com.yttx.comm.StringUtil;
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.xml.bean.Body;

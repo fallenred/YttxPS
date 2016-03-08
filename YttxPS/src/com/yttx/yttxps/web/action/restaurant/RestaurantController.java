@@ -38,8 +38,6 @@ import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.service.IRestaurantService;
 import com.yttx.yttxps.web.action.BaseController;
 
-import oracle.net.aso.f;
-
 /**
  * 类描述：餐厅资源配置Controller
  * @author sunchao
@@ -238,7 +236,7 @@ public class RestaurantController extends BaseController {
 		pic.setSeq(new BigDecimal(0));
 		if(!img.isEmpty()){
 			StringBuffer path = new StringBuffer();
-			path.append("/").append("cd").append("/");
+			path.append("cd").append("/");
 			path.append(pic.getResNo()).append("/");
 			String srcFile = resourceConvertURL(path.toString(),img);
 			pic.setSrcFile(srcFile);
