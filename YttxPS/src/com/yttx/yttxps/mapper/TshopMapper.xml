@@ -314,7 +314,34 @@
 	        and tt.rowno &gt; #{startrow}
 	      </if>
   </select>
-    <select id="selectFsNo" resultType="int">
+  
+  <select id="selectTshopByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT A.*
+      FROM TSHOP A
+     WHERE A.FS_REGIONNO IN(SELECT A.FS_REGIONNO
+                              FROM TSCENIC A
+                              WHERE 1 = 1
+                              <choose>
+                                <when test="scenicNo">
+                                  AND TRIM(A.FS_NO) IN
+                                  <foreach collection="scenicNo" open="(" close=")" separator="," item="listItem">
+                                    #{listItem}
+                                  </foreach>
+                                </when>
+                              </choose>
+                              )
+    <if test="no != null and no  != ''">
+	  AND A.FS_NO = #{no}
+	</if>
+	<if test="name != null and name != ''">
+	  AND A.FS_NAME LIKE '%'||#{name}||'%'
+	</if>
+	<if test="stat != null and stat != ''">
+	  AND A.FI_STAT = #{stat}
+	</if>
+  </select>
+  
+  <select id="selectFsNo" resultType="int">
       select SHOP_SEQUENCE.nextval from dual
   </select>
 </mapper>

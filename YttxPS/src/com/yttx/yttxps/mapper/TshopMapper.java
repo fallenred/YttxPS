@@ -1,7 +1,6 @@
 package com.yttx.yttxps.mapper;
 
 import java.util.List;
-
 import java.util.Map;
 
 import com.yttx.yttxps.model.Scenic;
@@ -70,6 +69,8 @@ public interface TshopMapper<T> extends IBaseMapper<T> {
      * @return List<Object>
      */
     List<T> selectSelectivePage(Map<String, Object> map);
+    
+    List<T> selectTshopByMap(Map<String, Object> map);
     
     /**
      * 获取购物店sequence

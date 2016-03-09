@@ -68,6 +68,12 @@
 												</div>
 											</div>
 											<div class="form-group">
+												<label class="col-sm-1 control-label no-padding-right" for="name">酒店名称</label>
+												<div class="col-sm-2">
+													<input maxlength="200" name="name" type="text" id="name" placeholder="忽略酒店名称" />
+												</div>
+											</div>
+											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="regionname">所属地区</label>
 												<div class="col-sm-2">
 													<input type="text" placeholder="忽略行政区域" name="regionname" data-key="0086" data-idx="0" data-full="中国" id="regionname" class="inp-search" />
@@ -163,30 +169,37 @@
 									<label class="col-sm-2 control-label no-padding-right" for="regdate">酒店星级</label>
 									<div class="col-sm-8">
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="01"><span class="lbl">5星级</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="01"><span class="lbl">挂五星酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="02"><span class="lbl">4星级</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="02"><span class="lbl">准五星酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="03"><span class="lbl">3星级</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="03"><span class="lbl">挂四星酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="04"><span class="lbl">一线准4</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="04"><span class="lbl">一线准四酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="05"><span class="lbl">二线准4</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="05"><span class="lbl">二线准四酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="06"><span class="lbl">乡村酒店</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="06"><span class="lbl">挂三星酒店</span>
 											</label>
 										</div>
-
+										<div class="checkbox-inline">
+											<label> <input name="starlvl" type="radio" class="ace" value="07"><span class="lbl">准三星酒店</span>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label> <input name="starlvl" type="radio" class="ace" value="08"><span class="lbl">乡村酒店</span>
+											</label>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -278,30 +291,37 @@
 									<label class="col-sm-2 control-label no-padding-right" for="regdate">酒店星级</label>
 									<div class="col-sm-8">
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="01"><span class="lbl">5星级</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="01"><span class="lbl">挂五星酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="02"><span class="lbl">4星级</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="02"><span class="lbl">准五星酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="03"><span class="lbl">3星级</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="03"><span class="lbl">挂四星酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="04"><span class="lbl">一线准4</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="04"><span class="lbl">一线准四酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="05"><span class="lbl">二线准4</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="05"><span class="lbl">二线准四酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="06"><span class="lbl">乡村酒店</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="06"><span class="lbl">挂三星酒店</span>
 											</label>
 										</div>
-
+										<div class="checkbox-inline">
+											<label> <input name="starlvl" type="radio" class="ace" value="07"><span class="lbl">准三星酒店</span>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label> <input name="starlvl" type="radio" class="ace" value="08"><span class="lbl">乡村酒店</span>
+											</label>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -393,30 +413,37 @@
 									<label class="col-sm-2 control-label no-padding-right" for="regdate">酒店星级</label>
 									<div class="col-sm-8">
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" disabled="disabled" class="ace" value="01"><span class="lbl">5星级</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="01"><span class="lbl">挂五星酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" disabled="disabled" class="ace" value="02"><span class="lbl">4星级</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="02"><span class="lbl">准五星酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" disabled="disabled" class="ace" value="03"><span class="lbl">3星级</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="03"><span class="lbl">挂四星酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" disabled="disabled" class="ace" value="04"><span class="lbl">一线准4</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="04"><span class="lbl">一线准四酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" disabled="disabled" class="ace" value="05"><span class="lbl">二线准4</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="05"><span class="lbl">二线准四酒店</span>
 											</label>
 										</div>
 										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" disabled="disabled" class="ace" value="06"><span class="lbl">乡村酒店</span>
+											<label> <input name="starlvl" type="radio" class="ace" value="06"><span class="lbl">挂三星酒店</span>
 											</label>
 										</div>
-
+										<div class="checkbox-inline">
+											<label> <input name="starlvl" type="radio" class="ace" value="07"><span class="lbl">准三星酒店</span>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label> <input name="starlvl" type="radio" class="ace" value="08"><span class="lbl">乡村酒店</span>
+											</label>
+										</div>
 									</div>
 								</div>
 							</div>

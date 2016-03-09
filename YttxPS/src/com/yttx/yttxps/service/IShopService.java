@@ -29,4 +29,6 @@ public interface IShopService {
 	
 	@Transactional
 	int delete(String no);
+	
+	List<Tshop> selectTshopByMap(Map<String, Object> map);
 }

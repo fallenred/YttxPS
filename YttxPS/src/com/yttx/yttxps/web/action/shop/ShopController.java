@@ -1,9 +1,12 @@
 package com.yttx.yttxps.web.action.shop;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Tshop;
-import com.yttx.yttxps.model.TshopExample;
 import com.yttx.yttxps.model.vo.ShopRequest;
 import com.yttx.yttxps.service.IShopService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -59,9 +61,13 @@ public class ShopController extends BaseController {
 	@ResponseBody
 	public Object ajaxSelectGuide(ShopRequest req, String scenicno)
     {  
-		TshopExample example = new TshopExample();
-		req.copyTshop(example);
-		List<Tshop> list = shopService.selectTshop(example);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringUtils.isNotEmpty(scenicno)) {
+			List<String> li = new ArrayList<String>();
+			CollectionUtils.addAll(li, scenicno.split(","));
+			map.put("scenicNo", li);
+		}
+		List<Tshop> list = shopService.selectTshopByMap(map);
 		return list;
     }
 

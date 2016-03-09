@@ -172,6 +172,7 @@ jQuery(function($) {
                 $("#collapseOne").collapse('hide');
                 var postData = $("#grid-table").jqGrid("getGridParam", "postData");
                 postData["accomadation.no"] = $("#queryfield").find("#no").val();
+                postData["accomadation.name"] = $("#queryfield").find("#name").val();
                 postData["accomadation.regionno"] = $("#queryfield").find("#regionno").val();
                 postData["accomadation.stat"] = $("#queryfield").find("#stat").val();
                 $("#grid-table").jqGrid("setGridParam", {
