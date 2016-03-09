@@ -38,4 +38,8 @@
 <!-- inline styles related to this page -->
 <link rel="stylesheet" href="/css/localcity.css">
 <link rel="stylesheet" href="/css/my.css" />
-
+<style>
+	.btn{
+		border-radius: 4px;
+	}
+</style>

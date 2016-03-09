@@ -10,8 +10,8 @@
 		
 		<item id="0300" name="会员管理" icon="menu-icon fa fa-group" >
 			<submenu>
-				<item id="03a0" name="会员审核" url="/jsp/member/audit.jsp" />
-				<item id="03b0" name="会员设置" url="/member/setting.htm" />
+				<item id="03a0" name="会员管理" url="/member/admin/page.htm" />
+				<item id="03b0" name="会员审核" url="/member/audit/page.htm" />
 			</submenu>
 		</item>
 		

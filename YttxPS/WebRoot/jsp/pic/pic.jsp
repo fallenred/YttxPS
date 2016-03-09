@@ -72,7 +72,7 @@
 	<script type="text/x-handlebars-template" id="imgTpt">
 		{{#each this}}
 			<div class="imgblock" id="img_wrapper_{{index}}" data-id="{{index}}" data-seq="{{seq}}" data-srcFile="{{srcFile}}">
-				<a class="imgdelete">×</a>
+				<a class="imgdelete" id="img_a_{{index}}" onclick="deleteImg('img_a_{{index}}')">×</a>
 				<img src="{{srcFile}}" whidth="100%" hieght="100%">
 			</div>
 		{{/each}}

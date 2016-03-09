@@ -213,9 +213,7 @@
 		      <if test="stat != null" >
 		        FI_STAT = #{stat,jdbcType=DECIMAL},
 		      </if>
-		      <if test="auditno != null" >
 		        FS_AUDITNO = #{auditno,jdbcType=VARCHAR},
-		      </if>
 		      <if test="legalPerson != null" >
 		        FS_LegalPerson=#{legalPerson,jdbcType=VARCHAR},
 		      </if>
@@ -245,10 +243,10 @@
 		WHERE
 			1=1
 		<if test="id != null and id != ''">
-			AND FS_ID like '%'||#{regionno,jdbcType = VARCHAR}||'%'
+			AND FS_ID like '%'||#{id,jdbcType = VARCHAR}||'%'
 		</if>
 		<if test="name != null and name != ''">
-			AND FS_NAME like '%'||#{id, jdbcType = VARCHAR}||'%'
+			AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
 		</if>
 		<if test="taName != null and taName !=''">
 			AND FS_TANAME = #{taName,jdbcType = VARCHAR}
@@ -265,16 +263,17 @@
 			* 
 		FROM (
 			SELECT
+				ROWNUM  rowno,
 				<include refid="Base_Column_List" />
 			FROM
 				TCUSTOMINFO
 			WHERE
 				1=1
 			<if test="id != null and id != ''">
-			AND FS_ID like '%'||#{regionno,jdbcType = VARCHAR}||'%'
+			AND FS_ID like '%'||#{id,jdbcType = VARCHAR}||'%'
 			</if>
 			<if test="name != null and name != ''">
-				AND FS_NAME like '%'||#{id, jdbcType = VARCHAR}||'%'
+				AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
 			</if>
 			<if test="taName != null and taName !=''">
 				AND FS_TANAME = #{taName,jdbcType = VARCHAR}

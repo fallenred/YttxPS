@@ -69,56 +69,30 @@
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="name">客户ID</label>
+												<label class="col-sm-1 control-label no-padding-right" for="id">客户ID</label>
 												<div class="col-sm-5">
-													<input maxlength="50" name="name" type="text" id="name" placeholder="忽略餐厅名称" />
+													<input maxlength="16" name="id" type="text" id="id" placeholder="忽略客户Id" />
 												</div>
-												<label class="col-sm-1 control-label no-padding-right" for="regionname">所属地区</label>
+												<label class="col-sm-1 control-label no-padding-right" for="name">客户名称</label>
 												<div class="col-sm-2">
-													<input type="text" placeholder="忽略行政区域" name="regionname"
-														data-key="000086" data-idx="0" data-full="中国" id="regionname" class="inp-search" /> 
-													<input type="hidden" name="regionno" id="regionno" />
-													<div id="selectCity" class="localcity"></div>
+													<input maxlength="50" name="name" type="text" id="name" placeholder="忽略客户名称" />
 												</div>
 											</div>
 											
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="scale">接待规模</label>
+												<label class="col-sm-1 control-label no-padding-right" for="taname">旅行社名称</label>
 												<div class="col-sm-5">
-													<input maxlength="4" id="scale_min" name="scale_min" type="text"  placeholder="忽略接待规模最小值" />
-													--
-													<input maxlength="4" id="scale_max" name="scale_max" type="text"  placeholder="忽略接待规模最大值" />
-												</div>
-												<label class="col-sm-1 control-label no-padding-right" for="special">菜品特色</label>
-												<div class="col-sm-5">
-													<select name="special"  id="special">
-														<!-- TODO:应该从数据字典中读取 -->
-														<option value="">忽略菜品特色</option>
-														<option value="01">小吃</option>
-														<option value="02">藏餐</option>
-														<option value="03">火锅</option>
-													</select>
-												</div>
-											</div>
-											
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="lvl">等级</label>
-												<div class="col-sm-5">
-													<select name="lvl"  id="lvl">
-														<!-- TODO:应该从数据字典中读取 -->
-														<option value="">忽略等级</option>
-														<option value="01">lvl1</option>
-														<option value="02">lvl2</option>
-														<option value="03">lvl3</option>
-													</select>
+													<input maxlength="50" name="taname" type="text" id="taname" placeholder="忽略旅行社名称" />
 												</div>
 												<label class="col-sm-1 control-label no-padding-right"
 													for="stat">状态</label>
 												<div class="col-sm-5">
 													<select id="stat" name="stat">
 														<option value="">忽略状态</option>
+														<option value="0">未激活</option>
 														<option value="1">正常</option>
-														<option value="2">失效</option>
+														<option value="99">信息变更</option>
+														<option value="-100">注销</option>
 													</select>
 												</div>
 											</div>
@@ -127,7 +101,6 @@
 													<button class="btn btn-info btn-sm" type="button" id="queryfield_submit">
 														<i class="ace-icon fa fa-check bigger-110"></i> 查询
 													</button>
-													
 													&nbsp; &nbsp; &nbsp;
 													<button class="btn btn-sm" type="reset" id="reset">
 														<i class="ace-icon fa fa-undo bigger-110"></i> 重置
@@ -153,56 +126,7 @@
 			<!-- /.main-content -->
 		</div>
 		<!-- /.main-container-inner -->
-		<!-- 模态框（餐厅消费选项定价） -->
-		<div class="modal fade" id="costModal" tabindex="-1" role="dialog" 
-			aria-labelledby="costModalLabel" aria-hidden="true">
-			<div class="modal-dialog" style="width: 1024px;">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title" id="costModalLabel">餐厅消费选项定价</h4>
-					</div>
-					
-					<div class="modal-body">
-						<iframe id="costIframe" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- 模态框（新增） -->
-		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" 
-			aria-labelledby="addModalLabel" aria-hidden="true">
-			<div class="modal-dialog" style="width: 1024px;">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title" id="addModalLabel">新增餐厅</h4>
-					</div>
-					
-					<div class="modal-body">
-						<iframe id="addIframe" width="100%" height="1200px" frameborder="0" scrolling="no"></iframe>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- 模态框（修改） -->
-		<div class="modal fade" id="editModal" tabindex="-1" role="dialog"
-			aria-labelledby="editModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"aria-hidden="true">×</button>
-						<h4 class="modal-title" id="editModalLabel">修改餐厅信息</h4>
-					</div>
-					<div class="modal-body">
-						<iframe id="editIframe" width="100%" height="1000px" frameborder="0" scrolling="no"></iframe>
-					</div>
-				</div>
-			</div>
-		</div>
-		
+	
 		<!-- 模态框（查询） -->
 		<div class="modal fade" id="showModal" tabindex="-1" role="dialog"
 			aria-labelledby="showModalLabel" aria-hidden="false">
@@ -211,10 +135,10 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h4 class="modal-title" id="showModalLabel">餐厅信息</h4>
+							<h4 class="modal-title" id="showModalLabel">会员信息</h4>
 						</div>
 						<div class="modal-body">
-							<iframe id="showIframe" width="100%" height="800px" frameborder="0" scrolling="no"></iframe>
+							<iframe id="showIframe" width="100%" height="900px" frameborder="0" scrolling="no"></iframe>
 						</div>
 					</div>
 				</div>
@@ -229,7 +153,7 @@
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">×</button>
-						<h4 class="modal-title" id="delModalLabel">删除警告</h4>
+						<h4 class="modal-title" id="delModalLabel">提示</h4>
 					</div>
 					<div class="modal-body">
 						<iframe id="delIframe" width="100%" height="200px" frameborder="0" scrolling="no"></iframe>
@@ -256,6 +180,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="/js/bus/restaurant/restaurant.js"></script>
+	<script src="/js/bus/member/member.js"></script>
 </body>
 </html>
