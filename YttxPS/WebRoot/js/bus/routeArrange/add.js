@@ -37,51 +37,16 @@ jQuery(function($) {
         			html += '<option value=' + comment['fiIndex'] + '>' + comment['fsName'] + '</option>';
         		});
         		$("#fiGenindex").html(html);
-        		getTransportArrange();
+        		getTransportArrange({"fiGenindex": $("#fiGenindex").val()});
         }
     });
 	
-	function getTransportArrange(){
-		//获取车型列表
-		$.ajax({
-			type: "GET",
-			url: "/transportArrange/selectTransportArrange.htm",
-			data: "transportArrange.fiGenindex=" + $("#fiGenindex").val(),
-			dataType: "json",
-			success: function(data){
-				var html = ''; 
-				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['fsTransno'] + '>' + comment['fsTransName'] + '</option>';
-				});
-				$("#transportArrange").html(html);
-			}
-		});
-	}
-	
-	function getGuide(){
-		//获取导游列表
-		$.ajax({
-			type: "GET",
-			url: "/guide/selectGuide.htm",
-			data: "guide.lvl="+$("#guideLvl").val(),
-			dataType: "json",
-			success: function(data){
-				var html = ''; 
-				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
-				});
-				$("#guideFsNo").html(html);
-			}
-		});
-	}
-	
 	$("#fiGenindex").change(function(){
-		getTransportArrange();
+		getTransportArrange({"fiGenindex": $("#fiGenindex").val()});
 	});
 	
-	getGuide();
 	$("#guideLvl").change(function(){
-		getGuide();
+		getGuide({"lvl": $("#guideLvl").val()});
 	});
 
 	//	重置

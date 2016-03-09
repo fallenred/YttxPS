@@ -8,7 +8,7 @@ function getTransportArrange(arrange){
 		success: function(data){
 			var html = ''; 
 			$.each(data, function(commentIndex, comment){
-				html += '<option value=' + comment['fsTransno'] + '>' + comment['fsTransName'] + '</option>';
+				html += '<option value=' + comment['fsNo'] + '>' + comment['fsTransName'] + '</option>';
 			});
 			$("#transportArrange").html(html);
 			if(arrange.transportArrange != undefined) {

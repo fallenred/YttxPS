@@ -49,7 +49,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">路线名称</label>
 											<div class="col-sm-3">
-												<input class="form-control" type="text" id="fsName" name="fsName" placeholder="路线名称" maxlength="10" />
+												<input class="form-control" type="text" id="fsName" name="fsName" placeholder="路线名称" maxlength="150" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiDays">路线天数</label>
 											<div class="col-sm-3">

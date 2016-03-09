@@ -200,6 +200,7 @@
 
 	</div>
 	<!-- /.main-container -->
+	<script src="/js/bus/routeArrange/routeArrange.comm.js"></script>
 	<script src="/js/bus/routeArrange/add.js"></script>
 
 	<c:if test="${!empty succflag && succflag =='1'}">
