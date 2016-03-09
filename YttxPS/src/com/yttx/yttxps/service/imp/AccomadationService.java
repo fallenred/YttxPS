@@ -43,6 +43,7 @@ public class AccomadationService implements IAccomadationService {
 
 	@Override
 	public int insert(Accomadation record) {
+		record.setNo(String.format("bg%08d", accomadationMapper.selectSequence().longValue()));
 		return accomadationMapper.insert(record);
 	}
 

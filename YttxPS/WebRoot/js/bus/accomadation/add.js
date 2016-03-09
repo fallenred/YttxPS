@@ -41,12 +41,6 @@ jQuery(function($) {
 	//	提交
 	$("#add_submit").on("click", function () {
 	    $("#addform #message").hide();
-		if($("#addform input[name='no']").val() == '') {
-			$("#addform #message").show();
-			$("#addform #message").text("酒店代码不能为空，请输入");
-			$('#addform #no').focus();
-			return false;
-		} 
         if($("#addform input[name='name']").val() == '') {
             $("#addform #message").show();
             $("#addform #message").text("酒店名称不能为空，请输入");

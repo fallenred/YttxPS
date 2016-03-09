@@ -51,12 +51,6 @@ jQuery(function($) {
 	
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#no").val() == '') {
-			$("#message").show();
-			$("#message").text("购物点代码不能为空，请输入");
-			$('#no').focus();
-			return false;
-		} 
 		if($("#name").val() == '') {
 			$("#message").show();
 			$("#message").text("购物店名称不能为空，请输入");

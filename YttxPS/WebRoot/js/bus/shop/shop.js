@@ -36,7 +36,7 @@ $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#no").val(raw.no);
 	$(this).find("#regionno").val(raw.regionno);
 	$(this).find("#name").val(raw.name);
-	$(this).find("#desr").val(raw.desr);
+	$(this).find("#desc").val(raw.desc);
 	$(this).find("#opentime").val(raw.opentime);
 	$(this).find("#tel").val(raw.tel);
 	getregionname(raw.regionno, function(name){
@@ -56,11 +56,11 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#no").val(raw.no);
 	$(this).contents().find("#regionno").val(raw.regionno);
 	$(this).contents().find("#name").val(raw.name);
-	$(this).contents().find("#desr").val(raw.desr);
+	$(this).contents().find("#desc").val(raw.desc);
 	$(this).contents().find("#opentime").val(raw.opentime);
 	$(this).contents().find("#tel").val(raw.tel);
 	getregionname(raw.regionno, function(name){
-		$("#showModal").contents().find("#regionname").val(name);
+		$("#editIframe", "#editModal").contents().find("#regionname").val(name);
 	});
 	$(this).contents().find("#singlereturn").val(raw.singlereturn);
 	$(this).contents().find("#totalreturn").val(raw.totalreturn);
@@ -110,7 +110,6 @@ jQuery(function($) {
 //	jqGrid form提交
 	$("#submit").on("click", function() {
 		$("#collapseOne").collapse('hide');
-		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
 		postData["shop.no"] = $("#queryfield").find("#no").val();
 		postData["shop.regionno"] = $("#queryfield").find("#regionno").val();
@@ -208,7 +207,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '购物点代码', '所属地区', '购物店名称', '经营范围', '开放时间',
+				colNames : [ '操作', '购物点代码', '所属地区编码', '所属地区', '购物店名称', '经营范围', '开放时间',
 						'售后电话', '单件商品返点比例', '总体返点比例', '人头费用', '停车费','停留时间', '淡旺季政策', '状态' ],
 				colModel : [ {
 					name : 'myac',
@@ -227,16 +226,19 @@ jQuery(function($) {
 					name : 'regionno',
 					index : 'regionno',
 					editable : true,
+					hidden : true
+				}, {
+					name : 'regionname',
+					index : 'regionname',
+					editable : true,
 				}, {
 					name : 'name',
 					index : 'name',
-					//width : 200,
 					editable : true,
 					sorttype : "char",
 				}, {
-					name : 'desr',
-					index : 'desr',
-					//width : 300,
+					name : 'desc',
+					index : 'desc',
 					editable : true,
 				}, {
 					name : 'opentime',
@@ -305,10 +307,6 @@ jQuery(function($) {
 				pager : pager_selector,
 				altRows : true,
 
-//				multiselect : true,
-//				multiboxonly : true,
-//				multipleSearch : true,
-
 				loadComplete : function() {
 					var table = this;
 					setTimeout(function() {
@@ -322,14 +320,6 @@ jQuery(function($) {
 				editurl : "/shop/save.htm",
 				shrinkToFit : true,
 				autowidth : true,
-
-			/**
-			 * , grouping:true, groupingView : { groupField : ['name'],
-			 * groupDataSorted : true, plusicon : 'fa fa-chevron-down
-			 * bigger-110', minusicon : 'fa fa-chevron-up bigger-110' },
-			 * caption: "Grouping"
-			 */
-
 			});
 	$(window).triggerHandler('resize.jqGrid');// trigger window resize to make
 	// the grid get the correct size

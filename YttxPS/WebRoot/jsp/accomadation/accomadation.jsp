@@ -130,9 +130,9 @@
 						<div class="modal-body">
 							<div class="row">
 								<div class="form-group">
-									<label class="col-sm-2 control-label no-padding-right" for="no">酒店代码</label>
+									<label class="col-sm-2 control-label no-padding-right" for="name">酒店名称</label>
 									<div class="col-sm-3">
-										<input type="text" name="no" class="form-control" placeholder="酒店代码" />
+										<input type="text" name="name" class="form-control" placeholder="酒店名称" />
 									</div>
 									<label class="col-sm-2 control-label no-padding-right" for="brand">所属地区</label>
 									<div class="col-sm-3">
@@ -144,12 +144,8 @@
 							</div>
 							<div class="row">
 								<div class="form-group">
-									<label class="col-sm-2 control-label no-padding-right" for="name">酒店名称</label>
-									<div class="col-sm-3">
-										<input type="text" name="name" class="form-control" placeholder="酒店名称" />
-									</div>
 									<label class="col-sm-2 control-label no-padding-right" for="addr">酒店地址</label>
-									<div class="col-sm-3">
+									<div class="col-sm-8">
 										<input type="text" name="addr" class="form-control" placeholder="酒店地址" />
 									</div>
 								</div>
@@ -248,9 +244,10 @@
 						<div class="modal-body">
 							<div class="row">
 								<div class="form-group">
-									<label class="col-sm-2 control-label no-padding-right" for="no">酒店代码</label>
+									<label class="col-sm-2 control-label no-padding-right" for="load">酒店名称</label>
 									<div class="col-sm-3">
-										<input type="text" name="no" class="form-control" readonly="readonly" placeholder="酒店代码" />
+										<input type="hidden" name="no" id="no" />
+										<input type="text" name="name" class="form-control" placeholder="酒店名称" />
 									</div>
 									<label class="col-sm-2 control-label no-padding-right" for="brand">所属地区</label>
 									<div class="col-sm-3">
@@ -262,12 +259,8 @@
 							</div>
 							<div class="row">
 								<div class="form-group">
-									<label class="col-sm-2 control-label no-padding-right" for="load">酒店名称</label>
-									<div class="col-sm-3">
-										<input type="text" name="name" class="form-control" placeholder="酒店名称" />
-									</div>
 									<label class="col-sm-2 control-label no-padding-right" for="company">酒店地址</label>
-									<div class="col-sm-3">
+									<div class="col-sm-8">
 										<input type="text" name="addr" class="form-control" placeholder="酒店地址" />
 									</div>
 								</div>
@@ -366,9 +359,10 @@
 						<div class="modal-body">
 							<div class="row">
 								<div class="form-group">
-									<label class="col-sm-2 control-label no-padding-right" for="no">酒店代码</label>
+									<label class="col-sm-2 control-label no-padding-right" for="load">酒店名称</label>
 									<div class="col-sm-3">
-										<input type="text" name="no" class="form-control" placeholder="酒店代码" disabled="disabled" />
+										<input type="hidden" name="no" id="no" />
+										<input type="text" name="name" class="form-control" placeholder="酒店名称" disabled="disabled" />
 									</div>
 									<label class="col-sm-2 control-label no-padding-right" for="brand">所属地区</label>
 									<div class="col-sm-3">
@@ -380,12 +374,8 @@
 							</div>
 							<div class="row">
 								<div class="form-group">
-									<label class="col-sm-2 control-label no-padding-right" for="load">酒店名称</label>
-									<div class="col-sm-3">
-										<input type="text" name="name" class="form-control" placeholder="酒店名称" disabled="disabled" />
-									</div>
 									<label class="col-sm-2 control-label no-padding-right" for="company">酒店地址</label>
-									<div class="col-sm-3">
+									<div class="col-sm-8">
 										<input type="text" name="addr" class="form-control" placeholder="酒店地址" disabled="disabled" />
 									</div>
 								</div>

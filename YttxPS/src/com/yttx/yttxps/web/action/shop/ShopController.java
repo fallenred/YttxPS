@@ -1,6 +1,5 @@
 package com.yttx.yttxps.web.action.shop;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,11 +61,6 @@ public class ShopController extends BaseController {
     {  
 		TshopExample example = new TshopExample();
 		req.copyTshop(example);
-		/*if (StringUtils.isNotEmpty(scenicno)) {
-			List<String> li = new ArrayList<String>();
-			CollectionUtils.addAll(li, scenicno.split(","));
-			example.createCriteria().andFsScenicnoIn(li);
-		}*/
 		List<Tshop> list = shopService.selectTshop(example);
 		return list;
     }
@@ -82,9 +76,6 @@ public class ShopController extends BaseController {
 	{  
 		logger.debug("当前新增对象 {}", shop);
 		try{
-			String str ="0000000000";
-			shop.setNo(str.substring(0, 10 - shop.getNo().length()) + shop.getNo());
-			shop.setStat(new BigDecimal(1));
 			shopService.insert(shop);
 		}
 		catch(Exception e){
@@ -105,7 +96,7 @@ public class ShopController extends BaseController {
 	{  
 		logger.debug("当前更新对象 {}", shop);
 		try{
-			int ret = shopService.update(shop);
+			shopService.update(shop);
 		}catch(Exception e){
 			logger.error(e.getMessage());
 			return (Map<String, Object>) JsonResult.jsonError("更新失败");

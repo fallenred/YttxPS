@@ -245,7 +245,7 @@
       ) tt 
       where 1=1
       <if test="startrow != null" >
-        and tt.rowno &gt;= #{startrow}
+        and tt.rowno &gt; #{startrow}
       </if>
   </select>
   
@@ -284,5 +284,9 @@
     <if test="stat != null" >
       and FI_STAT = #{stat,jdbcType=DECIMAL}
     </if>
+  </select>
+  
+  <select id="selectSequence" resultType="java.math.BigDecimal">
+    SELECT TACCOMADATION_SEQUENCE.Nextval FROM dual
   </select>
 </mapper>

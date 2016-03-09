@@ -1,5 +1,6 @@
 package com.yttx.yttxps.mapper;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -69,5 +70,7 @@ public interface AccomadationMapper<T>  extends IBaseMapper<T> {
      * @param map
      * @return
      */
-    List<T> selectSelective(Map map);
+    List<T> selectSelective(Map<String, Object> map);
+    
+    BigDecimal selectSequence();
 }

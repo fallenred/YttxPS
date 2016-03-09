@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.comm.DateEditor;
-import com.yttx.comm.StringUtil;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Accomadation;
 import com.yttx.yttxps.model.vo.AccomadationRequest;
@@ -118,13 +117,6 @@ static Logger logger = LoggerFactory.getLogger(AccomadationController.class);
     {
 		logger.debug("当前新增对象 {}", accomadation);
 		try{
-			if(StringUtil.nullOrBlank(accomadation.getNo()))
-				return (Map<String, Object>) JsonResult.jsonError("酒店代码未输入！");
-			
-			Accomadation info = accomadationService.selectAccomadationInfo(accomadation.getNo());
-			if(info != null && StringUtil.nullOrBlank(info.getNo())){
-				return (Map<String, Object>) JsonResult.jsonError("该酒店信息已存在，您可通过酒店代码【"+info.getNo()+"】查询");
-			}
 			accomadationService.insert(accomadation);
 		}catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("新增失败");

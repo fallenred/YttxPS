@@ -169,7 +169,6 @@ jQuery(function($) {
 					index : 'fsId',
 					width : 85,
 					sorttype : "int",
-					hidden : true,
 					hidden : true
 				}, {
 					name : 'fiGenindex',

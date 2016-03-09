@@ -41,19 +41,13 @@ jQuery(function($) {
 			$("#message").text("购物点代码不能为空，请输入");
 			$('#no').focus();
 			return false;
-		} 
+		}
 		if($("#name").val() == '') {
 			$("#message").show();
 			$("#message").text("购物店名称不能为空，请输入");
 			$('#name').focus();
 			return false;
-		} 
-//		if($("#regionno").val() == '') {
-//			$("#message").show();
-//			$("#message").text("所属地区不能为空，请输入");
-//			$('#regionno').focus();
-//			return false;
-//		} 
+		}
 		$.post("/shop/editShop.htm",
 				$("#editform").serialize(),
 				function(data){

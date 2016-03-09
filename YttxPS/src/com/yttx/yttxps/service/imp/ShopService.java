@@ -1,5 +1,6 @@
 package com.yttx.yttxps.service.imp;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +41,8 @@ public class ShopService implements IShopService {
 
 	@Override
 	public int insert(Tshop record) {
-		record.setNo("gw"+shopMapper.selectFsNo());
+		record.setNo(String.format("gw%08d", shopMapper.selectFsNo()));
+		record.setStat(BigDecimal.ONE);
 		return shopMapper.insert(record);
 	}
 

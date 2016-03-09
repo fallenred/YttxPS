@@ -43,12 +43,6 @@ jQuery(function($) {
             "click",
             function() {
                 $("#editForm #message").hide();
-                if($("#editForm input[name='no']").val() == '') {
-                    $("#editForm #message").show();
-                    $("#editForm #message").text("酒店代码不能为空，请输入");
-                    $('#editForm #no').focus();
-                    return false;
-                } 
                 if($("#editForm input[name='name']").val() == '') {
                     $("#editForm #message").show();
                     $("#editForm #message").text("酒店名称不能为空，请输入");
