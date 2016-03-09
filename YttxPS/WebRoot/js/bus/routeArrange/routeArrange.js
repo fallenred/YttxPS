@@ -23,7 +23,13 @@ function deleteCustom(id) {
 
 function picCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/pic/pic.jsp?no=" + raw.fsNo;
+	
+	var resType = "xl";
+	var resNo = raw.fsId;
+	var resName = raw.fsName;
+	var param="resType=" + resType + "&resNo=" + resNo + "&resName=" + resName;
+	
+	var frameSrc = "/pic/picpage.htm?" + param;
     $("#picIframe").attr("src", frameSrc);
     $('#picModal').modal({ show: true, backdrop: 'static' });
 };

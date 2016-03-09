@@ -40,6 +40,19 @@ function deleteCustom(id) {
     $('#delModal').modal({ show: true, backdrop: 'static' });
 };
 
+function picCustom(id) {
+	raw = jQuery("#grid-table").jqGrid('getRowData', id);
+	
+	var resType = "cx";
+	var resNo = raw.no;
+	var resName = raw.brand;
+	var param="resType=" + resType + "&resNo=" + resNo + "&resName=" + resName;
+	
+	var frameSrc = "/pic/picpage.htm?" + param;
+    $("#picIframe").attr("src", frameSrc);
+    $('#picModal').modal({ show: true, backdrop: 'static' });
+};
+
 //查询驾驶员信息
 function findDriverInfo(id){
     if(id == undefined){
@@ -125,7 +138,12 @@ jQuery(function($) {
         var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteCustom('
                 + options.rowId
                 + ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-        return detail + editBtn + deleteBtn;
+        
+        var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" id="picButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="picCustom('
+			+ options.rowId
+			+ ');" data-original-title="编辑资源图片"><span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
+        
+        return detail + editBtn + deleteBtn + picDtn;
     };
     
     driverFormatter = function(){

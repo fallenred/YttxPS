@@ -10,7 +10,13 @@ function editCustom(id) {
 
 function picCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/pic/pic.jsp?no=" + raw.no;
+	
+	var resType = "jq";
+	var resNo = raw.no;
+	var resName = raw.name;
+	var param="resType=" + resType + "&resNo=" + resNo + "&resName=" + resName;
+	
+	var frameSrc = "/pic/picpage.htm?" + param;
     $("#picIframe").attr("src", frameSrc);
     $('#picModal').modal({ show: true, backdrop: 'static' });
 };

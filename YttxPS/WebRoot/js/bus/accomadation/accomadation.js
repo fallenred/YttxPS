@@ -46,6 +46,19 @@ function deleteCustom(id) {
     });
 };
 
+function picCustom(id) {
+	raw = jQuery("#grid-table").jqGrid('getRowData', id);
+	
+	var resType = "bg";
+	var resNo = raw.no;
+	var resName = raw.name;
+	var param="resType=" + resType + "&resNo=" + resNo + "&resName=" + resName;
+	
+	var frameSrc = "/pic/picpage.htm?" + param;
+    $("#picIframe").attr("src", frameSrc);
+    $('#picModal').modal({ show: true, backdrop: 'static' });
+};
+
 //酒店房型配置
 function roomConfigCustom(id) {
     var raw = jQuery("#grid-table").jqGrid('getRowData', id);
@@ -191,9 +204,11 @@ jQuery(function($) {
         var roomBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="roomButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="roomConfigCustom('
                 + options.rowId
                 + ');" data-original-title="酒店房型配置"><span class="ui-icon ace-icon fa fa-cog red"></span></div>';
+        
         var detailBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="roomButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showCustom('
             + options.rowId
             + ');" data-original-title="查看记录详情"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
+        
         var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editCustom('
                 + options.rowId
                 + ');" data-original-title="编辑本条记录"><span class="ui-icon ui-icon-pencil"></span></div>';
@@ -201,7 +216,12 @@ jQuery(function($) {
         var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteCustom('
                 + options.rowId
                 + ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-        return roomBtn + detailBtn + editBtn + deleteBtn;
+        
+        var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" id="picButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="picCustom('
+			+ options.rowId
+			+ ');" data-original-title="编辑资源图片"><span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
+        
+        return roomBtn + detailBtn + editBtn + deleteBtn + picDtn;
     };
 
     // resize to fit page size
@@ -259,7 +279,7 @@ jQuery(function($) {
                 colModel : [ {
                     name : 'myaction',
                     index : '',
-                    width : 100,
+                    width : 110,
                     fixed : true,
                     sortable : false,
                     resize : false,

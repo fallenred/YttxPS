@@ -52,8 +52,8 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a class="accordion-toggle" href="#collapseOne" data-toggle="collapse" data-parent="#accordion"> <i class="bigger-110 ace-icon fa fa-angle-down"
-											data-icon-show="ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down"></i> &nbsp;查询条件
+										<a class="accordion-toggle" href="#collapseOne" data-toggle="collapse" data-parent="#accordion">
+											<i class="bigger-110 ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down"></i> &nbsp;查询条件
 										</a>
 									</h4>
 								</div>
@@ -259,8 +259,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label no-padding-right" for="load">酒店名称</label>
 									<div class="col-sm-3">
-										<input type="hidden" name="no" id="no" />
-										<input type="text" name="name" class="form-control" placeholder="酒店名称" />
+										<input type="hidden" name="no" id="no" /> <input type="text" name="name" class="form-control" placeholder="酒店名称" />
 									</div>
 									<label class="col-sm-2 control-label no-padding-right" for="brand">所属地区</label>
 									<div class="col-sm-3">
@@ -367,6 +366,26 @@
 			<!-- /.modal -->
 		</div>
 
+		<!-- 模态框（图片） -->
+		<div class="modal fade" id="picModal" tabindex="-1" role="dialog" aria-labelledby="picModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width: auto; height: auto">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="picModalLabel">图片管理</h4>
+					</div>
+					<div class="modal-body">
+						<iframe id="picIframe" width="100%" height="500px" frameborder="0" scrolling="yes"></iframe>
+
+					</div>
+
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+		</div>
+
 		<!-- 模态框（查询） -->
 		<div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel" aria-hidden="false">
 			<div class="modal-dialog modal-lg">
@@ -381,8 +400,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label no-padding-right" for="load">酒店名称</label>
 									<div class="col-sm-3">
-										<input type="hidden" name="no" id="no" />
-										<input type="text" name="name" class="form-control" placeholder="酒店名称" disabled="disabled" />
+										<input type="hidden" name="no" id="no" /> <input type="text" name="name" class="form-control" placeholder="酒店名称" disabled="disabled" />
 									</div>
 									<label class="col-sm-2 control-label no-padding-right" for="brand">所属地区</label>
 									<div class="col-sm-3">
