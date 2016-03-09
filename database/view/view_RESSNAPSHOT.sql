@@ -39,7 +39,7 @@ SELECT a.fs_routeno,
    AND d.fs_starlvl = c.fs_dictno
    AND b.fs_accomno = d.fs_no
    AND a.fs_restype = e.fs_restype
-   AND a.fs_restype = 'fx'
+   AND a.fs_restype = 'bg'
    AND c.fs_parentno = 'bg'
 UNION ALL
 --µº”Œ

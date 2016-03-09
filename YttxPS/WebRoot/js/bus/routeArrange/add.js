@@ -21,6 +21,10 @@ jQuery(function($) {
 		$("#selectCity", "#addform").show();
 	});
 	
+	$("#selectCity", "#addform").blur(function() {
+		$("#selectCity", "#addform").hide();
+	});
+	
 	//获取线路列表
 	$.ajax({
         type: "GET",
