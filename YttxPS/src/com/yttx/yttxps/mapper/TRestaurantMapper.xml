@@ -327,7 +327,9 @@
 	<select id="selectRestaurant" parameterType="java.util.Map" resultMap="BaseResultMap">
 	  SELECT A.*
         FROM trestaurant A
-       WHERE A.FS_REGIONNO IN(SELECT A.FS_REGIONNO
+       WHERE 1 = 1
+         <!-- 
+         AND A.FS_REGIONNO IN(SELECT A.FS_REGIONNO
                                 FROM TSCENIC A
                                WHERE 1 = 1 
                                  <choose>
@@ -338,7 +340,7 @@
                                      </foreach>
                                    </when>
                                  </choose>
-                                 )
+                                 ) -->
       <if test="name != null and name != ''">
         AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
       </if>

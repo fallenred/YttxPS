@@ -24,6 +24,9 @@ jQuery(function($) {
 			$.colorbox.resize();
 		}
 	};
+	
+	$(".row input").attr("readonly", "readonly");
+	$(".row select").attr("disabled", "disabled");
 
 	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
 	$("#cboxLoadingGraphic").html(

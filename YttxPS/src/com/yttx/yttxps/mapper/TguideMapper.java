@@ -74,4 +74,6 @@ public interface TguideMapper<T> extends IBaseMapper<T>{
      * @return List<Object>
      */
     List<T> selectSelectivePage(Map<String, Object> map);
+    
+    int selectFsNo();
 }

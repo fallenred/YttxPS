@@ -1,27 +1,6 @@
 jQuery(function($) {
 	$("#message").hide();
 
-//	var localsel = $("#selectCity", "#addform").localCity({
-
-//	provurl : "/pub/findcity.htm",
-//	cityurl : "/pub/findcity.htm",
-//	disturl : "/pub/findcity.htm",
-//	callback : localcallback
-//	});
-
-//	//城市选择器
-//	function localcallback(index, key, value, fullkey, fullname) {
-//	$("#regionname", "#addform").val(fullname);
-//	$("#regionno", "#addform").val(key);
-//	if (index == 3)
-//	$("#selectCity", "#addform").hide();
-//	}
-
-//	$("#regionname", "#addform").click(function() {
-//	$("#selectCity", "#addform").show();
-//	});
-
-
 	//	重置
 	$("#reset").on("click", function() {
 		$("#no").val(null);	
@@ -38,10 +17,10 @@ jQuery(function($) {
 
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#no").val() == '') {
+		if($("#desc").val() == '') {
 			$("#message").show();
-			$("#message").text("导游编号不能为空，请输入");
-			$('#no').focus();
+			$("#message").text("导游证号不能为空，请输入");
+			$('#desc').focus();
 			return false;
 		} 
 		if($("#name").val() == '') {
@@ -77,7 +56,7 @@ jQuery(function($) {
 		$.post("/guide/addGuide.htm",
 				$("#addform").serialize(),
 				function(data){
-			var json = eval("("+data+")");
+			var json = eval("(" + data + ")");
 			if(json.result == "ok") {
 				$("#message").text("增加记录成功");
 				$("#message").show();

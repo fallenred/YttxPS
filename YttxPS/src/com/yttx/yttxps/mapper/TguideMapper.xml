@@ -351,4 +351,8 @@
 	        and tt.rowno &gt; #{startrow}
 	      </if>
   </select>
+
+  <select id="selectFsNo" resultType="int">
+    select tguide_sequence.nextval from dual
+  </select>
 </mapper>
