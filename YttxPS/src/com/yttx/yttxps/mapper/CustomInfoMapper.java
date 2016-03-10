@@ -50,4 +50,14 @@ public interface CustomInfoMapper extends IBaseMapper<CustomInfo>{
      * @mbggenerated
      */
     int updateByPrimaryKey(CustomInfo record);
+    
+    /**
+     * 会员审核的时候，审核通过调用该方法
+     */
+	boolean updateByPassAudit(CustomInfo auditRec);
+	 
+	/**
+     * 会员审核的时候，审核不通过调用该方法
+     */
+	boolean updateByNotPassAudit(CustomInfo auditRec);
 }

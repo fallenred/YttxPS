@@ -19,7 +19,7 @@ jQuery(function($){
 	param.id=$.getUrlParam('id');
 	param.oper=oper;
 	
-	console.log(param);
+	//console.log(param);
 	//"确定"按钮的响应事件
 	$("#submit").on("click", function () {
 		$.ajax({

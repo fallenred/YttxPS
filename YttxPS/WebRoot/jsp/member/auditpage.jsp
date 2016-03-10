@@ -82,17 +82,15 @@
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="taname">旅行社名称</label>
 												<div class="col-sm-5">
-													<input maxlength="50" name="taname" type="text" id="taname" placeholder="忽略旅行社名称" />
+													<input maxlength="50" name="taname" type="text" 
+														id="taname" placeholder="忽略旅行社名称" />
 												</div>
-												<label class="col-sm-1 control-label no-padding-right"
-													for="stat">状态</label>
+												<label class="col-sm-1 control-label no-padding-right" for="stat">审核状态</label>
 												<div class="col-sm-5">
-													<select id="stat" name="stat">
+													<select id="auditType" name="auditType">
 														<option value="">忽略状态</option>
-														<option value="0">未激活</option>
-														<option value="1">正常</option>
-														<option value="99">信息变更</option>
-														<option value="-100">注销</option>
+														<option value="1">新增</option>
+														<option value="2">变更</option>
 													</select>
 												</div>
 											</div>
@@ -138,7 +136,7 @@
 							<h4 class="modal-title" id="showModalLabel">会员信息</h4>
 						</div>
 						<div class="modal-body">
-							<iframe id="showIframe" width="100%" height="900px" frameborder="0" scrolling="no"></iframe>
+							<iframe id="showIframe" width="100%" height="1200px" frameborder="0" scrolling="no"></iframe>
 						</div>
 					</div>
 				</div>
@@ -180,6 +178,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="/js/bus/member/admin.member.js"></script>
+	<script src="/js/bus/member/audit.member.js"></script>
 </body>
 </html>

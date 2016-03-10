@@ -34,6 +34,15 @@
       		o.FI_DEPNO = d.FI_DEPNO(+)
 	</select>
 	
+	<select id="selectOpersByDepNo" parameterType="long" resultMap="sysOperResultMap">
+		SELECT 
+      		FS_SYSOPERID,
+       		FS_SYSOPERNAME
+      	FROM 
+      		TSYSOPER
+      	WHERE 
+      		FI_DEPNO = #{depNo}
+	</select>
 	
 	<insert id="insert" parameterType="SysOper">
     	INSERT INTO TSysOper(

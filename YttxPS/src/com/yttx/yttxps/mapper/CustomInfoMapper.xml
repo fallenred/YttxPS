@@ -234,6 +234,45 @@
 	</update>
 	
 	
+	<!-- 会员审核通过的时候调用该方法-->
+  	<update id="updateByPassAudit" parameterType="com.yttx.yttxps.model.CustomInfo" >
+    	update 
+    		TCUSTOMINFO
+		 set
+		 	<if test="salesManID != null and salesManID!=''">
+		 		fs_SalesManID=#{salesManID,jdbcType=VARCHAR},
+		 	</if>
+		    FS_id = #{id,jdbcType=VARCHAR},
+		    FS_NAME = #{name,jdbcType=VARCHAR},
+		    FS_TANAME = #{taname,jdbcType=VARCHAR},
+		    FS_LICENCENO = #{licenceno,jdbcType=VARCHAR},
+		    FS_TAXLICENCE = #{taxlicence,jdbcType=VARCHAR},
+		    FS_CONTACT = #{contact,jdbcType=VARCHAR},
+		    FS_CERTID = #{certid,jdbcType=VARCHAR},
+		    FS_EMAIL = #{email,jdbcType=VARCHAR},
+		    FT_TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+		    FI_STAT = #{stat,jdbcType=DECIMAL},
+		    FS_AUDITNO = null,
+		    FS_LegalPerson=#{legalPerson,jdbcType=VARCHAR},
+		    FS_Fax=#{fax,jdbcType=VARCHAR},
+		    fs_Address=#{address,jdbcType=VARCHAR},
+		    fs_TabLicense= #{tabLicense,jdbcType=VARCHAR}
+		where FS_AUDITNO = #{auditno,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 会员审核不通过的时候调用该方法-->
+  	<update id="updateByNotPassAudit" parameterType="com.yttx.yttxps.model.CustomInfo" >
+    	update 
+    		TCUSTOMINFO
+		 set
+		    FT_TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+		    FI_STAT = #{stat,jdbcType=DECIMAL},
+		    FS_AUDITNO = null
+		where 
+			FS_AUDITNO = #{auditno,jdbcType=VARCHAR}
+	</update>
+	
+	
 	<!-- 查询满足该条件的所有记录总数 -->
 	<select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
 		SELECT

@@ -219,6 +219,20 @@ public class OperController extends UserBasicController{
 		return JsonResult.jsonOk();
 	}
 	
+	/**
+	 * 根据部门id找到部门下所有人
+	 */
+	@RequestMapping(value="oper/findOpersByDepNo.htm")
+	@ResponseBody
+	public Map<String, Object> findOpersByDepNo(Long key){
+		List<SysOper> list = sysService.findOpersByDepNo(key);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("succflag", 0);
+		map.put("msg", null);
+		map.put("data", list);
+		return map;
+	}
+	
 	//新增用户或修改用户信息，验证用户信息
 	private Map<String, Object> validSubData(SysOperSubRequest req,String type) {
 		Map<String,Object> flagMap = new HashMap<String,Object>();

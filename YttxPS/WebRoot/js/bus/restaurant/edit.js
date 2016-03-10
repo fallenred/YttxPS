@@ -92,15 +92,6 @@ jQuery(function($) {
 			return false;
 		}
 		
-		var img = $("#editform #menuImgFile").val();
-		var srcFile =$("#editform #menuImgFileLoction").val();
-		if(img == ''&& (srcFile==null||srcFile=='')) {
-			$("#message").show();
-			$("#message").text("请上传菜单图片");
-			$("#editform  #menuImgFile").focus();
-			return false;
-		}
-		
 		$.ajax({  
             url: "/restaurant/edit.htm",  
             type: 'POST',  

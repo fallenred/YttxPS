@@ -46,6 +46,23 @@ public class CustomInfo {
     private String tabLicense;
     
     private String salesManID;
+    
+    private BigDecimal auditType;
+    
+    private Date applyTime;
+    
+    private String applyTimeDesc;
+    
+    private String auditor;
+  
+    private Date auditTime;
+    
+    private String auditTimeDesc;
+    
+    private BigDecimal auditRet;
+    
+    private String comment;
+
 
     public String getId() {
         return id;
@@ -242,6 +259,84 @@ public class CustomInfo {
 	public void setSalesManID(String salesManID) {
 		this.salesManID = salesManID == null ? null :salesManID.trim() ;
 	}
-    
-    
+
+
+	public BigDecimal getAuditType() {
+		return auditType;
+	}
+
+
+	public void setAuditType(BigDecimal auditType) {
+		this.auditType = auditType;
+	}
+
+
+	public Date getApplyTime() {
+		return applyTime;
+	}
+
+
+	public void setApplyTime(Date applyTime) {
+		this.applyTime = applyTime;
+	}
+
+
+	public String getApplyTimeDesc() {
+		return applyTimeDesc;
+	}
+
+
+	public void setApplyTimeDesc(String applyTimeDesc) {
+		this.applyTimeDesc = applyTimeDesc==null?null : applyTimeDesc.trim();
+	}
+
+
+	public String getAuditor() {
+		return auditor;
+	}
+
+
+	public void setAuditor(String auditor) {
+		this.auditor = auditor ==null?null:auditor.trim();
+	}
+
+
+	public Date getAuditTime() {
+		return auditTime;
+	}
+
+
+	public void setAuditTime(Date auditTime) {
+		this.auditTime = auditTime;
+	}
+
+
+	public String getAuditTimeDesc() {
+		return auditTimeDesc;
+	}
+
+
+	public void setAuditTimeDesc(String auditTimeDesc) {
+		this.auditTimeDesc = auditTimeDesc==null?null:auditTimeDesc.trim();
+	}
+
+
+	public BigDecimal getAuditRet() {
+		return auditRet;
+	}
+
+
+	public void setAuditRet(BigDecimal auditRet) {
+		this.auditRet = auditRet;
+	}
+
+
+	public String getComment() {
+		return comment;
+	}
+
+
+	public void setComment(String comment) {
+		this.comment = comment == null?null:comment.trim();
+	}
 }

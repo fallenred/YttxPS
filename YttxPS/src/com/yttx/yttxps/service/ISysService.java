@@ -91,4 +91,10 @@ public interface ISysService {
 	@Transactional
 	public void deleteOperByOperId(String sysOperId);
 
+	/**
+	 * 根据部门id找到部门下所有人员
+	 */
+	@Transactional(readOnly = true) 
+	public List<SysOper> findOpersByDepNo(Long key);
+
 }

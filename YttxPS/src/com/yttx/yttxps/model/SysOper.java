@@ -25,7 +25,7 @@ public class SysOper {
 
 
 	public void setSysOperId(String sysOperId) {
-		this.sysOperId = sysOperId;
+		this.sysOperId = sysOperId==null?null:sysOperId.trim();
 	}
 
 
@@ -35,7 +35,7 @@ public class SysOper {
 
 
 	public void setSysOperName(String sysOperName) {
-		this.sysOperName = sysOperName;
+		this.sysOperName = sysOperName==null?null:sysOperName.trim();
 	}
 
 
@@ -65,7 +65,7 @@ public class SysOper {
 
 
 	public void setDepName(String depName) {
-		this.depName = depName;
+		this.depName = depName==null?null:depName.trim();
 	}
 
 

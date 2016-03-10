@@ -271,4 +271,9 @@ public class SysService implements ISysService {
 		sysOperMapper.deleteOperByOperId(sysOperId);
 		
 	}
+
+	@Override
+	public List<SysOper> findOpersByDepNo(Long key) {
+		return sysOperMapper.selectOpersByDepNo(key);
+	}
 }

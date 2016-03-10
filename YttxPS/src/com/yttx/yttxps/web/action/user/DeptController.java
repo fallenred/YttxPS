@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yttx.comm.StringUtil;
 import com.yttx.yttxps.comm.JsonResult;
+import com.yttx.yttxps.model.RegionMap;
 import com.yttx.yttxps.model.SysDep;
 import com.yttx.yttxps.model.SysOper;
 import com.yttx.yttxps.model.vo.DeptAddRequest;
@@ -176,5 +177,19 @@ public class DeptController extends UserBasicController{
 		List<HashMap<String, Object>> menulist = depManagerRights(depNo);
 		model.put("menulist", menulist);
 		return model;
+	}
+	
+	/**
+	 *找到所有状态为正常的 的部门
+	 */
+	@RequestMapping(value="dept/findDepts.htm")
+	@ResponseBody
+	public  Map<String, Object>	findDepts(Long key){
+		List<SysDep> list = sysService.findDepsByStat(key);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("succflag", 0);
+		map.put("msg", null);
+		map.put("data", list);
+		return map;
 	}
 }

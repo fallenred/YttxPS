@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yttx.yttxps.mapper.CustomerAuditMapper" >
+
+	<!-- 查询待审核记录resultmap -->
+	<resultMap id="BaseResultMap" type="com.yttx.yttxps.model.CustomInfo" >
+	  <id column="FS_ID"              property="id"            jdbcType="VARCHAR" />
+	  <result column="FS_NAME"        property="name"           jdbcType="VARCHAR" />
+	  <result column="FS_TANAME"      property="taname"         jdbcType="VARCHAR" />
+	  <result column="FS_LICENCENO"   property="licenceno"      jdbcType="VARCHAR" />
+	  <result column="FS_TAXLICENCE"  property="taxlicence"     jdbcType="VARCHAR" />
+	  <result column="FS_CONTACT"     property="contact"        jdbcType="VARCHAR" />
+	  <result column="FS_CERTID"      property="certid"         jdbcType="VARCHAR" />
+	  <result column="FS_EMAIL"       property="email"          jdbcType="VARCHAR" />
+	  <result column="FT_REGTIME"     property="regTimeDesc"    jdbcType="VARCHAR" />
+	  <result column="FT_TIMESTAMP"   property="timeStampDesc"  jdbcType="VARCHAR" />
+	  <result column="FS_DAC"         property="dac"            jdbcType="VARCHAR" />
+	  <result column="FI_STAT"        property="stat"           jdbcType="DECIMAL" />
+	  <result column="FS_AUDITNO"     property="auditno"        jdbcType="VARCHAR" />
+	  <result column="FS_LegalPerson" property="legalPerson"    jdbcType="VARCHAR" />
+	  <result column="FS_Fax"         property="fax"            jdbcType="VARCHAR" />
+	  <result column="fs_Address"     property="address"        jdbcType="VARCHAR" />
+	  <result column="fs_TabLicense"  property="tabLicense"     jdbcType="VARCHAR" />
+	  <result column="fs_SalesManID"  property="salesManID"     jdbcType="VARCHAR" />
+	  <result column="fi_AuditType"   property="auditType"      jdbcType="DECIMAL" />
+	  <result column="ft_ApplyTime"   property="applyTimeDesc"  jdbcType="VARCHAR" />
+	  <result column="fs_Auditor"     property="auditor"        jdbcType="VARCHAR" />
+	  <result column="ft_AuditTime"   property="auditTimeDesc"  jdbcType="VARCHAR" />
+	  <result column="fi_AuditRet"    property="auditRet"       jdbcType="DECIMAL" />
+	  <result column="fs_Comment"     property="comment"        jdbcType="VARCHAR" />
+  	</resultMap>
+	
+	<!-- 查询满足过滤条件审核记录的总数 -->
+	<select  id="selectCountSelective" parameterType="java.util.Map" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			 Tcustominfo i,Tcustchgau a
+		where
+			1=1 
+			and i.fs_auditno=a.fs_auditno
+		<if test="id != null and id != ''">
+			AND FS_ID like '%'||#{id,jdbcType = VARCHAR}||'%'
+		</if>
+		<if test="name != null and name != ''">
+			AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
+		</if>
+		<if test="taName != null and taName !=''">
+			AND FS_TANAME = #{taName,jdbcType = VARCHAR}
+		</if>
+		<if test="auditType != null">
+			AND FI_AuditType = #{auditType,jdbcType=DECIMAL}
+		</if>
+	</select>
+
+
+	<!-- 查询满足过滤条件审核记录的某一页的记录 -->
+	<select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT 
+			* 
+		FROM(
+			SELECT
+				ROWNUM  rowno,
+				i.FS_ID, 
+	    		i.FS_NAME, 
+	    		i.FS_TANAME,
+	    		i.FS_CONTACT, 
+	    		i.FS_EMAIL, 
+	    		i.FS_AUDITNO,
+				i.fs_Address,
+				i.FI_STAT,
+				a.fi_AuditType
+			FROM
+			 Tcustominfo i,Tcustchgau a
+			where
+				1=1 
+				and i.fs_auditno=a.fs_auditno
+			<if test="id != null and id != ''">
+				AND FS_ID like '%'||#{id,jdbcType = VARCHAR}||'%'
+			</if>
+			<if test="name != null and name != ''">
+				AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
+			</if>
+			<if test="taName != null and taName !=''">
+				AND FS_TANAME = #{taName,jdbcType = VARCHAR}
+			</if>
+			<if test="auditType != null">
+				AND FI_AuditType = #{auditType,jdbcType=DECIMAL}
+			</if>
+			<if test="endrow != null">
+				AND ROWNUM &lt;= #{endrow}
+			</if>
+		)
+		<if test="startrow != null">
+			WHERE rowno &gt; #{startrow}
+		</if>
+	</select>
+	
+	
+	<!-- 根据审核编号找到审核记录-->
+	<select  id="selectByAuditNo" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			fs_AuditNo,
+			fi_AuditType,
+			fs_ID,
+			fs_Name,
+			fs_TAName,
+			fs_LicenceNo,
+			fs_TaxLicence,
+			fs_Contact,
+			fs_CertID,
+			fs_Email,
+			fs_LegalPerson,
+			fs_Fax,
+			fs_Address,
+			fs_TabLicense,
+			to_char(ft_ApplyTime,'yyyy-mm-dd hh24:mi:ss') ft_ApplyTime,
+			to_char(ft_AuditTime,'yyyy-mm-dd hh24:mi:ss') ft_AuditTime,
+			fs_Auditor,
+			fi_AuditRet,
+			fs_Comment
+		FROM
+			 Tcustchgau
+		where
+			fs_AuditNo = #{auditNo,jdbcType=VARCHAR}
+	</select>
+	
+	<!--  -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.yttx.yttxps.model.CustomInfo" >
+	    update TCUSTCHGAU
+	    <set>
+	    	  <if test="auditType != null" >
+		        FI_AUDITTYPE = #{auditType,jdbcType=DECIMAL},
+		      </if>
+		      <if test="id != null" >
+		        FS_ID = #{id,jdbcType=VARCHAR},
+		      </if>
+		      <if test="name != null" >
+		        FS_NAME = #{name,jdbcType=VARCHAR},
+		      </if>
+		      <if test="taname != null" >
+		        FS_TANAME = #{taname,jdbcType=VARCHAR},
+		      </if>
+		      <if test="licenceno != null" >
+		        FS_LICENCENO = #{licenceno,jdbcType=VARCHAR},
+		      </if>
+		      <if test="taxlicence != null" >
+		        FS_TAXLICENCE = #{taxlicence,jdbcType=VARCHAR},
+		      </if>
+		      <if test="contact != null" >
+		        FS_CONTACT = #{contact,jdbcType=VARCHAR},
+		      </if>
+		      <if test="certid != null" >
+		        FS_CERTID = #{certid,jdbcType=VARCHAR},
+		      </if>
+		      <if test="email != null" >
+		        FS_EMAIL = #{email,jdbcType=VARCHAR},
+		      </if>
+		      <if test="applyTime != null" >
+		        FT_APPLYTIME = #{applyTime,jdbcType=TIMESTAMP},
+		      </if>
+		      <if test="auditor != null" >
+		        FS_AUDITOR = #{auditor,jdbcType=VARCHAR},
+		      </if>
+		      <if test="auditTime != null" >
+		        FT_AUDITTIME = #{auditTime,jdbcType=TIMESTAMP},
+		      </if>
+		      <if test="auditRet != null" >
+		        FI_AUDITRET = #{auditRet,jdbcType=DECIMAL},
+		      </if>
+		      <if test="comment != null" >
+		        FS_COMMENT = #{comment,jdbcType=VARCHAR},
+		      </if>
+		      <if test="legalPerson != null" >
+		        FS_LegalPerson=#{legalPerson,jdbcType=VARCHAR},
+		      </if>
+		      <if test="fax != null" >
+		       	FS_Fax=#{fax,jdbcType=VARCHAR},
+		      </if>
+		      <if test="address != null" >
+		       	fs_Address=#{address,jdbcType=VARCHAR},
+		      </if>
+		     <if test="tabLicense != null" >
+		      	fs_TabLicense= #{tabLicense,jdbcType=VARCHAR},
+		      </if>
+		   </set>
+	    	where FS_AUDITNO = #{auditno,jdbcType=VARCHAR}
+	  </update>
+</mapper>

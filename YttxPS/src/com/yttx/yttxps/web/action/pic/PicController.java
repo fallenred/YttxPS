@@ -80,11 +80,10 @@ static Logger logger = LoggerFactory.getLogger(PicController.class);
 	public  Object ajaxaddPic(Pic pic,
 			@RequestParam(value = "files", required = true) MultipartFile[] files)
     {  
-		logger.debug("当前新增对象 {}", pic.getSeq());
 		StringBuffer path = new StringBuffer();
 		path.append(pic.getResType()).append("/");
 		path.append(pic.getResNo()).append("/");
-		logger.debug("图片path{}", path.toString());
+		logger.debug("图片path:{}", path.toString());
 		try{
 			for(MultipartFile file:files){
 				if(!file.isEmpty()){

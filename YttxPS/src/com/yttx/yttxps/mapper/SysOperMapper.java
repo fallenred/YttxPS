@@ -1,5 +1,6 @@
 package com.yttx.yttxps.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import com.yttx.yttxps.model.SysOper;
@@ -23,4 +24,9 @@ public interface SysOperMapper extends IBaseMapper<SysOper>{
      * 删除一个用户
      */
 	public void deleteOperByOperId(String sysOperId);
+
+	/**
+	 * 通过部门编号找到部门下所有人员
+	 */
+	public List<SysOper> selectOpersByDepNo(Long depNo);
 }
