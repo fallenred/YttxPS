@@ -32,24 +32,6 @@ jQuery(function($) {
         }
     });
 	
-	$(".peak").hide();
-	$(".trans").hide();
-	$("#priceType").bind("change", function(){ 
-	    if($(this).val() == 1){   //淡季
-	      $(".low").show();
-	      $(".peak").hide();
-	      $(".trans").hide();
-	    } else if($(this).val() == 2) {   //旺季
-	    	$(".peak").show();
-		    $(".low").hide();
-		    $(".trans").hide();
-	    } else {   //接送费用
-	    	$(".peak").hide();
-		    $(".low").hide();
-		    $(".trans").show();
-	    }
-	}); 
-	
 	$("#regionname", "#editform").click(function() {
 		$("#selectCity", "#editform").show();
 	});
@@ -97,7 +79,7 @@ jQuery(function($) {
 		$.post("/entertainment/editEntertainmentPrice.htm",
 				$("#editform").serialize(),
 				function(data){
-			var json = eval("("+data+")");
+			var json = eval("(" + data + ")");
 					if(json.result == "ok") {
 						$("#message").text("修改记录成功");
 						$("#message").show();

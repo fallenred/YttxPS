@@ -32,19 +32,6 @@ jQuery(function($) {
         }
     });
 	
-	$(".peak").hide();
-	$("#priceType").bind("change",function(){ 
-		//淡季
-	    if($(this).val()==1){
-	      $(".low").show();
-	      $(".peak").hide();
-	    } 
-	    else{
-	    	$(".peak").show();
-		    $(".low").hide();
-	    } 
-	}); 
-	
 	$("#regionname", "#editform").click(function() {
 		$("#selectCity", "#editform").show();
 	});
@@ -92,7 +79,7 @@ jQuery(function($) {
 		$.post("/ticket/editTicketPrice.htm",
 				$("#editform").serialize(),
 				function(data){
-			var json = eval("("+data+")");
+			var json = eval("(" + data + ")");
 					if(json.result == "ok") {
 						$("#message").text("修改记录成功");
 						$("#message").show();

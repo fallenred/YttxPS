@@ -62,7 +62,7 @@ public class EntertainmentService implements IEntertainmentService {
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public void insert(TEntertainment record) {
-		record.setFsNo(String.format("%010d", entertainmentMapper.selectFsNo()));
+		record.setFsNo(String.format("yl%08d", entertainmentMapper.selectFsNo()));
 		entertainmentMapper.insert(record);
 	}
 
@@ -71,28 +71,11 @@ public class EntertainmentService implements IEntertainmentService {
 	public void insertEntertainmentPrice(TEntertainment record) {
 		if (CollectionUtils.isEmpty(record.getTccPrices())) return;
 		for (TCCPrice price : record.getTccPrices()) {
-			//如果价格为空则不作处理
-			if (price.getFdPrice() == null) continue;
-			//票价类型为淡季时不对旺季价格和接送费用进行保存
-			if("1".equals(record.getPriceType())) {
-				if(record.getTccPrices().indexOf(price) > 7)
-					continue;
-			} 
-			//票价类型为旺季时不对淡季价格和接送费用进行保存
-			else if ("2".equals(record.getPriceType())) {
-				if(record.getTccPrices().indexOf(price) < 8 || record.getTccPrices().indexOf(price) > 15)
-					continue;
-			}
-			//票价类型为接送费用时不对淡季价格和旺季价格进行保存
-			else if("3".equals(record.getPriceType())) {
-				if(record.getTccPrices().indexOf(price) < 16)
-					continue;
-			}
 			price.setFtStartdate(record.getFtStartdate());
 			price.setFtEnddate(record.getFtEnddate());
 			price.setFsRestype("yl");
 			price.setFsResno(record.getFsNo());
-			tccPriceMapper.insertSelective(price);
+			tccPriceMapper.insertPrice(price);
 		}
 	}
 
@@ -107,28 +90,11 @@ public class EntertainmentService implements IEntertainmentService {
 	public void updateEntertainmentPrice(TEntertainment record) {
 		if (CollectionUtils.isEmpty(record.getTccPrices())) return;
 		for (TCCPrice price : record.getTccPrices()) {
-			//如果价格为空则不作处理
-			if (price.getFdPrice() == null) continue;
-			//票价类型为淡季时不对旺季价格和接送费用进行保存
-			if("1".equals(record.getPriceType())) {
-				if(record.getTccPrices().indexOf(price) > 7)
-					continue;
-			} 
-			//票价类型为旺季时不对淡季价格和接送费用进行保存
-			else if ("2".equals(record.getPriceType())) {
-				if(record.getTccPrices().indexOf(price) < 8 || record.getTccPrices().indexOf(price) > 15)
-					continue;
-			}
-			//票价类型为接送费用时不对淡季价格和旺季价格进行保存
-			else if("3".equals(record.getPriceType())) {
-				if(record.getTccPrices().indexOf(price) < 16)
-					continue;
-			}
 			price.setFtStartdate(record.getFtStartdate());
 			price.setFtEnddate(record.getFtEnddate());
 			price.setFsRestype("yl");
 			price.setFsResno(record.getFsNo());
-			tccPriceMapper.updateByPrimaryKey(price);
+			tccPriceMapper.insertPrice(price);
 		}
 	}
 

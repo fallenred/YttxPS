@@ -24,8 +24,7 @@ jQuery(function($) {
 			$.colorbox.resize();
 		}
 	};
-	
-	$(".peak").hide();
+
 	$(".row input").attr("readonly", "readonly");
 	$(".row select").attr("disabled", "disabled");
 	
