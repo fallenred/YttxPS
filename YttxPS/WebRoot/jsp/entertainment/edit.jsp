@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -33,17 +32,18 @@
 
 							<!-- 模态框（修改） -->
 
-							<form class="form-horizontal" id="editform" >
+							<form class="form-horizontal" id="editform">
 
 								<div class="modal-body">
 									<!-- 图片TODO： -->
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
-												<li><a class="cboxElement" data-rel="colorbox"
-													href="http://127.0.0.1:81/1.jpg"> <img width="0"
-														height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
-												</a></li>
+												<li>
+													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg">
+														<img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
+													</a>
+												</li>
 											</div>
 										</ul>
 									</div>
@@ -52,7 +52,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">娱乐项目名称</label>
 											<div class="col-sm-3">
-												<input class="form-control" type="text" id="fsName" name="fsName" placeholder="娱乐项目名称"  maxlength="10"/>
+												<input class="form-control" type="text" id="fsName" name="fsName" placeholder="娱乐项目名称" maxlength="10" />
 											</div>
 											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsAddr">娱乐项目地址</label>
 											<div class="col-sm-3">
@@ -64,12 +64,12 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsRegionName">所属地区</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="请选择行政区域" name="fsRegionName" data-key="0086" data-idx="0" data-full="中国" id="fsRegionName" class="inp-search" /> 
+												<input type="text" placeholder="请选择行政区域" name="fsRegionName" data-key="0086" data-idx="0" data-full="中国" id="fsRegionName" class="inp-search" />
 												<input type="hidden" name="fsRegionno" id="fsRegionno" />
 												<div id="selectCity" class="localcity"></div>
 											</div>
 											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsType">娱乐项目类型</label>
-											<div class="col-sm-3" >
+											<div class="col-sm-3">
 												<select id="fsType" name="fsType" class="form-control">
 													<option value="01">类型一</option>
 													<option value="02">类型二</option>
@@ -81,7 +81,7 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsLvl">娱乐项目级别</label>
-											<div class="col-sm-2" >
+											<div class="col-sm-2">
 												<select id="fsLvl" name="fsLvl" class="form-control">
 													<option value="01">一级</option>
 													<option value="02">二级</option>
@@ -101,18 +101,15 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsDesc">描述</label>
 											<div class="col-sm-8">
-												<input class="form-control" type="text" id="fsDesc" name="fsDesc" class="form-control"
-													placeholder="描述" />
+												<input class="form-control" type="text" id="fsDesc" name="fsDesc" class="form-control" placeholder="描述" />
 											</div>
 										</div>
 									</div>
-									<div id = "message" class="alert alert-warning">
-										
-									</div>
+									<div id="message" class="alert alert-warning"></div>
 								</div>
-									<div class="modal-footer">
+								<div class="modal-footer">
 									<button id="close" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button id="reset" type="reset" class="btn" >重置</button>
+									<button id="reset" type="reset" class="btn">重置</button>
 									<button id="submit" type="button" class="btn btn-primary">提交</button>
 								</div>
 							</form>
@@ -136,9 +133,9 @@
 	<c:if test="${!empty succflag && succflag =='1'}">
 
 		<script type="text/javascript">
-	          $('.jump-step').removeClass('hide');
-	          setTimeout('window.location="/home.htm"', 5000);
-	    </script>
+			$('.jump-step').removeClass('hide');
+			setTimeout('window.location="/home.htm"', 5000);
+		</script>
 
 	</c:if>
 </body>

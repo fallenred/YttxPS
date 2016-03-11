@@ -26,6 +26,7 @@ import com.yttx.yttxps.model.RoomPrice;
 import com.yttx.yttxps.model.TCCPrice;
 import com.yttx.yttxps.model.vo.RoomPriceRequest;
 import com.yttx.yttxps.model.vo.RoomRequest;
+import com.yttx.yttxps.service.IDictService;
 import com.yttx.yttxps.service.IRoomPriceService;
 import com.yttx.yttxps.service.IRoomService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -49,6 +50,9 @@ public class RoomController extends BaseController {
 	
 	@Autowired
 	private IRoomPriceService roomPriceService;
+	
+	@Autowired
+	private IDictService dictService;
 
 	/**
 	 * 视图数据类型转换

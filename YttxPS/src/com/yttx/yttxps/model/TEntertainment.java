@@ -74,6 +74,11 @@ public class TEntertainment {
     private String fsScenicno;
     
     /**
+     * 所属地区名称
+     */
+    private String fsRegionName;
+    
+    /**
      * 票价类型（淡季-1 or 旺季-2 or 接送费用-3）
      */
     private String priceType;
@@ -342,5 +347,13 @@ public class TEntertainment {
 
 	public void setTccPrices(List<TCCPrice> tccPrices) {
 		this.tccPrices = tccPrices;
+	}
+
+	public String getFsRegionName() {
+		return fsRegionName;
+	}
+
+	public void setFsRegionName(String fsRegionName) {
+		this.fsRegionName = fsRegionName;
 	}
 }

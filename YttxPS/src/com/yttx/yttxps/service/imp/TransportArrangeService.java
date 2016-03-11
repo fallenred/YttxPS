@@ -55,7 +55,7 @@ public class TransportArrangeService implements ITransportArrangeService {
 		}
 		price.setFsRestype("cx");
 		price.setFsResno(record.getFsNo());
-		price.setFsCcno("000000");
+		price.setFsCcno("000023");
 		price.setFdPrice(record.getFdPrice());
 		priceMapper.insert(price);
 		
@@ -69,7 +69,7 @@ public class TransportArrangeService implements ITransportArrangeService {
 		transportArrangeMapper.updateByExample(record, example);
 		TCCPrice price = new TCCPrice();
 		price.setFsRestype("cx");
-		price.setFsCcno("000000");
+		price.setFsCcno("000023");
 		price.setFdPrice(record.getFdPrice());
 		price.setFtStartdate(record.getFtStartdate());
 		price.setFsResno(record.getFsNo());
@@ -87,10 +87,10 @@ public class TransportArrangeService implements ITransportArrangeService {
 		Criteria criteria1 = priceExample.createCriteria();
 		criteria1.andFsResnoEqualTo(no);
 		criteria1.andFsRestypeEqualTo("cx");
-		criteria1.andFsCcnoEqualTo("000000");
+		criteria1.andFsCcnoEqualTo("000023");
 		priceMapper.deleteByExample(priceExample);
 		TtransportArrangeExample example = new TtransportArrangeExample();
-		TtransportArrangeExample.Criteria criteria= example.createCriteria();
+		TtransportArrangeExample.Criteria criteria = example.createCriteria();
 		criteria.andFsNoEqualTo(no);
 		return transportArrangeMapper.deleteByExample(example);
 		

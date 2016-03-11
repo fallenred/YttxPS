@@ -1,5 +1,4 @@
 jQuery(function($) {
-
 	//	colorbox
 	var $overflow = '';
 	var colorbox_params = {
@@ -24,6 +23,9 @@ jQuery(function($) {
 			$.colorbox.resize();
 		}
 	};
+	
+	$("input").attr("readonly", "readonly");
+	$("select").attr("disabled", "disabled");
 
 	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
 	$("#cboxLoadingGraphic").html(

@@ -5,6 +5,7 @@
     <id column="FS_NO" property="fsNo" jdbcType="CHAR" />
     <result column="FS_NAME" property="fsName" jdbcType="VARCHAR" />
     <result column="FS_REGIONNO" property="fsRegionno" jdbcType="CHAR" />
+    <result column="FS_REGIONNAME" property="fsRegionName" jdbcType="VARCHAR" />
     <result column="FS_ADDR" property="fsAddr" jdbcType="VARCHAR" />
     <result column="FS_TYPE" property="fsType" jdbcType="CHAR" />
     <result column="FS_DESC" property="fsDesc" jdbcType="VARCHAR" />
@@ -73,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    FS_NO, FS_NAME, FS_REGIONNO, FS_ADDR, FS_TYPE, FS_DESC, FS_LVL, FS_OPENTIME, FI_STAT
+    FS_NO, FS_NAME, FS_REGIONNO, pkg_common.findRegionFullName(FS_REGIONNO) AS FS_REGIONNAME, FS_ADDR, FS_TYPE, FS_DESC, FS_LVL, FS_OPENTIME, FI_STAT
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yttx.yttxps.model.TEntertainmentExample" >
     select
@@ -295,7 +296,7 @@
   
   <!-- 分页查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
-      select * from (select ROWNUM as rowno, t.* from 
+      select * from (select ROWNUM as rowno, t.*, pkg_common.findRegionFullName(t.FS_REGIONNO) AS FS_REGIONNAME from 
                tentertainment t
     	where 1=1
 	      <if test="fsNo != null and fsNo != ''">

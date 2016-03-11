@@ -36,24 +36,30 @@ function picEntertainment(id) {
 
 $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#reset").click();
+	
 	$(this).find("#fsNo").val(raw.fsNo);
 	$(this).find("#fsName").val(raw.fsName);
-	$(this).find("#fsScenicno").val(raw.fsScenicname);
 	$(this).find("#fsType").val(raw.fsType);
 	$(this).find("#fiStat").val(raw.fiStat);
 	$(this).find("#fsDesc").val(raw.fsDesc);
+	$(this).find("#fsLvl").val(raw.fsLvl);
+	$(this).find("#fsAddr").val(raw.fsAddr);
+	$(this).find("#fsRegionno").val(raw.fsRegionno);
+	$(this).find("#fsRegionName").val(raw.fsRegionName);
 });
 
 $("#editIframe").on("load",function(){
 	$(this).contents().find("#reset").click();
+	
 	$(this).contents().find("#fsNo").val(raw.fsNo);
 	$(this).contents().find("#fsName").val(raw.fsName);
-	$(this).contents().find("#fsScenicno").val(raw.fsScenicno);
 	$(this).contents().find("#fsType").val(raw.fsType);
 	$(this).contents().find("#fiStat").val(raw.fiStat);
 	$(this).contents().find("#fsDesc").val(raw.fsDesc);
 	$(this).contents().find("#fsLvl").val(raw.fsLvl);
 	$(this).contents().find("#fsAddr").val(raw.fsAddr);
+	$(this).contents().find("#fsRegionno").val(raw.fsRegionno);
+	$(this).contents().find("#fsRegionName").val(raw.fsRegionName);
 });
 
 
@@ -93,7 +99,6 @@ jQuery(function($) {
 //	jqGrid form提交
 	$("#submit").click(function() {
 		$("#collapseOne").collapse('hide');
-		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
 		postData["entertainment.fsNo"] = $("#queryfield").find("#fsNo").val();
 		postData["entertainment.fsScenicno"] = $("#queryfield").find("#fsScenicno").val();
@@ -201,7 +206,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '娱乐项目代码', '景区代码', '所属景区', '地区代码', '娱乐项目地址', '娱乐项目名称',  '娱乐项目类型', '状态', '级别', '描述' ],
+				colNames : [ '操作', '娱乐项目代码', '景区代码', '所属景区代码', '所属地区代码', '所属地区', '娱乐项目地址', '娱乐项目名称',  '娱乐项目类型', '状态', '级别', '描述' ],
 				colModel : [{
 					name : 'myac',
 					index : '',
@@ -238,6 +243,12 @@ jQuery(function($) {
 					editable : true,
 					sorttype : "char",
 					hidden : true
+				}, {
+					name : 'fsRegionName',
+					index : 'fsRegionName',
+					width : 100,
+					editable : true,
+					sorttype : "char"
 				}, {
 					name : 'fsAddr',
 					index : 'fsAddr',
