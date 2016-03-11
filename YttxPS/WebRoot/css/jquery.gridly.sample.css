@@ -1,6 +1,6 @@
 .imgblock{
 	width:200px;
-	height:150px;
+	height:200px;
 	display:block;
 	float:left;
 	opacity: 1;
@@ -23,7 +23,7 @@
 }
 
 .imgblock img{
-	width:100%;
-	height:auto;
+	width:200px;
+	height:200px;
 }
   

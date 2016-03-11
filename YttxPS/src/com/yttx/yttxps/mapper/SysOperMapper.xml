@@ -169,7 +169,7 @@
 	      		<if test="stat != null" >
 	        		AND o.FI_STAT = #{stat}
 	      		</if>
-	      		ORDER BY FI_DEPNO
+	      		ORDER BY FI_DEPNO,FS_SYSOPERID
 	     	 ) os
 	      	<if test="endrow != null" >
 	        	WHERE Rownum &lt;= #{endrow}

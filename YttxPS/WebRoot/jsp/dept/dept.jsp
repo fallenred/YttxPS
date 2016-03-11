@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -80,8 +81,12 @@
 												<label class="col-sm-1 control-label no-padding-right"
 													for="depno">部门编号</label>
 												<div class="col-sm-10">
-													<input class="col-sm-6 col-xs-6" maxlength="10"
-														type="text" id="depno" placeholder="部门编号" />
+													<select class="col-sm-6 col-xs-6" id="depno">
+														<option value="">选择部门编号..</option>
+														<c:forEach items="${depts}" var="dept">
+															<option value="${dept.depNo}">${dept.depName}</option>
+														</c:forEach>
+													</select>
 												</div>
 											</div>
 											<div class="form-group">

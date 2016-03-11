@@ -207,11 +207,11 @@
 	</select>
 	
 	<select id="findByResNoAndType" resultMap="BaseResultMap"  parameterType="com.yttx.yttxps.model.Pic">
-		select * from Tpic where FS_RESNO= #{resNo,jdbcType=VARCHAR} and FS_RESTYPE=#{resType,jdbcType=VARCHAR} order by FI_SEQ
+		 select * from Tpic where trim(FS_RESNO) = #{resNo,jdbcType=VARCHAR} and FS_RESTYPE=#{resType,jdbcType=VARCHAR} order by FI_SEQ 
 	</select>
 	
 	<delete id="deleteByResTypeAndNo" parameterType="com.yttx.yttxps.model.Pic">
 		delete from TPIC
-		where FS_RESNO= #{resNo,jdbcType=VARCHAR} and FS_RESTYPE=#{resType,jdbcType=VARCHAR}
+		where trim(FS_RESNO) = #{resNo,jdbcType=VARCHAR} and FS_RESTYPE=#{resType,jdbcType=VARCHAR}
 	</delete>
 </mapper>

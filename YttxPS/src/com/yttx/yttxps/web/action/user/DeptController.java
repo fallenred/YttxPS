@@ -44,7 +44,10 @@ public class DeptController extends UserBasicController{
 		SysOper oper = sysService.findOperById(sysOperId);
 		Long adminType = oper.getAdminType();
 		if(adminType==1){//如果是超级管理员
-			return new ModelAndView("dept/dept");
+			List<SysDep> list = sysService.findDepsByStat(null);
+			Map<String, Object> map=new HashMap<String, Object>();
+			map.put("depts", list);
+			return new ModelAndView("dept/dept",map);
 		}else{
 			Map<String,Object> model=fullDepInfo(sessionEntity.getDepNo());
 			return new ModelAndView("dept/deptinfo",model);

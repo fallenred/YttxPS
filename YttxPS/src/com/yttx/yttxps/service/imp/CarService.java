@@ -38,6 +38,7 @@ public class CarService implements ICarService {
 
 	@Override
 	public int insert(Car record) {
+		record.setSeqNum("cl"+selectSequence());
 		return carMapper.insert(record);
 	}
 
@@ -51,7 +52,9 @@ public class CarService implements ICarService {
 		return carMapper.deleteByPrimaryKey(no);
 	}
 
-
+	public String selectSequence(){
+		 return String.format("%08d", carMapper.selectNo());
+	}
 
 
 

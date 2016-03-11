@@ -73,8 +73,8 @@ $("#configPrice").click(function(){
 /**
  * 弹出框-->"新增"弹出框-->重新加载数据
  */
-$("#addModal", parent.document).on("hidden.bs.modal", function() {
-	
+$("#priceModal", parent.document).on("hidden.bs.modal", function() {
+	 window.location.href=window.location.href;
 });
 
 

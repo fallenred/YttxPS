@@ -68,7 +68,7 @@
 										<div class="form-group">
 											<label class="col-sm-1 control-label no-padding-right" for="stat">部门状态</label>
 											<div class="col-sm-8">
-												<select id="stat" disabled="disabled">
+												<select id="stat">
 													<option value="1" <c:if test="${depInfo.stat==1}">selected</c:if>>正常</option>
 													<option value="2" <c:if test="${depInfo.stat==2}">selected</c:if>>失效</option>
 												</select>

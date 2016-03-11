@@ -43,9 +43,9 @@ function deleteCustom(id) {
 function picCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	
-	var resType = "cx";
-	var resNo = raw.no;
-	var resName = raw.brand;
+	var resType = "cl";
+	var resNo = raw.seqNum;
+	var resName = raw.brand+"-"+raw.no;
 	var param="resType=" + resType + "&resNo=" + resNo + "&resName=" + resName;
 	
 	var frameSrc = "/pic/picpage.htm?" + param;
@@ -186,7 +186,7 @@ jQuery(function($) {
                 datatype : "json",
                 mtype : 'POST',
                 height : 400,
-                colNames : [ '操作', '车牌号', '品牌', '准载数', '注册日期', '所属公司', '联系电话','驾驶员ID', '状态' ],
+                colNames : [ '操作','编号', '车牌号', '品牌', '准载数', '注册日期', '所属公司', '联系电话','驾驶员ID', '状态' ],
                 colModel : [ {
                     name : 'myaction',
                     index : '',
@@ -195,7 +195,14 @@ jQuery(function($) {
                     sortable : false,
                     resize : false,
                     formatter : actFormatter
-                }, {
+                }, 
+                {
+                    name : 'seqNum',
+                    index : 'seqNum',
+                    width : 100,
+                    sorttype : false
+                }, 
+                {
                     name : 'no',
                     index : 'no',
                     width : 100,

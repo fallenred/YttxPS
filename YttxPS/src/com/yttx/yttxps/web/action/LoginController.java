@@ -97,10 +97,9 @@ public class LoginController extends BaseController{
 			@RequestParam(value = "userid") String  userid,
             @RequestParam(value = "password") String  password, Model model)
      {  
-		
+		userid=userid.trim();
 		String hostIp = request.getRemoteAddr();
 		logger.info("用户登录, IP:{} ID:{} 密码{} ", hostIp+ userid+ password);
-		
 		SysOper sysOper = sysService.findOperById(userid);
 		if(sysOper != null)
 		{

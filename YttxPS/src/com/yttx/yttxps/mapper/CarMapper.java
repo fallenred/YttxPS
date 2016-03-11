@@ -50,4 +50,6 @@ public interface CarMapper<T> extends IBaseMapper<T> {
      * @mbggenerated
      */
     int updateByPrimaryKey(Car record);
+
+	int selectNo();
 }
