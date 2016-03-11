@@ -15,7 +15,7 @@
                     '<li><a href="javascript:void(0);">城市</a></li>'+
                     '<li><a href="javascript:void(0);">区县</a></li>'+
                     '</ul>'+
-                    '<span class="close-x"></span>'
+                    '<span class="close-x">X</span>'
                    '</div>';
             
         var contexts = '<div class="con">'+
@@ -57,6 +57,7 @@
             
             that.delegate('.close-x','click',function(e){
                 $(that).removeClass('cityactive');
+                $(that).hide();
             });
             
             function loadCity(key){             

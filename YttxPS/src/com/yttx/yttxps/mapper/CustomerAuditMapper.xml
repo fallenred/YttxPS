@@ -40,16 +40,16 @@
 			1=1 
 			and i.fs_auditno=a.fs_auditno
 		<if test="id != null and id != ''">
-			AND FS_ID like '%'||#{id,jdbcType = VARCHAR}||'%'
+			AND i.FS_ID like '%'||#{id,jdbcType = VARCHAR}||'%'
 		</if>
 		<if test="name != null and name != ''">
-			AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
+			AND i.FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
 		</if>
 		<if test="taName != null and taName !=''">
-			AND FS_TANAME = #{taName,jdbcType = VARCHAR}
+			AND i.FS_TANAME like '%'||#{taName,jdbcType = VARCHAR}||'%'
 		</if>
 		<if test="auditType != null">
-			AND FI_AuditType = #{auditType,jdbcType=DECIMAL}
+			AND a.FI_AuditType = #{auditType,jdbcType=DECIMAL}
 		</if>
 	</select>
 
@@ -76,16 +76,16 @@
 				1=1 
 				and i.fs_auditno=a.fs_auditno
 			<if test="id != null and id != ''">
-				AND FS_ID like '%'||#{id,jdbcType = VARCHAR}||'%'
+				AND i.FS_ID like '%'||#{id,jdbcType = VARCHAR}||'%'
 			</if>
 			<if test="name != null and name != ''">
-				AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
+				AND i.FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
 			</if>
 			<if test="taName != null and taName !=''">
-				AND FS_TANAME = #{taName,jdbcType = VARCHAR}
+				AND i.FS_TANAME like '%'||#{taName,jdbcType = VARCHAR}||'%'
 			</if>
 			<if test="auditType != null">
-				AND FI_AuditType = #{auditType,jdbcType=DECIMAL}
+				AND a.FI_AuditType = #{auditType,jdbcType=DECIMAL}
 			</if>
 			<if test="endrow != null">
 				AND ROWNUM &lt;= #{endrow}

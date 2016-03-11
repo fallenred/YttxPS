@@ -103,11 +103,10 @@ public class LoginController extends BaseController{
 		SysOper sysOper = sysService.findOperById(userid);
 		if(sysOper != null)
 		{
-//			TODO:先屏蔽
-//			if(!sysOper.getSysOperPwd().equalsIgnoreCase(password)){
-//				model.addAttribute("message", "用户名或密码错误");
-//				return "index";
-//			}
+			if(!sysOper.getSysOperPwd().equalsIgnoreCase(password)){
+				model.addAttribute("message", "用户名或密码错误");
+				return "index";
+			}
 			
 			if(sysOper.getStat() != 1){
 				model.addAttribute("message", "用户状态异常,请联系管理员");

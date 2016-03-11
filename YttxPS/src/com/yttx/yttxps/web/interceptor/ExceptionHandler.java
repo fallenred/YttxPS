@@ -112,8 +112,11 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 					for (StackTraceElement row : element)
 						message.append(row.toString() + "\n");
 					writer.write(message.toString());
-				} else
+				} else if("comm/session".equalsIgnoreCase(view)){
+					writer.write("session");
+				}else{
 					writer.write(e.getMessage().replaceAll("<br>", "\n"));
+				}
 				writer.flush();
 			} catch (IOException e1) {
 			}

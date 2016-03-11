@@ -257,7 +257,7 @@ jQuery(function($) {
 				            	 sorttype : "date",
 									formatter : function(value){
 										var timestamp = "";
-										if(value != ''){//rData[7]表示日期列
+										if(value!=null && value != ''){//rData[7]表示日期列
 											timestamp = (new Date(parseFloat(value))).format("yyyy-MM-dd");
 										}
 										return timestamp;

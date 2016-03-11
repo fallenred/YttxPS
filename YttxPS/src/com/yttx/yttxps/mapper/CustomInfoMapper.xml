@@ -314,7 +314,7 @@
 				AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
 			</if>
 			<if test="taName != null and taName !=''">
-				AND FS_TANAME = #{taName,jdbcType = VARCHAR}
+				AND FS_TANAME like '%'||#{taName,jdbcType = VARCHAR}||'%'
 			</if>
 			<if test="stat != null">
 				AND FI_STAT = #{stat}
