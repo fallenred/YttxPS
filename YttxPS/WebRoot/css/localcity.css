@@ -12,22 +12,24 @@
 
 .localcity .tabs {
 	height: 28px;
-	border: 1px solid #438EB9
+	border: 1px solid #438EB9;
+	width: 306px;
 }
 
 .localcity .tabs li {
 	height: 28px;
 	float: left;
-	width: 76px
+	width: 76px;
+	list-style-type:none;
 }
 .localcity .tabs .close-x{
 	position: absolute;
-	right: 9px;
-	top: 12px;
-	background: url(/images/icon/btn_x.png);
-	background-position: -4px -4px;
-	width: 12px;
-	height: 12px;
+    right: 8px;
+    top: 5px;
+    background: url(/images/icon/btn_x.png);
+    background-position: -4px -4px;
+    width: 12px;
+    height: 12px;
 }
 
 .localcity .tabs li a,.localcity .tabs li a:visited {
@@ -47,13 +49,14 @@
 }
 
 .localcity .con {
-	background:#FFFFFF;
-	position: absolute;
-	min-height: 110px;
-	min-width: 296px;
-	border: 1px solid #89C975;
-	border-top: none;
-	padding: 4px
+	background: #FFFFFF;
+    position: absolute;
+    min-height: 110px;
+    min-width: 296px;
+    width: 306px;
+    border: 1px solid #89C975;
+    border-top: none;
+    padding: 4px;
 }
 
 .localcity .subcon .list {

@@ -52,8 +52,8 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a class="accordion-toggle" href="#collapseOne" data-toggle="collapse" data-parent="#accordion"> <i class="bigger-110 ace-icon fa fa-angle-down"
-											data-icon-show="ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down"></i> &nbsp;查询条件
+										<a class="accordion-toggle" href="#collapseOne" data-toggle="collapse" data-parent="#accordion">
+											<i class="bigger-110 ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down"></i> &nbsp;查询条件
 										</a>
 									</h4>
 								</div>
@@ -107,7 +107,6 @@
 							</div>
 							<table id="grid-table"></table>
 							<div id="grid-pager"></div>
-
 							<!-- PAGE CONTENT ENDS -->
 						</div>
 						<!-- /.col -->
@@ -179,7 +178,6 @@
 			</div>
 			<!-- /.modal -->
 		</div>
-
 		<!-- 模态框（修改） -->
 		<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
@@ -230,12 +228,11 @@
 							</div>
 							<div class="modal-footer">
 								<button id="close" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-								<button id="reset" type="reset" class="btn">重置</button>
+								<!--<button id="reset" type="reset" class="btn" >重置</button>  -->
 								<button id="submit" type="button" class="btn btn-primary">提交</button>
 							</div>
 						</form>
 					</div>
-
 					<!-- /.modal-content -->
 				</div>
 				<!-- /.modal-dialog -->

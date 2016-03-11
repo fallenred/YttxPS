@@ -153,7 +153,7 @@ public class OperController extends UserBasicController{
 	@RequestMapping(value="oper/editpage.htm")
 	public String openOperEditpage(@RequestParam("sysOperId") String sysOperId,Model model){
 		//向页面输出所有部门
-		List<SysDep> deps = findDepsByStat(null);
+		List<SysDep> deps = findDepsByStat(1L);
 		model.addAttribute("deps", deps);
 		
 		//向页面输出用户信息
