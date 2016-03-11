@@ -126,7 +126,7 @@ $(function(){
 						}
 					}
 					for(var k in dataArray){
-						console.log(dataArray[k]);
+						//console.log(dataArray[k]);
 						events.push({
 							title:dataArray[k],
 							start: new Date(k.replace(/-/g,'/')),
