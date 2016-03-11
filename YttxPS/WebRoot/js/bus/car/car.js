@@ -267,9 +267,6 @@ jQuery(function($) {
                 rowList : [ 10, 20, 30 ],
                 pager : pager_selector,
                 altRows : true,
-    //          multiselect : true,
-    //          multiboxonly : true,
-    //          multipleSearch : true,
                 loadComplete : function() {
                     var table = this;
                     setTimeout(function() {
@@ -307,6 +304,9 @@ jQuery(function($) {
                 caption : "",
                 buttonicon : "ace-icon fa fa-plus-circle purple",
                 onClickButton : function() {
+                	$("#addform #message").hide();
+                	$("#addform input").val("");
+                	$("#addform select").val("");
                     $("#addModal .car_driver_msg").text("当前无驾驶员信息！");
                     $('#addModal').modal({ show: true, backdrop: 'static' });
                 },

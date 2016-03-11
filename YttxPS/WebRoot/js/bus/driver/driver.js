@@ -211,9 +211,6 @@ jQuery(function($) {
                 rowList : [ 10, 20, 30 ],
                 pager : pager_selector,
                 altRows : true,
-    //          multiselect : true,
-    //          multiboxonly : true,
-    //          multipleSearch : true,
                 loadComplete : function() {
                     var table = this;
                     setTimeout(function() {
@@ -251,9 +248,9 @@ jQuery(function($) {
                 caption : "",
                 buttonicon : "ace-icon fa fa-plus-circle purple",
                 onClickButton : function() {
-                  //var frameSrc = "/jsp/driver/add.jsp";
-                  //$("#addIframe").attr("src", frameSrc);
-                    
+                	$("#addform #message").hide();
+                	$("#addform input").val("");
+                	$("#addform select").val("");
                     $('#addModal').modal({ show: true, backdrop: 'static' });
                 },
                 position : "first",

@@ -57,7 +57,8 @@
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fsScenicno">所属景区</label>
 											<div class="col-sm-3">
-												<input class="form-control" maxlength="10" type="text" id="fsScenicno" name="fsScenicno" placeholder="所属景区" />
+												<select class="form-control" id="fsScenicno" name="fsScenicno">
+												</select>
 											</div>
 										</div>
 									</div>

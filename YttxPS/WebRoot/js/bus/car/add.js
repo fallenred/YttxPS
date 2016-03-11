@@ -34,14 +34,16 @@ jQuery(function($) {
 			$("#addform #message").text("车牌号不能为空，请输入");
 			$('#addform #no').focus();
 			return false;
-		} 
+		}
 
+		/*
 		if($("#addform input[name='brand']").val() == '') {
 			$("#addform #message").show();
 			$("#addform #message").text("品牌不能为空，请输入");
 			$('#addform #brand').focus();
 			return false;
 		}
+		*/
 
         if($("#addform input[name='load']").val() == '') {
             $("#addform #message").show();
@@ -57,26 +59,32 @@ jQuery(function($) {
             return false;
         }
 
+        /*
         if($("#addform input[name='company']").val() == '') {
             $("#addform #message").show();
             $("#addform #message").text("所属公司不能为空，请输入");
             $('#addform #company').focus();
             return false;
         }
+        */
         
+        /*
         if($("#addform input[name='tel']").val() == '') {
             $("#addform #message").show();
             $("#addform #message").text("联系电话不能为空，请输入");
             $('#addform #tel').focus();
             return false;
         }
+        */
         
+        /*
         if($("#addform input[name='driverindex']").val() == '') {
             $("#addform #message").show();
             $("#addform #message").text("驾驶员信息不能为空，请选择");
             $('#addform #carindex').focus();
             return false;
         }
+        */
         
 		if($("#addform select[name='stat']").val() == '') {
             $("#addform #message").show();
@@ -84,6 +92,16 @@ jQuery(function($) {
             $('#addform #stat').focus();
             return false;
         }
+		
+		var regex = /^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]{5}$/;
+		var carNo = $("#addform input[name='no']").val();
+		if(!regex.test(carNo)) {
+			$("#addform #message").show();
+			$("#addform #message").text("车牌号格式不规范，请重新录入");
+			$('#addform #no').focus();
+			return false;
+		}
+		
 		$("#addform #add_submit").attr("disabled","disabled");
 		$.post("/car/addCar.htm",
 		        $("#addform").serialize(),

@@ -79,7 +79,7 @@ jQuery(function($) {
 		$.post("/ticket/editTicket.htm",
 				$("#editform").serialize(),
 				function(data){
-			var json = eval("("+data+")");
+			var json = eval("(" + data + ")");
 					if(json.result == "ok") {
 						$("#message").text("修改记录成功");
 						$("#message").show();

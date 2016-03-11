@@ -1,5 +1,4 @@
 jQuery(function($) {
-    $("#addform #message").hide();
     
     $('.datetimepicker').datetimepicker({
 		language:  'zh-CN',

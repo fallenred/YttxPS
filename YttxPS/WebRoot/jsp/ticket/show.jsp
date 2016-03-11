@@ -55,17 +55,14 @@
 
 									<div class="row">
 										<div class="form-group">
-											<!-- <label class="col-sm-2 control-label no-padding-right" for="fsNo">门票代码</label>
-											<div class="col-sm-3">
-												<input class="form-control" maxlength="10" type="text" class="form-control" id="fsNo" name="fsNo" placeholder="门票代码需唯一" />
-											</div> -->
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">票名称</label>
 											<div class="col-sm-3">
 												<input class="form-control" type="text" class="form-control" id="fsName" name="fsName" placeholder="票名称"  maxlength="10" readonly="readonly"/>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fsScenicno">所属景区</label>
 											<div class="col-sm-3">
-												<input class="form-control" maxlength="10" type="text" class="form-control" id="fsScenicno" name="fsScenicno" placeholder="所属景区" readonly="readonly"/>
+												<select class="form-control" id="fsScenicno" name="fsScenicno" disabled="disabled">
+												</select>
 											</div>
 										</div>
 									</div>

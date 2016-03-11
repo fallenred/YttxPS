@@ -40,7 +40,7 @@ $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#reset").click();
 	$(this).find("#fsNo").val(raw.fsNo);
 	$(this).find("#fsName").val(raw.fsName);
-	$(this).find("#fsScenicno").val(raw.fsScenicname);
+	$(this).find("#fsScenicno").val(raw.fsScenicno);
 	$(this).find("#fsType").val(raw.fsType);
 	$(this).find("#fiStat").val(raw.fiStat);
 	$(this).find("#fsDesc").val(raw.fsDesc);
