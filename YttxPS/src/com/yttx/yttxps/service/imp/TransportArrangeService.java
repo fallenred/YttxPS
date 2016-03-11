@@ -107,6 +107,11 @@ public class TransportArrangeService implements ITransportArrangeService {
 	}
 	
 	@Override
+	public TtransportArrangeKey findUniqTtransportArrange(String fsNo) {
+		return transportArrangeMapper.selectByPrimaryKey(fsNo);
+	}
+	
+	@Override
 	public int selectFsNo() {
 		return transportArrangeMapper.selectFsNo();
 	}

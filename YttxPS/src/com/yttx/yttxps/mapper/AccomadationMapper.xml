@@ -253,7 +253,8 @@
   <select id="selectSelective" parameterType="map" resultMap="ResultMapWithBLOBs">
     SELECT A.*
       FROM TACCOMADATION A
-     WHERE A.FS_REGIONNO IN(SELECT A.FS_REGIONNO
+     WHERE 1 = 1
+       AND A.FS_REGIONNO IN(SELECT A.FS_REGIONNO
                               FROM TSCENIC A
                               WHERE 1 = 1
                               <choose>
@@ -264,6 +265,8 @@
                                   </foreach>
                                 </when>
                               </choose>
+                             UNION
+                             SELECT a.fs_no AS FS_REGIONNO FROM tregionmap a WHERE a.fs_manageno = '510100'
                               )
     <if test="regionno != null and regionno !='' " >
       and FS_REGIONNO = #{regionno,jdbcType=VARCHAR}

@@ -34,4 +34,6 @@ public interface ITransportArrangeService {
 	List<TtransportArrange> selectTtransportArrangeView(TtransportArrangeExample example);
 	
 	public int selectFsNo();
+	
+	public TtransportArrangeKey findUniqTtransportArrange(String fsNo);
 }

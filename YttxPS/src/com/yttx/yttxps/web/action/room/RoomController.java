@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.comm.DateEditor;
 import com.yttx.yttxps.comm.JsonResult;
+import com.yttx.yttxps.model.DictExample;
 import com.yttx.yttxps.model.Room;
 import com.yttx.yttxps.model.RoomPrice;
 import com.yttx.yttxps.model.TCCPrice;
@@ -186,17 +187,13 @@ public class RoomController extends BaseController {
 	@RequestMapping(value = "getRoomType.htm", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> ajaxGetRoomType() {
-		HashMap<String, Object> data = new HashMap<String, Object>();
-		//注：若有相关的表直接在此查询表数据按照该格式装入
-		data.put("01", "标准房");
-		data.put("02", "单人房");
-		data.put("03", "双人房");
-		data.put("04", "三人房");
-		data.put("05", "电脑房");
-		data.put("06", "棋牌房");
-		data.put("07", "标准套房");
-		data.put("08", "高级套房");
-		data.put("09", "豪华套房");
+		Map<String, Object> data = new HashMap<String, Object>();
+		
+		DictExample dictExample = new DictExample();
+		com.yttx.yttxps.model.DictExample.Criteria dictCriteria = dictExample.createCriteria();
+		dictCriteria.andFsParentnoEqualTo("fx");
+		data = dictService.selectDictMap(dictExample);
+		
 		Map<String, Object> result = (Map<String, Object>)JsonResult.jsonOk();
 		result.put("data", data);
 		return result;

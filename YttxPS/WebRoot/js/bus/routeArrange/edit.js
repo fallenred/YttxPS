@@ -59,8 +59,8 @@ jQuery(function($) {
         	
         	var arrange = {};
         	arrange.fiGenindex = data.data.routeArrange.fiGenindex;
-        	if(data.data.transport != undefined) {
-        		arrange.transportArrange = data.data.transport.fsNo;
+        	if(data.data.transportArrange != undefined) {
+        		arrange.transportArrange = data.data.transportArrange.fsNo;
         	} else {
         		arrange.transportArrange = "";
         	}

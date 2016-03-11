@@ -101,11 +101,7 @@ static Logger logger = LoggerFactory.getLogger(DriverController.class);
     {
 		logger.debug("当前新增对象 {}", driver);
 		try{
-			//注意:此处的唯一不准确，使用 oracle sequence 作为唯一
-			if(logger.isDebugEnabled())
-				driver.setIndex(new BigDecimal(System.currentTimeMillis()));
-			else
-				driver.setIndex(driverService.selectSequence());
+			driver.setIndex(driverService.selectSequence());
 			driverService.insert(driver);
 		}catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("新增失败");

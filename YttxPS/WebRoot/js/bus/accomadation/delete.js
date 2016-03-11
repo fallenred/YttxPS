@@ -13,7 +13,7 @@ jQuery(function($) {
 							return true;
 						}
 						else {
-							$("#delForm #message").text("删除记录失败:" + json.message );
+							$("#delForm #message").text("删除记录失败:" + data.message);
 							return false;
 						}
 						return false;
