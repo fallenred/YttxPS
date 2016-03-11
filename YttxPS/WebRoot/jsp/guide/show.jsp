@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -36,8 +35,7 @@
 
 							<form class="form-horizontal">
 								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">×</button>
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 									<h4 class="modal-title" id="showModalLabel">导游详情</h4>
 								</div>
 								<div class="modal-body">
@@ -45,75 +43,54 @@
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
-												<li><a class="cboxElement" data-rel="colorbox"
-													href="http://127.0.0.1:81/1.jpg"> <img width="0"
-														height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
-												</a>
-												</li>
+												<li><a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg"> <img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
+												</a></li>
 											</div>
 										</ul>
 									</div>
 
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="no">导游编号</label>
+											<label class="col-sm-2 control-label no-padding-right" for="name">姓名</label>
 											<div class="col-sm-3">
-												<input type="text" id="no" class="form-control"
-													placeholder="导游编号需唯一" readonly="readonly" />
+												<input type="text" id="name" name="name" class="form-control" placeholder="姓名" />
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
-												for="name">姓名</label>
-											<div class="col-sm-3">
-												<input type="text" id="name" class="form-control"
-													placeholder="姓名" readonly="readonly" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="gender">性别</label>
+											<label class="col-sm-2 control-label no-padding-right" for="gender">性别</label>
 											<div class="col-sm-3">
 												<select class="form-control" id="gender" name="gender">
 													<option value="1">男</option>
 													<option value="0">女</option>
 												</select>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
-												for="idno">身份证号</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="gender">身份证号</label>
 											<div class="col-sm-3">
-												<input type="text" id="idno" class="form-control"
-													placeholder="身份证号" readonly="readonly" />
+												<input type="text" id="idno" name="idno" class="form-control" placeholder="身份证号" />
+											</div>
+											<label class="col-sm-2 control-label no-padding-right" for="workdate">开始工作日期</label>
+											<div class="col-sm-3">
+												<input type="text" id="workdate" name="workdate" class="form-control datetimepicker" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="开始工作日期" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="workdate">开始工作日期</label>
+											<label class="col-sm-2 control-label no-padding-right" for="contactno">联系方式</label>
 											<div class="col-sm-3">
-												<input type="text" id="workdate" class="form-control"
-													placeholder="开始工作日期" readonly="readonly" />
+												<input type="text" placeholder="联系方式" id="contactno" name="contactno" class="form-control"></input>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
-												for="contactno">联系方式</label>
+											<label class="col-sm-2 control-label no-padding-right" for="mainroute">主带线路</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="联系方式" id="contactno"
-													class="form-control" readonly="readonly"></input>
+												<input type="text" placeholder="主带线路" id="mainroute" name="mainroute" class="form-control"></input>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="mainroute">主带线路</label>
-											<div class="col-sm-3">
-												<input type="text" placeholder="主带线路" id="mainroute"
-													class="form-control" readonly="readonly"></input>
-											</div>
-											<label class="col-sm-2 control-label no-padding-right"
-												for="preferteem">带团意向</label>
+											<label class="col-sm-2 control-label no-padding-right" for="preferteem">带团意向</label>
 											<div class="col-sm-3">
 												<select class="form-control" id="preferteem" name="preferteem">
 													<option value="01">纯玩团</option>
@@ -121,85 +98,67 @@
 													<option value="03">购物团</option>
 												</select>
 											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="speciality">特长</label>
+											<label class="col-sm-2 control-label no-padding-right" for="speciality">特长</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="特长" id="speciality"
-													class="form-control" readonly="readonly"></input>
-											</div>
-											<label class="col-sm-2 control-label no-padding-right"
-												for="desc">介绍</label>
-											<div class="col-sm-3">
-												<input type="text" placeholder="介绍" id="desc"
-													class="form-control" readonly="readonly"></input>
+												<input type="text" placeholder="特长" id="speciality" name="speciality" class="form-control"></input>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="lvl">当前级别</label>
+											<label class="col-sm-2 control-label no-padding-right" for="desc">导游证号</label>
+											<div class="col-sm-3">
+												<input type="text" placeholder="导游证号" id="desc" name="desc" class="form-control"></input>
+											</div>
+											<label class="col-sm-2 control-label no-padding-right" for="lvl">当前级别</label>
 											<div class="col-sm-3">
 												<select class="form-control" id="lvl" name="lvl">
-													<option value="01">金牌</option>
-													<option value="02">银牌</option>
-													<option value="03">铜牌</option>
 												</select>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
-												for="salary">工资</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="salary">工资</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="工资" id="salary"
-													class="form-control" readonly="readonly"></input>
+												<input type="text" placeholder="工资" id="salary" name="salary" class="form-control"></input>
+											</div>
+											<label class="col-sm-2 control-label no-padding-right" for="daysale">当日打单金额</label>
+											<div class="col-sm-3">
+												<input placeholder="当日打单金额" id="daysale" name="daysale" class="form-control"></input>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="daysale">当日打单金额</label>
+											<label class="col-sm-2 control-label no-padding-right" for="weeksale">本周打单金额</label>
 											<div class="col-sm-3">
-												<input placeholder="当日打单金额" id="daysale"
-													class="form-control" readonly="readonly"></input>
+												<input type="text" placeholder="本周打单金额" id="weeksale" name="weeksale" class="form-control"></input>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
-												for="weeksale">本周打单金额</label>
+											<label class="col-sm-2 control-label no-padding-right" for="monthsale">本月打单金额</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="本周打单金额" id="weeksale"
-													class="form-control" readonly="readonly"></input>
+												<input placeholder="本月打单金额" id="monthsale" name="monthsale" class="form-control"></input>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="monthsale">本月打单金额</label>
-											<div class="col-sm-3">
-												<input placeholder="本月打单金额" id="monthsale"
-													class="form-control" readonly="readonly"></input>
-											</div>
-											<label class="col-sm-2 control-label no-padding-right"
-												for="stat">状态</label>
+											<label class="col-sm-2 control-label no-padding-right" for="lvl">状态</label>
 											<div class="col-sm-3">
 												<select class="form-control" id="stat" name="stat">
 													<option value="1">正常</option>
 													<option value="2">失效</option>
-												</select>
+											</select>
 											</div>
 										</div>
+										
 									</div>
 
 								</div>
 
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">关闭</button>
-									<button id="reset" type="reset" class="btn"
-										style="display: none;">重置</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button id="reset" type="reset" class="btn" style="display: none;">重置</button>
 									<!--  
 											<button type="button" class="btn btn-primary">提交</button>
 											-->

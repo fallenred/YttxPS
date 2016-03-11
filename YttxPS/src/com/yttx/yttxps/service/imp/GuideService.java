@@ -1,5 +1,6 @@
 package com.yttx.yttxps.service.imp;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,8 @@ public class GuideService implements IGuideService {
 
 	@Override
 	public int insert(Tguide record) {
+		record.setStat(BigDecimal.ONE);
+		record.setNo(String.format("dy%08d", guideMapper.selectFsNo()));
 		return guideMapper.insert(record);
 	}
 
@@ -56,9 +59,4 @@ public class GuideService implements IGuideService {
 	public int delete(String no) {
 		return guideMapper.deleteByPrimaryKey(no);
 	}
-
-
-
-
-
 }

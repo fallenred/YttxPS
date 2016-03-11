@@ -318,7 +318,9 @@
   <select id="selectTshopByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
     SELECT A.*
       FROM TSHOP A
-     WHERE A.FS_REGIONNO IN(SELECT A.FS_REGIONNO
+     WHERE 1 = 1
+       <!-- 
+       AND A.FS_REGIONNO IN(SELECT A.FS_REGIONNO
                               FROM TSCENIC A
                               WHERE 1 = 1
                               <choose>
@@ -329,7 +331,7 @@
                                   </foreach>
                                 </when>
                               </choose>
-                              )
+                              ) -->
     <if test="no != null and no  != ''">
 	  AND A.FS_NO = #{no}
 	</if>

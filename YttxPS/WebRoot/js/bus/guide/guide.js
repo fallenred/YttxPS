@@ -102,18 +102,9 @@ $("#picModal").on("hidden.bs.modal", function() {
 
 
 jQuery(function($) {
-
-//	var localsel = $("#selectCity", "#queryfield").localCity({
-//	provurl : "/pub/findcity.htm",
-//	cityurl : "/pub/findcity.htm",
-//	disturl : "/pub/findcity.htm",
-//	callback : localcallback
-//	});
-
-//	jqGrid form提交
+	//	jqGrid form提交
 	$("#submit").on("click", function() {
 		$("#collapseOne").collapse('hide');
-		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
 		postData["guide.no"] = $("#queryfield").find("#no").val();
 		postData["guide.name"] = $("#queryfield").find("#name").val();
@@ -138,23 +129,8 @@ jQuery(function($) {
 		}).trigger("reloadGrid");
 	});
 
-////	城市选择器
-//	function localcallback(index, key, value, fullkey, fullname) {
-//	$("#regionname", "#queryfield").val(fullname);
-//	$("#regionno", "#queryfield").val(key);
-//	if (index == 3) {
-//	$("#selectCity", "#queryfield").hide();
-//	}
-//	}
-
-//	$("#regionname", "#queryfield").click(function() {
-
-//	$("#selectCity", "#queryfield").show();
-//	});
-
-//	重置
+	//	重置
 	$("#reset", "#queryfield").click(function() {
-//		$("#selectCity", "#queryfield").hide();
 		$("#regionno", "#queryfield").val(null);
 	});
 
@@ -230,7 +206,7 @@ jQuery(function($) {
 				mtype : 'POST',
 				height : 400,
 				colNames : [ '操作', '导游编号', '姓名', '性别', '身份证号', '开始工作日期',
-				             '联系方式', '主带线路', '带团意向','特长','介绍','当前级别','工资','当日打单金额','本周打单金额','本月打单金额', '状态' ],
+				             '联系方式', '主带线路', '带团意向','特长','导游证号','当前级别','工资','当日打单金额','本周打单金额','本月打单金额', '状态' ],
 				             colModel : [ {
 				            	 name : 'myac',
 				            	 index : '',
@@ -282,7 +258,7 @@ jQuery(function($) {
 									formatter : function(value){
 										var timestamp = "";
 										if(value != ''){//rData[7]表示日期列
-											timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+											timestamp = (new Date(parseFloat(value))).format("yyyy-MM-dd");
 										}
 										return timestamp;
 									}
@@ -322,8 +298,7 @@ jQuery(function($) {
 				             }, { name : 'desc',
 				            	 index : 'desc',
 				            	 editable : true,
-				            	 sorttype : "char",
-				            	 hidden : true
+				            	 sorttype : "char"
 				             }, { name : 'lvl',
 				            	 index : 'lvl',
 				            	 editable : true,
@@ -393,10 +368,6 @@ jQuery(function($) {
 				             pager : pager_selector,
 				             altRows : true,
 
-//				             multiselect : true,
-//				             multiboxonly : true,
-//				             multipleSearch : true,
-
 				             loadComplete : function() {
 				            	 var table = this;
 				            	 setTimeout(function() {
@@ -410,14 +381,6 @@ jQuery(function($) {
 				             editurl : "/guide/save.htm",
 				             shrinkToFit : true,
 				             autowidth : true
-
-				             /**
-				              * , grouping:true, groupingView : { groupField : ['name'],
-				              * groupDataSorted : true, plusicon : 'fa fa-chevron-down
-				              * bigger-110', minusicon : 'fa fa-chevron-up bigger-110' },
-				              * caption: "Grouping"
-				              */
-
 			});
 	$(window).triggerHandler('resize.jqGrid');// trigger window resize to make
 	// the grid get the correct size
