@@ -265,7 +265,6 @@
     	update 
     		TCUSTOMINFO
 		 set
-		    FT_TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
 		    FI_STAT = #{stat,jdbcType=DECIMAL},
 		    FS_AUDITNO = null
 		where 
