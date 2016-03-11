@@ -63,4 +63,6 @@ public interface TtransportArrangeMapper<T> extends IBaseMapper<T>  {
 	int selectFsNo();
 	
 	List<TtransportArrange> selectTtransportArrangeByExample(TtransportArrangeExample example);
+	
+	TtransportArrangeKey selectByPrimaryKey(String fsNo);
 }

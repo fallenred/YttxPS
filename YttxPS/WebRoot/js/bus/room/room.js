@@ -171,7 +171,7 @@ jQuery(function($) {
                 datatype : "json",
                 mtype : 'POST',
                 height : 395,
-                colNames : [ '操作', '编号','房型名称','房型类型','酒店代码','三餐情况','房型价格','状态'],
+                colNames : [ '操作', '编号','房型名称','房型类型','酒店代码','三餐情况','状态'],
                 colModel : [ {
                     name : 'myaction',
                     index : '',
@@ -252,12 +252,6 @@ jQuery(function($) {
                         }
                         return '';
                     }
-                }, {
-                    name : 'price',
-                    index : 'price',
-                    width : 30,
-                    editable : true,
-                    sorttype : "char"
                 }, {
                     name : 'fiStat',
                     index : 'fiStat',

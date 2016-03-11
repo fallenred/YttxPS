@@ -235,7 +235,7 @@
                         <div class="modal-footer">
                             <button id="room_close" type="button" class="btn btn-default"
                                 data-dismiss="modal">关闭</button>
-                            <button id="reset" type="reset" class="btn">重置</button>
+                            <button id="reset" type="reset" class="btn" style="display: none;">重置</button>
                             <button id="room_edit_submit" type="button" class="btn btn-primary">提交</button>
                         </div>
                     </form>

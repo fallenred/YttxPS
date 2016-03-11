@@ -32,10 +32,11 @@ import com.yttx.yttxps.model.TRouteCCExample;
 import com.yttx.yttxps.model.TRouteCCExample.Criteria;
 import com.yttx.yttxps.model.TRouteCCKey;
 import com.yttx.yttxps.model.Tguide;
-import com.yttx.yttxps.model.Ttransport;
+import com.yttx.yttxps.model.TtransportArrangeKey;
 import com.yttx.yttxps.model.vo.RouteArrangeRequest;
 import com.yttx.yttxps.service.IGuideService;
 import com.yttx.yttxps.service.IRouteArrangeService;
+import com.yttx.yttxps.service.ITransportArrangeService;
 import com.yttx.yttxps.service.ITransportService;
 import com.yttx.yttxps.web.action.BaseController;
 
@@ -58,6 +59,9 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
 	
 	@Autowired
 	private ITransportService transportService;
+	
+	@Autowired
+	private ITransportArrangeService transportArrangeService;
 	
 	/**
 	 * 视图数据类型转换
@@ -139,8 +143,9 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
 			transportCriteria.andFsRestypeEqualTo("cx");
 			List<TRouteCCKey> transports = routeArrangeService.findTRouteCCKey(routeCCExample);
 			if(transports != null && transports.size() > 0) {
-				Ttransport transport = transportService.findTtransport(transports.get(0).getFsResno());
-				data.put("transport", transport);
+				TtransportArrangeKey transportArrange = transportArrangeService.findUniqTtransportArrange(transports.get(0).getFsResno());
+				
+				data.put("transportArrange", transportArrange);
 			}
 		}
 		return JsonResult.jsonData(data);
