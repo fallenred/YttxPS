@@ -8,18 +8,6 @@ jQuery(function($) {
 		disturl : "/pub/findcity.htm",
 		callback : localcallback
 	});
-	$(".peak").hide();
-	$("#priceType").bind("change",function(){ 
-		//淡季
-	    if($(this).val()==1){
-	      $(".low").show();
-	      $(".peak").hide();
-	    } 
-	    else{
-	    	$(".peak").show();
-		      $(".low").hide();
-	    } 
-	}); 
 	
 	//获取门票列表
 	$.ajax({
@@ -69,23 +57,18 @@ jQuery(function($) {
 			$("#message").text("门票代码不能为空，请输入");
 			$('#no').focus();
 			return false;
-		} 
+		}
 		if($("#fsScenicno").val() == '') {
 			$("#message").show();
 			$("#message").text("所属景区不能为空，请输入");
 			$('#name').focus();
 			return false;
-		} 
-		if($("#fsType").val() == '') {
-			$("#message").show();
-			$("#message").text("门票类型不能为空，请输入");
-			$('#lvl').focus();
-			return false;
-		} 
+		}
+
 		$.post("/ticket/addTicketPrice.htm",
 				$("#addform").serialize(),
 				function(data){
-			var json = eval("("+data+")");
+			var json = eval("(" + data + ")");
 					if(json.result == "ok") {
 						$("#message").text("增加记录成功");
 						$("#message").show();

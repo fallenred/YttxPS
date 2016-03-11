@@ -16,17 +16,9 @@ function editTicketPrice(id) {
 
 function deleteTicketPrice(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/ticketPrice/delete.jsp?no=" + raw.fsNo + "&ftStartdate=" + raw.ftStartdate +
-					"&ftEnddate=" + raw.ftEnddate;
+	var frameSrc = "/jsp/ticketPrice/delete.jsp?no=" + raw.fsNo + "&ftStartdate=" + raw.ftStartdate + "&ftEnddate=" + raw.ftEnddate;
 	$("#delIframe").attr("src", frameSrc);
     $('#delModal').modal({ show: true, backdrop: 'static' });
-};
-
-function picTicketPrice(id) {
-	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/pic/pic.jsp?no=" + raw.fsNo;
-    $("#picIframe").attr("src", frameSrc);
-    $('#picModal').modal({ show: true, backdrop: 'static' });
 };
 
 $("#showModal").on("shown.bs.modal", function() {
@@ -34,31 +26,18 @@ $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#fsName").val(raw.fsName);
 	$(this).find("#ftStartdate").val(raw.ftStartdate);
 	$(this).find("#ftEnddate").val(raw.ftEnddate);
-	//旺季
-	if (raw.fdFullLowQp == '') {
-		$(this).find("#priceType").val('2');
-		$(this).find(".peak").show();
-		$(this).find(".low").hide();
-	}
-	$(this).find("#fdFullLowQp").val(raw.fdFullLowQp);
-	$(this).find("#fdHalfLowQp").val(raw.fdHalfLowQp);
-	$(this).find("#fdChildLowQp").val(raw.fdChildLowQp);
-	$(this).find("#fdFreeLowQp").val(raw.fdFreeLowQp);
-	$(this).find("#fdFullLowTp").val(raw.fdFullLowTp);
-	$(this).find("#fdHalfLowTp").val(raw.fdHalfLowTp);
-	$(this).find("#fdChildLowTp").val(raw.fdChildLowTp);
-	$(this).find("#fdFreeLowTp").val(raw.fdFreeLowTp);
-	$(this).find("#fdFullPeakQp").val(raw.fdFullPeakQp);
-	$(this).find("#fdHalfPeakQp").val(raw.fdHalfPeakQp);
-	$(this).find("#fdChildPeakQp").val(raw.fdChildPeakQp);
-	$(this).find("#fdFreePeakQp").val(raw.fdFreePeakQp);
-	$(this).find("#fdFullPeakTp").val(raw.fdFullPeakTp);
-	$(this).find("#fdHalfPeakTp").val(raw.fdHalfPeakTp);
-	$(this).find("#fdChildPeakTp").val(raw.fdChildPeakTp);
-	$(this).find("#fdFreePeakTp").val(raw.fdFreePeakTp);
+	
+	$(this).find("#fdFullLowQp").val(raw.fdFullLowQp);   //挂牌价格全票
+	$(this).find("#fdHalfLowQp").val(raw.fdHalfLowQp);   //挂牌价格半票
+	$(this).find("#fdChildLowQp").val(raw.fdChildLowQp);   //挂牌价格儿童票
+	$(this).find("#fdFreeLowQp").val(raw.fdFreeLowQp);   //挂牌价格免票
+	$(this).find("#fdFullLowTp").val(raw.fdFullLowTp);   //团队价格全票
+	$(this).find("#fdHalfLowTp").val(raw.fdHalfLowTp);   //团队价格半票
+	$(this).find("#fdChildLowTp").val(raw.fdChildLowTp);   //团队价格儿童票
+	$(this).find("#fdFreeLowTp").val(raw.fdFreeLowTp);   //团队价格免票
 });
 
-$("#editIframe").on("load",function(){
+$("#editIframe").on("load", function(){
 	$(this).contents().find("#reset").click();
 	$(this).contents().find("#fsNo").val(raw.fsNo);
 	$(this).contents().find("#fsName").val(raw.fsName);
@@ -68,31 +47,15 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fsDesc").val(raw.fsDesc);
 	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
 	$(this).contents().find("#ftEnddate").val(raw.ftEnddate);
-	//旺季
-	if (raw.fdFullLowQp == '') {
-		$(this).contents().find("#priceType").val('2');
-		$(this).contents().find("#priceTypeName").val('旺季');
-		$(this).contents().find(".peak").show();
-		$(this).contents().find(".low").hide();
-	} else {
-		$(this).contents().find("#priceTypeName").val('淡季');
-	}
-	$(this).contents().find("#fdFullLowQp").val(raw.fdFullLowQp);
-	$(this).contents().find("#fdHalfLowQp").val(raw.fdHalfLowQp);
-	$(this).contents().find("#fdChildLowQp").val(raw.fdChildLowQp);
-	$(this).contents().find("#fdFreeLowQp").val(raw.fdFreeLowQp);
-	$(this).contents().find("#fdFullLowTp").val(raw.fdFullLowTp);
-	$(this).contents().find("#fdHalfLowTp").val(raw.fdHalfLowTp);
-	$(this).contents().find("#fdChildLowTp").val(raw.fdChildLowTp);
-	$(this).contents().find("#fdFreeLowTp").val(raw.fdFreeLowTp);
-	$(this).contents().find("#fdFullPeakQp").val(raw.fdFullPeakQp);
-	$(this).contents().find("#fdHalfPeakQp").val(raw.fdHalfPeakQp);
-	$(this).contents().find("#fdChildPeakQp").val(raw.fdChildPeakQp);
-	$(this).contents().find("#fdFreePeakQp").val(raw.fdFreePeakQp);
-	$(this).contents().find("#fdFullPeakTp").val(raw.fdFullPeakTp);
-	$(this).contents().find("#fdHalfPeakTp").val(raw.fdHalfPeakTp);
-	$(this).contents().find("#fdChildPeakTp").val(raw.fdChildPeakTp);
-	$(this).contents().find("#fdFreePeakTp").val(raw.fdFreePeakTp);
+	
+	$(this).contents().find("#fdFullLowQp").val(raw.fdFullLowQp);   //挂牌价格全票
+	$(this).contents().find("#fdHalfLowQp").val(raw.fdHalfLowQp);   //挂牌价格半票
+	$(this).contents().find("#fdChildLowQp").val(raw.fdChildLowQp);   //挂牌价格儿童票
+	$(this).contents().find("#fdFreeLowQp").val(raw.fdFreeLowQp);   //挂牌价格免票
+	$(this).contents().find("#fdFullLowTp").val(raw.fdFullLowTp);   //团队价格全票
+	$(this).contents().find("#fdHalfLowTp").val(raw.fdHalfLowTp);   //团队价格半票
+	$(this).contents().find("#fdChildLowTp").val(raw.fdChildLowTp);   //团队价格儿童票
+	$(this).contents().find("#fdFreeLowTp").val(raw.fdFreeLowTp);   //团队价格免票
 });
 
 
@@ -140,7 +103,6 @@ jQuery(function($) {
 //	jqGrid form提交
 	$("#submit").click(function() {
 		$("#collapseOne").collapse('hide');
-		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
 		postData["ticketPrice.fsNo"] = $("#queryfield").find("#fsNo").val();
 		postData["ticketPrice.fsScenicno"] = $("#queryfield").find("#fsScenicno").val();
@@ -188,10 +150,7 @@ jQuery(function($) {
 	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteTicketPrice('
 			+ options.rowId
 			+ ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-	var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" id="picButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="picTicketPrice('
-		+ options.rowId
-		+ ');" data-original-title="编辑资源图片"><span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
-	return detail + editBtn + deleteBtn + picDtn;
+	return detail + editBtn + deleteBtn;
 	};
 
 	// resize to fit page size
@@ -212,16 +171,8 @@ jQuery(function($) {
 								parent_column.width());
 					}, 0);
 				}
-			});
+	});
 
-	var items = {
-			1 : '淡季价格',
-			2 : '旺季价格'
-		};
-	var s = '';
-	for (k in items)
-		s += ';' + k + ":" + items[k];
-	s = s.substring(1);
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/ticket/findTicketPrice.htm",
@@ -230,10 +181,8 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '门票代码', '票名称', '价格类型' ,'团队全票价格', '淡季挂牌价格全票', '淡季挂牌价格半票', '淡季挂牌价格儿童票', 
-				             '淡季挂牌价格免票', '淡季团队价格全票', '淡季团队价格半票', '淡季团队价格儿童票', '淡季团队价格免票', '旺季挂牌价格全票',
-				             '旺季挂牌价格半票', '旺季挂牌价格儿童票', '旺季挂牌价格免票', '旺季团队价格全票', '旺季团队价格半票', '旺季团队价格儿童票',
-				             '旺季团队价格免票', '开始日期', '结束日期' ],
+				colNames : [ '操作', '门票代码', '票名称', '挂牌价格全票', '挂牌价格半票', '挂牌价格儿童票', '挂牌价格免票', '团队价格全票', 
+				             '团队价格半票', '团队价格儿童票', '团队价格免票', '开始日期', '结束日期' ],
 				colModel : [ {
 					name : 'myac',
 					index : '',
@@ -255,129 +204,51 @@ jQuery(function($) {
 					width : 70,
 					editable : true,
 					sorttype : "char"
-				}, {
-					name : 'fdFullLowQp',
-					index : 'fdFullLowQp',
-					width : 35,
-					sortable : true,
-					editable : true,
-					edittype : 'select',
-					editoptions : {
-						value : s
-					},
-					formatter : function(v, opt, rec) {
-						//旺季价格
-						if (v == null) {
-							return items['2'];
-						} else {
-							return items['1'];
-						}
-					},
-					unformat : function(v) {
-						for (k in items)
-							if (items[k] == v)
-								return k;
-						return '1';
-					}
-				}, {
-					name : 'fdFullTp',
-					index : 'fdFullTp',
-					width : 35,
-					sortable : true,
-					editable : true
-				}, {
+				}, {//挂牌价格全票
 					name : 'fdFullLowQp',
 					index : 'fdFullLowQp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
+				}, {//挂牌价格半票
 					name : 'fdHalfLowQp',
 					index : 'fdHalfLowQp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
+				}, {//挂牌价格儿童票
 					name : 'fdChildLowQp',
 					index : 'fdChildLowQp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
+				}, {//挂牌价格免票
 					name : 'fdFreeLowQp',
 					index : 'fdFreeLowQp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
+				}, {//团队价格全票
 					name : 'fdFullLowTp',
 					index : 'fdFullLowTp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
+				}, {//团队价格半票
 					name : 'fdHalfLowTp',
 					index : 'fdHalfLowTp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
+				}, {//团队价格儿童票
 					name : 'fdChildLowTp',
 					index : 'fdChildLowTp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
+				}, {//团队价格免票
 					name : 'fdFreeLowTp',
 					index : 'fdFreeLowTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFullPeakQp',
-					index : 'fdFullPeakQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdHalfPeakQp',
-					index : 'fdHalfPeakQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdChildPeakQp',
-					index : 'fdChildPeakQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFreePeakQp',
-					index : 'fdFreePeakQp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFullPeakTp',
-					index : 'fdFullPeakTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdHalfPeakTp',
-					index : 'fdHalfPeakTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdChildPeakTp',
-					index : 'fdChildPeakTp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdFreePeakTp',
-					index : 'fdFreePeakTp',
 					width : 100,
 					editable : true,
 					hidden : true
@@ -391,7 +262,7 @@ jQuery(function($) {
 					formatter : function(value){
 						var timestamp = "";
 						if(value != ''){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+							timestamp = (new Date(parseFloat(value))).format("yyyy-MM-dd");
 						}
 						return timestamp;
 					}
@@ -405,7 +276,7 @@ jQuery(function($) {
 					formatter : function(value){
 						var timestamp = "";
 						if(value != ''){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+							timestamp = (new Date(parseFloat(value))).format("yyyy-MM-dd");
 						}
 						return timestamp;
 					}
@@ -416,10 +287,6 @@ jQuery(function($) {
 				rowList : [ 10, 20, 30 ],
 				pager : pager_selector,
 				altRows : true,
-
-//				multiselect : true,
-//				multiboxonly : true,
-//				multipleSearch : true,
 
 				loadComplete : function() {
 					var table = this;
@@ -435,13 +302,6 @@ jQuery(function($) {
 				shrinkToFit : true,
 				autowidth : true,
 				caption: (fsName!=null && fsName!="")?(fsName+"—门票价格配置列表"):"门票价格列表"
-			/**
-			 * , grouping:true, groupingView : { groupField : ['name'],
-			 * groupDataSorted : true, plusicon : 'fa fa-chevron-down
-			 * bigger-110', minusicon : 'fa fa-chevron-up bigger-110' },
-			 * caption: "Grouping"
-			 */
-
 			});
 	$(window).triggerHandler('resize.jqGrid');// trigger window resize to make
 	// the grid get the correct size

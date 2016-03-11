@@ -59,143 +59,76 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											
-											<label class="col-sm-2 control-label no-padding-right" for="fsType">价格类型</label>
-											<div class="col-sm-2" >
-												<input class="form-control" type="hidden" id="priceType" name="priceType" readonly="readonly"></input>
-												<input class="form-control" type="text" id="priceTypeName" readonly="readonly"></input>
+											<label class="col-sm-2 control-label no-padding-right" for="ftStartdate">开始日期</label>
+											<div class="col-sm-3">
+												<input class="form-control datetimepicker" data-date-format="yyyy-mm-dd" maxlength="10" readonly="readonly" type="text" id="ftStartdate" name="ftStartdate" placeholder="开始日期" />
+											</div>
+											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="ftEnddate">结束日期</label>
+											<div class="col-sm-3">
+												<input class="form-control datetimepicker" data-date-format="yyyy-mm-dd" maxlength="10" readonly="readonly" type="text" id="ftEnddate" name="ftEnddate" placeholder="结束日期" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="ftStartdate">开始日期</label>
-											<div class="col-sm-2">
-												<input class="form-control" maxlength="10" type="text" id="ftStartdate" name="ftStartdate" placeholder="淡季开始日期" readonly="readonly"/>
-											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="ftEnddate">结束日期</label>
-											<div class="col-sm-2">
-												<input class="form-control" maxlength="10" type="text" id="ftEnddate" name="ftEnddate" placeholder="淡季结束日期" readonly="readonly"/>
-											</div>
-										</div>
-									</div>
-									<div class="row low">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdfulllowqp">淡季挂牌价格全票</label>
-											<div class="col-sm-2">
+											<label class="col-sm-2 control-label no-padding-right" for="fdfulllowqp">挂牌价格全票</label>
+											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[0].fsCcno" value="000001">
-												<input class="form-control" maxlength="10" type="text" id="fdfulllowqp" name="tccPrices[0].fdPrice" placeholder="淡季挂牌价格全票" />
+												<input class="form-control" maxlength="10" type="text" id="fdfulllowqp" name="tccPrices[0].fdPrice" placeholder="挂牌价格全票" />
 											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fdhalflowqp">淡季挂牌价格半票</label>
-											<div class="col-sm-2">
+											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fdhalflowqp">挂牌价格半票</label>
+											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[1].fsCcno" value="000002">
-												<input class="form-control" maxlength="10" type="text" id="fdhalflowqp" name="tccPrices[1].fdPrice" placeholder="淡季挂牌价格半票" />
+												<input class="form-control" maxlength="10" type="text" id="fdhalflowqp" name="tccPrices[1].fdPrice" placeholder="挂牌价格半票" />
 											</div>
 										</div>
 									</div>
-									<div class="row low">
+									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdchildlowqp">淡季挂牌价格儿童票</label>
-											<div class="col-sm-2">
+											<label class="col-sm-2 control-label no-padding-right" for="fdchildlowqp">挂牌价格儿童票</label>
+											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[2].fsCcno" value="000003">
-												<input class="form-control" maxlength="10" type="text" id="fdchildlowqp" name="tccPrices[2].fdPrice" placeholder="淡季挂牌价格儿童票" />
+												<input class="form-control" maxlength="10" type="text" id="fdchildlowqp" name="tccPrices[2].fdPrice" placeholder="挂牌价格儿童票" />
 											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fdfreelowqp">淡季挂牌价格免票</label>
-											<div class="col-sm-2">
+											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fdfreelowqp">挂牌价格免票</label>
+											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[3].fsCcno" value="000004">
-												<input class="form-control" maxlength="10" type="text" id="fdfreelowqp" name="tccPrices[3].fdPrice" placeholder="淡季挂牌价格免票" />
+												<input class="form-control" maxlength="10" type="text" id="fdfreelowqp" name="tccPrices[3].fdPrice" placeholder="挂牌价格免票" />
 											</div>
 										</div>
 									</div>
-									<div class="row low">
+									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdfulllowtp">淡季团队价格全票</label>
-											<div class="col-sm-2">
+											<label class="col-sm-2 control-label no-padding-right" for="fdfulllowtp">团队价格全票</label>
+											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[4].fsCcno" value="000005">
-												<input class="form-control" maxlength="10" type="text" id="fdfulllowtp" name="tccPrices[4].fdPrice" placeholder="淡季团队价格全票" />
+												<input class="form-control" maxlength="10" type="text" id="fdfulllowtp" name="tccPrices[4].fdPrice" placeholder="团队价格全票" />
 											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fdhalflowtp">淡季团队价格半票</label>
-											<div class="col-sm-2">
+											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fdhalflowtp">团队价格半票</label>
+											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[5].fsCcno" value="000006">
-												<input class="form-control" maxlength="10" type="text" id="fdhalflowtp" name="tccPrices[5].fdPrice" placeholder="淡季团队价格半票" />
+												<input class="form-control" maxlength="10" type="text" id="fdhalflowtp" name="tccPrices[5].fdPrice" placeholder="团队价格半票" />
 											</div>
 										</div>
 									</div>
-									<div class="row low">
+									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdchildlowtp">淡季团队价格儿童票</label>
-											<div class="col-sm-2">
+											<label class="col-sm-2 control-label no-padding-right" for="fdchildlowtp">团队价格儿童票</label>
+											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[6].fsCcno" value="000007">
-												<input class="form-control" maxlength="10" type="text" id="fdchildlowtp" name="tccPrices[6].fdPrice" placeholder="淡季团队价格儿童票" />
+												<input class="form-control" maxlength="10" type="text" id="fdchildlowtp" name="tccPrices[6].fdPrice" placeholder="团队价格儿童票" />
 											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fdfreelowtp">淡季团队价格免票</label>
-											<div class="col-sm-2">
+											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fdfreelowtp">团队价格免票</label>
+											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[7].fsCcno" value="000008">
-												<input class="form-control" maxlength="10" type="text" id="fdfreelowtp" name="tccPrices[7].fdPrice" placeholder="淡季团队价格免票" />
+												<input class="form-control" maxlength="10" type="text" id="fdfreelowtp" name="tccPrices[7].fdPrice" placeholder="团队价格免票" />
 											</div>
 										</div>
 									</div>
-									<div class="row peak">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdfullpeakqp">旺季挂牌价格全票</label>
-											<div class="col-sm-2">
-												<input type="hidden" name="tccPrices[8].fsCcno" value="000009">
-												<input class="form-control" maxlength="10" type="text" id="fdfullpeakqp" name="tccPrices[8].fdPrice" placeholder="旺季挂牌价格全票" />
-											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fdhalfpeakqp">旺季挂牌价格半票</label>
-											<div class="col-sm-2">
-												<input type="hidden" name="tccPrices[9].fsCcno" value="000010">
-												<input class="form-control" maxlength="10" type="text" id="fdhalfpeakqp" name="tccPrices[9].fdPrice" placeholder="旺季挂牌价格半票" />
-											</div>
-										</div>
-									</div>
-									<div class="row peak">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdchildpeakqp">旺季挂牌价格儿童票</label>
-											<div class="col-sm-2">
-												<input type="hidden" name="tccPrices[10].fsCcno" value="000011">
-												<input class="form-control" maxlength="10" type="text" id="fdchildpeakqp" name="tccPrices[10].fdPrice" placeholder="旺季挂牌价格儿童票" />
-											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fdfreepeakqp">旺季挂牌价格免票</label>
-											<div class="col-sm-2">
-												<input type="hidden" name="tccPrices[11].fsCcno" value="000012">
-												<input class="form-control" maxlength="10" type="text" id="fdfreepeakqp" name="tccPrices[11].fdPrice" placeholder="旺季挂牌价格免票" />
-											</div>
-										</div>
-									</div>
-									<div class="row peak">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdfullpeaktp">旺季团队价格全票</label>
-											<div class="col-sm-2">
-												<input type="hidden" name="tccPrices[12].fsCcno" value="000013">
-												<input class="form-control" maxlength="10" type="text" id="fdfullpeaktp" name="tccPrices[12].fdPrice" placeholder="旺季团队价格全票" />
-											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fdhalfpeaktp">旺季团队价格半票</label>
-											<div class="col-sm-2">
-												<input type="hidden" name="tccPrices[13].fsCcno" value="000014">
-												<input class="form-control" maxlength="10" type="text" id="fdhalfpeaktp" name="tccPrices[13].fdPrice" placeholder="旺季团队价格半票" />
-											</div>
-										</div>
-									</div>
-									<div class="row peak">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdchildpeaktp">旺季团队价格儿童票</label>
-											<div class="col-sm-2">
-												<input type="hidden" name="tccPrices[14].fsCcno" value="000015">
-												<input class="form-control" maxlength="10" type="text" id="fdchildpeaktp" name="tccPrices[14].fdPrice" placeholder="旺季团队价格儿童票" />
-											</div>
-											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fdfreepeaktp">旺季团队价格免票</label>
-											<div class="col-sm-2">
-												<input type="hidden" name="tccPrices[15].fsCcno" value="000016">
-												<input class="form-control" maxlength="10" type="text" id="fdfreepeaktp" name="tccPrices[15].fdPrice" placeholder="旺季团队价格免票" />
-											</div>
-										</div>
-									</div>
-									
-									<div class="row trans">
+									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fdtranscoststp">接送费用</label>
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[16].fsCcno" value="000017">
 												<input class="form-control" maxlength="10" type="text" id="fdtranscoststp" name="tccPrices[16].fdPrice" placeholder="接送费用" />
 											</div>
@@ -237,6 +170,17 @@
 	    </script>
 
 	</c:if>
-
+	<script type="text/javascript">
+		$('.datetimepicker').datetimepicker({
+			language:  'zh-CN',
+	        weekStart: 1,
+	        todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+		});
+	</script>
 </body>
 </html>

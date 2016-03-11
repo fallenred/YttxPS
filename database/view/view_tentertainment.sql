@@ -15,3 +15,5 @@ AS
     WHERE c.fs_no = r.fs_resno
       AND r.fs_restype = 'yl'
       AND r.fs_scenicno = s.fs_no;
+      
+EXIT;

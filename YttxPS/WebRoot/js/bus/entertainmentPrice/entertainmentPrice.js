@@ -22,47 +22,20 @@ function deleteEntertainmentPrice(id) {
     $('#delModal').modal({ show: true, backdrop: 'static' });
 };
 
-function picEntertainmentPrice(id) {
-	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/pic/pic.jsp?no=" + raw.fsNo;
-    $("#picIframe").attr("src", frameSrc);
-    $('#picModal').modal({ show: true, backdrop: 'static' });
-};
-
 $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#reset").click();
 	$(this).find("#fsName").val(raw.fsName);
 	$(this).find("#ftStartdate").val(raw.ftStartdate);
 	$(this).find("#ftEnddate").val(raw.ftEnddate);
 	
-	if (raw.fdtranscoststp != '') {
-		$(this).find("#priceType").val('3');
-		$(this).find(".low").hide();
-		$(this).find(".trans").show();
-	} else {
-		if (raw.fdfulllowqp == '') {
-			$(this).find("#priceType").val('2');
-			$(this).find(".peak").show();
-			$(this).find(".low").hide();
-		}
-	}
-	
-	$(this).find("#fdfulllowqp").val(raw.fdfulllowqp);   //淡季挂牌价格全票
-	$(this).find("#fdhalflowqp").val(raw.fdhalflowqp);   //淡季挂牌价格半票
-	$(this).find("#fdchildlowqp").val(raw.fdchildlowqp);   //淡季挂牌价格儿童票
-	$(this).find("#fdfreelowqp").val(raw.fdfreelowqp);   //淡季挂牌价格免票
-	$(this).find("#fdfulllowtp").val(raw.fdfulllowtp);   //淡季团队价格全票
-	$(this).find("#fdhalflowtp").val(raw.fdhalflowtp);   //淡季团队价格半票
-	$(this).find("#fdchildlowtp").val(raw.fdchildlowtp);   //淡季团队价格儿童票
-	$(this).find("#fdfreelowtp").val(raw.fdfreelowtp);   //淡季团队价格免票
-	$(this).find("#fdfullpeakqp").val(raw.fdfullpeakqp);   //旺季挂牌价格全票
-	$(this).find("#fdhalfpeakqp").val(raw.fdhalfpeakqp);   //旺季挂牌价格半票
-	$(this).find("#fdchildpeakqp").val(raw.fdchildpeakqp);   //旺季挂牌价格儿童票
-	$(this).find("#fdfreepeakqp").val(raw.fdfreepeakqp);   //旺季挂牌价格免票
-	$(this).find("#fdfullpeaktp").val(raw.fdfullpeaktp);   //旺季团队价格全票
-	$(this).find("#fdhalfpeaktp").val(raw.fdhalfpeaktp);   //旺季团队价格半票
-	$(this).find("#fdchildpeaktp").val(raw.fdchildpeaktp);   //旺季团队价格儿童票
-	$(this).find("#fdfreepeaktp").val(raw.fdfreepeaktp);   //旺季团队价格免票
+	$(this).find("#fdfulllowqp").val(raw.fdfulllowqp);   //挂牌价格全票
+	$(this).find("#fdhalflowqp").val(raw.fdhalflowqp);   //挂牌价格半票
+	$(this).find("#fdchildlowqp").val(raw.fdchildlowqp);   //挂牌价格儿童票
+	$(this).find("#fdfreelowqp").val(raw.fdfreelowqp);   //挂牌价格免票
+	$(this).find("#fdfulllowtp").val(raw.fdfulllowtp);   //团队价格全票
+	$(this).find("#fdhalflowtp").val(raw.fdhalflowtp);   //团队价格半票
+	$(this).find("#fdchildlowtp").val(raw.fdchildlowtp);   //团队价格儿童票
+	$(this).find("#fdfreelowtp").val(raw.fdfreelowtp);   //团队价格免票
 	$(this).find("#fdtranscoststp").val(raw.fdtranscoststp);   //接送费用
 });
 
@@ -77,38 +50,14 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
 	$(this).contents().find("#ftEnddate").val(raw.ftEnddate);
 	
-	if (raw.fdtranscoststp != '') {   //接送费用
-		$(this).contents().find("#priceType").val('3');
-		$(this).contents().find("#priceTypeName").val('接送费用');
-		$(this).contents().find(".low").hide();
-		$(this).contents().find(".trans").show();
-	} else {
-		if (raw.fdfulllowqp == '') {   //旺季
-			$(this).contents().find("#priceType").val('2');
-			$(this).contents().find("#priceTypeName").val('旺季');
-			$(this).contents().find(".peak").show();
-			$(this).contents().find(".low").hide();
-		} else {
-			$(this).contents().find("#priceTypeName").val('淡季');
-		}
-	}
-	
-	$(this).contents().find("#fdfulllowqp").val(raw.fdfulllowqp);   //淡季挂牌价格全票
-	$(this).contents().find("#fdhalflowqp").val(raw.fdhalflowqp);   //淡季挂牌价格半票
-	$(this).contents().find("#fdchildlowqp").val(raw.fdchildlowqp);   //淡季挂牌价格儿童票
-	$(this).contents().find("#fdfreelowqp").val(raw.fdfreelowqp);   //淡季挂牌价格免票
-	$(this).contents().find("#fdfulllowtp").val(raw.fdfulllowtp);   //淡季团队价格全票
-	$(this).contents().find("#fdhalflowtp").val(raw.fdhalflowtp);   //淡季团队价格半票
-	$(this).contents().find("#fdchildlowtp").val(raw.fdchildlowtp);   //淡季团队价格儿童票
-	$(this).contents().find("#fdfreelowtp").val(raw.fdfreelowtp);   //淡季团队价格免票
-	$(this).contents().find("#fdfullpeakqp").val(raw.fdfullpeakqp);   //旺季挂牌价格全票
-	$(this).contents().find("#fdhalfpeakqp").val(raw.fdhalfpeakqp);   //旺季挂牌价格半票
-	$(this).contents().find("#fdchildpeakqp").val(raw.fdchildpeakqp);   //旺季挂牌价格儿童票
-	$(this).contents().find("#fdfreepeakqp").val(raw.fdfreepeakqp);   //旺季挂牌价格免票
-	$(this).contents().find("#fdfullpeaktp").val(raw.fdfullpeaktp);   //旺季团队价格全票
-	$(this).contents().find("#fdhalfpeaktp").val(raw.fdhalfpeaktp);   //旺季团队价格半票
-	$(this).contents().find("#fdchildpeaktp").val(raw.fdchildpeaktp);   //旺季团队价格儿童票
-	$(this).contents().find("#fdfreepeaktp").val(raw.fdfreepeaktp);   //旺季团队价格免票
+	$(this).contents().find("#fdfulllowqp").val(raw.fdfulllowqp);   //挂牌价格全票
+	$(this).contents().find("#fdhalflowqp").val(raw.fdhalflowqp);   //挂牌价格半票
+	$(this).contents().find("#fdchildlowqp").val(raw.fdchildlowqp);   //挂牌价格儿童票
+	$(this).contents().find("#fdfreelowqp").val(raw.fdfreelowqp);   //挂牌价格免票
+	$(this).contents().find("#fdfulllowtp").val(raw.fdfulllowtp);   //团队价格全票
+	$(this).contents().find("#fdhalflowtp").val(raw.fdhalflowtp);   //团队价格半票
+	$(this).contents().find("#fdchildlowtp").val(raw.fdchildlowtp);   //团队价格儿童票
+	$(this).contents().find("#fdfreelowtp").val(raw.fdfreelowtp);   //团队价格免票
 	$(this).contents().find("#fdtranscoststp").val(raw.fdtranscoststp);   //接送费用
 });
 
@@ -196,10 +145,8 @@ jQuery(function($) {
 	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteEntertainmentPrice('
 			+ options.rowId
 			+ ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-	var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" id="picButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="picEntertainmentPrice('
-		+ options.rowId
-		+ ');" data-original-title="编辑资源图片"><span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
-	return detail + editBtn + deleteBtn + picDtn;
+	
+	return detail + editBtn + deleteBtn;
 	};
 
 	// resize to fit page size
@@ -220,27 +167,16 @@ jQuery(function($) {
 								parent_column.width());
 					}, 0);
 				}
-			});
+	});
 
-	var items = {
-			1 : '淡季价格',
-			2 : '旺季价格',
-			3 : '接送费用'
-		};
-	var s = '';
-	for (k in items)
-		s += ';' + k + ":" + items[k];
-	s = s.substring(1);
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/entertainment/findEntertainmentPrice.htm",
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '娱乐项目代码', '娱乐项目名称', '价格类型', '淡季挂牌价格全票', '淡季挂牌价格半票', '淡季挂牌价格儿童票', 
-				             '淡季挂牌价格免票', '淡季团队价格全票', '淡季团队价格半票', '淡季团队价格儿童票', '淡季团队价格免票', '旺季挂牌价格全票',
-				             '旺季挂牌价格半票', '旺季挂牌价格儿童票', '旺季挂牌价格免票', '旺季团队价格全票', '旺季团队价格半票', '旺季团队价格儿童票',
-				             '旺季团队价格免票', '接送费用', '开始日期', '结束日期' ],
+				colNames : [ '操作', '娱乐项目代码', '娱乐项目名称', '挂牌价格全票', '挂牌价格半票', '挂牌价格儿童票', 
+				             '挂牌价格免票', '团队价格全票', '团队价格半票', '团队价格儿童票', '团队价格免票', '接送费用', '开始日期', '结束日期' ],
 				colModel : [ {
 					name : 'myac',
 					index : '',
@@ -262,130 +198,55 @@ jQuery(function($) {
 					width : 70,
 					editable : true,
 					sorttype : "char"
-				}, {
-					name : 'fdfulllowqp',
-					index : 'fdfulllowqp',
-					width : 35,
-					sortable : true,
-					editable : true,
-					edittype : 'select',
-					editoptions : {
-						value : s
-					},
-					formatter : function(v, opt, rec) {
-						//旺季价格
-						if (rec.fdtranscoststp != null) {
-							return items['3'];
-						}
-						if (v == null) {
-							return items['2'];
-						} else {
-							return items['1'];
-						}
-					},
-					unformat : function(v) {
-						for (k in items)
-							if (items[k] == v)
-								return k;
-						return '1';
-					}
-				}, {
+				}, {//挂牌价格全票
 					name : 'fdfulllowqp',
 					index : 'fdfulllowqp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
+				}, {//挂牌价格半票
 					name : 'fdhalflowqp',
 					index : 'fdhalflowqp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
+				}, {//挂牌价格儿童票
 					name : 'fdchildlowqp',
 					index : 'fdchildlowqp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
+				}, {//挂牌价格免票
 					name : 'fdfreelowqp',
 					index : 'fdfreelowqp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
+				}, {//团队价格全票
 					name : 'fdfulllowtp',
 					index : 'fdfulllowtp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
+				}, {//团队价格半票
 					name : 'fdhalflowtp',
 					index : 'fdhalflowtp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
+				}, {//团队价格儿童票
 					name : 'fdchildlowtp',
 					index : 'fdchildlowtp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
+				}, {//团队价格免票
 					name : 'fdfreelowtp',
 					index : 'fdfreelowtp',
 					width : 100,
 					editable : true,
 					hidden : true
-				}, {
-					name : 'fdfullpeakqp',
-					index : 'fdfullpeakqp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdhalfpeakqp',
-					index : 'fdhalfpeakqp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdchildpeakqp',
-					index : 'fdchildpeakqp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdfreepeakqp',
-					index : 'fdfreepeakqp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdfullpeaktp',
-					index : 'fdfullpeaktp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdhalfpeaktp',
-					index : 'fdhalfpeaktp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdchildpeaktp',
-					index : 'fdchildpeaktp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
-					name : 'fdfreepeaktp',
-					index : 'fdfreepeaktp',
-					width : 100,
-					editable : true,
-					hidden : true
-				}, {
+				}, {//接送费用
 					name : 'fdtranscoststp',
 					index : 'fdtranscoststp',
 					width : 100,
@@ -401,7 +262,7 @@ jQuery(function($) {
 					formatter : function(value){
 						var timestamp = "";
 						if(value != ''){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+							timestamp = (new Date(parseFloat(value))).format("yyyy-MM-dd");
 						}
 						return timestamp;
 					}
@@ -415,7 +276,7 @@ jQuery(function($) {
 					formatter : function(value){
 						var timestamp = "";
 						if(value != ''){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd");
+							timestamp = (new Date(parseFloat(value))).format("yyyy-MM-dd");
 						}
 						return timestamp;
 					}
