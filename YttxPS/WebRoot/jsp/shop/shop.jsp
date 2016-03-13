@@ -70,8 +70,8 @@
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="regionname">所属地区</label>
 												<div class="col-sm-2">
-													<input type="text" placeholder="请选择行政区域" name="regionname" data-key="0086" data-idx="0" data-full="中国" id="regionname" class="inp-search" /> <input type="hidden" name="regionno"
-														id="regionno" />
+													<input type="text" placeholder="请选择行政区域" name="regionname" data-key="0086" data-idx="0" data-full="中国" id="regionname" class="inp-search" /> 
+													<input type="hidden" name="regionno" id="regionno" />
 													<div id="selectCity" class="localcity"></div>
 												</div>
 											</div>

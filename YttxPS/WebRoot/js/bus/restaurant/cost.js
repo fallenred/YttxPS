@@ -84,16 +84,22 @@ $(function(){
 	 * 初始化日历表
 	 */
 	calendar = $('#calendar').fullCalendar({
-		 buttonText: {
-			prev: '上一月',
-			next: '下一月'
-		},
-
 		header: {
 			left: 'prev',
 			center: 'title',
 			right: 'next'
 		},
+		titleFormat: {
+			month:'yyyy年    MMMM'
+		},
+		buttonText: {
+			prev: '上一月',
+			next: '下一月'
+		},
+		monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],  
+        monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],  
+        dayNames: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],  
+        dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],  
 		events:function(start, end, callback){
 			var uploadurl = "/restaurant/costQuery.htm";
 			var param = new Object();
@@ -126,7 +132,6 @@ $(function(){
 						}
 					}
 					for(var k in dataArray){
-						//console.log(dataArray[k]);
 						events.push({
 							title:dataArray[k],
 							start: new Date(k.replace(/-/g,'/')),

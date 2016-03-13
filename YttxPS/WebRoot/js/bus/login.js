@@ -1,5 +1,9 @@
-;$(function(){
-	
+$(function(){
+	$(document).on("keydown",function(event){
+		if(event.keyCode==13){
+			$("#loginbtn").click();
+		}
+	})
 	var rememberflag = $.cookie("rememberflag");
 	if(rememberflag == null){
 		rememberflag = "false";

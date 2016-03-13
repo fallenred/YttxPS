@@ -89,7 +89,7 @@
 														
 														<div class="password-msg center">
 															<span class="bigger-150 red">${message}</span>
-															<span class="bigger-110 jump-step hide">五秒后页面跳至操作首面,或<a href="/home.htm">点击此处</a></span>
+															<span class="bigger-110 jump-step hide">三秒后页面跳至操作首面,或<a href="/home.htm">点击此处</a></span>
 														</div>
 
 														<div class="clearfix form-actions">
@@ -138,7 +138,7 @@
     	
 	   <script  type="text/javascript">
 	          $('.jump-step').removeClass('hide');
-	          setTimeout('window.location="/home.htm"',5000);
+	          setTimeout('window.location="/home.htm"',3000);
 	    </script>
       
       </c:if>

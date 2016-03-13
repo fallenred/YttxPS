@@ -2,7 +2,7 @@
 	$('#password-form').on('click', '#confirmbtn', function(event){
 		$('.password-msg span').text('');
 		if($('#origpwd').val() == ''){
-			$('.password-msg span').text('原始密码不能不空');
+			$('.password-msg span').text('原始密码不能为空');
 			$('#origpwd').focus();
 			event.preventDefault();
 			return false;
@@ -15,7 +15,7 @@
 		}
 
 		if($('#confpwd').val() == ''){
-			$('.password-msg span').text('确认密码不能不空');
+			$('.password-msg span').text('确认密码不能为空');
 			$('#confpwd').focus();
 			event.preventDefault();
 			return false;

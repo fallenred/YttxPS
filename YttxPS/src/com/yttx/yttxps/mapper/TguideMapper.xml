@@ -319,7 +319,7 @@
 	        and fs_Name like '%'||#{name}||'%'
 	      </if>
 	      <if test="gender != null and gender != ''">
-	        and fi_Gender = #{gender}
+	        and fi_Gender = #{gender,jdbcType=INTEGER}
 	      </if>
 	      <if test="stat != null and stat != ''">
 	        and fi_Stat = #{stat}
@@ -338,7 +338,7 @@
 	        and fs_Name like '%'||#{name}||'%'
 	      </if>
 	      <if test="gender != null and gender != ''">
-	        and fi_Gender = #{gender}
+	        and fi_Gender = #{gender,jdbcType=INTEGER}
 	      </if>
 	      <if test="stat != null and stat != ''">
 	        and fi_Stat = #{stat}
