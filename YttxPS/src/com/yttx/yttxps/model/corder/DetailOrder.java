@@ -18,18 +18,16 @@ import com.yttx.yttxps.xml.bean.Reslist;
  */
 public class DetailOrder extends SimpleOrder{
 	
-	/*//模糊资源快照解析
-	private List<Reslist> fuzzyResList;
-	
-	//精确资源快照解析
-	private List<Reslist> resList;*/
 	private HashMap<String, String> resMap;
 	
-	//每一批次的客户
+	//批次信息
 	private List<CustomerBatch> batches;
 	
-	//每个订单的备注
+	//订单备注
 	private List<ORemark>  remarks;
+	
+	//游客信息
+	private List<Tourist> tourists;
 
 	
 	public HashMap<String, String> getResMap() {
@@ -59,6 +57,17 @@ public class DetailOrder extends SimpleOrder{
 
 	public void setRemarks(List<ORemark> remarks) {
 		this.remarks = remarks;
+	}
+
+	
+	
+	public List<Tourist> getTourists() {
+		return tourists;
+	}
+
+
+	public void setTourists(List<Tourist> tourists) {
+		this.tourists = tourists;
 	}
 
 

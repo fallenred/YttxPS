@@ -67,11 +67,15 @@ public class StatementController extends BaseController {
 		//orderFilters.setOperId(sessionEntity.getId());
 		req.copyPage(map);
 		req.copyOrderFilters(map);
-		
-		List<SimpleOrder> list = clearOrderService.selectSelectivePage(map);
-		map.put("rows", list);
-		return map;
-		
+		List<SimpleOrder> list =null;
+		try {
+			list = clearOrderService.selectSelectivePage(map);
+			map.put("rows", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return map;	
 	}
 	
 	/**

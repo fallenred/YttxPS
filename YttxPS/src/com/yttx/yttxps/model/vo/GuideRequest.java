@@ -28,7 +28,7 @@ public class GuideRequest extends JqGridRequest implements
 		if (guide != null) {
 			map.put("no", guide.getNo() == null ? "" : guide.getNo());
 			map.put("name", guide.getName() == null ? "" : guide.getName());
-			map.put("gender",guide.getGender() == null ? "" : guide.getGender());
+			map.put("o",guide.getGender() == null ? "" : guide.getGender());
 			map.put("idno",guide.getIdno() == null ? "" : guide.getIdno());
 			map.put("workdate", guide.getWorkdate()== null ? "" : guide.getWorkdate());
 			map.put("contactno", guide.getContactno() == null ? "" : guide.getContactno());

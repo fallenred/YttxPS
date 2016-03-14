@@ -28,16 +28,7 @@
 		<result  column="FC_COMMRESSNAPSHOT"        property="commResSnapshot"    jdbcType="VARCHAR" />
 	</resultMap>
 	
-	<!-- ResultMap:订单中每一个备注对应Map -->
-	<resultMap id="oRemarkResultMap" type="com.yttx.yttxps.model.corder.ORemark" >
-		<id      property="orderId"   column="or_orderId"    jdbcType="VARCHAR" />
-		<result  property="seq"       column="or_seq"        jdbcType="INTEGER" />
-		<result  property="operId"    column="or_operId"     jdbcType="VARCHAR" />
-		<result  property="date"      column="or_date"       jdbcType="DATE" />
-		<result  property="content"   column="or_content"    jdbcType="VARCHAR" />
-		<result  property="amt"       column="or_amt"        jdbcType="DECIMAL" />
-		<result  property="stat"      column="or_stat"       jdbcType="INTEGER" />
-	</resultMap>
+	
 	
 	<!-- ResultMap:复杂订单对象DetailOrder的对应map -->
 	<resultMap id="detailOrderResultMap" type="com.yttx.yttxps.model.corder.DetailOrder">
@@ -68,6 +59,20 @@
 			
 		 <collection property="batches" javaType="ArrayList" column="orderId" 
 			ofType="com.yttx.yttxps.model.corder.CustomerBatch" select="selectCusBatches"/>
+			
+		 <collection property="tourists" javaType="ArrayList" column="orderId" 
+			ofType="com.yttx.yttxps.model.corder.Tourist" select="selectTourits"/>
+	</resultMap>
+	
+	<!-- ResultMap:订单中每一个备注对应Map -->
+	<resultMap id="oRemarkResultMap" type="com.yttx.yttxps.model.corder.ORemark" >
+		<id      property="orderId"   column="or_orderId"    jdbcType="VARCHAR" />
+		<result  property="seq"       column="or_seq"        jdbcType="INTEGER" />
+		<result  property="operId"    column="or_operId"     jdbcType="VARCHAR" />
+		<result  property="date"      column="or_date"       jdbcType="TIMESTAMP" />
+		<result  property="content"   column="or_content"    jdbcType="VARCHAR" />
+		<result  property="amt"       column="or_amt"        jdbcType="DECIMAL" />
+		<result  property="stat"      column="or_stat"       jdbcType="INTEGER" />
 	</resultMap>
 	
 	<!-- ResultMap:订单中每一批次CustomerBatch的对应Map-->
@@ -86,16 +91,18 @@
 		<result  property="amt"           column="batch_amt"             jdbcType="INTEGER" />
 		<result  property="fuzzySnapshot" column="batch_fuzzySnapshot"   jdbcType="VARCHAR" />
 		<result  property="resSnapshot"   column="batch_resSnapshot"     jdbcType="VARCHAR" />
-		
-		<collection property="customers" ofType="com.yttx.yttxps.model.corder.Customer" javaType="ArrayList">
-			<id      property="certId"      column="cus_certId"     jdbcType="VARCHAR" />
-			<result  property="customId"    column="cus_id"         jdbcType="INTEGER" />
-			<result  property="cusSeq"      column="cus_seq"        jdbcType="INTEGER" />
-			<result  property="name"        column="cus_name"       jdbcType="VARCHAR" />
-			<result  property="certIdType"  column="cus_certIdType" jdbcType="VARCHAR" />
-			<result  property="tel"         column="cus_tel"        jdbcType="VARCHAR" />
-			<result  property="mark"        column="cus_mark"       jdbcType="VARCHAR" />
-		</collection>
+	</resultMap>
+	
+	<!-- ResultMap:订单中游客信息对应Map -->
+	<resultMap id="touristResultMap" type="com.yttx.yttxps.model.corder.Tourist" >
+		<id      property="orderId"   column="tr_orderId"    jdbcType="VARCHAR" />
+		<result  property="seq"       column="tr_seq"        jdbcType="INTEGER" />
+		<result  property="name"      column="tr_name"       jdbcType="VARCHAR" />
+		<result  property="idType"    column="tr_idType"     jdbcType="VARCHAR" />
+		<result  property="id"        column="tr_id"         jdbcType="VARCHAR" />
+		<result  property="tel"       column="tr_tel"        jdbcType="VARCHAR" />
+		<result  property="mark"      column="tr_mark"       jdbcType="VARCHAR" />
+		<result  property="stat"      column="tr_stat"       jdbcType="INTEGER" />
 	</resultMap>
 
 	
@@ -274,23 +281,32 @@
 		    b.fd_Amt           batch_amt,
 		    b.fc_ResSnapshot   batch_resSnapshot,
 		    b.fc_FuzzySnapshot batch_fuzzySnapshot,
-		    
-		    c.fi_Custom_ID     cus_id,
-		    c.fi_Seq           cus_seq,
-		    c.fs_Name          cus_name,
-		    c.fs_IDType        cus_certIdType,
-		    c.fs_ID            cus_certId,
-		    c.fs_Tel           cus_tel,
-		    c.fs_Mark          cus_mark
 		FROM 
-		    TOrderCustom b, TOrderCustomList c
+		    TOrderCustom b
 		WHERE 
 		   TRIM(b.fs_Order_ID) = Trim(#{orderId,jdbcType= VARCHAR})
-		   AND  b.fi_ID = c.fi_Custom_ID(+)
 		ORDER BY
-		   b.fi_Seq,c.fi_Seq	
+		   b.fi_Seq
 	</select>
 	
+	<!-- select:查询-->
+	<select id="selectTourits" parameterType="string" resultMap="touristResultMap">
+		SELECT 
+		    fs_Order_ID  tr_orderId,
+			fi_Seq       tr_seq,
+			fs_Name      tr_name,
+			fs_IDType    tr_idType,
+			fs_ID        tr_id,
+			fs_Tel       tr_tel,
+			fs_Mark      tr_mark,
+			fi_Stat      tr_stat
+		FROM 
+		    TOrderCusList 
+		WHERE 
+		   TRIM(fs_Order_ID) = Trim(#{orderId,jdbcType= VARCHAR})
+		ORDER BY
+		  fi_Seq
+	</select>
 	
 	<!-- select:通过线路Id找到线路名称-->
 	<select id="findRouteNameById" parameterType="string" resultType="string">
@@ -302,6 +318,7 @@
 		   TRIM(fs_ID) = TRIM(#{routeId,jdbcType= VARCHAR})
 	</select>
 	
+	
 	<!-- select:通过线路Id找到线路名称-->
 	<update id="updateStatById" parameterType="string">
 		UPDATE
@@ -311,5 +328,4 @@
 		WHERE 
 		   TRIM(fs_No) = TRIM(#{orderId,jdbcType= VARCHAR})
 	</update>
-
 </mapper>
