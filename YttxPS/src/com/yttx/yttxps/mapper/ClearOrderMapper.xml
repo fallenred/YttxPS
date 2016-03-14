@@ -280,7 +280,7 @@
 		    b.fs_Postscript    batch_postscript,
 		    b.fd_Amt           batch_amt,
 		    b.fc_ResSnapshot   batch_resSnapshot,
-		    b.fc_FuzzySnapshot batch_fuzzySnapshot,
+		    b.fc_FuzzySnapshot batch_fuzzySnapshot
 		FROM 
 		    TOrderCustom b
 		WHERE 

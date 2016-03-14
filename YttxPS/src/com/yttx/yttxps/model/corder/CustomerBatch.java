@@ -58,9 +58,6 @@ public class CustomerBatch{
 	//资源快照
 	private String resSnapshot;
 	
-	//客户列表
-	private List<Customer> customers;
-	
 	//资源快照解析出响应的对象
 	private List<HashMap<String, String>> resList;
 
@@ -176,15 +173,6 @@ public class CustomerBatch{
 		this.resSnapshot = resSnapshot;
 	}
 
-	public List<Customer> getCustomers() {
-		return customers;
-	}
-
-	public void setCustomers(List<Customer> customers) {
-		this.customers = customers;
-	}
-
-	
 	public List<HashMap<String, String>> getResList() {
 		return parseDailyRes(resSnapshot);
 	}
@@ -211,5 +199,13 @@ public class CustomerBatch{
 			return list;
 		}
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "CustomerBatch [id=" + id + ", orderId=" + orderId + ", seq=" + seq + ", type=" + type + ", contactName="
+				+ contactName + ", contactTel=" + contactTel + ", total=" + total + ", older=" + older + ", adult="
+				+ adult + ", children=" + children + ", postscript=" + postscript + ", amt=" + amt + ", fuzzySnapshot="
+				+ fuzzySnapshot + ", resSnapshot=" + resSnapshot + ", resList=" + resList + "]";
 	}
 }

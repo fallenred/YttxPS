@@ -100,6 +100,7 @@ public class StatementController extends BaseController {
 		DetailOrder dOrder = null;
 		try {
 			dOrder = clearOrderService.findOrderDetail(orderId);
+			logger.debug("orderId为"+orderId+"的详细信息：{}",dOrder);
 		} catch (Exception e) {
 			return JsonResult.jsonError(e.getMessage());
 		}

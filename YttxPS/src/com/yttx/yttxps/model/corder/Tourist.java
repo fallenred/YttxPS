@@ -91,4 +91,10 @@ public class Tourist {
 		public void setStat(Integer stat) {
 			this.stat = stat;
 		}
+
+		@Override
+		public String toString() {
+			return "Tourist [orderId=" + orderId + ", seq=" + seq + ", name=" + name + ", idType=" + idType + ", id="
+					+ id + ", tel=" + tel + ", mark=" + mark + ", stat=" + stat + "]";
+		}
 }

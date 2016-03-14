@@ -3,11 +3,8 @@ package com.yttx.yttxps.model.corder;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.yttx.yttxps.xml.SnapshotUtil;
-import com.yttx.yttxps.xml.bean.Cclist;
-import com.yttx.yttxps.xml.bean.Daylist;
 import com.yttx.yttxps.xml.bean.Reslist;
 
 
@@ -75,5 +72,12 @@ public class DetailOrder extends SimpleOrder{
 		List<Reslist> commResList=SnapshotUtil.conver2ResList(xml);
 		HashMap<String, String> resMap= SnapshotUtil.converResListToDisplay(commResList);
 		return resMap;
+	}
+
+
+	@Override
+	public String toString() {
+		return "DetailOrder [resMap=" + resMap + ", batches=" + batches + ", remarks=" + remarks + ", tourists="
+				+ tourists + "]";
 	}
 }

@@ -24,8 +24,6 @@ public class ORemark {
 	private Date date;
 	private String dateDesc;
 	
-	
-
 	//备注内容
 	private String content;
 	
@@ -98,5 +96,11 @@ public class ORemark {
 
 	public void setDateDesc(String dateDesc) {
 		this.dateDesc = dateDesc;
+	}
+
+	@Override
+	public String toString() {
+		return "ORemark [orderId=" + orderId + ", seq=" + seq + ", operId=" + operId + ", date=" + date + ", dateDesc="
+				+ dateDesc + ", content=" + content + ", amt=" + amt + ", stat=" + stat + "]";
 	}
 }
