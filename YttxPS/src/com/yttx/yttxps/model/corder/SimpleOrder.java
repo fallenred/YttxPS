@@ -1,6 +1,8 @@
 package com.yttx.yttxps.model.corder;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 /**
  * 类描述：简单的订单对象，用于分页列表等功能
  * @author sunchao
@@ -26,7 +28,8 @@ public class SimpleOrder {
 	private String operId;
 	
 	//创建时间
-	private String createDate;
+	private Date createDate;
+	private String createDateDesc;
 	
 	//线路类型
 	private String type;
@@ -121,12 +124,12 @@ public class SimpleOrder {
 		this.operId = (operId ==null ?null :operId.trim());
 	}
 
-	public String getCreateDate() {
+	public Date getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate) {
-		this.createDate = (createDate == null?null:createDate.trim());
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
 	public String getType() {
@@ -248,5 +251,24 @@ public class SimpleOrder {
 
 	public void setCommResSnapshot(String commResSnapshot) {
 		this.commResSnapshot = (commResSnapshot == null?null:commResSnapshot.trim());
+	}
+	
+
+	public String getCreateDateDesc() {
+		return new SimpleDateFormat("yyyy-mm-dd hh:MM:ss").format(createDate);
+	}
+
+	public void setCreateDateDesc(String createDateDesc) {
+		this.createDateDesc = createDateDesc;
+	}
+
+	@Override
+	public String toString() {
+		return "SimpleOrder [no=" + no + ", genIndex=" + genIndex + ", name=" + name + ", userId=" + userId
+				+ ", userSubId=" + userSubId + ", operId=" + operId + ", createDate=" + createDate + ", type=" + type
+				+ ", routeId=" + routeId + ", property=" + property + ", days=" + days + ", startDate=" + startDate
+				+ ", startPlace=" + startPlace + ", price=" + price + ", summary=" + summary + ", schedule=" + schedule
+				+ ", totalFee=" + totalFee + ", paidAmt=" + paidAmt + ", remark=" + remark + ", stat=" + stat
+				+ ", commFuzzySnapshot=" + commFuzzySnapshot + ", commResSnapshot=" + commResSnapshot + "]";
 	}	
 }

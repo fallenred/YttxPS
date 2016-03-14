@@ -86,7 +86,7 @@ public class StatementController extends BaseController {
 			Model model)
 	{
 		DetailOrder dOrder = clearOrderService.findOrderDetail(orderId);
-		System.out.println(dOrder.getRemarks().size());
+		logger.debug("orderId为"+orderId+"的详细信息：{}",dOrder);
 		model.addAttribute("order", dOrder);
 		return "cOrder/orderInfo";	
 	}

@@ -31,6 +31,17 @@ $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#fiStat").val(raw.fiStat);
 });
 
+/**
+ * 表格行事件 -->上传图片-->打开上传图片弹出框
+ */
+function openPicPage(resType,resName,resNo) {
+	var param="resType="+resType+"&resNo="+resNo+"&resName="+resName;
+	var frameSrc = "/pic/picpage.htm?"+param;
+    $("#picIframe").attr("src", frameSrc);
+    $('#picModal').modal({ show: true, backdrop: 'static' });
+};
+
+
 $("#editIframe").on("load",function(){
 	$(this).contents().find("#reset").click();
 	$(this).contents().find("#fsNo").val(raw.fsNo);
@@ -127,7 +138,15 @@ jQuery(function($) {
 			+ options.rowId
 			+ ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
 	
-	return detail + editBtn + deleteBtn;
+	
+	var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" '+
+					'id="picButton" style="display: block; cursor: pointer; float: left;" '+
+					'onmouseover="jQuery(this).addClass(\'ui-state-hover\');" '+
+					'onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" '+
+					'onclick="openPicPage(\'cx\',\''+rawObject.fsName+'\',\''+rawObject.fsNo+'\');" data-original-title="编辑资源图片">'+
+					'<span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
+	
+	return detail + editBtn +picDtn+deleteBtn;
 	};
 
 	// resize to fit page size

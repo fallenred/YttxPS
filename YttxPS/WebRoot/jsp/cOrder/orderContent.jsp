@@ -152,32 +152,9 @@
 										</div>										
 									</div>
 									<!-- 每一批次的统计信息  结束-->
-									<div class="space-4"></div>
-									
-									<!-- 每一批次的游客信息-->
-									<div class="table-header">游客名单</div>
-									<table class="table table-striped table-bordered table-hover">
-										<thead>
-											<tr>
-												<th>姓名</th>
-												<th>联系电话</th>
-												<th>证件号</th>
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach items="${bat.customers}" var="cus">
-												<tr>
-													<td class="center">${cus.name}</td>
-													<td>${cus.tel}</td>
-													<td>${cus.certId}</td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-									<!-- 每一批次的游客信息  结束-->
 									
 									<div class="space-4"></div>
-									
+						
 									<!-- 轮询每一批次的使用资源信息-->
 									<c:forEach items="${bat.resList}" var="day" varStatus="status">
 										<div class="table-header">第${status.index+1}天资源使用描述</div>

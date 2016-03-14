@@ -10,7 +10,7 @@
 		<result  column="FS_USER_ID"         property="userId"         jdbcType="VARCHAR" />
 		<result  column="FS_USER_SUBID"      property="userSubId"      jdbcType="VARCHAR" />
 		<result  column="FS_OPER_ID"         property="operId"         jdbcType="VARCHAR" />
-		<result  column="FT_CREATDATE"      property="createDate"     jdbcType="VARCHAR" />
+		<result  column="FT_CREATDATE"      property="createDate"      jdbcType="TIMESTAMP" />
 		<result  column="FS_TYPE"            property="type"           jdbcType="VARCHAR" />
 		<result  column="FS_ROUTE_ID"        property="routeId"        jdbcType="VARCHAR" />
 		<result  column="FS_PROPERTY"        property="property"       jdbcType="VARCHAR" />
@@ -38,7 +38,7 @@
 		<result  column="FS_USER_ID"         property="userId"         jdbcType="VARCHAR" />
 		<result  column="FS_USER_SUBID"      property="userSubId"      jdbcType="VARCHAR" />
 		<result  column="FS_OPER_ID"         property="operId"         jdbcType="VARCHAR" />
-		<result  column="FT_CREATEDATE"      property="createDate"     jdbcType="VARCHAR" />
+		<result  column="FT_CREATDATE"       property="createDate"     jdbcType="TIMESTAMP" />
 		<result  column="FS_TYPE"            property="type"           jdbcType="VARCHAR" />
 		<result  column="FS_ROUTE_ID"        property="routeId"        jdbcType="VARCHAR" />
 		<result  column="FS_PROPERTY"        property="property"       jdbcType="VARCHAR" />
