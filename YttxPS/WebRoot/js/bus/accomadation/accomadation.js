@@ -253,20 +253,28 @@ jQuery(function($) {
     for (k in stat_items)
         stat_val += ';' + k + ":" + stat_items[k];
     stat_val = stat_val.substring(1);
+    
+    $.ajax({
+    	type: "GET",
+    	url: "/dict/selectDict.htm",
+    	data: "dict.fsParentno=bg",
+    	dataType: "json",
+    	async : false,
+    	success: function(data){
+    		var items = {};
+    		$.each(data, function(commentIndex, comment){
+    			items[comment["fsDictno"]] = comment["fsDictname"];
+    		});
+    		$(document).data("lvl_items", items);
+    	}
+	});
 
     //酒店等级
-    var lvl_items = {
-            '01':'5星',
-            '02':'4星',
-            '03':'3星',
-            '04':'一线准4',
-            '05':'二线准4',
-            '06':'乡村酒店'
-    };
-        var lvl_val = '';
-        for (k in lvl_items)
-            lvl_val += ';' + k + ":" + lvl_items[k];
-        lvl_val = lvl_val.substring(1);
+    var lvl_items = $(document).data("lvl_items");
+    var lvl_val = '';
+    for (k in lvl_items)
+       lvl_val += ';' + k + ":" + lvl_items[k];
+    lvl_val = lvl_val.substring(1);
     
     $(grid_selector).jqGrid(
             {
