@@ -3,9 +3,9 @@ var raw = {};
 function showCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	var frameSrc = "/jsp/routeCC/show.jsp?fiGenindex=" + raw.fiGenindex + "&fsRouteno=" + raw.fsId;
-    $("#editIframe").attr("src", frameSrc);
-    $("#editIframe").attr("scrolling", "auto");
-    $('#editModal').modal({ show: true, backdrop: 'static' });
+    $("#showIframe").attr("src", frameSrc);
+    $("#showIframe").attr("scrolling", "auto");
+    $('#showModal').modal({ show: true, backdrop: 'static' });
 };
 
 function editCustom(id) {

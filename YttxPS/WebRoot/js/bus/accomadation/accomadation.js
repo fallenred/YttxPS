@@ -62,7 +62,7 @@ function picCustom(id) {
 //酒店房型配置
 function roomConfigCustom(id) {
     var raw = jQuery("#grid-table").jqGrid('getRowData', id);
-    var page = "/jsp/room/room.jsp?no=" + raw.no+"&name="+escape(raw.name);
+    var page = "/jsp/room/room.jsp?no=" + raw.no+"&name=" + escape(raw.name);
     window.open(page);
 };
 

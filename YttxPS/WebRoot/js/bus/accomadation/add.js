@@ -41,31 +41,31 @@ jQuery(function($) {
 	//	提交
 	$("#add_submit").on("click", function () {
 	    $("#addform #message").hide();
-        if($("#addform input[name='name']").val() == '') {
+        if($("#addform input[name='name']").val() == '' || $("#addform input[name='name']").val() == undefined) {
             $("#addform #message").show();
             $("#addform #message").text("酒店名称不能为空，请输入");
             $('#addform #name').focus();
             return false;
         }
-		if($("#addform input[name='regionno']").val() == '') {
+		if($("#addform input[name='regionno']").val() == '' || $("#addform input[name='regionno']").val() == undefined) {
 			$("#addform #message").show();
 			$("#addform #message").text("酒店所属地区不能为空，请输入");
 			$('#addform #regionname').focus();
 			return false;
 		}
-		if($("#addform input[name='starlvl']").val() == '') {
+		if($("#addform input[name='starlvl']").val() == '' || $("#addform input[name='starlvl']").val() == undefined) {
 			$("#addform #message").show();
 			$("#addform #message").text("酒店等级不能为空，请输入");
 			$('#addform #starlvl').focus();
 			return false;
 		}
-		if($("#addform input[name='addr']").val() == '') {
+		if($("#addform input[name='addr']").val() == '' || $("#addform input[name='addr']").val() == undefined) {
             $("#addform #message").show();
             $("#addform #message").text("酒店地址不能为空，请输入");
             $('#addform #addr').focus();
             return false;
         }
-		if($("#addform select[name='stat']").val() == '') {
+		if($("#addform select[name='stat']").val() == '' || $("#addform select[name='stat']").val() == undefined) {
             $("#addform #message").show();
             $("#addform #message").text("状态不能为空，请选择");
             $('#addform #stat').focus();

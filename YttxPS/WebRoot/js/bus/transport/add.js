@@ -37,31 +37,31 @@ jQuery(function($) {
 	
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#fsName").val() == '') {
+		if($("#fsName").val() == '' || $("#fsName").val() == undefined) {
 			$("#message").show();
 			$("#message").text("车型名称不能为空，请输入");
 			$('#fsName').focus();
 			return false;
 		} 
-		if($("#fiLoadMin").val() == '') {
+		if($("#fiLoadMin").val() == '' || $("#fiLoadMin").val() == undefined) {
 			$("#message").show();
 			$("#message").text("准载下限不能为空，请输入");
 			$('#fiLoadMin').focus();
 			return false;
 		} 
-		if($("#fiLoadMax").val() == '') {
+		if($("#fiLoadMax").val() == '' || $("#fiLoadMax").val() == undefined) {
 			$("#message").show();
 			$("#message").text("准载上限不能为空，请输入");
 			$('#fiLoadMax').focus();
 			return false;
 		} 
-		if($("#fiFitMin").val() == '') {
+		if($("#fiFitMin").val() == '' || $("#fiFitMin").val() == undefined) {
 			$("#message").show();
 			$("#message").text("适应范围下限不能为空，请输入");
 			$('#fiFitMin').focus();
 			return false;
 		} 
-		if($("#fiFitMax").val() == '') {
+		if($("#fiFitMax").val() == '' || $("#fiFitMax").val() == undefined) {
 			$("#message").show();
 			$("#message").text("适应范围上限不能为空，请输入");
 			$('#fiFitMin').focus();

@@ -58,12 +58,6 @@ jQuery(function($) {
 			$('#fsNo').focus();
 			return false;
 		}
-		if($("#fsScenicno").val() == '' || $("#fsScenicno").val() == undefined) {
-			$("#message").show();
-			$("#message").text("所属景区不能为空，请输入");
-			$('#fsScenicno').focus();
-			return false;
-		}
 		if($("#fsType").val() == '' || $("#fsType").val() == undefined) {
 			$("#message").show();
 			$("#message").text("娱乐项目类型不能为空，请输入");

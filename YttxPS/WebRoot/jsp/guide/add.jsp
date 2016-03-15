@@ -29,11 +29,8 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<!-- PAGE CONTENT BEGINS -->
-
 							<!-- 模态框（新增） -->
-
 							<form class="form-horizontal" id="addform">
-
 								<div class="modal-body">
 									<!-- 图片TODO： -->
 									<div>

@@ -1,6 +1,8 @@
 jQuery(function($) {
 	$("#message").hide();
 	
+	var fsNo = $.getUrlParam("fsNo");
+	
 	var localsel = $("#selectCity", "#addform").localCity({
 		
 		provurl : "/pub/findcity.htm",
@@ -21,6 +23,7 @@ jQuery(function($) {
         			html += '<option value=' + comment['fsNo'] + '>' + comment['fsName'] + '</option>';
         		});
         		$("#fsNo").html(html);
+        		$("#fsNo").val(fsNo);
         }
     });
 	
@@ -52,29 +55,25 @@ jQuery(function($) {
 	
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#fsNo").val() == '') {
+		if($("#fsNo").val() == '' || $("#fsNo").val() == undefined) {
 			$("#message").show();
 			$("#message").text("门票代码不能为空，请输入");
 			$('#no').focus();
 			return false;
 		}
-		if($("#fsScenicno").val() == '') {
-			$("#message").show();
-			$("#message").text("所属景区不能为空，请输入");
-			$('#name').focus();
-			return false;
-		}
+		
+		$("#fsNo").removeAttr("disabled");
 
 		$.post("/ticket/addTicketPrice.htm",
 				$("#addform").serialize(),
 				function(data){
-			var json = eval("(" + data + ")");
+				$("#fsNo").attr("disabled", "disabled");
+					var json = eval("(" + data + ")");
 					if(json.result == "ok") {
 						$("#message").text("增加记录成功");
 						$("#message").show();
 						return true;
-					}
-					else {
+					} else {
 						$("#message").text("增加记录失败:" + json.message );
 						$("#message").show();
 						return false;
