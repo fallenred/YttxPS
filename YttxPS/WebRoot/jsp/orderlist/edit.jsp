@@ -216,7 +216,7 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="transPrice">车型价格</label>
 											<div class="col-sm-3">
-												<input type="hidden" name="reslist[0].cclist[0].ccno" value="000000"/>
+												<input type="hidden" name="reslist[0].cclist[0].ccno" value="000023"/>
 												<input type="hidden" name="reslist[0].cclist[0].ccname" value="价格(通用)"/>
 												<input type="text" id="transPrice" name="reslist[0].cclist[0].price" readonly="readonly" class="form-control"/>
 											</div>
@@ -262,6 +262,15 @@
 												for="fsSummary">路线摘要</label>
 											<div class="col-sm-8">
 												<textarea name="fsSummary" id="fsSummary" class="form-control" rows="3" placeholder="路线摘要"></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right"
+												for="fsRemark">整体备注</label>
+											<div class="col-sm-8">
+												<textarea name="fsRemark" id="fsRemark" class="form-control" rows="3" placeholder="整体备注"></textarea>
 											</div>
 										</div>
 									</div>
