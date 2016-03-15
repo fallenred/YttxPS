@@ -141,6 +141,11 @@
 			AND
 				FS_PROPERTY = #{itemProp,jdbcType=VARCHAR}
 		</if>
+		
+		<if test="stat != null">
+			AND
+				FI_stat = #{stat,jdbcType=VARCHAR}
+		</if>
 	</select>
 
 
@@ -205,9 +210,13 @@
 					AND
 						FS_PROPERTY = #{itemProp,jdbcType=VARCHAR}
 				</if>
-			<if test="endrow != null">
-				AND ROWNUM &lt;= #{endrow}
-			</if>
+				<if test="stat != null">
+					AND
+					FI_stat = #{stat,jdbcType=VARCHAR}
+				</if>
+				<if test="endrow != null">
+					AND ROWNUM &lt;= #{endrow}
+				</if>
 			)
 		<if test="startrow != null">
 			WHERE rowno &gt; #{startrow}

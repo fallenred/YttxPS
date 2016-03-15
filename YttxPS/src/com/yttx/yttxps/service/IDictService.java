@@ -12,7 +12,5 @@ public interface IDictService {
 	List<Dict> selectDict(DictExample example);
 	
 	Map<String, Object> selectDictMap(DictExample example);
-	
-	List<Dict> selectAllDict();
 }
 

@@ -8,16 +8,14 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.yttx.comm.StringUtil;
@@ -27,12 +25,13 @@ import com.yttx.yttxps.mapper.DictMapper;
 import com.yttx.yttxps.model.Dict;
 import com.yttx.yttxps.model.DictExample;
 import com.yttx.yttxps.model.DictExample.Criteria;
+
+import net.sf.json.JSONObject;
+
 import com.yttx.yttxps.model.Menu;
-import com.yttx.yttxps.service.IDictService;
-import com.yttx.yttxps.service.imp.DictService;
 
 
-public class SysMenuListener  extends ContextLoaderListener /*implements ServletContextListener */{
+public class SysMenuListener  extends ContextLoaderListener{
 	static Logger logger = LoggerFactory.getLogger(SysMenuListener.class);
 
 	@Override
@@ -53,9 +52,13 @@ public class SysMenuListener  extends ContextLoaderListener /*implements Servlet
 	private void loadCodeMaster(ServletContext servletContext) {
 		try {
 			
-			ApplicationContext	 appContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
-			DictService dictService = (DictService)appContext.getBean("dictService");
-			List<Dict> dicts = dictService.selectAllDict();
+			WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+			DictMapper dictMapper= (DictMapper) webApplicationContext.getBean("dictMapper");
+			
+			DictExample example = new DictExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andFsParentnoIsNotNull();
+			List<Dict> dicts = dictMapper.selectByExample(example);//加载所有parantNo不为空的字典数据
 			Map<String,List<Dict>> codeMasterList = new HashMap<String,List<Dict>>();//存放：String --List
 			Map<String,Map<String,String>> codeMasterMap = new HashMap<String,Map<String,String>>();//存放：String --List
 			for(Dict dict:dicts){
@@ -76,8 +79,10 @@ public class SysMenuListener  extends ContextLoaderListener /*implements Servlet
 				dictMap.put(dict.getFsDictno(), dict.getFsDictname());
 			}
 			
-			servletContext.setAttribute(Constants.CODEMASTERLIST, codeMasterList);
-			servletContext.setAttribute(Constants.CODEMASTERMAP, codeMasterList);
+			servletContext.setAttribute(Constants.CODE_MASTER_LIST, codeMasterList);
+			servletContext.setAttribute(Constants.CODE_MASTER_MAP, codeMasterMap);
+			servletContext.setAttribute(Constants.CODE_MASTER_JSON,
+					JSONObject.fromObject(codeMasterMap).toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

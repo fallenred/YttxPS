@@ -190,7 +190,7 @@
 												<c:if test="${order.resMap!=null}">
 													<c:forEach items="${order.resMap}" var="entry">
 														<tr>
-															<td rowspan="${fn:length(entry.value)}">${entry.key}</td>
+															<td rowspan="${fn:length(entry.value)}">${zy_map[entry.key]}</td>
 															<c:if test="${entry.value!=null}">
 																<c:forEach items="${entry.value}" var="res">
 																	<td>
@@ -239,7 +239,7 @@
 																					<c:forEach items="${entry.value}" var="res" varStatus="resStatus">
 																						<tr>
 																							<c:if test="${resStatus.first}">
-																								<td rowspan="${fn:length(entry.value)}">${entry.key}</td>
+																								<td rowspan="${fn:length(entry.value)}">${zy_map[entry.key]}</td>
 																							</c:if>
 																							<td>
 																								<c:if test="${res['resName']!=null}">${res['resName']}</c:if>
@@ -307,7 +307,7 @@
 																											<c:forEach items="${entry.value}" var="res" varStatus="resStatus">
 																												<tr>
 																													<c:if test="${resStatus.first}">
-																														<td rowspan="${fn:length(entry.value)}">${entry.key}</td>
+																														<td rowspan="${fn:length(entry.value)}">${zy_map[entry.key]}</td>
 																													</c:if>
 																													<td>
 																														<c:if test="${res['resName']!=null}">${res['resName']}</c:if>

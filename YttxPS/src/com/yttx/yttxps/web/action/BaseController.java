@@ -1,6 +1,7 @@
 package com.yttx.yttxps.web.action;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yttx.yttxps.comm.Config;
+import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.UPFileClient;
+import com.yttx.yttxps.model.Dict;
 import com.yttx.yttxps.model.SessionEntity;
+
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
 
 public class BaseController {
 	
@@ -136,6 +142,37 @@ public class BaseController {
 
 		return ret;
 		*/
+	}
+	
+	/**
+	 * 根据parentno查询该parentno的字典数据列表
+	 */
+	@SuppressWarnings("unchecked")
+	protected List<Dict> getDictListByParentNo(String parentno) {
+		Map<String,List<Dict>> codeMaster=(Map<String,List<Dict>>) request.getSession()
+				.getServletContext().getAttribute(Constants.CODE_MASTER_LIST);
+		return codeMaster.get(parentno);
+		
+	}
+	
+	/**
+	 * 根据parentno查询该parentno的字典数据记录转化而成的Map
+	 */
+	@SuppressWarnings("unchecked")
+	protected Map<String,String> getDictMapByParentNo(String parentno) {
+		Map<String,Map<String,String>> codeMaster=(Map<String,Map<String,String>>) request.getSession()
+				.getServletContext().getAttribute(Constants.CODE_MASTER_MAP);
+		return codeMaster.get(parentno);
+		
+	}
+	/**
+	 * 根据parentno查询该parentno的字典数据记录转化而成的Map，并将该Map转化成一个json字符串
+	 */
+	@SuppressWarnings("unchecked")
+	protected Object getDictMapJsonByParentNo(String parentno){
+		Map<String,Map<String,String>> codeMaster=(Map<String,Map<String,String>>) request.getSession()
+				.getServletContext().getAttribute(Constants.CODE_MASTER_MAP);
+		return JSONObject.fromObject(codeMaster.get(parentno));
 	}
 
 }

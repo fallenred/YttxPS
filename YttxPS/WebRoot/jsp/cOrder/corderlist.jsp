@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -12,8 +14,11 @@
 <link rel="stylesheet" href="/css/daterangepicker.css" />
 <script src="/js/date-time/moment.min.js"></script>
 <script src="/js/date-time/daterangepicker.min.js"></script>
-
 <script src="/js/handlebars.js"></script>
+<script type="text/javascript">
+	var order_stat_item = ${order_stat_item};
+	var fsmt_stat_item = ${fsmt_stat_item};
+</script>
 </head>
 <body class="no-skin">
 	<jsp:include page="/jsp/comm/topbar.jsp" flush="true" />
@@ -66,21 +71,13 @@
 														<i></i>全部订单
 													</a>
 												</li>
-												<li>
-													<a data-toggle="tab" data-stat="0" href="#stat_div" class="statPane">
-														<i></i>已生成
-													</a>
-												</li>
-												<li>
-													<a data-toggle="tab" data-stat="1" href="#stat_div" class="statPane">
-														<i></i>客户已确认
-													</a>
-												</li>
-												<li>
-													<a data-toggle="tab" data-stat="2" href="#stat_div" class="statPane">
-														<i></i>结算完毕
-													</a>
-												</li>
+												<c:forEach items="${fsmt_stat_list}" var="item">
+													<li>
+														<a data-toggle="tab" data-stat="${item.fsDictno}" href="#stat_div" class="statPane">
+															<i></i>${item.fsDictname}
+														</a>
+													</li>
+												</c:forEach>
 											</ul>
 											
 											<div class="tab-content">

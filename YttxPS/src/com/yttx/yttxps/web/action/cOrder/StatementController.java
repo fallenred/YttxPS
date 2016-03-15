@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yttx.comm.DateUtil;
 import com.yttx.comm.StringUtil;
 import com.yttx.yttxps.comm.JsonResult;
+import com.yttx.yttxps.model.Dict;
+import com.yttx.yttxps.model.OrderFilters;
 import com.yttx.yttxps.model.corder.DetailOrder;
 import com.yttx.yttxps.model.corder.FStatement;
 import com.yttx.yttxps.model.corder.ORemark;
@@ -51,7 +53,17 @@ public class StatementController extends BaseController {
 	 * 打开结算单管理的界面
 	 */
 	@RequestMapping(value="page.htm")
-	public String openPage(){
+	public String openPage(Model model){
+		//将结算单状态发送到web端
+		List<Dict> fsmt_stat_list = getDictListByParentNo("fsmt_stat");
+		Object fsmt_stat_item = getDictMapJsonByParentNo("fsmt_stat");
+		model.addAttribute("fsmt_stat_list",fsmt_stat_list);
+		model.addAttribute("fsmt_stat_item",fsmt_stat_item);
+		
+		//将订单状态发送到web端
+		Object order_stat_item = getDictMapJsonByParentNo("order_stat");
+		model.addAttribute("order_stat_item",order_stat_item);
+		
 		return "cOrder/corderlist";
 	}
 	
@@ -62,8 +74,11 @@ public class StatementController extends BaseController {
 	@ResponseBody
 	public Object findSimpleOrderList(OrderPageRequest req){
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		OrderFilters orderFilters = req.getFilters();
+		orderFilters.setStat(8);
+		
 		//是否要过滤相应的计调
-		//OrderFilters orderFilters = req.getFilters();
 		//orderFilters.setOperId(sessionEntity.getId());
 		req.copyPage(map);
 		req.copyOrderFilters(map);
@@ -85,6 +100,8 @@ public class StatementController extends BaseController {
 	public String openOrderPage(@RequestParam("orderId") String orderId,
 			Model model)
 	{
+		Map<String, String> zy_map = getDictMapByParentNo("zy");
+		model.addAttribute("zy_map", zy_map);
 		DetailOrder dOrder = clearOrderService.findOrderDetail(orderId);
 		logger.debug("orderId为"+orderId+"的详细信息：{}",dOrder);
 		model.addAttribute("order", dOrder);
@@ -114,6 +131,10 @@ public class StatementController extends BaseController {
 	public String openProdFStatPage(@RequestParam("orderId") String orderId,
 			Model model)
 	{
+		
+		Map<String, String> zy_map = getDictMapByParentNo("zy");
+		model.addAttribute("zy_map", zy_map);
+		
 		//订单的详细信息
 		DetailOrder dOrder = clearOrderService.findOrderDetail(orderId);
 		
@@ -158,9 +179,6 @@ public class StatementController extends BaseController {
 	{
 		//获取结算单对象
 		FStatement fStatement= fStatementService.findFStatByFSId(fsId);
-		//获取订单对象
-		DetailOrder dOrder = clearOrderService.findOrderDetail(fStatement.getOrderId());
-		model.addAttribute("order", dOrder);
 		model.addAttribute("fStat",fStatement);
 		model.addAttribute("oper","E");
 		return "cOrder/preStatment";	//返回欲生成结算单页面

@@ -84,14 +84,6 @@ $(document).ready(function(){
 	$('#order_date_range').daterangepicker();
 	$('#statment_date_range').daterangepicker();
 	
-	var orderStat={
-		'0':'待审核',
-		'1':'已审核待确认',
-		'-1':'审核未通过',
-		'2':'客户已确认',
-		'32':'已入结算单'
-	}
-	
 	/**
 	 * 全部订单--"重置按钮"
 	 */
@@ -169,8 +161,8 @@ $(document).ready(function(){
 			width : 100,
 			sortable : false,
 		}, {
-			name : 'createDate',
-			index : 'createDate',
+			name : 'createDateDesc',
+			index : 'createDateDesc',
 			width : 150,
 			sortable : false,
 		}, 
@@ -180,7 +172,7 @@ $(document).ready(function(){
 			width : 150,
 			sortable : false,
 			formatter : function(v, opt, rec) {
-				return orderStat[v];
+				return order_stat_item[v];
 			},
 			
 		},{
@@ -328,11 +320,7 @@ $(document).ready(function(){
 					}, 0);
 				}
 	});
-	var statement_stat_items={
-		"0":"已生成待客户确认",
-		"1":"客户已确认",
-		"2":"结算完毕"
-	}
+	
 	/**
 	 * 生成结算单列表
 	 */
@@ -379,7 +367,7 @@ $(document).ready(function(){
 			width : 120,
 			sortable : false,
 			formatter : function(v, opt, rec) {
-				return statement_stat_items[v];
+				return fsmt_stat_item[v];
 			},
 			
 		},{

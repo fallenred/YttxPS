@@ -22,18 +22,6 @@ import com.yttx.yttxps.xml.bean.Root;
  * @date 2016年2月23日 下午3:32:27
  */
 public class SnapshotUtil{
-	private static Map<String,String> hashtable = new Hashtable<String,String>();
-	static{
-		hashtable.put("mp","景区门票");
-		hashtable.put("yl","娱乐项目");
-		hashtable.put("ct","用餐标准");
-		hashtable.put("cx","发团车型");
-		hashtable.put("dy","随团导游");
-		hashtable.put("bg","住宿标准");
-		hashtable.put("gw","购物店");	
-	}
-	
-	
 	/**
 	 * 将一个xml字符串转化成一个对象
 	 */
@@ -74,7 +62,6 @@ public class SnapshotUtil{
 				if(StringUtil.nullOrBlank(resType)||"qj".equalsIgnoreCase(resType.trim())){
 					continue;
 				}
-				String resTypeZH = hashtable.get(resType);
 				Map<String, Object> resMap = new HashMap<String, Object>();
 				resMap.put("resNo", resNo);
 				resMap.put("resName", res.getResname());
@@ -92,12 +79,12 @@ public class SnapshotUtil{
 					}
 					resMap.put("resContent", resContent);
 				}
-				List<Map<String, Object>> resDisList = resListMap.get(resTypeZH);
+				List<Map<String, Object>> resDisList = resListMap.get(resType);
 				if(resDisList==null){
 					resDisList = new ArrayList<Map<String,Object>>();
 				}
 				resDisList.add(resMap);
-				resListMap.put(resTypeZH, resDisList);
+				resListMap.put(resType, resDisList);
 			}
 			return resListMap;
 		}

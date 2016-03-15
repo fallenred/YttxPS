@@ -232,7 +232,7 @@ public class RestaurantController extends BaseController {
 	 * @param img
 	 */
 	private void upImgFile(Pic pic, MultipartFile img){
-		pic.setMain(new BigDecimal(0));
+		pic.setMain(new BigDecimal(1));
 		pic.setSeq(new BigDecimal(0));
 		if(!img.isEmpty()){
 			StringBuffer path = new StringBuffer();

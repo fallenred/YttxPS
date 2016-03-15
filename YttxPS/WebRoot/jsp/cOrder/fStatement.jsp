@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="/css/daterangepicker.css" />
 <script src="/js/date-time/moment.min.js"></script>
 <script src="/js/date-time/daterangepicker.min.js"></script>
-
 <script src="/js/handlebars.js"></script>
 </head>
 <body class="no-skin">

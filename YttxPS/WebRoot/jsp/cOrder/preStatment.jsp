@@ -158,7 +158,12 @@
 														<div class="profile-info-name">订单快照:</div>
 														<div class="profile-info-value">
 															<textarea class="ckeditor" id="orderContent" name="orderContent">
-																<jsp:include page="orderContent.jsp" flush="true"/>
+																<c:if test="${oper=='A'}">
+																	<jsp:include page="orderContent.jsp" flush="true"/>
+																</c:if>
+																<c:if test="${oper=='E'}">
+																	${fStat.orderContent}"
+																</c:if>
 															</textarea>
 														</div>
 													</div>
