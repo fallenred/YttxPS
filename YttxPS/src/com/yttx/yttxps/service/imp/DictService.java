@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.yttx.yttxps.mapper.DictMapper;
 import com.yttx.yttxps.model.Dict;
 import com.yttx.yttxps.model.DictExample;
+import com.yttx.yttxps.model.DictExample.Criteria;
 import com.yttx.yttxps.service.IDictService;
 
 
@@ -33,5 +34,14 @@ public class DictService implements IDictService {
 		}
 		
 		return map;
+	}
+
+	@Override
+	public List<Dict> selectAllDict() {
+		DictExample example = new DictExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFsParentnoIsNotNull();
+		List<Dict> dicts = dictMapper.selectByExample(example);//加载所有parantNo不为空的字典数据
+		return dicts;
 	}
 }

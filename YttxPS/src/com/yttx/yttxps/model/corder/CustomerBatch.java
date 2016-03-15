@@ -1,14 +1,10 @@
 package com.yttx.yttxps.model.corder;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.yttx.yttxps.xml.SnapshotUtil;
-import com.yttx.yttxps.xml.bean.Daylist;
 
 /**
  * 类描述：每一批次客户的详细信息
@@ -59,7 +55,7 @@ public class CustomerBatch{
 	private String resSnapshot;
 	
 	//资源快照解析出响应的对象
-	private List<HashMap<String, String>> resList;
+	private List<Map<String, List<Map<String, Object>>>> resList;
 
 	public Long getId() {
 		return id;
@@ -173,39 +169,11 @@ public class CustomerBatch{
 		this.resSnapshot = resSnapshot;
 	}
 
-	public List<HashMap<String, String>> getResList() {
-		return parseDailyRes(resSnapshot);
+	public List<Map<String, List<Map<String, Object>>>> getResList() {
+		return SnapshotUtil.parseDayRes(resSnapshot);
 	}
 
-	public void setResList(List<HashMap<String, String>> resList) {
+	public void setResList(List<Map<String, List<Map<String, Object>>>> resList) {
 		this.resList = resList;
-	}
-
-	private List<HashMap<String, String>> parseDailyRes(String xml){
-		List<Daylist> daylists = SnapshotUtil.conver2DayList(xml);
-		if(daylists!=null){
-			Collections.sort(daylists,new Comparator<Daylist>(){
-				@Override
-				public int compare(Daylist o1, Daylist o2){
-					return o1.getDayflag().compareTo(o2.getDayflag());
-				}
-			});
-			List<HashMap<String, String>> list= new ArrayList<HashMap<String, String>>();
-			HashMap<String, String> map =null;
-			for(Daylist daylist:daylists){
-				map = SnapshotUtil.converResListToDisplay(daylist.getReslist());
-				list.add(map);
-			}
-			return list;
-		}
-		return null;
-	}
-
-	@Override
-	public String toString() {
-		return "CustomerBatch [id=" + id + ", orderId=" + orderId + ", seq=" + seq + ", type=" + type + ", contactName="
-				+ contactName + ", contactTel=" + contactTel + ", total=" + total + ", older=" + older + ", adult="
-				+ adult + ", children=" + children + ", postscript=" + postscript + ", amt=" + amt + ", fuzzySnapshot="
-				+ fuzzySnapshot + ", resSnapshot=" + resSnapshot + ", resList=" + resList + "]";
 	}
 }

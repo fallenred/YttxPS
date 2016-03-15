@@ -63,4 +63,12 @@ public class DateUtil{
 	public static String getSysCurrentTime(){
 		return df24.format(new Date());
 	}
+	
+	public static String getDateFormatStr(Date date){
+		if(date==null){
+			return "";
+		}
+		return df24.format(date);
+		
+	}
 }  

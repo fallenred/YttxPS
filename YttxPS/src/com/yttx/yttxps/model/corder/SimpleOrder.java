@@ -1,8 +1,9 @@
 package com.yttx.yttxps.model.corder;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.yttx.comm.DateUtil;
 /**
  * 类描述：简单的订单对象，用于分页列表等功能
  * @author sunchao
@@ -44,7 +45,8 @@ public class SimpleOrder {
 	private Long days;
 	
 	//发团日期
-	private String startDate;
+	private Date startDate;
+	private String startDateDesc;
 	
 	//发团地
 	private String startPlace;
@@ -75,6 +77,8 @@ public class SimpleOrder {
 	
 	//公共精确资源字段
 	protected String commResSnapshot;
+	
+	private Integer visitorNum;
 
 	public String getNo() {
 		return no;
@@ -165,12 +169,12 @@ public class SimpleOrder {
 		this.days = days;
 	}
 
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
-		this.startDate = (startDate == null ?null :startDate.trim());
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
 	public String getStartPlace() {
@@ -255,11 +259,28 @@ public class SimpleOrder {
 	
 
 	public String getCreateDateDesc() {
-		return new SimpleDateFormat("yyyy-mm-dd hh:MM:ss").format(createDate);
+		return DateUtil.getDateFormatStr(createDate);
 	}
 
 	public void setCreateDateDesc(String createDateDesc) {
 		this.createDateDesc = createDateDesc;
+	}
+
+	public String getStartDateDesc() {
+		return DateUtil.getDateFormatStr(startDate);
+	}
+
+	public void setStartDateDesc(String startDateDesc) {
+		this.startDateDesc = startDateDesc;
+	}
+	
+
+	public Integer getVisitorNum() {
+		return visitorNum;
+	}
+
+	public void setVisitorNum(Integer visitorNum) {
+		this.visitorNum = visitorNum;
 	}
 
 	@Override

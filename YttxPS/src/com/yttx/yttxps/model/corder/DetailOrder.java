@@ -1,10 +1,10 @@
 package com.yttx.yttxps.model.corder;
 
-
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.yttx.yttxps.xml.SnapshotUtil;
+import com.yttx.yttxps.xml.bean.Daylist;
 import com.yttx.yttxps.xml.bean.Reslist;
 
 
@@ -15,7 +15,9 @@ import com.yttx.yttxps.xml.bean.Reslist;
  */
 public class DetailOrder extends SimpleOrder{
 	
-	private HashMap<String, String> resMap;
+	private Map<String, List<Map<String, Object>>> resMap;
+	
+	private List<Map<String, List<Map<String, Object>>>> dayResList;
 	
 	//批次信息
 	private List<CustomerBatch> batches;
@@ -26,58 +28,43 @@ public class DetailOrder extends SimpleOrder{
 	//游客信息
 	private List<Tourist> tourists;
 
-	
-	public HashMap<String, String> getResMap() {
-		return  parseCommRes(commResSnapshot);
+	public Map<String, List<Map<String, Object>>> getResMap() {
+		return SnapshotUtil.parseCommRes(commResSnapshot);
 	}
 
-
-	public void setResMap(HashMap<String, String> resMap) {
+	public void setResMap(Map<String, List<Map<String, Object>>> resMap) {
 		this.resMap = resMap;
 	}
 
+	public List<Map<String, List<Map<String, Object>>>> getDayResList() {
+		return SnapshotUtil.parseDayRes(commResSnapshot);
+	}
+
+	public void setDayResList(List<Map<String, List<Map<String, Object>>>> dayResList) {
+		this.dayResList = dayResList;
+	}
 
 	public List<CustomerBatch> getBatches() {
 		return batches;
 	}
 
-
 	public void setBatches(List<CustomerBatch> batches) {
 		this.batches = batches;
 	}
-
 
 	public List<ORemark> getRemarks() {
 		return remarks;
 	}
 
-
 	public void setRemarks(List<ORemark> remarks) {
 		this.remarks = remarks;
 	}
 
-	
-	
 	public List<Tourist> getTourists() {
 		return tourists;
 	}
 
-
 	public void setTourists(List<Tourist> tourists) {
 		this.tourists = tourists;
-	}
-
-
-	private HashMap<String, String>  parseCommRes(String xml){
-		List<Reslist> commResList=SnapshotUtil.conver2ResList(xml);
-		HashMap<String, String> resMap= SnapshotUtil.converResListToDisplay(commResList);
-		return resMap;
-	}
-
-
-	@Override
-	public String toString() {
-		return "DetailOrder [resMap=" + resMap + ", batches=" + batches + ", remarks=" + remarks + ", tourists="
-				+ tourists + "]";
 	}
 }

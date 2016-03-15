@@ -29,6 +29,7 @@ public class Cclist {
 	/**
 	 * 实际消费人数(线路永远为1)
 	 */
+	@XStreamAlias("usernum")
 	private String usernum;
 	
 	public String getCcno() {

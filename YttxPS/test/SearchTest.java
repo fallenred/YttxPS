@@ -1,4 +1,5 @@
 import java.io.File;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,10 +30,11 @@ public class SearchTest {
 	 */
 	public static void main(String[] args) {
 		
-		SearchTest st = new SearchTest();
-		st.xml();
-	
-
+		/*SearchTest st = new SearchTest();
+		st.xml();*/
+		BigDecimal bigDecimal = new BigDecimal("-1.00");
+		System.out.println(bigDecimal.toString());
+		
 
 	}
 	

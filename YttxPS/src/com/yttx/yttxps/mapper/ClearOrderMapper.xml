@@ -19,13 +19,11 @@
 		<result  column="FS_STARTPLACE"      property="startPlace"     jdbcType="VARCHAR" />
 		<result  column="FD_PRICE"           property="price"          jdbcType="DECIMAL" />
 		<result  column="FS_SUMMARY"         property="summary"        jdbcType="VARCHAR" />
-		<result  column="FC_SCHEDULE"        property="schedule"       jdbcType="VARCHAR" />
 		<result  column="FD_TOTALFEE"        property="totalFee"       jdbcType="DECIMAL" />
 		<result  column="FD_PAIDAMT"         property="paidAmt"        jdbcType="DECIMAL" />
 		<result  column="FS_REMARK"          property="remark"         jdbcType="VARCHAR" />
 		<result  column="FI_STAT"            property="stat"           jdbcType="INTEGER" />
-		<result  column="FC_COMMFUZZYSNAPSHOT"      property="commFuzzySnapshot"  jdbcType="VARCHAR" />
-		<result  column="FC_COMMRESSNAPSHOT"        property="commResSnapshot"    jdbcType="VARCHAR" />
+		<result  column="fi_VisitorNum"      property="visitorNum"     jdbcType="INTEGER" />
 	</resultMap>
 	
 	
@@ -52,6 +50,7 @@
 		<result  column="FD_PAIDAMT"         property="paidAmt"        jdbcType="DECIMAL" />
 		<result  column="FS_REMARK"          property="remark"         jdbcType="VARCHAR" />
 		<result  column="FI_STAT"            property="stat"           jdbcType="INTEGER" />
+		<result  column="fi_VisitorNum"      property="visitorNum"           jdbcType="INTEGER" />
 		<result  column="FC_COMMFUZZYSNAPSHOT"      property="commFuzzySnapshot"  jdbcType="VARCHAR" />
 		<result  column="FC_COMMRESSNAPSHOT"        property="commResSnapshot"    jdbcType="VARCHAR" />
 		<collection property="remarks" javaType="ArrayList" column="orderId" 
@@ -239,7 +238,8 @@
 		     FS_REMARK,
 		     FI_STAT,
 		     FC_COMMFUZZYSNAPSHOT,
-		     FC_COMMRESSNAPSHOT
+		     FC_COMMRESSNAPSHOT,
+		     fi_VisitorNum
 		FROM 
 			Torderlist 
 		WHERE
@@ -291,21 +291,28 @@
 	
 	<!-- select:查询-->
 	<select id="selectTourits" parameterType="string" resultMap="touristResultMap">
-		SELECT 
-		    fs_Order_ID  tr_orderId,
-			fi_Seq       tr_seq,
-			fs_Name      tr_name,
-			fs_IDType    tr_idType,
-			fs_ID        tr_id,
-			fs_Tel       tr_tel,
-			fs_Mark      tr_mark,
-			fi_Stat      tr_stat
-		FROM 
-		    TOrderCusList 
-		WHERE 
-		   TRIM(fs_Order_ID) = Trim(#{orderId,jdbcType= VARCHAR})
-		ORDER BY
-		  fi_Seq
+		SELECT
+			c. fs_Order_ID tr_orderId,
+      		c. fi_Seq tr_seq,
+       		c. fs_Name tr_name,
+       		d. fs_dictname tr_idType,
+       		c. fs_ID tr_id,
+       		c. fs_Tel tr_tel,
+       		c. fs_Mark tr_mark,
+       		c. fi_Stat tr_stat
+ 		FROM 
+ 			TOrderCusList c,
+ 			(select 
+ 				fs_dictno, 
+ 				fs_dictname 
+ 			from 
+ 				Tdict 
+ 			where 
+ 				fs_parentno = 'zjlx') d
+ 		WHERE 
+ 			TRIM(c.fs_Order_ID) = #{orderId,jdbcType= VARCHAR}
+ 			and c.fs_idtype = d.fs_dictno(+)
+ 			ORDER BY fi_Seq
 	</select>
 	
 	<!-- select:通过线路Id找到线路名称-->

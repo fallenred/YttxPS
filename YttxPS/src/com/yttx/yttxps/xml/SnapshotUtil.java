@@ -1,5 +1,8 @@
 package com.yttx.yttxps.xml;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -23,11 +26,11 @@ public class SnapshotUtil{
 	static{
 		hashtable.put("mp","景区门票");
 		hashtable.put("yl","娱乐项目");
-		hashtable.put("ct","餐厅");
-		hashtable.put("cx","车型");
-		hashtable.put("dy","导游");
-		hashtable.put("bg","宾馆");
-		hashtable.put("gw","购物点");	
+		hashtable.put("ct","用餐标准");
+		hashtable.put("cx","发团车型");
+		hashtable.put("dy","随团导游");
+		hashtable.put("bg","住宿标准");
+		hashtable.put("gw","购物店");	
 	}
 	
 	
@@ -43,46 +46,93 @@ public class SnapshotUtil{
 		return root==null?null:root.getBody();
 	}
 	
+	/**
+	 * 解析资源字符串-获取每天的资源列表
+	 */
 	public static List<Daylist> conver2DayList(String xml){
 		Body body = objectFromXml(xml);
 		return  body==null ? null : body.getDaylist();
 	}
 	
+	/**
+	 * 解析资源字符串-获取公共的资源列表
+	 */
 	public static List<Reslist> conver2ResList(String xml){
 		Body body = objectFromXml(xml);
 		return  body==null ? null : body.getReslist();
 	}
 	
-	public static HashMap<String, String> converResListToDisplay(List<Reslist> list){
+	/**
+	 * 将资源列表转化成一个map用于前端显示
+	 */
+	public static Map<String, List<Map<String, Object>>> converResListToDisplay(List<Reslist> list){
 		if(list!=null){
-			HashMap<String, String> resMap=new HashMap<String,String>();
+			Map<String,List<Map<String, Object>>> resListMap=new HashMap<String,List<Map<String, Object>>>();
 			for(Reslist res:list){
 				String resType =res.getRestype();
-				if(StringUtil.nullOrBlank(resType)){
+				String resNo = res.getResno();
+				if(StringUtil.nullOrBlank(resType)||"qj".equalsIgnoreCase(resType.trim())){
 					continue;
 				}
-				String resName=hashtable.get(resType);
-				
+				String resTypeZH = hashtable.get(resType);
+				Map<String, Object> resMap = new HashMap<String, Object>();
+				resMap.put("resNo", resNo);
+				resMap.put("resName", res.getResname());
 				List<Cclist> cclist=res.getCclist();
-				StringBuilder resContent = null;
-				if(!StringUtil.nullOrBlank(res.getResname())){
-					resContent = new StringBuilder(res.getResname()+":");
-				}
-				
 				if(cclist!=null){
+					StringBuilder resContent = null;
 					for(Cclist cc:cclist){
-						resContent =new StringBuilder((cc.getCcname()==null?"":cc.getCcname())+",&nbsp;");
-						resContent.append((cc.getPrice()==null?"":"价格--"+cc.getPrice())+", &nbsp;");
-						resContent.append(cc.getUsernum()==null?"":"数量--"+cc.getUsernum()+";");
-						resContent.append("<br/>");
+						resContent =new StringBuilder((StringUtil.nullOrBlank(cc.getCcname())?"":("消费选项:"+cc.getCcname())+","));
+						resContent.append((cc.getPrice()==null?"":("价格:"+cc.getPrice())+","));
+						resContent.append(cc.getUsernum()==null?"":("数量:"+cc.getUsernum()+","));
+						int location = resContent.lastIndexOf(",");
+						if(location>=0){
+							resContent.setCharAt(resContent.lastIndexOf(","), ';');
+						}
 					}
+					resMap.put("resContent", resContent);
 				}
-				String content=resMap.get(resName);
-				content=(content==null?resContent.toString():content+resContent.toString());
-				resMap.put(resName, content);
+				List<Map<String, Object>> resDisList = resListMap.get(resTypeZH);
+				if(resDisList==null){
+					resDisList = new ArrayList<Map<String,Object>>();
+				}
+				resDisList.add(resMap);
+				resListMap.put(resTypeZH, resDisList);
 			}
-			return resMap;
+			return resListMap;
 		}
 		return null;
+	}
+	
+	/**
+	 * 解析公用资源
+	 */
+	public static Map<String, List<Map<String, Object>>>  parseCommRes(String xml){
+		List<Reslist> commResList=SnapshotUtil.conver2ResList(xml);
+		Map<String, List<Map<String, Object>>> resMap= converResListToDisplay(commResList);
+		return resMap;
+	}
+	
+	/**
+	 *解析每天的资源 
+	 */
+	public static List<Map<String, List<Map<String, Object>>>> parseDayRes(String xml){
+		 List<Daylist> daylists = conver2DayList(xml);
+		 if(daylists==null)
+			 return null;
+		Collections.sort(daylists,new Comparator<Daylist>(){
+			@Override
+			public int compare(Daylist o1, Daylist o2){
+				return o1.getDayflag().compareTo(o2.getDayflag());
+			}
+		});
+		
+		List<Map<String, List<Map<String,Object>>>> list= new ArrayList<Map<String, List<Map<String,Object>>>>();
+		Map<String, List<Map<String,Object>>> map =null;
+		for(Daylist daylist:daylists){
+			map = converResListToDisplay(daylist.getReslist());
+			list.add(map);
+		}
+		return list;
 	}
 }
