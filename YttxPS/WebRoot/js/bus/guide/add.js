@@ -17,37 +17,37 @@ jQuery(function($) {
 
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#desc").val() == '') {
+		if($("#desc").val() == '' || $("#desc").val() == undefined) {
 			$("#message").show();
 			$("#message").text("导游证号不能为空，请输入");
 			$('#desc').focus();
 			return false;
 		} 
-		if($("#name").val() == '') {
+		if($("#name").val() == '' || $("#name").val() == undefined) {
 			$("#message").show();
 			$("#message").text("姓名不能为空，请输入");
 			$('#name').focus();
 			return false;
 		}
-		if($("#gender").val() == '') {
+		if($("#gender").val() == '' || $("#gender").val() == undefined) {
 			$("#message").show();
 			$("#message").text("性别不能为空，请输入");
 			$('#gender').focus();
 			return false;
 		}
-		if($("#idno").val() == '') {
+		if($("#idno").val() == '' || $("#idno").val() == undefined) {
 			$("#message").show();
 			$("#message").text("身份证号不能为空，请输入");
 			$('#idno').focus();
 			return false;
 		}
-		if($("#contactno").val() == '') {
+		if($("#contactno").val() == '' || $("#contactno").val() == undefined) {
 			$("#message").show();
 			$("#message").text("联系方式不能为空，请输入");
 			$('#contactno').focus();
 			return false;
 		}
-		if($("#lvl").val() == '') {
+		if($("#lvl").val() == '' || $("#lvl").val() == undefined) {
 			$("#message").show();
 			$("#message").text("等级不能为空，请输入");
 			$('#lvl').focus();

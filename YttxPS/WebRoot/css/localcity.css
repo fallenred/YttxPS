@@ -23,6 +23,7 @@
 	list-style-type:none;
 }
 .localcity .tabs .close-x{
+	cursor:pointer;
 	position: absolute;
     right: 8px;
     top: 5px;

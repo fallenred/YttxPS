@@ -40,10 +40,11 @@
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
-												<li><a class="cboxElement" data-rel="colorbox"
-													href="http://127.0.0.1:81/1.jpg"> <img width="0"
-														height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
-												</a></li>
+												<li>
+													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg">
+														<img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
+													</a>
+												</li>
 											</div>
 										</ul>
 									</div>
@@ -52,7 +53,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">票名称</label>
 											<div class="col-sm-3">
-												<select class="form-control" id="fsNo" name="fsNo"></select>
+												<select class="form-control" id="fsNo" name="fsNo" disabled="disabled"></select>
 											</div>
 										</div>
 									</div>

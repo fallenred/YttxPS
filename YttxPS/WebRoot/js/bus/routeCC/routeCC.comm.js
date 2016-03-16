@@ -325,7 +325,7 @@ function getDict(parentno, selectId){
 		data: "dict.fsParentno=" + parentno,
 		dataType: "json",
 		success: function(data){
-			var html = '<option value="">' + '-- 请选择 --' + '</option>'; 
+			var html = '<option value="">' + '-- 请选择 --' + '</option>';
 			$.each(data, function(commentIndex, comment){
 				html += '<option value=' + comment['fsDictno'] + '>' + comment['fsDictname'] + '</option>';
 			});

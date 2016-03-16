@@ -51,37 +51,25 @@ jQuery(function($) {
 	
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#fsNo").val() == '') {
-			$("#message").show();
-			$("#message").text("娱乐项目代码不能为空，请输入");
-			$('#fsNo').focus();
-			return false;
-		}
-		if($("#fsScenicno").val() == '') {
-			$("#message").show();
-			$("#message").text("所属景区不能为空，请输入");
-			$('#fsScenicno').focus();
-			return false;
-		}
-		if($("#fsType").val() == '') {
+		if($("#fsType").val() == '' || $("#fsType").val() == undefined) {
 			$("#message").show();
 			$("#message").text("娱乐项目类型不能为空，请输入");
 			$('#fsType').focus();
 			return false;
 		}
-		if($("#fsRegionno").val() == '') {
+		if($("#fsRegionno").val() == '' || $("#fsRegionno").val() == undefined) {
 			$("#message").show();
 			$("#message").text("所属地区不能为空，请输入");
 			$('#fsRegionno').focus();
 			return false;
 		}
-		if($("#fsLvl").val() == '') {
+		if($("#fsLvl").val() == '' || $("#fsLvl").val() == undefined) {
 			$("#message").show();
 			$("#message").text("娱乐项目级别不能为空，请输入");
 			$('#fsLvl').focus();
 			return false;
 		}
-		if($("#fiStat").val() == '') {
+		if($("#fiStat").val() == '' || $("#fiStat").val() == undefined) {
 			$("#message").show();
 			$("#message").text("状态不能为空，请输入");
 			$('#fiStat').focus();

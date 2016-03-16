@@ -61,8 +61,8 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a class="accordion-toggle" href="#collapseOne" data-toggle="collapse" data-parent="#accordion"> <i class="bigger-110 ace-icon fa fa-angle-down"
-											data-icon-show="ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down"></i> &nbsp;查询条件
+										<a class="accordion-toggle" href="#collapseOne" data-toggle="collapse" data-parent="#accordion">
+											<i class="bigger-110 ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down"></i> &nbsp;查询条件
 										</a>
 									</h4>
 								</div>

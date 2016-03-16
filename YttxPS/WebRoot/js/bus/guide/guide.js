@@ -219,8 +219,7 @@ jQuery(function($) {
 				            	 name : 'no',
 				            	 index : 'no',
 				            	 width : 85,
-				            	 sorttype : "int",
-				            	 hidden : true
+				            	 sorttype : "int"
 				             }, {
 				            	 name : 'name',
 				            	 index : 'name',

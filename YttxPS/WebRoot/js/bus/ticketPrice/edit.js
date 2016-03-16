@@ -43,7 +43,7 @@ jQuery(function($) {
 			$("#regionno").val(null);
 			$("#message").hide();
 			$("#message").text("");
-		});
+	});
 	
 	// 关闭
 	$("#close").on("click", function () {

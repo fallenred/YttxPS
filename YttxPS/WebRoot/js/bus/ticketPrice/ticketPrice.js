@@ -301,7 +301,7 @@ jQuery(function($) {
 				editurl : "/ticketPrice/save.htm",
 				shrinkToFit : true,
 				autowidth : true,
-				caption: (fsName!=null && fsName!="")?(fsName+"—门票价格配置列表"):"门票价格列表"
+				caption: (fsName != null && fsName != "") ? (fsName + "—门票价格配置列表") : "门票价格列表"
 			});
 	$(window).triggerHandler('resize.jqGrid');// trigger window resize to make
 	// the grid get the correct size
@@ -365,14 +365,14 @@ jQuery(function($) {
 				caption : "",
 				buttonicon : "ace-icon fa fa-plus-circle purple",
 				onClickButton : function() {
-					var frameSrc = "/jsp/ticketPrice/add.jsp";
+					var frameSrc = "/jsp/ticketPrice/add.jsp?fsNo=" + fsNo;
 			        $("#addIframe").attr("src", frameSrc);
 			        $('#addModal').modal({ show: true, backdrop: 'static' });
 				},
 				position : "first",
 				title : "新增记录",
 				cursor : "pointer"
-			});
+	});
 
 	function style_delete_form(form) {
 		var buttons = form.next().find('.EditButton .fm-button');

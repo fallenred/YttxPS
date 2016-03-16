@@ -29,6 +29,7 @@ import com.yttx.yttxps.model.TRouteCCExample;
 import com.yttx.yttxps.model.TRouteCCExample.Criteria;
 import com.yttx.yttxps.model.TRouteCCKey;
 import com.yttx.yttxps.model.TRoutePropClass;
+import com.yttx.yttxps.model.TRoutePropClassExample;
 import com.yttx.yttxps.model.VResSnapshot;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.service.IRouteArrangeService;
@@ -107,6 +108,21 @@ public class RouteArrangeService implements IRouteArrangeService {
 			routeCC.setFsRouteno(record.getFsId());
 			routeCCMapper.insert(routeCC);
 		}
+		
+		//update TRoutePropClass
+		TRoutePropClass routePropClass = new TRoutePropClass();
+		routePropClass.setFiClass(new BigDecimal(record.getFsProperty()));
+		routePropClass.setFsId(record.getFsId());
+		routePropClass.setFiClasstype(BigDecimal.ONE);
+		
+		TRouteArrangeWithBLOBs obsoleteRouteArrange = routeArrangeMapper.selectByPrimaryKey(record.getFsId());
+		TRoutePropClassExample routePropClassExample = new TRoutePropClassExample();
+		com.yttx.yttxps.model.TRoutePropClassExample.Criteria routePropClassExampleCriteria = routePropClassExample.createCriteria();
+		routePropClassExampleCriteria.andFsIdEqualTo(record.getFsId());
+		routePropClassExampleCriteria.andFiClassEqualTo(new BigDecimal(obsoleteRouteArrange.getFsProperty()));
+		routePropClassExampleCriteria.andFiClasstypeEqualTo(BigDecimal.ONE);
+		routePropClassMapper.updateByExample(routePropClass, routePropClassExample);
+		
 		return routeArrangeMapper.updateByPrimaryKeySelective(record);
 	}
 	

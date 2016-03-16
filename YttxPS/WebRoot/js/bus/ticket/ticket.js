@@ -133,7 +133,7 @@ jQuery(function($) {
 		'id="roomButton" style="display: block; cursor: pointer; float: left;" '+
 		'onmouseover="jQuery(this).addClass(\'ui-state-hover\');" '+
 		'onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" '+
-		'onclick="showTicketPrice('+ options.rowId+ ');" data-original-title="门票价格配置">'+
+		'onclick="showTicketPrice(' + options.rowId + ');" data-original-title="门票价格配置">' +
 		'<span class="ui-icon ace-icon fa fa-cog red"></span></div>';
 		var detail = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showTicket('
 			+ options.rowId

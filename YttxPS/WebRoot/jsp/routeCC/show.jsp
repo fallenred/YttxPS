@@ -40,8 +40,11 @@
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
-												<li><a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg"> <img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
-												</a></li>
+												<li>
+													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg">
+														<img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
+													</a>
+												</li>
 											</div>
 										</ul>
 									</div>
