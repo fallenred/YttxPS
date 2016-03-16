@@ -1,8 +1,12 @@
 package com.yttx.yttxps.web.action.trade;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -16,17 +20,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
+import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
+import com.yttx.yttxps.model.DictExample;
+import com.yttx.yttxps.model.DictExample.Criteria;
+import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.TOrderlistExample;
 import com.yttx.yttxps.model.TOrderlistWithBLOBs;
-import com.yttx.yttxps.model.TRestaurant;
 import com.yttx.yttxps.model.vo.OrderlistRequest;
+import com.yttx.yttxps.service.IDictService;
 import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.web.action.LoginController;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
 import com.yttx.yttxps.xml.bean.Body;
+import com.yttx.yttxps.xml.bean.Daylist;
 import com.yttx.yttxps.xml.bean.Root;
 
 @Controller
@@ -40,6 +50,8 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	private IOrderlistService orderlistService;
 	@Autowired
 	private IPubService<?> pubService;
+	@Autowired
+	private IDictService dictService;;
 	
 	/**
 	 * 分页查询订单信息
@@ -55,8 +67,11 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		req.copyPage(map);
 		req.copyOrderlist(map);
 		List<TOrderlistWithBLOBs> list = orderlistService.selectSelectivePage(map);
-		if(list!=null){
-			for(TOrderlistWithBLOBs orderlist:list){
+		HttpSession session = request.getSession();
+		SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
+		if(CollectionUtils.isNotEmpty(list)){
+			for(TOrderlistWithBLOBs orderlist : list){
+				orderlist.setFsOperId(sessionEntity.getName());
 				if(orderlist.getFsStartplace()!=null)
 					orderlist.setRegionname(pubService.findRegionFullName(orderlist.getFsStartplace()));
 			}
@@ -77,19 +92,43 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		logger.debug("当前查询条件 {}", no);
 		TOrderlistExample example = new TOrderlistExample();
 		example.createCriteria().andFsNoEqualTo(no);
-		List<TOrderlistWithBLOBs> list = orderlistService.selectTOrderlist(example);
-		if (CollectionUtils.isEmpty(list))
+		TOrderlistWithBLOBs orderlistWithBLOBs = orderlistService.selectByPrimaryKey(no);
+		if (orderlistWithBLOBs == null)
 			return null;
 		Map<String, Body> map = new HashMap<String, Body>();
-		//模糊快照
-		if (StringUtils.isNotBlank(list.get(0).getFcCommfuzzysnapshot())){
-			Root root = ResScheduleXMLConverter.fromXml("http://www.cnacex.com/" ,list.get(0).getFcCommfuzzysnapshot(), Root.class);
+		//公共模糊快照
+		if (StringUtils.isNotBlank(orderlistWithBLOBs.getFcCommfuzzysnapshot())){
+			Root root = ResScheduleXMLConverter.fromXml("http://www.cnacex.com/" ,orderlistWithBLOBs.getFcCommfuzzysnapshot(), Root.class);
 			map.put("commFuzzySnapshot", root.getBody());
 		}
-		//精确快照
-		if (StringUtils.isNotBlank(list.get(0).getFcCommressnapshot())){
-			Root root = ResScheduleXMLConverter.fromXml("http://www.cnacex.com/", list.get(0).getFcCommressnapshot(), Root.class);
+		//公共精确快照
+		if (StringUtils.isNotBlank(orderlistWithBLOBs.getFcCommressnapshot())){
+			Root root = ResScheduleXMLConverter.fromXml("http://www.cnacex.com/", orderlistWithBLOBs.getFcCommressnapshot(), Root.class);
 			map.put("commResSnapshot", root.getBody());
+		} else if (StringUtils.isBlank(orderlistWithBLOBs.getFcCommressnapshot()) && "03".equals(orderlistWithBLOBs.getFsType())) {
+			//定制线路-公共精确快照为空时创建空的body对象供页面做解析
+			int days = orderlistWithBLOBs.getFiDays().toBigInteger().intValue();
+			Body body = new Body();
+			List<Daylist> list = new ArrayList<Daylist>();
+			for (int i = 0; i < days; i++) {
+				Daylist daylist = new Daylist();
+				daylist.setDayflag(i+"");
+				list.add(daylist);
+			}
+			body.setDaylist(list);
+			map.put("commResSnapshot", body);
+		}
+		//定制线路-客户询价内容
+		if ("03".equals(orderlistWithBLOBs.getFsType()) && StringUtils.isNotBlank(orderlistWithBLOBs.getFcSchedule())) {
+			Root root = ResScheduleXMLConverter.fromXml("http://www.cnacex.com/", orderlistWithBLOBs.getFcSchedule(), Root.class);
+			DictExample dictExample = new DictExample();
+			Criteria criteria = dictExample.createCriteria();
+			criteria.andFsParentnoEqualTo("jtgj");
+			Map<String, Object> dictMap = dictService.selectDictMap(dictExample);
+			for (Daylist daylist : root.getBody().getDaylist()) {
+				daylist.setTransport((String)dictMap.get(daylist.getTransport()));
+			}
+			map.put("fcSchedule", root.getBody());
 		}
 		return map;
     }
@@ -132,6 +171,30 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
     }
+	
+	/**
+	 * 更新定制线路订单
+	 * @param Orderlist
+	 * @return
+	 */
+	@RequestMapping(value="editOrderlist4custom.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ajaxeditOrderlist4custom(TOrderlistWithBLOBs orderlist)
+	{  
+		logger.debug("当前更新对象 {}", orderlist);
+		try{
+			HttpSession session = request.getSession();
+			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
+			orderlist.setFsUserId(sessionEntity.getId());
+			orderlistService.update4custom(orderlist);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			logger.error("更新订单失败, 订单编号："+orderlist.getFsNo() + "\n" + e);
+			return (Map<String, Object>) JsonResult.jsonError("更新失败");
+		}
+		return (Map<String, Object>) JsonResult.jsonOk();
+	}
 	
 	/**
 	 * 删除订单信息

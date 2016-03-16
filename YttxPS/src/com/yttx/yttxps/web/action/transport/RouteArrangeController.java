@@ -119,7 +119,7 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
 	public Object findUniqRouteArrange(@RequestParam(value="fsId")String fsId)
     {  
 		logger.debug("当前查询条件 {}", fsId);
-		Map<String, Object> data = new HashMap<>();
+		Map<String, Object> data = new HashMap();
 		JsonResult.jsonData(data);
 		TRouteArrangeWithBLOBs routeArrange = routeArrangeService.findTRouteArrange(fsId);
 		data.put("routeArrange", routeArrange);

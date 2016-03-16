@@ -17,9 +17,18 @@ function showOrderlist(id) {
 
 function editOrderlist(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/orderlist/edit.jsp";
-    $("#editIframe").attr("src", frameSrc);
-    $('#editModal').modal({ show: true, backdrop: 'static' });
+	var frameSrc = '';
+	if (raw.fsType == '02') {
+		//衍生线路
+		frameSrc = "/jsp/orderlist/edit.jsp";
+		$("#editIframe").attr("src", frameSrc);
+		$('#editModal').modal({ show: true, backdrop: 'static' });
+	} else if(raw.fsType == '03') {
+		//定制线路
+		frameSrc = "/jsp/orderlist/customization.jsp?fsNo="+raw.fsNo;
+		$("#customizationIframe").attr("src", frameSrc);
+		$('#customizationModal').modal({ show: true, backdrop: 'static' });
+	}
 };
 
 function deleteOrderlist(id) {
@@ -37,7 +46,7 @@ $("#addIframe").on("load",function(){
 	$(this).contents().find("#fdPaidAmt").val(raw.fdPaidAmt);
 });
 
-
+//衍生线路
 $("#editIframe").on("load",function(){
 	$(this).contents().find("#reset").click();
 	$(this).contents().find("#fsNo").val(raw.fsNo);
@@ -72,6 +81,19 @@ $("#editIframe").on("load",function(){
 	if (raw.fsNo != null) {
 		findCommSnapshot(this, raw.fsNo);
 	}
+});
+
+//定制线路
+$("#customizationIframe").on("load",function(){
+	$(this).contents().find("#fsNo").val(raw.fsNo);
+	$(this).contents().find("#fsName").val(raw.fsName);
+	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
+	$(this).contents().find("#fsRemark").val(raw.fsRemark);
+	$(this).contents().find("#fcRessnapshot").val(raw.fcRessnapshot);
+	$(this).contents().find("#fiVisitornum").val(raw.fiVisitornum);
+	$(this).contents().find("#insurenum").val(raw.fiVisitornum);
+	$(this).contents().find("#fsOperId").val(raw.fsOperId);
+	getGuide(obj, Lvl);
 });
 
 function getTccPrice(obj, fsResno, id){
@@ -155,7 +177,7 @@ function getGuide(obj, Lvl){
 			$.each(data, function(commentIndex, comment){
 				html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 			});
-			$("#guideFsNo").html(html);
+			$(obj).contents().find("#guideFsNo").html(html);
 		}
 	});
 }
@@ -293,7 +315,7 @@ jQuery(function($) {
 				mtype : 'POST',
 				height : 400,
 				colNames : ['操作', '订单编号', '线路统称Idx', '订单名称', '用户ID', '用户子ID', '计调ID', '创建时间', '线路类型', 'fs_Route_ID', '组团类型', '线路天数',
-				            '发团日期', '发团地id', '发团地', '线路初始报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照',],
+				            '发团日期', '发团地id', '发团地', '线路初始报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照', '总人数',],
 				colModel : [ {
 					name : 'myac',
 					index : '',
@@ -492,6 +514,13 @@ jQuery(function($) {
 				}, {
 					name : 'fcRessnapshot',
 					index : 'fcRessnapshot',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					hidden : true
+				}, {
+					name : 'fiVisitornum',
+					index : 'fiVisitornum',
 					width : 100,
 					editable : true,
 					sorttype : "char",

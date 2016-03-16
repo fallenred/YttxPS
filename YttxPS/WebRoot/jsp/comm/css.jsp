@@ -6,6 +6,7 @@
 <!-- basic styles -->
 
 <link href="/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/css/bootstrap-table-expandable.css" rel="stylesheet" />
 <link rel="stylesheet" href="/css/font-awesome.min.css" />
 
 <!--[if IE 7]>

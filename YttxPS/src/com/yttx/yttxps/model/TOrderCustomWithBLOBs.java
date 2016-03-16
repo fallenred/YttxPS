@@ -1,7 +1,6 @@
 package com.yttx.yttxps.model;
 
 import java.util.Date;
-import java.util.List;
 
 import com.yttx.yttxps.xml.bean.Body;
 

@@ -1,5 +1,7 @@
 package com.yttx.yttxps.model;
 
+import java.util.List;
+
 import com.yttx.yttxps.xml.bean.Body;
 
 public class TOrderlistWithBLOBs extends TOrderlist {
@@ -108,6 +110,9 @@ public class TOrderlistWithBLOBs extends TOrderlist {
 	//定制公共精确资源快照（暂用于定制线路）
 	private Body commBody;
 	
+	//批次精确资源快照（暂用于定制线路）
+	private List<Body> batchBody;
+	
 	public String getRegionname() {
 		return regionname;
 	}
@@ -131,4 +136,13 @@ public class TOrderlistWithBLOBs extends TOrderlist {
 	public void setCommBody(Body commBody) {
 		this.commBody = commBody;
 	}
+
+	public List<Body> getBatchBody() {
+		return batchBody;
+	}
+
+	public void setBatchBody(List<Body> batchBody) {
+		this.batchBody = batchBody;
+	}
+
 }

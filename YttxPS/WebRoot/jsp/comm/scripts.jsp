@@ -26,8 +26,10 @@
 </script>
 
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap-table-expandable.js"></script>
 
 <script src="/js/jquery.base64.js"></script>
+<script src="/js/handlebars.js"></script>
 
 
 
