@@ -28,22 +28,40 @@ $("#delModal", parent.document).on("hidden.bs.modal", function() {
 	$("#grid-table").trigger("reloadGrid");
 });
 
+//封装查询条件参数
+function setStateFilterParams(postData){
+	postData["filters.id"]     =  $("#id").val();//客户ID
+	postData["filters.name"]   =  $("#name").val()//客户名称
+	postData["filters.taname"] =  $("#taname").val();//旅行社名称
+	postData["filters.auditType"]   =  $("#auditType").val();//客户状态
+	postData["filters.auditRet"]   =  $("#auditRet").val();//审核结果
+}
+
+//重新加载表单数据
+function reloadCusAdtRecs(){
+	var postData = $("#grid-table").jqGrid("getGridParam","postData");
+	setStateFilterParams(postData);//封装查询条件参数
+	$("#grid-table").jqGrid("setGridParam", {//重新加载数据
+		datatype : 'json',
+		postData : postData
+	}).trigger("reloadGrid");
+}
+
 
 jQuery(function($){
 	// 查询条件-->按钮-->"提交"按钮 
-	$("#queryfield_submit").on("click",
-		function() {
-			$("#collapseOne").collapse('hide');
-			var postData = $("#grid-table").jqGrid("getGridParam","postData");
-			postData["filters.id"]     =  $("#id").val();//客户ID
-			postData["filters.name"]   =  $("#name").val()//客户名称
-			postData["filters.taname"] =  $("#taname").val();//旅行社名称
-			postData["filters.auditType"]   =  $("#auditType").val();//客户状态
-			$("#grid-table").jqGrid("setGridParam", {
-				datatype : 'json',
-				postData : postData
-			}).trigger("reloadGrid");
+	$("#queryfield_submit").on("click",function() {
+			reloadCusAdtRecs();//重新加载数据
 		});
+	
+	// "标签卡"的点击响应函数
+	$(".auditRetPane").click(function(){
+		$("#reset").click();//清空查询条件
+		var stat=$(this).attr("data-stat");//设置需要查询的状态
+		$("#auditRet").val(stat);
+		//重新加载结算列表数据
+		reloadCusAdtRecs();
+	})
 	
 
 	// 定义grid的选择器
@@ -78,107 +96,95 @@ jQuery(function($){
 			str += ';' + k + ":" + object[k];
 		return  str.substring(1);
 	}
-	//TODO 读取状态数据字典
-	// 客户状态
-	var stat_items = {
-		"0":"未激活",
-		"1":"正常",
-		"99":"信息变更",
-		"-100":"注销"
-	};
-	
-	var auditType_items = {
-		"1":"新增",
-		"2":"变更",
-		"4":"删除",
-	};
-	
 	
 	$(grid_selector).jqGrid({
 		url:"/member/audit/listpage.htm",
 		datatype : "json",
 		mtype : 'POST',
 		height : 400,
-		colNames : [ '客户ID', '客户名称','旅行社名称', '联系方式', 
-		             '邮件地址', '地址', '客户状态','审核类型', '操作' ],
+		colNames : [ '客户ID', '客户名称','旅行社名称', '联系方式', '申请审核类型', '审核人','审核时间','审核结果','操作' ],
 		colModel : [ {
 			name : 'id',
 			index : 'id',
-			width : 100,
+			width : 80,
 			sortable : false,
 			editable : false,
 		},
 		{
 			name : 'name',
 			index : 'name',
-			width : 150,
+			width : 140,
 			sortable : false,
 			editable : false,
 		},
 		{
 			name : 'taname',
 			index : 'taname',
-			width : 150,
+			width : 140,
 			sortable : false,
 			editable : false,
 		}, {
 			name : 'contact',
 			index : 'contact',
-			width : 120,
+			width : 100,
 			sortable : false,
 			editable : false,
 		}, {
-			name : 'email',
-			index : 'email',
-			width : 100,
+			name : 'auditType',
+			index : 'auditType',
+			width : 60,
 			editable : false,
 			sortable : false,
+			formatter: function(v, opt, rec) {
+				return auditType_item[v];
+			},
 		}, 
 		{
-			name : 'address',
-			index : 'address',
-			width : 160,
+			name : 'auditor',
+			index : 'auditor',
+			width : 100,
 			sortable : false,
 			editable : false,
 		} , 
 		{
-			name : 'stat',
-			index : 'stat',
-			width : 80,
+			name : 'auditTimeDesc',
+			index : 'auditTimeDesc',
+			width : 110,
 			sortable : false,
 			editable : false,
-			
-			formatter : function(v, opt, rec) {
-				return stat_items[v];
-			},
-			
 		},
 		{
-			name : 'auditType',
-			index : 'auditType',
-			width : 80,
+			name : 'auditRet',
+			index : 'auditRet',
+			width : 60,
 			sortable : false,
 			editable : false,
-			
 			formatter : function(v, opt, rec) {
-				return auditType_items[v];
+				return auditRet_item[v];
 			},
 			
 		},
 		{
 			name : 'myaction',
 			index : '',
-			width : 180,
+			width : 120,
 			fixed : true,
 			sortable : false,
 			resize : false,
 			formatter : 
 				function(cellvalue, options, rec) {
+					
 					var auditButton='<a href="javascript:void(0)" class="btn btn-info btn-xs "'+
 										'onclick="auidtCustomer(\''+ rec.id+ '\',\''+rec.auditno+'\',\''+rec.auditType+'\');">'+
 										'<span class="glyphicon glyphicon-check"></span>审核'+
 									'</a>';
-				return auditButton;
+					
+					var showButton='<a href="javascript:void(0)" class="btn btn-info btn-xs "'+
+										'onclick="auidtCustomer(\''+ rec.id+ '\',\''+rec.auditno+'\',\''+rec.auditType+'\');">'+
+										'<span class="glyphicon glyphicon-zoom-in"></span>查看审核记录'+
+									'</a>';
+					var auditRet = rec.auditRet;
+				return auditRet==0?auditButton:showButton;
 			}
 		}],
 		viewrecords : true,

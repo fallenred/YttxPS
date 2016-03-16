@@ -23,9 +23,9 @@
 	  <result column="fs_TabLicense"  property="tabLicense"     jdbcType="VARCHAR" />
 	  <result column="fs_SalesManID"  property="salesManID"     jdbcType="VARCHAR" />
 	  <result column="fi_AuditType"   property="auditType"      jdbcType="DECIMAL" />
-	  <result column="ft_ApplyTime"   property="applyTimeDesc"  jdbcType="VARCHAR" />
+	  <result column="ft_ApplyTime"   property="applyTime"      jdbcType="TIMESTAMP" />
 	  <result column="fs_Auditor"     property="auditor"        jdbcType="VARCHAR" />
-	  <result column="ft_AuditTime"   property="auditTimeDesc"  jdbcType="VARCHAR" />
+	  <result column="ft_AuditTime"   property="auditTime"      jdbcType="TIMESTAMP" />
 	  <result column="fi_AuditRet"    property="auditRet"       jdbcType="DECIMAL" />
 	  <result column="fs_Comment"     property="comment"        jdbcType="VARCHAR" />
   	</resultMap>
@@ -35,21 +35,23 @@
 		SELECT
 			COUNT(1)
 		FROM
-			 Tcustominfo i,Tcustchgau a
+			Tcustchgau 
 		where
 			1=1 
-			and i.fs_auditno=a.fs_auditno
 		<if test="id != null and id != ''">
-			AND i.FS_ID like '%'||#{id,jdbcType = VARCHAR}||'%'
+			AND FS_ID like '%'||#{id,jdbcType = VARCHAR}||'%'
 		</if>
 		<if test="name != null and name != ''">
-			AND i.FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
+			AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
 		</if>
 		<if test="taName != null and taName !=''">
-			AND i.FS_TANAME like '%'||#{taName,jdbcType = VARCHAR}||'%'
+			AND FS_TANAME like '%'||#{taName,jdbcType = VARCHAR}||'%'
 		</if>
 		<if test="auditType != null">
-			AND a.FI_AuditType = #{auditType,jdbcType=DECIMAL}
+			AND FI_AuditType = #{auditType,jdbcType=DECIMAL}
+		</if>
+		<if test="auditRet != null">
+			AND FI_AuditRet = #{auditRet,jdbcType=DECIMAL}
 		</if>
 	</select>
 
@@ -61,34 +63,34 @@
 		FROM(
 			SELECT
 				ROWNUM  rowno,
-				i.FS_ID, 
-	    		i.FS_NAME, 
-	    		i.FS_TANAME,
-	    		i.FS_CONTACT, 
-	    		i.FS_EMAIL, 
-	    		i.FS_AUDITNO,
-				i.fs_Address,
-				i.FI_STAT,
-				a.fi_AuditType
-			FROM
-			 Tcustominfo i,Tcustchgau a
-			where
-				1=1 
-				and i.fs_auditno=a.fs_auditno
-			<if test="id != null and id != ''">
-				AND i.FS_ID like '%'||#{id,jdbcType = VARCHAR}||'%'
-			</if>
-			<if test="name != null and name != ''">
-				AND i.FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
-			</if>
-			<if test="taName != null and taName !=''">
-				AND i.FS_TANAME like '%'||#{taName,jdbcType = VARCHAR}||'%'
-			</if>
-			<if test="auditType != null">
-				AND a.FI_AuditType = #{auditType,jdbcType=DECIMAL}
-			</if>
+				b.*
+			from
+				(select 
+					a.*
+				FROM
+				 	Tcustchgau a
+				where
+					1=1 
+				<if test="id != null and id != ''">
+					AND FS_ID like '%'||#{id,jdbcType = VARCHAR}||'%'
+				</if>
+				<if test="name != null and name != ''">
+					AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
+				</if>
+				<if test="taName != null and taName !=''">
+					AND FS_TANAME like '%'||#{taName,jdbcType = VARCHAR}||'%'
+				</if>
+				<if test="auditType != null">
+					AND FI_AuditType = #{auditType,jdbcType=DECIMAL}
+				</if>
+				<if test="auditRet != null">
+					AND FI_AuditRet = #{auditRet,jdbcType=DECIMAL}
+				</if>
+				order by 
+					FS_ID,ft_auditTime desc
+				)b
 			<if test="endrow != null">
-				AND ROWNUM &lt;= #{endrow}
+				where  ROWNUM &lt;= #{endrow}
 			</if>
 		)
 		<if test="startrow != null">
@@ -114,8 +116,8 @@
 			fs_Fax,
 			fs_Address,
 			fs_TabLicense,
-			to_char(ft_ApplyTime,'yyyy-mm-dd hh24:mi:ss') ft_ApplyTime,
-			to_char(ft_AuditTime,'yyyy-mm-dd hh24:mi:ss') ft_AuditTime,
+			ft_ApplyTime,
+			ft_AuditTime,
 			fs_Auditor,
 			fi_AuditRet,
 			fs_Comment

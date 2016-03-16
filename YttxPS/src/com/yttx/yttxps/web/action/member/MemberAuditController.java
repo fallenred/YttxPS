@@ -1,6 +1,5 @@
 package com.yttx.yttxps.web.action.member;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yttx.comm.StringUtil;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.CustomInfo;
+import com.yttx.yttxps.model.Dict;
 import com.yttx.yttxps.model.vo.CostomPageRequest;
 import com.yttx.yttxps.service.IMemberAuditService;
 import com.yttx.yttxps.service.IMemberService;
@@ -44,7 +44,16 @@ public class MemberAuditController extends BaseController {
 	 * 打开会员管理界面
 	 */
 	@RequestMapping(value="page.htm")
-	public String openManagePage(){
+	public String openManagePage(Model model){
+		List<Dict> auditRet_list= getDictListByParentNo("cus_adtret");
+		Object auditRet_Json = getDictMapJsonByParentNo("cus_adtret");
+		model.addAttribute("auditRet_list", auditRet_list);
+		model.addAttribute("auditRet_Json", auditRet_Json);
+		
+		List<Dict> auditType_list = getDictListByParentNo("cus_attype");
+		Object auditType_Json = getDictMapJsonByParentNo("cus_attype");
+		model.addAttribute("auditType_list", auditType_list);
+		model.addAttribute("auditType_Json", auditType_Json);
 		return "member/auditpage";
 	}
 	
@@ -68,12 +77,12 @@ public class MemberAuditController extends BaseController {
 	@RequestMapping(value="auditpage.htm")
 	public String  findCustomerById(@RequestParam("id") String id,
 			@RequestParam("auditNo") String auditNo,
-			@RequestParam("auditType") BigDecimal auditType,
+			@RequestParam("auditType") Integer auditType,
 			Model model){
 		model.addAttribute("auditType", auditType);
 		CustomInfo auditCus = memberAuditService.selectCusByAuditNo(auditNo);//找到需要审核的信息
 		model.addAttribute("acus", auditCus);
-		if(auditType.intValue()==2){//如果是信息变更，找到客户的原始信息
+		if(auditType==2&&auditCus.getAuditRet()==0){//如果是信息变更，找到客户的原始信息
 			CustomInfo ordCus = memberService.selectCusById(id);
 			model.addAttribute("ocus", ordCus);
 		}

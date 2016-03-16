@@ -1,4 +1,11 @@
 jQuery(function($){
+	
+	//放大图片
+	$(".imgzoom").WMZoom({config:{
+		inner : true
+		}
+	});
+	
 	$("#close").on("click", function (){
 		$("#showModal", parent.document).find(".close").click();
 	});

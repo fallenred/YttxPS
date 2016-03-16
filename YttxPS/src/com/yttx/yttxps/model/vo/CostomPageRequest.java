@@ -28,5 +28,6 @@ public class CostomPageRequest extends JqGridRequest implements Serializable{
 		map.put("taName", filters.getTaname());//旅行社名称
 		map.put("stat",filters.getStat());//状态
 		map.put("auditType",filters.getAuditType());//审核状态
+		map.put("auditRet",filters.getAuditRet());//审核状态
 	}
 }

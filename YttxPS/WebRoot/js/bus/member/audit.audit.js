@@ -1,5 +1,10 @@
 $(document).ready(function(){
 	$("#message").hide();
+	//放大图片
+	$(".imgzoom").WMZoom({config:{
+		inner : true
+		}
+	});;
 	//初始化会员选择器
 	var localsel = $("#selectUser").user({
 		depturl : "/user/dept/findDepts.htm",
@@ -55,7 +60,6 @@ $(document).ready(function(){
 		param.id = $("#id").val();  //会员id
 		param.auditno = $("#auditNo").val();  // 审核编号
 		
-		console.log(param);
 		var url="/member/audit/audit.htm"
 		$.ajax({    
             type:'post',        
@@ -91,9 +95,4 @@ $(document).ready(function(){
 	$("#audit_no").on("click", function (){
 		auditCustomer(-1);
 	});
-	
-	
-	
-	
-	
 })

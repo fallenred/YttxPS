@@ -25,8 +25,8 @@
 .localcity .tabs .close-x{
 	cursor:pointer;
 	position: absolute;
-    right: 8px;
-    top: 5px;
+    right: 5px;
+    top: 10px;
     background: url(/images/icon/btn_x.png);
     background-position: -4px -4px;
     width: 12px;

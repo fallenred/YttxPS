@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+	
+	
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -9,6 +13,10 @@
 <meta name="description" content="" />
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
+<script type="text/javascript">
+	var auditType_item = ${auditType_Json};
+	var auditRet_item = ${auditRet_Json};
+</script>
 </head>
 <body class="no-skin">
 	<jsp:include page="/jsp/comm/topbar.jsp" flush="true" />
@@ -51,68 +59,75 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-							<!-- PAGE CONTENT BEGINS -->
-							<!-- 查询条件 -->
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a class="accordion-toggle" href="#collapseOne"
-											data-toggle="collapse" data-parent="#accordion"> <i
-											class="bigger-110 ace-icon fa fa-angle-down"
-											data-icon-show="ace-icon fa fa-angle-right"
-											data-icon-hide="ace-icon fa fa-angle-down"></i> &nbsp;查询条件
-										</a>
-									</h4>
-								</div>
-
-								<div class="panel-collapse collapse in" id="collapseOne">
-									<div class="panel-body">
-										<form class="form-horizontal" role="form" id="queryfield">
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="id">客户ID</label>
-												<div class="col-sm-5">
-													<input maxlength="16" name="id" type="text" id="id" placeholder="忽略客户Id" />
-												</div>
-												<label class="col-sm-1 control-label no-padding-right" for="name">客户名称</label>
-												<div class="col-sm-2">
-													<input maxlength="50" name="name" type="text" id="name" placeholder="忽略客户名称" />
+							<div class="widget-box">
+								<div class="widget-body">
+									<div class="widget-main">
+										<div class="tabbable">
+											<ul class="nav nav-tabs" id="tab">
+												<c:forEach items="${auditRet_list}" var="item">
+													<li <c:if test="${item.fsDictno==0}">class="active"</c:if>>
+														<a data-toggle="tab" data-stat="${item.fsDictno}" href="#stat_div" class="auditRetPane">
+															<i></i>${item.fsDictname}
+														</a>
+													</li>
+												</c:forEach>
+											</ul>
+											<div class="tab-content">
+												<div id="stat_div" class="tab-pane in active">
+													<!-- 全部订单的过滤条件 -->
+													<form class="form-horizontal" role="form" id="queryfield">
+														<input type="hidden" id="auditRet" value="0">
+														<div class="form-group">
+															<label class="col-sm-1 control-label no-padding-right" for="id">客户ID</label>
+															<div class="col-sm-5">
+																<input maxlength="16" name="id" type="text" id="id" placeholder="忽略客户Id" />
+															</div>
+															<label class="col-sm-1 control-label no-padding-right" for="name">客户名称</label>
+															<div class="col-sm-2">
+																<input maxlength="50" name="name" type="text" id="name" placeholder="忽略客户名称" />
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="col-sm-1 control-label no-padding-right" for="taname">旅行社名称</label>
+															<div class="col-sm-5">
+																<input maxlength="50" name="taname" type="text" 
+																	id="taname" placeholder="忽略旅行社名称" />
+															</div>
+															<label class="col-sm-1 control-label no-padding-right" for="stat">申请审核类型</label>
+															<div class="col-sm-5">
+																<select id="auditType" name="auditType">
+																	<option value="">忽略申请审核类型</option>
+																	<c:forEach items="${auditType_list}" var="item">
+																		<option value="${item.fsDictno}">${item.fsDictname}</option>
+																	</c:forEach>
+																</select>
+															</div>
+														</div>
+														<div class="clearfix form-actions">
+															<div class="col-md-offset-3 col-md-9">
+																<button class="btn btn-info btn-sm" type="button" id="queryfield_submit">
+																	<i class="ace-icon fa fa-check bigger-110"></i> 查询
+																</button>
+																&nbsp; &nbsp; &nbsp;
+																<button class="btn btn-sm" type="reset" id="reset">
+																	<i class="ace-icon fa fa-undo bigger-110"></i> 重置
+																</button>
+															</div>
+														</div>
+													</form>
+													<div class="row">
+														<div class="col-xs-12">
+															<table id="grid-table"></table>
+															<div id="grid-pager"></div>
+														</div>
+													</div>
 												</div>
 											</div>
-											
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="taname">旅行社名称</label>
-												<div class="col-sm-5">
-													<input maxlength="50" name="taname" type="text" 
-														id="taname" placeholder="忽略旅行社名称" />
-												</div>
-												<label class="col-sm-1 control-label no-padding-right" for="stat">审核状态</label>
-												<div class="col-sm-5">
-													<select id="auditType" name="auditType">
-														<option value="">忽略状态</option>
-														<option value="1">新增</option>
-														<option value="2">变更</option>
-													</select>
-												</div>
-											</div>
-											<div class="clearfix form-actions">
-												<div class="col-md-offset-3 col-md-9">
-													<button class="btn btn-info btn-sm" type="button" id="queryfield_submit">
-														<i class="ace-icon fa fa-check bigger-110"></i> 查询
-													</button>
-													&nbsp; &nbsp; &nbsp;
-													<button class="btn btn-sm" type="reset" id="reset">
-														<i class="ace-icon fa fa-undo bigger-110"></i> 重置
-													</button>
-												</div>
-											</div>
-										</form>
+										</div>
 									</div>
-
 								</div>
 							</div>
-							<table id="grid-table"></table>
-							<div id="grid-pager"></div>
-
 							<!-- PAGE CONTENT ENDS -->
 						</div>
 						<!-- /.col -->

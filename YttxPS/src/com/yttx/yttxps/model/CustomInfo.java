@@ -1,7 +1,8 @@
 package com.yttx.yttxps.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
+
+import com.yttx.comm.DateUtil;
 /**
  * 会员管理模块--会员bean
  */
@@ -33,7 +34,7 @@ public class CustomInfo {
 
     private String dac;
 
-    private BigDecimal stat;
+    private Integer stat;
 
     private String auditno;
 
@@ -47,7 +48,7 @@ public class CustomInfo {
     
     private String salesManID;
     
-    private BigDecimal auditType;
+    private Integer auditType;
     
     private Date applyTime;
     
@@ -59,7 +60,7 @@ public class CustomInfo {
     
     private String auditTimeDesc;
     
-    private BigDecimal auditRet;
+    private Integer auditRet = 0;
     
     private String comment;
 
@@ -172,12 +173,12 @@ public class CustomInfo {
     }
 
     
-    public BigDecimal getStat() {
+    public Integer getStat() {
         return stat;
     }
 
     
-    public void setStat(BigDecimal stat) {
+    public void setStat(Integer stat) {
         this.stat = stat;
     }
 
@@ -261,12 +262,12 @@ public class CustomInfo {
 	}
 
 
-	public BigDecimal getAuditType() {
+	public Integer getAuditType() {
 		return auditType;
 	}
 
 
-	public void setAuditType(BigDecimal auditType) {
+	public void setAuditType(Integer auditType) {
 		this.auditType = auditType;
 	}
 
@@ -282,7 +283,7 @@ public class CustomInfo {
 
 
 	public String getApplyTimeDesc() {
-		return applyTimeDesc;
+		return DateUtil.getDateFormatStr(applyTime);
 	}
 
 
@@ -312,7 +313,7 @@ public class CustomInfo {
 
 
 	public String getAuditTimeDesc() {
-		return auditTimeDesc;
+		return DateUtil.getDateFormatStr(auditTime);
 	}
 
 
@@ -321,12 +322,12 @@ public class CustomInfo {
 	}
 
 
-	public BigDecimal getAuditRet() {
+	public Integer getAuditRet() {
 		return auditRet;
 	}
 
 
-	public void setAuditRet(BigDecimal auditRet) {
+	public void setAuditRet(Integer auditRet) {
 		this.auditRet = auditRet;
 	}
 

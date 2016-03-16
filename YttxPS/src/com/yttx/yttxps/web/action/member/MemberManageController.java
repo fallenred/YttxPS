@@ -1,6 +1,5 @@
 package com.yttx.yttxps.web.action.member;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,9 +74,9 @@ public class MemberManageController extends BaseController {
 	public Object modCusStat(@RequestParam("id") String id,@RequestParam("oper") String oper ){
 		CustomInfo customInfo = new CustomInfo();
 		if("S".equalsIgnoreCase(oper)){
-			customInfo.setStat(new BigDecimal("-100"));
+			customInfo.setStat(-100);
 		}else if("A".equalsIgnoreCase(oper)){
-			customInfo.setStat(new BigDecimal("1"));
+			customInfo.setStat(1);
 		}
 		customInfo.setId(id);
 		

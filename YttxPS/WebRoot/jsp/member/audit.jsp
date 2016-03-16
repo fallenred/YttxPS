@@ -11,7 +11,9 @@
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
 <link rel="stylesheet" href="/css/my.css" />
+<link rel="stylesheet" href="/css/jquery.wm-zoom-1.0.css" />
 <script src="/js/bus/user.js"></script>
+<script src="/js/jquery.wm-zoom-1.0.js"></script>
 </head>
 <body>
 	<div class="main-container" id="main-container">
@@ -34,12 +36,10 @@
 								<div class="row">
 									<div class="profile-user-info profile-user-info-striped">
 										<div class="profile-info-row">
-											<div class="profile-info-name col-xs-2">审核类型</div>
+											<div class="profile-info-name col-xs-2">申请审核类型</div>
 											<div class="profile-info-value col-xs-10">
-												<span>
-													<c:if test="${acus.auditType==1}">新增</c:if>
-													<c:if test="${acus.auditType==2}">信息变更</c:if>
-												</span>
+												<c:set var="auditTyp" scope="page">${acus.auditType}</c:set>
+												<span>${codeMasterMap['cus_attype'][auditTyp]}</span>
 											</div>
 										</div>
 									</div>
@@ -51,7 +51,7 @@
 											</div>
 										</div>
 									</div>
-									<c:if test="${auditType==1}">
+									<c:if test="${ocus==null}">
 										<div class="profile-user-info profile-user-info-striped">
 											<div class="profile-info-row">
 												<div class="profile-info-name col-xs-2">客户名称</div>
@@ -74,10 +74,12 @@
 											<div class="profile-info-row">
 												<div class="profile-info-name col-xs-2">营业许可证</div>
 												<div class="profile-info-value col-xs-10">
-													<span class="profile-picture"> 
-													<img class="editable img-responsive editable-click editable-empty" alt="菜单图片" 
-														src="${acus.licenceno}" style="width:160px; height:120px"> 
-													</span>
+													<div class="wm-zoom-container imgzoom">
+			  											<div class="wm-zoom-box">
+																<img src="${acus.licenceno}" style="width:280px; height:210px" 
+																data-hight-src="${acus.licenceno}">
+			  											</div>
+			  										</div>
 												</div>
 											</div>
 										</div>
@@ -86,10 +88,12 @@
 											<div class="profile-info-row">
 												<div class="profile-info-name col-xs-2">税务登记证</div>
 												<div class="profile-info-value col-xs-10">
-													<span class="profile-picture"> 
-													<img class="editable img-responsive editable-click editable-empty" alt="菜单图片" 
-														src="${acus.taxlicence}" style="width:160px; height:120px"> 
-													</span>
+													<div class="wm-zoom-container imgzoom">
+			  											<div class="wm-zoom-box">
+																<img src="${acus.taxlicence}" style="width:280px; height:210px" 
+																data-hight-src="${acus.taxlicence}">
+			  											</div>
+			  										</div>
 												</div>
 											</div>
 										</div>
@@ -166,24 +170,26 @@
 												</div>
 											</div>
 										</div>
-										<div class="profile-user-info profile-user-info-striped">
-											<div class="profile-info-row">
-												<div class="profile-info-name col-xs-2">销售人员ID</div>
-												<div class="profile-info-value col-xs-10">
-													<input type="text" placeholder="选择销售人员" name="operName" 
-													id="operName" data-idx="0" readonly /> 
-													<div class="localcity selectCity" id="selectUser"></div>
-													<input type="hidden" id="operId" name="operId"/> 
+										<c:if test="${acus.auditRet==0}">
+											<div class="profile-user-info profile-user-info-striped">
+												<div class="profile-info-row">
+													<div class="profile-info-name col-xs-2">销售人员ID</div>
+													<div class="profile-info-value col-xs-10">
+														<input type="text" placeholder="选择销售人员" name="operName" 
+														id="operName" data-idx="0" readonly /> 
+														<div class="localcity selectCity" id="selectUser"></div>
+														<input type="hidden" id="operId" name="operId"/> 
+													</div>
 												</div>
 											</div>
-										</div>
+										</c:if>
 									</c:if>
-									<c:if test="${auditType==2}">
+									<c:if test="${ocus!=null}">
 										<div class="profile-user-info profile-user-info-striped">
 											<div class="profile-info-row">
 												<div class="profile-info-name col-xs-2"><strong>客户信息类型</strong></div>
 												<div class="profile-info-value bchange col-xs-5">
-													<span><strong>原始信息</strong></span>
+													<span><strong>会员信息</strong></span>
 												</div>
 												<div class="profile-info-value col-xs-5">
 													<span><strong>变更信息</strong></span>
@@ -218,16 +224,20 @@
 											<div class="profile-info-row">
 												<div class="profile-info-name col-xs-2">营业许可证</div>
 												<div class="profile-info-value bchange col-xs-5">
-													<span class="profile-picture "> 
-													<img class="editable img-responsive editable-click editable-empty" alt="菜单图片" 
-														src="${ocus.licenceno}" style="width:160px; height:120px"> 
-													</span>
+													<div class="wm-zoom-container imgzoom">
+			  											<div class="wm-zoom-box">
+																<img src="${ocus.licenceno}" style="width:280px; height:210px" 
+																data-hight-src="${ocus.licenceno}">
+			  											</div>
+			  										</div>
 												</div>
 												<div class="profile-info-value col-xs-5">
-													<span class="profile-picture"> 
-													<img class="editable img-responsive editable-click editable-empty" alt="菜单图片" 
-														src="${acus.licenceno}" style="width:160px; height:120px"> 
-													</span>
+													<div class="wm-zoom-container imgzoom">
+			  											<div class="wm-zoom-box">
+																<img src="${acus.licenceno}" style="width:280px; height:210px" 
+																data-hight-src="${acus.licenceno}">
+			  											</div>
+			  										</div>
 												</div>
 											</div>
 										</div>
@@ -236,17 +246,21 @@
 											<div class="profile-info-row">
 												<div class="profile-info-name col-xs-2">税务登记证</div>
 												<div class="profile-info-value bchange col-xs-5">
-													<span class="profile-picture"> 
-													<img class="editable img-responsive editable-click editable-empty" alt="菜单图片" 
-														src="${ocus.taxlicence}" style="width:160px; height:120px"> 
-													</span>
+													<div class="wm-zoom-container imgzoom">
+			  											<div class="wm-zoom-box">
+																<img src="${ocus.taxlicence}" style="width:280px; height:210px" 
+																data-hight-src="${ocus.taxlicence}">
+			  											</div>
+			  										</div>
 												</div>
 												
 												<div class="profile-info-value col-xs-5">
-													<span class="profile-picture"> 
-													<img class="editable img-responsive editable-click editable-empty" alt="菜单图片" 
-														src="${acus.taxlicence}" style="width:160px; height:120px"> 
-													</span>
+													<div class="wm-zoom-container imgzoom">
+			  											<div class="wm-zoom-box">
+																<img src="${acus.taxlicence}" style="width:280px; height:210px" 
+																data-hight-src="${acus.taxlicence}">
+			  											</div>
+			  										</div>
 												</div>
 											</div>
 										</div>
@@ -345,28 +359,70 @@
 											</div>
 										</div>
 									</c:if>
-									<div class="profile-user-info profile-user-info-striped">
-										<div class="profile-info-row">
-											<div class="profile-info-name col-xs-2">审核意见</div>
-											<div class="profile-info-value col-xs-10">
-												<textarea cols="50" rows="5" id="comment"></textarea>
+									
+									
+									<c:if test="${acus.auditRet==0}">
+										<div class="profile-user-info profile-user-info-striped">
+											<div class="profile-info-row">
+												<div class="profile-info-name col-xs-2">审核意见</div>
+												<div class="profile-info-value col-xs-10">
+													<textarea cols="50" rows="5" id="comment"></textarea>
+												</div>
 											</div>
 										</div>
-									</div>
+									</c:if>
+									<c:if test="${acus.auditRet!=0}">
+										<div class="profile-user-info profile-user-info-striped">
+											<div class="profile-info-row">
+												<div class="profile-info-name col-xs-2">审核人</div>
+												<div class="profile-info-value col-xs-10">
+													<span>${acus.auditor}</span>
+												</div>
+											</div>
+										</div>
+										<div class="profile-user-info profile-user-info-striped">
+											<div class="profile-info-row">
+												<div class="profile-info-name col-xs-2">审核时间</div>
+												<div class="profile-info-value col-xs-10">
+													<span>${acus.auditTimeDesc}</span>
+												</div>
+											</div>
+										</div>
+										<div class="profile-user-info profile-user-info-striped">
+											<div class="profile-info-row">
+												<div class="profile-info-name col-xs-2">审核结果</div>
+												<div class="profile-info-value col-xs-10">
+													<c:set var="auditRet" scope="page">${acus.auditRet}</c:set>
+													<span>${codeMasterMap['cus_adtret'][auditRet]}</span>
+												</div>
+											</div>
+										</div>
+										<div class="profile-user-info profile-user-info-striped">
+											<div class="profile-info-row">
+												<div class="profile-info-name col-xs-2">审核意见</div>
+												<div class="profile-info-value col-xs-10">
+													<span>${acus.comment}</span>
+												</div>
+											</div>
+										</div>
+									</c:if>
 								</div>
 							</div>
 							<div id = "message" class="alert alert-warning"></div>
 							<div class="modal-footer">
 								<button id="close" type="button" 
 									class="btn btn-default" data-dismiss="modal">关闭</button>
-									
-								<button id="audit_no" type="button" 
-									class="btn  btn-info" data-dismiss="modal">
-									<span class="glyphicon glyphicon-remove"></span>审核不通过</button>
-									
-								<button id="aduit_ok" type="button" 
-									class="btn btn-info" data-dismiss="modal">
-									<span class="glyphicon glyphicon-ok"></span>审核通过</button>
+								<c:if test="${acus.auditRet==0}">
+									<button id="audit_no" type="button" 
+										class="btn  btn-info" data-dismiss="modal">
+										<span class="glyphicon glyphicon-remove"></span>审核不通过
+									</button>
+										
+									<button id="aduit_ok" type="button" 
+										class="btn btn-info" data-dismiss="modal">
+										<span class="glyphicon glyphicon-ok"></span>审核通过
+									</button>
+								</c:if>
 							</div>
 						</div>
 					</div>
