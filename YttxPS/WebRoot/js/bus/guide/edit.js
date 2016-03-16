@@ -1,25 +1,5 @@
 jQuery(function($) {
 	$("#message").hide();
-//	var localsel = $("#selectCity", "#editform").localCity({
-
-//	provurl : "/pub/findcity.htm",
-//	cityurl : "/pub/findcity.htm",
-//	disturl : "/pub/findcity.htm",
-//	callback : localcallback
-//	});
-
-//	//城市选择器
-//	function localcallback(index, key, value, fullkey, fullname) {
-//	$("#regionname", "#editform").val(fullname);
-//	$("#regionno", "#editform").val(key);
-//	if (index == 3)
-//	$("#selectCity", "#editform").hide();
-//	}
-
-//	$("#regionname", "#editform").click(function() {
-//	$("#selectCity", "#editform").show();
-//	});
-
 
 	//	重置
 	$("#reset").on("click", function() {
@@ -37,37 +17,37 @@ jQuery(function($) {
 
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#no").val() == '') {
+		if($("#no").val() == '' || $("#no").val() == undefined) {
 			$("#message").show();
 			$("#message").text("景区编码不能为空，请输入");
 			$('#no').focus();
 			return false;
 		} 
-		if($("#name").val() == '') {
+		if($("#name").val() == '' || $("#name").val() == undefined) {
 			$("#message").show();
 			$("#message").text("景区名称不能为空，请输入");
 			$('#name').focus();
 			return false;
 		} 
-		if($("#gender").val() == '') {
+		if($("#gender").val() == '' || $("#gender").val() == undefined) {
 			$("#message").show();
 			$("#message").text("性别不能为空，请输入");
 			$('#gender').focus();
 			return false;
 		}
-		if($("#idno").val() == '') {
+		if($("#idno").val() == '' || $("#idno").val() == undefined) {
 			$("#message").show();
 			$("#message").text("身份证号不能为空，请输入");
 			$('#idno').focus();
 			return false;
 		}
-		if($("#contactno").val() == '') {
+		if($("#contactno").val() == '' || $("#contactno").val() == undefined) {
 			$("#message").show();
 			$("#message").text("联系方式不能为空，请输入");
 			$('#contactno').focus();
 			return false;
 		}
-		if($("#lvl").val() == '') {
+		if($("#lvl").val() == '' || $("#lvl").val() == undefined) {
 			$("#message").show();
 			$("#message").text("等级不能为空，请输入");
 			$('#lvl').focus();
@@ -76,7 +56,7 @@ jQuery(function($) {
 		$.post("/guide/editGuide.htm",
 				$("#editform").serialize(),
 				function(data){
-			var json = eval("("+data+")");
+			var json = eval("(" + data + ")");
 			if(json.result == "ok") {
 				$("#message").text("修改记录成功");
 				$("#message").show();

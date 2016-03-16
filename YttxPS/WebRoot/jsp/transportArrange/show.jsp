@@ -38,7 +38,7 @@
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">×</button>
-									<h4 class="modal-title" id="showModalLabel">门票详情</h4>
+									<h4 class="modal-title" id="showModalLabel">车型线路详情</h4>
 								</div>
 								<div class="modal-body">
 									<!-- 图片TODO： -->

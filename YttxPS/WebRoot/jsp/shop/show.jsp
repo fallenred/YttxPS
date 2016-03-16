@@ -51,7 +51,7 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right" for="no">购物点代码</label>
+											<label class="col-sm-1 control-label no-padding-right" for="no">购物店代码</label>
 											<div class="col-sm-3">
 												<input type="text" id="no" class="form-control" placeholder="购物点代码" readonly="readonly" />
 											</div>
