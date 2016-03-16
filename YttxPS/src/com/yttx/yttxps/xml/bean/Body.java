@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @XStreamAlias("body")
 public class Body {
@@ -19,6 +20,27 @@ public class Body {
 	
 	@XStreamAlias("dayflag")
 	private String dayflag;
+	
+	/**
+	 * 以下为定制线路客户询价时录入的字段内容
+	 * add by huangtao
+	 * add date 2016-03-09
+	 */
+	@XStreamImplicit(itemFieldName="attachs")
+	//附件
+	private List<Attachs> attachs;
+	//服务标准
+	@XStreamAlias("svcstdcontent")
+	private String svcstdcontent;
+	//价格
+	@XStreamAlias("price")
+	private String price;
+	//保险价格
+	@XStreamAlias("insuerprice")
+	private String insuerprice;
+	//订单批次主键
+	@XStreamOmitField
+	private String fiId;
 
 	public List<Daylist> getDaylist() {
 		return daylist;
@@ -43,5 +65,44 @@ public class Body {
 	public void setDayflag(String dayflag) {
 		this.dayflag = dayflag;
 	}
-	
+
+	public String getSvcstdcontent() {
+		return svcstdcontent;
+	}
+
+	public void setSvcstdcontent(String svcstdcontent) {
+		this.svcstdcontent = svcstdcontent;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public List<Attachs> getAttachs() {
+		return attachs;
+	}
+
+	public void setAttachs(List<Attachs> attachs) {
+		this.attachs = attachs;
+	}
+
+	public String getInsuerprice() {
+		return insuerprice;
+	}
+
+	public void setInsuerprice(String insuerprice) {
+		this.insuerprice = insuerprice;
+	}
+
+	public String getFiId() {
+		return fiId;
+	}
+
+	public void setFiId(String fiId) {
+		this.fiId = fiId;
+	}
 }

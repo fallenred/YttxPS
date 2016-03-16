@@ -135,18 +135,18 @@
 							<table id="grid-table"></table>
 							<div id="grid-pager"></div>
 
-							<!-- 模态框（新增） -->
-							<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
-								aria-labelledby="addModalLabel" aria-hidden="true">
-								<div class="modal-dialog" style="width: 1024px;">
+							<!-- 定制线路 -->
+							<div class="modal fade" id="customizationModal" tabindex="-1" role="dialog"
+								aria-labelledby="customizationModalLabel" aria-hidden="true">
+								<div class="modal-dialog" style="width: 100%;">
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal"
 												aria-hidden="true">×</button>
-											<h4 class="modal-title" id="addModalLabel">订单结算</h4>
+											<h4 class="modal-title" id="customizationModalLabel">计调订单</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="addIframe" width="100%" height="500px"
+											<iframe id="customizationIframe" width="100%" height="2500px"
 												frameborder="0" scrolling="no"></iframe>
 										</div>
 
@@ -157,11 +157,11 @@
 								<!-- /.modal -->
 							</div>
 
-							<!-- 模态框（修改） -->
+							<!-- 衍生线路 -->
 							<div class="modal fade" id="editModal" tabindex="-1"
 								role="dialog" aria-labelledby="editModalLabel"
 								aria-hidden="true">
-								<div class="modal-dialog" style="width: 1024px;">
+								<div class="modal-dialog" style="width: auto;">
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal"
@@ -169,7 +169,7 @@
 											<h4 class="modal-title" id="addModalLabel">计调订单</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="editIframe" width="100%" height="1400px"
+											<iframe id="editIframe" width="100%" height="1900px"
 												frameborder="0" scrolling="no"></iframe>
 										</div>
 

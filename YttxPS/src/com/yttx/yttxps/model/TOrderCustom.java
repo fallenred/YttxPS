@@ -1,9 +1,6 @@
 package com.yttx.yttxps.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
-
-import com.yttx.yttxps.xml.bean.Body;
 
 public class TOrderCustom {
 

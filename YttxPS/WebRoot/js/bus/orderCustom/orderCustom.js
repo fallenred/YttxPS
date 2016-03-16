@@ -872,7 +872,7 @@ jQuery(function($) {
 				}, {
 					name : 'fsName',
 					index : 'fsName',
-					width : 80,
+					width : 120,
 					editable : true,
 					sorttype : "char"
 				}, {
@@ -884,7 +884,7 @@ jQuery(function($) {
 				}, {
 					name : 'ftCreatdate',
 					index : 'ftCreatdate',
-					width : 50,
+					width : 100,
 					editable : true,
 					sorttype : "date"
 				}, {
@@ -948,7 +948,7 @@ jQuery(function($) {
 				}, {
 					name : 'fsPostscript',
 					index : 'fsPostscript',
-					width : 50,
+					width : 150,
 					editable : true,
 					sorttype : "int"
 				}, {

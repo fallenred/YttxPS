@@ -1,6 +1,7 @@
 package com.yttx.yttxps.web.action.trade;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,14 +19,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
+import com.yttx.yttxps.model.TOrderCustom;
 import com.yttx.yttxps.model.TOrderCustomExample;
+import com.yttx.yttxps.model.TOrderCustomExample.Criteria;
 import com.yttx.yttxps.model.TOrderCustomWithBLOBs;
+import com.yttx.yttxps.model.TOrderlist;
 import com.yttx.yttxps.model.vo.OrderCustomRequest;
 import com.yttx.yttxps.service.IOrderCustomService;
+import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.web.action.LoginController;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
 import com.yttx.yttxps.xml.bean.Body;
+import com.yttx.yttxps.xml.bean.Daylist;
 import com.yttx.yttxps.xml.bean.Root;
 
 @Controller
@@ -37,6 +43,8 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
 	private IOrderCustomService orderCustomService;
+	@Autowired
+	private IOrderlistService orderlistService;
 	
 	/**
 	 * 分页查询批次订单信息
@@ -47,13 +55,52 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@ResponseBody
 	public Object ajaxfindOrderCustom(OrderCustomRequest req){  
 		logger.debug("当前查询条件 {}", req.getOrderCustom());
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		req.copyPage(map);
 		req.copyOrderCustom(map);
 		List<TOrderCustomWithBLOBs> list = orderCustomService.selectSelectivePage(map);
 		map.put("rows", list);
 		return map;
+    }
+	
+	/**
+	 * 查询批次订单信息
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="selectOrderCustom.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object ajaxfindOrderCustom(TOrderCustom orderCustom){  
+		TOrderCustomExample example = new TOrderCustomExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFsOrderIdEqualTo(orderCustom.getFsOrderId());
+		List<TOrderCustomWithBLOBs> list = orderCustomService.selectTOrderCustom(example);
+		//订单天数
+		int days = 0;
+		if (CollectionUtils.isNotEmpty(list)) {
+			TOrderlist orderlist = orderlistService.selectByPrimaryKey(list.get(0).getFsOrderId());
+			if (orderlist != null) {
+				days = Integer.parseInt(orderlist.getFsNo());
+			}
+		}
+		for(TOrderCustomWithBLOBs customWithBLOBs : list){
+			//转换精确快照文本
+			if (StringUtils.isNotEmpty(customWithBLOBs.getFcRessnapshot())){
+				Root root = ResScheduleXMLConverter.fromXml("http://www.yttx.com/", customWithBLOBs.getFcRessnapshot(), Root.class);
+				customWithBLOBs.setBody(root.getBody());
+			} else {
+				//如果为空则根据订单天数生成一个空的body对象供页面解析展现
+				Body body = new Body();
+				body.setDaylist(new ArrayList<Daylist>());
+				for (int i = 0; i < days; i++) {
+					Daylist daylist = new Daylist();
+					daylist.setDayflag(i+"");
+					body.getDaylist().add(daylist);
+				}
+				customWithBLOBs.setBody(body);
+			}
+		}
+		return list;
     }
 	
 	/**

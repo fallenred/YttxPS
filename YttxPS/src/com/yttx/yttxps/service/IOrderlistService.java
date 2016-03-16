@@ -25,8 +25,13 @@ public interface IOrderlistService {
 	int update(TOrderlistWithBLOBs orderlist) throws Exception;
 	
 	@Transactional
+	int update4custom(TOrderlistWithBLOBs orderlist) throws Exception;
+	
+	@Transactional
 	int delete(String no);
 
 	List<TOrderlistWithBLOBs> selectTOrderlist(TOrderlistExample example);
+	
+	TOrderlistWithBLOBs selectByPrimaryKey(String fsNo);
 	
 }
