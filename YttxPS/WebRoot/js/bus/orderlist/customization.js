@@ -506,6 +506,9 @@ jQuery(function($) {
 		var restype = $(this).parent().parent().find("#restype").val();
 		var resno = $(this).parent().parent().find("#resno").val();
 		var resname = $(this).parent().parent().find("#resno").find("option:selected").text();
+		if (restype == 'gw') {
+			ccno = '';
+		}
 		var data = {
 				"index" : reslistIndex,
 				"restype" : restype,
@@ -692,7 +695,14 @@ jQuery(function($) {
 			return false;
 		});
 	});
-
+	
+	//下载文件
+	$(document).on('click key', '.btn_downFile', function(event){
+		//文件路径
+		var url = $(this).next().val();
+		window.location.href = url;
+	});
+	
 	//	colorbox
 	var $overflow = '';
 	var colorbox_params = {

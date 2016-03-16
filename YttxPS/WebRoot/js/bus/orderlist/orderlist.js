@@ -93,6 +93,11 @@ $("#customizationIframe").on("load",function(){
 	$(this).contents().find("#fiVisitornum").val(raw.fiVisitornum);
 	$(this).contents().find("#insurenum").val(raw.fiVisitornum);
 	$(this).contents().find("#fsOperId").val(raw.fsOperId);
+	$(this).contents().find("#fiStat").val(raw.fiStat);
+	//询价状态时隐藏计调资源配置界面
+	if (raw.fiStat == '-10' || raw.fiStat == '-5') {
+		$(this).contents().find(".div_transfer").hide();
+	}
 	getGuide(obj, Lvl);
 });
 
@@ -279,6 +284,8 @@ jQuery(function($) {
 			});
 
 	var items = {
+		'-10' : '询价',
+		'-5' : '报价',
 		'0' : '待审核',
 		'1' : '已审核',
 		'2' : '已确认(待付款)',
@@ -495,7 +502,7 @@ jQuery(function($) {
 						for (k in items)
 							if (items[k] == v)
 								return k;
-						return '1';
+						return '-1';
 					}
 				}, {
 					name : 'fsDac',
