@@ -76,38 +76,43 @@
 
 								<div class="panel-collapse collapse in" id="collapseOne">
 									<div class="panel-body">
+										<!-- 
+											modify by marongcai
+											修改布局
+											2016-3-17
+											modify by start
+										 -->
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="depno">部门编号</label>
-												<div class="col-sm-10">
-													<select class="col-sm-6 col-xs-6" id="depno">
-														<option value="">选择部门编号..</option>
+												<div class="col-sm-2">
+													<select class="form-horizontal"id="depno">
+														<option value="">--选择部门编号--</option>
 														<c:forEach items="${depts}" var="dept">
 															<option value="${dept.depNo}">${dept.depName}</option>
 														</c:forEach>
 													</select>
 												</div>
-											</div>
-											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="depname">部门名称</label>
-												<div class="col-sm-10">
-													<input class="col-sm-6 col-xs-6" maxlength="128" type="text" id="depname"
+												<div class="col-sm-2">
+													<input class="form-horizontal" maxlength="128" type="text" id="depname"
 														placeholder="部门名称" />
 												</div>
-											</div>
-											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="stat">状态</label>
-												<div class="col-sm-10">
-													<select id="stat" class="col-sm-6 col-xs-6">
-														<option value="">请选择状态......</option>
+												<div class="col-sm-2">
+													<select class="form-horizontal" id="stat">
+														<option value="">---请选择状态---</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>
 												</div>
 											</div>
+											<!-- 
+												modify end
+											 -->
 
 											<div class="clearfix form-actions">
 												<div class="col-md-offset-3 col-md-9">

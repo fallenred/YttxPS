@@ -94,7 +94,7 @@
 																<input class="form-control" maxlength="50" name="taname" type="text" 
 																	id="taname" placeholder="忽略旅行社名称" />
 															</div>
-															<label class="col-sm-1 control-label no-padding-right" for="stat">申请审核类型</label>
+															<label class="col-sm-1 control-label no-padding-right" for="stat">审核类型</label>
 															<div class="col-sm-3">
 																<select class="form-control" id="auditType" name="auditType">
 																	<option value="">忽略申请审核类型</option>

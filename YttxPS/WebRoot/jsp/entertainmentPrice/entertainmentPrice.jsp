@@ -69,7 +69,7 @@
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="fsName">娱乐项目名称</label>
+												<label class="col-sm-1 control-label no-padding-right" for="fsName">项目名称</label>
 												<div class="col-sm-2">
 													<input maxlength="150" type="text" id="fsName" placeholder="娱乐项目名称" />
 												</div>
