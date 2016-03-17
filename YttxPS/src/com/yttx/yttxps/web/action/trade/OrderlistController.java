@@ -183,7 +183,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		try{
 			HttpSession session = request.getSession();
 			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
-			orderlist.setFsUserId(sessionEntity.getId());
+			orderlist.setFsOperId(sessionEntity.getId());
 			orderlistService.update4custom(orderlist);
 		}
 		catch(Exception e){

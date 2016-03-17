@@ -113,13 +113,13 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="usernum">游客人数</label>
+												for="fiVisitornum">游客人数</label>
 											<div class="col-sm-3">
 												<input type="text" id="fiVisitornum" class="form-control"
 													placeholder="游客人数" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
-												for="fsProperty">保险</label>
+												for="insurenum">保险</label>
 											<div class="col-sm-3">
 												<div class="input-group">
 													<input type="text" id="insurenum" class="form-control">
@@ -131,7 +131,7 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="fsProperty">保险费用</label>
+												for="insuerprice">保险费用</label>
 											<div class="col-sm-3">
 												<div class="input-group">
 													<input type="text" id="insuerprice"
@@ -147,7 +147,7 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="ftStartdate">订单备注</label>
+												for="fsRemark">订单备注</label>
 											<div class="col-sm-8">
 												<textarea name="fsRemark" id="fsRemark" class="form-control"
 													rows="3" placeholder="整体备注"></textarea>
@@ -157,7 +157,7 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="fdPrice">行程要求</label>
+												for="editTable">行程要求</label>
 											<div class="col-sm-8">
 												<table class="table table-bordered" id="editTable">
 													<thead>
@@ -215,7 +215,7 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="fdPrice">文件下载</label>
+												for="">文件下载</label>
 											<div class="col-sm-8">
 												<table class="table table-bordered">
 													<thead>
@@ -248,7 +248,7 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="fdPrice">服务标准</label>
+												for="svcstdcontent">服务标准</label>
 											<div class="col-sm-8">
 												<textarea name="scheduleBody.svcstdcontent"
 													id="svcstdcontent" class="form-control" rows="3"
@@ -264,7 +264,7 @@
 											<div class="col-sm-8">
 												<div class="panel panel-default">
 													<div class="panel-heading">
-														<h3 class="panel-title">行程&价格</h3>
+														<h3 class="panel-title">行程安排&报价</h3>
 													</div>
 													<div class="panel-body">
 														<div class="row">
@@ -280,10 +280,10 @@
 														</div>
 														<div class="row">
 															<div class="form-group">
-																<label class="col-sm-2 control-label" for="transName">预估金额</label>
+																<label class="col-sm-2 control-label" for="transName">报价金额</label>
 																<div class="col-sm-3">
 																	<input type="text" id="price" name="scheduleBody.price"
-																		class="form-control" placeholder="预估金额" />
+																		class="form-control" placeholder="报价" />
 																</div>
 																<label class="col-sm-2 control-label" for="fsOperId">计调人员</label>
 																<div class="col-sm-3">
@@ -301,7 +301,7 @@
 									<div class="row div_transfer">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="transName">公共资源</label>
+												for="commResSnapshot">公共资源</label>
 											<div class="col-sm-8">
 												<div class="panel panel-default">
 													<div class="panel-heading">
@@ -346,7 +346,7 @@
 																				</div>
 																				<div class="col-sm-1">
 																					<button type="button"
-																						class="btn btn-sm btn-success pull-right"
+																						class="btn btn_add btn-sm btn-success pull-right"
 																						onclick="javascript:addTransport(this);">添加</button>
 																				</div>
 																			</div>
@@ -370,7 +370,7 @@
 																				</div>
 																				<div class="col-sm-1">
 																					<button type="button"
-																						class="btn btn-sm btn-success pull-right"
+																						class="btn btn_add btn-sm btn-success pull-right"
 																						onclick="javascript:addGuide(this);">添加</button>
 																				</div>
 																			</div>
@@ -468,7 +468,7 @@
 																					<input type="text" id="usernum" class="form-control" value="1" placeholder="数量">
 																				</div>
 																				<div class="col-sm-1">
-																					<button type="button" class="btn btn_res btn-sm btn-success">添加</button>
+																					<button type="button" class="btn btn_add btn_res btn-sm btn-success">添加</button>
 																					<input type="hidden" class="reslistIndex" value="{{length reslist}}" placeholder="daylist下标">
 																					<input type="hidden" class="daylistIndex" name="commBody.daylist[{{@index}}].dayflag" value="{{@index}}" placeholder="日期">
 																				</div>
@@ -616,7 +616,7 @@
 																									<input type="text" id="usernum" class="usernum form-control" value="1"/>
 																								</div>
 																								<div class="col-sm-1">
-																									<button type="button" class="btn btn_batch btn-sm btn-success pull-right">添加</button>
+																									<button type="button" class="btn btn_add btn_batch btn-sm btn-success pull-right">添加</button>
 																									<input type="hidden" class="batchIndex" value="{{../fiSeq}}" placeholder="批次下标">
 																									<input type="hidden" class="daylistIndex" name="batchBody[{{../fiSeq}}].daylist[{{dayflag}}].dayflag" value="{{dayflag}}" placeholder="日期">
 																									<input type="hidden" class="reslistIndex" value="{{length reslist}}" placeholder="reslist下标">
@@ -679,6 +679,27 @@
 														<!-- 循环批次信息end -->
 													</tbody>
 												</table>
+											</div>
+										</div>
+									</div>
+									<div class="row div_transfer">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fdTotalfee">订单金额</label>
+											<div class="col-sm-3">
+												<input type="text" class="form-control" name="fdTotalfee" id="fdTotalfee">
+											</div>
+											<label class="col-sm-2 control-label no-padding-right" for="fdPaidamt">已缴金额</label>
+											<div class="col-sm-3">
+												<input type="text" class="form-control" name="fdPaidamt" id="fdPaidamt">
+											</div>
+										</div>
+									</div>
+									<div class="row div_transfer">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fiStat">订单状态</label>
+											<div class="col-sm-3">
+												<select id="fiStat" name="fiStat" class="form-control">
+												</select>
 											</div>
 										</div>
 									</div>
@@ -772,7 +793,24 @@
 		//删除资源项
 		function removeTr(obj){
 			$(obj).parent().parent().remove();
+			totalAmount();
 		}
+		
+		//合计订单金额
+		function totalAmount(){
+			var totalAmt = 0;
+			$(".price").each(function(){
+				var price = $(this).val();
+				var usernum = $(this).next().val();
+				if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
+					return;
+				}
+				totalAmt = parseFloat(totalAmt) + parseInt(usernum) * parseFloat(price);
+			});
+			totalAmt = parseFloat(totalAmt) + parseFloat($("#insuerprice").val());
+			$("#fdTotalfee").val(totalAmt.toFixed(2));
+		}
+		
 		//增加景区addScenic
 		function addScenic(obj){
 			var index = $("#reslistIndex").val();
@@ -805,6 +843,7 @@
 			var template = Handlebars.compile($("#tr-common").html());
 			$("#table_common tbody").html($("#table_common tbody").html() + template(data));
 			$("#reslistIndex").val(parseInt(index)+1);
+			totalAmount();
 		}
 		//增加导游addGuide
 		function addGuide(obj){
@@ -824,6 +863,7 @@
 			var template = Handlebars.compile($("#tr-common").html());
 			$("#table_common tbody").html($("#table_common tbody").html() + template(data));
 			$("#reslistIndex").val(parseInt(index)+1);
+			totalAmount();
 		}
 	</script>
 	<!-- 公共资源模板(车型、导游、景区) -->
