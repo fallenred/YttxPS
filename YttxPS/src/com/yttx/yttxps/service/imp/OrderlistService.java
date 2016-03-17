@@ -161,16 +161,20 @@ public class OrderlistService implements IOrderlistService {
 	 * @param orderlist
 	 */
 	private void handleStat(TOrderlist orderlist) {
-		BigDecimal stat = orderlist.getFiStat();
+		if (StringUtils.isBlank(orderlist.getFiStat())) {
+			orderlist.setFiStat(null);
+			return;
+		}
+		BigDecimal stat = new BigDecimal(orderlist.getFiStat());
 		//询价状态时
 		if (OrderStat.INQUIRY.getVal() == stat) {
 			//修改状态为报价
-			orderlist.setFiStat(OrderStat.OFFER.getVal());
+			orderlist.setFiStat(OrderStat.OFFER.getVal().toString());
 		}
 		//待审核状态时
 		if (OrderStat.WAITCONFIRM.getVal() == stat) {
 			//修改状态为已审核
-			orderlist.setFiStat(OrderStat.AUDITED.getVal());
+			orderlist.setFiStat(OrderStat.AUDITED.getVal().toString());
 		}
 	}
 	
