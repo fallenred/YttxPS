@@ -546,6 +546,7 @@ jQuery(function($) {
 			template = Handlebars.compile($("#tr-common1").html());
 		}
 		$("#table_common" + dayflag + " tbody").html($("#table_common" + dayflag + " tbody").html() + template(data));
+		totalAmount();
 	});
 	
 	//添加批次资源项
@@ -598,6 +599,7 @@ jQuery(function($) {
 		data["usernum"] = $(this).parent().parent().find("#usernum").val();
 		var template = Handlebars.compile($("#tr-batch").html());
 		$("#table_batch"+ batchIndex +'_'+ dayflag + " tbody").html($("#table_batch"+ batchIndex +'_'+ dayflag + " tbody").html() + template(data));
+		totalAmount();
 	});
 	
 	//查询订单所有批次信息
@@ -675,6 +677,20 @@ jQuery(function($) {
 			$(this).next().hide();
 		}
 	});
+	//合计订单金额
+	function totalAmount(){
+		var totalAmt = 0;
+		$(".price").each(function(){
+			var price = $(this).val();
+			var usernum = $(this).next().val();
+			if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
+				return;
+			}
+			totalAmt = parseFloat(totalAmt) + parseInt(usernum) * parseFloat(price);
+		});
+		totalAmt = parseFloat(totalAmt) + parseFloat($("#insuerprice").val());
+		$("#fdTotalfee").val(totalAmt.toFixed(2));
+	}
 	
 	//	提交
 	$("#submit").on("click", function () {

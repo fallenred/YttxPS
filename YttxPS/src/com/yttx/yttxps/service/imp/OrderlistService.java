@@ -135,7 +135,9 @@ public class OrderlistService implements IOrderlistService {
 		List<Reslist> list = new ArrayList<Reslist>();
 		if (CollectionUtils.isNotEmpty(obj)) {
 			for (Reslist r : obj) {
-				list.add(r);
+				if (CollectionUtils.isNotEmpty(r.getCclist())){
+					list.add(r);
+				}
 			}
 		}
 		return list;
@@ -146,7 +148,9 @@ public class OrderlistService implements IOrderlistService {
 		List<Daylist> list = new ArrayList<Daylist>();
 		if (CollectionUtils.isNotEmpty(obj)) {
 			for (Daylist d : obj) {
-				list.add(d);
+				if (CollectionUtils.isNotEmpty(d.getReslist())){
+					list.add(d);
+				}
 			}
 		}
 		return list;

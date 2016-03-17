@@ -92,11 +92,24 @@ $("#customizationIframe").on("load",function(){
 	$(this).contents().find("#fcRessnapshot").val(raw.fcRessnapshot);
 	$(this).contents().find("#fiVisitornum").val(raw.fiVisitornum);
 	$(this).contents().find("#insurenum").val(raw.fiVisitornum);
+	$(this).contents().find("#fdTotalfee").val(raw.fdTotalfee);
+	$(this).contents().find("#fdPaidamt").val(raw.fdPaidamt);
 	$(this).contents().find("#fsOperId").val(raw.fsOperId);
-	$(this).contents().find("#fiStat").val(raw.fiStat);
 	//询价状态时隐藏计调资源配置界面
 	if (raw.fiStat == '-10' || raw.fiStat == '-5') {
 		$(this).contents().find(".div_transfer").hide();
+	}
+	//状态为已确认时，页面状态只能选已付首款选项
+	if (raw.fiStat == '2') {
+		$(this).contents().find("#fiStat").html('<option value="4">已付首款</option>');
+	}
+	//状态为已付收款时，页面状态只能选已付全款选项
+	if (raw.fiStat == '4') {
+		$(this).contents().find("#fiStat").html('<option value="8">已付全款(可出团)</option>');
+	}
+	//状态为已付全款时，页面状态只能选完结选项
+	if (raw.fiStat == '8') {
+		$(this).contents().find("#fiStat").html('<option value="32">已完成</option>');
 	}
 	getGuide(obj, Lvl);
 });
