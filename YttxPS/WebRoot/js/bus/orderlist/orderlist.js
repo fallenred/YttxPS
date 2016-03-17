@@ -125,8 +125,10 @@ function getTccPrice(obj, fsResno, id){
         data: 'fsResno='+fsResno+'&ftStartdate='+$(obj).contents().find("#ftStartdate").val()+'&fsCcno=000023&fsRestype=cx',
         dataType: "json",
         success: function(data){
-        	if ($(obj).contents().find("#"+id).val() == '')
-        		$(obj).contents().find("#"+id).val(data.fdPrice);
+        	$.each(data, function(commentIndex, comment){
+        		if ($(obj).contents().find("#"+id).val() == '')
+        			$(obj).contents().find("#"+id).val(comment['fdPrice']);
+        	});
         }
     });
 }
