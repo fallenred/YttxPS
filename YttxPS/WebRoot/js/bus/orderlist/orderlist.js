@@ -122,7 +122,7 @@ function getTccPrice(obj, fsResno, id){
 	$.ajax({
         type: "GET",
         url: "/tccPrice/findTccPrice.htm",
-        data: 'fsResno='+fsResno+'&ftStartdate='+$(obj).contents().find("#ftStartdate").val()+'&fsCcno=000000&fsRestype=cx',
+        data: 'fsResno='+fsResno+'&ftStartdate='+$(obj).contents().find("#ftStartdate").val()+'&fsCcno=000023&fsRestype=cx',
         dataType: "json",
         success: function(data){
         	if ($(obj).contents().find("#"+id).val() == '')
