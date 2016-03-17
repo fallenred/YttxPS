@@ -41,7 +41,7 @@
 		<result  column="FS_ROUTE_ID"        property="routeId"        jdbcType="VARCHAR" />
 		<result  column="FS_PROPERTY"        property="property"       jdbcType="VARCHAR" />
 		<result  column="FI_DAYS"            property="days"           jdbcType="INTEGER" />
-		<result  column="FT_STARTDATE"       property="startDate"      jdbcType="VARCHAR" />
+		<result  column="FT_STARTDATE"       property="startDate"      jdbcType="TIMESTAMP" />
 		<result  column="FT_STARTPLACE"      property="startPlace"     jdbcType="VARCHAR" />
 		<result  column="FD_PRICE"           property="price"          jdbcType="DECIMAL" />
 		<result  column="FS_SUMMARY"         property="summary"        jdbcType="VARCHAR" />
@@ -162,12 +162,12 @@
 		        o.FS_USER_ID,
 		        o.FS_USER_SUBID,
 		        o.FS_OPER_ID,
-		        to_char(o.FT_CREATDATE,'yyyy-mm-dd hh24:mi:ss') FT_CREATDATE,
+		       	o.FT_CREATDATE,
 		        o.FS_TYPE,
 		        o.FS_ROUTE_ID,
 		        o.FS_PROPERTY,
 		        o.FI_DAYS,
-		        o.FT_STARTDATE,
+		       	o.FT_STARTDATE,
 		        o.FS_STARTPLACE,
 		        o.FD_PRICE,
 		        o.FS_SUMMARY,
@@ -232,7 +232,7 @@
 		     FS_USER_ID,
 		     FS_USER_SUBID,
 		     FS_OPER_ID,
-		     to_char(FT_CREATDATE,'yyyy-mm-dd hh24:mi:ss') FT_CREATDATE,
+		     FT_CREATDATE,
 		     FS_TYPE,
 		     FS_ROUTE_ID,
 		     FS_PROPERTY,

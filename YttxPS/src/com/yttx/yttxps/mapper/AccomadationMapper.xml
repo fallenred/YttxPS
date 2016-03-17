@@ -195,6 +195,9 @@
   
      <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
     select count(*) from TACCOMADATION where 1=1 
+     <if test="no != null and no !='' " >
+       and FS_NO like '%'||#{no,jdbcType=VARCHAR}||'%'
+      </if>
       <if test="regionno != null" >
        and FS_REGIONNO = #{regionno,jdbcType=VARCHAR}
       </if>
@@ -219,7 +222,7 @@
     select * from ( 
       select ROWNUM as rowno, t.*  from TACCOMADATION t where 1=1 
       <if test="no != null and no !='' " >
-       and FS_NO = #{no,jdbcType=VARCHAR}
+       and FS_NO like '%'||#{no,jdbcType=VARCHAR}||'%'
       </if>
       <if test="regionno != null and regionno !='' " >
        and FS_REGIONNO = #{regionno,jdbcType=VARCHAR}

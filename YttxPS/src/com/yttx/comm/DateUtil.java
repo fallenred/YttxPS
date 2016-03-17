@@ -64,11 +64,18 @@ public class DateUtil{
 		return df24.format(new Date());
 	}
 	
-	public static String getDateFormatStr(Date date){
+	public static String getFullDateFormatStr(Date date){
 		if(date==null){
 			return "";
 		}
 		return df24.format(date);
 		
+	}
+	
+	public static String getDateFormatStr(Date date){
+		if(date==null){
+			return "";
+		}
+		return df.format(date);
 	}
 }  

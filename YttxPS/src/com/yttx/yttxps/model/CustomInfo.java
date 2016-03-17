@@ -283,7 +283,7 @@ public class CustomInfo {
 
 
 	public String getApplyTimeDesc() {
-		return DateUtil.getDateFormatStr(applyTime);
+		return DateUtil.getFullDateFormatStr(applyTime);
 	}
 
 
@@ -313,7 +313,7 @@ public class CustomInfo {
 
 
 	public String getAuditTimeDesc() {
-		return DateUtil.getDateFormatStr(auditTime);
+		return DateUtil.getFullDateFormatStr(auditTime);
 	}
 
 

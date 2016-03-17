@@ -59,7 +59,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="startdate">日期范围</label>
 											<div class="col-sm-9">
-												<input type="text" id="date_range" placeholder="日期范围"  readonly>
+												<input type="text" id="date_range" placeholder="日期范围"  readonly class="form-control">
 											</div>
 										<!--  
 											<label class="col-sm-2 control-label no-padding-right" for="startdate">开始时间</label>

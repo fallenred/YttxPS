@@ -49,7 +49,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-12">
 						<div class="col-xs-2">
-							<label class="control-label no-padding-right"><strong>创建日期:</strong></label>
+							<label class="control-label no-padding-right"><strong>创建时间:</strong></label>
 						</div>
 						<div class="col-xs-4">
 							<label class="input-group">${order.createDateDesc}</label>
@@ -69,7 +69,7 @@
 							<label class="control-label no-padding-right"><strong>发团日期:</strong></label>
 						</div>
 						<div class="col-xs-4">
-							<label class="input-group">${order.createDateDesc}</label>
+							<label class="input-group">${order.startDateDesc}</label>
 						</div>
 						<div class="col-xs-2">
 							<label class="control-label no-padding-right"><strong>发团地:</strong></label>
