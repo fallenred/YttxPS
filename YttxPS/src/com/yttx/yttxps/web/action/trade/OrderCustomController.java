@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -20,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yttx.comm.FileDownload;
-import com.yttx.comm.PathUtil;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.TOrderCustom;
 import com.yttx.yttxps.model.TOrderCustomExample;
