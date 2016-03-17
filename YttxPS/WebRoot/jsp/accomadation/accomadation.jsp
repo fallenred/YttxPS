@@ -64,28 +64,28 @@
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="no">酒店代码</label>
 												<div class="col-sm-2">
-													<input maxlength="10" name="no" type="text" id="no" placeholder="忽略酒店代码" />
+													<input maxlength="10" name="no" type="text" id="no" placeholder="酒店代码" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="name">酒店名称</label>
 												<div class="col-sm-2">
-													<input maxlength="200" name="name" type="text" id="name" placeholder="忽略酒店名称" />
+													<input maxlength="200" name="name" type="text" id="name" placeholder="酒店名称" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="regionname">所属地区</label>
 												<div class="col-sm-2">
-													<input type="text" placeholder="忽略行政区域" name="regionname" data-key="0086" data-idx="0" data-full="中国" id="regionname" class="inp-search" />
+													<input type="text" placeholder="点击选择所属地区" name="regionname" data-key="0086" data-idx="0" data-full="中国" id="regionname" class="inp-search" />
 													<input type="hidden" name="regionno" id="regionno" />
 													<div id="selectCity" class="localcity"></div>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="stat">状态</label>
+												<label class="col-sm-1 control-label no-padding-right" for="stat">酒店状态</label>
 												<div class="col-sm-1">
 													<select id="stat" name="stat">
-														<option value="">&nbsp;&nbsp;忽略状态&nbsp;&nbsp;</option>
+														<option value="">---酒店状态---</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>

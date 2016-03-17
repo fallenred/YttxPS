@@ -54,7 +54,7 @@ $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#parktip").val(raw.parktip);
 	$(this).find("#staytime").val(raw.staytime);
 	$(this).find("#policy").val(raw.policy);
-	$(this).find("#stat").val(raw.stat);
+	$(this).find("#stat").find("option[value='"+raw.stat+"']").attr("selected" ,true);
 });
 
 $("#editIframe").on("load",function(){
@@ -74,7 +74,7 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#parktip").val(raw.parktip);
 	$(this).contents().find("#staytime").val(raw.staytime);
 	$(this).contents().find("#policy").val(raw.policy);
-	$(this).contents().find("#stat").val(raw.stat);
+	$(this).find("#stat").find("option[value='"+raw.stat+"']").attr("selected" ,true);
 });
 
 
@@ -176,7 +176,7 @@ jQuery(function($) {
 		var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" id="picButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="picCustom('
 			+ options.rowId
 			+ ');" data-original-title="编辑资源图片"><span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
-		return detail + editBtn + deleteBtn + picDtn;
+		return detail + editBtn /*+ deleteBtn*/ + picDtn;
 	};
 
 	// resize to fit page size
@@ -218,7 +218,7 @@ jQuery(function($) {
 				colModel : [ {
 					name : 'myac',
 					index : '',
-					width : 100,
+					width : 70,
 					fixed : true,
 					sortable : false,
 					resize : false,
@@ -289,7 +289,7 @@ jQuery(function($) {
 				}, {
 					name : 'stat',
 					index : 'stat',
-					width : 35,
+					width : 70,
 					sortable : true,
 					editable : true,
 					edittype : 'select',

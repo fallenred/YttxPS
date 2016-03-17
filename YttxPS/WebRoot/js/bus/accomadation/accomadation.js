@@ -221,7 +221,7 @@ jQuery(function($) {
 			+ options.rowId
 			+ ');" data-original-title="编辑资源图片"><span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
         
-        return roomBtn + detailBtn + editBtn + deleteBtn + picDtn;
+        return roomBtn + detailBtn + editBtn /*+ deleteBtn */+ picDtn;
     };
 
     // resize to fit page size

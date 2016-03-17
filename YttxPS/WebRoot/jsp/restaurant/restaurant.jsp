@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -9,6 +11,9 @@
 <meta name="description" content="" />
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
+<script type="text/javascript">
+	var special_item = ${special_item};
+</script>
 </head>
 <body class="no-skin">
 	<jsp:include page="/jsp/comm/topbar.jsp" flush="true" />
@@ -71,11 +76,11 @@
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="name">餐厅名称</label>
 												<div class="col-sm-5">
-													<input maxlength="50" name="name" type="text" id="name" placeholder="忽略餐厅名称" />
+													<input maxlength="50" name="name" type="text" id="name" placeholder="餐厅名称" />
 												</div>
 												<label class="col-sm-1 control-label no-padding-right" for="regionname">所属地区</label>
 												<div class="col-sm-2">
-													<input type="text" placeholder="忽略行政区域" name="regionname"
+													<input type="text" placeholder="点击选择所属地区" name="regionname"
 														data-key="000086" data-idx="0" data-full="中国" id="regionname" class="inp-search" /> 
 													<input type="hidden" name="regionno" id="regionno" />
 													<div id="selectCity" class="localcity"></div>
@@ -85,38 +90,38 @@
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="scale">接待规模</label>
 												<div class="col-sm-5">
-													<input maxlength="4" id="scale_min" name="scale_min" type="text"  placeholder="忽略接待规模最小值" />
+													<input maxlength="4" id="scale_min" name="scale_min" type="text"  placeholder="接待规模最小值" />
 													--
-													<input maxlength="4" id="scale_max" name="scale_max" type="text"  placeholder="忽略接待规模最大值" />
+													<input maxlength="4" id="scale_max" name="scale_max" type="text"  placeholder="接待规模最大值" />
 												</div>
 												<label class="col-sm-1 control-label no-padding-right" for="special">菜品特色</label>
 												<div class="col-sm-5">
 													<select name="special"  id="special">
 														<!-- TODO:应该从数据字典中读取 -->
-														<option value="">忽略菜品特色</option>
-														<option value="01">小吃</option>
-														<option value="02">藏餐</option>
-														<option value="03">火锅</option>
+														<option value="">---菜品特色---</option>
+														<c:forEach items="${codeMasterList['cpts']}" var="item">
+															<option value="${item.fsDictno}">${item.fsDictname}</option>
+														</c:forEach>
 													</select>
 												</div>
 											</div>
 											
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="lvl">等级</label>
+												<label class="col-sm-1 control-label no-padding-right" for="lvl">餐厅等级</label>
 												<div class="col-sm-5">
 													<select name="lvl"  id="lvl">
 														<!-- TODO:应该从数据字典中读取 -->
-														<option value="">忽略等级</option>
+														<option value="">---餐厅等级---</option>
 														<option value="01">lvl1</option>
 														<option value="02">lvl2</option>
 														<option value="03">lvl3</option>
 													</select>
 												</div>
 												<label class="col-sm-1 control-label no-padding-right"
-													for="stat">状态</label>
+													for="stat">餐厅状态</label>
 												<div class="col-sm-5">
 													<select id="stat" name="stat">
-														<option value="">忽略状态</option>
+														<option value="">---餐厅状态---</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>
@@ -136,7 +141,6 @@
 											</div>
 										</form>
 									</div>
-
 								</div>
 							</div>
 							<table id="grid-table"></table>

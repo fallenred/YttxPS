@@ -78,7 +78,7 @@
 												<label class="col-sm-1 control-label no-padding-right" for="fsType">娱乐项目类型</label>
 												<div class="col-sm-1">
 													<select id="fsType">
-														<option value="">----娱乐项目类型----</option>
+														<option value="">---娱乐项目类型---</option>
 														<option value="01">类型一</option>
 														<option value="02">类型二</option>
 														<option value="03">类型三</option>
@@ -89,7 +89,7 @@
 												<label class="col-sm-1 control-label no-padding-right" for="lvl">状态</label>
 												<div class="col-sm-1">
 													<select id="fiStat">
-														<option value="">----状态----</option>
+														<option value="">---娱乐项目状态---</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>

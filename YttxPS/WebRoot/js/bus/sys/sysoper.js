@@ -119,7 +119,7 @@ jQuery(function($){
 		var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="cancelOper('
 				+ options.rowId
 				+ ');" data-original-title="删除该用户"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-		return rawObject.adminType==1?detail:detail+ editBtn + deleteBtn ;
+		return rawObject.adminType==1?detail:detail+ editBtn /*+ deleteBtn */;
 	};
 
 	// resize to fit page size
@@ -178,7 +178,7 @@ jQuery(function($){
 				colModel : [ {
 					name : 'myac',
 					index : '',
-					width : 150,
+					width : 80,
 					fixed : true,
 					sortable : false,
 					resize : false,

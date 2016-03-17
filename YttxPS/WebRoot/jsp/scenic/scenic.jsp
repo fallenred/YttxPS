@@ -86,7 +86,7 @@
 												<label class="col-sm-1 control-label no-padding-right" for="lvl">景区等级</label>
 												<div class="col-sm-1">
 													<select id="lvl" name="lvl">
-														<option value="">请选择景区等级</option>
+														<option value="">---请选择景区等级---</option>
 														<c:forEach items="${codeMasterList['sc_lvl']}" var="lvl" varStatus="status">
 															<option value="${lvl.fsDictno}">${lvl.fsDictname}</option>
 														</c:forEach>
@@ -97,6 +97,7 @@
 												<label class="col-sm-1 control-label no-padding-right" for="lvl">状态</label>
 												<div class="col-sm-1">
 													<select id="stat">
+														<option value="">---选择景区状态---</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>

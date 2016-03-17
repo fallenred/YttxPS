@@ -69,25 +69,26 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="name">姓名</label>
+												<label class="col-sm-1 control-label no-padding-right" for="name">导游姓名</label>
 												<div class="col-sm-2">
-													<input maxlength="150" type="text" id="name" placeholder="姓名" />
+													<input maxlength="150" type="text" id="name" placeholder="导游姓名" />
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="gender">性别</label>
+												<label class="col-sm-1 control-label no-padding-right" for="gender">导游性别</label>
 												<div class="col-sm-2">
 													<select class="form-control" id="gender">
-														<option value="">--性别--</option>
+														<option value="">---导游性别---</option>
 														<option value="1">男</option>
 														<option value="0">女</option>
 													</select>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="lvl">状态</label>
+												<label class="col-sm-1 control-label no-padding-right" for="lvl">导游状态</label>
 												<div class="col-sm-2">
 													<select class="form-control" id="stat">
+														<option value="">---导游状态---</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>

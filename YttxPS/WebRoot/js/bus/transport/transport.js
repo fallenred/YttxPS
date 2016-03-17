@@ -130,23 +130,23 @@ jQuery(function($) {
 			+ options.rowId
 			+ ');" data-original-title="查看记录详情"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
 
-	var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editTransport('
-			+ options.rowId
-			+ ');" data-original-title="编辑本条记录"><span class="ui-icon ui-icon-pencil"></span></div>';
-
-	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteTransport('
-			+ options.rowId
-			+ ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
+		var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editTransport('
+				+ options.rowId
+				+ ');" data-original-title="编辑本条记录"><span class="ui-icon ui-icon-pencil"></span></div>';
 	
-	
-	var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" '+
-					'id="picButton" style="display: block; cursor: pointer; float: left;" '+
-					'onmouseover="jQuery(this).addClass(\'ui-state-hover\');" '+
-					'onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" '+
-					'onclick="openPicPage(\'cx\',\''+rawObject.fsName+'\',\''+rawObject.fsNo+'\');" data-original-title="编辑资源图片">'+
-					'<span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
-	
-	return detail + editBtn +picDtn+deleteBtn;
+		var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteTransport('
+				+ options.rowId
+				+ ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
+		
+		
+		var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" '+
+						'id="picButton" style="display: block; cursor: pointer; float: left;" '+
+						'onmouseover="jQuery(this).addClass(\'ui-state-hover\');" '+
+						'onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" '+
+						'onclick="openPicPage(\'cx\',\''+rawObject.fsName+'\',\''+rawObject.fsNo+'\');" data-original-title="编辑资源图片">'+
+						'<span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
+		
+		return detail + editBtn +picDtn/*+deleteBtn*/;
 	};
 
 	// resize to fit page size

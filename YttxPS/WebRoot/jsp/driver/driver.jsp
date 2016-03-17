@@ -64,24 +64,24 @@
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="name">驾驶员姓名</label>
 												<div class="col-sm-2">
-													<input maxlength="10" type="text" id="name" placeholder="忽略驾驶员姓名" />
+													<input maxlength="10" type="text" id="name" placeholder="驾驶员姓名" />
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="gender">性别</label>
+												<label class="col-sm-1 control-label no-padding-right" for="gender">驾驶员性别</label>
 												<div class="col-sm-1">
 													<select id="gender">
-														<option value="">&nbsp;&nbsp;忽略性别&nbsp;&nbsp;</option>
+														<option value="">---驾驶员性别---</option>
 														<option value="1">男</option>
 														<option value="2">女</option>
 													</select>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="stat">状态</label>
+												<label class="col-sm-1 control-label no-padding-right" for="stat">驾驶员状态</label>
 												<div class="col-sm-1">
 													<select id="stat">
-														<option value="">&nbsp;&nbsp;忽略状态&nbsp;&nbsp;</option>
+														<option value="">---驾驶员状态---</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>

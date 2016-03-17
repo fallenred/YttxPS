@@ -143,7 +143,7 @@ jQuery(function($) {
 			+ options.rowId
 			+ ');" data-original-title="编辑资源图片"><span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
         
-        return detail + editBtn + deleteBtn + picDtn;
+        return detail + editBtn /*+ deleteBtn */+ picDtn;
     };
     
     driverFormatter = function(){

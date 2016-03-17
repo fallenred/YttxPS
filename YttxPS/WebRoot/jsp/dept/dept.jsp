@@ -82,7 +82,7 @@
 													for="depno">部门编号</label>
 												<div class="col-sm-10">
 													<select class="col-sm-6 col-xs-6" id="depno">
-														<option value="">选择部门编号..</option>
+														<option value="">---选择部门编号---</option>
 														<c:forEach items="${depts}" var="dept">
 															<option value="${dept.depNo}">${dept.depName}</option>
 														</c:forEach>
@@ -102,7 +102,7 @@
 													for="stat">状态</label>
 												<div class="col-sm-10">
 													<select id="stat" class="col-sm-6 col-xs-6">
-														<option value="">请选择状态......</option>
+														<option value="">---选择部门状态---</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>

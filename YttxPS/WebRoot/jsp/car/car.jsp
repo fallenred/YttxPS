@@ -63,14 +63,14 @@
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="no">车牌号</label>
 												<div class="col-sm-2">
-													<input maxlength="10" name="no" type="text" id="no" placeholder="忽略车牌号" />
+													<input maxlength="10" name="no" type="text" id="no" placeholder="车牌号" />
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="stat">状态</label>
+												<label class="col-sm-1 control-label no-padding-right" for="stat">车辆状态</label>
 												<div class="col-sm-1">
 													<select id="stat" name="stat">
-														<option value="">&nbsp;&nbsp;忽略状态&nbsp;&nbsp;</option>
+														<option value="">---车辆状态---</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>

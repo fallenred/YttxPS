@@ -29,7 +29,7 @@ public class SysDep {
 
 
 	public void setDepName(String depName) {
-		this.depName = depName;
+		this.depName = depName==null?null:depName.trim();
 	}
 
 

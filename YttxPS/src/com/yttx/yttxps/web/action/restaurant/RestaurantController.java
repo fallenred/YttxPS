@@ -59,7 +59,9 @@ public class RestaurantController extends BaseController {
 	private IPicService picService;
 	
 	@RequestMapping(value = "page.htm")
-	public String openPage(){
+	public String openPage(Model model){
+		Object special_item = getDictMapJsonByParentNo("cpts");
+		model.addAttribute("special_item", special_item);
 		return "restaurant/restaurant";
 	}
 	

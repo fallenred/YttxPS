@@ -61,7 +61,9 @@ $(document).ready(function() {
 		var param = {};
 		param["sysDep.depName"] = $("#depName").val();
 		param["sysDep.depNo"] = $("#depNo").val();
-		param["sysDep.stat"] = $("#stat").val();
+		if($("#stat")!=undefined){
+			param["sysDep.stat"] = $("#stat").val();
+		}
 		
 		var checkedNodes = $.fn.zTree.getZTreeObj("edit_tree_div").getCheckedNodes(true);
 		if(null!=checkedNodes){

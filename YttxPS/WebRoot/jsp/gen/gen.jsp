@@ -86,7 +86,7 @@
 												<label class="col-sm-1 control-label no-padding-right" for="fiStat">状态</label>
 												<div class="col-sm-2">
 													<select class="form-control" id="fiStat">
-														<option value="">----状态----</option>
+														<option value="">---线路概况状态---</option>
 														<option value="1">正常</option>
 														<option value="-100">已销</option>
 													</select>

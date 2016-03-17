@@ -58,16 +58,15 @@
 												<input class="form-control" type="text" id="addr" name="addr" 
 													placeholder="餐厅地址"  maxlength="100" value="${res.addr}"/>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="special">特色菜品</label>
+											<label class="col-sm-2 control-label no-padding-right" for="special">菜品特色</label>
 											<div class="col-sm-4">
 											<!-- TODO 从数据字典中读取 -->
 												<select id="special" name="special" class="form-control">
-													<option value="">请选择......</option>
-													<option value="01" <c:if test="${res.special=='01'}">selected</c:if>>小吃</option>
-													<option value="02" <c:if test="${res.special=='02'}">selected</c:if>>藏餐</option>
-													<option value="03" <c:if test="${res.special=='03'}">selected</c:if>>火锅</option>
-													<option value="04" <c:if test="${res.special=='04'}">selected</c:if>>中餐</option>
-													<option value="05" <c:if test="${res.special=='05'}">selected</c:if>>其他</option>
+													<option value="">---菜品特色---</option>
+													<c:forEach items="${codeMasterList['cpts']}" var="item">
+														<option value="${item.fsDictno}" 
+															<c:if test="${res.special==item.fsDictno}">selected</c:if>>${item.fsDictname}</option>
+														</c:forEach>
 												</select>
 											</div>
 										</div>
