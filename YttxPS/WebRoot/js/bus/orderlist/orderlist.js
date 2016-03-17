@@ -99,17 +99,21 @@ $("#customizationIframe").on("load",function(){
 	if (raw.fiStat == '-10' || raw.fiStat == '-5') {
 		$(this).contents().find(".div_transfer").hide();
 	}
+	html='<option value="">---订单状态---</option>';
 	//状态为已确认时，页面状态只能选已付首款选项
 	if (raw.fiStat == '2') {
-		$(this).contents().find("#fiStat").html('<option value="4">已付首款</option>');
+		html +='<option value="4">已付首款</option>'
+		$(this).contents().find("#fiStat").html(html);
 	}
 	//状态为已付收款时，页面状态只能选已付全款选项
 	if (raw.fiStat == '4') {
-		$(this).contents().find("#fiStat").html('<option value="8">已付全款(可出团)</option>');
+		html +='<option value="8">已付全款(可出团)</option>'
+		$(this).contents().find("#fiStat").html(html);
 	}
 	//状态为已付全款时，页面状态只能选完结选项
 	if (raw.fiStat == '8') {
-		$(this).contents().find("#fiStat").html('<option value="32">已完成</option>');
+		html +='<option value="32">已完成</option>';
+		$(this).contents().find("#fiStat").html(html);
 	}
 	getGuide(obj, Lvl);
 });
