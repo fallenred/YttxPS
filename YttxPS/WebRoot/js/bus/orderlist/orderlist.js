@@ -235,10 +235,12 @@ jQuery(function($) {
 		$("#collapseOne").collapse('hide');
 		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
-		postData["orderlist.fsNo"] = $("#queryfield").find("#fsNo").val();
-		postData["orderlist.fsName"] = $("#queryfield").find("#fsName").val();
-		postData["orderlist.fsType"] = $("#queryfield").find("#fsType").val();
-		postData["orderlist.fiStat"] = $("#queryfield").find("#fiStat").val();
+		postData["orderlistWithBLOBs.fsNo"] = $("#queryfield").find("#fsNo").val();
+		postData["orderlistWithBLOBs.fsName"] = $("#queryfield").find("#fsName").val();
+		postData["orderlistWithBLOBs.fsTaName"] = $("#queryfield").find("#fsTaName").val();
+		postData["orderlistWithBLOBs.fsId"] = $("#queryfield").find("#fsId").val();
+		postData["orderlistWithBLOBs.fsType"] = $("#queryfield").find("#fsType").val();
+		postData["orderlistWithBLOBs.fiStat"] = $("#queryfield").find("#fiStat").val();
 		$("#grid-table").jqGrid("setGridParam", {
 			postData : postData
 		}).trigger("reloadGrid");
