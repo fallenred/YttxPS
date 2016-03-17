@@ -91,7 +91,7 @@ jQuery(function($) {
         var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteCustom('
                 + options.rowId
                 + ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-        return detail + editBtn + deleteBtn;
+        return detail + editBtn /*+ deleteBtn*/;
     };
     
     // resize to fit page size

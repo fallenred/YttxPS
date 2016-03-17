@@ -94,7 +94,7 @@
 												<label class="col-sm-1 control-label no-padding-right" for="lvl">状态</label>
 												<div class="col-sm-3">
 													<select class="form-control" id="fiStat">
-														<option value="">----状态----</option>
+														<option value="">---车型状态---</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>

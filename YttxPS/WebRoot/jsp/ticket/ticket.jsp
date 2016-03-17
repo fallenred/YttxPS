@@ -97,7 +97,7 @@
 												<label class="col-sm-1 control-label no-padding-right" for="fsType">门票类型</label>
 												<div class="col-sm-3">
 													<select class="form-control" id="fsType">
-														<option value="">----类型----</option>
+														<option value="">---门票类型---</option>
 														<option value="01">主门票</option>
 														<option value="02">车票</option>
 														<option value="03">小景区</option>
@@ -106,7 +106,7 @@
 												<label class="col-sm-1 control-label no-padding-right" for="lvl">状态</label>
 												<div class="col-sm-3">
 													<select class="form-control" id="fiStat">
-														<option value="">----状态----</option>
+														<option value="">---门票状态---</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>

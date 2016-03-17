@@ -120,20 +120,20 @@ jQuery(function($){
 				{
 					name : 'name',
 					index : 'name',
-					width : 150,
+					width : 125,
 					sortable : false,
 					editable : false,
 				},
 				{
 					name : 'taname',
 					index : 'taname',
-					width : 150,
+					width : 125,
 					sortable : false,
 					editable : false,
 				}, {
 					name : 'contact',
 					index : 'contact',
-					width : 120,
+					width : 100,
 					sortable : false,
 					editable : false,
 				}, {
@@ -146,7 +146,7 @@ jQuery(function($){
 				{
 					name : 'address',
 					index : 'address',
-					width : 160,
+					width : 140,
 					sortable : false,
 					editable : false,
 				} , 
@@ -165,7 +165,7 @@ jQuery(function($){
 				{
 					name : 'myaction',
 					index : '',
-					width : 180,
+					width : 150,
 					fixed : true,
 					sortable : false,
 					resize : false,

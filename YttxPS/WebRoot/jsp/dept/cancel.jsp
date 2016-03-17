@@ -41,7 +41,7 @@
 
 									<p id = "message"  class="bigger-110 bolder center grey">
 										<i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
-										您确定需要删除吗?
+										您确定需要注销该部门吗?
 									</p>
 
 								<div class="modal-footer">

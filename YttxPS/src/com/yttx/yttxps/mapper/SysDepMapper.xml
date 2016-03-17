@@ -15,7 +15,7 @@
         <![CDATA[
             SELECT
             	FI_DEPNO,
-            	TRIM(FS_DEPNAME) AS	FS_DEPNAME,
+            	FS_DEPNAME,
              	FI_STAT 
              FROM TSYSDEP 	
         ]]>  
@@ -40,21 +40,25 @@
 		 <![CDATA[
 		 SELECT
             	FI_DEPNO,
-            	TRIM(FS_DEPNAME) AS	FS_DEPNAME,
+            	FS_DEPNAME,
              	FI_STAT 
-         FROM TSYSDEP
-         WHERE FI_DEPNO = #{depNo}
+         FROM 
+         	TSYSDEP
+         WHERE 
+         	FI_DEPNO = #{depNo}
 		]]>
 	</select>
 	
 	<select id="findByDepName" parameterType="string" resultMap="sysDepResultMap">
 		 <![CDATA[
 		 SELECT
-            	FI_DEPNO,
-            	TRIM(FS_DEPNAME) AS	FS_DEPNAME,
-             	FI_STAT 
-         FROM TSYSDEP
-         WHERE  FS_DEPNAME = #{depName}
+            FI_DEPNO,
+            FS_DEPNAME,
+            FI_STAT 
+         FROM 
+         	TSYSDEP
+         WHERE  
+         	Trim(FS_DEPNAME) = #{depName}
 		]]>
 	</select>
 	

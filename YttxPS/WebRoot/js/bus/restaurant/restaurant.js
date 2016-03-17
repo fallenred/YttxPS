@@ -149,14 +149,11 @@ jQuery(function($) {
 			postData["restaurant.lvl"] = $("#lvl").val();
 			//状态
 			postData["restaurant.stat"] = $("#stat").val();
-			console.log("查询参数：");
-			console.log(postData);
 			$("#grid-table").jqGrid("setGridParam", {
 				datatype : 'json',
 				postData : postData
 			}).trigger("reloadGrid");
 		});
-	
 
 	/*
 	 * 定义grid的选择器
@@ -204,7 +201,7 @@ jQuery(function($) {
 						'onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" '+
 						'onclick="deleteRestaurant('+ options.rowId+ ');" data-original-title="删除该餐厅">'
 						+'<span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-		return costBtn + detailBtn + editBtn + picDtn+deleteBtn;
+		return costBtn + detailBtn + editBtn + picDtn/*+deleteBtn*/;
 	};
 
 	// resize to fit page size
@@ -235,27 +232,6 @@ jQuery(function($) {
 			str += ';' + k + ":" + object[k];
 		return  str.substring(1);
 	}
-	//TODO 读取菜品特色的数据字典
-	//菜品特色
-	var special_items = {
-		'01' : '小吃',
-		'02' : '藏餐',
-		'03' : '火锅',
-		'04' : '中餐',
-		'05' : '其他'
-	}
-	var special_val = contactStr(special_items);
-	
-
-	//TODO 读取餐厅等级的数据字典
-	//餐厅等级
-	var lvl_items = {
-		'01' : 'lvl1',
-		'02' : 'lvl2',
-		'03' : 'lvl3',
-	};
-	var lvl_val = contactStr(lvl_items);
-	
 	//TODO 读取状态数据字典
 	// 状态
 	var stat_items = {
@@ -264,7 +240,6 @@ jQuery(function($) {
 	};
 	//TODO 读取所属地区的数据字典
 	var stat_val = contactStr(stat_items)
-	
 	$(grid_selector).jqGrid(
 			{
 				url : "/restaurant/list.htm",
@@ -319,40 +294,10 @@ jQuery(function($) {
 					width : 80,
 					sortable : false,
 					editable : false,
-					edittype : 'select',
-					editoptions : {
-						value : special_val
-					},
 					formatter : function(v, opt, rec) {
-						return special_items[v];
+						return special_item[v];
 					},
-					unformat : function(v) {
-						for (k in special_items)
-							if (special_items[k] == v)
-								return k;
-						return v;
-					}
-				} , /*
-				{
-					name : 'lvl',
-					index : 'lvl',
-					width : 80,
-					sortable : false,
-					editable : false,
-					edittype : 'select',
-					editoptions : {
-						value : lvl_val
-					},
-					formatter : function(v, opt, rec) {
-						return lvl_items[v];
-					},
-					unformat : function(v) {
-						for (k in lvl_items)
-							if (lvl_items[k] == v)
-								return k;
-						return v;
-					}
-				},*/
+				},
 				{
 					name : 'stat',
 					index : 'stat',

@@ -125,6 +125,17 @@
 											</div>
 										</div>
 									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-1 control-label no-padding-right" for="stat">购物店状态</label>
+											<div class="col-sm-3">
+												<select id="stat" disabled="disabled">
+													<option value="1">正常</option>
+													<option value="2">失效</option>
+												</select>
+											</div>
+										</div>
+									</div>
 								</div>
 
 								<div class="modal-footer">

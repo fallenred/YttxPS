@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -9,6 +11,9 @@
 <meta name="description" content="" />
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
+<script type="text/javascript">
+	var special_item = ${special_item};
+</script>
 </head>
 <body class="no-skin">
 	<jsp:include page="/jsp/comm/topbar.jsp" flush="true" />
@@ -144,7 +149,6 @@
 											</div>
 										</form>
 									</div>
-
 								</div>
 							</div>
 							<table id="grid-table"></table>

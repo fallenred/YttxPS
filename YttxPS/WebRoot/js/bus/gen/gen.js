@@ -143,7 +143,7 @@ jQuery(function($) {
 			+ options.rowId
 			+ ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
 
-	return detail + editBtn + deleteBtn;
+	return detail + editBtn /*+ deleteBtn*/;
 	};
 
 	// resize to fit page size

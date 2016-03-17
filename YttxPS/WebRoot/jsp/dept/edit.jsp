@@ -64,16 +64,16 @@
 													placeholder="部门名称"  maxlength="128" value="${depInfo.depName}"/>
 											</div>
 										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right" for="stat">部门状态</label>
-											<div class="col-sm-8">
-												<select id="stat">
-													<option value="1" <c:if test="${depInfo.stat==1}">selected</c:if>>正常</option>
-													<option value="2" <c:if test="${depInfo.stat==2}">selected</c:if>>失效</option>
-												</select>
+										<c:if test="${depInfo.stat==2}">
+											<div class="form-group">
+												<label class="col-sm-1 control-label no-padding-right" for="stat">部门状态</label>
+												<div class="col-sm-8">
+													<select id="stat">
+														<option value="1" <c:if test="${depInfo.stat==1}">selected</c:if>>正常</option>
+													</select>
+												</div>
 											</div>
-										</div>
+										</c:if>
 									</div>
 									<h4>
 										部门权限

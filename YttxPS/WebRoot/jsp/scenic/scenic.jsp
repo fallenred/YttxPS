@@ -63,32 +63,37 @@
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="no">景区编码</label>
+												<label class="col-sm-1 control-label no-padding-right"
+													for="no">景区编码</label>
 												<div class="col-sm-2">
-													<input class="form-control" maxlength="10" type="text" id="no" placeholder="景区编码" />
+													<input class="form-control" maxlength="10" type="text" id="no"
+														placeholder="景区编码" />
 												</div>
-												<label class="col-sm-1 control-label no-padding-right" for="regionname">所属地区</label>
+												<label class="col-sm-1 control-label no-padding-right"
+													for="name">景区名称</label>
 												<div class="col-sm-2">
-													<input class="form-control" type="text" placeholder="请选择行政区域" name="regionname" data-key="0086" data-idx="0" data-full="中国" id="regionname" class="inp-search" />
-													<input type="hidden" name="regionno" id="regionno" />
-													<div id="selectCity" class="localcity"></div>
+													<input class="form-control" class="col-sm-5 col-xs-5" maxlength="150"
+														type="text" id="name" placeholder="景区名称" />
 												</div>
-												<label class="col-sm-1 control-label no-padding-right" for="name">景区名称</label>
+												<label class="col-sm-1 control-label no-padding-right"
+													for="lvl">景区等级</label>
 												<div class="col-sm-2">
-													<input class="form-control" class="col-sm-5 col-xs-5" maxlength="150" type="text" id="name" placeholder="景区名称" />
+													<input class="form-control" maxlength="5" type="text" id="lvl"
+														placeholder="景区等级" />
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="lvl">景区等级</label>
+												<label class="col-sm-1 control-label no-padding-right"
+													for="regionname">所属地区</label>
 												<div class="col-sm-2">
-													<select class="form-control" id="lvl" name="lvl">
-														<option value="">请选择景区等级</option>
-														<c:forEach items="${codeMasterList['sc_lvl']}" var="lvl" varStatus="status">
-															<option value="${lvl.fsDictno}">${lvl.fsDictname}</option>
-														</c:forEach>
-													</select>
+													<input class="form-control" type="text" placeholder="请选择行政区域" name="regionname"
+														data-key="0086" data-idx="0" data-full="中国"
+														id="regionname" class="inp-search" /> <input
+														type="hidden" name="regionno" id="regionno" />
+													<div id="selectCity" class="localcity"></div>
 												</div>
-												<label class="col-sm-1 control-label no-padding-right" for="lvl">状态</label>
+												<label class="col-sm-1 control-label no-padding-right"
+													for="lvl">状态</label>
 												<div class="col-sm-2">
 													<select class="form-control" id="stat">
 														<option value="1">正常</option>

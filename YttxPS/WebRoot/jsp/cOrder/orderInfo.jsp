@@ -66,13 +66,14 @@
 						<div class="space-10"></div>
 					</div>
 					<div class="row">
+						<div class="space-10"></div>
 						<div class="col-sm-offset-8 col-sm-1">
 							<c:if test="${order.stat==32}">
 								<button class="btn btn-warning .btn-lg disabled" type="button">
 									已入结算单
 								</button>
 							</c:if>
-							<c:if  test="${order.stat!=32}">
+							<c:if  test="${order.stat==8}">
 								<form method="post" action="/cOrder/prodStat.htm">
 									<input type="hidden" value="${order.no}" name="orderId">
 									<button class="btn btn-info .btn-lg " type="submit">

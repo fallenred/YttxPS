@@ -54,7 +54,7 @@
 									
 											<label class="col-sm-2 control-label no-padding-right" for="regionname">所属地区</label>
 											<div class="col-sm-4">
-												<input type="text" placeholder="忽略行政区域" name="regionname" 
+												<input type="text" placeholder="点击选择所属地区" name="regionname" 
 													id="regionname" data-key="0086" data-idx="0" data-full="中国"
 													class="form-control inp-search" /> 
 												<div class="localcity selectCity" id="selectCity"></div>
@@ -71,16 +71,14 @@
 												<input class="form-control" type="text" id="addr" name="addr" 
 													placeholder="餐厅地址"  maxlength="100"/>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="special">特色菜品</label>
+											<label class="col-sm-2 control-label no-padding-right" for="special">菜品特色</label>
 											<div class="col-sm-4">
 											<!-- TODO 从数据字典中读取 -->
 												<select id="special" name="special" class="form-control">
-													<option value="">请选择特色菜品...</option>
-													<option value="01">小吃</option>
-													<option value="02">藏餐</option>
-													<option value="03">火锅</option>
-													<option value="04">中餐</option>
-													<option value="05">其他</option>
+													<option value="">---菜品特色---</option>
+													<c:forEach items="${codeMasterList['cpts']}" var="item">
+														<option value="${item.fsDictno}">${item.fsDictname}</option>
+													</c:forEach>
 												</select>
 											</div>
 										</div>

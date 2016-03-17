@@ -74,12 +74,12 @@
 										<div class="widget-main padding-8">
 											<form method="post" action="/cOrder/submitStat.htm" onsubmit="return checkParams();">
 												<input type="hidden" name="oper" value="${oper}">
-												<div class="profile-user-info profile-user-info-striped">
+												<div class="profile-user-info profile-user-info-striped ">
 													<c:if test="${fStat.statmentId!=null}">
 														<div class="profile-info-row">
 															<div class="profile-info-name">结算单号:</div>
 															<div class="profile-info-value">
-																<input  type="text" id="statmentId"
+																<input  type="text" id="statmentId" class="col-sm-10"
 																	name="statmentId" value="${fStat.statmentId}" readonly/>
 															</div>
 														</div>
@@ -88,7 +88,7 @@
 													<div class="profile-info-row">
 														<div class="profile-info-name">结算单名称:</div>
 														<div class="profile-info-value">
-															<input type="text" id="statmentName" 
+															<input type="text" id="statmentName"  class="col-sm-10"
 																name="statmentName" value="${fStat.statmentName}"/>
 														</div>
 													</div>
@@ -97,7 +97,7 @@
 														<div class="profile-info-row">
 															<div class="profile-info-name">创建时间:</div>
 															<div class="profile-info-value">
-																<input  type="text" id="creatDate"
+																<input  type="text" id="creatDate" class="col-sm-10"
 																	name="creatDate" value="${fStat.creatDateDesc}" readonly disabled/>
 															</div>
 														</div>
@@ -107,7 +107,7 @@
 														<div class="profile-info-row">
 															<div class="profile-info-name">线路ID:</div>
 															<div class="profile-info-value">
-																<input type="text" id="statmentName" 
+																<input type="text" id="statmentName"  class="col-sm-10"
 																	name="routeID" value="${fStat.routeID}" readonly/>
 															</div>
 														</div>
@@ -117,7 +117,7 @@
 														<div class="profile-info-row">
 															<div class="profile-info-name">线路名称:</div>
 															<div class="profile-info-value">
-																<input  type="text" id="routeName"
+																<input  type="text" id="routeName" class="col-sm-10"
 																	name="routeName" value="${fStat.routeName}" readonly/>
 															</div>
 														</div>
@@ -126,21 +126,21 @@
 													<div class="profile-info-row">
 														<div class="profile-info-name">订单ID:</div>
 														<div class="profile-info-value">
-															<input  type="text" id="orderId" 
+															<input  type="text" id="orderId"  class="col-sm-10"
 																	name="orderId" value="${fStat.orderId}" readonly/>
 														</div>
 													</div>
 													<div class="profile-info-row">
 														<div class="profile-info-name">客户ID:</div>
 														<div class="profile-info-value">
-															<input  type="text" id="userID" 
+															<input  type="text" id="userID" class="col-sm-10"
 																	name="userID" value="${fStat.userID}" readonly/>
 														</div>
 													</div>
 													<div class="profile-info-row">
 														<div class="profile-info-name">客户子ID:</div>
 														<div class="profile-info-value">
-															<input  type="text" id="userSubID" 
+															<input  type="text" id="userSubID"  class="col-sm-10"
 																	name="userSubID" value="${fStat.userSubID}" readonly/>
 														</div>
 													</div>
@@ -149,7 +149,7 @@
 														<div class="profile-info-row">
 															<div class="profile-info-name">计调ID:</div>
 															<div class="profile-info-value">
-																<input  type="text" id="operId"
+																<input  type="text" id="operId" class="col-sm-10"
 																	name="operId" value="${fStat.operId}" readonly/>
 															</div>
 														</div>
@@ -157,7 +157,7 @@
 													<div class="profile-info-row">
 														<div class="profile-info-name">订单快照:</div>
 														<div class="profile-info-value">
-															<textarea class="ckeditor" id="orderContent" name="orderContent">
+															<textarea class="ckeditor" id="orderContent" name="orderContent" >
 																<c:if test="${oper=='A'}">
 																	<jsp:include page="orderContent.jsp" flush="true"/>
 																</c:if>
@@ -171,7 +171,7 @@
 													<div class="profile-info-row">
 														<div class="profile-info-name">订单预估全价:</div>
 														<div class="profile-info-value">
-															<input  type="text" id="orderTotolFee" 
+															<input  type="text" id="orderTotolFee" class="col-sm-10"
 																	name="orderTotolFee" value="${fStat.orderTotolFee}" readonly/>
 														</div>
 													</div>
@@ -179,7 +179,7 @@
 													<div class="profile-info-row">
 														<div class="profile-info-name">订单备注金额统计:</div>
 														<div class="profile-info-value">
-															<input  type="text" id="remarksAmt" 
+															<input  type="text" id="remarksAmt" class="col-sm-10"
 																	name="remarksAmt" value="${fStat.remarksAmt}" readonly/>
 														</div>
 													</div>
@@ -187,7 +187,7 @@
 													<div class="profile-info-row">
 														<div class="profile-info-name">结算单预估全价:</div>
 														<div class="profile-info-value">
-															<input  type="text" id="totalFee" 
+															<input  type="text" id="totalFee" class="col-sm-10"
 																	name="totalFee" value="${fStat.totalFee}"/>
 														</div>
 													</div>
@@ -195,7 +195,7 @@
 													<div class="profile-info-row">
 														<div class="profile-info-name">已付金额:</div>
 														<div class="profile-info-value">
-															<input  type="text" id="paidAmt" 
+															<input  type="text" id="paidAmt" class="col-sm-10"
 																	name="paidAmt" value="${fStat.paidAmt}"/>
 														</div>
 													</div>
@@ -203,24 +203,21 @@
 													<div class="profile-info-row">
 														<div class="profile-info-name">双方需交易金额:</div>
 														<div class="profile-info-value">
-															<input  type="text" id="amt" 
+															<input  type="text" id="amt" class="col-sm-10"
 																	name="amt" value="${fStat.amt}"/>
 														</div>
 													</div>
 													<div class="profile-info-row">
 														<div class="profile-info-name">整体备注:</div>
-														<div class="profile-info-value">
-															<textarea name="remark" cols="90" rows="5">
-															</textarea>
+														<div class="profile-info-value"> 
+															<textarea name="remark" cols="90" rows="5" class="col-sm-10"></textarea>
 														</div>
 													</div>
 												</div>
 												<div class="row">
 													<div class="space-10"></div>
 													<div class="col-sm-offset-9 col-sm-1">
-														<button class="btn btn-info .btn-lg " type="submit">
-															提交结算单
-														</button>
+														<button class="btn btn-info .btn-lg " type="submit">提交结算单</button>
 													</div>
 												</div>
 											</form>
