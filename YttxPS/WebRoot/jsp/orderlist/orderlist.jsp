@@ -82,14 +82,24 @@
 												<div class="col-sm-2">
 													<input class="form-control" maxlength="20" type="text" id="fsNo" placeholder="订单编号" />
 												</div>
-											</div>
-											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="fsName">订单名称</label>
 												<div class="col-sm-2">
 													<input class="form-control" maxlength="150" type="text" id="fsName" placeholder="订单名称" />
 												</div>
+												<label class="col-sm-1 control-label no-padding-right" for="fsTaName">旅行社名称</label>
+												<div class="col-sm-2">
+													<input class="form-control" maxlength="100" type="text" id="fsTaName" placeholder="旅行社名称" />
+												</div>
+												<label class="col-sm-1 control-label no-padding-right" for="fsId">旅行社账号</label>
+												<div class="col-sm-2">
+													<input class="form-control" maxlength="100" type="text" id="fsId" placeholder="旅行社账号" />
+												</div>
 											</div>
 											<div class="form-group">
+											<label class="col-sm-1 control-label no-padding-right" for="fsOperId">操作员号</label>
+												<div class="col-sm-2">
+													<input class="form-control" maxlength="100" type="text" id="fsOperId" placeholder="操作员号" />
+												</div>
 												<label class="col-sm-1 control-label no-padding-right" for="fsType">线路类型</label>
 												<div class="col-sm-2">
 													<select class="form-control" id="fsType">
@@ -98,8 +108,6 @@
 														<option value="03">定制线路</option>
 													</select>
 												</div>
-											</div>
-											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="fiStat">状态</label>
 												<div class="col-sm-2">

@@ -69,26 +69,22 @@
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="fsName">娱乐项目名称</label>
+												<label class="col-sm-1 control-label no-padding-right" for="fsName">项目名称</label>
 												<div class="col-sm-2">
-													<input maxlength="150" type="text" id="fsName" placeholder="娱乐项目名称" />
+													<input class="form-control" maxlength="150" type="text" id="fsName" placeholder="娱乐项目名称" />
 												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="fsType">娱乐项目类型</label>
-												<div class="col-sm-1">
-													<select id="fsType">
+												<label class="col-sm-1 control-label no-padding-right" for="fsType">项目类型</label>
+												<div class="col-sm-2">
+													<select class="form-control" id="fsType">
 														<option value="">----娱乐项目类型----</option>
 														<option value="01">类型一</option>
 														<option value="02">类型二</option>
 														<option value="03">类型三</option>
 													</select>
 												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="lvl">状态</label>
-												<div class="col-sm-1">
-													<select id="fiStat">
+												<label class="col-sm-1 control-label no-padding-right" for="lvl">项目状态</label>
+												<div class="col-sm-2">
+													<select class="form-control" id="fiStat">
 														<option value="">----状态----</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>

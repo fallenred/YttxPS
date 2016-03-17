@@ -47,6 +47,29 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fdPrice").val(raw.fdPrice);
 });
 
+/**
+ * add by marongcai
+ * 查询时下拉项从数据库中动态获取
+ * 2016-3-17
+ * add by start
+ */
+$.ajax({
+	type: "GET",
+	traditional: true,
+	url: "/transport/selectTransport.htm",
+//	data: "transport.fsNo=''",
+	dataType: "json",
+	success: function(data){
+		html = '<option value="">---请选择---</option>'; 
+		$.each(data, function(commentIndex, comment){
+			html += '<option value=' + comment['fsName'] + '>' + comment['fsName'] + '</option>';
+		});
+		$("#fsTransName").html(html);
+	}
+});
+/**
+ * add end
+ */
 
 $("#addModal", parent.document).on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
@@ -176,6 +199,12 @@ jQuery(function($) {
 					resize : false,
 					formatter : actFormatter
 				}, {
+					/**
+					 * modify by marongcai
+					 * 调整了列表宽度
+					 * 2016-3-16
+					 * modify by start
+					 */
 					name : 'fsNo',
 					index : 'fsNo',
 					width : 85,
@@ -190,7 +219,7 @@ jQuery(function($) {
 				}, {
 					name : 'fiGenName',
 					index : 'fiGenName',
-					width : 100,
+					width : 120,
 					editable : true,
 					sorttype : "char"
 				}, {
@@ -202,9 +231,12 @@ jQuery(function($) {
 				}, {
 					name : 'fsTransName',
 					index : 'fsTransName',
-					width : 100,
+					width : 80,
 					editable : true,
 					sorttype : "int"
+					/**
+					 * modify end
+					 */
 				}, {
 					name : 'ftStartdate',
 					index : 'ftStartdate',

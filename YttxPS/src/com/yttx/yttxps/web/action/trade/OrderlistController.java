@@ -60,7 +60,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@ResponseBody
 	public Object ajaxfindOrderlist(OrderlistRequest req)
     {  
-		logger.debug("当前查询条件 {}", req.getOrderlist());
+		logger.debug("当前查询条件 {}", req.getOrderlistWithBLOBs());
 		Map<String, Object> map = new HashMap<String, Object>();
 		req.copyPage(map);
 		req.copyOrderlist(map);

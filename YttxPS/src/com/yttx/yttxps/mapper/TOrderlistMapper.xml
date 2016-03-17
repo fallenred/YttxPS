@@ -40,6 +40,20 @@
     <result column="FC_COMMFUZZYSNAPSHOT" jdbcType="CLOB" property="fcCommfuzzysnapshot" />
     <result column="FC_COMMRESSNAPSHOT" jdbcType="CLOB" property="fcCommressnapshot" />
   </resultMap>
+  
+  <!-- 
+  		add by marongcai
+  		用于封装新的订单查询结果
+  		2016-3-15
+  		modify by start
+   -->
+  <resultMap extends="ResultMapWithBLOBs" id="ExtendResultMap" type="com.yttx.yttxps.model.TOrderlistWithBLOBs">
+    <result column="FS_TANAME" jdbcType="VARCHAR" property="fsTaName" />
+    <result column="FS_ID" jdbcType="VARCHAR" property="fsId" />
+  </resultMap>
+  <!-- 
+  		modify end
+   -->
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbggenerated
@@ -699,44 +713,75 @@
     where FS_NO = #{fsNo,jdbcType=CHAR}
   </update>
   
+  <!-- 
+  		modify by marongcai
+  		修改了订单分页查询的sql，以满足新的要求
+  		2016-3-15
+  		modify by start
+   -->
   <!-- 分页查询总数 -->
   <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
-  	select count(*) from TORDERLIST
+  	select count(*) from TORDERLIST o left join TCUSTOMINFO c
+  			on o.fs_user_id = c.fs_id
 	     where 1=1
 	      <if test="fsNo != null and fsNo != ''">
-	        and fs_no = #{fsNo}
+	        and o.fs_no = #{fsNo}
 	      </if>
 	      <if test="fsName != null and fsName != ''">
-	        and fs_Name like '%'||#{fsName}||'%'
+	        and o.fs_Name like '%'||#{fsName}||'%'
 	      </if>
 	      <if test="fsType != null and fsType != ''">
-	        and fs_Type = #{fsType}
+	        and o.fs_Type = #{fsType}
 	      </if>
 	      <if test="fiStat != null and fiStat != ''">
-	        and fi_Stat = #{fiStat}
+	        and o.fi_Stat = #{fiStat}
+	      </if>
+	      <if test="fsOperId != null and fsOperId != ''">
+	        and o.fs_oper_id = #{fsOperId}
+	      </if>
+	      <if test="fsId != null and fsId != ''">
+	        and c.fs_Id like '%'||#{fsId}||'%'
+	      </if>
+	      <if test="fsTaName != null and fsTaName != ''">
+	        and c.fs_Taname like '%'||#{fsTaName}||'%'
 	      </if>
   </select>
   
   <!-- 分页查询 -->
-  <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="ExtendResultMap">
       select * from (select ROWNUM as rowno, t.* from 
 		(select 
-		    <include refid="Base_Column_List" />
-		    ,
+		     o.FS_NO, o.FI_GENINDEX, o.FS_NAME, o.FS_USER_ID, o.FS_USER_SUBID,
+             o.FS_OPER_ID, o.FT_CREATDATE, o.FS_TYPE, o.FS_ROUTE_ID, o.FS_PROPERTY,
+             o.FI_DAYS, o.FT_STARTDATE, o.FS_STARTPLACE, o.FD_PRICE, o.FS_SUMMARY,
+             o.FD_TOTALFEE, o.FD_PAIDAMT, o.FS_REMARK, o.FI_STAT, o.FS_DAC, o.FI_VISITORNUM,
 		    <include refid="Blob_Column_List" />
-		    from TORDERLIST order by FS_NO) t
+		    , c.fs_Id, c.fs_TaName
+		from
+		    TORDERLIST o left join TCUSTOMINFO c
+  			on o.fs_user_id = c.fs_id
+		    order by FS_NO) t
     	where 1=1
 	      <if test="fsNo != null and fsNo != ''">
-	        and fs_no = #{fsNo}
+	        and t.fs_no = #{fsNo}
 	      </if>
 	      <if test="fsName != null and fsName != ''">
-	        and fs_Name like '%'||#{fsName}||'%'
+	        and t.fs_Name like '%'||#{fsName}||'%'
 	      </if>
 	      <if test="fsType != null and fsType != ''">
-	        and fs_Type = #{fsType}
+	        and t.fs_Type = #{fsType}
+	      </if>
+	      <if test="fsOperId != null and fsOperId != ''">
+	        and t.fs_oper_id = #{fsOperId}
 	      </if>
 	      <if test="fiStat != null and fiStat != ''">
-	        and fi_Stat = #{fiStat}
+	        and t.fi_Stat = #{fiStat}
+	      </if>
+	      <if test="fsId != null and fsId != ''">
+	        and t.fs_Id like '%'||#{fsId}||'%'
+	      </if>
+	      <if test="fsTaName != null and fsTaName != ''">
+	        and t.fs_Taname like '%'||#{fsTaName}||'%'
 	      </if>
 	      <if test="endrow != null">
 	        and ROWNUM &lt;= #{endrow}
@@ -746,4 +791,7 @@
 	        and tt.rowno &gt; #{startrow}
 	      </if>
   </select>
+  <!-- 
+  		modify end
+   -->
 </mapper>

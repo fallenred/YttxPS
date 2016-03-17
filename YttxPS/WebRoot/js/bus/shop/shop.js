@@ -216,6 +216,12 @@ jQuery(function($) {
 				colNames : [ '操作', '购物店编号', '所属地区编码', '所属地区', '购物店名称', '经营范围', '开放时间',
 						'售后电话', '单件商品返点比例', '总体返点比例', '人头费用', '停车费','停留时间', '淡旺季政策', '状态' ],
 				colModel : [ {
+					/**
+					 * modify by marongcai
+					 * 修改了显示的列还有宽度
+					 * 2016-3-16
+					 * modify by start
+					 */
 					name : 'myac',
 					index : '',
 					width : 100,
@@ -227,7 +233,8 @@ jQuery(function($) {
 					name : 'no',
 					index : 'no',
 					width : 100,
-					sorttype : "int"
+					sorttype : "int",
+					hidden : true
 				}, {
 					name : 'regionno',
 					index : 'regionno',
@@ -237,6 +244,7 @@ jQuery(function($) {
 					name : 'regionname',
 					index : 'regionname',
 					editable : true,
+					width : 200,
 				}, {
 					name : 'name',
 					index : 'name',
@@ -249,28 +257,31 @@ jQuery(function($) {
 				}, {
 					name : 'opentime',
 					index : 'opentime',
-					width : 160,
+					width : 135,
 					editable : true,
 				}, {
 					name : 'tel',
 					index : 'tel',
-					width : 160,
+					width : 170,
 					editable : true,
 				}, {
 					name : 'singlereturn',
 					index : 'singlereturn',
 					edittype : 'textarea',
 					editable : true,
+					hidden : true
 				}, {
 					name : 'totalreturn',
 					index : 'totalreturn',
 					edittype : 'textarea',
 					editable : true,
+					hidden : true
 				}, {
 					name : 'mantip',
 					index : 'mantip',
 					edittype : 'textarea',
 					editable : true,
+					hidden : true
 				}, {
 					name : 'parktip',
 					index : 'parktip',
@@ -289,7 +300,7 @@ jQuery(function($) {
 				}, {
 					name : 'stat',
 					index : 'stat',
-					width : 35,
+					width : 55,
 					sortable : true,
 					editable : true,
 					edittype : 'select',
@@ -306,6 +317,9 @@ jQuery(function($) {
 						return '1';
 					},
 				} ],
+				/**
+				 * modify end
+				 */
 
 				viewrecords : true,
 				rowNum : 10,

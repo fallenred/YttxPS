@@ -197,20 +197,26 @@ jQuery(function($) {
                     formatter : actFormatter
                 }, 
                 {
+                	/**
+                	 * modify by maroncai
+                	 * 调整了一下列的宽度
+                	 * 2016-3-16
+                	 * modify by start
+                	 */
                     name : 'seqNum',
                     index : 'seqNum',
-                    width : 100,
+                    width : 70,
                     sorttype : false
                 }, 
                 {
                     name : 'no',
                     index : 'no',
-                    width : 100,
+                    width : 50,
                     sorttype : "char"
                 }, {
                     name : 'brand',
                     index : 'brand',
-                    width : 100,
+                    width : 40,
                     editable : true,
                     sorttype : "char"
                 }, {
@@ -219,6 +225,9 @@ jQuery(function($) {
                     width : 50,
                     editable : true,
                     sorttype : "char"
+                    /**
+                     * modify end
+                     */
                 }, {
                     name : 'regdate',
                     index : 'regdate',

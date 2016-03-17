@@ -80,16 +80,14 @@
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="sysOperId">用户编号</label>
-												<div class="col-sm-10">
-													<input class="col-sm-6 col-xs-6" maxlength="16"
+												<div class="col-sm-3">
+													<input class="form-control" class="col-sm-6 col-xs-6" maxlength="16"
 														type="text" id="sysOperId" placeholder="操作员ID" />
 												</div>
-											</div>
-											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="sysOperName">用户名称</label>
-												<div class="col-sm-10">
-													<input class="col-sm-6 col-xs-6" maxlength="128" type="text" id="sysOperName"
+												<div class="col-sm-3">
+													<input class="form-control" class="col-sm-6 col-xs-6" maxlength="128" type="text" id="sysOperName"
 														placeholder="操作员名称" />
 												</div>
 											</div>
@@ -99,28 +97,23 @@
 													<div class="form-group">
 														<label class="col-sm-1 control-label no-padding-right"
 															for="depNo">部门名称</label>
-														<div class="col-sm-10">
-															<select class="col-sm-6 col-xs-6" id="depNo">
+														<div class="col-sm-3">
+															<select class="form-control" class="col-sm-6 col-xs-6" id="depNo">
 																<option value="" selected>请选择部门...</option>
 																<c:forEach items="${deps}" var="dep">
 																	<option value="${dep.depNo}">${dep.depName}</option>
 																</c:forEach>
 															</select>
 														</div>
-													</div>
 												</c:when>
 												<c:otherwise>
 													<input type="hidden" value="${oper.depNo}" id="depNo">
 												</c:otherwise>
 											</c:choose>
-											
-											
-											
-											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right"
 													for="stat">状态</label>
-												<div class="col-sm-10">
-													<select id="stat" class="col-sm-6 col-xs-6">
+												<div class="col-sm-3">
+													<select class="form-control" id="stat" class="col-sm-6 col-xs-6">
 														<option value="">请选择状态...</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>

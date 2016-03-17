@@ -147,6 +147,30 @@ $("#showModal").on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
 });
 
+/**
+ * add by marongcai
+ * 下拉框从数据库动态获取
+ * 2016-3-17
+ * add by start
+ */
+$.ajax({
+	type: "GET",
+	traditional: true,
+	url: "/dict/selectDict.htm",
+	data: "dict.fsParentno=bg",
+	dataType: "json",
+	success: function(data){
+		html = '<option value="">---请选择---</option>'; 
+		$.each(data, function(commentIndex, comment){
+			html += '<option value=' + comment['fsDictno'] + '>' + comment['fsDictname'] + '</option>';
+		});
+		$("#starlvl").html(html);
+	}
+});
+/**
+ * add end
+ */
+
 jQuery(function($) {
     //酒店房型配置 iframe 高度适配
     $("#roomIframe").css({"height": screen.height});
@@ -184,7 +208,16 @@ jQuery(function($) {
             function() {
                 $("#collapseOne").collapse('hide');
                 var postData = $("#grid-table").jqGrid("getGridParam", "postData");
-                postData["accomadation.no"] = $("#queryfield").find("#no").val();
+                /**
+                 * modify by marongcai
+                 * 酒店代码改为酒店等级
+                 * 2016-3-16
+                 * modify by start
+                 */
+                postData["accomadation.starlvl"] = $("#queryfield").find("#starlvl").val();
+                /**
+                 * modify end
+                 */
                 postData["accomadation.name"] = $("#queryfield").find("#name").val();
                 postData["accomadation.regionno"] = $("#queryfield").find("#regionno").val();
                 postData["accomadation.stat"] = $("#queryfield").find("#stat").val();
@@ -295,18 +328,27 @@ jQuery(function($) {
                 }, {
                     name : 'no',
                     index : 'no',
-                    width : 100,
+                    width : 50,
                     sorttype : "char"
                 }, {
                     name : 'regionno',
                     index : 'regionno',
-                    width : 80,
+                    /**
+                	 * modify by marongcai
+                	 * 调整了显示的宽度
+                	 * 2016-3-16
+                	 * modify by start
+                	 */
+                    width : 50,
                     editable : true,
                     sorttype : "char"
                 }, {
                     name : 'starlvl',
                     index : 'starlvl',
-                    width : 50,
+                    width : 45,
+                    /**
+                     * modify end
+                     */
                     sortable : false,
                     editable : false,
                     edittype : 'select',

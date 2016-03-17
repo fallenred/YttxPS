@@ -70,19 +70,21 @@
 								<div class="panel-collapse collapse in" id="collapseOne">
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
+											<!-- 
+												modify by marongcai
+												修改查询布局
+												2016-3-16
+												modify by start
+											 -->
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="fsName">路线名称</label>
 												<div class="col-sm-2">
 													<input class="form-control" maxlength="10" type="text" id="fsName" placeholder="路线名称" />
 												</div>
-											</div>
-											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="fiDays">路线天数</label>
 												<div class="col-sm-2">
 													<input class="form-control" maxlength="150" type="text" id="fiDays" placeholder="路线天数" />
 												</div>
-											</div>
-											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="fiStat">状态</label>
 												<div class="col-sm-2">
 													<select class="form-control" id="fiStat">
@@ -92,6 +94,9 @@
 													</select>
 												</div>
 											</div>
+											<!-- 
+												modify end
+											 -->
 
 											<div class="clearfix form-actions">
 												<div class="col-md-offset-3 col-md-9">
