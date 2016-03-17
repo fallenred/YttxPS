@@ -438,7 +438,7 @@
         FS_OPER_ID = #{record.fsOperId,jdbcType=VARCHAR},
       </if>
       <if test="record.ftCreatdate != null">
-        FT_CREATDATE = #{record.ftCreatdate,jdbcType=DATE},
+        FT_CREATDATE = to_date(#{record.ftCreatdate,jdbcType=DATE},'yyyy-MM-dd HH24:mi:ss'),
       </if>
       <if test="record.fsType != null">
         FS_TYPE = #{record.fsType,jdbcType=CHAR},
@@ -512,7 +512,7 @@
       FS_USER_ID = #{record.fsUserId,jdbcType=VARCHAR},
       FS_USER_SUBID = #{record.fsUserSubid,jdbcType=VARCHAR},
       FS_OPER_ID = #{record.fsOperId,jdbcType=VARCHAR},
-      FT_CREATDATE = #{record.ftCreatdate,jdbcType=DATE},
+      FT_CREATDATE = to_date(#{record.ftCreatdate,jdbcType=DATE},'yyyy-MM-dd HH24:mi:ss'),
       FS_TYPE = #{record.fsType,jdbcType=CHAR},
       FS_ROUTE_ID = #{record.fsRouteId,jdbcType=CHAR},
       FS_PROPERTY = #{record.fsProperty,jdbcType=CHAR},
@@ -548,7 +548,7 @@
       FS_USER_ID = #{record.fsUserId,jdbcType=VARCHAR},
       FS_USER_SUBID = #{record.fsUserSubid,jdbcType=VARCHAR},
       FS_OPER_ID = #{record.fsOperId,jdbcType=VARCHAR},
-      FT_CREATDATE = #{record.ftCreatdate,jdbcType=DATE},
+      FT_CREATDATE = to_date(#{record.ftCreatdate,jdbcType=DATE},'yyyy-MM-dd HH24:mi:ss'),
       FS_TYPE = #{record.fsType,jdbcType=CHAR},
       FS_ROUTE_ID = #{record.fsRouteId,jdbcType=CHAR},
       FS_PROPERTY = #{record.fsProperty,jdbcType=CHAR},
@@ -591,7 +591,7 @@
         FS_OPER_ID = #{fsOperId,jdbcType=VARCHAR},
       </if>
       <if test="ftCreatdate != null">
-        FT_CREATDATE = #{ftCreatdate,jdbcType=DATE},
+        FT_CREATDATE = to_date(#{ftCreatdate,jdbcType=DATE},'yyyy-MM-dd HH24:mi:ss'),
       </if>
       <if test="fsType != null">
         FS_TYPE = #{fsType,jdbcType=CHAR},
@@ -662,7 +662,7 @@
       FS_USER_ID = #{fsUserId,jdbcType=VARCHAR},
       FS_USER_SUBID = #{fsUserSubid,jdbcType=VARCHAR},
       FS_OPER_ID = #{fsOperId,jdbcType=VARCHAR},
-      FT_CREATDATE = #{ftCreatdate,jdbcType=DATE},
+      FT_CREATDATE = to_date(#{ftCreatdate,jdbcType=DATE},'yyyy-MM-dd HH24:mi:ss'),
       FS_TYPE = #{fsType,jdbcType=CHAR},
       FS_ROUTE_ID = #{fsRouteId,jdbcType=CHAR},
       FS_PROPERTY = #{fsProperty,jdbcType=CHAR},
@@ -695,7 +695,7 @@
       FS_USER_ID = #{fsUserId,jdbcType=VARCHAR},
       FS_USER_SUBID = #{fsUserSubid,jdbcType=VARCHAR},
       FS_OPER_ID = #{fsOperId,jdbcType=VARCHAR},
-      FT_CREATDATE = #{ftCreatdate,jdbcType=DATE},
+      FT_CREATDATE = to_date(#{ftCreatdate,jdbcType=DATE},'yyyy-MM-dd HH24:mi:ss'),
       FS_TYPE = #{fsType,jdbcType=CHAR},
       FS_ROUTE_ID = #{fsRouteId,jdbcType=CHAR},
       FS_PROPERTY = #{fsProperty,jdbcType=CHAR},
@@ -752,7 +752,7 @@
       select * from (select ROWNUM as rowno, t.* from 
 		(select 
 		     o.FS_NO, o.FI_GENINDEX, o.FS_NAME, o.FS_USER_ID, o.FS_USER_SUBID,
-             o.FS_OPER_ID, o.FT_CREATDATE, o.FS_TYPE, o.FS_ROUTE_ID, o.FS_PROPERTY,
+             o.FS_OPER_ID, to_char(o.FT_CREATDATE, 'yyyy-MM-dd HH24:mi:ss') as FT_CREATDATE, o.FS_TYPE, o.FS_ROUTE_ID, o.FS_PROPERTY,
              o.FI_DAYS, o.FT_STARTDATE, o.FS_STARTPLACE, o.FD_PRICE, o.FS_SUMMARY,
              o.FD_TOTALFEE, o.FD_PAIDAMT, o.FS_REMARK, o.FI_STAT, o.FS_DAC, o.FI_VISITORNUM,
 		    <include refid="Blob_Column_List" />
