@@ -222,7 +222,7 @@
 														<tr>
 															<th width="10%">操作</th>
 															<th width="20%">文件名称</th>
-															<th width="70%">文件说明</th>
+															<th width="70%">文件路径</th>
 														</tr>
 													</thead>
 													<tbody id="table-attachs">
@@ -230,11 +230,12 @@
 														{{#each attachs}}
 															<tr>
 																<td>
-																	<button type="button" class="btn btn-xs btn-primary" onclick="">下载</button></td>
-																	<input type="hidden" value="{{attachment}}">
-																<td>{{attachname}}<input name="scheduleBody.attachs[{{@index}}].attachname" type="hidden" value="{{attachname}}"></td>
-																<td>
+																	<button type="button" class="btn btn_downFile btn-xs btn-primary">下载</button>
+																	<input name="scheduleBody.attachs[{{@index}}].attachment" type="hidden" value="{{attachment}}">
 																</td>
+																	
+																<td>{{attachname}}<input name="scheduleBody.attachs[{{@index}}].attachname" type="hidden" value="{{attachname}}"></td>
+																<td><a herf="{{attachname}}">{{attachment}}</a></td>
 															</tr>
 														{{/each}}
 														</script>
@@ -296,7 +297,8 @@
 										</div>
 									</div>
 									<hr>
-									<div class="row">
+									<!-- 计调配置公共资源start -->
+									<div class="row div_transfer">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="transName">公共资源</label>
@@ -436,7 +438,7 @@
 															<!-- 公共资源体 start -->
 															<script id="commRes-template2" type="text/x-handlebars-template">
 															{{#each daylist}}
-															<div class="tab-pane fade" id="day{{dayflag}}">
+															<div class="tab-pane fade" id="day{{@index}}">
 																<div class="row" style="margin-top: 10px;">
 																	<div class="col-sm-12" style="padding: 10 0 0 0px;">
 																		<div class="row" style="padding: 0px 15px 0px 0px;">
@@ -468,7 +470,7 @@
 																				<div class="col-sm-1">
 																					<button type="button" class="btn btn_res btn-sm btn-success">添加</button>
 																					<input type="hidden" class="reslistIndex" value="{{length reslist}}" placeholder="daylist下标">
-																					<input type="hidden" class="daylistIndex" name="commBody.daylist[{{dayflag}}].dayflag" value="{{dayflag}}" placeholder="日期">
+																					<input type="hidden" class="daylistIndex" name="commBody.daylist[{{@index}}].dayflag" value="{{@index}}" placeholder="日期">
 																				</div>
 																			</div>
 																		</div>
@@ -528,7 +530,9 @@
 											</div>
 										</div>
 									</div>
-									<div class="row">
+									<!-- 计调配置公共资源end -->
+									<!-- 计调配置批次资源start -->
+									<div class="row div_transfer">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="transType">订单批次</label>
@@ -678,6 +682,7 @@
 											</div>
 										</div>
 									</div>
+									<!-- 计调配置批次资源end -->
 									<div id="message" class="alert alert-warning"></div>
 								</div>
 

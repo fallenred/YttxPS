@@ -11,10 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yttx.yttxps.comm.Constants.OrderStat;
 import com.yttx.yttxps.mapper.TOrderCustomMapper;
 import com.yttx.yttxps.mapper.TOrderlistMapper;
-import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.TOrderCustomWithBLOBs;
+import com.yttx.yttxps.model.TOrderlist;
 import com.yttx.yttxps.model.TOrderlistExample;
 import com.yttx.yttxps.model.TOrderlistWithBLOBs;
 import com.yttx.yttxps.service.IOrderlistService;
@@ -65,6 +66,8 @@ public class OrderlistService implements IOrderlistService {
 	@Override
 	@Transactional(rollbackFor=Exception.class)
 	public int update4custom(TOrderlistWithBLOBs record) throws Exception {
+		//处理订单状态
+		handleStat(record);
 		//询价快照
 		Body scheduleBody = record.getScheduleBody();
 		//设置早餐、午餐、晚餐默认值
@@ -86,6 +89,7 @@ public class OrderlistService implements IOrderlistService {
 				//处理body-daylist-reslist
 				daylist.setReslist(handleResListIndex(daylist.getReslist()));
 			}
+			commBody.setDaylist(record.getCommBody().getDaylist());
 		}
 		//将公共精确资源转换为xml
 		ResScheduleXMLConverter.toXml("http://www.cnacex.com/", commBody);
@@ -146,6 +150,24 @@ public class OrderlistService implements IOrderlistService {
 			}
 		}
 		return list;
+	}
+	
+	/**
+	 * 处理订单状态
+	 * @param orderlist
+	 */
+	private void handleStat(TOrderlist orderlist) {
+		BigDecimal stat = orderlist.getFiStat();
+		//询价状态时
+		if (OrderStat.INQUIRY.getVal() == stat) {
+			//修改状态为报价
+			orderlist.setFiStat(OrderStat.OFFER.getVal());
+		}
+		//待审核状态时
+		if (OrderStat.WAITCONFIRM.getVal() == stat) {
+			//修改状态为已审核
+			orderlist.setFiStat(OrderStat.AUDITED.getVal());
+		}
 	}
 	
 }
