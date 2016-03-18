@@ -66,10 +66,10 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		req.copyOrderlist(map);
 		HttpSession session = request.getSession();
 		SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
-		if ("1".equals(sessionEntity.getLevel()) || "2".equals(sessionEntity.getLevel())){
+		if (1l == sessionEntity.getLevel() || 2l == sessionEntity.getLevel()){
 			map.remove("fsOperId");
 		} else {
-			//map.put("fsOperId", sessionEntity.getId());
+			map.put("fsOperId", sessionEntity.getId());
 		}
 		List<TOrderlistWithBLOBs> list = orderlistService.selectSelectivePage(map);
 		if(CollectionUtils.isNotEmpty(list)){
