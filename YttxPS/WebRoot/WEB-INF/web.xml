@@ -25,10 +25,6 @@
     <servlet-name>springmvc</servlet-name>
     <url-pattern>*.htm</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>springmvc</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
  
    <servlet>
     <servlet-name>AuthImg</servlet-name>
