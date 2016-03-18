@@ -716,7 +716,7 @@ jQuery(function($) {
 	$(document).on('click key', '.btn_downFile', function(event){
 		//文件路径
 		var url = $(this).next().val();
-		window.location.href = url;
+		location.href = url;
 	});
 	
 	//	colorbox

@@ -77,25 +77,25 @@
 								<div class="panel-collapse collapse in" id="collapseOne">
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
-											<!-- <div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="fsScenicno">所属景区</label>
-												<div class="col-sm-2">
-													<input maxlength="150"
-														type="text" id="fsScenicno" placeholder="所属景区" />
-												</div>
-											</div> -->
+											<!--
+												modify by marongcai
+												修改查询条件的布局
+												2016-3-16
+												modify by start
+											  -->
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="fsName">门票名称</label>
-												<div class="col-sm-2">
+												<label class="col-sm-1 control-label no-padding-right" for="fsScenicname">所属景区</label>
+												<div class="col-sm-3">
+													<input class="form-control" maxlength="150" type="text" id="fsScenicname" placeholder="所属景区" />
+												</div>
+												<label class="col-sm-1 control-label no-padding-right" for="fsName">门票名称</label>
+												<div class="col-sm-3">
 													<input class="form-control" maxlength="150" type="text" id="fsName" placeholder="门票名称" />
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="fsType">门票类型</label>
-												<div class="col-sm-2">
+												<label class="col-sm-1 control-label no-padding-right" for="fsType">门票类型</label>
+												<div class="col-sm-3">
 													<select class="form-control" id="fsType">
 														<option value="">---门票类型---</option>
 														<option value="01">主门票</option>
@@ -103,11 +103,8 @@
 														<option value="03">小景区</option>
 													</select>
 												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="lvl">状态</label>
-												<div class="col-sm-2">
+												<label class="col-sm-1 control-label no-padding-right" for="lvl">状态</label>
+												<div class="col-sm-3">
 													<select class="form-control" id="fiStat">
 														<option value="">---门票状态---</option>
 														<option value="1">正常</option>
@@ -115,7 +112,9 @@
 													</select>
 												</div>
 											</div>
-
+											<!-- 
+												modify end
+											 -->
 											<div class="clearfix form-actions">
 												<div class="col-md-offset-3 col-md-9">
 													<button class="btn btn-info" type="button" id="submit">

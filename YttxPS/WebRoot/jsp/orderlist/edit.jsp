@@ -88,7 +88,7 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="ftCreatdate">创建日期</label>
 											<div class="col-sm-3">
-												<input type="text" id="ftCreatdate" name="ftCreatdate"
+												<input type="text" id="ftCreatdate" readonly="readonly" name="ftCreatdate"
 													class="form-control" placeholder="创建日期" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"

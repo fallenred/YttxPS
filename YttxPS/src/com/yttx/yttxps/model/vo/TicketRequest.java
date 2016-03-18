@@ -28,7 +28,16 @@ public class TicketRequest extends JqGridRequest implements
 		if (ticket != null) {
 			map.put("fsNo", ticket.getFsNo() == null ? "" : ticket.getFsNo());
 			map.put("fsName", ticket.getFsName() == null ? "" : ticket.getFsName());
-			map.put("fsScenicno", ticket.getFsScenicno() == null ? "" : ticket.getFsScenicno());
+			/**
+			 * modify by marongcai
+			 * 修改景区编号为景区名称
+			 * 2016-3-16
+			 * modify by start
+			 */
+			map.put("fsScenicname", ticket.getFsScenicname() == null ? "" : ticket.getFsScenicname());
+			/**
+			 * modify end
+			 */
 			map.put("fsType", ticket.getFsType() == null ? "" : ticket.getFsType());
 			map.put("fiStat", ticket.getFiStat() == null ? "" : ticket.getFiStat());
 		}

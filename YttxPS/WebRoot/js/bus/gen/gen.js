@@ -32,7 +32,7 @@ $("#showModal").on("shown.bs.modal", function() {
 
 $("#editIframe").on("load",function(){
 	$(this).contents().find("#reset").click();
-	$(this).contents().find("#fiIndex").val(raw.fiIndex);
+//	$(this).contents().find("#fiIndex").val(raw.fiIndex);
 	$(this).contents().find("#fsName").val(raw.fsName);
 	$(this).contents().find("#fiDays").val(raw.fiDays);
 	$(this).contents().find("#fiStat").val(raw.fiStat);

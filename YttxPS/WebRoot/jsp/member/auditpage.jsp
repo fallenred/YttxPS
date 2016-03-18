@@ -79,24 +79,24 @@
 														<input type="hidden" id="auditRet" value="0">
 														<div class="form-group">
 															<label class="col-sm-1 control-label no-padding-right" for="id">客户ID</label>
-															<div class="col-sm-5">
-																<input maxlength="16" name="id" type="text" id="id" placeholder="忽略客户Id" />
+															<div class="col-sm-3">
+																<input class="form-control" maxlength="16" name="id" type="text" id="id" placeholder="忽略客户Id" />
 															</div>
 															<label class="col-sm-1 control-label no-padding-right" for="name">客户名称</label>
-															<div class="col-sm-2">
-																<input maxlength="50" name="name" type="text" id="name" placeholder="忽略客户名称" />
+															<div class="col-sm-3">
+																<input class="form-control" maxlength="50" name="name" type="text" id="name" placeholder="忽略客户名称" />
 															</div>
 														</div>
 														
 														<div class="form-group">
 															<label class="col-sm-1 control-label no-padding-right" for="taname">旅行社名称</label>
-															<div class="col-sm-5">
-																<input maxlength="50" name="taname" type="text" 
+															<div class="col-sm-3">
+																<input class="form-control" maxlength="50" name="taname" type="text" 
 																	id="taname" placeholder="忽略旅行社名称" />
 															</div>
-															<label class="col-sm-1 control-label no-padding-right" for="stat">申请审核类型</label>
-															<div class="col-sm-5">
-																<select id="auditType" name="auditType">
+															<label class="col-sm-1 control-label no-padding-right" for="stat">审核类型</label>
+															<div class="col-sm-3">
+																<select class="form-control" id="auditType" name="auditType">
 																	<option value="">忽略申请审核类型</option>
 																	<c:forEach items="${auditType_list}" var="item">
 																		<option value="${item.fsDictno}">${item.fsDictname}</option>

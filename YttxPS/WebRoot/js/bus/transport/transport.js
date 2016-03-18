@@ -185,9 +185,15 @@ jQuery(function($) {
 				height : 400,
 				colNames : [ '操作', '车型编码', '车型名称', '准载下限', '准载上限', '适应范围下限', '适应范围上限', '状态' ],
 				colModel : [ {
+					/**
+					 * modify by marongcai
+					 * 修改了列表宽度
+					 * 2016-3-16
+					 * modify by start
+					 */
 					name : 'myac',
 					index : '',
-					width : 90,
+					width : 120,
 					fixed : true,
 					sortable : false,
 					resize : false,
@@ -201,37 +207,37 @@ jQuery(function($) {
 				}, {
 					name : 'fsName',
 					index : 'fsName',
-					width : 100,
+					width : 85,
 					editable : true,
 					sorttype : "char"
 				}, {
 					name : 'fiLoadMin',
 					index : 'fiLoadMin',
-					width : 100,
+					width : 85,
 					editable : true,
 					sorttype : "int"
 				}, {
 					name : 'fiLoadMax',
 					index : 'fiLoadMax',
-					width : 100,
+					width : 85,
 					editable : true,
 					sorttype : "int"
 				}, {
 					name : 'fiFitMin',
 					index : 'fiFitMin',
-					width : 100,
+					width : 85,
 					editable : true,
 					sorttype : "int"
 				}, {
 					name : 'fiFitMax',
 					index : 'fiFitMax',
-					width : 100,
+					width : 85,
 					editable : true,
 					sorttype : "int"
 				}, {
 					name : 'fiStat',
 					index : 'fiStat',
-					width : 35,
+					width : 45,
 					sortable : true,
 					editable : true,
 					edittype : 'select',
@@ -248,6 +254,9 @@ jQuery(function($) {
 						return '1';
 					}
 				}],
+				/**
+				 * modify end
+				 */
 
 				viewrecords : true,
 				rowNum : 10,

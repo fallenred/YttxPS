@@ -61,39 +61,40 @@
 								<div class="panel-collapse collapse in" id="collapseOne">
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
+											<!-- 
+												modify by marongcai
+												修改了查询布局
+												2016-3-16
+												modify by start
+											 -->
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="no">购物店代码</label>
-												<div class="col-sm-2">
-													<input maxlength="10" type="text" id="no" placeholder="购物店代码" />
+												<label class="col-sm-1 control-label no-padding-right" for="no">购物点代码</label>
+												<div class="col-sm-3">
+													<input class="form-control" maxlength="10" type="text" id="no" placeholder="购物点代码" />
 												</div>
-											</div>
-											
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="name">购物店名称</label>
-												<div class="col-sm-2">
-													<input maxlength="150" type="text" id="name" placeholder="购物店名称" />
-												</div>
-											</div>
-											
-											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="regionname">所属地区</label>
-												<div class="col-sm-2">
-													<input type="text" placeholder="点击选择所属地区" name="regionname" data-key="0086" data-idx="0" data-full="中国" id="regionname" class="inp-search" /> 
+												<div class="col-sm-3">
+													<input class="form-control" type="text" placeholder="请选择行政区域" name="regionname" data-key="0086" data-idx="0" data-full="中国" id="regionname" class="inp-search" /> 
 													<input type="hidden" name="regionno" id="regionno" />
 													<div id="selectCity" class="localcity"></div>
 												</div>
 											</div>
-											
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="lvl">购物店状态</label>
-												<div class="col-sm-1">
-													<select id="stat">
-														<option value="">---购物店状态---</option>
+												<label class="col-sm-1 control-label no-padding-right" for="name">购物店名称</label>
+												<div class="col-sm-3">
+													<input class="form-control" maxlength="150" type="text" id="name" placeholder="购物店名称" />
+												</div>
+												<label class="col-sm-1 control-label no-padding-right" for="lvl">状态</label>
+												<div class="col-sm-3">
+													<select class="form-control" id="stat">
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>
 												</div>
 											</div>
+											<!-- 
+												modify end
+											 -->
 
 											<div class="clearfix form-actions">
 												<div class="col-md-offset-3 col-md-9">

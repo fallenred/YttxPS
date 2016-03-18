@@ -90,12 +90,18 @@ jQuery(function($) {
 		callback : localcallback
 	});
 	
+	/**
+	 * modify by marongncai
+	 * 修改提交属性，景区编号改为景区名称
+	 * 2016-3-16
+	 * modify by start
+	 */
 //	jqGrid form提交
 	$("#submit").click(function() {
 		$("#collapseOne").collapse('hide');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
 		postData["ticket.fsNo"] = $("#queryfield").find("#fsNo").val();
-		postData["ticket.fsScenicno"] = $("#queryfield").find("#fsScenicno").val();
+		postData["ticket.fsScenicname"] = $("#queryfield").find("#fsScenicname").val();
 		postData["ticket.fsName"] = $("#queryfield").find("#fsName").val();
 		postData["ticket.fsType"] = $("#queryfield").find("#fsType").val();
 		postData["ticket.fiStat"] = $("#queryfield").find("#fiStat").val();
@@ -103,6 +109,9 @@ jQuery(function($) {
 			postData : postData
 		}).trigger("reloadGrid");
 	})
+	/**
+	 * modify end 
+	 */
 	
 //	城市选择器
 	function localcallback(index, key, value, fullkey, fullname) {

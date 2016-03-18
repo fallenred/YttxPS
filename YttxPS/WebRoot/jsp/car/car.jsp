@@ -60,23 +60,29 @@
 								<div class="panel-collapse collapse in" id="collapseOne">
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
+											<!-- 
+												modify by marongcai
+												修改查询条件布局
+												2016-3-16
+												modify by start
+											 -->
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="no">车牌号</label>
 												<div class="col-sm-2">
-													<input maxlength="10" name="no" type="text" id="no" placeholder="车牌号" />
+													<input class="form-control" maxlength="10" name="no" type="text" id="no" placeholder="忽略车牌号" />
 												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="stat">车辆状态</label>
-												<div class="col-sm-1">
-													<select id="stat" name="stat">
-														<option value="">---车辆状态---</option>
+												<label class="col-sm-1 control-label no-padding-right" for="stat">状态</label>
+												<div class="col-sm-2">
+													<select class="form-control" id="stat" name="stat">
+														<option value="">&nbsp;&nbsp;忽略状态&nbsp;&nbsp;</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>
 												</div>
 											</div>
-
+											<!-- 
+												modify end
+											 -->
 											<div class="clearfix form-actions">
 												<div class="col-md-offset-3 col-md-9">
 													<button class="btn btn-info btn-sm" type="button" id="queryfield_submit">

@@ -100,20 +100,19 @@ $("#customizationIframe").on("load",function(){
 		$(this).contents().find(".div_transfer").hide();
 	}
 	html='<option value="">---订单状态---</option>';
-	//状态为已确认时，页面状态只能选已付首款选项
 	if (raw.fiStat == '2') {
 		html +='<option value="4">已付首款</option>'
 		$(this).contents().find("#fiStat").html(html);
-	}
-	//状态为已付收款时，页面状态只能选已付全款选项
-	if (raw.fiStat == '4') {
+	} else if (raw.fiStat == '4') {
+		//状态为已付收款时，页面状态只能选已付全款选项
 		html +='<option value="8">已付全款(可出团)</option>'
 		$(this).contents().find("#fiStat").html(html);
-	}
-	//状态为已付全款时，页面状态只能选完结选项
-	if (raw.fiStat == '8') {
+	} else if (raw.fiStat == '8') {
+		//状态为已付全款时，页面状态只能选完结选项
 		html +='<option value="32">已完成</option>';
 		$(this).contents().find("#fiStat").html(html);
+	} else {
+		$(this).contents().find("#fiStat").html('<option value="'+raw.fiStat+'"></option>');
 	}
 	getGuide(obj, Lvl);
 });
@@ -235,10 +234,12 @@ jQuery(function($) {
 		$("#collapseOne").collapse('hide');
 		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
-		postData["orderlist.fsNo"] = $("#queryfield").find("#fsNo").val();
-		postData["orderlist.fsName"] = $("#queryfield").find("#fsName").val();
-		postData["orderlist.fsType"] = $("#queryfield").find("#fsType").val();
-		postData["orderlist.fiStat"] = $("#queryfield").find("#fiStat").val();
+		postData["orderlistWithBLOBs.fsNo"] = $("#queryfield").find("#fsNo").val();
+		postData["orderlistWithBLOBs.fsName"] = $("#queryfield").find("#fsName").val();
+		postData["orderlistWithBLOBs.fsTaName"] = $("#queryfield").find("#fsTaName").val();
+		postData["orderlistWithBLOBs.fsId"] = $("#queryfield").find("#fsId").val();
+		postData["orderlistWithBLOBs.fsType"] = $("#queryfield").find("#fsType").val();
+		postData["orderlistWithBLOBs.fiStat"] = $("#queryfield").find("#fiStat").val();
 		$("#grid-table").jqGrid("setGridParam", {
 			postData : postData
 		}).trigger("reloadGrid");
@@ -334,13 +335,19 @@ jQuery(function($) {
 	for (k in fsProperty)
 			s1 += ';' + k + ":" + fsProperty[k];
 	s2 = s2.substring(1);	
+	/**
+	 * modify by marongcai
+	 * 隐藏线路天数、发团日期，添加旅行社名称列
+	 * 2016-3-18
+	 * modify by start
+	 */
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/orderlist/findOrderlist.htm",
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : ['操作', '订单编号', '线路统称Idx', '订单名称', '用户ID', '用户子ID', '计调ID', '创建时间', '线路类型', 'fs_Route_ID', '组团类型', '线路天数',
+				colNames : ['操作', '订单编号', '线路统称Idx', '订单名称', '用户ID', '用户子ID', '计调ID', '创建时间', '线路类型', 'fs_Route_ID', '组团类型', '线路天数','旅行社名称',
 				            '发团日期', '发团地id', '发团地', '线路初始报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照', '总人数',],
 				colModel : [ {
 					name : 'myac',
@@ -445,13 +452,21 @@ jQuery(function($) {
 					index : 'fiDays',
 					width : 50,
 					editable : true,
+					sorttype : "int",
+					hidden : true
+				},  {
+					name : 'fsTaName',
+					index : 'fsTaName',
+					width : 50,
+					editable : true,
 					sorttype : "int"
-				}, {
+				},{
 					name : 'ftStartdate',
 					index : 'ftStartdate',
 					width : 50,
 					editable : true,
 					sorttype : "date",
+					hidden : true,
 					formatter : function(value){
 						var timestamp = "";
 						if(value != ''){//rData[7]表示日期列
@@ -552,6 +567,9 @@ jQuery(function($) {
 					sorttype : "char",
 					hidden : true
 				}],
+				/**
+				 * modify end
+				 */
 
 				viewrecords : true,
 				rowNum : 10,

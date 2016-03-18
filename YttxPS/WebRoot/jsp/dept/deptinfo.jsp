@@ -66,18 +66,18 @@
 						<div class="form-group">
 							<label class="col-sm-1 control-label no-padding-right" for="depNo">部门编号</label>
 							<div class="col-sm-2">
-								<input type="text" id="depNo" class="form-control"
+								<input class="form-control" type="text" id="depNo" class="form-control"
 									placeholder="部门编号" readonly="readonly" value="${depInfo.depNo}"/>
 							</div>
 							
 							<label class="col-sm-1 control-label no-padding-right" for="depName">部门名称</label>
 							<div class="col-sm-2">
-								<input type="text" id="depName" class="form-control"
+								<input class="form-control" type="text" id="depName" class="form-control"
 									placeholder="部门名称" readonly="readonly" value="${depInfo.depName}"/>
 							</div>
 							<label class="col-sm-2 control-label no-padding-right" for="stat">部门状态</label>
 							<div class="col-sm-1">
-								<select id="stat" disabled="disabled">
+								<select class="form-control" id="stat" disabled="disabled">
 									<option value="1" <c:if test="${depInfo.stat==1}">selected</c:if>>正常</option>
 									<option value="2" <c:if test="${depInfo.stat==2}">selected</c:if>>失效</option>
 								</select>

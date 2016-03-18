@@ -73,60 +73,68 @@
 								<div class="panel-collapse collapse in" id="collapseOne">
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
+										<!-- 
+											modify by marongcai
+											修改查询条件布局
+											2016-3-16
+											modify by start
+										 -->
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="name">餐厅名称</label>
-												<div class="col-sm-5">
-													<input maxlength="50" name="name" type="text" id="name" placeholder="餐厅名称" />
+												<div class="col-sm-2">
+													<input class="form-control" maxlength="50" name="name" type="text" id="name" placeholder="忽略餐厅名称" />
 												</div>
 												<label class="col-sm-1 control-label no-padding-right" for="regionname">所属地区</label>
 												<div class="col-sm-2">
-													<input type="text" placeholder="点击选择所属地区" name="regionname"
+													<input class="form-control" type="text" placeholder="忽略行政区域" name="regionname"
 														data-key="000086" data-idx="0" data-full="中国" id="regionname" class="inp-search" /> 
 													<input type="hidden" name="regionno" id="regionno" />
 													<div id="selectCity" class="localcity"></div>
 												</div>
+												
+												<label class="col-sm-1 control-label no-padding-right" for="scale">接待规模</label>
+												<div class="col-sm-1">
+													<input class="form-control" maxlength="4" id="scale_min" name="scale_min" type="text"  placeholder="最小值" />
+												</div>
+												<div class="col-sm-1">
+													<input class="form-control" maxlength="4" id="scale_max" name="scale_max" type="text"  placeholder="最大值" />
+												</div>
 											</div>
 											
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="scale">接待规模</label>
-												<div class="col-sm-5">
-													<input maxlength="4" id="scale_min" name="scale_min" type="text"  placeholder="接待规模最小值" />
-													--
-													<input maxlength="4" id="scale_max" name="scale_max" type="text"  placeholder="接待规模最大值" />
-												</div>
 												<label class="col-sm-1 control-label no-padding-right" for="special">菜品特色</label>
-												<div class="col-sm-5">
-													<select name="special"  id="special">
+												<div class="col-sm-2">
+													<select class="form-control" name="special"  id="special">
 														<!-- TODO:应该从数据字典中读取 -->
-														<option value="">---菜品特色---</option>
-														<c:forEach items="${codeMasterList['cpts']}" var="item">
-															<option value="${item.fsDictno}">${item.fsDictname}</option>
-														</c:forEach>
+														<option value="">忽略菜品特色</option>
+														<option value="01">小吃</option>
+														<option value="02">藏餐</option>
+														<option value="03">火锅</option>
 													</select>
 												</div>
-											</div>
-											
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="lvl">餐厅等级</label>
-												<div class="col-sm-5">
-													<select name="lvl"  id="lvl">
+												<label class="col-sm-1 control-label no-padding-right" for="lvl">等级</label>
+												<div class="col-sm-2">
+													<select class="form-control" name="lvl"  id="lvl">
 														<!-- TODO:应该从数据字典中读取 -->
-														<option value="">---餐厅等级---</option>
+														<option value="">忽略等级</option>
 														<option value="01">lvl1</option>
 														<option value="02">lvl2</option>
 														<option value="03">lvl3</option>
 													</select>
 												</div>
 												<label class="col-sm-1 control-label no-padding-right"
-													for="stat">餐厅状态</label>
-												<div class="col-sm-5">
-													<select id="stat" name="stat">
-														<option value="">---餐厅状态---</option>
+													for="stat">状态</label>
+												<div class="col-sm-2">
+													<select class="form-control" id="stat" name="stat">
+														<option value="">忽略状态</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>
 												</div>
 											</div>
+											<!-- 
+												modify end
+											 -->
 											<div class="clearfix form-actions">
 												<div class="col-md-offset-3 col-md-9">
 													<button class="btn btn-info btn-sm" type="button" id="queryfield_submit">

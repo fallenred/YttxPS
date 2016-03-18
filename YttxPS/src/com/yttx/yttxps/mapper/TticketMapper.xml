@@ -302,6 +302,13 @@
       FI_STAT = #{fiStat,jdbcType=DECIMAL}
     where FS_NO = #{fsNo,jdbcType=CHAR}
   </update>
+  
+  <!-- 
+  		modify by marongcai
+  		修改分页查询门票的sql，增加了根据景区名称查询
+  		2016-3-16
+  		modify by start
+   -->
   <!-- 分页查询总记录 -->
   <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
   	select count(*) from VIEW_TTICKET
@@ -311,6 +318,9 @@
 	      </if>
 	      <if test="fsName != null and fsName != ''">
 	        and fs_Name like '%'||#{fsName}||'%'
+	      </if>
+	      <if test="fsScenicname != null and fsScenicname != ''">
+	        and fs_Scenicname like '%'||#{fsScenicname}||'%'
 	      </if>
 	      <if test="fsType != null and fsType != ''">
 	        and fs_Type = #{fsType}
@@ -331,6 +341,9 @@
 	      <if test="fsName != null and fsName != ''">
 	        and fs_Name like '%'||#{fsName}||'%'
 	      </if>
+	      <if test="fsScenicname != null and fsScenicname != ''">
+	        and fs_Scenicname like '%'||#{fsScenicname}||'%'
+	      </if>
 	      <if test="fsType != null and fsType != ''">
 	        and fs_Type = #{fsType}
 	      </if>
@@ -345,6 +358,9 @@
 	        and tt.rowno &gt; #{startrow}
 	      </if>
   </select>
+  <!-- 
+  		modify end
+   -->
   
   <select id="selectFsNo" resultType="int">
       select ticket_sequence.nextval from dual

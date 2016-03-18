@@ -167,12 +167,12 @@ public class OrderlistService implements IOrderlistService {
 		}
 		BigDecimal stat = new BigDecimal(orderlist.getFiStat());
 		//询价状态时
-		if (OrderStat.INQUIRY.getVal() == stat) {
+		if (OrderStat.INQUIRY.getVal().compareTo(stat) == 0) {
 			//修改状态为报价
 			orderlist.setFiStat(OrderStat.OFFER.getVal().toString());
 		}
 		//待审核状态时
-		if (OrderStat.WAITCONFIRM.getVal() == stat) {
+		if (OrderStat.WAITCONFIRM.getVal().compareTo(stat) == 0) {
 			//修改状态为已审核
 			orderlist.setFiStat(OrderStat.AUDITED.getVal().toString());
 		}

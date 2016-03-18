@@ -60,13 +60,18 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@ResponseBody
 	public Object ajaxfindOrderlist(OrderlistRequest req)
     {  
-		logger.debug("当前查询条件 {}", req.getOrderlist());
+		logger.debug("当前查询条件 {}", req.getOrderlistWithBLOBs());
 		Map<String, Object> map = new HashMap<String, Object>();
 		req.copyPage(map);
 		req.copyOrderlist(map);
-		List<TOrderlistWithBLOBs> list = orderlistService.selectSelectivePage(map);
 		HttpSession session = request.getSession();
 		SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
+		if ("1".equals(sessionEntity.getLevel()) || "2".equals(sessionEntity.getLevel())){
+			map.remove("fsOperId");
+		} else {
+			//map.put("fsOperId", sessionEntity.getId());
+		}
+		List<TOrderlistWithBLOBs> list = orderlistService.selectSelectivePage(map);
 		if(CollectionUtils.isNotEmpty(list)){
 			for(TOrderlistWithBLOBs orderlist : list){
 				orderlist.setFsOperId(sessionEntity.getName());
@@ -164,7 +169,8 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			orderlistService.update(orderlist);
 		}
 		catch(Exception e){
-			logger.error("更新订单失败, 订单编号："+orderlist.getFsNo() + "\n" + e);
+			e.printStackTrace();
+			logger.error("更新订单失败, 订单编号："+orderlist.getFsNo() + "\n" + e.getMessage());
 			return (Map<String, Object>) JsonResult.jsonError("更新失败");
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();

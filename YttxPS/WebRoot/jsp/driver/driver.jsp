@@ -61,33 +61,37 @@
 								<div class="panel-collapse collapse in" id="collapseOne">
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
+											<!-- 
+												modify by marongcai
+												修改查询条件布局
+												2016-3-16
+												modify by start
+											 -->
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="name">驾驶员姓名</label>
 												<div class="col-sm-2">
-													<input maxlength="10" type="text" id="name" placeholder="驾驶员姓名" />
+													<input class="form-control" maxlength="10" type="text" id="name" placeholder="忽略驾驶员姓名" />
 												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="gender">驾驶员性别</label>
-												<div class="col-sm-1">
-													<select id="gender">
-														<option value="">---驾驶员性别---</option>
+												<label class="col-sm-1 control-label no-padding-right" for="gender">性别</label>
+												<div class="col-sm-2">
+													<select class="form-control" id="gender">
+														<option value="">&nbsp;&nbsp;忽略性别&nbsp;&nbsp;</option>
 														<option value="1">男</option>
 														<option value="2">女</option>
 													</select>
 												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="stat">驾驶员状态</label>
-												<div class="col-sm-1">
-													<select id="stat">
-														<option value="">---驾驶员状态---</option>
+												<label class="col-sm-1 control-label no-padding-right" for="stat">状态</label>
+												<div class="col-sm-2">
+													<select class="form-control" id="stat">
+														<option value="">&nbsp;&nbsp;忽略状态&nbsp;&nbsp;</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>
 												</div>
 											</div>
-
+											<!-- 
+												modify end
+											 -->
 											<div class="clearfix form-actions">
 												<div class="col-md-offset-3 col-md-9">
 													<button class="btn btn-info btn-sm" type="button" id="queryfield_submit">

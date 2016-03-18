@@ -61,37 +61,43 @@
 								<div class="panel-collapse collapse in" id="collapseOne">
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="no">酒店代码</label>
-												<div class="col-sm-2">
-													<input maxlength="10" name="no" type="text" id="no" placeholder="酒店代码" />
-												</div>
-											</div>
+											<!-- 
+												modify by marongcai
+												修改查询条件，去除酒店代码，添加酒店等级的下拉框
+												2016-3-16
+												modify by start
+											 -->
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="name">酒店名称</label>
-												<div class="col-sm-2">
-													<input maxlength="200" name="name" type="text" id="name" placeholder="酒店名称" />
+												<div class="col-sm-3">
+													<input class="form-control" maxlength="200" name="name" type="text" id="name" placeholder="忽略酒店名称" />
 												</div>
-											</div>
-											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="regionname">所属地区</label>
-												<div class="col-sm-2">
-													<input type="text" placeholder="点击选择所属地区" name="regionname" data-key="0086" data-idx="0" data-full="中国" id="regionname" class="inp-search" />
+												<div class="col-sm-3">
+													<input class="form-control" type="text" placeholder="忽略行政区域" name="regionname" data-key="0086" data-idx="0" data-full="中国" id="regionname" class="inp-search" />
 													<input type="hidden" name="regionno" id="regionno" />
 													<div id="selectCity" class="localcity"></div>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="stat">酒店状态</label>
-												<div class="col-sm-1">
-													<select id="stat" name="stat">
-														<option value="">---酒店状态---</option>
+												<label class="col-sm-1 control-label no-padding-right" for="starlvl">酒店等级</label>
+												<div class="col-sm-3">
+													<select id="starlvl" class="form-control" name="starlvl">
+													<!-- js中动态从数据库获取 -->
+													</select>
+												</div>
+												<label class="col-sm-1 control-label no-padding-right" for="stat">状态</label>
+												<div class="col-sm-3">
+													<select id="stat" class="form-control" name="stat">
+														<option value="">&nbsp;&nbsp;忽略状态&nbsp;&nbsp;</option>
 														<option value="1">正常</option>
 														<option value="2">失效</option>
 													</select>
 												</div>
 											</div>
-
+											<!-- 
+												modify end
+											 -->
 											<div class="clearfix form-actions">
 												<div class="col-md-offset-3 col-md-9">
 													<button class="btn btn-info btn-sm" type="button" id="queryfield_submit">

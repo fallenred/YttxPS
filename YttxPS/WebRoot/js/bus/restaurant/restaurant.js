@@ -259,20 +259,20 @@ jQuery(function($) {
 				}, {
 					name : 'no',
 					index : 'no',
-					width : 100,
+					width : 70,
 					sorttype : "char"
 				},
 				{
 					name : 'name',
 					index : 'name',
-					width : 180,
+					width : 150,
 					sortable : false,
 					editable : false,
 				},
 				{
 					name : 'regionname',
 					index : 'regionname',
-					width : 150,
+					width : 160,
 					sortable : false,
 					editable : false,
 				}, {
@@ -301,7 +301,7 @@ jQuery(function($) {
 				{
 					name : 'stat',
 					index : 'stat',
-					width : 40,
+					width : 50,
 					sortable : false,
 					editable : false,
 					edittype : 'select',

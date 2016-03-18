@@ -96,7 +96,12 @@ jQuery(function($){
 			str += ';' + k + ":" + object[k];
 		return  str.substring(1);
 	}
-	
+	/**
+	 * modify by marongcai
+	 * 修改列表参数
+	 * 2016-3-18
+	 * modify by start
+	 */
 	$(grid_selector).jqGrid({
 		url:"/member/audit/listpage.htm",
 		datatype : "json",
@@ -120,7 +125,7 @@ jQuery(function($){
 		{
 			name : 'name',
 			index : 'name',
-			width : 140,
+			width : 120,
 			sortable : false,
 			editable : false,
 		},
@@ -133,7 +138,7 @@ jQuery(function($){
 		},{
 			name : 'auditType',
 			index : 'auditType',
-			width : 60,
+			width : 80,
 			editable : false,
 			sortable : false,
 			formatter: function(v, opt, rec) {
@@ -143,7 +148,7 @@ jQuery(function($){
 		{
 			name : 'auditor',
 			index : 'auditor',
-			width : 90,
+			width : 80,
 			sortable : false,
 			editable : false,
 		} , 
@@ -188,6 +193,9 @@ jQuery(function($){
 				return auditRet==0?auditButton:showButton;
 			}
 		}],
+		/**
+		 * modify end
+		 */
 		viewrecords : true,
 		rowNum : 10,
 		rowList : [ 10, 20, 30 ],
