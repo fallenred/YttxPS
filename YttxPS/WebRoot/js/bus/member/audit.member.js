@@ -102,8 +102,15 @@ jQuery(function($){
 		datatype : "json",
 		mtype : 'POST',
 		height : 400,
-		colNames : [ '客户ID', '客户名称','旅行社名称', '联系方式', '申请审核类型', '审核人','审核时间','审核结果','操作' ],
-		colModel : [ {
+		colNames : ['审核编号' ,'客户ID', '客户名称','旅行社名称', '申请审核类型', '审核人','审核时间','审核结果','操作' ],
+		colModel : [{
+    			name : 'auditno',
+    			index : 'auditno',
+    			width : 140,
+    			sortable : false,
+    			editable : false,
+    		},
+		            {
 			name : 'id',
 			index : 'id',
 			width : 80,
@@ -123,13 +130,7 @@ jQuery(function($){
 			width : 140,
 			sortable : false,
 			editable : false,
-		}, {
-			name : 'contact',
-			index : 'contact',
-			width : 100,
-			sortable : false,
-			editable : false,
-		}, {
+		},{
 			name : 'auditType',
 			index : 'auditType',
 			width : 60,
@@ -142,7 +143,7 @@ jQuery(function($){
 		{
 			name : 'auditor',
 			index : 'auditor',
-			width : 100,
+			width : 90,
 			sortable : false,
 			editable : false,
 		} , 
@@ -192,6 +193,9 @@ jQuery(function($){
 		rowList : [ 10, 20, 30 ],
 		pager : pager_selector,
 		altRows : true,
+		jsonReader : {  
+			id: "auditno",  
+		},
 		
 		loadComplete : function() {
 			var table = this;
