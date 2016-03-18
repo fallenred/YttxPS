@@ -834,9 +834,9 @@
 					"resprop" : "comm",
 					"resno" : $("#transport").val(),
 					"resname" : $("#transport").find("option:selected").text(),
-					"ccno" : "000000"
+					"ccno" : "000023"
 			}
-			data["ccname"] = "价格(通用)";
+			data["ccname"] = "车辆消费";
 			data["price"] = $("#transportPrice").val();
 			data["cctype"] = "0";
 			data["usernum"] = $("#transportNum").val();
