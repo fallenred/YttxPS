@@ -80,7 +80,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		if (CollectionUtils.isNotEmpty(list)) {
 			TOrderlist orderlist = orderlistService.selectByPrimaryKey(list.get(0).getFsOrderId());
 			if (orderlist != null) {
-				days = Integer.parseInt(orderlist.getFsNo());
+				days = orderlist.getFiDays().intValue();
 			}
 		}
 		for(TOrderCustomWithBLOBs customWithBLOBs : list){
