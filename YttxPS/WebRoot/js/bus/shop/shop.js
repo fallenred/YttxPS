@@ -219,7 +219,7 @@ jQuery(function($) {
 					/**
 					 * modify by marongcai
 					 * 修改了显示的列还有宽度
-					 * 2016-3-16
+					 * 2016-3-18
 					 * modify by start
 					 */
 					name : 'myac',

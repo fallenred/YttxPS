@@ -335,13 +335,19 @@ jQuery(function($) {
 	for (k in fsProperty)
 			s1 += ';' + k + ":" + fsProperty[k];
 	s2 = s2.substring(1);	
+	/**
+	 * modify by marongcai
+	 * 隐藏线路天数、发团日期，添加旅行社名称列
+	 * 2016-3-18
+	 * modify by start
+	 */
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/orderlist/findOrderlist.htm",
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : ['操作', '订单编号', '线路统称Idx', '订单名称', '用户ID', '用户子ID', '计调ID', '创建时间', '线路类型', 'fs_Route_ID', '组团类型', '线路天数',
+				colNames : ['操作', '订单编号', '线路统称Idx', '订单名称', '用户ID', '用户子ID', '计调ID', '创建时间', '线路类型', 'fs_Route_ID', '组团类型', '线路天数','旅行社名称',
 				            '发团日期', '发团地id', '发团地', '线路初始报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照', '总人数',],
 				colModel : [ {
 					name : 'myac',
@@ -446,13 +452,21 @@ jQuery(function($) {
 					index : 'fiDays',
 					width : 50,
 					editable : true,
+					sorttype : "int",
+					hidden : true
+				},  {
+					name : 'fsTaName',
+					index : 'fsTaName',
+					width : 50,
+					editable : true,
 					sorttype : "int"
-				}, {
+				},{
 					name : 'ftStartdate',
 					index : 'ftStartdate',
 					width : 50,
 					editable : true,
 					sorttype : "date",
+					hidden : true,
 					formatter : function(value){
 						var timestamp = "";
 						if(value != ''){//rData[7]表示日期列
@@ -553,6 +567,9 @@ jQuery(function($) {
 					sorttype : "char",
 					hidden : true
 				}],
+				/**
+				 * modify end
+				 */
 
 				viewrecords : true,
 				rowNum : 10,

@@ -199,6 +199,13 @@ jQuery(function($) {
 			'02' : '散客团',
 			'03' : '购物团'
 	};
+	
+	/**
+	 * modify by marongcai
+	 * 调整列表参数
+	 * 2016-3-18
+	 * modify by start
+	 */
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/guide/findGuide.htm",
@@ -210,7 +217,7 @@ jQuery(function($) {
 				             colModel : [ {
 				            	 name : 'myac',
 				            	 index : '',
-				            	 width : 100,
+				            	 width : 70,
 				            	 fixed : true,
 				            	 sortable : false,
 				            	 resize : false,
@@ -218,12 +225,12 @@ jQuery(function($) {
 				             }, {
 				            	 name : 'no',
 				            	 index : 'no',
-				            	 width : 85,
+				            	 width : 95,
 				            	 sorttype : "int"
 				             }, {
 				            	 name : 'name',
 				            	 index : 'name',
-				            	 width : 80,
+				            	 width : 60,
 				            	 editable : true,
 				            	 sorttype : "char"
 				             }, {
@@ -247,6 +254,7 @@ jQuery(function($) {
 				            	 }
 				             }, { name : 'idno',
 				            	 index : 'idno',
+				            	 width : 165,
 				            	 editable : true,
 				            	 sorttype : "char"
 				             }, { name : 'workdate',
@@ -264,17 +272,17 @@ jQuery(function($) {
 				             }, { name : 'contactno',
 				            	 index : 'contactno',
 				            	 editable : true,
-				            	 width : 100,
+				            	 width : 105,
 				            	 sorttype : "char"
 				             }, { name : 'mainroute',
 				            	 index : 'mainroute',
-				            	 width : 100,
+				            	 width : 120,
 				            	 editable : true,
 				            	 sorttype : "char"
 				             }, { name : 'preferteem',
 				            	 index : 'preferteem',
 				            	 editable : true,
-				            	 width : 80,
+				            	 width : 70,
 				            	 sorttype : "char",
 				            	 edittype : 'select',
 				            	 editoptions : {
@@ -296,6 +304,7 @@ jQuery(function($) {
 				            	 sorttype : "char"
 				             }, { name : 'desc',
 				            	 index : 'desc',
+				            	 width : 120,
 				            	 editable : true,
 				            	 sorttype : "char"
 				             }, { name : 'lvl',
@@ -360,6 +369,9 @@ jQuery(function($) {
 				            		 return '1';
 				            	 }
 				             } ],
+				             /**
+				              * modify end
+				              */
 
 				             viewrecords : true,
 				             rowNum : 10,
