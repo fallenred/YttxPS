@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class DateUtil{  
 	private static DateFormat df =new SimpleDateFormat("yyyy-MM-dd");
-	private static DateFormat df24=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	private static DateFormat df24=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	/**
 	 * 获取两个日期中的每一天
 	 * @param String startDate :格式 "yyyy-MM-dd"

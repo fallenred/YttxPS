@@ -138,16 +138,21 @@
   
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
     select * from ( 
-      select ROWNUM as rowno, t.*  from TDRIVER t where 1=1 
-      <if test="name != null and name != ''" >
-        and FS_NAME like #{name}||'%'
-      </if>
-      <if test="gender != null" >
-        and FI_GENDER = #{gender}
-      </if>
-      <if test="stat != null" >
-        and FI_STAT = #{stat}
-      </if>
+      select ROWNUM as rowno, t.*  from(
+      	 select td.* from TDRIVER td where 1=1 
+		      <if test="name != null and name != ''" >
+		        and FS_NAME like #{name}||'%'
+		      </if>
+		      <if test="gender != null" >
+		        and FI_GENDER = #{gender}
+		      </if>
+		      <if test="stat != null" >
+		        and FI_STAT = #{stat}
+		      </if>
+		    order by 
+		    	FI_INDEX
+		)t
+		where 1=1
       <if test="endrow != null" >
         and ROWNUM &lt;= #{endrow}
       </if>

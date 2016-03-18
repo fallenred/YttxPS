@@ -185,7 +185,8 @@
   
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
     select * from ( 
-      select ROWNUM as rowno, t.*  from TCAR t where 1=1 
+      select ROWNUM as rowno, t.*  from(
+      	select tc.* from  TCAR tc where 1=1 
       <if test="no != null and no != ''" >
         and FS_NO like #{no}||'%'
       </if>
@@ -195,6 +196,8 @@
       <if test="stat != null" >
         and FI_STAT = #{stat}
       </if>
+      order by fs_seqNum) t
+      where 1=1
       <if test="endrow != null" >
         and ROWNUM &lt;= #{endrow}
       </if>
