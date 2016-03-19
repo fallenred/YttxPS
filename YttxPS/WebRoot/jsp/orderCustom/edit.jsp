@@ -336,25 +336,36 @@
 
 	</c:if>
 	<script>
-	 $(function() {
-		   $(document).on('change key', '.usernum', function(event){
-				countPrice = 0;
-				$(".usernum").each(function(){
-					usernum = $(this).val();
-					if (usernum != ''){
-						$(this).parent().parent().find(".price").each(function(){
-							price = '';
-							if (!$(this).prop("disabled")) {
-								price = $(this).val();
-							}
-							if (price != '') {
-								countPrice = parseInt(countPrice) + parseInt(usernum) * parseInt(price);
-							}
-						});
+	/**
+	 * 计算批次金额小计
+	 */
+	function calculatePrice(){
+		countPrice = 0;
+		$(".usernum").each(function(){
+			usernum = $(this).val();
+			if (usernum != ''){
+				$(this).parent().parent().find(".price").each(function(){
+					price = '';
+					if (!$(this).prop("disabled")) {
+						price = $(this).val();
+					}
+					if (price != '') {
+						countPrice = parseInt(countPrice) + parseInt(usernum) * parseInt(price);
 					}
 				});
-				$("#fdAmt").val(countPrice);
-		   });
+			}
+		});
+		$("#fdAmt").val(countPrice);
+	}
+	
+	 $(function() {
+		 /**
+		  * 数量改变，计算价格
+		  */
+		   $(document).on('change key', '.usernum', function(event){
+			   calculatePrice();
+		   })
+
 	   });
 	</script>
 	<script type="text/javascript">
@@ -392,6 +403,7 @@
 				$(obj).next().attr("disabled", true);
 				$(obj).next().next().attr("disabled", true);
 			}
+			calculatePrice();//点击餐厅的多选框，修改批次金额小计
 			
 		}
 		
