@@ -897,7 +897,16 @@
 				type: "GET",
 				traditional: true,
 				url: "/accomadation/selectAccomadation.htm",
-				data: "accomadation.starlvl=" + $(obj).val(),
+				/*
+				 * modify by marongcai
+				 * 请求参数中添加了状态
+				 * 2016-3-19
+				 * modify by start
+				 */
+				data: "accomadation.starlvl=" + $(obj).val()+"&accomadation.stat=1",
+				/*
+				 * modify end
+				 */
 				dataType: "json",
 				success: function(data){
 					var html = ''; 
