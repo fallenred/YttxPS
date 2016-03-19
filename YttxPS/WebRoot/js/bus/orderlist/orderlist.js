@@ -95,6 +95,7 @@ $("#customizationIframe").on("load",function(){
 	$(this).contents().find("#fdTotalfee").val(raw.fdTotalfee);
 	$(this).contents().find("#fdPaidamt").val(raw.fdPaidamt);
 	$(this).contents().find("#fsOperId").val(raw.fsOperId);
+	$(this).contents().find("#fdInsuerprice").val(raw.fdInsuerprice);
 	//询价状态时隐藏计调资源配置界面
 	if (raw.fiStat == '-10' || raw.fiStat == '-5') {
 		$(this).contents().find(".div_transfer").hide();
@@ -348,7 +349,7 @@ jQuery(function($) {
 				mtype : 'POST',
 				height : 400,
 				colNames : ['操作', '订单编号', '线路统称Idx', '订单名称', '用户ID', '用户子ID', '计调ID', '创建时间', '线路类型', 'fs_Route_ID', '组团类型', '线路天数','旅行社名称',
-				            '发团日期', '发团地id', '发团地', '线路初始报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照', '总人数',],
+				            '发团日期', '发团地id', '发团地', '线路初始报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照', '总人数','保险费用'],
 				colModel : [ {
 					name : 'myac',
 					index : '',
@@ -562,6 +563,13 @@ jQuery(function($) {
 				}, {
 					name : 'fiVisitornum',
 					index : 'fiVisitornum',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					hidden : true
+				}, {
+					name : 'fdInsuerprice',
+					index : 'fdInsuerprice',
 					width : 100,
 					editable : true,
 					sorttype : "char",

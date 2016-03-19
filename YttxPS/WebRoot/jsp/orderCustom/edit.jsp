@@ -913,17 +913,20 @@
 	
 		//获取酒店列表
 		function getAccomadation(obj){
-			var postData = {};
-			postData["accomadation.starlvl"] = $(obj).val();//餐厅等级
-			$("input[name='scenicGen']").each(function(index){//景区代码
-				postData["scenicNo["+index+"]"] = $(this).val();
-			})
-			
 			$.ajax({
 				type: "GET",
 				traditional: true,
 				url: "/accomadation/selectAccomadation.htm",
-				data: postData,
+				/*
+				 * modify by marongcai
+				 * 请求参数中添加了状态
+				 * 2016-3-19
+				 * modify by start
+				 */
+				data: "accomadation.starlvl=" + $(obj).val()+"&accomadation.stat=1",
+				/*
+				 * modify end
+				 */
 				dataType: "json",
 				success: function(data){
 					var html = ''; 

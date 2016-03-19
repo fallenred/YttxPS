@@ -26,10 +26,12 @@ import com.yttx.yttxps.model.DictExample.Criteria;
 import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.TOrderlistExample;
 import com.yttx.yttxps.model.TOrderlistWithBLOBs;
+import com.yttx.yttxps.model.TRemarksExample;
 import com.yttx.yttxps.model.vo.OrderlistRequest;
 import com.yttx.yttxps.service.IDictService;
 import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.service.IPubService;
+import com.yttx.yttxps.service.IRemarksService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.web.action.LoginController;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
@@ -50,6 +52,8 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	private IPubService<?> pubService;
 	@Autowired
 	private IDictService dictService;;
+	@Autowired
+	private IRemarksService remarksService;;
 	
 	/**
 	 * 分页查询订单信息
@@ -82,6 +86,21 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		map.put("rows", list);
 		return map;
     }
+	
+	/**
+	 * 查询订单备注信息
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="findRemarks.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object ajaxfindRemarks(String orderId) {
+		TRemarksExample example = new TRemarksExample();
+		com.yttx.yttxps.model.TRemarksExample.Criteria criteria = example.createCriteria();
+		criteria.andFsOrderIdEqualTo(orderId);
+		return remarksService.selectRemarks(example);
+    }
+	
 	
 	/**
 	 * 查询资源快照
@@ -124,13 +143,13 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		//定制线路-客户询价内容
 		if ("03".equals(orderlistWithBLOBs.getFsType()) && StringUtils.isNotBlank(orderlistWithBLOBs.getFcSchedule())) {
 			Root root = ResScheduleXMLConverter.fromXml("http://www.cnacex.com/", orderlistWithBLOBs.getFcSchedule(), Root.class);
-			DictExample dictExample = new DictExample();
+			/*DictExample dictExample = new DictExample();
 			Criteria criteria = dictExample.createCriteria();
 			criteria.andFsParentnoEqualTo("jtgj");
 			Map<String, Object> dictMap = dictService.selectDictMap(dictExample);
 			for (Daylist daylist : root.getBody().getDaylist()) {
 				daylist.setTransport((String)dictMap.get(daylist.getTransport()));
-			}
+			}*/
 			map.put("fcSchedule", root.getBody());
 		}
 		return map;
