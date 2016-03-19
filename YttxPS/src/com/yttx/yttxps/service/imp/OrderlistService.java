@@ -14,10 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.yttx.yttxps.comm.Constants.OrderStat;
 import com.yttx.yttxps.mapper.TOrderCustomMapper;
 import com.yttx.yttxps.mapper.TOrderlistMapper;
+import com.yttx.yttxps.mapper.TRemarksMapper;
 import com.yttx.yttxps.model.TOrderCustomWithBLOBs;
 import com.yttx.yttxps.model.TOrderlist;
 import com.yttx.yttxps.model.TOrderlistExample;
 import com.yttx.yttxps.model.TOrderlistWithBLOBs;
+import com.yttx.yttxps.model.TRemarks;
+import com.yttx.yttxps.model.TRemarksExample;
+import com.yttx.yttxps.model.TRemarksExample.Criteria;
 import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
@@ -39,6 +43,9 @@ public class OrderlistService implements IOrderlistService {
 	@Autowired
 	private TOrderCustomMapper<TOrderCustomWithBLOBs> orderCustomMapper;
 
+	@Autowired
+	private TRemarksMapper<TRemarks> remarksMapper ;
+	
 	@Override
 	public int selectCountSelective(Map<String, Object> map) {
 		return orderlistMapper.selectCountSelective(map);
@@ -108,6 +115,24 @@ public class OrderlistService implements IOrderlistService {
 				customWithBLOBs.setFcRessnapshot(fcRessnapshot);
 				customWithBLOBs.setFiId(new BigDecimal(body.getFiId()));
 				orderCustomMapper.updateByPrimaryKeySelective(customWithBLOBs);
+			}
+		}
+		//更新订单备注
+		if (CollectionUtils.isNotEmpty(record.getRemarks())) {
+			//先删除订单备注
+			TRemarksExample example = new TRemarksExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andFsOrderIdEqualTo(record.getFsNo());
+			remarksMapper.deleteByExample(example);
+			for (int i = 0; i < record.getRemarks().size(); i++) {
+				TRemarks remarks = record.getRemarks().get(i);
+				if (remarks.getFdAmt() == null) continue;
+				remarks.setFsOrderId(record.getFsNo());
+				remarks.setFsOperId(record.getFsOperId());
+				remarks.setFiSeq(new BigDecimal(i));
+				remarks.setFdPaidamt(BigDecimal.ZERO);
+				remarks.setFiClosestat(BigDecimal.ZERO);
+				remarksMapper.insertSelective(remarks);
 			}
 		}
 		return orderlistMapper.updateByPrimaryKeySelective(record);

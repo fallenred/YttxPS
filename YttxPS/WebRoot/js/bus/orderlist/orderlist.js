@@ -104,14 +104,17 @@ $("#customizationIframe").on("load",function(){
 	if (raw.fiStat == '2') {
 		html +='<option value="4">已付首款</option>'
 		$(this).contents().find("#fiStat").html(html);
+		$(this).contents().find(".div_transfer_stat").show();
 	} else if (raw.fiStat == '4') {
 		//状态为已付收款时，页面状态只能选已付全款选项
 		html +='<option value="8">已付全款(可出团)</option>'
 		$(this).contents().find("#fiStat").html(html);
+		$(this).contents().find(".div_transfer_stat").show();
 	} else if (raw.fiStat == '8') {
 		//状态为已付全款时，页面状态只能选完结选项
 		html +='<option value="32">已完成</option>';
 		$(this).contents().find("#fiStat").html(html);
+		$(this).contents().find(".div_transfer_stat").show();
 	} else {
 		$(this).contents().find("#fiStat").html('<option value="'+raw.fiStat+'"></option>');
 	}

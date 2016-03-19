@@ -237,6 +237,7 @@ jQuery(function($) {
 		}
 		if(restype == 'gw'){
 			getShop(this);
+			$(this).parent().parent().find("#ccno").html('');
 		}
 		if(restype == 'bg'){
 			$(this).parent().parent().find(".batch_bg").show();
@@ -452,13 +453,24 @@ jQuery(function($) {
 				$.each(data, function(commentIndex, comment){
 					html += '<option value=' + comment['fsNo'] + '>' + comment['fsName'] + '</option>';
 				});
-				resMap.put('ticket', html);
 				if (obj == null) {
-					$(".select_resno").each(function(){
-						
+					$(".select_resno").html(html);
+					$(".select_ccno").each(function(){
+						setTimeout("3000");
+						var resno = $(this).parent().parent().find("#resno").val();
+						var restype = $(this).parent().parent().find("#restype").val();
+						date = getDate($("#ftStartdate").val(), $(this).parent().parent().find("#dayflag").val());
+						params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resno+'&fsRestype='+restype;
+						getTccprice(params, resno, date, $(this).parent().parent().find("#ccno"));
 					});
+				} else {
+					$(obj).parent().parent().find(".select_resno").html(html);
+					var resno = $(obj).parent().parent().find("#resno").val();
+					var restype = $(obj).parent().parent().find("#restype").val();
+					date = getDate($("#ftStartdate").val(), $(obj).parent().parent().find("#dayflag").val());
+					params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resno+'&fsRestype='+restype;
+					getTccprice(params, resno, date, $(obj).parent().parent().find("#ccno"));
 				}
-				$(obj).parent().parent().find(".select_resno").html(html);
 			}
 		});
 	}
@@ -487,12 +499,32 @@ jQuery(function($) {
 			data: {"scenicNo" : dataArr},
 			dataType: "json",
 			success: function(data){
-				var html = ''; 
-				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
-				});
-				resMap.put('restaurant', html);
-				$(obj).parent().parent().find(".select_resno").html(html);
+				if(data == null || data == ''){
+					$(obj).parent().parent().find(".select_resno").html('');
+				} else {
+					var html = ''; 
+					$.each(data, function(commentIndex, comment){
+						html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
+					});
+					if (obj == null) {
+						$(".select_resno").html(html);
+						$(".select_ccno").each(function(){
+							setTimeout("3000");
+							var resno = $(this).parent().parent().find("#resno").val();
+							var restype = $(this).parent().parent().find("#restype").val();
+							date = getDate($("#ftStartdate").val(), $(this).parent().parent().find("#dayflag").val());
+							params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resno+'&fsRestype='+restype;
+							getTccprice(params, resno, date, $(this).parent().parent().find("#ccno"));
+						});
+					} else {
+						$(obj).parent().parent().find(".select_resno").html(html);
+						var resno = $(obj).parent().parent().find("#resno").val();
+						var restype = $(obj).parent().parent().find("#restype").val();
+						date = getDate($("#ftStartdate").val(), $(obj).parent().parent().find("#dayflag").val());
+						params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resno+'&fsRestype='+restype;
+						getTccprice(params, resno, date, $(obj).parent().parent().find("#ccno"));
+					}
+				}
 			}
 		});
 	}
@@ -780,7 +812,6 @@ jQuery(function($) {
 	$(document).on('click key', '#btn_remarks', function(event){
 		var remarksTemplate = Handlebars.compile($("#tr-remarks").html());
 		var fsOrderId = $("#fsNo").val();
-		$("#remarksIndex").val(parseInt($("#remarksIndex").val())+1);
 		var reslistIndex = $("#remarksIndex").val();
 		var ftDate = getNowFormatDate();
 		var fsContent = $("#fsContent").val();
@@ -796,6 +827,7 @@ jQuery(function($) {
 				"fdAmt" : fdAmt,
 				"fiStat" : fiStat
 		}
+		$("#remarksIndex").val(parseInt($("#remarksIndex").val())+1);
 		$('#table_remarks tbody').html($('#table_remarks tbody').html() + remarksTemplate(data));
 	});
 	

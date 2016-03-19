@@ -684,7 +684,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="row div_transfer">
+									<div hidden="hidden" class="row div_transfer_stat">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fiStat">订单状态</label>
 											<div class="col-sm-3">
@@ -874,6 +874,11 @@
 	<script type="text/javascript">
 		//删除资源项
 		function removeTr(obj){
+			$(obj).parent().parent().remove();
+			totalAmount();
+		}
+		
+		function removeRemarkTr(obj){
 			$(obj).parent().parent().remove();
 			totalAmount();
 		}
