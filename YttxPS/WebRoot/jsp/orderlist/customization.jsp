@@ -131,11 +131,11 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="insuerprice">保险费用</label>
+												for="fdInsuerprice">保险费用</label>
 											<div class="col-sm-3">
 												<div class="input-group">
-													<input type="text" id="insuerprice"
-														name="scheduleBody.insuerprice" class="form-control">
+													<input type="text" id="fdInsuerprice"
+														name="scheduleBody.fdInsuerprice" class="form-control">
 													<span class="input-group-addon">￥</span>
 												</div>
 											</div>
@@ -897,7 +897,7 @@
 				}
 				totalAmt = parseFloat(totalAmt) + parseInt(usernum) * parseFloat(price);
 			});
-			totalAmt = parseFloat(totalAmt) + parseFloat($("#insuerprice").val());
+			totalAmt = parseFloat(totalAmt) + parseFloat($("#fdInsuerprice").val());
 			$("#fdTotalfee").val(totalAmt.toFixed(2));
 		}
 		

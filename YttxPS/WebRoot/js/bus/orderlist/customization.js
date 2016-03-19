@@ -139,6 +139,7 @@ jQuery(function($) {
 		}
 		var template = Handlebars.compile($("#tr-common").html());
 		$("#table_common tbody").html($("#table_common tbody").html() + template(data));
+		resMap.put("isChange_jq", true);
 		$("#reslistIndex").val(parseInt(index)+1);
 	});
 	
@@ -244,14 +245,14 @@ jQuery(function($) {
 	});
 	//获取酒店级别
 	function getAccomadationLvl(obj){
-		var flag = false;
+		/*var flag = false;
 		resMap.each(function(key,value,index){
 			if (key == 'bgjb'){
 				$(obj).parent().parent().find(".batch_bgLvl").html(value);
 				flag = true;
 			}
 		});
-		if(flag) return;
+		if(flag) return;*/
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -274,7 +275,7 @@ jQuery(function($) {
 	}
 	//获取酒店列表
 	function getAccomadation(obj){
-		var flag = false;
+		/*var flag = false;
 		bg = 'bg' + $(obj).val();
 		resMap.each(function(key,value,index){
 			if (key == bg){
@@ -282,7 +283,7 @@ jQuery(function($) {
 				flag = true;
 			}
 		});
-		if(flag) return;
+		if(flag) return;*/
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -301,14 +302,14 @@ jQuery(function($) {
 	}
 	//获取酒店房型列表
 	function getRoom(obj){
-		var flag = false;
+		/*var flag = false;
 		bg = 'bg' + $(obj).val();
 		resMap.each(function(key,value,index){
 			if (key == bg){
 				$(obj).parent().parent().find(".batch_resno").html(value);
 				flag = true;
 			}
-		});
+		});*/
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -385,17 +386,20 @@ jQuery(function($) {
 	}
 	
 	var resMap = new Map();
+	//景区是否变更
+	var isChange_jq = false;
+	resMap.put("isChange_jq", isChange_jq);
 	//获取景区门票列表
 	function getTicket(obj){
 		//从map中获取景区门票列表内容
-		var flag = false;
+		/*var flag = false;
 		resMap.each(function(key,value,index){
 			if (key == 'ticket'){
 				$(obj).parent().parent().find(".select_resno").html(value);
 				flag = true;
 			}
 		});
-		if (flag) return;
+		if (flag) return;*/
 		var scenic = '';
 		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
@@ -422,18 +426,23 @@ jQuery(function($) {
 	}
 	//获取景区餐厅列表
 	function getRestaurant(obj){
-		var flag = false;
+		/*var flag = false;
 		resMap.each(function(key,value,index){
 			if (key == 'restaurant'){
 				$(obj).parent().parent().find(".select_resno").html(value);
 				flag = true;
 			}
 		});
-		if (flag) return;
+		if (flag) return;*/
 		var dataArr = new Array();
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
+		if(dataArr.length == 0){
+			alert("请先添加景区资源！");
+			$(obj).parent().parent().find(".select_resno").html('');
+			return;
+		}
 		$.ajax({
 			type: "POST",
 			url: "/restaurant/selectRestaurant.htm",
@@ -451,14 +460,14 @@ jQuery(function($) {
 	}
 	//获取购物店列表
 	function getShop(obj){
-		var flag = false;
+		/*var flag = false;
 		resMap.each(function(key,value,index){
 			if (key == 'shop'){
 				$(obj).parent().parent().find(".select_resno").html(value);
 				flag = true;
 			}
 		});
-		if (flag) return;
+		if (flag) return;*/
 		var scenic = '';
 		$("input[name='scenicGen']").each(function(){
 			scenic += $(this).val() + ",";
@@ -481,13 +490,13 @@ jQuery(function($) {
 	}
 	//获取景区娱乐项目列表
 	function getEntertainment(obj){
-		var flag = false;
+		/*var flag = false;
 		resMap.each(function(key,value,index){
 			if (key == 'entertainment'){
 				$(".select_resno").html(value);
 				flag = true;
 			}
-		});
+		});*/
 		var dataArr = new Array();
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
@@ -705,7 +714,7 @@ jQuery(function($) {
 			}
 			totalAmt = parseFloat(totalAmt) + parseInt(usernum) * parseFloat(price);
 		});
-		totalAmt = parseFloat(totalAmt) + parseFloat($("#insuerprice").val());
+		totalAmt = parseFloat(totalAmt) + parseFloat($("#fdInsuerprice").val());
 		$("#fdTotalfee").val(totalAmt.toFixed(2));
 	}
 	
