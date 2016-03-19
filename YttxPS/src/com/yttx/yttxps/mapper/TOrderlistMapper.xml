@@ -721,7 +721,14 @@
    -->
   <!-- 分页查询总数 -->
   <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
-  	select count(*) from TORDERLIST o left join TCUSTOMINFO c
+  	select count(*) from (select * from torderlist t 
+		    	where (t.fs_type = '02' and t.fi_stat = '0') or 
+		    			(t.fs_type = '03' and t.fi_stat = '-10') or 
+		    			(1=1 <if test="fsOperId != null and fsOperId != ''">
+						        and t.fs_oper_id = #{fsOperId}
+						     </if>
+						 )
+			) o left join TCUSTOMINFO c
   			on o.fs_user_id = c.fs_id
 	     where 1=1
 	      <if test="fsNo != null and fsNo != ''">
@@ -735,9 +742,6 @@
 	      </if>
 	      <if test="fiStat != null and fiStat != ''">
 	        and o.fi_Stat = #{fiStat}
-	      </if>
-	      <if test="fsOperId != null and fsOperId != ''">
-	        and o.fs_oper_id = #{fsOperId}
 	      </if>
 	      <if test="fsId != null and fsId != ''">
 	        and c.fs_Id like '%'||#{fsId}||'%'
@@ -758,7 +762,14 @@
 		    <include refid="Blob_Column_List" />
 		    , c.fs_Id, c.fs_TaName
 		from
-		    TORDERLIST o left join TCUSTOMINFO c
+		    (select * from torderlist t 
+		    	where (t.fs_type = '02' and t.fi_stat = '0') or 
+		    			(t.fs_type = '03' and t.fi_stat = '-10') or 
+		    			(1=1 <if test="fsOperId != null and fsOperId != ''">
+						        and t.fs_oper_id = #{fsOperId}
+						     </if>
+						 )
+			) o left join TCUSTOMINFO c
   			on o.fs_user_id = c.fs_id
 		    order by FS_NO) t
     	where 1=1
@@ -770,9 +781,6 @@
 	      </if>
 	      <if test="fsType != null and fsType != ''">
 	        and t.fs_Type = #{fsType}
-	      </if>
-	      <if test="fsOperId != null and fsOperId != ''">
-	        and t.fs_oper_id = #{fsOperId}
 	      </if>
 	      <if test="fiStat != null and fiStat != ''">
 	        and t.fi_Stat = #{fiStat}

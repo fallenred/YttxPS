@@ -153,33 +153,35 @@
 	<select id="selectSelectivePage" parameterType="java.util.Map" resultMap="simpleOrderResultMap">
 		SELECT 
 			* 
-		FROM (		
+		FROM (select
+				ROWNUM AS rowno,
+				o.*
+			from (
 		      SELECT
-		        ROWNUM AS rowno,
-		        o.FS_NO,
-		        o.FI_GENINDEX,
-		        o.FS_NAME,
-		        o.FS_USER_ID,
-		        o.FS_USER_SUBID,
-		        o.FS_OPER_ID,
-		       	o.FT_CREATDATE,
-		        o.FS_TYPE,
-		        o.FS_ROUTE_ID,
-		        o.FS_PROPERTY,
-		        o.FI_DAYS,
-		       	o.FT_STARTDATE,
-		        o.FS_STARTPLACE,
-		        o.FD_PRICE,
-		        o.FS_SUMMARY,
-		        o.FC_SCHEDULE,
-		        o.FD_TOTALFEE,
-		        o.FD_PAIDAMT,
-		        o.FS_REMARK,
-		        o.FI_STAT,
-		        o.FC_COMMFUZZYSNAPSHOT,
-		        o.FC_COMMRESSNAPSHOT
+		        FS_NO,
+		        FI_GENINDEX,
+		        FS_NAME,
+		        FS_USER_ID,
+		        FS_USER_SUBID,
+		        FS_OPER_ID,
+		       	FT_CREATDATE,
+		        FS_TYPE,
+		        FS_ROUTE_ID,
+		        FS_PROPERTY,
+		        FI_DAYS,
+		       	FT_STARTDATE,
+		        FS_STARTPLACE,
+		        FD_PRICE,
+		       	FS_SUMMARY,
+		        FC_SCHEDULE,
+		        FD_TOTALFEE,
+		       	FD_PAIDAMT,
+		        FS_REMARK,
+		        FI_STAT,
+		       	FC_COMMFUZZYSNAPSHOT,
+		        FC_COMMRESSNAPSHOT
 		      FROM 
-		        Torderlist o
+		        Torderlist
 			WHERE
 				1=1
 				<if test="orderId != null and orderId !=''">
@@ -214,8 +216,10 @@
 					AND
 					FI_stat = #{stat,jdbcType=VARCHAR}
 				</if>
+				order by FS_NO
+				) o
 				<if test="endrow != null">
-					AND ROWNUM &lt;= #{endrow}
+					where ROWNUM &lt;= #{endrow}
 				</if>
 			)
 		<if test="startrow != null">

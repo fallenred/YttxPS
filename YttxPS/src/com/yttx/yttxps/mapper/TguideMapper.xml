@@ -328,21 +328,25 @@
   
   <!-- 分页查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
-      select * from (select ROWNUM as rowno, t.* from 
-		TGUIDE t
-    	where 1=1
-	      <if test="no != null and no  != ''">
-	        and fs_no = #{no}
-	      </if>
-	      <if test="name != null and name != ''">
-	        and fs_Name like '%'||#{name}||'%'
-	      </if>
-	      <if test="gender != null">
-	        and fi_Gender = #{gender,jdbcType=INTEGER}
-	      </if>
-	      <if test="stat != null and stat != ''">
-	        and fi_Stat = #{stat}
-	      </if>
+      select * from (select ROWNUM as rowno, t.* from (
+      	select tg.* from 
+			TGUIDE tg
+	    	where 1=1
+		      <if test="no != null and no  != ''">
+		        and fs_no = #{no}
+		      </if>
+		      <if test="name != null and name != ''">
+		        and fs_Name like '%'||#{name}||'%'
+		      </if>
+		      <if test="gender != null">
+		        and fi_Gender = #{gender,jdbcType=INTEGER}
+		      </if>
+		      <if test="stat != null and stat != ''">
+		        and fi_Stat = #{stat}
+		      </if>
+		      order by fs_no
+		  )t
+		  where 1=1
 	      <if test="endrow != null" >
 	        and ROWNUM &lt;= #{endrow}
 	      </if>

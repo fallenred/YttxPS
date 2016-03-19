@@ -279,43 +279,47 @@
 		FROM (
 			SELECT
 				ROWNUM  rowno,
-				FS_NO, 
-				FS_NAME, 
-				FS_REGIONNO, 
-				FS_ADDR, 
-				FS_MENU,
-				FI_SCALE, 
-				FS_SPECIAL,
-				FS_ATTENTION,
-				FS_LVL,
-				FI_STAT
-			FROM
-				TRestaurant
-			WHERE
-				1=1
-			<if test="name != null and name != ''">
-				AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
-			</if>
-			<if test="regionno != null and regionno != ''">
-				AND FS_REGIONNO like '%'||#{regionno,jdbcType = VARCHAR}||'%'
-			</if>
-			<if test="minScale != null">
-				AND FI_SCALE &gt;= #{minScale,jdbcType = INTEGER}
-			</if>
-			<if test="maxScale != null">
-				AND FI_SCALE &lt;= #{maxScale,jdbcType = INTEGER}
-			</if>
-			<if test="special != null and special !=''">
-				AND FS_SPECIAL = #{special,jdbcType = VARCHAR}
-			</if>
-			<if test="lvl != null and lvl !=''">
-				AND FS_LVL = #{lvl,jdbcType = VARCHAR}
-			</if>
-			<if test="stat != null">
-				AND FI_STAT = #{stat,jdbcType=INTEGER}
-			</if>
+				r.*
+			from (
+			  	select
+					FS_NO, 
+					FS_NAME, 
+					FS_REGIONNO, 
+					FS_ADDR, 
+					FS_MENU,
+					FI_SCALE, 
+					FS_SPECIAL,
+					FS_ATTENTION,
+					FS_LVL,
+					FI_STAT
+				FROM
+					TRestaurant
+				WHERE
+					1=1
+				<if test="name != null and name != ''">
+					AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
+				</if>
+				<if test="regionno != null and regionno != ''">
+					AND FS_REGIONNO like '%'||#{regionno,jdbcType = VARCHAR}||'%'
+				</if>
+				<if test="minScale != null">
+					AND FI_SCALE &gt;= #{minScale,jdbcType = INTEGER}
+				</if>
+				<if test="maxScale != null">
+					AND FI_SCALE &lt;= #{maxScale,jdbcType = INTEGER}
+				</if>
+				<if test="special != null and special !=''">
+					AND FS_SPECIAL = #{special,jdbcType = VARCHAR}
+				</if>
+				<if test="lvl != null and lvl !=''">
+					AND FS_LVL = #{lvl,jdbcType = VARCHAR}
+				</if>
+				<if test="stat != null">
+					AND FI_STAT = #{stat,jdbcType=INTEGER}
+				</if>
+				order by FS_NO) r
 			<if test="endrow != null">
-				AND ROWNUM &lt;= #{endrow}
+				where ROWNUM &lt;= #{endrow}
 			</if>
 		)
 		<if test="startrow != null">

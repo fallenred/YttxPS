@@ -126,6 +126,22 @@ jQuery(function($) {
 			}
 		});
 	}
+	
+	//增加景区addScenic
+	$(document).on('click key', '.addScenicBtn', function(event){
+		var index = $("#reslistIndex").val();
+		var data={
+				"index" : index,
+				"restype" : "jq",
+				"resprop" : "comm",
+				"resno" : $("#scenic").val(),
+				"resname" : $("#scenic").find("option:selected").text()
+		}
+		var template = Handlebars.compile($("#tr-common").html());
+		$("#table_common tbody").html($("#table_common tbody").html() + template(data));
+		$("#reslistIndex").val(parseInt(index)+1);
+	});
+	
 	//获取车型列表selectTransport.htm
 	function getTransport(){
 		$.ajax({
@@ -677,6 +693,7 @@ jQuery(function($) {
 			$(this).next().hide();
 		}
 	});
+
 	//合计订单金额
 	function totalAmount(){
 		var totalAmt = 0;
@@ -691,6 +708,27 @@ jQuery(function($) {
 		totalAmt = parseFloat(totalAmt) + parseFloat($("#insuerprice").val());
 		$("#fdTotalfee").val(totalAmt.toFixed(2));
 	}
+	
+	//查询订单所有备注信息
+	$.ajax({
+		type: "POST",
+		url: "/orderlist/findRemarks.htm",
+		data: 'orderId='+fsNo,
+		dataType: "json",
+		success: function(data){
+			var remarks = {
+				"remarks" : data
+			}
+			var remarksTemplate = Handlebars.compile($("#remarks-template").html());
+			//返回数组长度
+			$('#table_remarks tbody').html(remarksTemplate(remarks));
+		}
+	});
+	
+	//添加备注项
+	$(document).on('click key', '#btn_remarks', function(event){
+		
+	});
 	
 	//	提交
 	$("#submit").on("click", function () {

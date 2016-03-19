@@ -703,7 +703,97 @@
 											</div>
 										</div>
 									</div>
-									<!-- 计调配置批次资源end -->
+									<hr>
+									<!-- 订单备注start -->
+									<div class="row div_transfer">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right"
+												for="remarks">订单备注</label>
+											<div class="col-sm-8">
+												<div class="panel panel-default">
+													<div class="panel-body" id="remarks">
+														<!-- 公共精确资源 start -->
+														<ul id="remarksTab" class="nav nav-tabs">
+														<script id="commRes-template" type="text/x-handlebars-template">
+															<li class="active"><a href="#common" data-toggle="tab">车型/导游/景区</a></li>
+															{{#each daylist}}
+															<li><a href="#day{{@index}}" data-toggle="tab">第{{addOne @index}}天</a></li>
+															{{/each}}
+														</script>
+														</ul>
+														<div id="remarksTab" class="tab-content">
+															<div class="tab-pane fade in active" id="common">
+																<div class="row" style="margin-top: 10px;">
+																	<div class="col-sm-12" style="padding: 10 0 0 0px;">
+																		<div class="row" style="padding: 10 10 0 0px;">
+																			<div class="form-group">
+																				<label class="col-sm-1 control-label" for="fsRegions">内容</label>
+																				<div class="col-sm-7">
+																					<input id="fsContent" type="text" class="form-control" />
+																				</div>
+																				<label class="col-sm-1 control-label" for="fsRegions">金额</label>
+																				<div class="col-sm-1">
+																					<input id="fdAmt" type="text" class="form-control" />
+																				</div>
+																				<div class="col-sm-1">
+																					<button type="button" id="btn_remarks"
+																						class="btn btn-sm btn-success pull-right">添加</button>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="form-group"  style="padding: 0px 10px 0px 10px;">
+																				<div class="col-sm-12">
+																					<table id="table_remarks" class="table table-bordered">
+																						<thead>
+      																						<tr>
+         																						<th>操作</th>
+         																						<th>序号</th>
+         																						<th>备注时间</th>
+         																						<th>备注内容</th>
+         																						<th>金额</th>
+         																						<th>状态</th>
+      																						</tr>
+   																						</thead>
+   																						<tbody>
+   																							<script id="remarks-template" type="text/x-handlebars-template">
+																							<input type="hidden" id="reslistIndex" value="{{length reslist}}" placeholder="reslist下标">
+																							{{#each remarks}}
+      																						<tr>
+         																						<td>
+																									<a style="cursor:pointer;" onclick="removeTr(this)">删除</a>
+																									<input type="hidden" name="remarks[{{@index}}].fsOrderId" value="{{fsOrderId}}" placeholder="订单编号">
+																									<input type="hidden" name="remarks[{{@index}}].fiSeq" value="{{fiSeq}}" placeholder="序号">
+																									<input type="hidden" name="remarks[{{@index}}].fsOperId" value="{{fsOperId}}" placeholder="操作员号">
+																									<input type="hidden" name="remarks[{{@index}}].ftDate" value="{{ftDate}}" placeholder="备注时间">
+																									<input type="hidden" name="remarks[{{@index}}].resname" value="{{resname}}" placeholder="资源名称">
+																									<input type="hidden" name="remarks[{{@index}}].fsContent" value="{{fsContent}}" placeholder="备注内容">
+																									<input type="hidden" name="remarks[{{@index}}].fdAmt" value="{{fdAmt}}" placeholder="备注金额">
+																									<input type="hidden" name="remarks[{{@index}}].fiStat" value="{{fiStat}}" placeholder="状态">
+																								</td>
+         																						<td>{{fiSeq}}</td>
+         																						<td>{{ftDate}}</td>
+         																						<td>{{fsContent}}</td>
+         																						<td>{{fdAmt}}</td>
+         																						<td>{{fiStat}}</td>
+      																						</tr>
+																							{{/each}}
+																							</script>
+   																						</tbody>
+																					</table>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- 订单备注end -->
 									<div id="message" class="alert alert-warning"></div>
 								</div>
 
@@ -811,20 +901,6 @@
 			$("#fdTotalfee").val(totalAmt.toFixed(2));
 		}
 		
-		//增加景区addScenic
-		function addScenic(obj){
-			var index = $("#reslistIndex").val();
-			var data={
-					"index" : index,
-					"restype" : "jq",
-					"resprop" : "comm",
-					"resno" : $("#scenic").val(),
-					"resname" : $("#scenic").find("option:selected").text()
-			}
-			var template = Handlebars.compile($("#tr-common").html());
-			$("#table_common tbody").html($("#table_common tbody").html() + template(data));
-			$("#reslistIndex").val(parseInt(index)+1);
-		}
 		//增加车型addTransport
 		function addTransport(obj){
 			var index = $("#reslistIndex").val();
@@ -834,9 +910,9 @@
 					"resprop" : "comm",
 					"resno" : $("#transport").val(),
 					"resname" : $("#transport").find("option:selected").text(),
-					"ccno" : "000000"
+					"ccno" : "000023"
 			}
-			data["ccname"] = "价格(通用)";
+			data["ccname"] = "车辆消费";
 			data["price"] = $("#transportPrice").val();
 			data["cctype"] = "0";
 			data["usernum"] = $("#transportNum").val();
@@ -873,7 +949,7 @@
 				<a style="cursor:pointer;" onclick="removeTr(this)">删除</a>
 				<input type="hidden" name="commBody.reslist[{{index}}].restype" value="{{restype}}" placeholder="资源类型">
 				<input type="hidden" name="commBody.reslist[{{index}}].resprop" value="{{resprop}}" placeholder="资源属性">
-				<input type="hidden" name="commBody.reslist[{{index}}].resno" value="{{resno}}" placeholder="资源编号">
+				<input type="hidden" name="commBody.reslist[{{index}}].resno" value="{{resno}}"  class="{{isScenic restype}}" placeholder="资源编号">
 				<input type="hidden" name="commBody.reslist[{{index}}].resname" value="{{resname}}" placeholder="资源名称">
 				<input type="hidden" name="commBody.reslist[{{index}}].cclist[0].ccno" value="{{ccno}}" placeholder="选项编号">
 				<input type="hidden" name="commBody.reslist[{{index}}].cclist[0].ccname" value="{{ccname}}" placeholder="选项名称">

@@ -68,7 +68,7 @@
 											<ul class="nav nav-tabs" id="tab">
 												<li class="active">
 													<a data-toggle="tab" id="all_order_a" href="#all_order">
-														<i></i>全部订单
+														<i></i>待结算订单
 													</a>
 												</li>
 												<c:forEach items="${fsmt_stat_list}" var="item">

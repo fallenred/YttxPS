@@ -193,7 +193,7 @@ public class CustomInfo {
 
 
 	public String getRegTimeDesc() {
-		return regTimeDesc;
+		return DateUtil.getFullDateFormatStr(regtime);
 	}
 
 
@@ -203,7 +203,7 @@ public class CustomInfo {
 
 
 	public String getTimeStampDesc() {
-		return timeStampDesc;
+		return DateUtil.getFullDateFormatStr(timestamp);
 	}
 
 

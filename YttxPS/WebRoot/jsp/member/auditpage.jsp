@@ -151,7 +151,7 @@
 							<h4 class="modal-title" id="showModalLabel">会员信息</h4>
 						</div>
 						<div class="modal-body">
-							<iframe id="showIframe" width="100%" height="1200px" frameborder="0" scrolling="no"></iframe>
+							<iframe id="showIframe" width="100%" height="1300px" frameborder="0" scrolling="no"></iframe>
 						</div>
 					</div>
 				</div>

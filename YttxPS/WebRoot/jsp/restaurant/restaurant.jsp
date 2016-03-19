@@ -107,9 +107,10 @@
 													<select class="form-control" name="special"  id="special">
 														<!-- TODO:应该从数据字典中读取 -->
 														<option value="">忽略菜品特色</option>
-														<option value="01">小吃</option>
-														<option value="02">藏餐</option>
-														<option value="03">火锅</option>
+														<c:forEach items="${codeMasterList['cpts']}" var="item">
+														<option value="${item.fsDictno}" 
+															<c:if test="${res.special==item.fsDictno}">selected</c:if>>${item.fsDictname}</option>
+														</c:forEach>
 													</select>
 												</div>
 												<label class="col-sm-1 control-label no-padding-right" for="lvl">等级</label>

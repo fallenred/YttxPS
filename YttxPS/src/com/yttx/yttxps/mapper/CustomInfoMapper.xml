@@ -10,8 +10,8 @@
 		  <result column="FS_CONTACT"     property="contact"        jdbcType="VARCHAR" />
 		  <result column="FS_CERTID"      property="certid"         jdbcType="VARCHAR" />
 		  <result column="FS_EMAIL"       property="email"          jdbcType="VARCHAR" />
-		  <result column="FT_REGTIME"     property="regTimeDesc"    jdbcType="VARCHAR" />
-		  <result column="FT_TIMESTAMP"   property="timeStampDesc"  jdbcType="VARCHAR" />
+		  <result column="FT_REGTIME"     property="regtime"        jdbcType="VARCHAR" />
+		  <result column="FT_TIMESTAMP"   property="timestamp"      jdbcType="VARCHAR" />
 		  <result column="FS_DAC"         property="dac"            jdbcType="VARCHAR" />
 		  <result column="FI_STAT"        property="stat"           jdbcType="DECIMAL" />
 		  <result column="FS_AUDITNO"     property="auditno"        jdbcType="VARCHAR" />
@@ -32,8 +32,8 @@
 	    FS_CONTACT, 
 	    FS_CERTID, 
 	    FS_EMAIL, 
-	    to_char(FT_REGTIME,  'yyyy-mm-dd hh24:mi:ss') FT_REGTIME,
-	    to_char(FT_TIMESTAMP, 'yyyy-mm-dd hh24:mi:ss') FT_TIMESTAMP, 
+	   	FT_REGTIME,
+	    FT_TIMESTAMP, 
 	    FS_DAC, 
 	    FI_STAT,
 	    FS_AUDITNO,
@@ -302,25 +302,30 @@
 		FROM (
 			SELECT
 				ROWNUM  rowno,
-				<include refid="Base_Column_List" />
-			FROM
-				TCUSTOMINFO
-			WHERE
-				1=1
-			<if test="id != null and id != ''">
-			AND FS_ID like '%'||#{id,jdbcType = VARCHAR}||'%'
-			</if>
-			<if test="name != null and name != ''">
-				AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
-			</if>
-			<if test="taName != null and taName !=''">
-				AND FS_TANAME like '%'||#{taName,jdbcType = VARCHAR}||'%'
-			</if>
-			<if test="stat != null">
-				AND FI_STAT = #{stat}
-			</if>
+				c.*
+			from(
+				select 
+					<include refid="Base_Column_List" />
+				FROM
+					TCUSTOMINFO
+				WHERE
+					1=1
+				<if test="id != null and id != ''">
+				AND FS_ID like '%'||#{id,jdbcType = VARCHAR}||'%'
+				</if>
+				<if test="name != null and name != ''">
+					AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
+				</if>
+				<if test="taName != null and taName !=''">
+					AND FS_TANAME like '%'||#{taName,jdbcType = VARCHAR}||'%'
+				</if>
+				<if test="stat != null">
+					AND FI_STAT = #{stat}
+				</if>
+				order by 
+					FT_REGTIME desc) c
 			<if test="endrow != null">
-				AND ROWNUM &lt;= #{endrow}
+				where ROWNUM &lt;= #{endrow}
 			</if>
 		)
 		<if test="startrow != null">

@@ -177,5 +177,4 @@ public class OrderlistService implements IOrderlistService {
 			orderlist.setFiStat(OrderStat.AUDITED.getVal().toString());
 		}
 	}
-	
 }

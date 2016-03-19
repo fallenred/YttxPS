@@ -10,6 +10,8 @@
 <meta name="description" content="" />
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
+<link rel="stylesheet" href="/css/jquery.wm-zoom-1.0.css" />
+<script src="/js/jquery.wm-zoom-1.0.js"></script>
 </head>
 <body>
 	<div class="main-container" id="main-container">
@@ -59,10 +61,12 @@
 											<div class="profile-info-row">
 												<div class="profile-info-name">营业许可证</div>
 												<div class="profile-info-value">
-													<span class="profile-picture"> 
-													<img class="editable img-responsive editable-click editable-empty" alt="菜单图片" 
-														src="${cus.licenceno}" style="width:160px; height:120px"> 
-													</span>
+													<div class="wm-zoom-container imgzoom">
+			  											<div class="wm-zoom-box">
+															<img src="${cus.licenceno}" style="width:280px; height:210px" 
+																data-hight-src="${cus.licenceno}">
+			  											</div>
+			  										</div>
 												</div>
 											</div>
 										</div>
@@ -71,10 +75,12 @@
 											<div class="profile-info-row">
 												<div class="profile-info-name">税务登记证</div>
 												<div class="profile-info-value">
-													<span class="profile-picture"> 
-													<img class="editable img-responsive editable-click editable-empty" alt="菜单图片" 
-														src="${cus.taxlicence}" style="width:160px; height:120px"> 
-													</span>
+													<div class="wm-zoom-container imgzoom">
+			  											<div class="wm-zoom-box">
+															<img src="${cus.taxlicence}" style="width:280px; height:210px" 
+																data-hight-src="${cus.taxlicence}">
+			  											</div>
+			  										</div>
 												</div>
 											</div>
 										</div>

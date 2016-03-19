@@ -26,7 +26,7 @@
 	<!--select：找到满足条件的订单的总数  -->
 	<select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
 		SELECT 
-			COUNT(FS_NO) 
+			COUNT(1) 
 		FROM 
 			TCloselist
 		WHERE
@@ -64,60 +64,62 @@
 
 	<!--select：找到满足条件的某页订单的总数  -->
 	<select id="selectSelectivePage" parameterType="java.util.Map" resultMap="fsResultMap">
-		SELECT 
-			* 
-		FROM(		
+		SELECT * FROM(		
 			SELECT
-		        ROWNUM AS rowno,
-		        fs_No,
-				fs_Route_ID,
-				fs_RouteName,
-				fs_Name,
-				fs_Order_ID,
-				fs_User_ID,
-				fs_User_SubID,
-				fs_Oper_ID,
-				to_char(ft_CreatDate,'yyyy-mm-dd hh24:mi:ss') ft_CreatDate,
-				fc_Content,
-				fd_TotalFee,
-				fd_PaidAmt,
-				fd_Amt,
-				fs_Remark,
-				fi_Stat
-		    FROM 
-		        TCloselist
-			WHERE
-				1=1
-				<if test="statementId != null and statementId !=''">
-					AND 
-						fs_No  like '%'||#{statementId,jdbcType = VARCHAR}||'%'
-				</if>
-				<if test="orderId != null and orderId !=''">
-					AND
-						fs_Order_ID like '%'||#{orderId,jdbcType = VARCHAR}||'%'
-				</if>
-				<if test="userId != null and userId !=''">
-					AND
-						fs_User_ID like '%'||#{userId,jdbcType = VARCHAR}||'%'
-				</if>
-				<if test="operId != null and operId !=''">
-					AND
-						Trim(FS_OPER_ID) = Trim(#{operId,jdbcType=VARCHAR})
-				</if>
-				<if test="startDate != null and startDate !=''">
-					AND
-						TRUNC(FT_CREATDATE,'dd') &gt;= TO_DATE(#{startDate,jdbcType=VARCHAR},'yyyy/mm/dd')
-				</if>
-				<if test="endDate != null and endDate !=''">
-					AND
-						TRUNC(FT_CREATDATE,'dd') &lt;= TO_DATE(#{endDate,jdbcType=VARCHAR},'yyyy/mm/dd')
-				</if>
-				<if test="stat != null">
-					AND
-						fi_Stat = #{stat,jdbcType=INTEGER}
-				</if>
+		        ROWNUM AS rowno, o.*
+		    from (
+			    select 
+			        fs_No,
+					fs_Route_ID,
+					fs_RouteName,
+					fs_Name,
+					fs_Order_ID,
+					fs_User_ID,
+					fs_User_SubID,
+					fs_Oper_ID,
+					to_char(ft_CreatDate,'yyyy-mm-dd hh24:mi:ss') ft_CreatDate,
+					fc_Content,
+					fd_TotalFee,
+					fd_PaidAmt,
+					fd_Amt,
+					fs_Remark,
+					fi_Stat
+			    FROM 
+			        TCloselist
+				WHERE
+					1=1
+					<if test="statementId != null and statementId !=''">
+						AND 
+							fs_No  like '%'||#{statementId,jdbcType = VARCHAR}||'%'
+					</if>
+					<if test="orderId != null and orderId !=''">
+						AND
+							fs_Order_ID like '%'||#{orderId,jdbcType = VARCHAR}||'%'
+					</if>
+					<if test="userId != null and userId !=''">
+						AND
+							fs_User_ID like '%'||#{userId,jdbcType = VARCHAR}||'%'
+					</if>
+					<if test="operId != null and operId !=''">
+						AND
+							Trim(FS_OPER_ID) = Trim(#{operId,jdbcType=VARCHAR})
+					</if>
+					<if test="startDate != null and startDate !=''">
+						AND
+							TRUNC(FT_CREATDATE,'dd') &gt;= TO_DATE(#{startDate,jdbcType=VARCHAR},'yyyy/mm/dd')
+					</if>
+					<if test="endDate != null and endDate !=''">
+						AND
+							TRUNC(FT_CREATDATE,'dd') &lt;= TO_DATE(#{endDate,jdbcType=VARCHAR},'yyyy/mm/dd')
+					</if>
+					<if test="stat != null">
+						AND
+							fi_Stat = #{stat,jdbcType=INTEGER}
+					</if>
+					order by fs_No
+					) o
 				<if test="endrow != null">
-					AND ROWNUM &lt;= #{endrow}
+					where ROWNUM &lt;= #{endrow}
 				</if>
 			)
 		<if test="startrow != null">
