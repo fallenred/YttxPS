@@ -61,7 +61,9 @@ public class RestaurantController extends BaseController {
 	@RequestMapping(value = "page.htm")
 	public String openPage(Model model){
 		Object special_item = getDictMapJsonByParentNo("meal_type");
+		Object lvl_item = getDictMapJsonByParentNo("ct");
 		model.addAttribute("special_item", special_item);
+		model.addAttribute("lvl_item", lvl_item);
 		return "restaurant/restaurant";
 	}
 	

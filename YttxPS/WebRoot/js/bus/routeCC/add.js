@@ -180,7 +180,7 @@ jQuery(function($) {
 	}
 	
 	/**
-	 * 获取餐厅列表
+	 * 获取菜单列表
 	 */
 	function getRestaurant() {
 		var scenic = [];
@@ -268,7 +268,7 @@ jQuery(function($) {
 		resetIframeHeight("sub");
 	});
 	
-	//增加餐厅
+	//增加菜单
 	$("#addRestaurantBtn").click(function() {
 		var html = $("#div_restaurant").html();
 		var val = $("#restaurant").val();

@@ -41,9 +41,9 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="name">餐厅名称</label>
+											<label class="col-sm-2 control-label no-padding-right" for="name">菜单名称</label>
 											<div class="col-sm-4">
-												<input class="form-control" type="text" id="name" name="name" placeholder="餐厅名称"  
+												<input class="form-control" type="text" id="name" name="name" placeholder="菜单名称"  
 													maxlength="50" readonly="readonly" value="${res.name}"/>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right">所属地区</label>
@@ -55,31 +55,22 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="addr">餐厅地址</label>
+											<label class="col-sm-2 control-label no-padding-right" for="special">类型标识</label>
 											<div class="col-sm-4">
-												<input class="form-control" type="text" id="addr" name="addr" 
-													placeholder="餐厅地址"  maxlength="100" readonly="readonly" value="${res.addr}"/>
-											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="special">菜品特色</label>
-											<div class="col-sm-4">
-											<!-- TODO 从数据字典中读取 -->
 												<select id="special" name="special" class="form-control" disabled>
-													<option value="">---菜品特色---</option>
-													<c:forEach items="${codeMasterList['cpts']}" var="item">
+													<option value="">---类型标识---</option>
+													<c:forEach items="${codeMasterList['meal_type']}" var="item">
 														<option value="${item.fsDictno}" 
 															<c:if test="${res.special==item.fsDictno}">selected</c:if>>${item.fsDictname}</option>
 													</c:forEach>
 												</select>
 											</div>
-										</div>
-									</div>
-									
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="menu">菜单名称</label>
-											<div class="col-sm-10">
+											<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="menu">菜单描述</label>
+											<div class="col-sm-4">
 												<input id="menu"  class="form-control" type="text"  name="menu" readonly value="${res.menu}">
 											</div>
+										</div>
 										</div>
 									</div>
 									
@@ -115,41 +106,22 @@
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right">餐厅等级</label>
+											<label class="col-sm-2 control-label no-padding-right">餐标</label>
 											<div class="col-sm-10">
-											<!-- TODO读取餐厅等级 -->
-												<div class="checkbox-inline">
+												<c:forEach items="${codeMasterList['ct']}" var="item" varStatus="status">
+													<div class="checkbox-inline">
 													<label>
-														<input name="lvl" type="radio" class="ace" value="01" 
-															<c:if test="${res.lvl=='01'}">checked</c:if> disabled>
-														<span class="lbl">lvl1</span>
+														<input name="lvl" type="radio" class="ace" value="${item.fsDictno}" <c:if test="${res.lvl==item.fsDictno}">checked</c:if>>
+														<span class="lbl">${item.fsDictname}</span>
 													</label>
 												</div>
-												<div class="checkbox-inline">
-													<label>
-														<input name="lvl" type="radio" class="ace" value="02"
-															<c:if test="${res.lvl=='02'}">checked</c:if> disabled>
-														<span class="lbl">lvl2</span>
-													</label>
-												</div>
-												<div class="checkbox-inline">
-													<label>
-														<input name="lvl" type="radio" class="ace" value="03"
-															<c:if test="${res.lvl=='03'}">checked</c:if> disabled>
-														<span class="lbl">lvl3</span>
-													</label>
-												</div>
+												</c:forEach>
 											</div>
 										</div>
 									</div>
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="scale">接待规模</label>
-											<div class="col-sm-4">
-												<input class="form-control" type="text" id="scale" name="scale" 
-													placeholder="接待规模(桌)"  maxlength="4" value="${res.scale}" readonly/>
-											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="stat">状态</label>
 											<div class="col-sm-4">
 												<select id="stat" name="stat" class="form-control" disabled>

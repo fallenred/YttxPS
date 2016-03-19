@@ -46,7 +46,7 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="name">餐厅名称</label>
+											<label class="col-sm-2 control-label no-padding-right" for="name">菜单名称</label>
 											<div class="col-sm-9">
 												<input class="unreset" type="hidden" id="no" value="${res.no}"/>
 												<input class="form-control unreset" type="text" id="name" name="name" 
@@ -78,33 +78,12 @@
 										</div>
 									</div>
 									
-									<!-- TODO消费选项的读取 -->
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="breakfast">早餐价格</label>
+											<label class="col-sm-2 control-label no-padding-right" for="price">价格</label>
 											<div class="col-sm-9">
-												<input class="form-control" style="width:150px" type="text" id="breakfast" 
-													name="breakfast"  placeholder="早餐价格" />
-											</div>
-										</div>
-									</div>
-									
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="lunch">午餐价格</label>
-											<div class="col-sm-9">
-												<input class="form-control" style="width:150px" type="text" id="lunch" 
-													name="lunch"  placeholder="午餐价格" />
-											</div>
-										</div>
-									</div>
-									
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="dinner">晚餐价格</label>
-											<div class="col-sm-9">
-												<input class="form-control"  style="width:150px" type="text" id="dinner" 
-													name="dinner"  placeholder="晚餐价格" />
+												<input class="form-control"  style="width:150px" type="text" id="price" 
+													name="price"  placeholder="价格" />
 											</div>
 										</div>
 									</div>

@@ -13,6 +13,7 @@
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
 <script type="text/javascript">
 	var special_item = ${special_item};
+	var lvl_item = ${lvl_item};
 </script>
 </head>
 <body class="no-skin">

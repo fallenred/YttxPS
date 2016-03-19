@@ -54,7 +54,7 @@ jQuery(function($) {
 	 */
 	$("#submit").on("click", function (){
 		//第一步，验证数据
-		var resNo = $("#no").val();//餐厅名称
+		var resNo = $("#no").val();//菜单名称
 		
 	
 		var dRange = $.trim($("#date_range").val())
@@ -64,33 +64,18 @@ jQuery(function($) {
 			$("#dRange").focus();
 			return false;
 		} 
-		var breakfast = $.trim($("#breakfast").val())//早餐价格
-		if( !validMoney(breakfast)) {
-			$("#message").show();
-			$("#message").text("早餐价格录入格式不正确");
-			$("#breakfast").focus();
-			return false;
-		}
 		
-		var lunch = $.trim($("#lunch").val())//午餐价格
-		if( !validMoney(lunch)) {
+		var price = $.trim($("#price").val())//价格
+		if( !validMoney(price)) {
 			$("#message").show();
-			$("#message").text("午餐价格录入格式不正确");
-			$("#lunch").focus();
+			$("#message").text("价格录入格式不正确");
+			$("#price").focus();
 			return false;
 		}
-		
-		var dinner = $.trim($("#dinner").val())//晚餐价格
-		if( !validMoney(dinner)) {
+		if(price == '' || price == undefined){
 			$("#message").show();
-			$("#message").text("晚餐价格录入格式不正确");
-			$("#dinner").focus();
-			return false;
-		}
-		if(breakfast==''&&lunch==''&&dinner!=''){
-			$("#message").show();
-			$("#message").text("至少录入一个价格");
-			$("#breakfast").focus();
+			$("#message").text("价格不允许为空");
+			$("#price").focus();
 			return false;
 		}
 		
@@ -101,24 +86,12 @@ jQuery(function($) {
 		}
 		var postData = {};
 		postData["no"]         = resNo;
-		postData["startDate"]  = getDate(dRange,0);
-		postData["endDate"]    = getDate(dRange,1);
-		
-		var i=0;
-		if(breakfast!=''){
-			postData["prices["+i+"].fsCcno"]= "000018";
-			postData["prices["+i+"].fdPrice"]= breakfast;
-			i++;
-		}
-		if(lunch!=''){
-			postData["prices["+i+"].fsCcno"]= "000019";
-			postData["prices["+i+"].fdPrice"]= lunch;
-			i++;
-		}
-		if(dinner!=''){
-			postData["prices["+i+"].fsCcno"]= "000020";
-			postData["prices["+i+"].fdPrice"]= dinner;
-			i++;
+		postData["startDate"]  = getDate(dRange, 0);
+		postData["endDate"]    = getDate(dRange, 1);
+
+		if(price != ''){
+			postData["prices[0].fsCcno"]= "000000";
+			postData["prices[0].fdPrice"]= price;
 		}
 		$.post(
 			"/restaurant/submitPrice.htm",
@@ -126,11 +99,11 @@ jQuery(function($) {
 			function(data){
 				var json = eval("("+data+")");
 				if(json.result == "ok") {
-					$("#message").text("添加餐厅消费选项成功！");
+					$("#message").text("添加菜单消费选项成功！");
 					$("#message").show();
 					return true;
 				}else {
-					$("#message").text("添加餐厅消费选项失败:" + json.message );
+					$("#message").text("添加菜单消费选项失败:" + json.message );
 					$("#message").show();
 					return false;
 				}

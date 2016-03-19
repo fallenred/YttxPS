@@ -278,6 +278,15 @@ jQuery(function($) {
 						return special_item[v];
 					},
 				}, {
+					name : 'lvl',
+					index : 'lvl',
+					width : 80,
+					sortable : false,
+					editable : false,
+					formatter : function(v, opt, rec) {
+						return lvl_item[v];
+					},
+				}, {
 					name : 'stat',
 					index : 'stat',
 					width : 50,

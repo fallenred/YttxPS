@@ -43,10 +43,10 @@ jQuery(function($) {
 	 */
 	$("#editform #submit").on("click", function (){
 		//第一步，验证数据
-		var name = $.trim($("#editform #name").val());//餐厅名称
+		var name = $.trim($("#editform #name").val());//菜单名称
 		if(name == '') {
 			$("#message").show();
-			$("#message").text("餐厅名称不能为空，请输入");
+			$("#message").text("菜单名称不能为空，请输入");
 			$("#editform #name").focus();
 			return false;
 		} 
@@ -59,28 +59,19 @@ jQuery(function($) {
 			return false;
 		} 
 		
-		var special = $("#editform #special").val()//特殊菜品
+		var special = $("#editform #special").val()//类型标识
 		if(special == '') {
 			$("#message").show();
-			$("#message").text("请选择特殊菜品");
+			$("#message").text("请选择类型标识");
 			$("#editform #special").focus();
 			return false;
 		}
 		
-		var lvl = $("#editform input[name='lvl']:checked").val()//等级
+		var lvl = $("#editform input[name='lvl']:checked").val()//餐标
 		if(lvl ==undefined) {
 			$("#message").show();
-			$("#message").text("请选择特餐厅等级");
+			$("#message").text("请选择餐标");
 			$("#editform input[name='lvl']").focus();
-			return false;
-		}
-		
-		var scale = $.trim($("#editform #scale").val())//接待规模
-		var re = /^[1-9]+[0-9]*]*$/;
-		if (!re.test(scale)){
-			$("#message").show();
-			$("#message").text("接待规模请输入正整数");
-			$("#editform #scale").focus();
 			return false;
 		}
 		
@@ -102,11 +93,11 @@ jQuery(function($) {
             contentType: false
 		}).done(function(json){
 			if(json.result == "ok") {
-				$("#message").text("修改餐厅成功！");
+				$("#message").text("修改菜单成功！");
 				$("#message").show();
 				return true;
 			}else {
-				$("#message").text("修改餐厅失败:" + json.message );
+				$("#message").text("修改菜单失败:" + json.message );
 				$("#message").show();
 				return false;
 			}

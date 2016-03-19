@@ -21,7 +21,7 @@
 						<div class="space-10"></div>
 						<div class="breadcrumbs" id="breadcrumbs">
 							<ul class="breadcrumb">
-								<li><a href="javascript:void(0)">餐厅资源</a></li>
+								<li><a href="javascript:void(0)">菜单资源</a></li>
 								<li><a href="javascript:void(0)">${res.name}</a></li>
 							</ul>
 						</div>
@@ -30,7 +30,7 @@
 				<div class="row">
 					<div class="space-10"></div>
 					<div class="col-xs-1 col-xs-offset-10">
-						<button id="configPrice" type="button" class="btn btn-primary">餐厅资源定价</button>
+						<button id="configPrice" type="button" class="btn btn-primary">菜单资源定价</button>
 					</div>
 				</div>
 				<div class="row">
@@ -44,14 +44,14 @@
 		</div>
 	</div>
 	
-	<!-- 模态框（餐厅消费选项定价） -->
+	<!-- 模态框（菜单消费选项定价） -->
 	<div class="modal fade" id="priceModal" tabindex="-1" role="dialog" 
 		aria-labelledby="priceModalLabel" aria-hidden="true">
 		<div class="modal-dialog" style="width: 1024px;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h4 class="modal-title" id="priceModalLabel">餐厅消费选项定价</h4>
+					<h4 class="modal-title" id="priceModalLabel">菜单消费选项定价</h4>
 				</div>
 					
 				<div class="modal-body">

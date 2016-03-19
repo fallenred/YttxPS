@@ -108,7 +108,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 		}
 	});
 	
-	//餐厅
+	//菜单
 	$.ajax({
 		type: "GET",
 		traditional: true,
