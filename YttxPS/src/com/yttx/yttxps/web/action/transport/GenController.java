@@ -87,7 +87,7 @@ static Logger logger = LoggerFactory.getLogger(GenController.class);
 			genService.insert(tgen);
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			logger.error(e.getMessage());
 			return (Map<String, Object>) JsonResult.jsonError("新增失败");
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
@@ -108,6 +108,7 @@ static Logger logger = LoggerFactory.getLogger(GenController.class);
 			genService.update(gen);
 		}
 		catch(Exception e){
+			logger.error(e.getMessage());
 			return (Map<String, Object>) JsonResult.jsonError("更新失败");
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
@@ -128,6 +129,7 @@ static Logger logger = LoggerFactory.getLogger(GenController.class);
 			genService.delete(no);
 		}
 		catch(Exception e){
+			logger.error(e.getMessage());
 			return (Map<String, Object>) JsonResult.jsonError("删除失败");
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
