@@ -403,10 +403,13 @@
 				$(obj).next().attr("disabled", true);
 				$(obj).next().next().attr("disabled", true);
 			}
-			calculatePrice();//点击餐厅的多选框，修改批次金额小计
+			calculatePrice();//点击餐厅的多选框，修改批次金额
 			
 		}
 		
+		/**
+		 * 门票价格
+		 */
 		function handlePrice(obj){
 			resno = $(obj).attr("class");
 			$(obj).parent().parent().find(".price").attr("value", $(obj).next().attr("id"));
@@ -418,6 +421,7 @@
 					$(this).next().attr("disabled", false);
 				}
 			});
+			calculatePrice();//点击门票的单选按钮，修改批次金额
 		}
 		
 		//增加门票
@@ -533,6 +537,7 @@
 					resetIframeHeight("sub");
 				} 
 			});
+			calculatePrice();//点击门票删除按钮，修改批次金额
 		}
 		
 		//增加餐厅
@@ -623,6 +628,7 @@
 					resetIframeHeight("sub");
 				} 
 			});
+			calculatePrice();//点击门票删除按钮，修改批次金额
 		}
 		
 		//增加娱乐项目
