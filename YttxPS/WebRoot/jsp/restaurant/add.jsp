@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -37,7 +36,7 @@
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
 												<li>
-													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg"> 
+													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg">
 														<img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
 													</a>
 												</li>
@@ -46,131 +45,95 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="name">餐厅名称</label>
+											<label class="col-sm-2 control-label no-padding-right" for="name">菜单名称</label>
 											<div class="col-sm-4">
-												<input class="form-control" type="text" id="name" name="name" 
-													placeholder="餐厅名称"  maxlength="50"/>
+												<input class="form-control" type="text" id="name" name="name" placeholder="菜单名称" maxlength="50" />
 											</div>
-									
+
 											<label class="col-sm-2 control-label no-padding-right" for="regionname">所属地区</label>
 											<div class="col-sm-4">
-												<input type="text" placeholder="点击选择所属地区" name="regionname" 
-													id="regionname" data-key="0086" data-idx="0" data-full="中国"
-													class="form-control inp-search" /> 
+												<input type="text" placeholder="点击选择所属地区" name="regionname" id="regionname" data-key="0086" data-idx="0" data-full="中国" class="form-control inp-search" />
 												<div class="localcity selectCity" id="selectCity"></div>
-												<input type="hidden" id="regionno" name="regionno"/> 
+												<input type="hidden" id="regionno" name="regionno" />
 											</div>
-													
+
 										</div>
 									</div>
-											
+
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="addr">餐厅地址</label>
+											<label class="col-sm-2 control-label no-padding-right" for="special">菜单类型</label>
 											<div class="col-sm-4">
-												<input class="form-control" type="text" id="addr" name="addr" 
-													placeholder="餐厅地址"  maxlength="100"/>
-											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="special">菜品特色</label>
-											<div class="col-sm-4">
-											<!-- TODO 从数据字典中读取 -->
 												<select id="special" name="special" class="form-control">
-													<option value="">---菜品特色---</option>
-													<c:forEach items="${codeMasterList['cpts']}" var="item">
+													<option value="">---菜单类型---</option>
+													<c:forEach items="${codeMasterList['cdlx']}" var="item">
 														<option value="${item.fsDictno}">${item.fsDictname}</option>
 													</c:forEach>
 												</select>
 											</div>
-										</div>
-									</div>
-									
-									<div class="row">
-										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="menu">菜单名称</label>
 											<div class="col-sm-4">
-												<input class="form-control" type="text" id="menu" name="menu" 
-													placeholder="菜单名称"  maxlength="500"/>
+												<input class="form-control" type="text" id="menu" name="menu" placeholder="菜单名称" maxlength="500" />
 											</div>
 										</div>
 									</div>
-									
+
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="menuImgFile">菜单图片</label>
 											<div class="col-sm-10">
-												<span class="block input-icon"> 
-													<input id="menuImgFile" class="file" type="file" name="menuImgFile"> 
+												<span class="block input-icon">
+													<input id="menuImgFile" class="file" type="file" name="menuImgFile">
 													<i class="icon-warning-sign red"></i>
 												</span>
 												<script>
-												$("#menuImgFile")
-														.fileinput(
-																{
-																	showUpload : false,
-																	'allowedFileExtensions' : [
-																			'jpg',
-																			'png',
-																			'gif' ],
-																	'browseLabel' : '选择菜单图片',
-														});
-											</script>
+													$("#menuImgFile").fileinput({
+															showUpload : false,
+															'allowedFileExtensions' : [
+																'jpg',
+																'png',
+																'gif' ],
+															'browseLabel' : '选择菜单图片',
+													});
+												</script>
 											</div>
 										</div>
 									</div>
-									
+
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="menuDesc">菜单说明</label>
 											<div class="col-sm-10">
-												<textarea id="menuDesc" rows="4" cols="20"  name="menuDesc" 
-													class="form-control"></textarea>
+												<textarea id="menuDesc" rows="4" cols="20" name="menuDesc" class="form-control"></textarea>
 											</div>
 										</div>
 									</div>
-									
+
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="attention">特殊说明</label>
 											<div class="col-sm-10">
-												<textarea id="attention" rows="4" cols="20"  name="attention" 
-													class="form-control"></textarea>
+												<textarea id="attention" rows="4" cols="20" name="attention" class="form-control"></textarea>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right">餐厅等级</label>
+											<label class="col-sm-2 control-label no-padding-right">餐标</label>
 											<div class="col-sm-10">
-											<!-- TODO读取餐厅等级 -->
-												<div class="checkbox-inline">
-													<label>
-														<input name="lvl" type="radio" class="ace" value="01">
-														<span class="lbl">lvl1</span>
-													</label>
-												</div>
-												<div class="checkbox-inline">
-													<label>
-														<input name="lvl" type="radio" class="ace" value="02">
-														<span class="lbl">lvl2</span>
-													</label>
-												</div>
-												<div class="checkbox-inline">
-													<label>
-														<input name="lvl" type="radio" class="ace" value="03">
-														<span class="lbl">lvl3</span>
-													</label>
-												</div>
+												<c:forEach items="${codeMasterList['ct']}" var="item" varStatus="status">
+													<div class="checkbox-inline">
+														<label>
+															<input name="lvl" type="radio" class="ace" value="${item.fsDictno}"> <span class="lbl">${item.fsDictname}</span>
+														</label>
+													</div>
+												</c:forEach>
 											</div>
 										</div>
 									</div>
-									
+
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="scale">接待规模(桌)</label>
-											<div class="col-sm-4">
-												<input class="form-control" type="text" id="scale" name="scale" 
-													placeholder="接待规模(桌)"  maxlength="4"/>
-											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="stat">状态</label>
 											<div class="col-sm-4">
 												<select id="stat" name="stat" class="form-control">
@@ -181,12 +144,12 @@
 											</div>
 										</div>
 									</div>
-									<div id = "message" class="alert alert-warning"></div>
+									<div id="message" class="alert alert-warning"></div>
 								</div>
-								
+
 								<div class="modal-footer">
 									<button id="close" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button id="reset" type="reset" class="btn" >重置</button>
+									<button id="reset" type="reset" class="btn">重置</button>
 									<button id="submit" type="button" class="btn btn-primary">提交</button>
 								</div>
 							</form>
@@ -199,9 +162,9 @@
 	<script src="/js/bus/restaurant/add.js"></script>
 	<c:if test="${!empty succflag && succflag =='1'}">
 		<script type="text/javascript">
-	          $('.jump-step').removeClass('hide');
-	          setTimeout('window.location="/home.htm"',5000);
-	    </script>
+			$('.jump-step').removeClass('hide');
+			setTimeout('window.location="/home.htm"', 5000);
+		</script>
 	</c:if>
 </body>
 </html>

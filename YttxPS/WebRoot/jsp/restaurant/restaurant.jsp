@@ -80,9 +80,9 @@
 											modify by start
 										 -->
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="name">餐厅名称</label>
+												<label class="col-sm-1 control-label no-padding-right" for="name">菜单名称</label>
 												<div class="col-sm-2">
-													<input class="form-control" maxlength="50" name="name" type="text" id="name" placeholder="忽略餐厅名称" />
+													<input class="form-control" maxlength="50" name="name" type="text" id="name" placeholder="忽略菜单名称" />
 												</div>
 												<label class="col-sm-1 control-label no-padding-right" for="regionname">所属地区</label>
 												<div class="col-sm-2">
@@ -91,36 +91,27 @@
 													<input type="hidden" name="regionno" id="regionno" />
 													<div id="selectCity" class="localcity"></div>
 												</div>
-												
-												<label class="col-sm-1 control-label no-padding-right" for="scale">接待规模</label>
-												<div class="col-sm-1">
-													<input class="form-control" maxlength="4" id="scale_min" name="scale_min" type="text"  placeholder="最小值" />
-												</div>
-												<div class="col-sm-1">
-													<input class="form-control" maxlength="4" id="scale_max" name="scale_max" type="text"  placeholder="最大值" />
-												</div>
-											</div>
-											
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="special">菜品特色</label>
+												<label class="col-sm-1 control-label no-padding-right" for="special">菜单类型</label>
 												<div class="col-sm-2">
 													<select class="form-control" name="special"  id="special">
-														<!-- TODO:应该从数据字典中读取 -->
-														<option value="">忽略菜品特色</option>
+														<option value="">忽略菜单类型</option>
 														<c:forEach items="${codeMasterList['cpts']}" var="item">
 														<option value="${item.fsDictno}" 
 															<c:if test="${res.special==item.fsDictno}">selected</c:if>>${item.fsDictname}</option>
 														</c:forEach>
 													</select>
 												</div>
-												<label class="col-sm-1 control-label no-padding-right" for="lvl">等级</label>
+											</div>
+											
+											<div class="form-group">
+												<label class="col-sm-1 control-label no-padding-right" for="lvl">餐标</label>
 												<div class="col-sm-2">
 													<select class="form-control" name="lvl"  id="lvl">
 														<!-- TODO:应该从数据字典中读取 -->
-														<option value="">忽略等级</option>
-														<option value="01">lvl1</option>
-														<option value="02">lvl2</option>
-														<option value="03">lvl3</option>
+														<option value="">忽略餐标</option>
+														<c:forEach items="${codeMasterList['ct']}" var="item" varStatus="status">
+															<option value="${item.fsDictno}">${item.fsDictname}</option>
+														</c:forEach>
 													</select>
 												</div>
 												<label class="col-sm-1 control-label no-padding-right"
@@ -173,7 +164,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title" id="costModalLabel">餐厅消费选项定价</h4>
+						<h4 class="modal-title" id="costModalLabel">菜单消费选项定价</h4>
 					</div>
 					
 					<div class="modal-body">
@@ -190,7 +181,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title" id="addModalLabel">新增餐厅</h4>
+						<h4 class="modal-title" id="addModalLabel">新增菜单</h4>
 					</div>
 					
 					<div class="modal-body">
@@ -207,7 +198,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"aria-hidden="true">×</button>
-						<h4 class="modal-title" id="editModalLabel">修改餐厅信息</h4>
+						<h4 class="modal-title" id="editModalLabel">修改菜单信息</h4>
 					</div>
 					<div class="modal-body">
 						<iframe id="editIframe" width="100%" height="1000px" frameborder="0" scrolling="no"></iframe>
@@ -224,7 +215,7 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h4 class="modal-title" id="showModalLabel">餐厅信息</h4>
+							<h4 class="modal-title" id="showModalLabel">菜单信息</h4>
 						</div>
 						<div class="modal-body">
 							<iframe id="showIframe" width="100%" height="800px" frameborder="0" scrolling="no"></iframe>
