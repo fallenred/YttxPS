@@ -151,7 +151,7 @@
         FI_STAT = #{stat,jdbcType=DECIMAL},
       </if>
     </set>
-    where FS_NO = #{no,jdbcType=VARCHAR}
+    where trim(FS_NO) = #{no,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yttx.yttxps.model.Scenic" >
     <!--
