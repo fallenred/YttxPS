@@ -39,7 +39,7 @@ import com.yttx.yttxps.service.IRestaurantService;
 import com.yttx.yttxps.web.action.BaseController;
 
 /**
- * 类描述：餐厅资源配置Controller
+ * 类描述：菜单资源配置Controller
  * @author sunchao
  * @date 2016年2月16日 上午10:30:01
  */
@@ -60,7 +60,7 @@ public class RestaurantController extends BaseController {
 	
 	@RequestMapping(value = "page.htm")
 	public String openPage(Model model){
-		Object special_item = getDictMapJsonByParentNo("cpts");
+		Object special_item = getDictMapJsonByParentNo("meal_type");
 		model.addAttribute("special_item", special_item);
 		return "restaurant/restaurant";
 	}
@@ -76,7 +76,7 @@ public class RestaurantController extends BaseController {
 	}
 	
 	/**
-	 * 分页查询餐厅信息信息
+	 * 分页查询菜单信息
 	 */
 	@RequestMapping(value="list.htm", method = RequestMethod.POST)
 	@ResponseBody
@@ -97,7 +97,7 @@ public class RestaurantController extends BaseController {
     }
 	
 	/**
-	 * 根据景区查询餐厅
+	 * 根据景区查询菜单
 	 */
 	@RequestMapping(value="selectRestaurant.htm", method = RequestMethod.POST)
 	@ResponseBody
@@ -112,7 +112,7 @@ public class RestaurantController extends BaseController {
     }
 	
 	/**
-	 * 新增餐厅--打开新增页面
+	 * 新增菜单--打开新增页面
 	 */
 	@RequestMapping(value = "addPage.htm")
 	public String openAddPage(Model model)
@@ -123,7 +123,7 @@ public class RestaurantController extends BaseController {
 	}
 	
 	/**
-	 * 新增餐厅--向后台提交数据
+	 * 新增菜单--向后台提交数据
 	 */
 	@RequestMapping(value = "add.htm")
 	@ResponseBody
@@ -136,7 +136,7 @@ public class RestaurantController extends BaseController {
 		}
 		//向数据库中插入数据
 		try{
-			//提交餐厅数据
+			//提交菜单数据
 			String resno=restaurantService.addRestaurent(restaurant);
 			
 			//向资源服务器上提交图片
@@ -155,12 +155,12 @@ public class RestaurantController extends BaseController {
 	}
 	
 	/**
-	 * 餐厅详情-->打开餐厅详情页面
+	 * 菜单详情-->打开菜单详情页面
 	 */
 	@RequestMapping(value = "show.htm")
 	public String openShowPage(@RequestParam("no") String no,Model model)
 	{
-		//获取餐厅信息
+		//获取菜单信息
 		TRestaurant restaurant = restaurantService.selectRestaurantInfo(no);
 		if(restaurant.getRegionno()!=null)
 			restaurant.setRegionname(pubService.findRegionFullName(restaurant.getRegionno()));
@@ -169,12 +169,12 @@ public class RestaurantController extends BaseController {
 	}
 	
 	/**
-	 * 修改餐厅信息-->打开餐厅信息编辑界面
+	 * 修改菜单信息-->打开菜单信息编辑界面
 	 */
 	@RequestMapping(value = "editPage.htm")
 	public String openEditPage(@RequestParam("no") String no,Model model)
 	{
-		//获取餐厅信息
+		//获取菜单信息
 		TRestaurant restaurant = restaurantService.selectRestaurantInfo(no);
 		if(restaurant.getRegionno()!=null)
 			restaurant.setRegionname(pubService.findRegionFullName(restaurant.getRegionno()));
@@ -183,7 +183,7 @@ public class RestaurantController extends BaseController {
 	}
 	
 	/**
-	 * 修改餐厅信息-->向后台提交数据
+	 * 修改菜单信息-->向后台提交数据
 	 */
 	@RequestMapping(value = "edit.htm")
 	@ResponseBody
@@ -247,7 +247,7 @@ public class RestaurantController extends BaseController {
 	}
 
 	/**
-	 * 删除餐厅信息-->向后台提交数据
+	 * 删除菜单信息-->向后台提交数据
 	 */
 	@RequestMapping(value = "del.htm")
 	@ResponseBody
@@ -262,7 +262,7 @@ public class RestaurantController extends BaseController {
 			pic.setResNo(no);
 			deleteByResTypeAndNo(pic);
 			
-			pic.setResType("ct");//删除餐厅的图片
+			pic.setResType("ct");//删除菜单的图片
 			deleteByResTypeAndNo(pic);
 		}catch(Exception e){
 			return JsonResult.jsonError(e.getMessage());
@@ -272,7 +272,7 @@ public class RestaurantController extends BaseController {
 	
 	
 	/**
-	 * 餐厅资源定价-->打开餐厅资源价格展示页面
+	 * 菜单资源定价-->打开菜单资源价格展示页面
 	 */
 	@RequestMapping(value = "costPage.htm")
 	public String openCostPage(@RequestParam("no") String no,Model model)
@@ -283,7 +283,7 @@ public class RestaurantController extends BaseController {
 	}
 	
 	/**
-	 * 餐厅资源定价-->ajax查询餐厅资源定价
+	 * 菜单资源定价-->ajax查询菜单资源定价
 	 */
 	@RequestMapping(value = "costQuery.htm")
 	@ResponseBody
@@ -306,7 +306,7 @@ public class RestaurantController extends BaseController {
 	}
 	
 	/**
-	 * 餐厅资源定价-->打开餐厅资源定价页面
+	 * 菜单资源定价-->打开菜单资源定价页面
 	 */
 	@RequestMapping(value = "showCPPage.htm")
 	public String openCPPage(@RequestParam("no") String no,Model model)
@@ -317,7 +317,7 @@ public class RestaurantController extends BaseController {
 	}
 	
 	/**
-	 * 餐厅资源定价-->打开餐厅资源定价页面
+	 * 菜单资源定价-->打开菜单资源定价页面
 	 */
 	@RequestMapping(value = "submitPrice.htm")
 	@ResponseBody
@@ -338,7 +338,7 @@ public class RestaurantController extends BaseController {
 	
 	
 	/*
-	 * 验证提交的餐厅消费选项的价格是否提交完成
+	 * 验证提交的菜单消费选项的价格是否提交完成
 	 */
 	private Map<String, Object> RestaurantPriceReq(RestaurantPriceReq rpReq) {
 		Map<String, Object> flagMap = new HashMap<String,Object>();
@@ -348,12 +348,12 @@ public class RestaurantController extends BaseController {
 			return flagMap;
 		}
 		
-		//非空 餐厅名称
+		//非空 菜单名称
 		Boolean succFlag = true;
 		String message = "";
 		if(StringUtil.nullOrBlank(rpReq.getNo())){
 			succFlag = succFlag && false;
-			message += "餐厅名称为空<br/>";
+			message += "菜单名称为空<br/>";
 		}
 		
 		if(rpReq.getStartDate()==null){
@@ -391,49 +391,44 @@ public class RestaurantController extends BaseController {
 	}
 
 	/*
-	 * 验证一个餐厅的数据是否完成和符合要求
+	 * 验证一个菜单的数据是否完成和符合要求
 	 */
 	private Map<String, Object> validRestaurent(TRestaurant restaurant,String type)
 	{
 		Map<String, Object> flagMap = new HashMap<String,Object>();
 		if(null==restaurant){
 			flagMap.put("succflag", false);
-			flagMap.put("message", "餐厅数据为空");
+			flagMap.put("message", "菜单数据为空");
 			return flagMap;
 		}
 		Boolean succFlag = true;
 		String message = "";
 		
-		if("edit".equalsIgnoreCase(type)){//如果是修改餐厅信息，要验证餐厅编号
+		if("edit".equalsIgnoreCase(type)){//如果是修改菜单信息，要验证菜单编号
 			if(StringUtil.nullOrBlank(restaurant.getNo())){
 				succFlag = succFlag && false;
-				message += "餐厅编号为空<br/>";
+				message += "菜单编号为空<br/>";
 			}
 		}
 		//非空 餐厅名称
 		if(StringUtil.nullOrBlank(restaurant.getName())){
 			succFlag = succFlag && false;
-			message += "餐厅名称为空<br/>";
+			message += "菜单名称为空<br/>";
 		}
 		//非空	所属地区
 		if(StringUtil.nullOrBlank(restaurant.getRegionno())){
 			succFlag = succFlag && false;
 			message += "所属地区为空<br/>";
 		}
-		//非空	接待规模（单次接待桌数)
-		if(null == restaurant.getScale()){
-			succFlag = succFlag && false;
-			message += "接待规模未输正整数<br/>";
-		}
 		//非空	菜品特色
 		if(StringUtil.nullOrBlank(restaurant.getSpecial())){
 			succFlag = succFlag && false;
-			message += "特色菜品未选择<br/>";
+			message += "类型标识未选择<br/>";
 		}
 		//非空 餐厅等级
 		if(StringUtil.nullOrBlank(restaurant.getLvl())){
 			succFlag = succFlag && false;
-			message += "餐厅等级未选择<br/>";
+			message += "餐标未选择<br/>";
 		}
 		//非空  状态
 		if(null == restaurant.getStat()){

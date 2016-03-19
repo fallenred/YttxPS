@@ -1,5 +1,5 @@
 /**
- * 表格行事件 -->餐厅消费选项配置
+ * 表格行事件 -->菜单消费选项配置
  */
 function showRestaurantCost(id){
 	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
@@ -7,7 +7,7 @@ function showRestaurantCost(id){
 };
 
 /**
- * 表格行事件 -->查看餐厅详细信息
+ * 表格行事件 -->查看菜单详细信息
  */
 function showRestaurant(id) {
 	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
@@ -17,7 +17,7 @@ function showRestaurant(id) {
 };
 
 /**
- * 弹出框-->"餐厅信息"弹出框-->隐藏的时候removeData
+ * 弹出框-->"菜单信息"弹出框-->隐藏的时候removeData
  */
 $("#showModal").on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
@@ -25,7 +25,7 @@ $("#showModal").on("hidden.bs.modal", function() {
 
 
 /**
- * 表格行事件 -->修改餐厅信息-->打开弹出框
+ * 表格行事件 -->修改菜单信息-->打开弹出框
  */
 function eidtRestaurant(id) {
 	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
@@ -35,7 +35,7 @@ function eidtRestaurant(id) {
 };
 
 /**
- * 弹出框-->"修改餐厅信息"弹出框-->隐藏的时候重新加载餐厅列表
+ * 弹出框-->"修改菜单信息"弹出框-->隐藏的时候重新加载菜单列表
  */
 $("#editModal", parent.document).on("hidden.bs.modal", function() {
 	$(this).removeData("bs.modal");
@@ -44,7 +44,7 @@ $("#editModal", parent.document).on("hidden.bs.modal", function() {
 
 
 /**
- * 表格行事件 -->删除餐厅信息-->打开删除警告弹出框
+ * 表格行事件 -->删除菜单信息-->打开删除警告弹出框
  */
 function deleteRestaurant(id) {
 	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
@@ -54,7 +54,7 @@ function deleteRestaurant(id) {
 };
 
 /**
- * 弹出框-->"删除警告"弹出框-->隐藏的时候重新加载餐厅列表
+ * 弹出框-->"删除警告"弹出框-->隐藏的时候重新加载菜单列表
  */
 $("#delModal", parent.document).on("hidden.bs.modal", function() {
 	$(this).removeData("bs.modal");
@@ -63,7 +63,7 @@ $("#delModal", parent.document).on("hidden.bs.modal", function() {
 
 
 /**
- * 弹出框-->"新增餐厅"弹出框-->隐藏的时候重新加载餐厅列表
+ * 弹出框-->"新增菜单"弹出框-->隐藏的时候重新加载菜单列表
  */
 $("#addModal", parent.document).on("hidden.bs.modal", function() {
 	$(this).removeData("bs.modal");
@@ -135,17 +135,13 @@ jQuery(function($) {
 		function() {
 			$("#collapseOne").collapse('hide');
 			var postData = $("#grid-table").jqGrid("getGridParam","postData");
-			//TODO  进行数据验证
-			//餐厅名称
+			//菜单名称
 			postData["restaurant.name"] = $("#name").val();
 			//行政区划
 			postData["restaurant.regionno"] = $("#regionno").val();
-			//接待规模
-			postData["restaurant.minScale"] = $("#scale_min").val();
-			postData["restaurant.maxScale"] = $("#scale_max").val();
-			//菜品特色
+			//类型标识
 			postData["restaurant.special"] = $("#special").val();
-			//等级
+			//餐标
 			postData["restaurant.lvl"] = $("#lvl").val();
 			//状态
 			postData["restaurant.stat"] = $("#stat").val();
@@ -169,14 +165,14 @@ jQuery(function($) {
 							'id="roomButton" style="display: block; cursor: pointer; float: left;" '+
 							'onmouseover="jQuery(this).addClass(\'ui-state-hover\');" '+
 							'onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" '+
-							'onclick="showRestaurantCost('+ options.rowId+ ');" data-original-title="餐厅消费选项配置">'+
+							'onclick="showRestaurantCost('+ options.rowId+ ');" data-original-title="菜单消费选项配置">'+
 							'<span class="ui-icon ace-icon fa fa-cog red"></span></div>';
 
 		var detailBtn = '<div title="" class="ui-pg-div ui-inline-edit" '+
 							'id="roomButton" style="display: block; cursor: pointer; float: left;"'+
 							'onmouseover="jQuery(this).addClass(\'ui-state-hover\');"'+
 							'onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" '+
-							'onclick="showRestaurant('+ options.rowId+ ');" data-original-title="查看餐厅信息">'+
+							'onclick="showRestaurant('+ options.rowId+ ');" data-original-title="查看菜单信息">'+
 							'<span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
 		
 		
@@ -184,7 +180,7 @@ jQuery(function($) {
 						'id="editButton" style="display: block; cursor: pointer; float: left;" '+
 						'onmouseover="jQuery(this).addClass(\'ui-state-hover\');" '+
 						'onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" '+
-						'onclick="eidtRestaurant('+ options.rowId+ ');" data-original-title="修改餐厅信息">'+
+						'onclick="eidtRestaurant('+ options.rowId+ ');" data-original-title="修改菜单信息">'+
 						'<span class="ui-icon ui-icon-pencil"></span></div>';
 		
 		var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" '+
@@ -199,7 +195,7 @@ jQuery(function($) {
 						'id="deleteButton" style="display: block; cursor: pointer; float: left;" '+
 						'onmouseover="jQuery(this).addClass(\'ui-state-hover\');" '+
 						'onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" '+
-						'onclick="deleteRestaurant('+ options.rowId+ ');" data-original-title="删除该餐厅">'
+						'onclick="deleteRestaurant('+ options.rowId+ ');" data-original-title="删除该菜单">'
 						+'<span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
 		return costBtn + detailBtn + editBtn + picDtn/*+deleteBtn*/;
 	};
@@ -232,13 +228,13 @@ jQuery(function($) {
 			str += ';' + k + ":" + object[k];
 		return  str.substring(1);
 	}
-	//TODO 读取状态数据字典
+	//读取状态数据字典
 	// 状态
 	var stat_items = {
 		1 : '正常',
 		2 : '失效'
 	};
-	//TODO 读取所属地区的数据字典
+	//读取所属地区的数据字典
 	var stat_val = contactStr(stat_items)
 	$(grid_selector).jqGrid(
 			{
@@ -246,8 +242,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '餐厅编号','餐厅名称', '所属地区', 
-				             '餐厅地址', '接待规模(桌)', '菜品特色',/*'等级',*/ '状态' ],
+				colNames : [ '操作', '菜单编号','菜单名称', '所属地区', '类型标识', '餐标', '状态' ],
 				colModel : [ {
 					name : 'myaction',
 					index : '',
@@ -261,34 +256,19 @@ jQuery(function($) {
 					index : 'no',
 					width : 70,
 					sorttype : "char"
-				},
-				{
+				}, {
 					name : 'name',
 					index : 'name',
 					width : 150,
 					sortable : false,
 					editable : false,
-				},
-				{
+				}, {
 					name : 'regionname',
 					index : 'regionname',
 					width : 160,
 					sortable : false,
-					editable : false,
+					editable : false
 				}, {
-					name : 'addr',
-					index : 'addr',
-					width : 200,
-					sortable : false,
-					editable : false,
-				}, {
-					name : 'scale',
-					index : 'scale',
-					width : 80,
-					editable : false,
-					sortable : "int",
-				}, 
-				{
 					name : 'special',
 					index : 'special',
 					width : 80,
@@ -297,8 +277,7 @@ jQuery(function($) {
 					formatter : function(v, opt, rec) {
 						return special_item[v];
 					},
-				},
-				{
+				}, {
 					name : 'stat',
 					index : 'stat',
 					width : 50,

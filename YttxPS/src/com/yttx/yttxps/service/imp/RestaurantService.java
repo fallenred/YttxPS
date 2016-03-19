@@ -1,5 +1,6 @@
 package com.yttx.yttxps.service.imp;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +59,7 @@ public class RestaurantService implements IRestaurantService{
 		//新增景区资源对照数据
 		String no = "ct"+produceNo();
 		restaurant.setNo(no);
+		restaurant.setScale(BigDecimal.ONE);
 		restaurantMapper.insertSelective(restaurant);//向数据库中插入数据
 		return no;
 	}

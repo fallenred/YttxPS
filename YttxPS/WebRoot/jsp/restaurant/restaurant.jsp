@@ -95,7 +95,7 @@
 												<div class="col-sm-2">
 													<select class="form-control" name="special"  id="special">
 														<option value="">忽略菜单类型</option>
-														<c:forEach items="${codeMasterList['cpts']}" var="item">
+														<c:forEach items="${codeMasterList['meal_type']}" var="item">
 														<option value="${item.fsDictno}" 
 															<c:if test="${res.special==item.fsDictno}">selected</c:if>>${item.fsDictname}</option>
 														</c:forEach>

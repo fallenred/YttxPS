@@ -66,14 +66,14 @@
 											<div class="col-sm-4">
 												<select id="special" name="special" class="form-control">
 													<option value="">---菜单类型---</option>
-													<c:forEach items="${codeMasterList['cdlx']}" var="item">
+													<c:forEach items="${codeMasterList['meal_type']}" var="item">
 														<option value="${item.fsDictno}">${item.fsDictname}</option>
 													</c:forEach>
 												</select>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="menu">菜单名称</label>
+											<label class="col-sm-2 control-label no-padding-right" for="menu">菜单描述</label>
 											<div class="col-sm-4">
-												<input class="form-control" type="text" id="menu" name="menu" placeholder="菜单名称" maxlength="500" />
+												<input class="form-control" type="text" id="menu" name="menu" placeholder="菜单描述" maxlength="500" />
 											</div>
 										</div>
 									</div>

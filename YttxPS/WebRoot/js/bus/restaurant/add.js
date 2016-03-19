@@ -63,10 +63,10 @@ jQuery(function($) {
 	 */
 	$("#addform #submit").on("click", function (){
 		//第一步，验证数据
-		var name = $.trim($("#addform #name").val());//餐厅名称
+		var name = $.trim($("#addform #name").val());//菜单名称
 		if(name == '') {
 			$("#message").show();
-			$("#message").text("餐厅名称不能为空，请输入");
+			$("#message").text("菜单名称不能为空，请输入");
 			$("#addform #name").focus();
 			return false;
 		} 
@@ -79,28 +79,19 @@ jQuery(function($) {
 			return false;
 		} 
 		
-		var special = $("#addform #special").val()//特殊菜品
+		var special = $("#addform #special").val()//类型标识
 		if(special == '') {
 			$("#message").show();
-			$("#message").text("请选择特殊菜品");
+			$("#message").text("请选择类型标识");
 			$("#addform #special").focus();
 			return false;
 		}
 		
-		var lvl = $("#addform input[name='lvl']:checked").val()//等级
+		var lvl = $("#addform input[name='lvl']:checked").val()//餐标
 		if(lvl ==undefined) {
 			$("#message").show();
-			$("#message").text("请选择特餐厅等级");
+			$("#message").text("请选择餐标");
 			$("#addform input[name='lvl']").focus();
-			return false;
-		}
-		
-		var scale = $.trim($("#addform #scale").val())//接待规模
-		var re = /^[1-9]+[0-9]*]*$/;
-		if (!re.test(scale)){
-			$("#message").show();
-			$("#message").text("接待规模请输入正整数");
-			$("#addform #scale").focus();
 			return false;
 		}
 		
@@ -130,11 +121,11 @@ jQuery(function($) {
 	            contentType: false
 		 }).done(function(json){
 				if(json.result == "ok") {
-					$("#message").html("新增餐厅成功！");
+					$("#message").html("新增菜单成功！");
 					$("#message").show();
 					return true;
 				}else {
-					$("#message").html("新增餐厅失败:" + json.message );
+					$("#message").html("新增菜单失败:" + json.message );
 					$("#message").show();
 					return false;
 				}
