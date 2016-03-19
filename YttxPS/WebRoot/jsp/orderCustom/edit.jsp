@@ -891,13 +891,21 @@
 	</script>
 	
 	<script type="text/javascript">
+		
+	
 		//获取酒店列表
 		function getAccomadation(obj){
+			var postData = {};
+			postData["accomadation.starlvl"] = $(obj).val();//餐厅等级
+			$("input[name='scenicGen']").each(function(index){//景区代码
+				postData["scenicNo["+index+"]"] = $(this).val();
+			})
+			
 			$.ajax({
 				type: "GET",
 				traditional: true,
 				url: "/accomadation/selectAccomadation.htm",
-				data: "accomadation.starlvl=" + $(obj).val(),
+				data: postData,
 				dataType: "json",
 				success: function(data){
 					var html = ''; 
@@ -926,8 +934,11 @@
 				}
 			});
 		}
+		
+		
 		//获取餐厅列表
 		function getRestaurant(obj){
+			
 			$.ajax({
 				type: "GET",
 				traditional: true,

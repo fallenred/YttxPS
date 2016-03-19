@@ -122,7 +122,7 @@ jQuery(function($) {
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' +comment['scenicname'] + '--' + comment['name'] + '</option>';
+					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 				});
 				$(".shop").html(html);
 			}
