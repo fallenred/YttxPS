@@ -121,11 +121,16 @@
                                     <label class="col-sm-2 control-label no-padding-right"
                                         for="regdate">三餐情况</label>
                                     <div class="col-sm-8">
-                                        <label> <input name="fsMeal" class="ace ace-switch ace-switch-2" type="checkbox" value="1">
+                                        <label>
+                                        	<input name="fsMeal" class="ace ace-switch ace-switch-2" type="checkbox" value="1">
                                             <span class="lbl">&nbsp;早餐</span>
-                                        </label> <label> <input name="fsMeal" class="ace ace-switch ace-switch-2" type="checkbox" value="2">
+                                        </label>
+                                        <label>
+                                        	<input name="fsMeal" class="ace ace-switch ace-switch-2" type="checkbox" value="1">
                                             <span class="lbl">&nbsp;中餐</span>
-                                        </label> <label> <input name="fsMeal" class="ace ace-switch ace-switch-2" type="checkbox" value="3">
+                                        </label>
+                                        <label>
+                                        	<input name="fsMeal" class="ace ace-switch ace-switch-2" type="checkbox" value="1">
                                             <span class="lbl">&nbsp;晚餐</span>
                                         </label>
                                     </div>
@@ -193,11 +198,6 @@
                                     <div class="col-sm-4">
                                         <input type="text" name="fsName" class="form-control" placeholder="房型名称" />
                                     </div>
-                                    <!-- 
-                                    <label class="col-sm-3 control-label no-padding-right">房型价格（元）</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" name="price" class="form-control input-sm " placeholder="房型价格" />
-                                    </div> -->
                                 </div>
                             </div>
                             <div class="row">
@@ -205,11 +205,16 @@
                                     <label class="col-sm-2 control-label no-padding-right"
                                         for="regdate">三餐情况</label>
                                     <div class="col-sm-8">
-                                        <label> <input name="fsMeal" class="ace ace-switch ace-switch-2" type="checkbox" value="1">
-                                            <span class="lbl">&nbsp;早餐</span>
-                                        </label> <label> <input name="fsMeal" class="ace ace-switch ace-switch-2" type="checkbox" value="2">
+                                        <label>
+                                        	<input name="fsMeal" class="ace ace-switch ace-switch-2" type="checkbox" value="1">
+											<span class="lbl">&nbsp;早餐</span>
+                                        </label>
+                                        <label>
+                                        	<input name="fsMeal" class="ace ace-switch ace-switch-2" type="checkbox" value="1">
                                             <span class="lbl">&nbsp;中餐</span>
-                                        </label> <label> <input name="fsMeal" class="ace ace-switch ace-switch-2" type="checkbox" value="3">
+                                        </label>
+                                        <label>
+                                        	<input name="fsMeal" class="ace ace-switch ace-switch-2" type="checkbox" value="1">
                                             <span class="lbl">&nbsp;晚餐</span>
                                         </label>
                                     </div>
@@ -276,11 +281,6 @@
                                     <div class="col-sm-4">
                                         <input type="text" name="fsName" class="form-control" placeholder="房型名称" disabled="disabled" />
                                     </div>
-                                    <!-- 
-                                    <label class="col-sm-3 control-label no-padding-right">房型价格（元）</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" name="price" class="form-control input-sm " placeholder="房型价格" disabled="disabled" />
-                                    </div> -->
                                 </div>
                             </div>
                             <div class="row">
@@ -288,11 +288,16 @@
                                     <label class="col-sm-2 control-label no-padding-right"
                                         for="regdate">三餐情况</label>
                                     <div class="col-sm-8">
-                                        <label> <input name="fsMeal" disabled="disabled" class="ace ace-switch ace-switch-2" type="checkbox" value="1">
+                                        <label>
+                                        	<input name="fsMeal" disabled="disabled" class="ace ace-switch ace-switch-2" type="checkbox" value="1">
                                             <span class="lbl">&nbsp;早餐</span>
-                                        </label> <label> <input name="fsMeal" disabled="disabled" class="ace ace-switch ace-switch-2" type="checkbox" value="2">
+                                        </label>
+                                        <label>
+                                        	<input name="fsMeal" disabled="disabled" class="ace ace-switch ace-switch-2" type="checkbox" value="1">
                                             <span class="lbl">&nbsp;中餐</span>
-                                        </label> <label> <input name="fsMeal" disabled="disabled" class="ace ace-switch ace-switch-2" type="checkbox" value="3">
+                                        </label>
+                                        <label>
+                                        	<input name="fsMeal" disabled="disabled" class="ace ace-switch ace-switch-2" type="checkbox" value="1">
                                             <span class="lbl">&nbsp;晚餐</span>
                                         </label>
                                     </div>
