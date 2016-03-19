@@ -259,7 +259,7 @@ public class SimpleOrder {
 	
 
 	public String getCreateDateDesc() {
-		return DateUtil.getFullDateFormatStr(createDate);
+		return DateUtil.getFullTimeFormatStr(createDate);
 	}
 
 	public void setCreateDateDesc(String createDateDesc) {

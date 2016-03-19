@@ -332,19 +332,30 @@
 	  SELECT A.*
         FROM trestaurant A
        WHERE 1 = 1
-         <!-- 
-         AND A.FS_REGIONNO IN(SELECT A.FS_REGIONNO
-                                FROM TSCENIC A
-                               WHERE 1 = 1 
-                                 <choose>
-                                   <when test="scenicNo">
-                                     AND TRIM(A.FS_NO) IN
-                                     <foreach collection="scenicNo" open="(" close=")" separator="," item="listItem">
-                                       #{listItem}
-                                     </foreach>
-                                   </when>
-                                 </choose>
-                                 ) -->
+        	AND A.FS_REGIONNO IN
+	    	(select 
+	      		fs_no
+	 		from 
+	 			Tregionmap 
+			where 
+				substr(fs_no,0,4) in
+				(SELECT 
+		       		distinct substr(FS_REGIONNO,0,4)
+			     FROM 
+			        TSCENIC
+			     WHERE 1 = 1
+		            <choose>
+		              <when test="scenicNo">
+		                AND TRIM(FS_NO) IN
+		                <foreach collection="scenicNo" open="(" close=")" separator="," item="listItem">
+		                  #{listItem}
+		                </foreach>
+		              </when>
+		            </choose>
+		     UNION
+		     (SELECT '5101' FROM dual)             
+		  )
+	  )
       <if test="name != null and name != ''">
         AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'
       </if>
