@@ -143,13 +143,13 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		//定制线路-客户询价内容
 		if ("03".equals(orderlistWithBLOBs.getFsType()) && StringUtils.isNotBlank(orderlistWithBLOBs.getFcSchedule())) {
 			Root root = ResScheduleXMLConverter.fromXml("http://www.cnacex.com/", orderlistWithBLOBs.getFcSchedule(), Root.class);
-			DictExample dictExample = new DictExample();
+			/*DictExample dictExample = new DictExample();
 			Criteria criteria = dictExample.createCriteria();
 			criteria.andFsParentnoEqualTo("jtgj");
 			Map<String, Object> dictMap = dictService.selectDictMap(dictExample);
 			for (Daylist daylist : root.getBody().getDaylist()) {
 				daylist.setTransport((String)dictMap.get(daylist.getTransport()));
-			}
+			}*/
 			map.put("fcSchedule", root.getBody());
 		}
 		return map;
