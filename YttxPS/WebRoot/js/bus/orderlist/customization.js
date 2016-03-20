@@ -156,6 +156,10 @@ jQuery(function($) {
 		$("#table_common tbody").html($("#table_common tbody").html() + template(data));
 		resMap.put("isChange_jq", true);
 		$("#reslistIndex").val(parseInt(index)+1);
+		//获取景区门票列表
+		getTicket(null);
+		//获取酒店级别列表
+		getAccomadationLvl(null);
 	});
 	
 	//获取车型列表selectTransport.htm
@@ -244,7 +248,6 @@ jQuery(function($) {
 			$(this).parent().parent().find(".batch_resno").html('');
 			$(this).parent().parent().parent().next().find(".batch_ccno").html('');
 			$(this).parent().parent().find(".batch_resname").html('房型');
-			batch_resname 
 			getAccomadationLvl(this);
 		}
 		if(restype == 'yl'){
@@ -306,11 +309,18 @@ jQuery(function($) {
 			}
 		});
 		if(flag) return;*/
+		var dataArr = new Array();
+		$(".scenic").each(function(i, item){
+			dataArr.push($(item).val());
+		});
 		$.ajax({
 			type: "GET",
 			traditional: true,
 			url: "/accomadation/selectAccomadation.htm",
-			data: "accomadation.starlvl=" + $(obj).val() + "&accomadation.stat=1",
+			data: {"scenicNo" : dataArr,
+				"accomadation.starlvl" : $(obj).val(),
+				"accomadation.stat" : "1"
+				},
 			dataType: "json",
 			success: function(data){
 				if (data == '' || data == null) {
@@ -456,7 +466,7 @@ jQuery(function($) {
 				if (obj == null) {
 					$(".select_resno").html(html);
 					$(".select_ccno").each(function(){
-						setTimeout("3000");
+						setTimeout("4000");
 						var resno = $(this).parent().parent().find("#resno").val();
 						var restype = $(this).parent().parent().find("#restype").val();
 						date = getDate($("#ftStartdate").val(), $(this).parent().parent().find("#dayflag").val());
@@ -539,7 +549,7 @@ jQuery(function($) {
 		});
 		if (flag) return;*/
 		var scenic = '';
-		$("input[name='scenicGen']").each(function(){
+		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
 		});
 		$.ajax({
@@ -699,6 +709,7 @@ jQuery(function($) {
 		$("#table_batch"+ batchIndex +'_'+ dayflag + " tbody").html($("#table_batch"+ batchIndex +'_'+ dayflag + " tbody").html() + template(data));
 		$(this).parent().find(".reslistIndex").val(parseInt(reslistIndex)+1);
 		totalAmount();
+		totalBatchAmt();
 	});
 	
 	//查询订单所有批次信息
@@ -790,6 +801,23 @@ jQuery(function($) {
 		});
 		totalAmt = parseFloat(totalAmt) + parseFloat($("#fdInsuerprice").val());
 		$("#fdTotalfee").val(totalAmt.toFixed(2));
+	}
+	
+	//合计订单批次金额
+	function totalBatchAmt(){
+		//循环批次
+		$(".batch_div").each(function(){
+			var fdAmt = 0;
+			$(this).find(".price").each(function(){
+				var price = $(this).val();
+				var usernum = $(this).next().val();
+				if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
+					return;
+				}
+				fdAmt = parseFloat(fdAmt) + parseInt(usernum) * parseFloat(price);
+			});
+			$(this).parent().next().find("#fdAmt").val(fdAmt);
+		});
 	}
 	
 	//查询订单所有备注信息

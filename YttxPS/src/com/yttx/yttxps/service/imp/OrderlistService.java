@@ -105,7 +105,8 @@ public class OrderlistService implements IOrderlistService {
 		
 		//批次精确资源:ordercustom-fc_ResSnapshot
 		if (CollectionUtils.isNotEmpty(record.getBatchBody())){
-			for (Body body : record.getBatchBody()) {
+			for (int i = 0; i < record.getBatchBody().size(); i++) {
+				Body body = record.getBatchBody().get(i);
 				for(Daylist daylist : body.getDaylist()){
 					daylist.setReslist(handleResListIndex(daylist.getReslist()));
 				}
@@ -114,6 +115,7 @@ public class OrderlistService implements IOrderlistService {
 				String fcRessnapshot = ResScheduleXMLConverter.toXml("http://www.cnacex.com/", new Root(body));
 				customWithBLOBs.setFcRessnapshot(fcRessnapshot);
 				customWithBLOBs.setFiId(new BigDecimal(body.getFiId()));
+				customWithBLOBs.setFdAmt(record.getBatchAmt().get(i));
 				orderCustomMapper.updateByPrimaryKeySelective(customWithBLOBs);
 			}
 		}

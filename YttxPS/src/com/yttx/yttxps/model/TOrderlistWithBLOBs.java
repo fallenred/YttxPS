@@ -1,5 +1,6 @@
 package com.yttx.yttxps.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.yttx.yttxps.xml.bean.Body;
@@ -124,17 +125,20 @@ public class TOrderlistWithBLOBs extends TOrderlist {
 
 	private String regionname;
 	
-	//预估行程Body，用于保存客户询价内容（用于定制线路订单�?
+	//预估行程Body，用于保存客户询价内容（用于定制线路订单）
 	private Body scheduleBody;
 	
-	//定制公共精确资源快照（暂用于定制线路�?
+	//定制公共精确资源快照（暂用于定制线路）
 	private Body commBody;
 	
-	//批次精确资源快照（暂用于定制线路�?
+	//批次精确资源快照（暂用于定制线路）
 	private List<Body> batchBody;
 	
 	//订单备注内容
 	private List<TRemarks> remarks;
+	
+	//批次总金额
+	private List<BigDecimal> batchAmt;
 	
 	public String getRegionname() {
 		return regionname;
@@ -176,4 +180,12 @@ public class TOrderlistWithBLOBs extends TOrderlist {
 		this.remarks = remarks;
 	}
 
+	public List<BigDecimal> getBatchAmt() {
+		return batchAmt;
+	}
+
+	public void setBatchAmt(List<BigDecimal> batchAmt) {
+		this.batchAmt = batchAmt;
+	}
+	
 }

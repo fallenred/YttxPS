@@ -96,6 +96,7 @@ $("#customizationIframe").on("load",function(){
 	$(this).contents().find("#fdPaidamt").val(raw.fdPaidamt);
 	$(this).contents().find("#fsOperId").val(raw.fsOperId);
 	$(this).contents().find("#fdInsuerprice").val(raw.fdInsuerprice);
+	$(this).contents().find("#fdTotalfee").val(raw.fdTotalfee);
 	//询价状态时隐藏计调资源配置界面
 	if (raw.fiStat == '-10' || raw.fiStat == '-5') {
 		$(this).contents().find(".div_transfer").hide();
@@ -215,6 +216,11 @@ $("#addModal", parent.document).on("hidden.bs.modal", function() {
 });
 
 $("#editModal", parent.document).on("hidden.bs.modal", function() {
+    $(this).removeData("bs.modal");
+    $("#grid-table").trigger("reloadGrid");
+});
+
+$("#customizationModal", parent.document).on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
     $("#grid-table").trigger("reloadGrid");
 });
@@ -364,7 +370,7 @@ jQuery(function($) {
 				}, {
 					name : 'fsNo',
 					index : 'fsNo',
-					width : 85,
+					width : 100,
 					sorttype : "int"
 				}, {
 					name : 'fiGenindex',
