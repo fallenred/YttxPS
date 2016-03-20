@@ -65,33 +65,18 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsName">订单名称</label>
 											<div class="col-sm-8">
-												<input type="hidden" id="fsNo" name="fsNo"
-													class="form-control" placeholder="订单id" /> <input
-													type="text" id="fsName" name="fsName" readonly="readonly"
+												<input type="text" id="fsName" name="fsName" readonly="readonly"
 													class="form-control" placeholder="订单名称" />
 											</div>
 										</div>
 									</div>
-									<!-- <div class="row">
-										<div class="form-group"> -->
-									<!-- <label class="col-sm-2 control-label no-padding-right"
-												for="fsUserName">用户</label>
-											<div class="col-sm-3"> -->
-									<!-- <input type="hidden" id="fsUserId" name="fsUserId"
-										class="form-control" placeholder="用户id" /> -->
-									<!-- <input type="text" id="fsUserName" name="fsUserName" class="form-control" placeholder="用户名" /> -->
-									<!-- </div> -->
-									<!-- <label class="col-sm-2 control-label no-padding-right"
-												for="fsUserSubName">子用户</label> -->
-									<!-- <div class="col-sm-3"> -->
-									<!-- <input type="hidden" id="fsUserSubid" name="fsUserSubid"
-										class="form-control" placeholder="用户id" /> -->
-									<!-- <input type="text" id="fsUserSubName" name="fsUserSubName" class="form-control" placeholder="子用户" /> -->
-									<!-- </div>
-										</div>
-									</div> -->
 									<div class="row">
 										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right"
+												for="fsName">订单编号</label>
+											<div class="col-sm-3">
+												<input type="text" readonly="readonly" id="fsNo" name="fsNo" class="form-control" placeholder="订单id" />
+											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="ftStartdate">出发日期</label>
 											<div class="col-sm-3">
@@ -99,6 +84,10 @@
 													class="form-control" data-date-format="yyyy/mm/dd"
 													readonly="readonly" placeholder="出发日期" />
 											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="days">计划天数</label>
 											<div class="col-sm-3">
@@ -108,16 +97,16 @@
 														class="input-group-addon">天</span>
 												</div>
 											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fiVisitornum">游客人数</label>
 											<div class="col-sm-3">
 												<input type="text" id="fiVisitornum" class="form-control"
 													placeholder="游客人数" />
 											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="insurenum">保险</label>
 											<div class="col-sm-3">
@@ -126,22 +115,15 @@
 													<span class="input-group-addon">份/人/天</span>
 												</div>
 											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="insuerprice">保险费用</label>
+												for="fdInsuerprice">保险费用</label>
 											<div class="col-sm-3">
 												<div class="input-group">
-													<input type="text" id="insuerprice"
-														name="scheduleBody.insuerprice" class="form-control">
+													<input type="text" id="fdInsuerprice"
+														name="scheduleBody.fdInsuerprice" class="form-control">
 													<span class="input-group-addon">￥</span>
 												</div>
 											</div>
-											<label class="col-sm-7 control-label"
-												style="text-align: left;" for="fsProperty"><p
-													class="text-danger">（保险费用说明：1元2天/人，超出2天后按0.5元每天/人计算）</p> </label>
 										</div>
 									</div>
 									<div class="row">
@@ -163,12 +145,12 @@
 													<thead>
 														<tr>
 															<th width="10%">日期</th>
-															<th width="10%">交通</th>
+															<th width="11%">交通</th>
 															<th width="50%">行程</th>
-															<th width="7%">早餐</th>
-															<th width="7%">午餐</th>
-															<th width="7%">晚餐</th>
-															<th width="10%">酒店</th>
+															<th width="6%">早餐</th>
+															<th width="6%">午餐</th>
+															<th width="6%">晚餐</th>
+															<th width="11%">酒店</th>
 														</tr>
 													</thead>
 													<tbody id="table-daylist">
@@ -176,8 +158,16 @@
 														{{#each daylist}}
 															<tr>
 																<td>{{date}}<input name="scheduleBody.daylist[{{@index}}].date" type="hidden" value="{{date}}"></td>
-																<td>{{transport}}<input name="scheduleBody.daylist[{{@index}}].transport" type="hidden" value="{{transport}}"></td>
-																<td>{{schedule}}<input name="scheduleBody.daylist[{{@index}}].schedule" type="hidden" value="{{schedule}}"></td>
+																<td>
+																	<select name="scheduleBody.daylist[{{@index}}].transport" class="col-sm-12">
+																		<option value="01" {{#isSelected transport '01'}}{{/isSelected}}>汽车</option>
+																		<option value="02" {{#isSelected transport '02'}}{{/isSelected}}>飞机</option>
+																		<option value="03" {{#isSelected transport '03'}}{{/isSelected}}>火车</option>
+																		<option value="04" {{#isSelected transport '04'}}{{/isSelected}}>船只</option>
+																		<option value="05" {{#isSelected transport '05'}}{{/isSelected}}>其他</option>
+																	</select>
+																</td>
+																<td><input class="col-sm-12" name="scheduleBody.daylist[{{@index}}].schedule" type="text" value="{{schedule}}"></td>
 																<td>
 																	<input name="scheduleBody.daylist[{{@index}}].breakfast" value="1" type="checkbox" 
 																	{{#compare breakfast}}
@@ -203,7 +193,7 @@
 																	{{/compare}}
 																	/>
 																</td>
-																<td>{{hotel}}<input name="scheduleBody.daylist[{{@index}}].hotel" type="hidden" value="{{hotel}}"></td>
+																<td><input class="col-sm-12" name="scheduleBody.daylist[{{@index}}].hotel" type="text" value="{{hotel}}"></td>
 															</tr>
 														{{/each}}
 														</script>
@@ -573,7 +563,7 @@
 																			<li class="{{isActive_li @index}}"><a href="#batch{{../fiId}}_day{{@index}}" data-toggle="tab">第{{addOne @index}}天</a></li>
 																			{{/each}}
 																		</ul>
-																		<div id="myTabContent" class="tab-content">
+																		<div id="myTabContent" class="tab-content batch_div">
 																			<!-- 批次酒店、娱乐配置 start -->
 																			{{#each body/daylist}}
 																			<div class="tab-pane fade {{isActive_pane @index}}" id="batch{{../fiId}}_day{{@index}}">
@@ -641,7 +631,7 @@
 																											{{#each reslist}}
       																										<tr>
          																										<td>
-																												<a style="cursor:pointer;" onclick="removeTr(this)">删除</a>
+																												<a style="cursor:pointer;" class="batch_remove">删除</a>
 																												<input type="hidden" name="batchBody[{{../../fiSeq}}].daylist[{{../dayflag}}].reslist[{{@index}}].restype" value="{{restype}}" placeholder="资源类型">
 																												<input type="hidden" name="batchBody[{{../../fiSeq}}].daylist[{{../dayflag}}].reslist[{{@index}}].resprop" value="{{resprop}}" placeholder="资源属性">
 																												<input type="hidden" name="batchBody[{{../../fiSeq}}].daylist[{{../dayflag}}].reslist[{{@index}}].resno" value="{{resno}}" placeholder="资源编号">
@@ -670,8 +660,16 @@
 																			{{/each}}
 																			<!-- 批次酒店、娱乐配置 end -->
 																		</div>
+																</div>
+																<div class="row div_transfer">
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label" for="fdTotalfee">批次金额</label>
+																		<div class="col-sm-3">
+																			<input type="text" class="form-control" name="batchAmt[{{@index}}]" value="{{fdAmt}}" id="fdAmt">
+																		</div>
 																	</div>
 																</div>
+															</div>
 															</td>
 														</tr>
 														{{/each}}
@@ -694,13 +692,20 @@
 											</div>
 										</div>
 									</div>
-									<div class="row div_transfer">
+									<div hidden="hidden" class="row div_transfer_stat">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fiStat">订单状态</label>
 											<div class="col-sm-3">
 												<select id="fiStat" name="fiStat" class="form-control">
 												</select>
 											</div>
+											<!-- <label class="col-sm-2 control-label no-padding-right" for="fiStat">游客名单</label>
+											<div class="col-sm-1">
+												<button type="button" class="btn btn-sm btn-default pull-right">下载模板</button>
+											</div>
+											<div class="col-sm-1">
+												<button type="button" class="btn btn-sm btn-success pull-right">上传名单</button>
+											</div> -->
 										</div>
 									</div>
 									<hr>
@@ -712,26 +717,17 @@
 											<div class="col-sm-8">
 												<div class="panel panel-default">
 													<div class="panel-body" id="remarks">
-														<!-- 公共精确资源 start -->
-														<ul id="remarksTab" class="nav nav-tabs">
-														<script id="commRes-template" type="text/x-handlebars-template">
-															<li class="active"><a href="#common" data-toggle="tab">车型/导游/景区</a></li>
-															{{#each daylist}}
-															<li><a href="#day{{@index}}" data-toggle="tab">第{{addOne @index}}天</a></li>
-															{{/each}}
-														</script>
-														</ul>
 														<div id="remarksTab" class="tab-content">
 															<div class="tab-pane fade in active" id="common">
 																<div class="row" style="margin-top: 10px;">
 																	<div class="col-sm-12" style="padding: 10 0 0 0px;">
 																		<div class="row" style="padding: 10 10 0 0px;">
 																			<div class="form-group">
-																				<label class="col-sm-1 control-label" for="fsRegions">内容</label>
+																				<label class="col-sm-1 control-label" for="fsContent">内容</label>
 																				<div class="col-sm-7">
 																					<input id="fsContent" type="text" class="form-control" />
 																				</div>
-																				<label class="col-sm-1 control-label" for="fsRegions">金额</label>
+																				<label class="col-sm-1 control-label" for="fdAmt">金额</label>
 																				<div class="col-sm-1">
 																					<input id="fdAmt" type="text" class="form-control" />
 																				</div>
@@ -747,35 +743,37 @@
 																					<table id="table_remarks" class="table table-bordered">
 																						<thead>
       																						<tr>
-         																						<th>操作</th>
-         																						<th>序号</th>
-         																						<th>备注时间</th>
-         																						<th>备注内容</th>
-         																						<th>金额</th>
-         																						<th>状态</th>
+         																						<th width="7%">操作</th>
+         																						<th width="7%">序号</th>
+         																						<th width="20%">备注时间</th>
+         																						<th width="45%">备注内容</th>
+         																						<th width="7%">金额</th>
+         																						<th width="15%">状态</th>
       																						</tr>
    																						</thead>
    																						<tbody>
    																							<script id="remarks-template" type="text/x-handlebars-template">
-																							<input type="hidden" id="reslistIndex" value="{{length reslist}}" placeholder="reslist下标">
+																							<input type="hidden" id="remarksIndex" value="{{length remarks}}" placeholder="remarks下标">
 																							{{#each remarks}}
       																						<tr>
          																						<td>
 																									<a style="cursor:pointer;" onclick="removeTr(this)">删除</a>
 																									<input type="hidden" name="remarks[{{@index}}].fsOrderId" value="{{fsOrderId}}" placeholder="订单编号">
 																									<input type="hidden" name="remarks[{{@index}}].fiSeq" value="{{fiSeq}}" placeholder="序号">
-																									<input type="hidden" name="remarks[{{@index}}].fsOperId" value="{{fsOperId}}" placeholder="操作员号">
 																									<input type="hidden" name="remarks[{{@index}}].ftDate" value="{{ftDate}}" placeholder="备注时间">
-																									<input type="hidden" name="remarks[{{@index}}].resname" value="{{resname}}" placeholder="资源名称">
-																									<input type="hidden" name="remarks[{{@index}}].fsContent" value="{{fsContent}}" placeholder="备注内容">
 																									<input type="hidden" name="remarks[{{@index}}].fdAmt" value="{{fdAmt}}" placeholder="备注金额">
-																									<input type="hidden" name="remarks[{{@index}}].fiStat" value="{{fiStat}}" placeholder="状态">
 																								</td>
          																						<td>{{fiSeq}}</td>
          																						<td>{{ftDate}}</td>
-         																						<td>{{fsContent}}</td>
+         																						<td><input class="col-sm-12" type="text" name="remarks[{{@index}}].fsContent" value="{{fsContent}}" placeholder="备注内容"></td>
          																						<td>{{fdAmt}}</td>
-         																						<td>{{fiStat}}</td>
+         																						<td>
+																								<select name="remarks[{{@index}}].fiStat" class="col-sm-12">
+																									<option value="0" {{#remarkStat fiStat '0'}}{{/remarkStat}}>未付款</option>
+																									<option value="1" {{#remarkStat fiStat '1'}}{{/remarkStat}}>已付首款</option>
+																									<option value="2" {{#remarkStat fiStat '2'}}{{/remarkStat}}>已付全款</option>
+																								</select>
+																								</td>
       																						</tr>
 																							{{/each}}
 																							</script>
@@ -885,6 +883,17 @@
 			$(obj).parent().parent().remove();
 			totalAmount();
 		}
+		//删除备注
+		function removeRemarkTr(obj){
+			$(obj).parent().parent().remove();
+			totalAmount();
+		}
+		//删除批次消费项
+		$(document).on('click key', '.batch_remove', function(event){
+			$(this).parent().parent().remove();
+			totalAmount();
+			totalBatchAmt();
+		});
 		
 		//合计订单金额
 		function totalAmount(){
@@ -897,8 +906,25 @@
 				}
 				totalAmt = parseFloat(totalAmt) + parseInt(usernum) * parseFloat(price);
 			});
-			totalAmt = parseFloat(totalAmt) + parseFloat($("#insuerprice").val());
+			totalAmt = parseFloat(totalAmt) + parseFloat($("#fdInsuerprice").val());
 			$("#fdTotalfee").val(totalAmt.toFixed(2));
+		}
+		
+		//合计订单批次金额
+		function totalBatchAmt(){
+			//循环批次
+			$(".batch_div").each(function(){
+			var fdAmt = 0;
+				$(this).find(".price").each(function(){
+					var price = $(this).val();
+					var usernum = $(this).next().val();
+					if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
+						return;
+					}
+					fdAmt = parseFloat(fdAmt) + parseInt(usernum) * parseFloat(price);
+				});
+				$(this).parent().next().find("#fdAmt").val(fdAmt);
+			});
 		}
 		
 		//增加车型addTransport
@@ -990,7 +1016,7 @@
 	<script id="tr-batch" type="text/x-handlebars-template">
 		<tr>
         	<td>
-				<a style="cursor:pointer;" onclick="removeTr(this)">删除</a>
+				<a style="cursor:pointer;" class="batch_remove">删除</a>
 				<input type="hidden" name="batchBody[{{fiId}}].daylist[{{dayflag}}].reslist[{{index}}].restype" value="{{restype}}" placeholder="资源类型">
 				<input type="hidden" name="batchBody[{{fiId}}].daylist[{{dayflag}}].reslist[{{index}}].resprop" value="{{resprop}}" placeholder="资源属性">
 				<input type="hidden" name="batchBody[{{fiId}}].daylist[{{dayflag}}].reslist[{{index}}].resno" value="{{resno}}" placeholder="资源编号">
@@ -1006,6 +1032,29 @@
          	<td>{{ccname}}</td>
          	<td>{{price}}</td>
          	<td>{{usernum}}</td>
+      	</tr>
+	</script>
+	<!-- 订单备注模板 -->
+	<script id="tr-remarks" type="text/x-handlebars-template">
+		<tr>
+      		<td>
+				<a style="cursor:pointer;" onclick="removeTr(this)">删除</a>
+				<input type="hidden" name="remarks[{{index}}].fsOrderId" value="{{fsOrderId}}" placeholder="订单编号">
+				<input type="hidden" name="remarks[{{index}}].fiSeq" value="{{fiSeq}}" placeholder="序号">
+				<input type="hidden" name="remarks[{{index}}].ftDate" value="{{ftDate}}" placeholder="备注时间">
+				<input type="hidden" name="remarks[{{index}}].fdAmt" value="{{fdAmt}}" placeholder="备注金额">
+			</td>
+       		<td>{{fiSeq}}</td>
+         	<td>{{ftDate}}</td>
+         	<td><input class="col-sm-12" type="text" name="remarks[{{index}}].fsContent" value="{{fsContent}}" placeholder="备注内容"></td>
+         	<td>{{fdAmt}}</td>
+         	<td>
+			<select name="remarks[{{index}}].fiStat" class="col-sm-12">
+				<option value="0">未付款</option>
+				<option value="1">已付首款</option>
+				<option value="2">已付全款</option>
+				</select>
+			</td>
       	</tr>
 	</script>
 </body>

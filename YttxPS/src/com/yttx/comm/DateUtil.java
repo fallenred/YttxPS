@@ -12,8 +12,8 @@ import java.util.List;
  * 时间工具类
  */
 public class DateUtil{  
-	private static DateFormat df =new SimpleDateFormat("yyyy-MM-dd");
-	private static DateFormat df24=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	private static DateFormat df24 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	/**
 	 * 获取两个日期中的每一天
 	 * @param String startDate :格式 "yyyy-MM-dd"
@@ -64,7 +64,7 @@ public class DateUtil{
 		return df24.format(new Date());
 	}
 	
-	public static String getFullDateFormatStr(Date date){
+	public static String getFullTimeFormatStr(Date date){
 		if(date==null){
 			return "";
 		}
@@ -77,5 +77,22 @@ public class DateUtil{
 			return "";
 		}
 		return df.format(date);
+	}
+	
+	public static void main(String[] args) {
+		Date date =new Date();
+		System.out.println(getFullTimeFormatStr(date));
+	}
+	
+	/**
+	 * 获取日期字符串
+	 * @param date
+	 * @param format
+	 * @return
+	 */
+	public static String getDateString(Date date, String format) {
+		if (date == null) return "";
+		DateFormat fmt = new SimpleDateFormat(format);
+		return fmt.format(date);
 	}
 }  

@@ -20,7 +20,7 @@ function editOrderlist(id) {
 	var frameSrc = '';
 	if (raw.fsType == '02') {
 		//衍生线路
-		frameSrc = "/jsp/orderlist/edit.jsp";
+		frameSrc = "/jsp/orderlist/edit.jsp?fsNo="+raw.fsNo;
 		$("#editIframe").attr("src", frameSrc);
 		$('#editModal').modal({ show: true, backdrop: 'static' });
 	} else if(raw.fsType == '03') {
@@ -95,6 +95,8 @@ $("#customizationIframe").on("load",function(){
 	$(this).contents().find("#fdTotalfee").val(raw.fdTotalfee);
 	$(this).contents().find("#fdPaidamt").val(raw.fdPaidamt);
 	$(this).contents().find("#fsOperId").val(raw.fsOperId);
+	$(this).contents().find("#fdInsuerprice").val(raw.fdInsuerprice);
+	$(this).contents().find("#fdTotalfee").val(raw.fdTotalfee);
 	//询价状态时隐藏计调资源配置界面
 	if (raw.fiStat == '-10' || raw.fiStat == '-5') {
 		$(this).contents().find(".div_transfer").hide();
@@ -103,14 +105,17 @@ $("#customizationIframe").on("load",function(){
 	if (raw.fiStat == '2') {
 		html +='<option value="4">已付首款</option>'
 		$(this).contents().find("#fiStat").html(html);
+		$(this).contents().find(".div_transfer_stat").show();
 	} else if (raw.fiStat == '4') {
 		//状态为已付收款时，页面状态只能选已付全款选项
 		html +='<option value="8">已付全款(可出团)</option>'
 		$(this).contents().find("#fiStat").html(html);
+		$(this).contents().find(".div_transfer_stat").show();
 	} else if (raw.fiStat == '8') {
 		//状态为已付全款时，页面状态只能选完结选项
 		html +='<option value="32">已完成</option>';
 		$(this).contents().find("#fiStat").html(html);
+		$(this).contents().find(".div_transfer_stat").show();
 	} else {
 		$(this).contents().find("#fiStat").html('<option value="'+raw.fiStat+'"></option>');
 	}
@@ -215,6 +220,11 @@ $("#editModal", parent.document).on("hidden.bs.modal", function() {
     $("#grid-table").trigger("reloadGrid");
 });
 
+$("#customizationModal", parent.document).on("hidden.bs.modal", function() {
+    $(this).removeData("bs.modal");
+    $("#grid-table").trigger("reloadGrid");
+});
+
 $("#delModal").on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
     $("#grid-table").trigger("reloadGrid");
@@ -280,7 +290,7 @@ jQuery(function($) {
 	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteOrderlist('
 			+ options.rowId
 			+ ');" data-original-title="删除订单"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-	return configBtn + editBtn + deleteBtn;
+	return configBtn + editBtn;
 	};
 
 	// resize to fit page size
@@ -348,11 +358,11 @@ jQuery(function($) {
 				mtype : 'POST',
 				height : 400,
 				colNames : ['操作', '订单编号', '线路统称Idx', '订单名称', '用户ID', '用户子ID', '计调ID', '创建时间', '线路类型', 'fs_Route_ID', '组团类型', '线路天数','旅行社名称',
-				            '发团日期', '发团地id', '发团地', '线路初始报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照', '总人数',],
+				            '发团日期', '发团地id', '发团地', '线路初始报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照', '总人数','保险费用'],
 				colModel : [ {
 					name : 'myac',
 					index : '',
-					width : 70,
+					width : 50,
 					fixed : true,
 					sortable : false,
 					resize : false,
@@ -360,7 +370,7 @@ jQuery(function($) {
 				}, {
 					name : 'fsNo',
 					index : 'fsNo',
-					width : 85,
+					width : 100,
 					sorttype : "int"
 				}, {
 					name : 'fiGenindex',
@@ -562,6 +572,13 @@ jQuery(function($) {
 				}, {
 					name : 'fiVisitornum',
 					index : 'fiVisitornum',
+					width : 100,
+					editable : true,
+					sorttype : "char",
+					hidden : true
+				}, {
+					name : 'fdInsuerprice',
+					index : 'fdInsuerprice',
 					width : 100,
 					editable : true,
 					sorttype : "char",

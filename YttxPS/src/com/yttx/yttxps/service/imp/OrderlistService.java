@@ -14,10 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.yttx.yttxps.comm.Constants.OrderStat;
 import com.yttx.yttxps.mapper.TOrderCustomMapper;
 import com.yttx.yttxps.mapper.TOrderlistMapper;
+import com.yttx.yttxps.mapper.TRemarksMapper;
 import com.yttx.yttxps.model.TOrderCustomWithBLOBs;
 import com.yttx.yttxps.model.TOrderlist;
 import com.yttx.yttxps.model.TOrderlistExample;
 import com.yttx.yttxps.model.TOrderlistWithBLOBs;
+import com.yttx.yttxps.model.TRemarks;
+import com.yttx.yttxps.model.TRemarksExample;
+import com.yttx.yttxps.model.TRemarksExample.Criteria;
 import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
@@ -39,6 +43,9 @@ public class OrderlistService implements IOrderlistService {
 	@Autowired
 	private TOrderCustomMapper<TOrderCustomWithBLOBs> orderCustomMapper;
 
+	@Autowired
+	private TRemarksMapper<TRemarks> remarksMapper ;
+	
 	@Override
 	public int selectCountSelective(Map<String, Object> map) {
 		return orderlistMapper.selectCountSelective(map);
@@ -55,11 +62,30 @@ public class OrderlistService implements IOrderlistService {
 	}
 
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public int update(TOrderlistWithBLOBs record) throws Exception {
 		Body body = new Body();
 		body.setReslist(record.getReslist());
 		String fcCommressnapshot = ResScheduleXMLConverter.toXml("http://www.cnacex.com/", new Root(body));
 		record.setFcCommressnapshot(fcCommressnapshot);
+		//更新订单备注
+		if (CollectionUtils.isNotEmpty(record.getRemarks())) {
+			//先删除订单备注
+			TRemarksExample example = new TRemarksExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andFsOrderIdEqualTo(record.getFsNo());
+			remarksMapper.deleteByExample(example);
+			for (int i = 0; i < record.getRemarks().size(); i++) {
+				TRemarks remarks = record.getRemarks().get(i);
+				if (remarks.getFdAmt() == null) continue;
+				remarks.setFsOrderId(record.getFsNo());
+				remarks.setFsOperId(record.getFsOperId());
+				remarks.setFiSeq(new BigDecimal(i));
+				remarks.setFdPaidamt(BigDecimal.ZERO);
+				remarks.setFiClosestat(BigDecimal.ZERO);
+				remarksMapper.insertSelective(remarks);
+			}
+		}
 		return orderlistMapper.updateByPrimaryKeySelective(record);
 	}
 	
@@ -98,7 +124,8 @@ public class OrderlistService implements IOrderlistService {
 		
 		//批次精确资源:ordercustom-fc_ResSnapshot
 		if (CollectionUtils.isNotEmpty(record.getBatchBody())){
-			for (Body body : record.getBatchBody()) {
+			for (int i = 0; i < record.getBatchBody().size(); i++) {
+				Body body = record.getBatchBody().get(i);
 				for(Daylist daylist : body.getDaylist()){
 					daylist.setReslist(handleResListIndex(daylist.getReslist()));
 				}
@@ -107,7 +134,26 @@ public class OrderlistService implements IOrderlistService {
 				String fcRessnapshot = ResScheduleXMLConverter.toXml("http://www.cnacex.com/", new Root(body));
 				customWithBLOBs.setFcRessnapshot(fcRessnapshot);
 				customWithBLOBs.setFiId(new BigDecimal(body.getFiId()));
+				customWithBLOBs.setFdAmt(record.getBatchAmt().get(i));
 				orderCustomMapper.updateByPrimaryKeySelective(customWithBLOBs);
+			}
+		}
+		//更新订单备注
+		if (CollectionUtils.isNotEmpty(record.getRemarks())) {
+			//先删除订单备注
+			TRemarksExample example = new TRemarksExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andFsOrderIdEqualTo(record.getFsNo());
+			remarksMapper.deleteByExample(example);
+			for (int i = 0; i < record.getRemarks().size(); i++) {
+				TRemarks remarks = record.getRemarks().get(i);
+				if (remarks.getFdAmt() == null) continue;
+				remarks.setFsOrderId(record.getFsNo());
+				remarks.setFsOperId(record.getFsOperId());
+				remarks.setFiSeq(new BigDecimal(i));
+				remarks.setFdPaidamt(BigDecimal.ZERO);
+				remarks.setFiClosestat(BigDecimal.ZERO);
+				remarksMapper.insertSelective(remarks);
 			}
 		}
 		return orderlistMapper.updateByPrimaryKeySelective(record);
