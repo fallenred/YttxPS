@@ -699,6 +699,13 @@
 												<select id="fiStat" name="fiStat" class="form-control">
 												</select>
 											</div>
+											<!-- <label class="col-sm-2 control-label no-padding-right" for="fiStat">游客名单</label>
+											<div class="col-sm-1">
+												<button type="button" class="btn btn-sm btn-default pull-right">下载模板</button>
+											</div>
+											<div class="col-sm-1">
+												<button type="button" class="btn btn-sm btn-success pull-right">上传名单</button>
+											</div> -->
 										</div>
 									</div>
 									<hr>
@@ -710,15 +717,6 @@
 											<div class="col-sm-8">
 												<div class="panel panel-default">
 													<div class="panel-body" id="remarks">
-														<!-- 公共精确资源 start -->
-														<ul id="remarksTab" class="nav nav-tabs">
-														<script id="commRes-template" type="text/x-handlebars-template">
-															<li class="active"><a href="#common" data-toggle="tab">车型/导游/景区</a></li>
-															{{#each daylist}}
-															<li><a href="#day{{@index}}" data-toggle="tab">第{{addOne @index}}天</a></li>
-															{{/each}}
-														</script>
-														</ul>
 														<div id="remarksTab" class="tab-content">
 															<div class="tab-pane fade in active" id="common">
 																<div class="row" style="margin-top: 10px;">

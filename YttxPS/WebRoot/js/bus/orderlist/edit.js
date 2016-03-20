@@ -2,7 +2,7 @@ jQuery(function($) {
 	$("#message").hide();
 	$.base64.utf8encode = true;
 	setTimeout(loadtext,"3000");
-
+	var fsNo = $.getUrlParam('fsNo');
 	function loadtext(){
 		var ckEditor = CKEDITOR.instances.fcSchedule;
 		ckEditor.setData($.base64.atob($('#hSchedule').val(), true));
@@ -120,6 +120,81 @@ jQuery(function($) {
 				$("#guideName").attr("value", $("#guideNo").find("option:selected").text());
 			}
 		});
+	}
+	
+	//查询订单所有备注信息
+	$.ajax({
+		type: "POST",
+		url: "/orderlist/findRemarks.htm",
+		data: 'orderId='+fsNo,
+		dataType: "json",
+		success: function(data){
+			var remarks = {
+				"remarks" : data
+			}
+			var remarksTemplate = Handlebars.compile($("#remarks-template").html());
+			//返回数组长度
+			$('#table_remarks tbody').html(remarksTemplate(remarks));
+		}
+	});
+	Handlebars.registerHelper("remarkStat",function(v1, v2){
+		if (v1 == v2) {
+			return 'selected="selected"';
+		} else {
+			return "";
+		}
+	});
+	//返回数组长度
+	Handlebars.registerHelper("length",function(array){
+		if (array == null || array == '') {
+			return 0;
+		}
+		return array.length;
+	});
+	//添加备注项
+	$(document).on('click key', '#btn_remarks', function(event){
+		var remarksTemplate = Handlebars.compile($("#tr-remarks").html());
+		var fsOrderId = $("#fsNo").val();
+		var reslistIndex = $("#remarksIndex").val();
+		var ftDate = getNowFormatDate();
+		var fsContent = $("#fsContent").val();
+		var fdAmt = $("#fdAmt").val();
+		if (fdAmt == '') {
+			alert("备注金额不能为空！");
+			return;
+		}
+		var fiStat = '0';
+		var data = {
+				"index" : reslistIndex,
+				"fsOrderId" : fsOrderId,
+				"fiSeq" : reslistIndex,
+				"fsOperId" : fsOperId,
+				"ftDate" : ftDate,
+				"fsContent" : fsContent,
+				"fdAmt" : fdAmt,
+				"fiStat" : fiStat
+		}
+		$("#remarksIndex").val(parseInt($("#remarksIndex").val())+1);
+		alert(remarksTemplate(data));
+		$('#table_remarks tbody').html($('#table_remarks tbody').html() + remarksTemplate(data));
+	});
+	
+	function getNowFormatDate() {
+	    var date = new Date();
+	    var seperator1 = "/";
+	    var seperator2 = ":";
+	    var month = date.getMonth() + 1;
+	    var strDate = date.getDate();
+	    if (month >= 1 && month <= 9) {
+	        month = "0" + month;
+	    }
+	    if (strDate >= 0 && strDate <= 9) {
+	        strDate = "0" + strDate;
+	    }
+	    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+	            + " " + date.getHours() + seperator2 + date.getMinutes()
+	            + seperator2 + date.getSeconds();
+	    return currentdate;
 	}
 	
 	$("#regionname", "#addform").click(function() {

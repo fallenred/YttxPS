@@ -62,11 +62,30 @@ public class OrderlistService implements IOrderlistService {
 	}
 
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public int update(TOrderlistWithBLOBs record) throws Exception {
 		Body body = new Body();
 		body.setReslist(record.getReslist());
 		String fcCommressnapshot = ResScheduleXMLConverter.toXml("http://www.cnacex.com/", new Root(body));
 		record.setFcCommressnapshot(fcCommressnapshot);
+		//更新订单备注
+		if (CollectionUtils.isNotEmpty(record.getRemarks())) {
+			//先删除订单备注
+			TRemarksExample example = new TRemarksExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andFsOrderIdEqualTo(record.getFsNo());
+			remarksMapper.deleteByExample(example);
+			for (int i = 0; i < record.getRemarks().size(); i++) {
+				TRemarks remarks = record.getRemarks().get(i);
+				if (remarks.getFdAmt() == null) continue;
+				remarks.setFsOrderId(record.getFsNo());
+				remarks.setFsOperId(record.getFsOperId());
+				remarks.setFiSeq(new BigDecimal(i));
+				remarks.setFdPaidamt(BigDecimal.ZERO);
+				remarks.setFiClosestat(BigDecimal.ZERO);
+				remarksMapper.insertSelective(remarks);
+			}
+		}
 		return orderlistMapper.updateByPrimaryKeySelective(record);
 	}
 	

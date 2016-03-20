@@ -20,7 +20,7 @@ function editOrderlist(id) {
 	var frameSrc = '';
 	if (raw.fsType == '02') {
 		//衍生线路
-		frameSrc = "/jsp/orderlist/edit.jsp";
+		frameSrc = "/jsp/orderlist/edit.jsp?fsNo="+raw.fsNo;
 		$("#editIframe").attr("src", frameSrc);
 		$('#editModal').modal({ show: true, backdrop: 'static' });
 	} else if(raw.fsType == '03') {
@@ -290,7 +290,7 @@ jQuery(function($) {
 	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteOrderlist('
 			+ options.rowId
 			+ ');" data-original-title="删除订单"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-	return configBtn + editBtn + deleteBtn;
+	return configBtn + editBtn;
 	};
 
 	// resize to fit page size
@@ -362,7 +362,7 @@ jQuery(function($) {
 				colModel : [ {
 					name : 'myac',
 					index : '',
-					width : 70,
+					width : 50,
 					fixed : true,
 					sortable : false,
 					resize : false,

@@ -235,4 +235,5 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
     }
+	
 }

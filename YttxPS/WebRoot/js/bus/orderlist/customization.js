@@ -844,6 +844,10 @@ jQuery(function($) {
 		var ftDate = getNowFormatDate();
 		var fsContent = $("#fsContent").val();
 		var fdAmt = $("#fdAmt").val();
+		if (fdAmt == '') {
+			alert("备注金额不能为空！");
+			return;
+		}
 		var fiStat = '0';
 		var data = {
 				"index" : reslistIndex,
