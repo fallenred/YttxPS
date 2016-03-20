@@ -31,18 +31,6 @@ jQuery(function($) {
         }
     });
 	
-	/**
-	 * 生成日程下拉列表
-	 */
-	function getDays(num){
-		var html="";
-		for (var i = 0; i < num ; i++) {
-			html += '<option value=' + i + '>第' + (parseInt(i) + 1) + '天</option>';
-		}
-		$("#fiDays").html(html);
-		$("#fiDays").val("");
-	}
-	
 	$(".query-condition").change(function(){
 		var fiDayflag = $("#fiDays").val();
 		var fsRouteno = $("#fsResno").val();

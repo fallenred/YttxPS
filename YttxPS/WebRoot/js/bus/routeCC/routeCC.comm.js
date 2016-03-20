@@ -382,3 +382,19 @@ $("#fsStarLvl").change(function(){
 $("#accomadationNo").change(function(){
 	getRoom($("#accomadationNo").val());
 });
+
+$("#fsResno").change(function(){
+	alert("Done");
+});
+
+/**
+ * 生成日程下拉列表
+ */
+function getDays(num){
+	var html="";
+	for (var i = 0; i < num ; i++) {
+		html += '<option value=' + i + '>第' + (parseInt(i) + 1) + '天</option>';
+	}
+	$("#fiDays").html(html);
+	$("#fiDays").val("");
+}
