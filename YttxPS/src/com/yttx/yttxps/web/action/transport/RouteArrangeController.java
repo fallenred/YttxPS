@@ -37,7 +37,6 @@ import com.yttx.yttxps.model.vo.RouteArrangeRequest;
 import com.yttx.yttxps.service.IGuideService;
 import com.yttx.yttxps.service.IRouteArrangeService;
 import com.yttx.yttxps.service.ITransportArrangeService;
-import com.yttx.yttxps.service.ITransportService;
 import com.yttx.yttxps.web.action.BaseController;
 
 /**
@@ -56,9 +55,6 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
 	
 	@Autowired
 	private IGuideService guideService;
-	
-	@Autowired
-	private ITransportService transportService;
 	
 	@Autowired
 	private ITransportArrangeService transportArrangeService;
@@ -119,7 +115,7 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
 	public Object findUniqRouteArrange(@RequestParam(value="fsId")String fsId)
     {  
 		logger.debug("当前查询条件 {}", fsId);
-		Map<String, Object> data = new HashMap();
+		Map<String, Object> data = new HashMap<String, Object>();
 		JsonResult.jsonData(data);
 		TRouteArrangeWithBLOBs routeArrange = routeArrangeService.findTRouteArrange(fsId);
 		data.put("routeArrange", routeArrange);

@@ -189,9 +189,10 @@
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-right" id="addRoomBtn">添加</button>
 											</div>
+											<!-- 
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-left" id="rmRoomBtn">删除</button>
-											</div>
+											</div> -->
 										</div>
 									</div>
 									<div class="row">

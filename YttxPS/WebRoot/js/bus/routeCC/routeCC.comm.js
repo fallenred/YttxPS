@@ -64,6 +64,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 	$("#room").val("");
 	$("#accomadationNo").find("option").remove();
 	$("#accomadationNo").val("");
+	$("#fsStarLvl").find("option[selected='selected']").removeAttr("selected");
 	$("#fsStarLvl").find("option[value='--']").attr("selected", "selected");
 	
 	//门票
@@ -354,13 +355,33 @@ $("#addRoomBtn").click(function(){
 			url: "/rescc/findResCC.htm",
 			dataType: "json",
 			success: function(data){
-				html += '<label for="form-field-select-2" class="room-label-' + val + '">' + text + '</label>';
+				html += '<label for="form-field-select-2" class="pull-left room-label-' + val + '">' + text + '</label>';
+				html += '<span id="' + val + '" class="pull-right btn-link red room-span-del">删除</span>';
 				html += '<select class="form-control room room-select-' + val + '" name="' + val + '" id="rooms_' + val + '" multiple="multiple">';
 				$.each(data.rows, function(i, e){
 					html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
 				});
 				
 				$("#div_room").html(html);
+				
+				//添加删除功能
+				/*
+				$("#room_span_" + val).click(function(){
+					$(".room-label-" + val).remove();
+					$(".room-select-" + val).remove();
+					$(this).remove();
+				});
+				*/
+				
+				$(".room-span-del").each(function(idx, e){
+					var id = $(this).attr("id");
+					var roomNo = id
+					$(this).click(function(){
+						$(".room-label-" + id).remove();
+						$(".room-select-" + id).remove();
+						$(this).remove();
+					});
+				});
 			}
 		});
 	}
@@ -382,19 +403,3 @@ $("#fsStarLvl").change(function(){
 $("#accomadationNo").change(function(){
 	getRoom($("#accomadationNo").val());
 });
-
-$("#fsResno").change(function(){
-	alert("Done");
-});
-
-/**
- * 生成日程下拉列表
- */
-function getDays(num){
-	var html="";
-	for (var i = 0; i < num ; i++) {
-		html += '<option value=' + i + '>第' + (parseInt(i) + 1) + '天</option>';
-	}
-	$("#fiDays").html(html);
-	$("#fiDays").val("");
-}
