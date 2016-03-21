@@ -346,6 +346,7 @@
 			if (usernum != ''){
 				$(this).parent().parent().find(".price").each(function(){
 					price = '';
+					
 					if (!$(this).prop("disabled")) {
 						price = $(this).val();
 					}

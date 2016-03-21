@@ -96,6 +96,7 @@ public class OrderCustomService implements IOrderCustomService {
 			BigDecimal totalfee = BigDecimal.ZERO;
 			for (TOrderCustomWithBLOBs orderCustom : list) {
 				if(StringUtils.isEmpty(orderCustom.getFcRessnapshot())){
+					orderCustom.setFdAmt(record.getFdAmt());
 					orderCustom.setFcRessnapshot(record.getFcRessnapshot());
 					totalfee.add(record.getFdAmt());
 					orderCustomMapper.updateByPrimaryKey(orderCustom);

@@ -441,14 +441,14 @@ function findSnapshot(obj, no){
 											html += '<span>&nbsp;团队免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 											break;
 										case '000017':
-											if(comment['fsCcno'] == resComment['cclist'][2].ccno){
-												html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
-														'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="checkbox" checked="checked"/>'+
-														'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'"/>';
+											if(resComment['cclist'][1]!=undefined&&resComment['cclist'][1]!=null&&comment['fsCcno'] == resComment['cclist'][1].ccno){
+												html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
+														'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccno" onclick=" handleRestaurantPrice(this)" value="'+comment['fsCcno']+'" type="checkbox" checked="checked"/>'+
+														'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].price" value="'+comment['fdPrice']+'"/>';
 											} else {
-												html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
-												'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="checkbox"/>'+
-												'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'"/>';
+												html += '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccname" value="'+comment['fsCcname']+'" type="hidden"/>'+
+												'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].ccno" onclick=" handleRestaurantPrice(this)" value="'+comment['fsCcno']+'" type="checkbox"/>'+
+												'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[1].price" value="'+comment['fdPrice']+'" disabled="true"/>';
 											}
 											html += '<span>&nbsp;接送费用('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 											break;
@@ -502,8 +502,9 @@ function findSnapshot(obj, no){
 										html += '<span id="'+comment['fdPrice']+'">&nbsp;接送费用('+comment['fdPrice']+'￥)</span></div>';
 												
 									}
-									 */
-									usernum = resComment['cclist'][commentIndex].usernum;
+									*/
+					        		usernum = resComment['cclist'][0].usernum;/* modify by sunchao */
+									//usernum = resComment['cclist'][commentIndex].usernum;
 					        	});
 								 html += '<span><!-- 资源大类 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].restype" value="yl"/>' +
 									 	 '<span><!-- 选项类型 --></span><input type="hidden" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].cctype" value="1"/>' +
