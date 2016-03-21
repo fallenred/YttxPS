@@ -21,14 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
-import com.yttx.yttxps.model.DictExample;
-import com.yttx.yttxps.model.DictExample.Criteria;
 import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.TOrderlistExample;
 import com.yttx.yttxps.model.TOrderlistWithBLOBs;
 import com.yttx.yttxps.model.TRemarksExample;
 import com.yttx.yttxps.model.vo.OrderlistRequest;
-import com.yttx.yttxps.service.IDictService;
 import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.service.IRemarksService;
@@ -50,8 +47,6 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	private IOrderlistService orderlistService;
 	@Autowired
 	private IPubService<?> pubService;
-	@Autowired
-	private IDictService dictService;;
 	@Autowired
 	private IRemarksService remarksService;;
 	
@@ -160,6 +155,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 * @param Orderlist
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="addOrderlist.htm", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> ajaxaddOrderlist(TOrderlistWithBLOBs orderlist)
@@ -179,6 +175,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 * @param Orderlist
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="editOrderlist.htm", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> ajaxeditOrderlist(TOrderlistWithBLOBs orderlist)
@@ -200,10 +197,10 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 * @param Orderlist
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="editOrderlist4custom.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxeditOrderlist4custom(TOrderlistWithBLOBs orderlist)
-	{  
+	public Map<String, Object> ajaxeditOrderlist4custom(TOrderlistWithBLOBs orderlist) {  
 		logger.debug("当前更新对象 {}", orderlist);
 		try{
 			HttpSession session = request.getSession();
@@ -224,6 +221,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 * @param Orderlist
 	 * @return
 	 */
+	@SuppressWarnings({ "unused", "unchecked" })
 	@RequestMapping(value="delOrderlist.htm", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> ajaxdelOrderlist(@RequestParam(value = "no") String  no)
@@ -237,4 +235,5 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
     }
+	
 }

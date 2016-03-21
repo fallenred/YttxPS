@@ -83,4 +83,16 @@ public class DateUtil{
 		Date date =new Date();
 		System.out.println(getFullTimeFormatStr(date));
 	}
+	
+	/**
+	 * 获取日期字符串
+	 * @param date
+	 * @param format
+	 * @return
+	 */
+	public static String getDateString(Date date, String format) {
+		if (date == null) return "";
+		DateFormat fmt = new SimpleDateFormat(format);
+		return fmt.format(date);
+	}
 }  

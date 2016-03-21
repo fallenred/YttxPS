@@ -156,6 +156,10 @@ jQuery(function($) {
 		$("#table_common tbody").html($("#table_common tbody").html() + template(data));
 		resMap.put("isChange_jq", true);
 		$("#reslistIndex").val(parseInt(index)+1);
+		//获取景区门票列表
+		getTicket(null);
+		//获取酒店级别列表
+		getAccomadationLvl(null);
 	});
 	
 	//获取车型列表selectTransport.htm
@@ -237,13 +241,13 @@ jQuery(function($) {
 		}
 		if(restype == 'gw'){
 			getShop(this);
+			$(this).parent().parent().find("#ccno").html('');
 		}
 		if(restype == 'bg'){
 			$(this).parent().parent().find(".batch_bg").show();
 			$(this).parent().parent().find(".batch_resno").html('');
 			$(this).parent().parent().parent().next().find(".batch_ccno").html('');
 			$(this).parent().parent().find(".batch_resname").html('房型');
-			batch_resname 
 			getAccomadationLvl(this);
 		}
 		if(restype == 'yl'){
@@ -305,11 +309,18 @@ jQuery(function($) {
 			}
 		});
 		if(flag) return;*/
+		var dataArr = new Array();
+		$(".scenic").each(function(i, item){
+			dataArr.push($(item).val());
+		});
 		$.ajax({
 			type: "GET",
 			traditional: true,
 			url: "/accomadation/selectAccomadation.htm",
-			data: "accomadation.starlvl=" + $(obj).val() + "&accomadation.stat=1",
+			data: {"scenicNo" : dataArr,
+				"accomadation.starlvl" : $(obj).val(),
+				"accomadation.stat" : "1"
+				},
 			dataType: "json",
 			success: function(data){
 				if (data == '' || data == null) {
@@ -452,13 +463,24 @@ jQuery(function($) {
 				$.each(data, function(commentIndex, comment){
 					html += '<option value=' + comment['fsNo'] + '>' + comment['fsName'] + '</option>';
 				});
-				resMap.put('ticket', html);
 				if (obj == null) {
-					$(".select_resno").each(function(){
-						
+					$(".select_resno").html(html);
+					$(".select_ccno").each(function(){
+						setTimeout("4000");
+						var resno = $(this).parent().parent().find("#resno").val();
+						var restype = $(this).parent().parent().find("#restype").val();
+						date = getDate($("#ftStartdate").val(), $(this).parent().parent().find("#dayflag").val());
+						params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resno+'&fsRestype='+restype;
+						getTccprice(params, resno, date, $(this).parent().parent().find("#ccno"));
 					});
+				} else {
+					$(obj).parent().parent().find(".select_resno").html(html);
+					var resno = $(obj).parent().parent().find("#resno").val();
+					var restype = $(obj).parent().parent().find("#restype").val();
+					date = getDate($("#ftStartdate").val(), $(obj).parent().parent().find("#dayflag").val());
+					params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resno+'&fsRestype='+restype;
+					getTccprice(params, resno, date, $(obj).parent().parent().find("#ccno"));
 				}
-				$(obj).parent().parent().find(".select_resno").html(html);
 			}
 		});
 	}
@@ -487,12 +509,32 @@ jQuery(function($) {
 			data: {"scenicNo" : dataArr},
 			dataType: "json",
 			success: function(data){
-				var html = ''; 
-				$.each(data, function(commentIndex, comment){
-					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
-				});
-				resMap.put('restaurant', html);
-				$(obj).parent().parent().find(".select_resno").html(html);
+				if(data == null || data == ''){
+					$(obj).parent().parent().find(".select_resno").html('');
+				} else {
+					var html = ''; 
+					$.each(data, function(commentIndex, comment){
+						html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
+					});
+					if (obj == null) {
+						$(".select_resno").html(html);
+						$(".select_ccno").each(function(){
+							setTimeout("3000");
+							var resno = $(this).parent().parent().find("#resno").val();
+							var restype = $(this).parent().parent().find("#restype").val();
+							date = getDate($("#ftStartdate").val(), $(this).parent().parent().find("#dayflag").val());
+							params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resno+'&fsRestype='+restype;
+							getTccprice(params, resno, date, $(this).parent().parent().find("#ccno"));
+						});
+					} else {
+						$(obj).parent().parent().find(".select_resno").html(html);
+						var resno = $(obj).parent().parent().find("#resno").val();
+						var restype = $(obj).parent().parent().find("#restype").val();
+						date = getDate($("#ftStartdate").val(), $(obj).parent().parent().find("#dayflag").val());
+						params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resno+'&fsRestype='+restype;
+						getTccprice(params, resno, date, $(obj).parent().parent().find("#ccno"));
+					}
+				}
 			}
 		});
 	}
@@ -507,7 +549,7 @@ jQuery(function($) {
 		});
 		if (flag) return;*/
 		var scenic = '';
-		$("input[name='scenicGen']").each(function(){
+		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
 		});
 		$.ajax({
@@ -667,6 +709,7 @@ jQuery(function($) {
 		$("#table_batch"+ batchIndex +'_'+ dayflag + " tbody").html($("#table_batch"+ batchIndex +'_'+ dayflag + " tbody").html() + template(data));
 		$(this).parent().find(".reslistIndex").val(parseInt(reslistIndex)+1);
 		totalAmount();
+		totalBatchAmt();
 	});
 	
 	//查询订单所有批次信息
@@ -760,6 +803,23 @@ jQuery(function($) {
 		$("#fdTotalfee").val(totalAmt.toFixed(2));
 	}
 	
+	//合计订单批次金额
+	function totalBatchAmt(){
+		//循环批次
+		$(".batch_div").each(function(){
+			var fdAmt = 0;
+			$(this).find(".price").each(function(){
+				var price = $(this).val();
+				var usernum = $(this).next().val();
+				if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
+					return;
+				}
+				fdAmt = parseFloat(fdAmt) + parseInt(usernum) * parseFloat(price);
+			});
+			$(this).parent().next().find("#fdAmt").val(fdAmt);
+		});
+	}
+	
 	//查询订单所有备注信息
 	$.ajax({
 		type: "POST",
@@ -780,11 +840,14 @@ jQuery(function($) {
 	$(document).on('click key', '#btn_remarks', function(event){
 		var remarksTemplate = Handlebars.compile($("#tr-remarks").html());
 		var fsOrderId = $("#fsNo").val();
-		$("#remarksIndex").val(parseInt($("#remarksIndex").val())+1);
 		var reslistIndex = $("#remarksIndex").val();
 		var ftDate = getNowFormatDate();
 		var fsContent = $("#fsContent").val();
 		var fdAmt = $("#fdAmt").val();
+		if (fdAmt == '') {
+			alert("备注金额不能为空！");
+			return;
+		}
 		var fiStat = '0';
 		var data = {
 				"index" : reslistIndex,
@@ -796,6 +859,7 @@ jQuery(function($) {
 				"fdAmt" : fdAmt,
 				"fiStat" : fiStat
 		}
+		$("#remarksIndex").val(parseInt($("#remarksIndex").val())+1);
 		$('#table_remarks tbody').html($('#table_remarks tbody').html() + remarksTemplate(data));
 	});
 	
