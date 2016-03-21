@@ -463,7 +463,7 @@
 						$.each(data, function(commentIndex, comment){
 							str = '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 							'<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
-							'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>';
+							'<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'" disabled="true"/>';
 							switch(comment['fsCcno']){
 								case '000001':
 									html += str + '<span>&nbsp;全票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
@@ -474,6 +474,9 @@
 								case '000003':
 									html += str + '<span>&nbsp;儿童票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							 	break;
+								case '000004':
+									html += str + '<span>&nbsp;免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+							 	break;
 								case '000005':
 									html += str + '<span>&nbsp;团队全票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							 	break;
@@ -483,8 +486,8 @@
 								case '000007':
 									html += str + '<span>&nbsp;团队儿童票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							 	break;
-								case '000004':
-									html += str + '<span>&nbsp;免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+								case '000008':
+									html += str + '<span>&nbsp;团队免票('+comment['fdPrice']+'￥)&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 							 	break;
 								default:
 									alert("未配置门票消费价格！");
@@ -672,11 +675,11 @@
 							if (comment['fsCcno'] != '000017') {
 								str = '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 									  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].ccno" onclick="handlePrice(this)" value="'+comment['fsCcno']+'" type="radio"/>'+
-									  '<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'"/>';
+									  '<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[0].price" value="'+comment['fdPrice']+'" disabled="true" />';
 							} else {
 								str = '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccname" value="'+comment['fsCcname']+'" type="hidden" disabled="disabled"/>'+
 									  '<input name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].ccno" onclick="handleRestaurantPrice(this)" value="'+comment['fsCcno']+'" type="checkbox"/>'+
-									  '<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'"/>';
+									  '<input type="hidden" class="price" name="body.daylist['+dayIndex+'].reslist['+index+'].cclist[2].price" value="'+comment['fdPrice']+'" disabled="true"/>';
 							}
 							switch(comment['fsCcno']){
 								case '000001':
@@ -708,7 +711,6 @@
 							 		break;
 								default:
 									alert("未配置娱乐项目消费价格！");
-									throw "未配置娱乐项目消费价格！";
 							}
 							if (commentIndex == data.length - 1) {
 			        			html += '</div>';
@@ -766,6 +768,7 @@
 					resetIframeHeight("sub");
 				} 
 			});
+			calculatePrice();//点击娱乐项目删除按钮，修改批次金额
 		}
 		
 		

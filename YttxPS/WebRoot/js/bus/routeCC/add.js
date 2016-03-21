@@ -54,6 +54,31 @@ jQuery(function($) {
 		}
 	});
 	
+	//线路变更
+	$("#fsResno").change(function(){
+		$.ajax({
+			type: "GET",
+			url: "/routeArrange/findUniqRouteArrange.htm",
+			data: {"fsId": $("#fsResno").val()},
+			dataType: "json",
+			success: function(data){
+				getDays(data.data.routeArrange != null && data.data.routeArrange != undefined ? data.data.routeArrange.fiDays : 0);
+			}
+		});
+	});
+	
+	/**
+	 * 生成日程下拉列表
+	 */
+	function getDays(num){
+		var html="";
+		for (var i = 0; i < num ; i++) {
+			html += '<option value=' + i + '>第' + (parseInt(i) + 1) + '天</option>';
+		}
+		$("#fiDays").html(html);
+		$("#fiDays").val("");
+	}
+	
 	/**
 	 * 获取线路配置列表
 	 */
@@ -69,6 +94,15 @@ jQuery(function($) {
 					html += '<option value=' + comment['fsId'] + '>' + comment['fsName'] + '</option>';
 				});
 				$("#fsResno").html(html);
+				$.ajax({
+					type: "GET",
+					url: "/routeArrange/findUniqRouteArrange.htm",
+					data: {"fsId": $("#fsResno").val()},
+					dataType: "json",
+					success: function(data){
+						getDays(data.data.routeArrange != null && data.data.routeArrange != undefined ? data.data.routeArrange.fiDays : 0);
+					}
+				});
 			}
 		});
 	}
@@ -96,7 +130,6 @@ jQuery(function($) {
 	 * 获取线路景区
 	 */
 	function getSceniceGen(){
-		var num = '';
 		$.ajax({
 			type: "GET",
 			url: "/scenicGen/selectScenicGen.htm",
@@ -106,12 +139,9 @@ jQuery(function($) {
 				var html = '线路景区：'; 
 				$.each(data, function(commentIndex, comment){
 					html += '<input type="hidden" name="scenicGen" value="' + comment['fsScenicno'] + '"/>' + '&nbsp;&nbsp;<label>' + comment['fsScenicname'] + '</label>';
-					if(commentIndex == 0)
-						num = comment['fiDays'];
 				});
 				$("#div_scenics").html(html);
 				getTicket();   //获取景区票列表
-				getDays(num);   //生成日程下拉列表
 				getShop();   //获取购物店列表
 				getRestaurant();   //获取餐厅
 				getEntertainment();   //获取娱乐项目
