@@ -349,7 +349,7 @@
         FI_SEQ = #{record.fiSeq,jdbcType=DECIMAL},
       </if>
       <if test="record.ftCreatdate != null">
-        FT_CREATDATE = #{record.ftCreatdate,jdbcType=DATE},
+        FT_CREATDATE = to_date(#{record.ftCreatdate,jdbcType=DATE},'yyyy-MM-dd HH24:mi:ss'),
       </if>
       <if test="record.fiType != null">
         FI_TYPE = #{record.fiType,jdbcType=DECIMAL},
@@ -402,7 +402,7 @@
     set FI_ID = #{record.fiId,jdbcType=DECIMAL},
       FS_ORDER_ID = #{record.fsOrderId,jdbcType=CHAR},
       FI_SEQ = #{record.fiSeq,jdbcType=DECIMAL},
-      FT_CREATDATE = #{record.ftCreatdate,jdbcType=DATE},
+      FT_CREATDATE = to_date(#{record.ftCreatdate,jdbcType=DATE},'yyyy-MM-dd HH24:mi:ss'),
       FI_TYPE = #{record.fiType,jdbcType=DECIMAL},
       FS_CONTACTNAME = #{record.fsContactname,jdbcType=VARCHAR},
       FS_CONTACTTEL = #{record.fsContacttel,jdbcType=VARCHAR},
@@ -429,7 +429,7 @@
     set FI_ID = #{record.fiId,jdbcType=DECIMAL},
       FS_ORDER_ID = #{record.fsOrderId,jdbcType=CHAR},
       FI_SEQ = #{record.fiSeq,jdbcType=DECIMAL},
-      FT_CREATDATE = #{record.ftCreatdate,jdbcType=DATE},
+      FT_CREATDATE = to_date(#{record.ftCreatdate,jdbcType=DATE},'yyyy-MM-dd HH24:mi:ss'),
       FI_TYPE = #{record.fiType,jdbcType=DECIMAL},
       FS_CONTACTNAME = #{record.fsContactname,jdbcType=VARCHAR},
       FS_CONTACTTEL = #{record.fsContacttel,jdbcType=VARCHAR},
@@ -509,7 +509,7 @@
     update TORDERCUSTOM
     set FS_ORDER_ID = #{fsOrderId,jdbcType=CHAR},
       FI_SEQ = #{fiSeq,jdbcType=DECIMAL},
-      FT_CREATDATE = #{ftCreatdate,jdbcType=DATE},
+      FT_CREATDATE = to_date(#{ftCreatdate,jdbcType=DATE},'yyyy-MM-dd HH24:mi:ss'),
       FI_TYPE = #{fiType,jdbcType=DECIMAL},
       FS_CONTACTNAME = #{fsContactname,jdbcType=VARCHAR},
       FS_CONTACTTEL = #{fsContacttel,jdbcType=VARCHAR},
@@ -533,7 +533,7 @@
     update TORDERCUSTOM
     set FS_ORDER_ID = #{fsOrderId,jdbcType=CHAR},
       FI_SEQ = #{fiSeq,jdbcType=DECIMAL},
-      FT_CREATDATE = #{ftCreatdate,jdbcType=DATE},
+      FT_CREATDATE = to_date(#{ftCreatdate,jdbcType=DATE},'yyyy-MM-dd HH24:mi:ss'),
       FI_TYPE = #{fiType,jdbcType=DECIMAL},
       FS_CONTACTNAME = #{fsContactname,jdbcType=VARCHAR},
       FS_CONTACTTEL = #{fsContacttel,jdbcType=VARCHAR},
@@ -558,7 +558,7 @@
 	        and FI_SEQ = #{fiSeq}
 	      </if>
 	      <if test="ftCreatDate != null and ftCreatDate != ''">
-	        and FT_CREATDATE = #{ftCreatDate}
+	        and FT_CREATDATE = to_date(#{ftCreatdate,jdbcType=DATE},'yyyy-MM-dd HH24:mi:ss'),
 	      </if>
   </select>
   
@@ -580,7 +580,7 @@
 	        and FI_SEQ = #{fiSeq}
 	      </if>
 	      <if test="ftCreatDate != null and ftCreatDate != ''">
-	        and FT_CREATDATE = #{ftCreatDate}
+	        and FT_CREATDATE = to_date(#{ftCreatdate,jdbcType=DATE},'yyyy-MM-dd HH24:mi:ss'),
 	      </if>
 	      <if test="endrow != null" >
 	        and ROWNUM &lt;= #{endrow}

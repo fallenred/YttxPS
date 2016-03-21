@@ -86,6 +86,7 @@ $("#editIframe").on("load",function(){
 //定制线路
 $("#customizationIframe").on("load",function(){
 	$(this).contents().find("#fsNo").val(raw.fsNo);
+	$(this).contents().find("#orderId").val(raw.fsNo);
 	$(this).contents().find("#fsName").val(raw.fsName);
 	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
 	$(this).contents().find("#fsRemark").val(raw.fsRemark);
@@ -112,8 +113,8 @@ $("#customizationIframe").on("load",function(){
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
 	} else if (raw.fiStat == '8') {
-		//状态为已付全款时，页面状态只能选完结选项
-		html +='<option value="32">已完成</option>';
+		//状态为已付全款时，页面状态只做显示
+		html ='<option value="8">已付全款(可出团)</option>';
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
 	} else {

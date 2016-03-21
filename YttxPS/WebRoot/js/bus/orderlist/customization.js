@@ -121,7 +121,7 @@ jQuery(function($) {
 				//获取景区门票列表
 				getTicket(null);
 				//获取酒店级别列表
-				getAccomadationLvl(null);
+				getDictLvl(null, 'bg');
 			}
 		});
 	}); 
@@ -159,7 +159,7 @@ jQuery(function($) {
 		//获取景区门票列表
 		getTicket(null);
 		//获取酒店级别列表
-		getAccomadationLvl(null);
+		getDictLvl(null);
 	});
 	
 	//获取车型列表selectTransport.htm
@@ -237,6 +237,11 @@ jQuery(function($) {
 			getTicket(this);
 		}
 		if(restype == 'ct'){
+			$(this).parent().parent().find(".batch_bg").hide();
+			$(this).parent().parent().find(".batch_lvl").show();
+			$(this).parent().parent().find(".batch_ct").show();
+			$(this).parent().parent().find(".batch_resname").html('菜单');
+			getDictLvl(this, 'ct');
 			getRestaurant(this);
 		}
 		if(restype == 'gw'){
@@ -244,33 +249,33 @@ jQuery(function($) {
 			$(this).parent().parent().find("#ccno").html('');
 		}
 		if(restype == 'bg'){
+			$(this).parent().parent().find(".batch_ct").hide();
+			$(this).parent().parent().find(".batch_lvl").show();
 			$(this).parent().parent().find(".batch_bg").show();
 			$(this).parent().parent().find(".batch_resno").html('');
 			$(this).parent().parent().parent().next().find(".batch_ccno").html('');
 			$(this).parent().parent().find(".batch_resname").html('房型');
-			getAccomadationLvl(this);
+			getDictLvl(this, 'bg');
 		}
 		if(restype == 'yl'){
 			$(this).parent().parent().parent().next().find(".batch_ccno").html('');
 			$(this).parent().parent().find(".batch_resname").html('资源');
 			$(this).parent().parent().find(".batch_bg").hide();
+			$(this).parent().parent().find(".batch_lvl").hide();
+			$(this).parent().parent().find(".batch_ct").hide();
 			getEntertainment(this);
 		}
-	});
-	//酒店标准变更
-	$(document).on('change key', '.batch_bgLvl', function(event){
-		getAccomadation(this);
 	});
 	//酒店变更
 	$(document).on('change key', '.batch_accomadation', function(event){
 		getRoom(this);
 	});
-	//获取酒店级别
-	function getAccomadationLvl(obj){
+	//获取字典标准
+	function getDictLvl(obj, type){
 		/*var flag = false;
 		resMap.each(function(key,value,index){
-			if (key == 'bgjb'){
-				$(obj).parent().parent().find(".batch_bgLvl").html(value);
+			if (key == type){
+				$(obj).parent().parent().find(".batch_Lvl").html(value);
 				flag = true;
 			}
 		});
@@ -279,36 +284,33 @@ jQuery(function($) {
 			type: "GET",
 			traditional: true,
 			url: "/dict/selectDict.htm",
-			data: "dict.fsParentno=bg",
+			data: "dict.fsParentno="+type,
 			dataType: "json",
 			success: function(data){
 				html = ''; 
 				$.each(data, function(commentIndex, comment){
 					html += '<option value=' + comment['fsDictno'] + '>' + comment['fsDictname'] + '</option>';
 				});
-				resMap.put("bgjb", html);
+				//resMap.put(type, html);
 				if (obj == null) {
-					$(".batch_bgLvl").html(html);
-					$(".batch_bgLvl").each(function(){
+					$(".batch_Lvl").html(html);
+					$(".batch_Lvl").each(function(){
 						getAccomadation(this)
 					});
 				} else {
-					$(obj).parent().parent().find(".batch_bgLvl").html(html);
+					$(obj).parent().parent().find(".batch_Lvl").html(html);
+					resType = $(obj).parent().parent().find("#restype").val();
+					if (resType == 'ct'){
+						//getRestaurant(obj);
+					} else if (resType == 'bg') {
+						getRoom($(obj).parent().parent().find(".batch_accomadation"));
+					}
 				}
 			}
 		});
 	}
 	//获取酒店列表
 	function getAccomadation(obj){
-		/*var flag = false;
-		bg = 'bg' + $(obj).val();
-		resMap.each(function(key,value,index){
-			if (key == bg){
-				$(obj).parent().parent().find(".batch_accomadation").html(value);
-				flag = true;
-			}
-		});
-		if(flag) return;*/
 		var dataArr = new Array();
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
@@ -330,7 +332,6 @@ jQuery(function($) {
 					$.each(data, function(commentIndex, comment){
 						html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 					});
-					resMap.put("bg"+$(obj).val(), html);
 					$(obj).parent().parent().find(".batch_accomadation").html(html);
 					getRoom($(obj).parent().parent().find(".batch_accomadation"));
 				}
@@ -339,14 +340,6 @@ jQuery(function($) {
 	}
 	//获取酒店房型列表
 	function getRoom(obj){
-		/*var flag = false;
-		bg = 'bg' + $(obj).val();
-		resMap.each(function(key,value,index){
-			if (key == bg){
-				$(obj).parent().parent().find(".batch_resno").html(value);
-				flag = true;
-			}
-		});*/
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -398,8 +391,23 @@ jQuery(function($) {
 		getTccprice(params, resno, date, $(this).parent().parent().find("#ccno"));
 	});
 	
+	//菜单类型变更（午餐、晚餐）
+	$(document).on('change key', '.ct_special', function(event){
+		getRestaurant(this);
+	});
+	
+	//餐标类型变更（人均）
+	$(document).on('change key', '.batch_Lvl', function(event){
+		resType = $(this).parent().parent().find("#restype").val();
+		if (resType == 'ct'){
+			getRestaurant(this);
+		} else if (resType == 'bg') {
+			getAccomadation(this);
+		}
+	});
+	
 	function getTccprice(params, resno, date, obj){
-		/*var flag = false;
+		var flag = false;
 		resMap.each(function(key,value,index){
 			if (key == resno+date){
 				html = '';
@@ -410,7 +418,7 @@ jQuery(function($) {
 				flag = true;
 			}
 		});
-		if (flag) return;*/
+		if (flag) return;
 		$.ajax({
 			type: "GET",
 			url: "/tccPrice/findTccPrice.htm",
@@ -438,15 +446,6 @@ jQuery(function($) {
 	resMap.put("isChange_jq", isChange_jq);
 	//获取景区门票列表
 	function getTicket(obj){
-		//从map中获取景区门票列表内容
-		/*var flag = false;
-		resMap.each(function(key,value,index){
-			if (key == 'ticket'){
-				$(obj).parent().parent().find(".select_resno").html(value);
-				flag = true;
-			}
-		});
-		if (flag) return;*/
 		var scenic = '';
 		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
@@ -484,70 +483,46 @@ jQuery(function($) {
 			}
 		});
 	}
-	//获取景区餐厅列表
+	//获取景区菜单列表
 	function getRestaurant(obj){
-		/*var flag = false;
-		resMap.each(function(key,value,index){
-			if (key == 'restaurant'){
-				$(obj).parent().parent().find(".select_resno").html(value);
-				flag = true;
-			}
-		});
-		if (flag) return;*/
 		var dataArr = new Array();
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		if(dataArr.length == 0){
+		/*if(dataArr.length == 0){
 			alert("请先添加景区资源！");
 			$(obj).parent().parent().find(".select_resno").html('');
 			return;
-		}
+		}*/
 		$.ajax({
 			type: "POST",
 			url: "/restaurant/selectRestaurant.htm",
-			data: {"scenicNo" : dataArr},
+			data: {"scenicNo" : dataArr,
+				   "lvl" : $(obj).parent().parent().find(".batch_Lvl").val(),
+				   "special" : $(obj).parent().parent().find(".ct_special").val()
+				},
 			dataType: "json",
 			success: function(data){
 				if(data == null || data == ''){
-					$(obj).parent().parent().find(".select_resno").html('');
+					$(obj).parent().parent().find(".batch_resno").html('');
+					$(obj).parent().parent().parent().next().find(".batch_ccno").html('');
 				} else {
 					var html = ''; 
 					$.each(data, function(commentIndex, comment){
 						html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 					});
-					if (obj == null) {
-						$(".select_resno").html(html);
-						$(".select_ccno").each(function(){
-							setTimeout("3000");
-							var resno = $(this).parent().parent().find("#resno").val();
-							var restype = $(this).parent().parent().find("#restype").val();
-							date = getDate($("#ftStartdate").val(), $(this).parent().parent().find("#dayflag").val());
-							params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resno+'&fsRestype='+restype;
-							getTccprice(params, resno, date, $(this).parent().parent().find("#ccno"));
-						});
-					} else {
-						$(obj).parent().parent().find(".select_resno").html(html);
-						var resno = $(obj).parent().parent().find("#resno").val();
-						var restype = $(obj).parent().parent().find("#restype").val();
-						date = getDate($("#ftStartdate").val(), $(obj).parent().parent().find("#dayflag").val());
-						params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resno+'&fsRestype='+restype;
-						getTccprice(params, resno, date, $(obj).parent().parent().find("#ccno"));
-					}
+					$(obj).parent().parent().find(".batch_resno").html(html);
+					var resno = $(obj).parent().parent().find("#batch_resno").val();
+					var restype = $(obj).parent().parent().find("#restype").val();
+					date = getDate($("#ftStartdate").val(), $(obj).parent().parent().parent().next().find(".daylistIndex").val());
+					params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resno+'&fsRestype='+restype;
+					getTccprice(params, resno, date, $(obj).parent().parent().parent().next().find(".batch_ccno"));
 				}
 			}
 		});
 	}
 	//获取购物店列表
 	function getShop(obj){
-		/*var flag = false;
-		resMap.each(function(key,value,index){
-			if (key == 'shop'){
-				$(obj).parent().parent().find(".select_resno").html(value);
-				flag = true;
-			}
-		});
-		if (flag) return;*/
 		var scenic = '';
 		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
@@ -570,13 +545,6 @@ jQuery(function($) {
 	}
 	//获取景区娱乐项目列表
 	function getEntertainment(obj){
-		/*var flag = false;
-		resMap.each(function(key,value,index){
-			if (key == 'entertainment'){
-				$(".select_resno").html(value);
-				flag = true;
-			}
-		});*/
 		var dataArr = new Array();
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
@@ -900,12 +868,64 @@ jQuery(function($) {
 	    return currentdate;
 	}
 	
-	//下载文件
-	$(document).on('click key', '.btn_downFile', function(event){
-		//文件路径
-		var url = $(this).next().val();
-		location.href = url;
+	//下载游客名单
+	$(document).on('click key', '.btn_export', function(event){
+		var orderId = $("#fsNo").val();
+		var parm = "";
+		if(orderId == ''){
+			alert("订单号不能为空");
+			return;
+		}
+		parm+="&orderId="+encodeURIComponent(orderId);
+		window.location.href = '../../orderlist/exportOrderCusList.htm?1=1'+parm;
 	});
+	
+	//上传游客名单
+	$(document).on('click key', '.btn_import', function(event){
+		save();
+	});
+	
+	//保存
+	function save(){
+		if($("#excel").val()=="" || document.getElementById("excel").files[0] =='请选择xls格式的文件'){
+			$("#excel").tips({
+				side:3,
+	            msg:'请选择文件',
+	            bg:'#AE81FF',
+	            time:3
+	        });
+			return false;
+		}
+		$("#excel1").val($("#excel").val());
+		var formData = new FormData($("#uploadForm")[0]);
+		$.ajax({  
+	          url: '../../orderlist/importExcel.htm' ,  
+	          type: 'POST',  
+	          data: formData,  
+	          async: false,  
+	          cache: false,  
+	          contentType: false,  
+	          processData: false,  
+	          success: function (data) { 
+	  			$("#upload_message").text(data);
+	  			$("#upload_message").show();
+	          }
+	     });
+	}
+	
+	function fileType(obj){
+		var fileType=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
+	    if(fileType != '.xls'){
+	    	$("#excel").tips({
+				side:3,
+	            msg:'请上传xls格式的文件',
+	            bg:'#AE81FF',
+	            time:3
+	        });
+	    	$("#excel").val('');
+	    	document.getElementById("excel").files[0] = '请选择xls格式的文件';
+	    }
+	}
 	
 	//	colorbox
 	var $overflow = '';
