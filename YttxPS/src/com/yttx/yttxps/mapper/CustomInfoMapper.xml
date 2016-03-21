@@ -10,8 +10,8 @@
 		  <result column="FS_CONTACT"     property="contact"        jdbcType="VARCHAR" />
 		  <result column="FS_CERTID"      property="certid"         jdbcType="VARCHAR" />
 		  <result column="FS_EMAIL"       property="email"          jdbcType="VARCHAR" />
-		  <result column="FT_REGTIME"     property="regtime"        jdbcType="VARCHAR" />
-		  <result column="FT_TIMESTAMP"   property="timestamp"      jdbcType="VARCHAR" />
+		  <result column="FT_REGTIME"     property="regtime"        jdbcType="TIMESTAMP" />
+		  <result column="FT_TIMESTAMP"   property="timestamp"      jdbcType="TIMESTAMP" />
 		  <result column="FS_DAC"         property="dac"            jdbcType="VARCHAR" />
 		  <result column="FI_STAT"        property="stat"           jdbcType="DECIMAL" />
 		  <result column="FS_AUDITNO"     property="auditno"        jdbcType="VARCHAR" />

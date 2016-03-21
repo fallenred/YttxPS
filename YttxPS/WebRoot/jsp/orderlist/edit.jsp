@@ -12,6 +12,12 @@
 <meta name="description" content="" />
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
+<style>
+	.table tbody tr td {
+		text-align: center;
+		vertical-align: middle;
+	}
+</style>
 </head>
 <body>
 	<div class="main-container" id="main-container">
@@ -283,6 +289,90 @@
 											</div>
 										</div>
 									</div>
+									<hr/>
+									<!-- 订单备注start -->
+									<div class="row div_transfer">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right"
+												for="remarks">订单备注</label>
+											<div class="col-sm-8">
+												<div class="panel panel-default">
+													<div class="panel-body" id="remarks">
+														<div id="remarksTab" class="tab-content">
+															<div class="tab-pane fade in active" id="common">
+																<div class="row" style="margin-top: 10px;">
+																	<div class="col-sm-12" style="padding: 10 0 0 0px;">
+																		<div class="row" style="padding: 10 10 0 0px;">
+																			<div class="form-group">
+																				<label class="col-sm-1 control-label" for="fsContent">内容</label>
+																				<div class="col-sm-7">
+																					<input id="fsContent" type="text" class="form-control" />
+																				</div>
+																				<label class="col-sm-1 control-label" for="fdAmt">金额</label>
+																				<div class="col-sm-1">
+																					<input id="fdAmt" type="text" class="form-control" />
+																				</div>
+																				<div class="col-sm-1">
+																					<button type="button" id="btn_remarks"
+																						class="btn btn-sm btn-success pull-right">添加</button>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="form-group"  style="padding: 0px 10px 0px 10px;">
+																				<div class="col-sm-12">
+																					<table id="table_remarks" class="table table-bordered">
+																						<thead>
+      																						<tr>
+         																						<th width="7%">操作</th>
+         																						<th width="7%">序号</th>
+         																						<th width="20%">备注时间</th>
+         																						<th width="45%">备注内容</th>
+         																						<th width="7%">金额</th>
+         																						<th width="15%">状态</th>
+      																						</tr>
+   																						</thead>
+   																						<tbody>
+   																							<script id="remarks-template" type="text/x-handlebars-template">
+																							<input type="hidden" id="remarksIndex" value="{{length remarks}}" placeholder="remarks下标">
+																							{{#each remarks}}
+      																						<tr>
+         																						<td>
+																									<a style="cursor:pointer;" onclick="removeTr(this)">删除</a>
+																									<input type="hidden" name="remarks[{{@index}}].fsOrderId" value="{{fsOrderId}}" placeholder="订单编号">
+																									<input type="hidden" name="remarks[{{@index}}].fiSeq" value="{{fiSeq}}" placeholder="序号">
+																									<input type="hidden" name="remarks[{{@index}}].ftDate" value="{{ftDate}}" placeholder="备注时间">
+																									<input type="hidden" name="remarks[{{@index}}].fdAmt" value="{{fdAmt}}" placeholder="备注金额">
+																								</td>
+         																						<td>{{fiSeq}}</td>
+         																						<td>{{ftDate}}</td>
+         																						<td><input class="col-sm-12" type="text" name="remarks[{{@index}}].fsContent" value="{{fsContent}}" placeholder="备注内容"></td>
+         																						<td>{{fdAmt}}</td>
+         																						<td>
+																								<select name="remarks[{{@index}}].fiStat" class="col-sm-12">
+																									<option value="0" {{#remarkStat fiStat '0'}}{{/remarkStat}}>未付款</option>
+																									<option value="1" {{#remarkStat fiStat '1'}}{{/remarkStat}}>已付首款</option>
+																									<option value="2" {{#remarkStat fiStat '2'}}{{/remarkStat}}>已付全款</option>
+																								</select>
+																								</td>
+      																						</tr>
+																							{{/each}}
+																							</script>
+   																						</tbody>
+																					</table>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- 订单备注end -->
 
 									<div id="message" class="alert alert-warning"></div>
 								</div>
@@ -330,6 +420,37 @@
 			minView: 2,
 			forceParse: 0
 		});
+	</script>
+
+	<script>
+		//删除备注
+		function removeRemarkTr(obj){
+			$(obj).parent().parent().remove();
+		}
+	</script>
+		
+	<!-- 订单备注模板 -->
+	<script id="tr-remarks" type="text/x-handlebars-template">
+		<tr>
+      		<td>
+				<a style="cursor:pointer;" onclick="removeTr(this)">删除</a>
+				<input type="hidden" name="remarks[{{index}}].fsOrderId" value="{{fsOrderId}}" placeholder="订单编号">
+				<input type="hidden" name="remarks[{{index}}].fiSeq" value="{{fiSeq}}" placeholder="序号">
+				<input type="hidden" name="remarks[{{index}}].ftDate" value="{{ftDate}}" placeholder="备注时间">
+				<input type="hidden" name="remarks[{{index}}].fdAmt" value="{{fdAmt}}" placeholder="备注金额">
+			</td>
+       		<td>{{fiSeq}}</td>
+         	<td>{{ftDate}}</td>
+         	<td><input class="col-sm-12" type="text" name="remarks[{{index}}].fsContent" value="{{fsContent}}" placeholder="备注内容"></td>
+         	<td>{{fdAmt}}</td>
+         	<td>
+			<select name="remarks[{{index}}].fiStat" class="col-sm-12">
+				<option value="0">未付款</option>
+				<option value="1">已付首款</option>
+				<option value="2">已付全款</option>
+				</select>
+			</td>
+      	</tr>
 	</script>
 </body>
 </html>
