@@ -811,7 +811,7 @@ jQuery(function($) {
 		var reslistIndex = $("#remarksIndex").val();
 		var ftDate = getNowFormatDate();
 		var fsContent = $("#fsContent").val();
-		var fdAmt = $("#fdAmt").val();
+		var fdAmt = $("#remarksAmt").val();
 		if (fdAmt == '') {
 			alert("备注金额不能为空！");
 			return;
