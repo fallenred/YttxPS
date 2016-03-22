@@ -411,7 +411,7 @@ jQuery(function($) {
 	});
 	
 	function getTccprice(params, resno, date, obj){
-		var flag = false;
+		/*var flag = false;
 		resMap.each(function(key,value,index){
 			if (key == resno+date){
 				html = '';
@@ -421,7 +421,7 @@ jQuery(function($) {
 				$(".select_ccno").html(html);
 				flag = true;
 			}
-		});
+		});*/
 		if (flag) return;
 		$.ajax({
 			type: "GET",
@@ -438,7 +438,6 @@ jQuery(function($) {
 				$.each(data, function(commentIndex, comment){
 					html += '<option value=' + comment['fsCcno'] + '>' + comment['fsCcname'] + '(' + comment['fdPrice'] + '￥)</option>';
 				});
-				resMap.put(resno+date, data);
 				$(obj).html(html);
 			}
 		});
