@@ -175,7 +175,6 @@ jQuery(function($) {
 				"fiStat" : fiStat
 		}
 		$("#remarksIndex").val(parseInt($("#remarksIndex").val())+1);
-		alert(remarksTemplate(data));
 		$('#table_remarks tbody').html($('#table_remarks tbody').html() + remarksTemplate(data));
 	});
 	

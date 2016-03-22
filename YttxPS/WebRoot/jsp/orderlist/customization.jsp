@@ -14,14 +14,14 @@
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
 <style>
-.table thead tr th {
-	text-align: center;
-}
-
-.table tbody tr td {
-	text-align: center;
-	vertical-align: middle;
-}
+	.table thead tr th {
+		text-align: center;
+	}
+	
+	.table tbody tr td {
+		text-align: center;
+		vertical-align: middle;
+	}
 </style>
 </head>
 <body>
@@ -437,7 +437,6 @@
 																				<div class="col-sm-2">
 																					<select id="restype" class="form-control">
 																						<option value="mp">门票</option>
-																						<option value="ct">餐厅</option>
 																						<option value="gw">购物</option>
 																					</select>
 																				</div>
@@ -576,11 +575,19 @@
 																									<select id="restype" class="form-control">
 																										<option value="bg">酒店</option>
 																										<option value="yl">娱乐</option>
+																										<option value="ct">餐饮</option>
 																									</select>
 																								</div>
-																								<label class="batch_bg col-sm-1 control-label">标准</label>
-																								<div class="batch_bg col-sm-2">
-																									<select class="batch_bgLvl form-control">
+																								<label style="display:none" class="batch_ct col-sm-1 control-label">类型</label>
+																								<div style="display:none" class="batch_ct col-sm-2">
+																									<select class="ct_special form-control">
+																										<option value="02">午餐</option>
+																										<option value="03">晚餐</option>
+																									</select>
+																								</div>
+																								<label class="batch_lvl col-sm-1 control-label">标准</label>
+																								<div class="batch_lvl col-sm-2">
+																									<select class="batch_Lvl form-control">
 																									</select>
 																								</div>
 																								<label class="batch_bg col-sm-1 control-label">酒店</label>
@@ -699,13 +706,17 @@
 												<select id="fiStat" name="fiStat" class="form-control">
 												</select>
 											</div>
-											<!-- <label class="col-sm-2 control-label no-padding-right" for="fiStat">游客名单</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fiStat">游客名单</label>
 											<div class="col-sm-1">
-												<button type="button" class="btn btn-sm btn-default pull-right">下载模板</button>
+												<button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-success pull-right">上传名单</button>
 											</div>
 											<div class="col-sm-1">
-												<button type="button" class="btn btn-sm btn-success pull-right">上传名单</button>
-											</div> -->
+												<button type="button" class="btn btn_export btn-sm btn-success pull-right">下载名单</button>
+											</div>
 										</div>
 									</div>
 									<hr>
@@ -794,7 +805,6 @@
 									<!-- 订单备注end -->
 									<div id="message" class="alert alert-warning"></div>
 								</div>
-
 								<div class="modal-footer">
 									<button id="close" type="button" class="btn btn-sm btn-default"
 										data-dismiss="modal">关闭</button>
@@ -818,6 +828,38 @@
 
 	</div>
 	<!-- /.main-container -->
+	
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" id="identifier"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+			            <button type="button" class="close" data-dismiss="modal" 
+			               aria-hidden="true">×
+			            </button>
+			            <h4 class="modal-title" id="myModalLabel">名单上传</h4>
+			         </div>
+			         <div class="modal-body" style="heigh: 400px;">
+			         	<form name="uploadForm" id="uploadForm" method="post" enctype="multipart/form-data">
+								<div class="row">
+									<div class="col-md-5 col-md-offset-1 pull-left">
+										<p class="help-block">请选择要上传的文件</p>
+										<input type="file" class="form-control" id="excel" name="excel" style="background-color:#BEBEBE;margin-top: 5px;" onchange="fileType(this)" />
+										<input type="hidden" id="orderId" name="orderId"/>
+									</div>
+								</div>
+								<div id="upload_message" class="alert alert-warning"></div>
+							<div class="modal-footer">
+								<a class="btn btn_import btn-sm btn-primary" href="#" role="button">上传</a>
+								<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">关闭</button>
+							</div>
+						</form>
+			         </div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
 	<script src="/js/bus/orderlist/customization.js"></script>
 
 	<c:if test="${!empty succflag && succflag =='1'}">
@@ -840,44 +882,32 @@
 			minView : 2,
 			forceParse : 0
 		});
-	</script>
-	<script>
-		//dom创建文本框
-		//var input = document.createElement("input");
-		//input.type="text" ;
-		//得到当前的单元格
-		var currentCell;
-		function editCell(event) {
-			var input = $(this).find("input");
-			input.type = "text"
-			if (event == null) {
-				currentCell = window.event.srcElement;
-			} else {
-				currentCell = event.target;
-			}
-			//根据Dimmacro 的建议修定下面的bug 非常感谢
-			if (currentCell.tagName == "TD") {
-
-				//用单元格的值来填充文本框的值
-				input.value = currentCell.innerHTML;
-				//当文本框丢失焦点时调用last
-				input.onblur = last;
-				input.ondblclick = last;
-				currentCell.innerHTML = "";
-				//把文本框加到当前单元格上.
-				currentCell.appendChild(input);
-				//根据liu_binq63 的建议修定下面的bug 非常感谢
-				input.focus();
-			}
-		}
-		function last() {
-			//充文本框的值给当前单元格
-			currentCell.innerHTML = input.value;
-		}
-		//最后为表格绑定处理方法.
-		//document.getElementById("editTable").ondblclick=editCell;
+		$(function() {
+			//上传
+			$('#excel').ace_file_input({
+				no_file:'请选择EXCEL ...',
+				btn_choose:'选择',
+				btn_change:'更改',
+				droppable:false,
+				onchange:null,
+				thumbnail:false, //| true | large
+				whitelist:'xls|xls',
+				blacklist:'gif|png|jpg|jpeg'
+				//onchange:''
+				//
+			});
+			
+		});
 	</script>
 	<script type="text/javascript">
+		$('#myModal').on('show.bs.modal', function (e) { 
+		    $(this).find('.modal-dialog').css({  
+		        'margin-top': function () {  
+		            var modalHeight = $('#myModal').find('.modal-dialog').height();  
+		            return ($(window).height() / 2.2 - (modalHeight / 2));  
+		        }
+		    });      
+		}); 
 		//删除资源项
 		function removeTr(obj){
 			$(obj).parent().parent().remove();

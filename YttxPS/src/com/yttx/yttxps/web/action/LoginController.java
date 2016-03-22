@@ -103,7 +103,7 @@ public class LoginController extends BaseController{
 		SysOper sysOper = sysService.findOperById(userid);
 		if(sysOper != null)
 		{
-			if(!sysOper.getSysOperPwd().equalsIgnoreCase(password)){
+			if(!sysOper.getSysOperPwd().trim().equalsIgnoreCase(password)){
 				model.addAttribute("message", "用户名或密码错误");
 				return "index";
 			}
