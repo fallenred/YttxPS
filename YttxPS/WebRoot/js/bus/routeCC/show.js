@@ -21,6 +21,7 @@ jQuery(function($) {
         url: "/gen/selectGen.htm",
         data: '',
         dataType: "json",
+        async: false,
         success: function(data){
         		var html = ''; 
         		$.each(data, function(commentIndex, comment){
@@ -30,9 +31,11 @@ jQuery(function($) {
         		getRouteArrange();   //获取线路配置列表
         		getSceniceGen();   //获取线路景区
         		getScenice();   //获取景区列表
-        		$("#ticket").html('');
         }
     });
+	
+	//屏蔽部分组件
+	shieldTags();
 	
 	/**
 	 * 生成日程下拉列表
@@ -44,11 +47,13 @@ jQuery(function($) {
 		}
 		$("#fiDays").html(html);
 		getAllRouteCC($("#fiDays").val(), fiGenindex, fsRouteno);
+		shieldTags();
 	}
 	
 	//
 	$("#fiDays").change(function(){
 		getAllRouteCC($("#fiDays").val(), fiGenindex, fsRouteno);
+		shieldTags();
 	});
 	
 	/**
@@ -60,6 +65,7 @@ jQuery(function($) {
 			url: "/routeArrange/selectRouteArrange.htm",
 			data: "arrange.fiGenindex=" + fiGenindex,
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
@@ -79,6 +85,7 @@ jQuery(function($) {
 			url: "/scenicGen/selectScenicGen.htm",
 			data: "scenicGen.fiGenindex=" + fiGenindex,
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
@@ -99,6 +106,7 @@ jQuery(function($) {
 			url: "/scenicGen/selectScenicGen.htm",
 			data: "scenicGen.fiGenindex=" + fiGenindex,
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = '线路景区：'; 
 				$.each(data, function(commentIndex, comment){
@@ -124,12 +132,16 @@ jQuery(function($) {
 		$("input[name='scenicGen']").each(function(){
 			scenic += $.trim($(this).val()) + ",";
 		});
+		
+		$("#ticket").html('');
+		
 		$.ajax({
 			type: "GET",
 			traditional: true,
 			url: "/ticket/selectTicket.htm",
 			data: "scenicno=" + scenic,
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
@@ -150,6 +162,7 @@ jQuery(function($) {
 			url: "/dict/selectDict.htm",
 			data: "dict.fsParentno=" + parentno,
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = '<option value="--">' + '-- 请选择 --' + '</option>'; 
 				$.each(data, function(commentIndex, comment){
@@ -174,6 +187,7 @@ jQuery(function($) {
 			url: "/shop/selectShop.htm",
 			data: "scenicno=" + scenic,
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
@@ -199,6 +213,7 @@ jQuery(function($) {
 			url: "/restaurant/selectRestaurant.htm",
 			data: {"scenicNo[]": scenic},
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
@@ -224,6 +239,7 @@ jQuery(function($) {
 			url: "/entertainment/selectEntertainmentDynamic.htm",
 			data: {"scenicNo": scenic},
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
@@ -256,12 +272,17 @@ jQuery(function($) {
 	
 	// 关闭
 	$("#close").on("click", function () {
-			$("#editModal", parent.document).find(".close").click();
+			$("#showModal", parent.document).find(".close").click();
 	});
 	
-	//屏蔽部分组件
-	$("select:not(.query-condition)").attr("disabled", "disabled");
-	$("button[id!='close']").attr("disabled", "disabled");
+	/**
+	 * 屏蔽部分组件
+	 */
+	function shieldTags(){
+		$("select:not(.query-condition)").attr("disabled", "disabled");
+		$("button[id!='close']").attr("disabled", "disabled");
+		$(".span-del").attr("hidden", "hidden");
+	}
 	
 	//	colorbox
 	var $overflow = '';
