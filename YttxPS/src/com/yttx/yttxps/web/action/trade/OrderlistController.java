@@ -1,14 +1,17 @@
 package com.yttx.yttxps.web.action.trade;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.poifs.filesystem.NotOLE2FileException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +21,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.yttx.comm.FileUpload;
+import com.yttx.comm.ObjectExcelView;
+import com.yttx.comm.PathUtil;
+import com.yttx.comm.road.RoadExcelRead;
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
+import com.yttx.yttxps.model.DictExample;
 import com.yttx.yttxps.model.SessionEntity;
+import com.yttx.yttxps.model.TOrderCusList;
+import com.yttx.yttxps.model.TOrderCusListExample;
+import com.yttx.yttxps.model.TOrderCusListExample.Criteria;
 import com.yttx.yttxps.model.TOrderlistExample;
 import com.yttx.yttxps.model.TOrderlistWithBLOBs;
 import com.yttx.yttxps.model.TRemarksExample;
 import com.yttx.yttxps.model.vo.OrderlistRequest;
+import com.yttx.yttxps.service.IDictService;
+import com.yttx.yttxps.service.IOrderCusListService;
 import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.service.IRemarksService;
@@ -44,11 +59,15 @@ public class OrderlistController extends BaseController {
 static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
+	private IOrderCusListService orderCusListService;
+	@Autowired
 	private IOrderlistService orderlistService;
 	@Autowired
 	private IPubService<?> pubService;
 	@Autowired
 	private IRemarksService remarksService;;
+	@Autowired
+	private IDictService dictService;;
 	
 	/**
 	 * 分页查询订单信息
@@ -92,6 +111,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	public Object ajaxfindRemarks(String orderId) {
 		TRemarksExample example = new TRemarksExample();
 		com.yttx.yttxps.model.TRemarksExample.Criteria criteria = example.createCriteria();
+		example.setOrderByClause("fi_Seq");
 		criteria.andFsOrderIdEqualTo(orderId);
 		return remarksService.selectRemarks(example);
     }
@@ -236,4 +256,98 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		return (Map<String, Object>) JsonResult.jsonOk();
     }
 	
+	/**
+	 * 导出游客名单
+	 * @param orderId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/exportOrderCusList")
+	public Object exportExcel(String orderId){
+		ModelAndView mv = new ModelAndView();
+		try{
+			Map<String,Object> dataMap = new HashMap<String,Object>();
+			List<String> titles = new ArrayList<String>();
+			titles.add("姓名");
+			titles.add("电话");
+			titles.add("证件类型");
+			titles.add("证件号码");
+			titles.add("备注");
+			dataMap.put("titles", titles);
+
+			//查询游客名单
+			TOrderCusListExample example = new TOrderCusListExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andFsOrderIdEqualTo(new String(orderId.getBytes("ISO-8859-1"),"utf-8"));
+			List<TOrderCusList> list = orderCusListService.selectByExample(example);
+			List<Map<String, String>> varList = new ArrayList<Map<String, String>>();
+			
+			for(int i=0; i<list.size(); i++){
+				Map<String, String> vpd = new HashMap<String, String>();
+				vpd.put("var1", list.get(i).getFsName());	
+				vpd.put("var2", list.get(i).getFsTel());
+				vpd.put("var3", list.get(i).getFsIdtype());
+				vpd.put("var4", list.get(i).getFsId());
+				vpd.put("var5", list.get(i).getFsMark());
+				varList.add(vpd);
+			}
+
+			dataMap.put("varList", varList);
+			//执行excel操作
+			ObjectExcelView erv = new ObjectExcelView();
+			mv = new ModelAndView(erv, dataMap);
+		} catch(Exception e){
+			logger.error(e.toString(), e);
+			return (Map<String, Object>) JsonResult.jsonError("游客名单下载失败");
+		}
+		return mv;
+	}
+	
+	/**
+	 * 导入订单游客名单
+	 * @param file
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value="/importExcel.htm")
+	public void importExcel(HttpServletResponse response, @RequestParam(value="excel",required=false) MultipartFile file, String orderId) throws Exception{
+		if (null != file && !file.isEmpty()) {
+			String filePath = PathUtil.getClasspath();
+			String fileName =  FileUpload.fileUp(file, filePath, "companyExcel");							//执行上传
+			List<Map<String, String>> list = (List)RoadExcelRead.readExcel(filePath, fileName, 1, 0, 0);	
+			try {
+				if (CollectionUtils.isNotEmpty(list)) {
+					List<TOrderCusList> cusLists = new ArrayList<TOrderCusList>();
+					//查询证件类型
+					DictExample example = new DictExample();
+					com.yttx.yttxps.model.DictExample.Criteria criteria = example.createCriteria();
+					criteria.andFsParentnoEqualTo("zjlx");
+					Map zjlxMap = dictService.selectDictMapName4key(example);
+					for (int i = 0; i < list.size(); i++) {
+						Map<String, String> map = list.get(0);
+						TOrderCusList orderCusList = new TOrderCusList();
+						orderCusList.setFsOrderId(orderId);
+						orderCusList.setFiSeq(new BigDecimal(i));
+						orderCusList.setFsName(map.get("var0").trim());
+						orderCusList.setFsTel(map.get("var1").trim());
+						orderCusList.setFsIdtype((String)zjlxMap.get(map.get("var2").trim()));
+						orderCusList.setFsId(map.get("var3").trim());
+						orderCusList.setFsMark(map.get("var4").trim());
+						cusLists.add(orderCusList);
+					}
+					orderCusListService.inser(cusLists);
+				}
+			} catch (Exception e) {
+				String mgs = "导入游客名单失败";
+				logger.error(mgs, e);
+				if(e instanceof NotOLE2FileException){
+					mgs = "Excel文件损坏，请将文件另存为xls为后缀的文件后再次导入";
+				}
+				response.getOutputStream().write(mgs.getBytes("utf-8"));
+				return;
+			}
+		}
+		response.getOutputStream().write("导入成功".getBytes("utf-8"));
+	}
 }

@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,15 +101,18 @@ public class RestaurantController extends BaseController {
 	
 	/**
 	 * 根据景区查询菜单
+	 * 新增餐标、菜单类型（早午晚餐）两个查询条件 modify by huangtao(2016-03-21)
 	 */
 	@RequestMapping(value="selectRestaurant.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object selectRestaurant(@RequestParam(value = "scenicNo[]") String[] scenicNo)
+	public Object selectRestaurant(@RequestParam(value = "scenicNo[]") String[] scenicNo, String lvl, String special)
 	{  
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (scenicNo == null || scenicNo.length < 1){
 			return null;
 		}
+		if (StringUtils.isNotBlank(lvl)) map.put("lvl", lvl);
+		if (StringUtils.isNotBlank(special)) map.put("special", special);
 		map.put("scenicNo", Arrays.asList(scenicNo));
 		return restaurantService.selectRestaurant(map);
     }

@@ -31,7 +31,16 @@ public class DictService implements IDictService {
 		for(Dict dict : list) {
 			map.put(dict.getFsDictno(), dict.getFsDictname());
 		}
-		
+		return map;
+	}
+	
+	@Override
+	public Map<String, Object> selectDictMapName4key(DictExample example) {
+		List<Dict> list = selectDict(example);
+		Map<String, Object> map = new HashMap<String, Object>();
+		for(Dict dict : list) {
+			map.put(dict.getFsDictname(), dict.getFsDictno());
+		}
 		return map;
 	}
 }
