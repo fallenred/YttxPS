@@ -31,9 +31,11 @@ jQuery(function($) {
         		getRouteArrange();   //获取线路配置列表
         		getSceniceGen();   //获取线路景区
         		getScenice();   //获取景区列表
-        		$("#ticket").html('');
         }
     });
+	
+	//屏蔽部分组件
+	shieldTags();
 	
 	/**
 	 * 生成日程下拉列表
@@ -45,11 +47,13 @@ jQuery(function($) {
 		}
 		$("#fiDays").html(html);
 		getAllRouteCC($("#fiDays").val(), fiGenindex, fsRouteno);
+		shieldTags();
 	}
 	
 	//
 	$("#fiDays").change(function(){
 		getAllRouteCC($("#fiDays").val(), fiGenindex, fsRouteno);
+		shieldTags();
 	});
 	
 	/**
@@ -128,6 +132,9 @@ jQuery(function($) {
 		$("input[name='scenicGen']").each(function(){
 			scenic += $.trim($(this).val()) + ",";
 		});
+		
+		$("#ticket").html('');
+		
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -268,13 +275,14 @@ jQuery(function($) {
 			$("#showModal", parent.document).find(".close").click();
 	});
 	
-	//屏蔽部分组件
-	$("select:not(.query-condition)").attr("disabled", "disabled");
-	$("button[id!='close']").attr("disabled", "disabled");
-	
-	$(document).ready(function(){
+	/**
+	 * 屏蔽部分组件
+	 */
+	function shieldTags(){
+		$("select:not(.query-condition)").attr("disabled", "disabled");
+		$("button[id!='close']").attr("disabled", "disabled");
 		$(".span-del").attr("hidden", "hidden");
-	});
+	}
 	
 	//	colorbox
 	var $overflow = '';
