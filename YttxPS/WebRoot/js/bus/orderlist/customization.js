@@ -315,6 +315,10 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
+		if(dataArr.length == 0){
+			alert("请先添加景区资源！");
+			return;
+		}
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -450,6 +454,10 @@ jQuery(function($) {
 		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
 		});
+		if(scenic == ''){
+			alert("请先添加景区资源！");
+			return;
+		}
 		var resno = '';
 		$.ajax({
 			type: "GET",
@@ -489,11 +497,10 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		/*if(dataArr.length == 0){
+		if(dataArr.length == 0){
 			alert("请先添加景区资源！");
-			$(obj).parent().parent().find(".select_resno").html('');
 			return;
-		}*/
+		}
 		$.ajax({
 			type: "POST",
 			url: "/restaurant/selectRestaurant.htm",
@@ -527,6 +534,10 @@ jQuery(function($) {
 		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
 		});
+		if(scenic == ''){
+			alert("请先添加景区资源！");
+			return;
+		}
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -549,6 +560,10 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
+		if(dataArr.length == 0){
+			alert("请先添加景区资源！");
+			return;
+		}
 		$.ajax({
 			type: "POST",
 			url: "/entertainment/selectEntertainment.htm",

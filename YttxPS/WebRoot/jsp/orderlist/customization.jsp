@@ -781,8 +781,7 @@
          																						<td>
 																								<select name="remarks[{{@index}}].fiStat" class="col-sm-12">
 																									<option value="0" {{#remarkStat fiStat '0'}}{{/remarkStat}}>未付款</option>
-																									<option value="1" {{#remarkStat fiStat '1'}}{{/remarkStat}}>已付首款</option>
-																									<option value="2" {{#remarkStat fiStat '2'}}{{/remarkStat}}>已付全款</option>
+																									<option value="2" {{#remarkStat fiStat '1'}}{{/remarkStat}}>已付全款</option>
 																								</select>
 																								</td>
       																						</tr>
@@ -1081,8 +1080,7 @@
          	<td>
 			<select name="remarks[{{index}}].fiStat" class="col-sm-12">
 				<option value="0">未付款</option>
-				<option value="1">已付首款</option>
-				<option value="2">已付全款</option>
+				<option value="1">已付全款</option>
 				</select>
 			</td>
       	</tr>
