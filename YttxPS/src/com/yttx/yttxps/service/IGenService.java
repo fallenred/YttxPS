@@ -1,6 +1,7 @@
 package com.yttx.yttxps.service;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,8 @@ public interface IGenService {
 	int delete(String no);
 
 	List<Tgen> selectTgen(TgenExample example);
+	
+	Tgen selectTgen(BigDecimal index);
 	
 	int selectFiIndex();
 }
