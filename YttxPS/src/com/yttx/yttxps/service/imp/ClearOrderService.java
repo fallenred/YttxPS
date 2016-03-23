@@ -1,17 +1,13 @@
 package com.yttx.yttxps.service.imp;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.yttx.yttxps.model.TRemarksExample.Criteria;
+
 import com.yttx.yttxps.mapper.ClearOrderMapper;
 import com.yttx.yttxps.mapper.FStatementMapper;
-import com.yttx.yttxps.mapper.TRemarksMapper;
-import com.yttx.yttxps.model.TRemarks;
-import com.yttx.yttxps.model.TRemarksExample;
 import com.yttx.yttxps.model.corder.DetailOrder;
 import com.yttx.yttxps.model.corder.FStatement;
 import com.yttx.yttxps.model.corder.SimpleOrder;
@@ -34,9 +30,6 @@ public class ClearOrderService implements IClearOrderService{
 	
 	@Autowired
 	private FStatementMapper< FStatement>  fStatementMapper;
-	
-	@Autowired
-	private TRemarksMapper<TRemarks> tRemarksMapper;
 	
 	/**
 	 * 分页查询简单订单列表
@@ -78,16 +71,6 @@ public class ClearOrderService implements IClearOrderService{
 		fStatement.setStatmentId(generateFSId());
 		fStatementMapper.insert(fStatement);
 		clearOrderMapper.updateStatById(fStatement.getOrderId());
-		
-		TRemarksExample tExample = new TRemarksExample();
-		Criteria criteria = tExample.createCriteria();
-		criteria.andFsOrderIdEqualTo(fStatement.getOrderId());
-		List<TRemarks> remarks = tRemarksMapper.selectByExample(tExample);
-		
-		for(TRemarks remark:remarks){
-			remark.setFiClosestat(BigDecimal.ONE);
-			tRemarksMapper.updateByPrimaryKey(remark);
-		}
 		return fStatement.getStatmentId();
 	}
 	/**

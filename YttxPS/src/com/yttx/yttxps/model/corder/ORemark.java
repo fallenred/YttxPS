@@ -30,12 +30,8 @@ public class ORemark {
 	//发生交易金额
 	private BigDecimal amt;
 	
-	private BigDecimal paidAmt;
-	
 	//备注状态
 	private Integer stat;
-	
-	private Integer closeStat;
 
 	public String getOrderId() {
 		return orderId;
@@ -100,23 +96,6 @@ public class ORemark {
 
 	public void setDateDesc(String dateDesc) {
 		this.dateDesc = dateDesc;
-	}
-	
-
-	public BigDecimal getPaidAmt() {
-		return paidAmt;
-	}
-
-	public void setPaidAmt(BigDecimal paidAmt) {
-		this.paidAmt = paidAmt;
-	}
-
-	public Integer getCloseStat() {
-		return closeStat;
-	}
-
-	public void setCloseStat(Integer closeStat) {
-		this.closeStat = closeStat;
 	}
 
 	@Override

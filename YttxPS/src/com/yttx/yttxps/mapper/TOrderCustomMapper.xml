@@ -543,9 +543,7 @@
       FI_CHILDREN = #{fiChildren,jdbcType=DECIMAL},
       FS_POSTSCRIPT = #{fsPostscript,jdbcType=VARCHAR},
       FD_AMT = #{fdAmt,jdbcType=DECIMAL},
-      FI_STAT = #{fiStat,jdbcType=DECIMAL},
-      FC_RESSNAPSHOT = #{fcRessnapshot,jdbcType=CLOB},
-      FC_FUZZYSNAPSHOT = #{fcFuzzysnapshot,jdbcType=CLOB}
+      FI_STAT = #{fiStat,jdbcType=DECIMAL}
     where FI_ID = #{fiId,jdbcType=DECIMAL}
   </update>
   

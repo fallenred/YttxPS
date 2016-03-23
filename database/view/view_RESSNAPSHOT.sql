@@ -54,18 +54,6 @@ SELECT a.fs_routeno,
    AND b.fs_lvl = c.fs_dictno
    AND a.fs_restype = d.fs_restype
    AND a.fs_restype = 'dy'
-   AND c.fs_parentno = 'dy'
-UNION ALL
---¾°Çø
-SELECT DISTINCT
-       c.fs_id AS fs_routeno,
-       1 AS fi_dayflag,
-       'jq' AS restype,
-       'comm' AS resprop,
-       b.fs_no AS resno,
-       b.fs_name AS resname
-  FROM TScenicGen a,tscenic b,troutearrange c
- WHERE a.FS_SCENICNO = b.fs_no
-   AND a.FI_INDEX = c.fi_genindex;
+   AND c.fs_parentno = 'dy';
    
 EXIT;
