@@ -155,14 +155,16 @@ public class StatementController extends BaseController {
 		
 		List<ORemark> remarks =dOrder.getRemarks();
 		BigDecimal remarkAmt =new BigDecimal(0);
+		BigDecimal remarkPaidAmt = new BigDecimal(0);
 		if(remarks!=null){
 			for(ORemark remark:remarks){
 				remarkAmt=add(remarkAmt,remark.getAmt());
+				remarkPaidAmt = add(remarkPaidAmt, remark.getPaidAmt());
 			}
 		}
 		fs.setRemarksAmt(remarkAmt);
 		fs.setTotalFee(add(dOrder.getTotalFee(),remarkAmt));
-		fs.setPaidAmt(dOrder.getPaidAmt());
+		fs.setPaidAmt(add(dOrder.getPaidAmt(), remarkPaidAmt));
 		fs.setAmt(add(fs.getTotalFee(),fs.getPaidAmt().negate()));
 		model.addAttribute("oper", "A");
 		model.addAttribute("order", dOrder);
