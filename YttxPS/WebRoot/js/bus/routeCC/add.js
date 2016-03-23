@@ -28,7 +28,7 @@ jQuery(function($) {
         		getRouteArrange();   //获取线路配置列表
         		getSceniceGen();   //获取线路景区
         		getScenice();   //获取景区列表
-        		$("#ticket").html('');
+        		//$("#ticket").html('');
         }
     });
 	

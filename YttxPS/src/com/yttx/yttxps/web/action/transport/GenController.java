@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Tgen;
 import com.yttx.yttxps.model.TgenExample;
-import com.yttx.yttxps.model.TgenExample.Criteria;
 import com.yttx.yttxps.model.vo.GenRequest;
 import com.yttx.yttxps.service.IGenService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -70,17 +69,6 @@ static Logger logger = LoggerFactory.getLogger(GenController.class);
 		example.createCriteria().andFiStatEqualTo(new BigDecimal(1));
 		List<Tgen> list = genService.selectTgen(example);
 		return list;
-    }
-	
-	/**
-	 * 获取路线列表
-	 * @param req
-	 * @return
-	 */
-	@RequestMapping(value="selectGen.htm", method = RequestMethod.GET)
-	@ResponseBody
-	public Object ajaxSelectGen(BigDecimal index) {  
-		return this.genService.selectTgen(index);
     }
 	
 	/**
