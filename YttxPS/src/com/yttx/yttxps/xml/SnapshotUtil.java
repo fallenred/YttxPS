@@ -59,7 +59,7 @@ public class SnapshotUtil{
 			for(Reslist res:list){
 				String resType =res.getRestype();
 				String resNo = res.getResno();
-				if(StringUtil.nullOrBlank(resType)||"qj".equalsIgnoreCase(resType.trim())){
+				if(StringUtil.nullOrBlank(resType)||"jq".equalsIgnoreCase(resType.trim())){
 					continue;
 				}
 				Map<String, Object> resMap = new HashMap<String, Object>();
@@ -71,7 +71,7 @@ public class SnapshotUtil{
 					for(Cclist cc:cclist){
 						resContent =new StringBuilder((StringUtil.nullOrBlank(cc.getCcname())?"":("消费选项:"+cc.getCcname())+","));
 						resContent.append((cc.getPrice()==null?"":("价格:"+cc.getPrice())+","));
-						resContent.append(cc.getUsernum()==null?"":("数量:"+cc.getUsernum()+","));
+						resContent.append(StringUtil.nullOrBlank(cc.getUsernum())?"":("数量:"+cc.getUsernum()+","));
 						int location = resContent.lastIndexOf(",");
 						if(location>=0){
 							resContent.setCharAt(resContent.lastIndexOf(","), ';');

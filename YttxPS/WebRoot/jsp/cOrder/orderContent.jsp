@@ -368,41 +368,25 @@
 									<th>结算状态</th>
 								</tr>
 							 </thead>
-								<tbody>
-									<c:forEach items="${order.remarks}" var="tt">
-										<tr>
-											<td>${tt.operId}</td>
-											<td>${tt.content}</td>
-											<td>${tt.amt}</td>
-											<td>${tt.paidAmt}</td>
-											<td>
-												<c:if test="${tt.stat==0}">未付款</c:if>
-												<c:if test="${tt.stat==1}">已付首款</c:if>
-												<c:if test="${tt.stat==2}">已付全款</c:if>
-											</td>
-											<td>
-												<c:if test="${tt.stat==0}">未结算</c:if>
-												<c:if test="${tt.stat==1}">已入计算单</c:if>
-											</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-					
-					
-					
-						<!--循环遍历订单备注  -->
-						<table id="prvres" class="table table-striped table-bordered table-hover">
-							<c:forEach items="${order.remarks}" var="remark">
-								<tr>
-									<td class="col-xs-2">${remark.dateDesc}</td>
-									<td class="col-xs-10">
-										<p>计   调 ID：${remark.operId}</p>
-										<p>备注内容：${remark.content}</p>
-										<p>发生金额：${remark.amt}</p>
-									</td>
-								</tr>
-							</c:forEach>
+							<tbody>
+								<c:forEach items="${order.remarks}" var="tt">
+									<tr>
+										<td>${tt.operId}</td>
+										<td>${tt.content}</td>
+										<td>${tt.amt}</td>
+										<td>${tt.paidAmt}</td>
+										<td>
+											<c:if test="${tt.stat==0}">未付款</c:if>
+											<c:if test="${tt.stat==1}">已付首款</c:if>
+											<c:if test="${tt.stat==2}">已付全款</c:if>
+										</td>
+										<td>
+											<c:if test="${tt.stat==0}">未结算</c:if>
+											<c:if test="${tt.stat==1}">已入计算单</c:if>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
 						</table>
 					</div>
 				</div>
