@@ -59,13 +59,36 @@ UNION ALL
 --景区
 SELECT DISTINCT
        c.fs_id AS fs_routeno,
-       1 AS fi_dayflag,
+       0 AS fi_dayflag,
        'jq' AS restype,
        'comm' AS resprop,
        b.fs_no AS resno,
        b.fs_name AS resname
   FROM TScenicGen a,tscenic b,troutearrange c
  WHERE a.FS_SCENICNO = b.fs_no
-   AND a.FI_INDEX = c.fi_genindex;
+   AND a.FI_INDEX = c.fi_genindex
+UNION ALL
+--车型
+SELECT a.fs_routeno,
+       a.fi_dayflag,
+       'cx' AS restype,
+       'comm' AS resprop,
+       b.fs_no AS resno,
+       c.fs_name AS resname
+  FROM troutecc a,ttransportarrange b,ttransport c
+ WHERE a.fs_resno = b.fs_no
+   AND b.fs_transno = c.fs_no
+   AND a.fs_restype = 'cx'
+UNION ALL
+--菜单
+SELECT a.fs_routeno,
+       a.fi_dayflag,
+       'ct' AS restype,
+       'prop' AS resprop,
+       b.fs_no AS resno,
+       b.fs_name||' -- '||pkg_common.findTdictName(b.fs_special,'meal_type')||' -- '||pkg_common.findTdictName(b.fs_lvl,'ct') AS resname
+  FROM troutecc a,trestaurant b
+ WHERE a.fs_resno = b.fs_no
+   AND a.fs_restype = 'ct';
    
 EXIT;

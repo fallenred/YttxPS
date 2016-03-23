@@ -255,7 +255,8 @@ jQuery(function($) {
 					name : 'no',
 					index : 'no',
 					width : 70,
-					sorttype : "char"
+					sorttype : "char",
+					hidden : true
 				}, {
 					name : 'name',
 					index : 'name',

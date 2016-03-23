@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yttx.comm.StringUtil;
 import com.yttx.yttxps.comm.JsonResult;
-import com.yttx.yttxps.model.RegionMap;
 import com.yttx.yttxps.model.SysDep;
 import com.yttx.yttxps.model.SysOper;
 import com.yttx.yttxps.model.vo.DeptAddRequest;

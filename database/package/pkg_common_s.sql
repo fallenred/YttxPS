@@ -15,6 +15,8 @@ CREATE OR REPLACE PACKAGE pkg_common AS
    );
    
    FUNCTION findRegionFullName(fs_id IN CHAR) RETURN VARCHAR2;
+
+   FUNCTION findTdictName(fsDictno IN VARCHAR2, fsParentno IN VARCHAR2) RETURN VARCHAR2;
    
 END pkg_common;
 /

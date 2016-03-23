@@ -1,5 +1,6 @@
 package com.yttx.yttxps.model.vo;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import com.yttx.yttxps.model.TRouteArrange;
@@ -49,12 +50,11 @@ public class RouteArrangeRequest extends JqGridRequest implements
 	public void copyTRouteArrange(TRouteArrangeExample example) {
 		if (arrange != null) {
 			Criteria criteria = example.createCriteria();
+			criteria.andFiStatEqualTo(BigDecimal.ONE);
 			if (arrange.getFsName() != null) 
 				criteria.andFsNameLike(arrange.getFsName());
 			if (arrange.getFiGenindex() != null)
 				criteria.andFiGenindexEqualTo(arrange.getFiGenindex());
-			if (arrange.getFiStat() != null)
-				criteria.andFiStatEqualTo(arrange.getFiStat());
 		}
 	}
 }

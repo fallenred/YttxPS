@@ -193,29 +193,9 @@
     where FS_NO = #{no,jdbcType=VARCHAR}
   </update>
   
-     <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
+  <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
     select count(*) from TACCOMADATION where 1=1 
-     <if test="no != null and no !='' " >
-       and FS_NO like '%'||#{no,jdbcType=VARCHAR}||'%'
-      </if>
-      <if test="regionno != null" >
-       and FS_REGIONNO = #{regionno,jdbcType=VARCHAR}
-      </if>
-      <if test="starlvl != null and starlvl !='' " >
-       and FS_STARLVL = #{starlvl,jdbcType=VARCHAR}
-      </if>
-      <if test="name != null and name != '' " >
-       and FS_NAME like '%'||#{name,jdbcType=VARCHAR}||'%'
-      </if>
-      <if test="addr != null and addr !='' " >
-       and FS_ADDR = #{addr,jdbcType=VARCHAR}
-      </if>
-      <if test="speciality != null and speciality !='' " >
-       and FS_SPECIALITY = #{speciality,jdbcType=VARCHAR}
-      </if>
-      <if test="stat != null and stat !='' " >
-       and FI_STAT = #{stat,jdbcType=DECIMAL}
-      </if>
+    <include refid="selectSelectiveCondition" />
   </select>
   
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
@@ -226,27 +206,7 @@
 	      from
 	      	 TACCOMADATION ta 
 	      where 1=1 
-	      <if test="no != null and no !='' " >
-	       and FS_NO like '%'||#{no,jdbcType=VARCHAR}||'%'
-	      </if>
-	      <if test="regionno != null and regionno !='' " >
-	       and FS_REGIONNO = #{regionno,jdbcType=VARCHAR}
-	      </if>
-	      <if test="starlvl != null and starlvl !='' " >
-	       and FS_STARLVL = #{starlvl,jdbcType=VARCHAR}
-	      </if>
-	      <if test="name != null and name != '' " >
-	       and FS_NAME like '%'||#{name,jdbcType=VARCHAR}||'%'
-	      </if>
-	      <if test="addr != null and addr != '' " >
-	       and FS_ADDR = #{addr,jdbcType=VARCHAR}
-	      </if>
-	      <if test="speciality != null and speciality != '' " >
-	       and FS_SPECIALITY = #{speciality,jdbcType=VARCHAR}
-	      </if>
-	      <if test="stat != null and stat !='' " >
-	       and FI_STAT = #{stat,jdbcType=DECIMAL}
-	      </if>
+	      <include refid="selectSelectiveCondition" />
 	      order by
 	       	FS_NO
 	   )t
@@ -259,6 +219,30 @@
         and tt.rowno &gt; #{startrow}
       </if>
   </select>
+  
+  <sql id="selectSelectiveCondition">
+    <if test="no != null and no !='' " >
+	  and FS_NO like '%'||#{no,jdbcType=VARCHAR}||'%'
+	</if>
+	<if test="regionno != null and regionno !='' " >
+	  and FS_REGIONNO = #{regionno,jdbcType=VARCHAR}
+	</if>
+	<if test="starlvl != null and starlvl !='' " >
+	  and FS_STARLVL = #{starlvl,jdbcType=VARCHAR}
+	</if>
+	<if test="name != null and name != '' " >
+	  and FS_NAME like '%'||#{name,jdbcType=VARCHAR}||'%'
+	</if>
+	<if test="addr != null and addr != '' " >
+	  and FS_ADDR = #{addr,jdbcType=VARCHAR}
+	</if>
+	<if test="speciality != null and speciality != '' " >
+	  and FS_SPECIALITY = #{speciality,jdbcType=VARCHAR}
+	</if>
+	<if test="stat != null and stat !='' " >
+	  and FI_STAT = #{stat,jdbcType=DECIMAL}
+	</if>
+  </sql>
   
   <!-- 查询宾馆列表（线路配置时使用） -->
   <select id="selectSelective" parameterType="map" resultMap="ResultMapWithBLOBs">

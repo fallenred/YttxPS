@@ -128,6 +128,22 @@ CREATE OR REPLACE PACKAGE BODY pkg_common AS
        END IF;
    END findRegionFullName;
    
+   FUNCTION findTdictName(fsDictno IN VARCHAR2, fsParentno IN VARCHAR2) RETURN VARCHAR2
+   AS
+      var_fsdictname VARCHAR2(100);
+   BEGIN
+      SELECT a.fs_dictname
+        INTO var_fsdictname
+        FROM tdict a
+       WHERE a.fs_dictno = fsDictno
+         AND a.fs_parentno = fsParentno;
+         
+      RETURN var_fsdictname;
+   EXCEPTION
+      WHEN OTHERS THEN
+         RETURN fsDictno;
+   END findTdictName;
+   
 END pkg_common;
 /
 SHOW ERROR;
