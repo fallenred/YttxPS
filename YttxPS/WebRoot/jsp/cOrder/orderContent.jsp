@@ -357,6 +357,40 @@
 			<div class="widget-main padding-8">
 				<div class="row">
 					<div class="col-xs-12">
+						<table id="prvres" class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>计调Id</th>
+									<th>备注内容</th>
+									<th>发生金额</th>
+									<th>已付金额</th>
+									<th>备注状态</th>
+									<th>结算状态</th>
+								</tr>
+							 </thead>
+								<tbody>
+									<c:forEach items="${order.remarks}" var="tt">
+										<tr>
+											<td>${tt.operId}</td>
+											<td>${tt.content}</td>
+											<td>${tt.amt}</td>
+											<td>${tt.paidAmt}</td>
+											<td>
+												<c:if test="${tt.stat==0}">未付款</c:if>
+												<c:if test="${tt.stat==1}">已付首款</c:if>
+												<c:if test="${tt.stat==2}">已付全款</c:if>
+											</td>
+											<td>
+												<c:if test="${tt.stat==0}">未结算</c:if>
+												<c:if test="${tt.stat==1}">已入计算单</c:if>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+					
+					
+					
 						<!--循环遍历订单备注  -->
 						<table id="prvres" class="table table-striped table-bordered table-hover">
 							<c:forEach items="${order.remarks}" var="remark">
