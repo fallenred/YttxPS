@@ -315,10 +315,10 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		if(dataArr.length == 0){
+		/*if(dataArr.length == 0){
 			alert("请先添加景区资源！");
 			return;
-		}
+		}*/
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -421,8 +421,10 @@ jQuery(function($) {
 				$(".select_ccno").html(html);
 				flag = true;
 			}
-		});*/
+		});
 		if (flag) return;
+		*/
+		
 		$.ajax({
 			type: "GET",
 			url: "/tccPrice/findTccPrice.htm",
@@ -438,6 +440,7 @@ jQuery(function($) {
 				$.each(data, function(commentIndex, comment){
 					html += '<option value=' + comment['fsCcno'] + '>' + comment['fsCcname'] + '(' + comment['fdPrice'] + '￥)</option>';
 				});
+				resMap.put(resno+date, data);
 				$(obj).html(html);
 			}
 		});
@@ -453,10 +456,10 @@ jQuery(function($) {
 		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
 		});
-		if(scenic == ''){
+		/*if(scenic == ''){
 			alert("请先添加景区资源！");
 			return;
-		}
+		}*/
 		var resno = '';
 		$.ajax({
 			type: "GET",
@@ -496,10 +499,10 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		if(dataArr.length == 0){
+		/*if(dataArr.length == 0){
 			alert("请先添加景区资源！");
 			return;
-		}
+		}*/
 		$.ajax({
 			type: "POST",
 			url: "/restaurant/selectRestaurant.htm",
@@ -533,10 +536,10 @@ jQuery(function($) {
 		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
 		});
-		if(scenic == ''){
+		/*if(scenic == ''){
 			alert("请先添加景区资源！");
 			return;
-		}
+		}*/
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -559,10 +562,10 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		if(dataArr.length == 0){
+		/*if(dataArr.length == 0){
 			alert("请先添加景区资源！");
 			return;
-		}
+		}*/
 		$.ajax({
 			type: "POST",
 			url: "/entertainment/selectEntertainment.htm",

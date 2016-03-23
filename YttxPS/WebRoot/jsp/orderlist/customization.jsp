@@ -377,6 +377,9 @@
 																					<button type="button" onclick="javascript:addScenic(this);"
 																						class="btn btn-sm addScenicBtn btn-success pull-right">添加</button>
 																				</div>
+																				<div class="col-sm-4">
+																					<p class="text-danger" style="margin-top:5px;"><font size="3">请先添加景区再配置资源！</font></p>
+																				</div>
 																			</div>
 																		</div>
 																		<div class="row">
@@ -739,7 +742,7 @@
 																					<input id="fsContent" type="text" class="form-control" />
 																				</div>
 																				<label class="col-sm-1 control-label" for="fdAmt">金额</label>
-																				<div class="col-sm-1">
+																				<div class="col-sm-2">
 																					<input id="remarksAmt" type="text" class="form-control" />
 																				</div>
 																				<div class="col-sm-1">
@@ -768,7 +771,7 @@
 																							{{#each remarks}}
       																						<tr>
          																						<td>
-																									<a style="cursor:pointer;" onclick="removeTr(this)">删除</a>
+																									<a style="cursor:pointer;" onclick="removeTr(this)">作废</a>
 																									<input type="hidden" name="remarks[{{@index}}].fsOrderId" value="{{fsOrderId}}" placeholder="订单编号">
 																									<input type="hidden" name="remarks[{{@index}}].fiSeq" value="{{fiSeq}}" placeholder="序号">
 																									<input type="hidden" name="remarks[{{@index}}].ftDate" value="{{ftDate}}" placeholder="备注时间">
