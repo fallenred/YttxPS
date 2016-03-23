@@ -365,7 +365,6 @@
 									<th>发生金额</th>
 									<th>已付金额</th>
 									<th>备注状态</th>
-									<th>结算状态</th>
 								</tr>
 							 </thead>
 							<tbody>
@@ -379,10 +378,6 @@
 											<c:if test="${tt.stat==0}">未付款</c:if>
 											<c:if test="${tt.stat==1}">已付首款</c:if>
 											<c:if test="${tt.stat==2}">已付全款</c:if>
-										</td>
-										<td>
-											<c:if test="${tt.stat==0}">未结算</c:if>
-											<c:if test="${tt.stat==1}">已入计算单</c:if>
 										</td>
 									</tr>
 								</c:forEach>
