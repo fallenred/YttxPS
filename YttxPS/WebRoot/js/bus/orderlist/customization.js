@@ -421,8 +421,9 @@ jQuery(function($) {
 				$(".select_ccno").html(html);
 				flag = true;
 			}
-		});*/
+		});
 		if (flag) return;
+		*/
 		$.ajax({
 			type: "GET",
 			url: "/tccPrice/findTccPrice.htm",
