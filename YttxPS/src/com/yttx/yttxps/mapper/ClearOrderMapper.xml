@@ -73,7 +73,7 @@
 		<result  property="amt"       column="or_amt"        jdbcType="DECIMAL" />
 		<result  property="paidAmt"   column="or_paidAmt"    jdbcType="DECIMAL" />
 		<result  property="stat"      column="or_stat"       jdbcType="INTEGER" />
-		<result  property="closeStat" column="or_closeStat"       jdbcType="INTEGER" />
+		<result  property="closeStat" column="or_closeStat"  jdbcType="INTEGER" />
 	</resultMap>
 	
 	<!-- ResultMap:订单中每一批次CustomerBatch的对应Map-->

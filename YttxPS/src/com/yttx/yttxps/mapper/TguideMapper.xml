@@ -312,18 +312,7 @@
   <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
   	select count(*) from TGUIDE
 	     where 1=1
-	      <if test="no != null and no  != ''">
-	        and fs_no = #{no}
-	      </if>
-	      <if test="name != null and name != ''">
-	        and fs_Name like '%'||#{name}||'%'
-	      </if>
-	      <if test="gender != null">
-	        and fi_Gender = #{gender,jdbcType=INTEGER}
-	      </if>
-	      <if test="stat != null and stat != ''">
-	        and fi_Stat = #{stat}
-	      </if>
+	      <include refid="selectSelectiveCondition" />
   </select>
   
   <!-- 分页查询 -->
@@ -332,19 +321,8 @@
       	select tg.* from 
 			TGUIDE tg
 	    	where 1=1
-		      <if test="no != null and no  != ''">
-		        and fs_no = #{no}
-		      </if>
-		      <if test="name != null and name != ''">
-		        and fs_Name like '%'||#{name}||'%'
-		      </if>
-		      <if test="gender != null">
-		        and fi_Gender = #{gender,jdbcType=INTEGER}
-		      </if>
-		      <if test="stat != null and stat != ''">
-		        and fi_Stat = #{stat}
-		      </if>
-		      order by fs_no
+		    <include refid="selectSelectiveCondition" />
+		    order by fs_no
 		  )t
 		  where 1=1
 	      <if test="endrow != null" >
@@ -355,6 +333,21 @@
 	        and tt.rowno &gt; #{startrow}
 	      </if>
   </select>
+  
+  <sql id="selectSelectiveCondition">
+    <if test="no != null and no != ''">
+	  and fs_no = #{no,jdbcType=VARCHAR}
+	</if>
+	<if test="name != null and name != ''">
+	  and fs_Name like '%'||#{name,jdbcType=VARCHAR}||'%'
+	</if>
+	<if test="gender != null">
+	  and fi_Gender = #{gender,jdbcType=DECIMAL}
+	</if>
+	<if test="stat != null">
+	  and fi_Stat = #{stat,jdbcType=DECIMAL}
+	</if>
+  </sql>
 
   <select id="selectFsNo" resultType="int">
     select tguide_sequence.nextval from dual

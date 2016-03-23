@@ -189,19 +189,22 @@
 											<tbody>
 												<c:if test="${order.resMap!=null}">
 													<c:forEach items="${order.resMap}" var="entry">
-														<tr>
-															<td rowspan="${fn:length(entry.value)}">${zy_map[entry.key]}</td>
-															<c:if test="${entry.value!=null}">
-																<c:forEach items="${entry.value}" var="res">
+														<c:if test="${entry.value!=null}">
+															<c:forEach items="${entry.value}" var="res" varStatus="resStatus">
+																<tr>
+																	<c:if test="${resStatus.first}">
+																		<td rowspan="${fn:length(entry.value)}">${zy_map[entry.key]}</td>
+																	</c:if>
 																	<td>
 																		<c:if test="${res['resName']!=null}">${res['resName']}</c:if>
 																	</td>
 																	<td>
 																		${res['resContent']}
 																	</td>
-																</c:forEach>
-															</c:if>
-														</tr>	
+																</tr>	
+															</c:forEach>
+														</c:if>
+						
 													</c:forEach>
 												</c:if>
 											</tbody>
@@ -344,30 +347,28 @@
 	</div>
 						
 	
-	
+	<c:if test="${order.remarks!=null && fn:length(order.remarks)>0}">
 	<!-- 订单备注  开始 -->
-	<div class="widget-box transparent">
-		<div class="widget-header widget-header-small">
-			<h4 class="blue smaller">
-				<i class="icon-edit orange"></i> 订单备注
-			</h4>
-		</div>
-		
-		<div class="widget-body">
-			<div class="widget-main padding-8">
-				<div class="row">
-					<div class="col-xs-12">
-						<table id="prvres" class="table table-striped table-bordered table-hover">
-							<thead>
-								<tr>
-									<th>计调Id</th>
-									<th>备注内容</th>
-									<th>发生金额</th>
-									<th>已付金额</th>
-									<th>备注状态</th>
-									<th>结算状态</th>
-								</tr>
-							 </thead>
+		<div class="widget-box transparent">
+			<div class="widget-header widget-header-small">
+				<h4 class="blue smaller">
+					<i class="icon-edit orange"></i> 订单备注
+				</h4>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main padding-8">
+					<div class="row">
+						<div class="col-xs-12">
+							<table id="prvres" class="table table-striped table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>计调Id</th>
+										<th>备注内容</th>
+										<th>发生金额</th>
+										<th>已付金额</th>
+										<th>备注状态</th>
+									</tr>
+								 </thead>
 								<tbody>
 									<c:forEach items="${order.remarks}" var="tt">
 										<tr>
@@ -380,34 +381,15 @@
 												<c:if test="${tt.stat==1}">已付首款</c:if>
 												<c:if test="${tt.stat==2}">已付全款</c:if>
 											</td>
-											<td>
-												<c:if test="${tt.stat==0}">未结算</c:if>
-												<c:if test="${tt.stat==1}">已入计算单</c:if>
-											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-					
-					
-					
-						<!--循环遍历订单备注  -->
-						<table id="prvres" class="table table-striped table-bordered table-hover">
-							<c:forEach items="${order.remarks}" var="remark">
-								<tr>
-									<td class="col-xs-2">${remark.dateDesc}</td>
-									<td class="col-xs-10">
-										<p>计   调 ID：${remark.operId}</p>
-										<p>备注内容：${remark.content}</p>
-										<p>发生金额：${remark.amt}</p>
-									</td>
-								</tr>
-							</c:forEach>
-						</table>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</c:if>
 	<!-- 订单备注  结束 -->
 </div>

@@ -134,8 +134,8 @@ jQuery(function($) {
         var meal_val = '';
         for (k in meal_items)
             meal_val += ';' + k + ":" + meal_items[k];
-        meal_val = meal_val.substring(1);
-    
+        meal_val = meal_val.substring(1); 
+        
     //房型类型
     var type_items = {'':'未取到房型类型列表，请刷新！'};
     //获取房型类型列表
@@ -154,7 +154,7 @@ jQuery(function($) {
     var room_type_option = '<option value="">请选择房型类型</option>';
     for (k in type_items){
         room_type_val += ';' + k + ":" + type_items[k];
-        room_type_option += '<option value="'+k+'">'+type_items[k]+'</option>';
+        room_type_option += '<option value="' + k + '">' + type_items[k] + '</option>';
     }
     room_type_val = room_type_val.substring(1);
     //查询-房型类型数据绑定
@@ -162,6 +162,10 @@ jQuery(function($) {
     $("#addModal").find("select[name='fsType']").html(room_type_option);
     $("#showRoomModal").find("select[name='fsType']").html(room_type_option);
     $("#editModal").find("select[name='fsType']").html(room_type_option);
+    
+    var meal_arrays = [];
+    meal_arrays[0] = ["不含早餐", "不含午餐", "不含晚餐"];
+    meal_arrays[1] = ["含早餐", "含午餐", "含晚餐"];
     
     //表格
     $(grid_selector).jqGrid(
@@ -229,26 +233,27 @@ jQuery(function($) {
                         value : meal_val
                     },
                     formatter : function(v, opt, rec) {
-                        var vals ="";
-                        if(v != null && v != ""  && v!= undefined ){
-                            for(var t_i =0; t_i < v.length; t_i ++){
-                                vals += meal_items[v.substring(t_i,t_i+1)]+","
+                        var vals = "";
+                        if(v != null && v != ""  && v != undefined ){
+                            for(var t_i = 0; t_i < v.length; t_i ++){
+                                vals += meal_arrays[parseInt(v.substring(t_i, t_i + 1))][t_i] + ",";
                             }
-                            vals = vals.length>0?vals.substring(0,vals.length-1):vals;
+                            vals = vals.length > 0 ? vals.substring(0, vals.length - 1) : vals;
                         }
                         return vals;
                     },
                     unformat : function(v) {
-                        if(v != null && v != ""  && v!= undefined ){
+                        if(v != null && v != ""  && v != undefined ){
                              var vals = v.split(",");
-                             var texts ="";
+                             var texts = "";
                              for(index in vals){
-                                 for (k in meal_items){
-                                     if (meal_items[k] == vals[index])
-                                         texts +=k+","
-                                 }
+                            	 if(vals[index].length > 3){   //长度大于3表示该字符串为“不含……”
+                            		 texts += "0,";
+                            	 } else {
+                            		 texts += "1,"
+                            	 }
                              }
-                             return texts.length>0?texts.substring(0,texts.length-1):texts;
+                             return texts.length > 0 ? texts.substring(0, texts.length - 1) : texts;
                         }
                         return '';
                     }
@@ -287,7 +292,7 @@ jQuery(function($) {
                 },
                 editurl : "/room/save.htm",
                 autowidth : true,
-                caption: (accomname!=null && accomname!="")?(accomname+"—房型配置列表"):"酒店房型列表"
+                caption: (accomname != null && accomname != "") ? (accomname + "—房型配置列表") : "酒店房型列表"
             });
     $(window).triggerHandler('resize.jqGrid');// trigger window resize to make
     // the grid get the correct size
@@ -392,7 +397,29 @@ jQuery(function($) {
 function editCustom(id) {
     var raw = jQuery("#grid-table").jqGrid('getRowData', id);
     $("#editForm #message").hide();
-    loadFormData(raw, $("#editForm"));
+    //loadFormData(raw, $("#editForm"));
+    
+    $("#editForm").find("input[name='fsRoomno']").val(raw.fsRoomno);   //房型唯一编号
+    $("#editForm").find("input[name='fsAccomno']").val(raw.fsAccomno);   //酒店代码
+    $("#editForm").find("select[name='fsType']").val(raw.fsType);   //忽略房型类型
+    $("#editForm").find("input[name='fsName']").val(raw.fsName);   //房型名称
+    $("#editForm").find("select[name='fiStat']").val(raw.fiStat);   //状态
+    
+    var meal_items = raw.fsMeal.split(",");
+    
+    //早餐
+    if(meal_items[0] == "1"){
+    	$("#editForm").find("input[name='fsMeal1']").prop('checked', true);
+    }
+    //中餐
+    if(meal_items[1] == "1"){
+    	$("#editForm").find("input[name='fsMeal2']").prop('checked', true);
+    }
+    //晚餐
+    if(meal_items[2] == "1"){
+    	$("#editForm").find("input[name='fsMeal3']").prop('checked', true);
+    }
+    
     $('#editModal').modal({
         show : true,
         backdrop : 'static'
@@ -401,7 +428,29 @@ function editCustom(id) {
 
 function showCustom(id) {
     var raw = jQuery("#grid-table").jqGrid('getRowData', id);
-    loadFormData(raw, $("#showForm"));
+    //loadFormData(raw, $("#showForm"));
+    
+    $("#showForm").find("input[name='fsRoomno']").val(raw.fsRoomno);   //房型唯一编号
+    $("#showForm").find("input[name='fsAccomno']").val(raw.fsAccomno);   //酒店代码
+    $("#showForm").find("select[name='fsType']").val(raw.fsType);   //忽略房型类型
+    $("#showForm").find("input[name='fsName']").val(raw.fsName);   //房型名称
+    $("#showForm").find("select[name='fiStat']").val(raw.fiStat);   //状态
+    
+    var meal_items = raw.fsMeal.split(",");
+    
+    //早餐
+    if(meal_items[0] == "1"){
+    	$("#showForm").find("input[name='fsMeal1']").prop('checked', true);
+    }
+    //中餐
+    if(meal_items[1] == "1"){
+    	$("#showForm").find("input[name='fsMeal2']").prop('checked', true);
+    }
+    //晚餐
+    if(meal_items[2] == "1"){
+    	$("#showForm").find("input[name='fsMeal3']").prop('checked', true);
+    }
+    
     $("#showRoomModal").modal({
         show : true,
         backdrop : 'static'

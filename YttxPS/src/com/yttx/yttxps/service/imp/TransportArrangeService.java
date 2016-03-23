@@ -57,7 +57,7 @@ public class TransportArrangeService implements ITransportArrangeService {
 		price.setFsResno(record.getFsNo());
 		price.setFsCcno("000023");
 		price.setFdPrice(record.getFdPrice());
-		priceMapper.insert(price);
+		priceMapper.insertPrice(price);
 		
 	}
 
@@ -78,7 +78,7 @@ public class TransportArrangeService implements ITransportArrangeService {
 		} else {
 			price.setFtEnddate(record.getFtEnddate());
 		}
-		priceMapper.updateByPrimaryKey(price);
+		priceMapper.insertPrice(price);
 	}
 
 	@Override

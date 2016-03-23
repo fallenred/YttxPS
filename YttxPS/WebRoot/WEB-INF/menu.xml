@@ -30,9 +30,9 @@
 			</submenu>
 		</item>
 		
-		<item id="0600" name="餐厅管理" icon="menu-icon fa fa-table" >
+		<item id="0600" name="菜单管理" icon="menu-icon fa fa-table" >
 			<submenu>
-				<item id="06a0" name="餐厅资源配置" url="/restaurant/page.htm" />
+				<item id="06a0" name="菜单资源配置" url="/restaurant/page.htm" />
 			</submenu>
 		</item>
 		
