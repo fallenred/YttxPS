@@ -344,49 +344,49 @@
 	</div>
 						
 	
-	
+	<c:if test="${order.remarks!=null && fn:length(order.remarks)>0}">
 	<!-- 订单备注  开始 -->
-	<div class="widget-box transparent">
-		<div class="widget-header widget-header-small">
-			<h4 class="blue smaller">
-				<i class="icon-edit orange"></i> 订单备注
-			</h4>
-		</div>
-		
-		<div class="widget-body">
-			<div class="widget-main padding-8">
-				<div class="row">
-					<div class="col-xs-12">
-						<table id="prvres" class="table table-striped table-bordered table-hover">
-							<thead>
-								<tr>
-									<th>计调Id</th>
-									<th>备注内容</th>
-									<th>发生金额</th>
-									<th>已付金额</th>
-									<th>备注状态</th>
-								</tr>
-							 </thead>
-							<tbody>
-								<c:forEach items="${order.remarks}" var="tt">
+		<div class="widget-box transparent">
+			<div class="widget-header widget-header-small">
+				<h4 class="blue smaller">
+					<i class="icon-edit orange"></i> 订单备注
+				</h4>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main padding-8">
+					<div class="row">
+						<div class="col-xs-12">
+							<table id="prvres" class="table table-striped table-bordered table-hover">
+								<thead>
 									<tr>
-										<td>${tt.operId}</td>
-										<td>${tt.content}</td>
-										<td>${tt.amt}</td>
-										<td>${tt.paidAmt}</td>
-										<td>
-											<c:if test="${tt.stat==0}">未付款</c:if>
-											<c:if test="${tt.stat==1}">已付首款</c:if>
-											<c:if test="${tt.stat==2}">已付全款</c:if>
-										</td>
+										<th>计调Id</th>
+										<th>备注内容</th>
+										<th>发生金额</th>
+										<th>已付金额</th>
+										<th>备注状态</th>
 									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+								 </thead>
+								<tbody>
+									<c:forEach items="${order.remarks}" var="tt">
+										<tr>
+											<td>${tt.operId}</td>
+											<td>${tt.content}</td>
+											<td>${tt.amt}</td>
+											<td>${tt.paidAmt}</td>
+											<td>
+												<c:if test="${tt.stat==0}">未付款</c:if>
+												<c:if test="${tt.stat==1}">已付首款</c:if>
+												<c:if test="${tt.stat==2}">已付全款</c:if>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</c:if>
 	<!-- 订单备注  结束 -->
 </div>
