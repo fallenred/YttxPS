@@ -18,6 +18,7 @@ jQuery(function($) {
         url: "/gen/selectGen.htm",
         data: '',
         dataType: "json",
+        async: false,
         success: function(data){
         		var html = ''; 
         		$.each(data, function(commentIndex, comment){
@@ -42,6 +43,7 @@ jQuery(function($) {
 				url: "/routeArrange/findRouteCCCount.htm",
 				data: "fiDayflag=" + fiDayflag + "&fsRouteno=" + fsRouteno,
 				dataType: "json",
+				async: false,
 				success: function(data){
 					if(data > 0) {
 						getAllRouteCC(fiDayflag, fiGenindex, fsRouteno);
@@ -54,6 +56,32 @@ jQuery(function($) {
 		}
 	});
 	
+	//线路变更
+	$("#fsResno").change(function(){
+		$.ajax({
+			type: "GET",
+			url: "/routeArrange/findUniqRouteArrange.htm",
+			data: {"fsId": $("#fsResno").val()},
+			dataType: "json",
+			async: false,
+			success: function(data){
+				getDays(data.data.routeArrange != null && data.data.routeArrange != undefined ? data.data.routeArrange.fiDays : 0);
+			}
+		});
+	});
+	
+	/**
+	 * 生成日程下拉列表
+	 */
+	function getDays(num){
+		var html="";
+		for (var i = 0; i < num ; i++) {
+			html += '<option value=' + i + '>第' + (parseInt(i) + 1) + '天</option>';
+		}
+		$("#fiDays").html(html);
+		$("#fiDays").val("");
+	}
+	
 	/**
 	 * 获取线路配置列表
 	 */
@@ -63,12 +91,23 @@ jQuery(function($) {
 			url: "/routeArrange/selectRouteArrange.htm",
 			data: "arrange.fiGenindex=" + $("#fiGenindex").val(),
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
 					html += '<option value=' + comment['fsId'] + '>' + comment['fsName'] + '</option>';
 				});
 				$("#fsResno").html(html);
+				$.ajax({
+					type: "GET",
+					url: "/routeArrange/findUniqRouteArrange.htm",
+					data: {"fsId": $("#fsResno").val()},
+					dataType: "json",
+					async: false,
+					success: function(data){
+						getDays(data.data.routeArrange != null && data.data.routeArrange != undefined ? data.data.routeArrange.fiDays : 0);
+					}
+				});
 			}
 		});
 	}
@@ -82,6 +121,7 @@ jQuery(function($) {
 			url: "/scenicGen/selectScenicGen.htm",
 			data: "scenicGen.fiGenindex=" + $("#fiGenindex").val(),
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
@@ -96,22 +136,19 @@ jQuery(function($) {
 	 * 获取线路景区
 	 */
 	function getSceniceGen(){
-		var num = '';
 		$.ajax({
 			type: "GET",
 			url: "/scenicGen/selectScenicGen.htm",
 			data: "scenicGen.fiGenindex=" + $("#fiGenindex").val(),
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = '线路景区：'; 
 				$.each(data, function(commentIndex, comment){
 					html += '<input type="hidden" name="scenicGen" value="' + comment['fsScenicno'] + '"/>' + '&nbsp;&nbsp;<label>' + comment['fsScenicname'] + '</label>';
-					if(commentIndex == 0)
-						num = comment['fiDays'];
 				});
 				$("#div_scenics").html(html);
 				getTicket();   //获取景区票列表
-				getDays(num);   //生成日程下拉列表
 				getShop();   //获取购物店列表
 				getRestaurant();   //获取餐厅
 				getEntertainment();   //获取娱乐项目
@@ -133,6 +170,7 @@ jQuery(function($) {
 			url: "/ticket/selectTicket.htm",
 			data: "scenicno=" + scenic,
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
@@ -157,6 +195,7 @@ jQuery(function($) {
 			url: "/shop/selectShop.htm",
 			data: "scenicno=" + scenic,
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
@@ -182,6 +221,7 @@ jQuery(function($) {
 			url: "/restaurant/selectRestaurant.htm",
 			data: {"scenicNo[]": scenic},
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
@@ -207,6 +247,7 @@ jQuery(function($) {
 			url: "/entertainment/selectEntertainmentDynamic.htm",
 			data: {"scenicNo": scenic},
 			dataType: "json",
+			async: false,
 			success: function(data){
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
@@ -234,8 +275,10 @@ jQuery(function($) {
 				data: "fsRestype=yl",
 				url: "/rescc/findResCC.htm",
 				dataType: "json",
+				async: false,
 				success: function(data){
 					html += '<label for="form-field-select-2" class="entertainment-label-' + val + '">' + text + '</label>';
+					html += '<span class="pull-right btn-link red span-del entertainment-span-del-' + val + '" onclick="fnDelAssociationTags(\'entertainment\', \'' + val + '\');">删除</span>';
 					html += '<select class="form-control entertainment entertainment-select-' + val + '" name="' + val + '" id="entertainments_' + val + '" multiple="multiple">';
 					$.each(data.rows, function(i, e){
 						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
@@ -273,8 +316,10 @@ jQuery(function($) {
 				data: "fsRestype=ct",
 				url: "/rescc/findResCC.htm",
 				dataType: "json",
+				async: false,
 				success: function(data) {
 					html += '<label for="form-field-select-2" class="restaurant-label-' + val + '">' + text + '</label>';
+					html += '<span class="pull-right btn-link red span-del restaurant-span-del-' + val + '" onclick="fnDelAssociationTags(\'restaurant\', \'' + val + '\');">删除</span>';
 					html += '<select class="form-control restaurant restaurant-select-' + val + '" name="' + val + '" id="restaurants_' + val + '" multiple="multiple">';
 					$.each(data.rows, function(i, e){
 						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
@@ -282,17 +327,20 @@ jQuery(function($) {
 					
 					resetIframeHeight("add");
 					$("#div_restaurant").html(html);
+					
+					$(".restaurant-span-del").each(function(idx, e){
+						var id = $(this).attr("id");
+						var roomNo = id
+						$(this).click(function(){
+							$(".restaurant-label-" + id).remove();
+							$(".restaurant-select-" + id).remove();
+							$(this).remove();
+							resetIframeHeight("sub");
+						});
+					});
 				}
 			});
 		}
-	});
-	
-	//删除餐厅
-	$("#rmRestaurantBtn").click(function(){
-		var val = $("#restaurant").val();
-		$(".restaurant-label-" + val).remove();
-		$(".restaurant-select-" + val).remove();
-		resetIframeHeight("sub");
 	});
 	
 	//线路变更
@@ -353,8 +401,10 @@ jQuery(function($) {
 				data: "fsRestype=mp",
 				url: "/rescc/findResCC.htm",
 				dataType: "json",
+				async: false,
 				success: function(data){
 					html += '<label for="form-field-select-2" class="ticket-label-' + val + '">' + text + '</label>';
+					html += '<span class="pull-right btn-link red span-del ticket-span-del-' + val + '" onclick="fnDelAssociationTags(\'ticket\', \'' + val + '\');">删除</span>';
 					html += '<select class="form-control ticket ticket-select-' + val + '" name="' + val + '" id="tickets_' + val + '" multiple="multiple">';
 					$.each(data.rows, function(i, e){
 						html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
@@ -365,14 +415,6 @@ jQuery(function($) {
 				}
 			});
 		}
-	});
-	
-	//删除门票
-	$("#rmTicketBtn").click(function(){
-		var val = $("#ticket").val();
-		$(".ticket-label-" + val).remove();
-		$(".ticket-select-" + val).remove();
-		resetIframeHeight("sub");
 	});
 	
 	//增加购物店
@@ -392,7 +434,7 @@ jQuery(function($) {
 			}
 		});
 		if (flag) {
-			$("#index").attr("value", parseInt(index)+1);
+			$("#index").attr("value", parseInt(index) + 1);
 			html += '<input type="hidden" class="shopid" name="routecc[' + val + '].fsResno" value="' + val + '"/>'+
 					'<input type="hidden" class="shop_' + val + '" name="routecc[' + val + '].fsRestype" value="gw"/>' + 
 					'<label class="shop_' + val + '">&nbsp;&nbsp;' + text + '：</label>' +

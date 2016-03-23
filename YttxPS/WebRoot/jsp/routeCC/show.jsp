@@ -109,9 +109,10 @@
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-right" id="addTicketBtn" disabled="disabled">添加</button>
 											</div>
+											<!-- 
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-left" id="rmTicketBtn" disabled="disabled">删除</button>
-											</div>
+											</div> -->
 										</div>
 									</div>
 									<div class="row">
@@ -124,7 +125,7 @@
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="restaurant">餐厅选择</label>
+											<label class="col-sm-2 control-label no-padding-right" for="restaurant">菜单选择</label>
 											<div class="col-sm-3">
 												<select id="restaurant" name="restaurant" class="form-control">
 												</select>
@@ -132,9 +133,10 @@
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-right" id="addRestaurantBtn" disabled="disabled">添加</button>
 											</div>
+											<!-- 
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-left" id="rmRestaurantBtn" disabled="disabled">删除</button>
-											</div>
+											</div> -->
 										</div>
 									</div>
 									<div class="row">
@@ -155,9 +157,10 @@
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-right" id="addEntertainmentBtn" disabled="disabled">添加</button>
 											</div>
+											<!-- 
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-left" id="rmEntertainmentBtn" disabled="disabled">删除</button>
-											</div>
+											</div> -->
 										</div>
 									</div>
 									<div class="row">
@@ -192,9 +195,10 @@
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-right" id="addRoomBtn" disabled="disabled">添加</button>
 											</div>
+											<!-- 
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-left" id="rmRoomBtn" disabled="disabled">删除</button>
-											</div>
+											</div> -->
 										</div>
 									</div>
 									<div class="row">

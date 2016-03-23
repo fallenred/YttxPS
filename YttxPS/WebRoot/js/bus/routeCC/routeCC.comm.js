@@ -8,6 +8,7 @@ function getRoom(fsAccomno){
 		url: "/room/selectRoom.htm",
 		data: "room.fsAccomno=" + fsAccomno,
 		dataType: "json",
+		async: false,
 		success: function(data){
 			var html = ''; 
 			$.each(data, function(commentIndex, comment){
@@ -36,6 +37,7 @@ function getAccomadation(accomadation){
 		url: "/accomadation/selectAccomadation.htm",
 		data: req,
 		dataType: "json",
+		async: false,
 		success: function(data){
 			var html = ''; 
 			$.each(data, function(commentIndex, comment){
@@ -64,6 +66,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 	$("#room").val("");
 	$("#accomadationNo").find("option").remove();
 	$("#accomadationNo").val("");
+	$("#fsStarLvl").find("option[selected='selected']").removeAttr("selected");
 	$("#fsStarLvl").find("option[value='--']").attr("selected", "selected");
 	
 	//门票
@@ -73,6 +76,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 		url: "/routeArrange/findRouteCCType.htm",
 		data: "fsRouteno=" + fsRouteno + "&fiDayflag=" + day + "&fsRestype=mp",
 		dataType: "json",
+		async: false,
 		success: function(data){
 			$.each(data, function(typeIdx, type){
 				$.ajax({
@@ -81,9 +85,11 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 					data: "fsRestype=mp",
 					url: "/rescc/findResCC.htm",
 					dataType: "json",
+					async: false,
 					success: function(data){
 						var html = $("#div_ticket").html();
 						html += '<label for="form-field-select-2" class="ticket-label-' + type.fsResno + '">' + type.fsName + '</label>';
+						html += '<span class="pull-right btn-link red span-del ticket-span-del-' + type.fsResno + '" onclick="fnDelAssociationTags(\'ticket\', \'' + type.fsResno + '\');">删除</span>';
 						html += '<select class="form-control ticket ticket-select-' + type.fsResno + '" name="' + type.fsResno + '" id="ticket_' + type.fsResno + '" multiple="multiple">';
 						$.each(data.rows, function(i, e){
 							html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
@@ -95,6 +101,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 							data: "fsRouteno=" + fsRouteno + "&fiDayflag=" + day + "&fsRestype=mp&fsResno=" + type.fsResno,
 							url: "/routeArrange/findRouteCC.htm",
 							dataType: "json",
+							async: false,
 							success: function(data) {
 								var select = $("#ticket_" + type.fsResno);
 								$.each(data, function(ccIdx, cc){
@@ -115,6 +122,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 		url: "/routeArrange/findRouteCCType.htm",
 		data: "fsRouteno=" + fsRouteno + "&fiDayflag=" + day + "&fsRestype=ct",
 		dataType: "json",
+		async: false,
 		success: function(data){
 			$.each(data, function(typeIdx, type){
 				$.ajax({
@@ -123,9 +131,11 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 					data: "fsRestype=ct",
 					url: "/rescc/findResCC.htm",
 					dataType: "json",
+					async: false,
 					success: function(data){
 						var html = $("#div_restaurant").html();
 						html += '<label for="form-field-select-2" class="restaurant-label-' + type.fsResno + '">' + type.fsName + '</label>';
+						html += '<span class="pull-right btn-link red span-del restaurant-span-del-' + type.fsResno + '" onclick="fnDelAssociationTags(\'restaurant\', \'' + type.fsResno + '\');">删除</span>';
 						html += '<select class="form-control restaurant restaurant-select-' + type.fsResno + '" name="' + type.fsResno + '" id="restaurant_' + type.fsResno + '" multiple="multiple">';
 						$.each(data.rows, function(i, e){
 							html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
@@ -137,6 +147,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 							data: "fsRouteno=" + fsRouteno + "&fiDayflag=" + day + "&fsRestype=ct&fsResno=" + type.fsResno,
 							url: "/routeArrange/findRouteCC.htm",
 							dataType: "json",
+							async: false,
 							success: function(data) {
 								var select = $("#restaurant_" + type.fsResno);
 								$.each(data, function(ccIdx, cc){
@@ -157,6 +168,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 		url: "/routeArrange/findRouteCCType.htm",
 		data: "fsRouteno=" + fsRouteno + "&fiDayflag=" + day + "&fsRestype=yl",
 		dataType: "json",
+		async: false,
 		success: function(data){
 			$.each(data, function(typeIdx, type){
 				$.ajax({
@@ -165,9 +177,11 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 					data: "fsRestype=yl",
 					url: "/rescc/findResCC.htm",
 					dataType: "json",
+					async: false,
 					success: function(data){
 						var html = $("#div_entertainment").html();
 						html += '<label for="form-field-select-2" class="entertainment-label-' + type.fsResno + '">' + type.fsName + '</label>';
+						html += '<span class="pull-right btn-link red span-del entertainment-span-del-' + type.fsResno + '" onclick="fnDelAssociationTags(\'entertainment\', \'' + type.fsResno + '\');">删除</span>';
 						html += '<select class="form-control entertainment entertainment-select-' + type.fsResno + '" name="' + type.fsResno + '" id="entertainment_' + type.fsResno + '" multiple="multiple">';
 						$.each(data.rows, function(i, e){
 							html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
@@ -179,6 +193,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 							data: "fsRouteno=" + fsRouteno + "&fiDayflag=" + day + "&fsRestype=yl&fsResno=" + type.fsResno,
 							url: "/routeArrange/findRouteCC.htm",
 							dataType: "json",
+							async: false,
 							success: function(data) {
 								var select = $("#entertainment_" + type.fsResno);
 								$.each(data, function(ccIdx, cc){
@@ -199,6 +214,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 		url: "/routeArrange/findRouteCCType.htm",
 		data: "fsRouteno=" + fsRouteno + "&fiDayflag=" + day + "&fsRestype=bg",
 		dataType: "json",
+		async: false,
 		success: function(data){
 			$.each(data, function(typeIdx, type){
 				$.ajax({
@@ -207,9 +223,11 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 					data: "fsRestype=bg",
 					url: "/rescc/findResCC.htm",
 					dataType: "json",
+					async: false,
 					success: function(data){
 						var html = $("#div_room").html();
 						html += '<label for="form-field-select-2" class="room-label-' + type.fsResno + '">' + type.fsName + '</label>';
+						html += '<span class="pull-right btn-link red span-del room-span-del-' + type.fsResno + '" onclick="fnDelAssociationTags(\'room\', \'' + type.fsResno + '\');">删除</span>';
 						html += '<select class="form-control room room-select-' + type.fsResno + '" name="' + type.fsResno + '" id="room_' + type.fsResno + '" multiple="multiple">';
 						$.each(data.rows, function(i, e){
 							html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
@@ -221,6 +239,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 							data: "fsRouteno=" + fsRouteno + "&fiDayflag=" + day + "&fsRestype=bg&fsResno=" + type.fsResno,
 							url: "/routeArrange/findRouteCC.htm",
 							dataType: "json",
+							async: false,
 							success: function(data) {
 								var select = $("#room_" + type.fsResno);
 								$.each(data, function(ccIdx, cc){
@@ -232,6 +251,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 									data: "id=" + type.fsResno,
 									url: "/room/findRoomInfo.htm",
 									dataType: "json",
+									async: false,
 									success: function(room){
 										getRoom(room.data.fsAccomno);
 										$.ajax({
@@ -240,6 +260,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 											data: "id=" + room.data.fsAccomno,
 											url: "/accomadation/findAccomadationInfo.htm",
 											dataType: "json",
+											async: false,
 											success: function(accomadation) {
 												getAccomadation(accomadation.data);
 												$("#fsStarLvl").find("option[value='" + accomadation.data.starlvl + "']").attr("selected", "selected");
@@ -266,6 +287,7 @@ function getAllRouteCC(day, fiGenindex, fsRouteno) {
 		url: "/routeArrange/findRouteCCType.htm",
 		data: "fsRouteno=" + fsRouteno + "&fiDayflag=" + day + "&fsRestype=gw",
 		dataType: "json",
+		async: false,
 		success: function(data){
 			var html = $("#div_shop").html();
 			$.each(data, function(typeIdx, type){
@@ -324,6 +346,7 @@ function getDict(parentno, selectId){
 		url: "/dict/selectDict.htm",
 		data: "dict.fsParentno=" + parentno,
 		dataType: "json",
+		async: false,
 		success: function(data){
 			var html = '<option value="">' + '-- 请选择 --' + '</option>';
 			$.each(data, function(commentIndex, comment){
@@ -353,8 +376,10 @@ $("#addRoomBtn").click(function(){
 			data: "fsRestype=bg",
 			url: "/rescc/findResCC.htm",
 			dataType: "json",
+			async: false,
 			success: function(data){
-				html += '<label for="form-field-select-2" class="room-label-' + val + '">' + text + '</label>';
+				html += '<label for="form-field-select-2" class="pull-left room-label-' + val + '">' + text + '</label>';
+				html += '<span class="pull-right btn-link red span-del room-span-del-' + val + '" onclick="fnDelAssociationTags(\'room\', \'' + val + '\');">删除</span>';
 				html += '<select class="form-control room room-select-' + val + '" name="' + val + '" id="rooms_' + val + '" multiple="multiple">';
 				$.each(data.rows, function(i, e){
 					html += '<option value="' + e.fsCcno + '">' + e.fsCcname + '</option>';
@@ -366,12 +391,11 @@ $("#addRoomBtn").click(function(){
 	}
 });
 
-//删除房型
-$("#rmRoomBtn").click(function(){
-	var val = $("#room").val();
-	$(".room-label-" + val).remove();
-	$(".room-select-" + val).remove();
-});
+function fnDelAssociationTags(clazz, fsNo){
+	$("." + clazz + "-label-" + fsNo).remove();
+	$("." + clazz + "-select-" + fsNo).remove();
+	$("." + clazz + "-span-del-" + fsNo).remove();
+}
 
 //酒店标准变更
 $("#fsStarLvl").change(function(){
@@ -382,19 +406,3 @@ $("#fsStarLvl").change(function(){
 $("#accomadationNo").change(function(){
 	getRoom($("#accomadationNo").val());
 });
-
-$("#fsResno").change(function(){
-	alert("Done");
-});
-
-/**
- * 生成日程下拉列表
- */
-function getDays(num){
-	var html="";
-	for (var i = 0; i < num ; i++) {
-		html += '<option value=' + i + '>第' + (parseInt(i) + 1) + '天</option>';
-	}
-	$("#fiDays").html(html);
-	$("#fiDays").val("");
-}
