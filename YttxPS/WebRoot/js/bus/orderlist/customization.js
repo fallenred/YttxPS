@@ -315,6 +315,10 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
+		if(dataArr.length == 0){
+			alert("请先添加景区资源！");
+			return;
+		}
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -407,7 +411,7 @@ jQuery(function($) {
 	});
 	
 	function getTccprice(params, resno, date, obj){
-		var flag = false;
+		/*var flag = false;
 		resMap.each(function(key,value,index){
 			if (key == resno+date){
 				html = '';
@@ -417,7 +421,7 @@ jQuery(function($) {
 				$(".select_ccno").html(html);
 				flag = true;
 			}
-		});
+		});*/
 		if (flag) return;
 		$.ajax({
 			type: "GET",
@@ -434,7 +438,6 @@ jQuery(function($) {
 				$.each(data, function(commentIndex, comment){
 					html += '<option value=' + comment['fsCcno'] + '>' + comment['fsCcname'] + '(' + comment['fdPrice'] + '￥)</option>';
 				});
-				resMap.put(resno+date, data);
 				$(obj).html(html);
 			}
 		});
@@ -450,6 +453,10 @@ jQuery(function($) {
 		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
 		});
+		if(scenic == ''){
+			alert("请先添加景区资源！");
+			return;
+		}
 		var resno = '';
 		$.ajax({
 			type: "GET",
@@ -489,11 +496,10 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		/*if(dataArr.length == 0){
+		if(dataArr.length == 0){
 			alert("请先添加景区资源！");
-			$(obj).parent().parent().find(".select_resno").html('');
 			return;
-		}*/
+		}
 		$.ajax({
 			type: "POST",
 			url: "/restaurant/selectRestaurant.htm",
@@ -527,6 +533,10 @@ jQuery(function($) {
 		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
 		});
+		if(scenic == ''){
+			alert("请先添加景区资源！");
+			return;
+		}
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -549,6 +559,10 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
+		if(dataArr.length == 0){
+			alert("请先添加景区资源！");
+			return;
+		}
 		$.ajax({
 			type: "POST",
 			url: "/entertainment/selectEntertainment.htm",
@@ -811,7 +825,7 @@ jQuery(function($) {
 		var reslistIndex = $("#remarksIndex").val();
 		var ftDate = getNowFormatDate();
 		var fsContent = $("#fsContent").val();
-		var fdAmt = $("#fdAmt").val();
+		var fdAmt = $("#remarksAmt").val();
 		if (fdAmt == '') {
 			alert("备注金额不能为空！");
 			return;

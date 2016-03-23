@@ -89,4 +89,10 @@ public class GenService implements IGenService {
 	public int selectFiIndex() {
 		return genMapper.selectFiIndex();
 	}
+
+	@Override
+	public Tgen selectTgen(BigDecimal index) {
+		// TODO Auto-generated method stub
+		return genMapper.selectByPrimaryKey(index);
+	}
 }

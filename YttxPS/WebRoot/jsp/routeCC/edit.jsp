@@ -40,11 +40,8 @@
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
-												<li>
-													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg">
-														<img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
-													</a>
-												</li>
+												<li><a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg"> <img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
+												</a></li>
 											</div>
 										</ul>
 									</div>
@@ -109,10 +106,9 @@
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-right" id="addTicketBtn">添加</button>
 											</div>
-											<!-- 
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-left" id="rmTicketBtn">删除</button>
-											</div> -->
+											</div>
 										</div>
 									</div>
 									<div class="row">
@@ -133,10 +129,9 @@
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-right" id="addRestaurantBtn">添加</button>
 											</div>
-											<!-- 
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-left" id="rmRestaurantBtn">删除</button>
-											</div> -->
+											</div>
 										</div>
 									</div>
 									<div class="row">
@@ -157,10 +152,9 @@
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-right" id="addEntertainmentBtn">添加</button>
 											</div>
-											<!-- 
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-left" id="rmEntertainmentBtn">删除</button>
-											</div> -->
+											</div>
 										</div>
 									</div>
 									<div class="row">
@@ -195,10 +189,9 @@
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-right" id="addRoomBtn">添加</button>
 											</div>
-											<!-- 
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-success pull-left" id="rmRoomBtn">删除</button>
-											</div> -->
+											</div>
 										</div>
 									</div>
 									<div class="row">

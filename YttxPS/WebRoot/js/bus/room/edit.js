@@ -14,7 +14,6 @@ jQuery(function($) {
 
     // 关闭
     $("#editModal #room_close").on("click", function() {
-        //$("#editModal", parent.document).find(".close").click();
         $(this).removeData("bs.modal");
         $("#grid-table").trigger("reloadGrid");
     });
@@ -25,33 +24,50 @@ jQuery(function($) {
             function() {
                 $("#editForm #message").hide();
                 
-                if($("#editForm input[name='name']").val() == '') {
+                if($("#editForm input[name='fsName']").val() == '' || $("#addform input[name='fsName']").val() == undefined) {
                     $("#editForm #message").show();
                     $("#editForm #message").text("房型名称不能为空，请输入");
-                    $('#editForm #name').focus();
+                    $("#editForm input[name='fsName']").focus();
                     return false;
                 }
-                if($("#editForm select[name='type']").val() == '') {
-                    $("#editForm #message").show();
-                    $("#editForm #message").text("房型类型不能为空，请选择");
-                    $('#editForm #type').focus();
-                    return false;
-                }
-                if($("#editForm input[name='accomno']").val() == '') {
-                    $("#editForm #message").show();
-                    $("#editForm #message").text("酒店代码不能为空，请输入");
-                    $('#editForm #accomno').focus();
-                    return false;
-                }
-                if($("#editForm select[name='stat']").val() == '') {
+        		if($("#editForm select[name='fsType']").val() == '' || $("#addform select[name='fsType']").val() == undefined) {
+        			$("#editForm #message").show();
+        			$("#editForm #message").text("房型类型不能为空，请选择");
+        			$("#editForm select[name='fsType']").focus();
+        			return false;
+        		}
+        		if($("#editForm input[name='fsAccomno']").val() == '' || $("#addform input[name='fsAccomno']").val() == undefined) {
+        			$("#editForm #message").show();
+        			$("#editForm #message").text("酒店代码不能为空，请输入");
+        			$("#editForm input[name='fsAccomno']").focus();
+        			return false;
+        		}
+        		if($("#editForm select[name='fiStat']").val() == '' || $("#addform select[name='fiStat']").val() == undefined) {
                     $("#editForm #message").show();
                     $("#editForm #message").text("状态不能为空，请选择");
-                    $('#editForm #stat').focus();
+                    $("#editForm select[name='fiStat']").focus();
                     return false;
                 }
+        		
+        		var fsMeal = "";
+        		if($("#editForm input[name='fsMeal1']").is(":checked") == true) {
+        			fsMeal += "1";
+        		} else {
+        			fsMeal += "0";
+        		}
+        		if($("#editForm input[name='fsMeal2']").is(":checked") == true) {
+        			fsMeal += "1";
+        		} else {
+        			fsMeal += "0";
+        		}
+        		if($("#editForm input[name='fsMeal3']").is(":checked") == true) {
+        			fsMeal += "1";
+        		} else {
+        			fsMeal += "0";
+        		}
                 
                 $("#editForm #edit_submit").attr("disabled", "disabled");
-                $.post("/room/editRoom.htm", $("#editForm").serialize(),
+                $.post("/room/editRoom.htm", $("#editForm").serialize() + "&fsMeal=" + fsMeal,
                                 function(data) {
                                     var json = eval("(" + data + ")");
                                     $("#editForm #edit_submit").attr(
