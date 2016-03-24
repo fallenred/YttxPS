@@ -369,7 +369,7 @@ $("#addRoomBtn").click(function(){
 		flag = false;
 	}
 	
-	if (flag) {
+	if (flag && val) {
 		$.ajax({
 			type: "POST",
 			traditional: true,

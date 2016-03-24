@@ -47,12 +47,12 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsName">线路</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fiGenindex">线路</label>
 											<div class="col-sm-3">
 												<select id="fiGenindex" name="fiGenindex" class="form-control">
 												</select>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fsScenicName">车型</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fsTransno">车型</label>
 											<div class="col-sm-3">
 												<select id="fsTransno" name="fsTransno" class="form-control">
 												</select>
@@ -62,19 +62,19 @@
 									<div class="row">
 										<div class="form-group">
 
-											<label class="col-sm-2 control-label no-padding-right" for="fsType">起始日期</label>
+											<label class="col-sm-2 control-label no-padding-right" for="ftStartdate">起始日期</label>
 											<div class="col-sm-3">
 												<input class="form-control datetimepicker" data-date-format="yyyy-mm-dd" readonly="readonly" type="text" id="ftStartdate" name="ftStartdate" placeholder="起始日期" />
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fsType">截止日期</label>
+											<label class="col-sm-2 control-label no-padding-right" for="ftEnddate">截止日期</label>
 											<div class="col-sm-3">
-												<input class="form-control datetimepicker" data-date-format="yyyy-mm-dd" readonly="readonly" type="text" id="ftStartdate" name="ftEnddate" placeholder="截止日期" />
+												<input class="form-control datetimepicker" data-date-format="yyyy-mm-dd" readonly="readonly" type="text" id="ftEnddate" name="ftEnddate" placeholder="截止日期" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsType">价格</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fdPrice">价格</label>
 											<div class="col-sm-3">
 												<input class="form-control" type="text" id="fdPrice" name="fdPrice" placeholder="价格" />
 											</div>

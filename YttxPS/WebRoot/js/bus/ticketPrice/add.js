@@ -62,6 +62,29 @@ jQuery(function($) {
 			return false;
 		}
 		
+		if($("#ftStartdate").val() == '' || $("#ftStartdate").val() == undefined) {
+			$("#message").show();
+			$("#message").text("开始日期不能为空，请输入");
+			$('#ftStartdate').focus();
+			return false;
+		}
+		
+		if($("#ftEnddate").val() == '' || $("#ftEnddate").val() == undefined) {
+			$("#message").show();
+			$("#message").text("结束日期不能为空，请输入");
+			$('#ftEnddate').focus();
+			return false;
+		}
+		
+		var ftStartdate = new Date($("#ftStartdate").val());
+		var ftEnddate = new Date($("#ftEnddate").val());
+		if(ftEnddate - ftStartdate < 0) {
+			$("#message").show();
+			$("#message").text("结束日期不能早于开始日期");
+			$('#ftStartdate').focus();
+			return false;
+		}
+		
 		$("#fsNo").removeAttr("disabled");
 
 		$.post("/ticket/addTicketPrice.htm",

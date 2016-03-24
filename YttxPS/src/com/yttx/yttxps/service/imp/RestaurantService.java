@@ -57,7 +57,7 @@ public class RestaurantService implements IRestaurantService{
 	@Override
 	public String addRestaurent(TRestaurant restaurant){
 		//新增景区资源对照数据
-		String no = "ct"+produceNo();
+		String no = "ct" + produceNo();
 		restaurant.setNo(no);
 		restaurant.setScale(BigDecimal.ONE);
 		restaurantMapper.insertSelective(restaurant);//向数据库中插入数据

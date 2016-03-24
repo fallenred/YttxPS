@@ -44,6 +44,7 @@ $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#fsDesc").val(raw.fsDesc);
 	$(this).find("#fsLvl").val(raw.fsLvl);
 	$(this).find("#fsAddr").val(raw.fsAddr);
+	$(this).find("#fsOpentime").val(raw.fsOpentime);
 	$(this).find("#fsRegionno").val(raw.fsRegionno);
 	$(this).find("#fsRegionName").val(raw.fsRegionName);
 });
@@ -58,6 +59,7 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fsDesc").val(raw.fsDesc);
 	$(this).contents().find("#fsLvl").val(raw.fsLvl);
 	$(this).contents().find("#fsAddr").val(raw.fsAddr);
+	$(this).contents().find("#fsOpentime").val(raw.fsOpentime);
 	$(this).contents().find("#fsRegionno").val(raw.fsRegionno);
 	$(this).contents().find("#fsRegionName").val(raw.fsRegionName);
 });
@@ -206,7 +208,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '娱乐项目代码', '景区代码', '所属景区代码', '所属地区代码', '所属地区', '娱乐项目地址', '娱乐项目名称',  '娱乐项目类型', '状态', '级别', '描述' ],
+				colNames : [ '操作', '娱乐项目代码', '景区代码', '所属景区代码', '所属地区代码', '所属地区', '娱乐项目地址', '娱乐项目名称',  '娱乐项目类型', '状态', '级别', '开放时间', '描述' ],
 				colModel : [{
 					name : 'myac',
 					index : '',
@@ -318,6 +320,12 @@ jQuery(function($) {
 								return k;
 						return '1';
 					}
+				}, {
+					name : 'fsOpentime',
+					index : 'fsOpentime',
+					width : 50,
+					editable : true,
+					sorttype : "char"
 				}, {
 					name : 'fsDesc',
 					index : 'fsDesc',

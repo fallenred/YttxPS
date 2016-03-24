@@ -51,7 +51,7 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsName">票名称</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fsNo">票名称</label>
 											<div class="col-sm-3">
 												<select class="form-control" id="fsNo" name="fsNo" disabled="disabled"></select>
 											</div>

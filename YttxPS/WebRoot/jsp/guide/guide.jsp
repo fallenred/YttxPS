@@ -8,6 +8,9 @@
 <meta name="description" content="" />
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
+<script type="text/javascript">
+	var lvl = ${codeMasterJson}["dy"];
+</script>
 </head>
 <body class="no-skin">
 	<jsp:include page="/jsp/comm/topbar.jsp" flush="true" />

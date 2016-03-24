@@ -268,7 +268,7 @@ jQuery(function($) {
 			flag = false;
 		}
 		
-		if (flag) {
+		if (flag && val) {
 			$.ajax({
 				type: "POST",
 				traditional: true,
@@ -309,7 +309,7 @@ jQuery(function($) {
 			flag = false;
 		}
 		
-		if(flag) {
+		if(flag && val) {
 			$.ajax({
 				type: "POST",
 				traditional: true,
@@ -362,7 +362,7 @@ jQuery(function($) {
 				flag = false;
 			} 
 		});
-		if (flag)
+		if (flag && val)
 			html += '<input type="hidden" name="scenicGen" value="' + val + '"/>' + '&nbsp;&nbsp;<label>' + text + '</label>&nbsp;&nbsp;';
 		$("#div_scenics").html(html);
 		getTicket();
@@ -393,7 +393,7 @@ jQuery(function($) {
 			flag = false;
 		}
 		
-		if (flag) {
+		if (flag || val) {
 			//获取门票价格
 			$.ajax({
 				type: "POST",
@@ -433,7 +433,7 @@ jQuery(function($) {
 				flag = false;
 			}
 		});
-		if (flag) {
+		if (flag && val) {
 			$("#index").attr("value", parseInt(index) + 1);
 			html += '<input type="hidden" class="shopid" name="routecc[' + val + '].fsResno" value="' + val + '"/>'+
 					'<input type="hidden" class="shop_' + val + '" name="routecc[' + val + '].fsRestype" value="gw"/>' + 
