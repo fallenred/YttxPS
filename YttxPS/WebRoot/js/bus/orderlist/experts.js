@@ -214,7 +214,7 @@ jQuery(function($) {
 		//获取景区门票列表
 		getTicket(null);
 		//获取酒店级别列表
-		getDictLvl(null);
+		getDictLvl(null, 'bg');
 	});
 	
 	//获取车型列表selectTransport.htm

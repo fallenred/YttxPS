@@ -161,10 +161,10 @@
 												<input type="text" id="fdPrice" name="fdPrice"
 													class="form-control" placeholder="初始报价" />
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
+											<label hidden="hidden" class="div_transfer_stat col-sm-2 control-label no-padding-right"
 												for="fiStat">订单状态</label>
-											<div class="col-sm-3">
-												<select disabled="disabled" id="fiStat" name="fiStat"
+											<div hidden="hidden" class="div_transfer_stat col-sm-3">
+												<select id="fiStat" name="fiStat"
 													class="form-control">
 													<option value="0">待审核</option>
 													<option value="1">已审核</option>

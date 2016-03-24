@@ -64,6 +64,8 @@ public class OrderlistService implements IOrderlistService {
 	@Override
 	@Transactional(rollbackFor=Exception.class)
 	public int update(TOrderlistWithBLOBs record) throws Exception {
+		//处理状态
+		handleStat(record);
 		//公共精确资源:orderlist-fc_Schedule
 		Body commBody = new Body();
 		//处理body-reslist
@@ -112,6 +114,9 @@ public class OrderlistService implements IOrderlistService {
 				remarks.setFiSeq(new BigDecimal(i));
 				remarks.setFdPaidamt(BigDecimal.ZERO);
 				remarks.setFiClosestat(BigDecimal.ZERO);
+				if ("1".equals(record.getFiStat())) {
+					remarks.setFdPaidamt(remarks.getFdAmt());
+				}
 				remarksMapper.insertSelective(remarks);
 			}
 		}

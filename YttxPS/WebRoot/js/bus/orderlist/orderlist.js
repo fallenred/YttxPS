@@ -78,16 +78,24 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fiVisitornum").val(raw.fiVisitornum);
 	$(this).contents().find("#insurenum").val(raw.fiVisitornum);
 	getGenName(raw.fiGenindex, $(this).contents().find("#genName"));
-	/*$.ajax({
-		type: "GET",
-		url: "/gen/findGen.htm",
-		data: 'index='+raw.fiGenindex,
-		dataType: "json",
-		success: function(data){
-			alert(data.fsName);
-			$(this).contents().find("#genName").val(data.fsName);
-		}
-	});*/
+	html='<option value="">---订单状态---</option>';
+	if (raw.fiStat == '2') {
+		html +='<option value="4">已付首款</option>'
+		$(this).contents().find("#fiStat").html(html);
+		$(this).contents().find(".div_transfer_stat").show();
+	} else if (raw.fiStat == '4') {
+		//状态为已付收款时，页面状态只能选已付全款选项
+		html +='<option value="8">已付全款(可出团)</option>'
+		$(this).contents().find("#fiStat").html(html);
+		$(this).contents().find(".div_transfer_stat").show();
+	} else if (raw.fiStat == '8') {
+		//状态为已付全款时，页面状态只做显示
+		html ='<option value="8">已付全款(可出团)</option>';
+		$(this).contents().find("#fiStat").html(html);
+		$(this).contents().find(".div_transfer_stat").show();
+	} else {
+		$(this).contents().find("#fiStat").html('<option value="'+raw.fiStat+'"></option>');
+	}
 	$.base64.utf8encode = true;
 	$(this).contents().find('#fcSchedule').val($.base64.btoa(raw.fcSchedule));
 	//获取线路列表
