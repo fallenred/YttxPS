@@ -72,6 +72,17 @@ static Logger logger = LoggerFactory.getLogger(GenController.class);
     }
 	
 	/**
+	 * 获取路线
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="findGenByIndex.htm", method = RequestMethod.GET)
+	@ResponseBody
+	public Object ajaxSelectGen(BigDecimal index) {  
+		return this.genService.selectTgen(index);
+    }
+	
+	/**
 	 * 新增线路信息
 	 * @param Gen
 	 * @return

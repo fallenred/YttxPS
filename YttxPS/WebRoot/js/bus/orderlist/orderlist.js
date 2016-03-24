@@ -96,7 +96,7 @@ $("#editIframe").on("load",function(){
 function getGenName(genindex, obj){
 	$.ajax({
 		type: "GET",
-		url: "/gen/findGen.htm",
+		url: "/gen/findGenByIndex.htm",
 		data: 'index='+genindex,
 		dataType: "json",
 		success: function(data){
