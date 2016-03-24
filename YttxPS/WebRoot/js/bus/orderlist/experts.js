@@ -1,9 +1,11 @@
 jQuery(function($) {
 	$("#message").hide();
 	$("#reset").click();
+	
 	var fsNo = $.getUrlParam('fsNo');
+	var genIndex = $.getUrlParam('genIndex');
 	var startdate = $.getUrlParam('startdate');
-
+	
 	var localsel = $("#selectCity", "#editform").localCity({
 
 		provurl : "/pub/findcity.htm",
@@ -35,7 +37,7 @@ jQuery(function($) {
 
 	// 关闭
 	$("#close").on("click", function () {
-		$("#customizationModal", parent.document).find(".close").click();
+		$("#editModal", parent.document).find(".close").click();
 	});
 	//返回+1之后的结果
 	Handlebars.registerHelper("addOne",function(index){
@@ -79,40 +81,20 @@ jQuery(function($) {
 			data: 'no='+fsNo,
 			dataType: "json",
 			success: function(data){
-				//计划天数
-				$("#days").val(data.fcSchedule.daylist.length);
-				//服务标准
-				$("#svcstdcontent").val(data.fcSchedule.svcstdcontent);
-				//保险金额
-				$("#insuerprice").val(data.fcSchedule.insuerprice);
-				//预估金额
-				$("#price").val(data.fcSchedule.price);
-				var daylistTemplate = Handlebars.compile($("#daylist-template").html());
-				//处理早午晚餐页面勾选
-				Handlebars.registerHelper('compare',function(value, options) {
-					//不勾选
-					if(value == 0){
-						return options.fn(this);
-					}
-					//勾选
-					else if(value == 1){  
-						return options.inverse(this);
-					}
-				});
-				//行程安排
-				$('#table-daylist').html(daylistTemplate(data.fcSchedule));
-				//附件
-				var attachsTemplate = Handlebars.compile($("#attachs-template").html());
-				$('#table-attachs').html(attachsTemplate(data.fcSchedule));
+				//获取线路景区
+				getSceniceGen();
 				//公共资源头
 				var commResTemplate = Handlebars.compile($("#commRes-template").html());
-				//公共资源体（导游、车型、景区）
+				//公共资源体（服务标准）
 				var commResTemplate1 = Handlebars.compile($("#commRes-template1").html());
-				//公共资源体（门票、购物、餐厅）
+				//公共资源体（导游、车型、景区）
 				var commResTemplate2 = Handlebars.compile($("#commRes-template2").html());
+				//公共资源体（门票、购物、餐厅）
+				var commResTemplate3 = Handlebars.compile($("#commRes-template3").html());
 				$('#myTab').html(commResTemplate(data.commResSnapshot));
-				$('#myTabContent').html(commResTemplate1(data.commResSnapshot));
-				$('#myTabContent').html($('#myTabContent').html() + commResTemplate2(data.commResSnapshot));
+				$('#table_fuzz').html(commResTemplate1(data.commFuzzySnapshot));
+				$('#tbody_common').html(commResTemplate2(data.commResSnapshot));
+				$('#myTabContent').html($('#myTabContent').html() + commResTemplate3(data.commResSnapshot));
 				//获取车型列表
 				getTransport();
 				//获取导游星级列表
@@ -126,8 +108,61 @@ jQuery(function($) {
 			}
 		});
 	}); 
+	
+	//车型变更
+	/*$(document).on('change key', '#transport', function(event){
+		var resno = $(this).val();
+		var restype = "cx";
+		$.ajax({
+			type: "GET",
+			url: "/tccPrice/findTccPrice.htm",
+			data: {
+				"ftStartdate" : startdate,
+				"ftEnddate" : startdate,
+				"restype" : restype,
+				"resno" : resno
+			},
+			dataType: "json",
+			success: function(data){
+				if (data == null || data == '') {
+					//alert("未配置资源价格！");
+					$(obj).parent().find("#transportPrice").html('');
+					return;
+				}
+				html = '';
+				$.each(data, function(commentIndex, comment){
+					
+				});
+			}
+		});
+	});*/
+	
+	//查询线路景区
+	function getSceniceGen(){
+		$.ajax({
+			type: "GET",
+			url: "/scenicGen/selectScenicGen.htm",
+			data: "scenicGen.fiGenindex="+genIndex,
+			dataType: "json",
+			success: function(data){
+				html = '';
+				$.each(data, function(commentIndex, comment){
+					html += '<tr>'+
+								'<td><input type="hidden" value="'+comment['fsScenicno']+'" class="scenic" placeholder="资源编号"></td>'+
+								'<td>景区</td>'+
+								'<td>'+comment['fsScenicname']+'</td>'+
+								'<td></td>'+
+								'<td></td>'+
+								'<td></td>'+
+							'</tr>';	
+				});
+				$("#tbody_common").html($("#tbody_common").html() + html);
+			}
+		});
+	}
+	
+	//查询景区列表
 	function getScenic(){
-		//获取景区列表
 		$.ajax({
 			type: "POST",
 			url: "/scenic/findAllScenic.htm",
@@ -316,10 +351,6 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		/*if(dataArr.length == 0){
-			alert("请先添加景区资源！");
-			return;
-		}*/
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -423,9 +454,7 @@ jQuery(function($) {
 				flag = true;
 			}
 		});
-		if (flag) return;
-		*/
-		
+		if (flag) return;*/
 		$.ajax({
 			type: "GET",
 			url: "/tccPrice/findTccPrice.htm",
@@ -457,10 +486,6 @@ jQuery(function($) {
 		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
 		});
-		/*if(scenic == ''){
-			alert("请先添加景区资源！");
-			return;
-		}*/
 		var resno = '';
 		$.ajax({
 			type: "GET",
@@ -502,6 +527,7 @@ jQuery(function($) {
 		});
 		/*if(dataArr.length == 0){
 			alert("请先添加景区资源！");
+			$(obj).parent().parent().find(".select_resno").html('');
 			return;
 		}*/
 		$.ajax({
@@ -537,10 +563,6 @@ jQuery(function($) {
 		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
 		});
-		/*if(scenic == ''){
-			alert("请先添加景区资源！");
-			return;
-		}*/
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -563,10 +585,6 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		/*if(dataArr.length == 0){
-			alert("请先添加景区资源！");
-			return;
-		}*/
 		$.ajax({
 			type: "POST",
 			url: "/entertainment/selectEntertainment.htm",
@@ -711,8 +729,48 @@ jQuery(function($) {
 			var batchTemplate = Handlebars.compile($("#batch-template").html());
 			//返回数组长度
 			$('#table_batch tbody').html(batchTemplate(orderCustoms));
+			//遍历所有批次
+			$.each(data, function(cusIndex, cuscomment){
+				$.each(cuscomment['fuzzBody'].daylist, function(bodyIndex, daycomment){
+					$.each(daycomment['reslist'], function(index, comment){
+						restype = '';
+						if (comment['restype'] == 'ct') {
+							restype = '餐饮';
+						} else {
+							restype = '酒店';
+						}
+						resname = '';
+						if (comment['resname'] != null) {
+							resname = comment['resname'];
+						}
+						remark = '';
+						if (comment['remark'] != null) {
+							remark = comment['remark'];
+						}
+						html = '<tr class="warning">'+
+						'<td>'+	restype + '</td>'+
+						'<td>'+resname+'</td>'+
+						'<td>'+remark+'</td>'+
+						'</tr>';
+						id = "#table_" + cuscomment['fiId'] +'_day'+bodyIndex + " tbody";
+						$(id).html($(id).html()+html);
+					});
+				});
+			});
 		}
 	});
+	
+	function getBatchFuzz(){
+		$.ajax({
+			type: "POST",
+			url: "/orderCustom/selectOrderCustom.htm",
+			data: 'fsOrderId='+fsNo,
+			dataType: "json",
+			success: function(data){
+			}
+		});
+		//alert($('#table_243_0').html());
+	}
 
 	//返回资源类型
 	Handlebars.registerHelper("getType",function(value){
@@ -848,10 +906,9 @@ jQuery(function($) {
 		$("#remarksIndex").val(parseInt($("#remarksIndex").val())+1);
 		$('#table_remarks tbody').html($('#table_remarks tbody').html() + remarksTemplate(data));
 	});
-	
 	//	提交
 	$("#submit").on("click", function () {
-		$.post("/orderlist/editOrderlist4custom.htm",
+		$.post("/orderlist/editOrderlist.htm",
 				$("#editform").serialize(),
 				function(data){
 			var json = eval("("+data+")");

@@ -99,6 +99,11 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 				}
 				customWithBLOBs.setBody(body);
 			}
+			//转换模糊快照
+			if (StringUtils.isNotEmpty(customWithBLOBs.getFcFuzzysnapshot())) {
+				Root root = ResScheduleXMLConverter.fromXml("http://www.yttx.com/", customWithBLOBs.getFcFuzzysnapshot(), Root.class);
+				customWithBLOBs.setFuzzBody(root.getBody());
+			}
 		}
 		return list;
     }

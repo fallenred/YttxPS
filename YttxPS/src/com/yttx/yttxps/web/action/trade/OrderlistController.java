@@ -142,7 +142,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		if (StringUtils.isNotBlank(orderlistWithBLOBs.getFcCommressnapshot())){
 			Root root = ResScheduleXMLConverter.fromXml("http://www.cnacex.com/", orderlistWithBLOBs.getFcCommressnapshot(), Root.class);
 			map.put("commResSnapshot", root.getBody());
-		} else if (StringUtils.isBlank(orderlistWithBLOBs.getFcCommressnapshot()) && "03".equals(orderlistWithBLOBs.getFsType())) {
+		} else if (StringUtils.isBlank(orderlistWithBLOBs.getFcCommressnapshot())) {
 			//定制线路-公共精确快照为空时创建空的body对象供页面做解析
 			int days = orderlistWithBLOBs.getFiDays().toBigInteger().intValue();
 			Body body = new Body();
@@ -202,6 +202,9 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
     {  
 		logger.debug("当前更新对象 {}", orderlist);
 		try{
+			HttpSession session = request.getSession();
+			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
+			orderlist.setFsOperId(sessionEntity.getId());
 			orderlistService.update(orderlist);
 		}
 		catch(Exception e){

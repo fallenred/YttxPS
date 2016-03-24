@@ -19,13 +19,13 @@ function editOrderlist(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	var frameSrc = '';
 	if (raw.fsType == '02') {
-		//衍生线路
-		frameSrc = "/jsp/orderlist/edit.jsp?fsNo="+raw.fsNo;
+		//专家线路
+		frameSrc = "/jsp/orderlist/experts.jsp?fsNo="+raw.fsNo+"&genIndex="+raw.fiGenindex+"&startdate="+raw.ftStartdate;
 		$("#editIframe").attr("src", frameSrc);
 		$('#editModal').modal({ show: true, backdrop: 'static' });
 	} else if(raw.fsType == '03') {
 		//定制线路
-		frameSrc = "/jsp/orderlist/customization.jsp?fsNo="+raw.fsNo;
+		frameSrc = "/jsp/orderlist/customization.jsp?fsNo="+raw.fsNo+"&startdate="+raw.ftStartdate;
 		$("#customizationIframe").attr("src", frameSrc);
 		$('#customizationModal').modal({ show: true, backdrop: 'static' });
 	}
@@ -46,7 +46,7 @@ $("#addIframe").on("load",function(){
 	$(this).contents().find("#fdPaidAmt").val(raw.fdPaidAmt);
 });
 
-//衍生线路
+//专家线路
 $("#editIframe").on("load",function(){
 	$(this).contents().find("#reset").click();
 	$(this).contents().find("#fsNo").val(raw.fsNo);
@@ -61,6 +61,7 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fsRouteId").val(raw.fsRouteId);
 	$(this).contents().find("#fsProperty").val(raw.fsProperty);
 	$(this).contents().find("#fiDays").val(raw.fiDays);
+	$(this).contents().find("#days").val(raw.fiDays);
 	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
 	$(this).contents().find("#fsStartplace").val(raw.fsStartplace);
 	$(this).contents().find("#regionname").val(raw.regionname);
@@ -72,16 +73,37 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fiStat").val(raw.fiStat);
 	$(this).contents().find("#currStat").val(raw.fiStat);
 	$(this).contents().find("#fsDac").val(raw.fsDac);
-	//$(this).contents().find("#fcSchedule").html(raw.fcSchedule);
+	$(this).contents().find("#fsOperId").val(raw.fsOperId);
+	$(this).contents().find("#fdInsuerprice").val(raw.fdInsuerprice);
+	$(this).contents().find("#fiVisitornum").val(raw.fiVisitornum);
+	$(this).contents().find("#insurenum").val(raw.fiVisitornum);
+	getGenName(raw.fiGenindex, $(this).contents().find("#genName"));
+	/*$.ajax({
+		type: "GET",
+		url: "/gen/findGen.htm",
+		data: 'index='+raw.fiGenindex,
+		dataType: "json",
+		success: function(data){
+			alert(data.fsName);
+			$(this).contents().find("#genName").val(data.fsName);
+		}
+	});*/
 	$.base64.utf8encode = true;
 	$(this).contents().find('#hSchedule').val($.base64.btoa(raw.fcSchedule));
-
-	if (raw.fiGenindex != null)
-		getTransportArrange(this, raw.fiGenindex);
-	if (raw.fsNo != null) {
-		findCommSnapshot(this, raw.fsNo);
-	}
+	//获取线路列表
 });
+
+function getGenName(genindex, obj){
+	$.ajax({
+		type: "GET",
+		url: "/gen/findGen.htm",
+		data: 'index='+genindex,
+		dataType: "json",
+		success: function(data){
+			$(obj).val(data.fsName);
+		}
+	});
+}
 
 //定制线路
 $("#customizationIframe").on("load",function(){
@@ -120,96 +142,9 @@ $("#customizationIframe").on("load",function(){
 	} else {
 		$(this).contents().find("#fiStat").html('<option value="'+raw.fiStat+'"></option>');
 	}
-	getGuide(obj, Lvl);
+	//getGuide(obj, Lvl);
 });
 
-function getTccPrice(obj, fsResno, id){
-	$.ajax({
-        type: "GET",
-        url: "/tccPrice/findTccPrice.htm",
-        data: 'fsResno='+fsResno+'&ftStartdate='+$(obj).contents().find("#ftStartdate").val()+'&fsCcno=000023&fsRestype=cx',
-        dataType: "json",
-        success: function(data){
-        	$.each(data, function(commentIndex, comment){
-        		if ($(obj).contents().find("#"+id).val() == '')
-        			$(obj).contents().find("#"+id).val(comment['fdPrice']);
-        	});
-        }
-    });
-}
-
-//获取资源快照
-function findCommSnapshot(obj, no){
-	$.ajax({
-		type: "POST",
-		url: "/orderlist/findCommSnapshot.htm",
-		data: 'no='+no,
-		dataType: "json",
-		success: function(data){
-			var html = ''; 
-			//模糊字段处理
-			$.each(data.commFuzzySnapshot.reslist, function(commentIndex, comment){
-				if(comment['restype'] == 'cx'){
-					$(obj).contents().find("#transName").val(comment['resname']);
-				}
-				if(comment['restype'] == 'dy'){
-					$(obj).contents().find("#custGuideLvl").val(comment['resname']);
-				}
-			});
-			//精确字段处理
-			$.each(data.commResSnapshot.reslist, function(commentIndex, comment){
-				if(comment['restype'] == 'cx'){
-					$(obj).contents().find("#transType").val(comment['resno']);
-					$(obj).contents().find("#resTransName").attr("value", comment['resname']);
-					$(obj).contents().find("#transPrice").attr("value", comment['cclist'][0].price);
-				}
-				if(comment['restype'] == 'dy'){
-					$(obj).contents().find("#guideNo").val(comment['resno']);
-					html += '<option value=' + comment['resno'] + '>' + comment['resname'] + '</option>';
-					$(obj).contents().find("#guideNo").html(html);
-					$(obj).contents().find("#guideName").attr("value", comment['resname']);
-					$(obj).contents().find("#guidePrice").attr("value", comment['cclist'][0].price);
-				}
-			});
-		}
-	});
-}
-
-//获取车型列表
-function getTransportArrange(obj, index){
-	$.ajax({
-		type: "GET",
-		url: "/transportArrange/selectTransportArrange.htm",
-		data: "transportArrange.fiGenindex="+index,
-		dataType: "json",
-		success: function(data){
-			var html = ''; 
-			$.each(data, function(commentIndex, comment){
-				html += '<option value=' + comment['fsNo'] + '>' + comment['fsTransName'] + '</option>';
-			});
-			$(obj).contents().find("#transType").html(html);
-			getTccPrice(obj, $(obj).contents().find("#transType").val(), 'transPrice');
-			$(obj).contents().find("#resTransName").attr("value", $(obj).contents().find("#transType").find("option:selected").text());
-		}
-	});
-}
-
-function getGuide(obj, Lvl){
-	//获取导游列表
-	$.ajax({
-		type: "GET",
-		url: "/guide/selectGuide.htm",
-		data: "guide.lvl="+Lvl,
-		dataType: "json",
-		success: function(data){
-			var html = ''; 
-			$.each(data, function(commentIndex, comment){
-				html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
-			});
-			$(obj).contents().find("#guideFsNo").html(html);
-		}
-	});
-}
 
 $("#addModal", parent.document).on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
@@ -330,7 +265,7 @@ jQuery(function($) {
 	s = s.substring(1);
 	//线路类型
 	var fsType = {
-			'02' : '衍生线路',
+			'02' : '专家线路',
 			'03' : '定制线路'
 		};
 	var s1 = '';
