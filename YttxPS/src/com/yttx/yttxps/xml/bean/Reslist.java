@@ -32,6 +32,18 @@ public class Reslist {
 	private String resname;
 	
 	/**
+	 * 客户备注
+	 */
+	@XStreamAlias("remark")
+	private String remark;
+	
+	/**
+	 * 午餐、晚餐标志
+	 */
+	@XStreamAlias("flag")
+	private String flag;
+	
+	/**
 	 * 消费选项
 	 */
 	@XStreamImplicit(itemFieldName="cclist")
@@ -66,5 +78,17 @@ public class Reslist {
 	}
 	public void setCclist(List<Cclist> cclist) {
 		this.cclist = cclist;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 }

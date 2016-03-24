@@ -113,6 +113,8 @@
 												<div class="col-sm-2">
 													<select class="form-control" id="fiStat">
 														<option value="">----状态----</option>
+														<option value="-10">询价</option>
+														<option value="-5">报价</option>
 														<option value="0">待审核</option>
 														<option value="1">已审核</option>
 														<option value="2">已确认(待付款)</option>
@@ -177,7 +179,7 @@
 											<h4 class="modal-title" id="addModalLabel">计调订单</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="editIframe" width="100%" height="2500px"
+											<iframe id="editIframe" width="100%" height="3500px"
 												frameborder="0" scrolling="no"></iframe>
 										</div>
 

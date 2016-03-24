@@ -73,22 +73,6 @@
 											</div>
 										</div>
 									</div>
-									<!-- <div class="row">
-										<div class="form-group"> -->
-											<!-- <label class="col-sm-2 control-label no-padding-right"
-												for="fsUserName">用户</label>
-											<div class="col-sm-3"> -->
-												<input type="hidden" id="fsUserId" name="fsUserId" class="form-control" placeholder="用户id" /> 
-												<!-- <input type="text" id="fsUserName" name="fsUserName" class="form-control" placeholder="用户名" /> -->
-											<!-- </div> -->
-											<!-- <label class="col-sm-2 control-label no-padding-right"
-												for="fsUserSubName">子用户</label> -->
-											<!-- <div class="col-sm-3"> -->
-												<input type="hidden" id="fsUserSubid" name="fsUserSubid" class="form-control" placeholder="用户id" /> 
-												<!-- <input type="text" id="fsUserSubName" name="fsUserSubName" class="form-control" placeholder="子用户" /> -->
-											<!-- </div>
-										</div>
-									</div> -->
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"

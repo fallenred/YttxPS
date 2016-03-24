@@ -60,6 +60,7 @@ public class PubService<T> implements IPubService<T> {
 	@Override
 	public String findRegionFullName(String no) {
 		RegionMap r1 = regionMapMapper.selectByPrimaryKey(no);
+		if (r1 == null) return "";
 		if(r1.getLvl().intValue() == 1) {
 			return r1.getName();
 		} else {

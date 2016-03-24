@@ -64,13 +64,42 @@ public class OrderlistService implements IOrderlistService {
 	@Override
 	@Transactional(rollbackFor=Exception.class)
 	public int update(TOrderlistWithBLOBs record) throws Exception {
-		Body body = new Body();
-		body.setReslist(record.getReslist());
-		String fcCommressnapshot = ResScheduleXMLConverter.toXml("http://www.cnacex.com/", new Root(body));
+		//公共精确资源:orderlist-fc_Schedule
+		Body commBody = new Body();
+		//处理body-reslist
+		commBody.setReslist(handleResListIndex(record.getCommBody().getReslist()));
+		if (CollectionUtils.isNotEmpty(record.getCommBody().getDaylist())) {
+			for (Daylist daylist : record.getCommBody().getDaylist()){
+				//处理body-daylist-reslist
+				daylist.setReslist(handleResListIndex(daylist.getReslist()));
+			}
+			commBody.setDaylist(record.getCommBody().getDaylist());
+		}
+		//将公共精确资源转换为xml
+		ResScheduleXMLConverter.toXml("http://www.cnacex.com/", commBody);
+		String fcCommressnapshot = ResScheduleXMLConverter.toXml("http://www.cnacex.com/", new Root(commBody));
 		record.setFcCommressnapshot(fcCommressnapshot);
+		
+		//批次精确资源:ordercustom-fc_ResSnapshot
+		if (CollectionUtils.isNotEmpty(record.getBatchBody())){
+			for (int i = 0; i < record.getBatchBody().size(); i++) {
+				Body body = record.getBatchBody().get(i);
+				for(Daylist daylist : body.getDaylist()){
+					daylist.setReslist(handleResListIndex(daylist.getReslist()));
+				}
+				TOrderCustomWithBLOBs customWithBLOBs = new TOrderCustomWithBLOBs();
+				ResScheduleXMLConverter.toXml("http://www.cnacex.com/", body);
+				String fcRessnapshot = ResScheduleXMLConverter.toXml("http://www.cnacex.com/", new Root(body));
+				customWithBLOBs.setFcRessnapshot(fcRessnapshot);
+				customWithBLOBs.setFiId(new BigDecimal(body.getFiId()));
+				customWithBLOBs.setFdAmt(record.getBatchAmt().get(i));
+				orderCustomMapper.updateByPrimaryKeySelective(customWithBLOBs);
+			}
+		}
+		
+		//先删除订单备注
 		//更新订单备注
 		if (CollectionUtils.isNotEmpty(record.getRemarks())) {
-			//先删除订单备注
 			TRemarksExample example = new TRemarksExample();
 			Criteria criteria = example.createCriteria();
 			criteria.andFsOrderIdEqualTo(record.getFsNo());
@@ -138,9 +167,9 @@ public class OrderlistService implements IOrderlistService {
 				orderCustomMapper.updateByPrimaryKeySelective(customWithBLOBs);
 			}
 		}
+		//先删除订单备注
 		//更新订单备注
 		if (CollectionUtils.isNotEmpty(record.getRemarks())) {
-			//先删除订单备注
 			TRemarksExample example = new TRemarksExample();
 			Criteria criteria = example.createCriteria();
 			criteria.andFsOrderIdEqualTo(record.getFsNo());

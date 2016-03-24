@@ -63,52 +63,79 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="fsName">订单名称</label>
-											<div class="col-sm-8">
-												<input type="text" id="fsName" name="fsName" readonly="readonly"
-													class="form-control" placeholder="订单名称" />
+												for="fsNo">订单名称</label>
+											<div class="col-sm-3">
+												<input type="hidden" id="fsNo" name="fsNo"
+													class="form-control" placeholder="订单id" /> <input
+													type="text" id="fsName" name="fsName" class="form-control"
+													placeholder="订单名称" />
+											</div>
+											<label class="col-sm-2 control-label no-padding-right"
+												for="fiGenindex">所属线路</label>
+											<div class="col-sm-3">
+												<input type="hidden" class="form-control" id="fiGenindex">
+												<input type="text" readonly="readonly" class="form-control" id="genName">
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="fsName">订单编号</label>
+												for="ftCreatdate">创建日期</label>
 											<div class="col-sm-3">
-												<input type="text" readonly="readonly" id="fsNo" name="fsNo" class="form-control" placeholder="订单id" />
+												<input type="text" id="ftCreatdate" readonly="readonly" name="ftCreatdate"
+													class="form-control" placeholder="创建日期" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
-												for="ftStartdate">出发日期</label>
+												for="fsOperId">计&nbsp;调&nbsp;&nbsp;员</label>
+											<div class="col-sm-3">
+												<input type="text" readonly="readonly" id="fsOperId" name="fsOperName" class="form-control" placeholder="计调员" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right"
+												for="fsType">路线类型</label>
+											<div class="col-sm-3">
+												<input type="hidden" id="fsRouteId" name="fsRouteId" class="form-control" placeholder="线路id" /> 
+												<select id="fsType" name="fsType" class="form-control" disabled="disabled">
+													<option value="02">专家线路</option>
+												</select>
+											</div>
+											<label class="col-sm-2 control-label no-padding-right"
+												for="fsProperty">组团类型</label>
+											<div class="col-sm-3">
+												<select id="fsProperty" name="fsProperty" class="form-control" disabled="disabled">
+													<option value="01">独立成团</option>
+													<option value="02">散客拼团</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right"
+												for="ftStartdate">发团日期</label>
 											<div class="col-sm-3">
 												<input type="text" id="ftStartdate" name="ftStartdate"
-													class="form-control" data-date-format="yyyy/mm/dd"
-													readonly="readonly" placeholder="出发日期" />
+													class="form-control" readonly="readonly" placeholder="发团日期" />
+											</div>
+											<label class="col-sm-2 control-label no-padding-right"
+												for="regionname">发团地点</label>
+											<div class="col-sm-3">
+												<input class="form-control" type="text" placeholder="请选择行政区域" name="regionname"
+													data-key="0086" data-idx="0" data-full="中国"
+													id="regionname" class="inp-search" /> <input
+													type="hidden" name="fsStartplace" id="regionno" />
+												<div id="selectCity" class="localcity"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="days">计划天数</label>
-											<div class="col-sm-3">
-												<div class="input-group">
-													<input type="text" id="days" readonly="readonly"
-														class="form-control"> <span
-														class="input-group-addon">天</span>
-												</div>
-											</div>
-											<label class="col-sm-2 control-label no-padding-right"
-												for="fiVisitornum">游客人数</label>
-											<div class="col-sm-3">
-												<input type="text" id="fiVisitornum" class="form-control"
-													placeholder="游客人数" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="insurenum">保险</label>
+												for="insurenum">保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;险</label>
 											<div class="col-sm-3">
 												<div class="input-group">
 													<input type="text" id="insurenum" class="form-control">
@@ -129,160 +156,48 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="fsRemark">订单备注</label>
-											<div class="col-sm-8">
-												<textarea name="fsRemark" id="fsRemark" class="form-control"
-													rows="3" placeholder="整体备注"></textarea>
+												for="fdPrice">单人报价</label>
+											<div class="col-sm-3">
+												<input type="text" id="fdPrice" name="fdPrice"
+													class="form-control" placeholder="初始报价" />
+											</div>
+											<label class="col-sm-2 control-label no-padding-right"
+												for="fiStat">订单状态</label>
+											<div class="col-sm-3">
+												<select disabled="disabled" id="fiStat" name="fiStat"
+													class="form-control">
+													<option value="0">待审核</option>
+													<option value="1">已审核</option>
+													<option value="4">已付首款</option>
+													<option value="8">已付全款(可出团)</option>
+												</select>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="editTable">行程要求</label>
+												for="fsSummary">路线摘要</label>
 											<div class="col-sm-8">
-												<table class="table table-bordered" id="editTable">
-													<thead>
-														<tr>
-															<th width="10%">日期</th>
-															<th width="11%">交通</th>
-															<th width="50%">行程</th>
-															<th width="6%">早餐</th>
-															<th width="6%">午餐</th>
-															<th width="6%">晚餐</th>
-															<th width="11%">酒店</th>
-														</tr>
-													</thead>
-													<tbody id="table-daylist">
-														<script id="daylist-template" type="text/x-handlebars-template">
-														{{#each daylist}}
-															<tr>
-																<td>{{date}}<input name="scheduleBody.daylist[{{@index}}].date" type="hidden" value="{{date}}"></td>
-																<td>
-																	<select name="scheduleBody.daylist[{{@index}}].transport" class="col-sm-12">
-																		<option value="01" {{#isSelected transport '01'}}{{/isSelected}}>汽车</option>
-																		<option value="02" {{#isSelected transport '02'}}{{/isSelected}}>飞机</option>
-																		<option value="03" {{#isSelected transport '03'}}{{/isSelected}}>火车</option>
-																		<option value="04" {{#isSelected transport '04'}}{{/isSelected}}>船只</option>
-																		<option value="05" {{#isSelected transport '05'}}{{/isSelected}}>其他</option>
-																	</select>
-																</td>
-																<td><input class="col-sm-12" name="scheduleBody.daylist[{{@index}}].schedule" type="text" value="{{schedule}}"></td>
-																<td>
-																	<input name="scheduleBody.daylist[{{@index}}].breakfast" value="1" type="checkbox" 
-																	{{#compare breakfast}}
-																	{{else}}
-																		checked="checked"
-																	{{/compare}}
-																	/>
-																</td>
-																<td>
-																	<input name="scheduleBody.daylist[{{@index}}].lunch" value="1" type="checkbox" 
-																	{{#compare lunch}}
-																	{{else}}
-																		checked="checked"
-																	{{/compare}}
-																	/>
-																</td>
-																<td>
-																	<input name="scheduleBody.daylist[{{@index}}].dinner" value="1" type="checkbox" 
-																	{{#compare dinner}}
-																		
-																	{{else}}
-																		checked="checked"
-																	{{/compare}}
-																	/>
-																</td>
-																<td><input class="col-sm-12" name="scheduleBody.daylist[{{@index}}].hotel" type="text" value="{{hotel}}"></td>
-															</tr>
-														{{/each}}
-														</script>
-													</tbody>
-												</table>
+												<textarea name="fsSummary" id="fsSummary" class="form-control" rows="3" placeholder="路线摘要"></textarea>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="">文件下载</label>
+												for="fsRemark">整体备注</label>
 											<div class="col-sm-8">
-												<table class="table table-bordered">
-													<thead>
-														<tr>
-															<th width="10%">操作</th>
-															<th width="20%">文件名称</th>
-															<th width="70%">文件路径</th>
-														</tr>
-													</thead>
-													<tbody id="table-attachs">
-														<script id="attachs-template" type="text/x-handlebars-template">
-														{{#each attachs}}
-															<tr>
-																<td>
-																	<button type="button" class="btn btn_downFile btn-xs btn-primary">下载</button>
-																	<input name="scheduleBody.attachs[{{@index}}].attachment" type="hidden" value="{{attachment}}">
-																</td>
-																	
-																<td>{{attachname}}<input name="scheduleBody.attachs[{{@index}}].attachname" type="hidden" value="{{attachname}}"></td>
-																<td><a herf="{{attachname}}">{{attachment}}</a></td>
-															</tr>
-														{{/each}}
-														</script>
-													</tbody>
-													<tbody />
-												</table>
+												<textarea name="fsRemark" id="fsRemark" class="form-control" rows="3" placeholder="整体备注"></textarea>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="svcstdcontent">服务标准</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fcSchedule">日程快照</label>
+											<input type="hidden"  id="hSchedule" name="hSchedule" />
 											<div class="col-sm-8">
-												<textarea name="scheduleBody.svcstdcontent"
-													id="svcstdcontent" class="form-control" rows="3"
-													placeholder="服务标准"></textarea>
-											</div>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="fdPrice">计调预估</label>
-											<div class="col-sm-8">
-												<div class="panel panel-default">
-													<div class="panel-heading">
-														<h3 class="panel-title">行程安排&报价</h3>
-													</div>
-													<div class="panel-body">
-														<div class="row">
-															<label class="col-sm-3 control-label"
-																style="text-align: left;" for=""><h5>预估行程</h5> </label>
-															<div class="col-sm-12">
-																<div class="form-group" style="padding: 10px;">
-																	<textarea name="fcRessnapshot" id="fcRessnapshot"
-																		class="form-control" rows="3"
-																		placeholder="为定制线路客户预估一个大致行程安排，通过此行程安排再预估一个价格"></textarea>
-																</div>
-															</div>
-														</div>
-														<div class="row">
-															<div class="form-group">
-																<label class="col-sm-2 control-label" for="transName">报价金额</label>
-																<div class="col-sm-3">
-																	<input type="text" id="price" name="scheduleBody.price"
-																		class="form-control" placeholder="报价" />
-																</div>
-																<label class="col-sm-2 control-label" for="fsOperId">计调人员</label>
-																<div class="col-sm-3">
-																	<input type="text" id="fsOperId" readonly="readonly" class="form-control" placeholder="计调人员" />
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
+												<textarea class="ckeditor" id="fcSchedule" name="fcSchedule"></textarea>
 											</div>
 										</div>
 									</div>
@@ -300,18 +215,47 @@
 													<div class="panel-body" id="commResSnapshot">
 														<!-- 公共精确资源 start -->
 														<ul id="myTab" class="nav nav-tabs">
-														<script id="commRes-template" type="text/x-handlebars-template">
+															<script id="commRes-template" type="text/x-handlebars-template">
 															<li class="active"><a href="#common" data-toggle="tab">车型/导游/景区</a></li>
 															{{#each daylist}}
 															<li><a href="#day{{@index}}" data-toggle="tab">第{{addOne @index}}天</a></li>
 															{{/each}}
-														</script>
+															</script>
 														</ul>
 														<div id="myTabContent" class="tab-content">
-															<script id="commRes-template1" type="text/x-handlebars-template">
+															<!-- <script id="commRes-template1" type="text/x-handlebars-template"> -->
 															<div class="tab-pane fade in active" id="common">
 																<div class="row" style="margin-top: 10px;">
 																	<div class="col-sm-12" style="padding: 10 0 0 0px;">
+																		<div class="row">
+																			<div class="form-group"  style="padding: 0px 10px 0px 10px;margin-top:-25px;">
+																				<div class="col-sm-12">
+																					<table id="table_fuzz" class="table table-bordered">
+																						<script id="commRes-template1" type="text/x-handlebars-template">
+																						<caption style="text-align:left">
+																							<h4><font color="#12a6e2">服务标准</font></h4>
+																						</caption>
+																						<thead>
+      																						<tr>
+         																						<th>资源类型</th>
+         																						<th>标准</th>
+         																						<th>备注</th>
+      																						</tr>
+   																						</thead>
+   																						<tbody>
+																							{{#each reslist}}
+      																						<tr class="warning">
+         																						<td>{{#getType restype}}{{/getType}}</td>
+         																						<td>{{resname}}</td>
+         																						<td>{{remark}}</td>
+      																						</tr>
+																							{{/each}}
+   																						</tbody>
+																						</script>
+																					</table>
+																				</div>
+																			</div>
+																		</div>
 																		<div class="row" style="padding: 10 10 0 0px;">
 																			<div class="form-group">
 																				<label class="col-sm-2 control-label" for="fsRegions">车辆类型</label>
@@ -377,15 +321,15 @@
 																					<button type="button" onclick="javascript:addScenic(this);"
 																						class="btn btn-sm addScenicBtn btn-success pull-right">添加</button>
 																				</div>
-																				<div class="col-sm-4">
-																					<p class="text-danger" style="margin-top:5px;"><font size="3">请先添加景区再配置资源！</font></p>
-																				</div>
 																			</div>
 																		</div>
 																		<div class="row">
 																			<div class="form-group"  style="padding: 0px 10px 0px 10px;">
 																				<div class="col-sm-12">
 																					<table id="table_common" class="table table-bordered">
+																						<caption style="text-align:left">
+																							<h4><font color="#12a6e2">调配资源<font></h4>
+																						</caption>
 																						<thead>
       																						<tr>
          																						<th>操作</th>
@@ -396,7 +340,8 @@
          																						<th>数量</th>
       																						</tr>
    																						</thead>
-   																						<tbody>
+   																						<tbody id="tbody_common">
+																						<script id="commRes-template2" type="text/x-handlebars-template">
 																							<input type="hidden" id="reslistIndex" value="{{length reslist}}" placeholder="reslist下标">
 																							{{#each reslist}}
       																						<tr>
@@ -419,6 +364,7 @@
          																						<td>{{#each cclist}}{{usernum}}{{/each}}</td>
       																						</tr>
 																							{{/each}}
+																						</script>
    																						</tbody>
 																					</table>
 																				</div>
@@ -427,9 +373,9 @@
 																	</div>
 																</div>
 															</div>
-															</script>
+															<!-- </script> -->
 															<!-- 公共资源体 start -->
-															<script id="commRes-template2" type="text/x-handlebars-template">
+															<script id="commRes-template3" type="text/x-handlebars-template">
 															{{#each daylist}}
 															<div class="tab-pane fade" id="day{{@index}}">
 																<div class="row" style="margin-top: 10px;">
@@ -514,9 +460,7 @@
 															</script>
 															<!-- 公共资源体 end -->
 														</div>
-														<!-- 
-														</script>
-														公共精确资源 end -->
+														<!-- 公共精确资源 end -->
 													</div>
 												</div>
 											</div>
@@ -570,7 +514,21 @@
 																			{{#each body/daylist}}
 																			<div class="tab-pane fade {{isActive_pane @index}}" id="batch{{../fiId}}_day{{@index}}">
 																				<div class="row" style="margin-top: 10px;">
-																					<div class="col-sm-12" style="padding: 10 10 0 0px;">
+																					<div class="col-sm-12" style="padding: 10 10 0 0px;margin-top:-25px;">
+																						<table id="table_{{../fiId}}_day{{@index}}" class="table table-bordered">
+																							<caption style="text-align:left">
+																							<h4><font color="#12a6e2">服务标准</font></h4>
+																							</caption>
+																							<thead>
+																								<tr>
+																									<th>资源类型</th>
+																									<th>资源标准</th>
+																									<th>资源备注</th>
+																								</tr>
+																							</thead>
+																							<tbody>
+																							</tbody>
+																						</table>
 																						<div class="row">
 																							<div class="form-group">
 																								<label class="col-sm-1 control-label">类型</label>
@@ -627,6 +585,9 @@
 																							<div class="form-group" style="padding: 0px 10px 0px 10px;">
 																								<div class="col-sm-12">
 																									<table id="table_batch{{../fiSeq}}_{{dayflag}}" class="table table-bordered">
+																										<caption style="text-align:left">
+																										<h4><font color="#12a6e2">调配资源</font></h4>
+																										</caption>
 																										<thead>
 																											<tr>
 																												<th>操作</th>
@@ -742,7 +703,7 @@
 																					<input id="fsContent" type="text" class="form-control" />
 																				</div>
 																				<label class="col-sm-1 control-label" for="fdAmt">金额</label>
-																				<div class="col-sm-2">
+																				<div class="col-sm-1">
 																					<input id="remarksAmt" type="text" class="form-control" />
 																				</div>
 																				<div class="col-sm-1">
@@ -859,7 +820,7 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
-	<script src="/js/bus/orderlist/customization.js"></script>
+	<script src="/js/bus/orderlist/experts.js"></script>
 
 	<c:if test="${!empty succflag && succflag =='1'}">
 
@@ -925,6 +886,7 @@
 				$(obj).parent().parent().find(".remark_stat ").html('<option value="2">作废</option>');
 			}
 		}
+		
 		//删除批次消费项
 		$(document).on('click key', '.batch_remove', function(event){
 			$(this).parent().parent().remove();
