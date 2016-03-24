@@ -89,7 +89,7 @@ $("#editIframe").on("load",function(){
 		}
 	});*/
 	$.base64.utf8encode = true;
-	$(this).contents().find('#hSchedule').val($.base64.btoa(raw.fcSchedule));
+	$(this).contents().find('#fcSchedule').val($.base64.btoa(raw.fcSchedule));
 	//获取线路列表
 });
 
@@ -226,7 +226,7 @@ jQuery(function($) {
 	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteOrderlist('
 			+ options.rowId
 			+ ');" data-original-title="删除订单"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-	return configBtn + editBtn;
+	return editBtn;
 	};
 
 	// resize to fit page size
@@ -298,7 +298,7 @@ jQuery(function($) {
 				colModel : [ {
 					name : 'myac',
 					index : '',
-					width : 50,
+					width : 30,
 					fixed : true,
 					sortable : false,
 					resize : false,

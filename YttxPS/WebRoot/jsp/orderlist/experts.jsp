@@ -87,7 +87,7 @@
 													class="form-control" placeholder="创建日期" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
-												for="fsOperId">计调员</label>
+												for="fsOperId">计&nbsp;调&nbsp;&nbsp;员</label>
 											<div class="col-sm-3">
 												<input type="text" readonly="readonly" id="fsOperId" name="fsOperName" class="form-control" placeholder="计调员" />
 											</div>
@@ -135,7 +135,7 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="insurenum">保险</label>
+												for="insurenum">保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;险</label>
 											<div class="col-sm-3">
 												<div class="input-group">
 													<input type="text" id="insurenum" class="form-control">
@@ -164,7 +164,7 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fiStat">订单状态</label>
 											<div class="col-sm-3">
-												<select id="fiStat" name="fiStat"
+												<select disabled="disabled" id="fiStat" name="fiStat"
 													class="form-control">
 													<option value="0">待审核</option>
 													<option value="1">已审核</option>
@@ -719,7 +719,6 @@
 																						<thead>
       																						<tr>
          																						<th width="7%">操作</th>
-         																						<th width="7%">序号</th>
          																						<th width="20%">备注时间</th>
          																						<th width="45%">备注内容</th>
          																						<th width="7%">金额</th>
@@ -732,20 +731,18 @@
 																							{{#each remarks}}
       																						<tr>
          																						<td>
-																									<a style="cursor:pointer;" onclick="invalid(this)">作废</a>
+																									{{#remarkOption fiStat}}{{/remarkOption}}
 																									<input type="hidden" name="remarks[{{@index}}].fsOrderId" value="{{fsOrderId}}" placeholder="订单编号">
 																									<input type="hidden" name="remarks[{{@index}}].fiSeq" value="{{fiSeq}}" placeholder="序号">
 																									<input type="hidden" name="remarks[{{@index}}].ftDate" value="{{ftDate}}" placeholder="备注时间">
 																									<input type="hidden" name="remarks[{{@index}}].fdAmt" value="{{fdAmt}}" placeholder="备注金额">
 																								</td>
-         																						<td>{{fiSeq}}</td>
          																						<td>{{ftDate}}</td>
          																						<td><input class="col-sm-12" type="text" name="remarks[{{@index}}].fsContent" value="{{fsContent}}" placeholder="备注内容"></td>
          																						<td>{{fdAmt}}</td>
          																						<td>
 																								<select name="remarks[{{@index}}].fiStat" class="remark_stat col-sm-12">
-																									<option value="0" {{#remarkStat fiStat '0'}}{{/remarkStat}}>未付款</option>
-																									<option value="1" {{#remarkStat fiStat '1'}}{{/remarkStat}}>已付款</option>
+																									{{#remarkStat fiStat}}{{/remarkStat}}
 																								</select>
 																								</td>
       																						</tr>
@@ -876,13 +873,18 @@
 			$(obj).parent().parent().remove();
 			totalAmount();
 		}
-		//删除备注
+		//删除订单备注
 		function removeRemarkTr(obj){
 			$(obj).parent().parent().remove();
 		}
-		//作废备注
-		function invalidRemark((obj){
-			//$(obj).parent().find("remark_stat").attr
+		//订单备注作废\生效
+		function invalid(obj){
+			var stat = $(obj).parent().parent().find(".remark_stat ").val();
+			//作废
+			if (stat == '0' || stat == '1') {
+				$(obj).html('');
+				$(obj).parent().parent().find(".remark_stat ").html('<option value="2">作废</option>');
+			}
 		}
 		
 		//删除批次消费项
@@ -1035,18 +1037,17 @@
 	<script id="tr-remarks" type="text/x-handlebars-template">
 		<tr>
       		<td>
-				<a style="cursor:pointer;" onclick="removeTr(this)">删除</a>
+				<a style="cursor:pointer;" onclick="removeRemarkTr(this)">删除</a>
 				<input type="hidden" name="remarks[{{index}}].fsOrderId" value="{{fsOrderId}}" placeholder="订单编号">
 				<input type="hidden" name="remarks[{{index}}].fiSeq" value="{{fiSeq}}" placeholder="序号">
 				<input type="hidden" name="remarks[{{index}}].ftDate" value="{{ftDate}}" placeholder="备注时间">
 				<input type="hidden" name="remarks[{{index}}].fdAmt" value="{{fdAmt}}" placeholder="备注金额">
 			</td>
-       		<td>{{fiSeq}}</td>
          	<td>{{ftDate}}</td>
          	<td><input class="col-sm-12" type="text" name="remarks[{{index}}].fsContent" value="{{fsContent}}" placeholder="备注内容"></td>
          	<td>{{fdAmt}}</td>
          	<td>
-			<select name="remarks[{{index}}].fiStat" class="col-sm-12">
+			<select name="remarks[{{index}}].fiStat" class="remark_stat col-sm-12">
 				<option value="0">未付款</option>
 				<option value="1">已付款</option>
 				</select>

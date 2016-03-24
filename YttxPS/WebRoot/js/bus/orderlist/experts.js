@@ -1,13 +1,18 @@
 jQuery(function($) {
-	$("#message").hide();
 	$("#reset").click();
+	$("#message").hide();
+	$.base64.utf8encode = true;
+	setTimeout(loadtext, 1000);
+	function loadtext(){
+		var ckEditor = CKEDITOR.instances.fcSchedule;
+		ckEditor.setData($.base64.atob($('#fcSchedule').val(), true));
+	}
 	
 	var fsNo = $.getUrlParam('fsNo');
 	var genIndex = $.getUrlParam('genIndex');
 	var startdate = $.getUrlParam('startdate');
 	
 	var localsel = $("#selectCity", "#editform").localCity({
-
 		provurl : "/pub/findcity.htm",
 		cityurl : "/pub/findcity.htm",
 		disturl : "/pub/findcity.htm",
@@ -66,11 +71,25 @@ jQuery(function($) {
 			return "";
 		}
 	});
-	Handlebars.registerHelper("remarkStat",function(v1, v2){
-		if (v1 == v2) {
-			return 'selected="selected"';
+	//备注状态
+	Handlebars.registerHelper("remarkStat",function(v1){
+		html = '';
+		if (v1 == '0') {
+			html = '<option value="0">未付款</option>' +
+				   '<option value="1">已付款</option>';
+			return html;
+		} else if(v1 == '1'){
+			return '<option value="1">已付款</option>';
 		} else {
-			return "";
+			return '<option value="2">作废</option>';
+		}
+	});
+	//备注操作
+	Handlebars.registerHelper("remarkOption",function(v1){
+		if (v1 == '0') {
+			return '<a style="cursor:pointer;" onclick="invalid(this)">作废</a>';
+		} else {
+			return '';
 		}
 	});
 	$(function(){
@@ -908,6 +927,7 @@ jQuery(function($) {
 	});
 	//	提交
 	$("#submit").on("click", function () {
+		$("#fcSchedule").val(CKEDITOR.instances["fcSchedule"].getData());
 		$.post("/orderlist/editOrderlist.htm",
 				$("#editform").serialize(),
 				function(data){

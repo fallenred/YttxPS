@@ -8,7 +8,6 @@ jQuery(function($) {
 		ckEditor.setData($.base64.atob($('#hSchedule').val(), true));
 	}
 	var localsel = $("#selectCity", "#editform").localCity({
-		
 		provurl : "/pub/findcity.htm",
 		cityurl : "/pub/findcity.htm",
 		disturl : "/pub/findcity.htm",
