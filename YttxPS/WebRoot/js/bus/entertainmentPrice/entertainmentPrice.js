@@ -99,11 +99,11 @@ jQuery(function($) {
 	$("#submit").click(function() {
 		$("#collapseOne").collapse('hide');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
-		postData["entertainmentPrice.fsNo"] = $("#queryfield").find("#fsNo").val();
-		postData["entertainmentPrice.fsScenicno"] = $("#queryfield").find("#fsScenicno").val();
-		postData["entertainmentPrice.fsName"] = $("#queryfield").find("#fsName").val();
-		postData["entertainmentPrice.fsType"] = $("#queryfield").find("#fsType").val();
-		postData["entertainmentPrice.fiStat"] = $("#queryfield").find("#fiStat").val();
+		postData["entertainment.fsNo"] = $("#queryfield").find("#fsNo").val();
+		postData["entertainment.fsScenicno"] = $("#queryfield").find("#fsScenicno").val();
+		postData["entertainment.fsName"] = $("#queryfield").find("#fsName").val();
+		postData["entertainment.fsType"] = $("#queryfield").find("#fsType").val();
+		postData["entertainment.fiStat"] = $("#queryfield").find("#fiStat").val();
 		$("#grid-table").jqGrid("setGridParam", {
 			postData : postData
 		}).trigger("reloadGrid");

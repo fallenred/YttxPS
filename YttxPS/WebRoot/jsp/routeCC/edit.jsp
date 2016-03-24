@@ -125,7 +125,7 @@
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="restaurant">餐厅选择</label>
+											<label class="col-sm-2 control-label no-padding-right" for="restaurant">菜单选择</label>
 											<div class="col-sm-3">
 												<select id="restaurant" name="restaurant" class="form-control">
 												</select>

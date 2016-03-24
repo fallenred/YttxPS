@@ -85,7 +85,7 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsLvl">娱乐项目级别</label>
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<select id="fsLvl" name="fsLvl" class="form-control">
 													<option value="01">一级</option>
 													<option value="02">二级</option>
@@ -93,7 +93,7 @@
 												</select>
 											</div>
 											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsType">状态</label>
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<select id="fiStat" name="fiStat" class="form-control">
 													<option value="1">正常</option>
 													<option value="2">失效</option>
@@ -103,13 +103,20 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsDesc">描述</label>
-											<div class="col-sm-8">
-												<input class="form-control" type="text" id="fsDesc" name="fsDesc" class="form-control" placeholder="描述" />
+											<label class="col-sm-2 control-label no-padding-right" for="fsOpentime">开放时间</label>
+											<div class="col-sm-3">
+												<input class="form-control" type="text" id="fsOpentime" name="fsOpentime" placeholder="开放时间" maxlength="100" />
 											</div>
 										</div>
 									</div>
-
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsDesc">描述</label>
+											<div class="col-sm-10">
+												<textarea class="form-control" id="fsDesc" name="fsDesc" rows="3" placeholder="描述" maxlength="4000"></textarea>
+											</div>
+										</div>
+									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 										<button id="reset" type="reset" class="btn" style="display: none;">重置</button>

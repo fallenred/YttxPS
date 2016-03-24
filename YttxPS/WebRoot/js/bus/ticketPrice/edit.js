@@ -52,30 +52,36 @@ jQuery(function($) {
 	
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#no").val() == '') {
+		if($("#fsNo").val() == '' || $("#fsNo").val() == undefined) {
 			$("#message").show();
-			$("#message").text("景区编码不能为空，请输入");
+			$("#message").text("门票代码不能为空，请输入");
 			$('#no').focus();
 			return false;
-		} 
-		if($("#name").val() == '') {
+		}
+		
+		if($("#ftStartdate").val() == '' || $("#ftStartdate").val() == undefined) {
 			$("#message").show();
-			$("#message").text("景区名称不能为空，请输入");
-			$('#name').focus();
+			$("#message").text("开始日期不能为空，请输入");
+			$('#ftStartdate').focus();
 			return false;
-		} 
-		if($("#lvl").val() == '') {
+		}
+		
+		if($("#ftEnddate").val() == '' || $("#ftEnddate").val() == undefined) {
 			$("#message").show();
-			$("#message").text("景区等级不能为空，请输入");
-			$('#lvl').focus();
+			$("#message").text("结束日期不能为空，请输入");
+			$('#ftEnddate').focus();
 			return false;
-		} 
-		if($("#regionno").val() == '') {
+		}
+		
+		var ftStartdate = new Date($("#ftStartdate").val());
+		var ftEnddate = new Date($("#ftEnddate").val());
+		if(ftEnddate - ftStartdate < 0) {
 			$("#message").show();
-			$("#message").text("景区地区不能为空，请输入");
-			$('#regionno').focus();
+			$("#message").text("结束日期不能早于开始日期");
+			$('#ftStartdate').focus();
 			return false;
-		} 
+		}
+		
 		$.post("/ticket/editTicketPrice.htm",
 				$("#editform").serialize(),
 				function(data){

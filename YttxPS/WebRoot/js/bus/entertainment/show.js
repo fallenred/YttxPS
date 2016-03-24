@@ -24,8 +24,9 @@ jQuery(function($) {
 		}
 	};
 	
-	$("input").attr("readonly", "readonly");
-	$("select").attr("disabled", "disabled");
+	$("#showModal input").attr("readonly", "readonly");
+	$("#showModal select").attr("disabled", "disabled");
+	$("#showModal textarea").attr("readonly", "readonly");
 
 	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
 	$("#cboxLoadingGraphic").html(

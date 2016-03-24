@@ -47,12 +47,13 @@
 
 									<div class="row">
 										<div class="form-group">
-											<input maxlength="10" type="hidden" id="fsNo" name="fsNo" /> <label class="col-sm-2 control-label no-padding-right" for="fsName">线路</label>
+											<input maxlength="10" type="hidden" id="fsNo" name="fsNo" />
+											<label class="col-sm-2 control-label no-padding-right" for="fiGenindex">线路</label>
 											<div class="col-sm-3">
 												<select id="fiGenindex" name="fiGenindex" class="form-control">
 												</select>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fsScenicName">车型</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fsTransno">车型</label>
 											<div class="col-sm-3">
 												<select id="fsTransno" name="fsTransno" class="form-control">
 												</select>
@@ -74,7 +75,7 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsType">价格</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fdPrice">价格</label>
 											<div class="col-sm-3">
 												<input class="form-control" type="text" id="fdPrice" name="fdPrice" placeholder="价格" />
 											</div>

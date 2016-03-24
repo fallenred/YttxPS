@@ -90,7 +90,6 @@ jQuery(function($) {
 					$("#message").show();
 					return false;
 				}
-				return false;
 		});
 	});
 	

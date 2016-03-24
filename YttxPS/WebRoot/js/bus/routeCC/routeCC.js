@@ -30,19 +30,6 @@ function picCustom(id) {
     $('#picModal').modal({ show: true, backdrop: 'static' });
 };
 
-$("#showModal").on("shown.bs.modal", function() {
-	$(this).find("#reset").click();
-	$(this).find("#fsResno").val(raw.fsId);
-	$(this).find("#fiGenindex").val(raw.fiGenindex);
-});
-
-$("#editIframe").on("load",function(){
-	$(this).contents().find("#reset").click();
-	$(this).contents().find("#fsResno").val(raw.fsId);
-	$(this).contents().find("#fiGenindex").val(raw.fiGenindex);
-});
-
-
 $("#addModal", parent.document).on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
 	$("#grid-table").trigger("reloadGrid");

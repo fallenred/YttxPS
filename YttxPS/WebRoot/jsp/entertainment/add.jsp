@@ -13,7 +13,7 @@
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
 </head>
-<body>
+<body style="overflow-x:auto;">
 	<div class="main-container" id="main-container">
 		<script type="text/javascript">
 			try {
@@ -99,9 +99,17 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right" for="fsOpentime">开放时间</label>
+											<div class="col-sm-3">
+												<input class="form-control" type="text" id="fsOpentime" name="fsOpentime" placeholder="开放时间" maxlength="100" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsDesc">描述</label>
 											<div class="col-sm-10">
-												<input class="form-control" type="text" id="fsDesc" name="fsDesc" placeholder="描述" />
+												<textarea class="form-control" id="fsDesc" name="fsDesc" rows="3" placeholder="描述" maxlength="4000"></textarea>
 											</div>
 										</div>
 									</div>

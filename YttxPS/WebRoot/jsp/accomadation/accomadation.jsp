@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -174,38 +175,13 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label no-padding-right" for="regdate">酒店星级</label>
 									<div class="col-sm-8">
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="01"><span class="lbl">挂五星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="02"><span class="lbl">准五星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="03"><span class="lbl">挂四星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="04"><span class="lbl">一线准四酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="05"><span class="lbl">二线准四酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="06"><span class="lbl">挂三星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="07"><span class="lbl">准三星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="08"><span class="lbl">乡村酒店</span>
-											</label>
-										</div>
+										<c:forEach items="${codeMasterList['bg']}" var="item" varStatus="status">
+											<div class="checkbox-inline">
+												<label>
+													<input name="starlvl" type="radio" class="ace" value="${item.fsDictno}"><span class="lbl">${item.fsDictname}</span>
+												</label>
+											</div>
+										</c:forEach>
 									</div>
 								</div>
 							</div>
@@ -295,38 +271,13 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label no-padding-right" for="regdate">酒店星级</label>
 									<div class="col-sm-8">
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="01"><span class="lbl">挂五星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="02"><span class="lbl">准五星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="03"><span class="lbl">挂四星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="04"><span class="lbl">一线准四酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="05"><span class="lbl">二线准四酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="06"><span class="lbl">挂三星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="07"><span class="lbl">准三星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="08"><span class="lbl">乡村酒店</span>
-											</label>
-										</div>
+										<c:forEach items="${codeMasterList['bg']}" var="item" varStatus="status">
+											<div class="checkbox-inline">
+												<label>
+													<input name="starlvl" type="radio" class="ace" value="${item.fsDictno}"><span class="lbl">${item.fsDictname}</span>
+												</label>
+											</div>
+										</c:forEach>
 									</div>
 								</div>
 							</div>
@@ -436,38 +387,13 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label no-padding-right" for="regdate">酒店星级</label>
 									<div class="col-sm-8">
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="01"><span class="lbl">挂五星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="02"><span class="lbl">准五星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="03"><span class="lbl">挂四星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="04"><span class="lbl">一线准四酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="05"><span class="lbl">二线准四酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="06"><span class="lbl">挂三星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="07"><span class="lbl">准三星酒店</span>
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> <input name="starlvl" type="radio" class="ace" value="08"><span class="lbl">乡村酒店</span>
-											</label>
-										</div>
+										<c:forEach items="${codeMasterList['bg']}" var="item" varStatus="status">
+											<div class="checkbox-inline">
+												<label>
+													<input name="starlvl" type="radio" class="ace" value="${item.fsDictno}"><span class="lbl">${item.fsDictname}</span>
+												</label>
+											</div>
+										</c:forEach>
 									</div>
 								</div>
 							</div>

@@ -35,11 +35,15 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="name">菜单名称</label>
-											<div class="col-sm-4">
+											<div class="col-sm-10">
 												<input type="hidden" id="no" name="no" value="${res.no}"/>
 												<input class="form-control" type="text" id="name" name="name" placeholder="菜单名称"  maxlength="50" value="${res.name}"/>
 											</div>
-											
+										</div>
+									</div>
+								
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="brand">所属地区</label>
 											<div class="col-sm-4">
 												<input type="text" placeholder="忽略行政区域" name="regionname" id="regionname" 
@@ -47,14 +51,8 @@
 												<input type="hidden" id="regionno" name="regionno" value="${res.regionno}"/>
 												<div class="localcity selectCity" id="selectCity"></div>
 											</div>
-										</div>
-									</div>
-								
-									<div class="row">
-										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="special">类型标识</label>
 											<div class="col-sm-4">
-											<!-- TODO 从数据字典中读取 -->
 												<select id="special" name="special" class="form-control">
 													<option value="">---类型标识---</option>
 													<c:forEach items="${codeMasterList['meal_type']}" var="item">
@@ -62,11 +60,6 @@
 															<c:if test="${res.special==item.fsDictno}">selected</c:if>>${item.fsDictname}</option>
 														</c:forEach>
 												</select>
-											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="menu">菜单描述</label>
-											<div class="col-sm-4">
-												<input id="menu" name="menu" type="text" class="form-control" 
-												 	placeholder="菜单描述" value="${res.menu}"/>
 											</div>
 										</div>
 									</div>
@@ -94,9 +87,9 @@
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="menuDesc">菜单说明</label>
+											<label class="col-sm-2 control-label no-padding-right" for="menuDesc">菜单描述</label>
 											<div class="col-sm-10">
-												<textarea id="menuDesc" rows="4" cols="20"  name="menuDesc" class="form-control">${res.menuDesc}</textarea>
+												<textarea id="menu" rows="4" cols="20"  name="menuDesc" class="form-control">${res.menu}</textarea>
 											</div>
 										</div>
 									</div>

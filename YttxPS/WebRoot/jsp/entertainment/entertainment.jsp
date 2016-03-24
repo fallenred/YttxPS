@@ -120,7 +120,7 @@
 											<h4 class="modal-title" id="addModalLabel">新增娱乐项目</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="addIframe" width="100%" height="400px" frameborder="0" scrolling="no"></iframe>
+											<iframe id="addIframe" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
 										</div>
 										<!-- /.modal-content -->
 									</div>
@@ -140,7 +140,7 @@
 											<h4 class="modal-title" id="addModalLabel">修改娱乐项目</h4>
 										</div>
 										<div class="modal-body">
-											<iframe id="editIframe" width="100%" height="400px" frameborder="0" scrolling="no"></iframe>
+											<iframe id="editIframe" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
 										</div>
 
 										<!-- /.modal-content -->

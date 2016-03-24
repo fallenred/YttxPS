@@ -66,22 +66,52 @@ jQuery(function($) {
 	
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#fsName").val() == '') {
+		if($("#fiGenindex").val() == '' || $("#fiGenindex").val() == undefined) {
 			$("#message").show();
-			$("#message").text("路线名称不能为空，请输入");
-			$('#no').focus();
+			$("#message").text("路线不能为空，请输入");
+			$('#fiGenindex').focus();
 			return false;
 		} 
-		if($("#fiDays").val() == '') {
+		if($("#fsTransno").val() == '' || $("#fsTransno").val() == undefined) {
 			$("#message").show();
-			$("#message").text("路线天数不能为空，请输入");
-			$('#name').focus();
+			$("#message").text("车型不能为空，请输入");
+			$('#fsTransno').focus();
 			return false;
-		} 
+		}
+		if($("#fdPrice").val() == '' || $("#fdPrice").val() == undefined) {
+			$("#message").show();
+			$("#message").text("价格不能为空，请输入");
+			$('#fdPrice').focus();
+			return false;
+		}
+		
+		if($("#ftStartdate").val() == '' || $("#ftStartdate").val() == undefined) {
+			$("#message").show();
+			$("#message").text("开始日期不能为空，请输入");
+			$('#ftStartdate').focus();
+			return false;
+		}
+		
+		if($("#ftEnddate").val() == '' || $("#ftEnddate").val() == undefined) {
+			$("#message").show();
+			$("#message").text("结束日期不能为空，请输入");
+			$('#ftEnddate').focus();
+			return false;
+		}
+		
+		var ftStartdate = new Date($("#ftStartdate").val());
+		var ftEnddate = new Date($("#ftEnddate").val());
+		if(ftEnddate - ftStartdate < 0) {
+			$("#message").show();
+			$("#message").text("结束日期不能早于开始日期");
+			$('#ftStartdate').focus();
+			return false;
+		}
+		
 		$.post("/transportArrange/addTransportArrange.htm",
 				$("#addform").serialize(),
 				function(data){
-			var json = eval("("+data+")");
+			var json = eval("(" + data + ")");
 					if(json.result == "ok") {
 						$("#message").text("增加记录成功");
 						$("#message").show();

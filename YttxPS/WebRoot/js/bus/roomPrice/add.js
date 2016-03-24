@@ -23,22 +23,31 @@ jQuery(function($) {
 	$("#add_submit").on("click", function () {
 	    $("#addform #message").hide();
 		
-        if($("#addform input[name='ftStartdate']").val() == '') {
+        if($("#addform input[name='ftStartdate']").val() == '' || $("#addform input[name='ftStartdate']").val() == undefined) {
             $("#addform #message").show();
             $("#addform #message").text("开始日期不能为空，请输入");
             $("#addform input[name='ftStartdate']").focus();
             return false;
         }
-		if($("#addform select[name='ftEnddate']").val() == '') {
+		if($("#addform input[name='ftEnddate']").val() == '' || $("#addform input[name='ftEnddate']").val() == undefined) {
 			$("#addform #message").show();
 			$("#addform #message").text("结束日期不能为空，请选择");
-			$("#addform select[name='ftEnddate']").focus();
+			$("#addform input[name='ftEnddate']").focus();
 			return false;
 		}
-		if($("#addform input[name='fdPrice']").val() == '') {
+		if($("#addform input[name='fdPrice']").val() == '' || $("#addform input[name='fdPrice']").val() == undefined) {
 			$("#addform #message").show();
 			$("#addform #message").text("价格不能为空，请输入");
 			$("#addform input[name='fdPrice']").focus();
+			return false;
+		}
+		
+		var ftStartdate = new Date($("#addform input[name='ftStartdate']").val());
+		var ftEnddate = new Date($("#addform input[name='ftEnddate']").val());
+		if(ftEnddate - ftStartdate < 0) {
+			$("#message").show();
+			$("#message").text("结束日期不能早于开始日期");
+			$('#ftStartdate').focus();
 			return false;
 		}
 		

@@ -28,10 +28,10 @@ jQuery(function($) {
         			html += '<option value=' + comment['fiIndex'] + '>' + comment['fsName'] + '</option>';
         		});
         		$("#fiGenindex").html(html);
+        		$("#fiGenindex").val(fiGenindex);
         		getRouteArrange();   //获取线路配置列表
         		getSceniceGen();   //获取线路景区
         		getScenice();   //获取景区列表
-        		//$("#ticket").html('');
         }
     });
 	
@@ -68,6 +68,17 @@ jQuery(function($) {
 					html += '<option value=' + comment['fsId'] + '>' + comment['fsName'] + '</option>';
 				});
 				$("#fsResno").html(html);
+				$("#fsResno").val(fsRouteno);
+				$.ajax({
+					type: "GET",
+					url: "/routeArrange/findUniqRouteArrange.htm",
+					data: {"fsId": $("#fsResno").val()},
+					dataType: "json",
+					async: false,
+					success: function(data){
+						getDays(data.data.routeArrange != null && data.data.routeArrange != undefined ? data.data.routeArrange.fiDays : 0);
+					}
+				});
 			}
 		});
 	}
@@ -107,12 +118,9 @@ jQuery(function($) {
 				var html = '线路景区：'; 
 				$.each(data, function(commentIndex, comment){
 					html += '<input type="hidden" name="scenicGen" value="' + comment['fsScenicno'] + '"/>' + '&nbsp;&nbsp;<label>' + comment['fsScenicname'] + '</label>';
-					if(commentIndex == 0)
-						num = comment['fiDays'];
 				});
 				$("#div_scenics").html(html);
 				getTicket();   //获取景区票列表
-				getDays(num);   //生成日程下拉列表
 				getShop();   //获取购物店列表
 				getRestaurant();   //获取餐厅
 				getEntertainment();   //获取娱乐项目

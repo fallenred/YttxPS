@@ -28,6 +28,7 @@ jQuery(function($) {
         			html += '<option value=' + comment['fiIndex'] + '>' + comment['fsName'] + '</option>';
         		});
         		$("#fiGenindex").html(html);
+        		$("#fiGenindex").val(fiGenindex);
         		getRouteArrange();   //获取线路配置列表
         		getSceniceGen();   //获取线路景区
         		getScenice();   //获取景区列表
@@ -68,6 +69,17 @@ jQuery(function($) {
 					html += '<option value=' + comment['fsId'] + '>' + comment['fsName'] + '</option>';
 				});
 				$("#fsResno").html(html);
+				$("#fsResno").val(fsRouteno);
+				$.ajax({
+					type: "GET",
+					url: "/routeArrange/findUniqRouteArrange.htm",
+					data: {"fsId": $("#fsResno").val()},
+					dataType: "json",
+					async: false,
+					success: function(data){
+						getDays(data.data.routeArrange != null && data.data.routeArrange != undefined ? data.data.routeArrange.fiDays : 0);
+					}
+				});
 			}
 		});
 	}
@@ -96,7 +108,6 @@ jQuery(function($) {
 	 * 获取线路景区
 	 */
 	function getSceniceGen(){
-		var num = '';
 		$.ajax({
 			type: "GET",
 			url: "/scenicGen/selectScenicGen.htm",
@@ -107,12 +118,9 @@ jQuery(function($) {
 				var html = '线路景区：'; 
 				$.each(data, function(commentIndex, comment){
 					html += '<input type="hidden" name="scenicGen" value="' + comment['fsScenicno'] + '"/>' + '&nbsp;&nbsp;<label>' + comment['fsScenicname'] + '</label>';
-					if(commentIndex == 0)
-						num = comment['fiDays'];
 				});
 				$("#div_scenics").html(html);
 				getTicket();   //获取景区票列表
-				getDays(num);   //生成日程下拉列表
 				getShop();   //获取购物店列表
 				getRestaurant();   //获取餐厅
 				getEntertainment();   //获取娱乐项目
@@ -253,7 +261,7 @@ jQuery(function($) {
 			flag = false;
 		}
 		
-		if (flag) {
+		if (flag && val) {
 			$.ajax({
 				type: "POST",
 				traditional: true,
@@ -280,13 +288,13 @@ jQuery(function($) {
 	$("#addRestaurantBtn").click(function() {
 		var html = $("#div_restaurant").html();
 		var val = $("#restaurant").val();
-		var text = $("restaurant").find("option:selected").text();
+		var text = $("#restaurant").find("option:selected").text();
 		var flag = true;
 		if($(".restaurant-label-" + val) != null && $(".restaurant-label-" + val).length != 0) {
 			flag = false;
 		}
 		
-		if(flag) {
+		if(flag && val) {
 			$.ajax({
 				type: "POST",
 				traditional: true,
@@ -328,7 +336,7 @@ jQuery(function($) {
 				flag = false;
 			} 
 		});
-		if (flag)
+		if (flag && val)
 			html += '<input type="hidden" name="scenicGen" value="' + val + '"/>' + '&nbsp;&nbsp;<label>' + text + '</label>&nbsp;&nbsp;';
 		$("#div_scenics").html(html);
 		getTicket();
@@ -339,6 +347,14 @@ jQuery(function($) {
 	$("#rmTransportBtn").click(function(){
 		var html = '线路景区：';
 		var val = $("#scenic").val();
+		
+		if($("input[name='scenicGen']") == null || $("input[name='scenicGen']") == undefined || $("input[name='scenicGen']").length <= 1) {
+			$("#message").text("景区不能为空");
+			$("#message").show();
+			$("#message").fadeOut(5000);
+			return false;
+		}
+		
 		$("input[name='scenicGen']").each(function(){
 			if (val != $(this).val()) { 
 				html += '<input type="hidden" name="scenicGen" value="' + $(this).val() + '"/>' + '&nbsp;&nbsp;<label>' + $(this).next().text() + '</label>&nbsp;&nbsp;';
@@ -359,7 +375,7 @@ jQuery(function($) {
 			flag = false;
 		}
 		
-		if (flag) {
+		if (flag && val) {
 			//获取门票价格
 			$.ajax({
 				type: "POST",
@@ -399,7 +415,7 @@ jQuery(function($) {
 				flag = false;
 			}
 		});
-		if (flag) {
+		if (flag && val) {
 			$("#index").attr("value", parseInt(index) + 1);
 			html += '<input type="hidden" class="shopid" name="routecc[' + val + '].fsResno" value="' + val + '"/>'+
 					'<input type="hidden" class="shop_' + val + '" name="routecc[' + val + '].fsRestype" value="gw"/>' + 
