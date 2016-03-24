@@ -899,6 +899,12 @@ jQuery(function($) {
 	            + seperator2 + date.getSeconds();
 	    return currentdate;
 	}
+	//下载文件
+	$(document).on('click key', '.btn_downFile', function(event){
+		//文件路径
+		var url = $(this).next().val();
+		location.href = url;
+	});
 	
 	//下载游客名单
 	$(document).on('click key', '.btn_export', function(event){
@@ -943,20 +949,6 @@ jQuery(function($) {
 	  			$("#upload_message").show();
 	          }
 	     });
-	}
-	
-	function fileType(obj){
-		var fileType=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
-	    if(fileType != '.xls'){
-	    	$("#excel").tips({
-				side:3,
-	            msg:'请上传xls格式的文件',
-	            bg:'#AE81FF',
-	            time:3
-	        });
-	    	$("#excel").val('');
-	    	document.getElementById("excel").files[0] = '请选择xls格式的文件';
-	    }
 	}
 	
 	//	colorbox

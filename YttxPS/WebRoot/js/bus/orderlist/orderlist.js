@@ -77,7 +77,9 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fdInsuerprice").val(raw.fdInsuerprice);
 	$(this).contents().find("#fiVisitornum").val(raw.fiVisitornum);
 	$(this).contents().find("#insurenum").val(raw.fiVisitornum);
-	getGenName(raw.fiGenindex, $(this).contents().find("#genName"));
+	if (raw.fiGenindex != null) {
+		getGenName(raw.fiGenindex, $(this).contents().find("#genName"));
+	}
 	html='<option value="">---订单状态---</option>';
 	if (raw.fiStat == '2') {
 		html +='<option value="4">已付首款</option>'

@@ -881,6 +881,13 @@
 			minView : 2,
 			forceParse : 0
 		});
+		function fileType(obj){
+			var fileType=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
+		    if(fileType != '.xls'){
+		    	$("#excel").val('');
+			    alert("请上传excel文件");
+		    }
+		}
 		$(function() {
 			//上传
 			$('#excel').ace_file_input({

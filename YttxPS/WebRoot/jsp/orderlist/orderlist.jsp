@@ -90,15 +90,11 @@
 												<div class="col-sm-2">
 													<input class="form-control" maxlength="100" type="text" id="fsTaName" placeholder="旅行社名称" />
 												</div>
+											</div>
+											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="fsId">旅行社账号</label>
 												<div class="col-sm-2">
 													<input class="form-control" maxlength="100" type="text" id="fsId" placeholder="旅行社账号" />
-												</div>
-											</div>
-											<div class="form-group">
-											<label class="col-sm-1 control-label no-padding-right" for="fsOperId">操作员号</label>
-												<div class="col-sm-2">
-													<input class="form-control" maxlength="100" type="text" id="fsOperId" placeholder="操作员号" />
 												</div>
 												<label class="col-sm-1 control-label no-padding-right" for="fsType">线路类型</label>
 												<div class="col-sm-2">
