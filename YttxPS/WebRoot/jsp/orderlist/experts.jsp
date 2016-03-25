@@ -672,7 +672,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="row">
+									<div hidden="hidden" class="row div_custList">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fiStat">游客名单</label>
 											<div class="col-sm-1">

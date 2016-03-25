@@ -695,11 +695,11 @@ jQuery(function($) {
 		var dayflag = $(this).parent().find(".daylistIndex").val();
 		//资源名称所在的div
 		var prevDiv = $(this).parent().parent().parent().prev();
-		//alert();
 		
 		var restype = prevDiv.find("#restype").val();
 		var resno = prevDiv.find("#batch_resno").val();
 		var resname = prevDiv.find("#batch_resno").find("option:selected").text();
+		var accomadationName = prevDiv.find(".batch_accomadation").find("option:selected").text();
 		var data = {
 				"fiId" : batchIndex,
 				"dayflag" : dayflag,
@@ -724,6 +724,9 @@ jQuery(function($) {
 				});
 			}
 		});
+		if (restype == 'bg') {
+			data["resname"] = accomadationName+'-'+resname;
+		}
 		data["ccname"] = ccname;
 		data["price"] = price;
 		data["cctype"] = "0";

@@ -85,16 +85,19 @@ $("#editIframe").on("load",function(){
 		html +='<option value="4">已付首款</option>'
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
+		$(this).contents().find(".div_custList").show();
 	} else if (raw.fiStat == '4') {
 		//状态为已付收款时，页面状态只能选已付全款选项
 		html +='<option value="8">已付全款(可出团)</option>'
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
+		$(this).contents().find(".div_custList").show();
 	} else if (raw.fiStat == '8') {
 		//状态为已付全款时，页面状态只做显示
 		html ='<option value="8">已付全款(可出团)</option>';
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
+		$(this).contents().find(".div_custList").show();
 	} else {
 		$(this).contents().find("#fiStat").html('<option value="'+raw.fiStat+'"></option>');
 	}
@@ -139,16 +142,19 @@ $("#customizationIframe").on("load",function(){
 		html +='<option value="4">已付首款</option>'
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
+		$(this).contents().find(".div_custList").show();
 	} else if (raw.fiStat == '4') {
 		//状态为已付收款时，页面状态只能选已付全款选项
 		html +='<option value="8">已付全款(可出团)</option>'
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
+		$(this).contents().find(".div_custList").show();
 	} else if (raw.fiStat == '8') {
 		//状态为已付全款时，页面状态只做显示
 		html ='<option value="8">已付全款(可出团)</option>';
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
+		$(this).contents().find(".div_custList").show();
 	} else {
 		$(this).contents().find("#fiStat").html('<option value="'+raw.fiStat+'"></option>');
 	}
