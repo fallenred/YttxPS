@@ -134,11 +134,11 @@ static Logger logger = LoggerFactory.getLogger(TransportArrangeController.class)
 	 */
 	@RequestMapping(value="delTransportArrange.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxdelTransportArrange(@RequestParam(value = "no") String  no)
-    {  
+	public Map<String, Object> ajaxdelTransportArrange(@RequestParam(value = "no") String  no) {
+		
 		logger.debug("当前删除key {}", no);
 		try{
-			int ret = transportArrangeService.deleteByNo(no);
+			transportArrangeService.deleteByNo(no);
 		}
 		catch(Exception e){
 			logger.error(e.getMessage());
