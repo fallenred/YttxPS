@@ -1,12 +1,5 @@
 jQuery(function($) {
-	$("#reset").click();
 	$("#message").hide();
-	$.base64.utf8encode = true;
-	setTimeout(loadtext, 1000);
-	function loadtext(){
-		var ckEditor = CKEDITOR.instances.fcSchedule;
-		ckEditor.setData($.base64.atob($('#fcSchedule').val(), true));
-	}
 	
 	var fsNo = $.getUrlParam('fsNo');
 	var genIndex = $.getUrlParam('genIndex');
@@ -99,6 +92,7 @@ jQuery(function($) {
 			data: 'no='+fsNo,
 			dataType: "json",
 			success: function(data){
+				$("#schedule").html(data.fcSchedule);
 				//获取线路景区
 				getSceniceGen();
 				//公共资源头
@@ -120,12 +114,20 @@ jQuery(function($) {
 				//获取景区列表
 				getScenic();
 				//获取景区门票列表
-				 setTimeout(getTicket, 1000);
+				setTimeout(getTicket, 1000);
 				//获取酒店级别列表
 				getDictLvl(null, 'bg');
+				//资源快照
+				setTimeout(setSchedule, 1000);
+				
 			}
 		});
-	}); 
+	});
+	
+	function setSchedule(){
+		str = $("#schedule").html() + "";
+		$("#fcSchedule").val(str);
+	}
 	
 	//车型变更
 	/*$(document).on('change key', '#transport', function(event){
@@ -299,6 +301,7 @@ jQuery(function($) {
 			$(this).parent().parent().find(".batch_lvl").show();
 			$(this).parent().parent().find(".batch_ct").show();
 			$(this).parent().parent().find(".batch_resname").html('菜单');
+			$(this).parent().parent().parent().next().find(".tccPrice").val(0);
 			getDictLvl(this, 'ct');
 			getRestaurant(this);
 		}
@@ -312,11 +315,13 @@ jQuery(function($) {
 			$(this).parent().parent().find(".batch_bg").show();
 			$(this).parent().parent().find(".batch_resno").html('');
 			$(this).parent().parent().parent().next().find(".batch_ccno").html('');
+			$(this).parent().parent().parent().next().find(".tccPrice").val(0);
 			$(this).parent().parent().find(".batch_resname").html('房型');
 			getDictLvl(this, 'bg');
 		}
 		if(restype == 'yl'){
 			$(this).parent().parent().parent().next().find(".batch_ccno").html('');
+			$(this).parent().parent().parent().next().find(".tccPrice").val(0);
 			$(this).parent().parent().find(".batch_resname").html('资源');
 			$(this).parent().parent().find(".batch_bg").hide();
 			$(this).parent().parent().find(".batch_lvl").hide();
@@ -490,10 +495,14 @@ jQuery(function($) {
 				if (data == null || data == '') {
 					//alert("未配置资源价格！");
 					$(obj).html('');
+					$(obj).parent().parent().find(".tccPrice").val(0);
 					return;
 				}
 				html = '';
 				$.each(data, function(commentIndex, comment){
+					if (commentIndex == 0) {
+						$(obj).parent().parent().find(".tccPrice").val(comment['fdPrice']);
+					}
 					html += '<option value=' + comment['fsCcno'] + '>' + comment['fsCcname'] + '(' + comment['fdPrice'] + '￥)</option>';
 				});
 				resMap.put(resno+date, data);
@@ -690,6 +699,7 @@ jQuery(function($) {
 	//添加批次资源项
 	$(document).on('click key', '.btn_batch', function(event){
 		var ccno = $(this).parent().parent().find(".batch_ccno").val();
+		var tccprice = $(this).parent().parent().find(".tccPrice").val();
 		if (ccno == null) {
 			alert("请选择消费项目再进行添加！");
 			return;
@@ -731,6 +741,9 @@ jQuery(function($) {
 				});
 			}
 		});
+		if (tccprice != null && tccprice != ''){
+			price = tccprice;
+		}
 		if (restype == 'bg') {
 			data["resname"] = accomadationName+'-'+resname;
 		}

@@ -132,7 +132,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		TOrderlistWithBLOBs orderlistWithBLOBs = orderlistService.selectByPrimaryKey(no);
 		if (orderlistWithBLOBs == null)
 			return null;
-		Map<String, Body> map = new HashMap<String, Body>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		//公共模糊快照
 		if (StringUtils.isNotBlank(orderlistWithBLOBs.getFcCommfuzzysnapshot())){
 			Root root = ResScheduleXMLConverter.fromXml("http://www.cnacex.com/" ,orderlistWithBLOBs.getFcCommfuzzysnapshot(), Root.class);
@@ -156,8 +156,13 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			map.put("commResSnapshot", body);
 		}
 		//定制线路-客户询价内容
-		if ("03".equals(orderlistWithBLOBs.getFsType()) && StringUtils.isNotBlank(orderlistWithBLOBs.getFcSchedule())) {
-			Root root = ResScheduleXMLConverter.fromXml("http://www.cnacex.com/", orderlistWithBLOBs.getFcSchedule(), Root.class);
+		if (StringUtils.isNotBlank(orderlistWithBLOBs.getFcSchedule())) {
+			if ("03".equals(orderlistWithBLOBs.getFsType())) {
+				Root root = ResScheduleXMLConverter.fromXml("http://www.cnacex.com/", orderlistWithBLOBs.getFcSchedule(), Root.class);
+				map.put("fcSchedule", root.getBody());
+			} else {
+				map.put("fcSchedule", orderlistWithBLOBs.getFcSchedule());
+			}
 			/*DictExample dictExample = new DictExample();
 			Criteria criteria = dictExample.createCriteria();
 			criteria.andFsParentnoEqualTo("jtgj");
@@ -165,7 +170,6 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			for (Daylist daylist : root.getBody().getDaylist()) {
 				daylist.setTransport((String)dictMap.get(daylist.getTransport()));
 			}*/
-			map.put("fcSchedule", root.getBody());
 		}
 		return map;
     }

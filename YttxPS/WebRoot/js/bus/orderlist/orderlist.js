@@ -101,8 +101,8 @@ $("#editIframe").on("load",function(){
 	} else {
 		$(this).contents().find("#fiStat").html('<option value="'+raw.fiStat+'"></option>');
 	}
-	$.base64.utf8encode = true;
-	$(this).contents().find('#fcSchedule').val($.base64.btoa(raw.fcSchedule));
+	/*$.base64.utf8encode = true;
+	$(this).contents().find('#fcSchedule').val($.base64.btoa(raw.fcSchedule));*/
 	//获取线路列表
 });
 

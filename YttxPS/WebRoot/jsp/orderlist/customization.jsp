@@ -612,6 +612,13 @@
 																								<div class="col-sm-2">
 																									<select class="batch_ccno form-control"></select>
 																								</div>
+																								<label class="col-sm-1 control-label">价格</label>
+																								<div class="col-sm-2">
+																									<div class="input-group">
+																										<input type="text" class="tccPrice form-control">
+																										<span class="input-group-addon">￥</span>
+																									</div>
+																								</div>
 																								<label class="col-sm-1 control-label">数量</label>
 																								<div class="col-sm-2">
 																									<input type="text" id="usernum" class="usernum form-control" value="1"/>

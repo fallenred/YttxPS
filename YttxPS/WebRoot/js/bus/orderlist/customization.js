@@ -259,6 +259,7 @@ jQuery(function($) {
 			$(this).parent().parent().find(".batch_lvl").show();
 			$(this).parent().parent().find(".batch_ct").show();
 			$(this).parent().parent().find(".batch_resname").html('菜单');
+			$(this).parent().parent().parent().next().find(".tccPrice").val(0);
 			getDictLvl(this, 'ct');
 			getRestaurant(this);
 		}
@@ -272,11 +273,13 @@ jQuery(function($) {
 			$(this).parent().parent().find(".batch_bg").show();
 			$(this).parent().parent().find(".batch_resno").html('');
 			$(this).parent().parent().parent().next().find(".batch_ccno").html('');
+			$(this).parent().parent().parent().next().find(".tccPrice").val(0);
 			$(this).parent().parent().find(".batch_resname").html('房型');
 			getDictLvl(this, 'bg');
 		}
 		if(restype == 'yl'){
 			$(this).parent().parent().parent().next().find(".batch_ccno").html('');
+			$(this).parent().parent().parent().next().find(".tccPrice").val(0);
 			$(this).parent().parent().find(".batch_resname").html('资源');
 			$(this).parent().parent().find(".batch_bg").hide();
 			$(this).parent().parent().find(".batch_lvl").hide();
@@ -455,10 +458,14 @@ jQuery(function($) {
 				if (data == null || data == '') {
 					//alert("未配置资源价格！");
 					$(obj).html('');
+					$(obj).parent().parent().find(".tccPrice").val(0);
 					return;
 				}
 				html = '';
 				$.each(data, function(commentIndex, comment){
+					if (commentIndex == 0) {
+						$(obj).parent().parent().find(".tccPrice").val(comment['fdPrice']);
+					}
 					html += '<option value=' + comment['fsCcno'] + '>' + comment['fsCcname'] + '(' + comment['fdPrice'] + '￥)</option>';
 				});
 				resMap.put(resno+date, data);
@@ -520,10 +527,10 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		/*if(dataArr.length == 0){
+		if(dataArr.length == 0){
 			alert("请先添加景区资源！");
 			return;
-		}*/
+		}
 		$.ajax({
 			type: "POST",
 			url: "/restaurant/selectRestaurant.htm",
@@ -583,10 +590,10 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		/*if(dataArr.length == 0){
+		if(dataArr.length == 0){
 			alert("请先添加景区资源！");
 			return;
-		}*/
+		}
 		$.ajax({
 			type: "POST",
 			url: "/entertainment/selectEntertainment.htm",
@@ -666,6 +673,7 @@ jQuery(function($) {
 	//添加批次资源项
 	$(document).on('click key', '.btn_batch', function(event){
 		var ccno = $(this).parent().parent().find(".batch_ccno").val();
+		var tccprice = $(this).parent().parent().find(".tccPrice").val();
 		if (ccno == null) {
 			alert("请选择消费项目再进行添加！");
 			return;
@@ -708,6 +716,9 @@ jQuery(function($) {
 				});
 			}
 		});
+		if (tccprice != null && tccprice != ''){
+			price = tccprice;
+		}
 		if (restype == 'bg') {
 			data["resname"] = accomadationName+'-'+resname;
 		}

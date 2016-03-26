@@ -198,6 +198,7 @@
 											<input type="hidden"  id="hSchedule" name="hSchedule" />
 											<div class="col-sm-8">
 												<textarea class="ckeditor" id="fcSchedule" name="fcSchedule"></textarea>
+												<div hidden="hidden" id="schedule"></div>
 											</div>
 										</div>
 									</div>
@@ -569,6 +570,13 @@
 																								<div class="col-sm-2">
 																									<select class="batch_ccno form-control"></select>
 																								</div>
+																								<label class="col-sm-1 control-label">价格</label>
+																								<div class="col-sm-2">
+																									<div class="input-group">
+																										<input type="text" class="tccPrice form-control">
+																										<span class="input-group-addon">￥</span>
+																									</div>
+																								</div>
 																								<label class="col-sm-1 control-label">数量</label>
 																								<div class="col-sm-2">
 																									<input type="text" id="usernum" class="usernum form-control" value="1"/>
@@ -660,15 +668,6 @@
 											<label class="col-sm-2 control-label no-padding-right" for="fdPaidamt">已缴金额</label>
 											<div class="col-sm-3">
 												<input type="text" class="form-control" name="fdPaidamt" id="fdPaidamt">
-											</div>
-										</div>
-									</div>
-									<div hidden="hidden" class="row div_transfer_stat">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fiStat">订单状态</label>
-											<div class="col-sm-3">
-												<select id="fiStat" name="fiStat" class="form-control">
-												</select>
 											</div>
 										</div>
 									</div>
