@@ -100,7 +100,7 @@
 												<div class="col-sm-2">
 													<select class="form-control" id="fsType">
 														<option value="">----线路类型----</option>
-														<option value="02">衍生线路</option>
+														<option value="02">专家线路</option>
 														<option value="03">定制线路</option>
 													</select>
 												</div>

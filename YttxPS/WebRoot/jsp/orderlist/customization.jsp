@@ -370,7 +370,7 @@
 																				<label class="col-sm-2 control-label"
 																					for="fsRegions">景区选择</label>
 																				<div class="col-sm-2">
-																					<select id="scenic" class="form-control">
+																					<select id="scenic" class="width-80 chosen-select form-control">
 																					</select>
 																				</div>
 																				<div class="col-sm-1">
@@ -862,15 +862,14 @@
 	<script src="/js/bus/orderlist/customization.js"></script>
 
 	<c:if test="${!empty succflag && succflag =='1'}">
-
 		<script type="text/javascript">
 			$('.jump-step').removeClass('hide');
 			setTimeout('window.location="/home.htm"', 5000);
 		</script>
-
 	</c:if>
 
 	<script type="text/javascript">
+
 		$('.datetimepicker').datetimepicker({
 			language : 'zh-CN',
 			weekStart : 1,
@@ -903,6 +902,11 @@
 				//
 			});
 			
+		});
+		$(this).find('.chosen-container').each(function(){
+			$(this).find('a:first-child').css('width' , '210px');
+			$(this).find('.chosen-drop').css('width' , '210px');
+			$(this).find('.chosen-search input').css('width' , '200px');
 		});
 	</script>
 	<script type="text/javascript">

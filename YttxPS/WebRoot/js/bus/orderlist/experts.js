@@ -30,8 +30,7 @@ jQuery(function($) {
 	$("#regionname", "#editform").click(function() {
 		$("#selectCity", "#editform").show();
 	});
-
-
+	
 	//	重置
 	$("#reset").on("click", function() {
 		$("#selectCity").hide();
@@ -121,7 +120,7 @@ jQuery(function($) {
 				//获取景区列表
 				getScenic();
 				//获取景区门票列表
-				getTicket(null);
+				 setTimeout(getTicket, 1000);
 				//获取酒店级别列表
 				getDictLvl(null, 'bg');
 			}
@@ -189,10 +188,12 @@ jQuery(function($) {
 			dataType: "json",
 			success: function(data){
 				var html = ''; 
+				var span = '';
 				$.each(data, function(commentIndex, comment){
 					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 				});
 				$("#scenic").html(html);
+				$("#scenic").chosen();
 			}
 		});
 	}
@@ -270,6 +271,7 @@ jQuery(function($) {
 				});
 				$("#guide").html(html);
 				$("#guideName").attr("value", $("#guideNo").find("option:selected").text());
+				$("#guide").chosen();
 			}
 		});
 	}
@@ -292,6 +294,7 @@ jQuery(function($) {
 			getTicket(this);
 		}
 		if(restype == 'ct'){
+			$(this).parent().parent().find(".batch_Lvl").html('<option value="01"></option>');
 			$(this).parent().parent().find(".batch_bg").hide();
 			$(this).parent().parent().find(".batch_lvl").show();
 			$(this).parent().parent().find(".batch_ct").show();
@@ -389,7 +392,11 @@ jQuery(function($) {
 					});
 					$(obj).parent().parent().find(".batch_accomadation").html(html);
 					getRoom($(obj).parent().parent().find(".batch_accomadation"));
+					
 				}
+				$(obj).parent().parent().find(".batch_accomadation").attr("class", "width-80 chosen-select batch_accomadation form-control");
+				$(obj).parent().parent().find(".batch_accomadation").chosen(); 
+				$(obj).parent().parent().find(".batch_accomadation").next().attr("style","width:100px;"); 
 			}
 		});
 	}
@@ -1024,6 +1031,7 @@ jQuery(function($) {
 	    	document.getElementById("excel").files[0] = '请选择xls格式的文件';
 	    }
 	}
+
 	
 	//	colorbox
 	var $overflow = '';

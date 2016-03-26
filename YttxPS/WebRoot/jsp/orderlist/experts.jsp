@@ -66,7 +66,7 @@
 												for="fsNo">订单名称</label>
 											<div class="col-sm-3">
 												<input type="hidden" id="fsNo" name="fsNo"
-													class="form-control" placeholder="订单id" /> <input
+													class="form-control" placeholder="订单id" /> <input readonly="readonly"
 													type="text" id="fsName" name="fsName" class="form-control"
 													placeholder="订单名称" />
 											</div>
@@ -293,7 +293,7 @@
 																				</div>
 																				<label class="col-sm-1 control-label" for="fsRegions">导游</label>
 																				<div class="col-sm-2">
-																					<select id="guide" class="form-control"></select>
+																					<select id="guide" class="width-80 chosen-select form-control"></select>
 																				</div>
 																				<label class="col-sm-1 control-label" for="fsRegions">价格</label>
 																				<div class="col-sm-2">
@@ -314,7 +314,7 @@
 																				<label class="col-sm-2 control-label"
 																					for="fsRegions">景区选择</label>
 																				<div class="col-sm-2">
-																					<select id="scenic" class="form-control">
+																					<select id="scenic" class="width-80 chosen-select form-control">
 																					</select>
 																				</div>
 																				<div class="col-sm-1">
@@ -821,6 +821,7 @@
 			<!-- /.modal-dialog -->
 		</div>
 	<script src="/js/bus/orderlist/experts.js"></script>
+	<script src="/js/chosen.jquery.min.js"></script>
 
 	<c:if test="${!empty succflag && succflag =='1'}">
 

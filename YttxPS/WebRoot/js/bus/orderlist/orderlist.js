@@ -63,7 +63,7 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#fiDays").val(raw.fiDays);
 	$(this).contents().find("#days").val(raw.fiDays);
 	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
-	$(this).contents().find("#fsStartplace").val(raw.fsStartplace);
+	$(this).contents().find("#regionno").val(raw.fsStartplace);
 	$(this).contents().find("#regionname").val(raw.regionname);
 	$(this).contents().find("#fdPrice").val(raw.fdPrice);
 	$(this).contents().find("#fsSummary").val(raw.fsSummary);
@@ -82,7 +82,7 @@ $("#editIframe").on("load",function(){
 	}
 	html='<option value="">---订单状态---</option>';
 	if (raw.fiStat == '2') {
-		html +='<option value="4">已付首款</option>'
+		html +='<option value="4">已付首款</option>';
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
 		$(this).contents().find(".div_custList").show();
@@ -139,7 +139,7 @@ $("#customizationIframe").on("load",function(){
 	}
 	html='<option value="">---订单状态---</option>';
 	if (raw.fiStat == '2') {
-		html +='<option value="4">已付首款</option>'
+		html +='<option value="4">已付首款</option>';
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
 		$(this).contents().find(".div_custList").show();

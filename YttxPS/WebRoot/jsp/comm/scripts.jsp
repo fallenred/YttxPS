@@ -31,7 +31,7 @@
 <script src="/js/jquery.base64.js"></script>
 <script src="/js/handlebars.js"></script>
 
-
+<script src="/js/chosen.jquery.min.js"></script>
 
 <!-- page specific plugin scripts -->
 <!-- jqGrid -->
@@ -57,6 +57,7 @@
 <script src="/js/typeahead-bs2.min.js"></script>
 
 <script src="/js/bus/localcity.js"></script>
+<script src="/js/bus/pub.js"></script>
 <script src="/js/bus/pub.js"></script>
 <script type="text/javascript">
 /** 
@@ -188,7 +189,7 @@ Date.prototype.format = function(format) {
 	        s+="}";     
 	        return s;     
 	    };     
-	}   
+	}
 </script>
 <script src="/js/date-time/bootstrap-datetimepicker.min.js"></script>
 <script src="/js/date-time/locales/bootstrap-datetimepicker.zh-CN.js"></script>

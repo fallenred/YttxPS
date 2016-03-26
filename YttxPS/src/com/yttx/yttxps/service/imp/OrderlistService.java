@@ -112,10 +112,11 @@ public class OrderlistService implements IOrderlistService {
 				remarks.setFsOrderId(record.getFsNo());
 				remarks.setFsOperId(record.getFsOperId());
 				remarks.setFiSeq(new BigDecimal(i));
-				remarks.setFdPaidamt(BigDecimal.ZERO);
 				remarks.setFiClosestat(BigDecimal.ZERO);
-				if ("1".equals(record.getFiStat())) {
+				if (remarks.getFiStat().compareTo(BigDecimal.ONE) == 0) {
 					remarks.setFdPaidamt(remarks.getFdAmt());
+				} else {
+					remarks.setFdPaidamt(BigDecimal.ZERO);
 				}
 				remarksMapper.insertSelective(remarks);
 			}
@@ -185,7 +186,11 @@ public class OrderlistService implements IOrderlistService {
 				remarks.setFsOrderId(record.getFsNo());
 				remarks.setFsOperId(record.getFsOperId());
 				remarks.setFiSeq(new BigDecimal(i));
-				remarks.setFdPaidamt(BigDecimal.ZERO);
+				if (remarks.getFiStat().compareTo(BigDecimal.ONE) == 0) {
+					remarks.setFdPaidamt(remarks.getFdAmt());
+				} else {
+					remarks.setFdPaidamt(BigDecimal.ZERO);
+				}
 				remarks.setFiClosestat(BigDecimal.ZERO);
 				remarksMapper.insertSelective(remarks);
 			}

@@ -252,6 +252,7 @@ jQuery(function($) {
 			getTicket(this);
 		}
 		if(restype == 'ct'){
+			$(this).parent().parent().find(".batch_Lvl").html('<option value="01"></option>');
 			$(this).parent().parent().find(".batch_bg").hide();
 			$(this).parent().parent().find(".batch_lvl").show();
 			$(this).parent().parent().find(".batch_ct").show();

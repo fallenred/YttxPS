@@ -74,6 +74,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		TOrderCustomExample example = new TOrderCustomExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andFsOrderIdEqualTo(orderCustom.getFsOrderId());
+		example.setOrderByClause("fi_seq");
 		List<TOrderCustomWithBLOBs> list = orderCustomService.selectTOrderCustom(example);
 		//订单天数
 		int days = 0;

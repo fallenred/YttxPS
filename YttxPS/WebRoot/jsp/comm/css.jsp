@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
 <link rel="stylesheet" href="/css/ui.jqgrid.css" />
 <link rel="stylesheet" href="/css/dropzone.css" />
+<link rel="stylesheet" href="/css/chosen.css" />
 
 <!-- fonts -->
 <link rel="stylesheet" href="/css/ace-fonts.css" />
