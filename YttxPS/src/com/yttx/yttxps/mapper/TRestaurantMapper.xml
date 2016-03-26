@@ -353,8 +353,11 @@
 		              </when>
 		            </choose>
 		     UNION
-		     (SELECT '5101' FROM dual)             
+		     (SELECT '5101' FROM dual) 
 		  )
+		  <!-- 10元菜单配置在省编码级别上 -->
+		  UNION
+         (SELECT '510000' FROM dual)
 	  )
       <if test="name != null and name != ''">
         AND FS_NAME like '%'||#{name, jdbcType = VARCHAR}||'%'

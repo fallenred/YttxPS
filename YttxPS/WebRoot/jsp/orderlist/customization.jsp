@@ -308,7 +308,7 @@
 														</script>
 														</ul>
 														<div id="myTabContent" class="tab-content">
-															<script id="commRes-template1" type="text/x-handlebars-template">
+															
 															<div class="tab-pane fade in active" id="common">
 																<div class="row" style="margin-top: 10px;">
 																	<div class="col-sm-12" style="padding: 10 0 0 0px;">
@@ -349,7 +349,7 @@
 																				</div>
 																				<label class="col-sm-1 control-label" for="fsRegions">导游</label>
 																				<div class="col-sm-2">
-																					<select id="guide" class="form-control"></select>
+																					<select id="guide" class="width-80 chosen-select form-control"></select>
 																				</div>
 																				<label class="col-sm-1 control-label" for="fsRegions">价格</label>
 																				<div class="col-sm-2">
@@ -396,7 +396,8 @@
          																						<th>数量</th>
       																						</tr>
    																						</thead>
-   																						<tbody>
+   																						<tbody id="tbody_common">
+																						<script id="commRes-template1" type="text/x-handlebars-template">
 																							<input type="hidden" id="reslistIndex" value="{{length reslist}}" placeholder="reslist下标">
 																							{{#each reslist}}
       																						<tr>
@@ -420,6 +421,7 @@
       																						</tr>
 																							{{/each}}
    																						</tbody>
+																						</script>
 																					</table>
 																				</div>
 																			</div>
@@ -427,7 +429,6 @@
 																	</div>
 																</div>
 															</div>
-															</script>
 															<!-- 公共资源体 start -->
 															<script id="commRes-template2" type="text/x-handlebars-template">
 															{{#each daylist}}

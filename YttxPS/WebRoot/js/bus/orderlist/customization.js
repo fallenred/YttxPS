@@ -125,7 +125,7 @@ jQuery(function($) {
 				//公共资源体（门票、购物、餐厅）
 				var commResTemplate2 = Handlebars.compile($("#commRes-template2").html());
 				$('#myTab').html(commResTemplate(data.commResSnapshot));
-				$('#myTabContent').html(commResTemplate1(data.commResSnapshot));
+				$('#tbody_common').html(commResTemplate1(data.commResSnapshot));
 				$('#myTabContent').html($('#myTabContent').html() + commResTemplate2(data.commResSnapshot));
 				//获取车型列表
 				getTransport();
@@ -148,11 +148,12 @@ jQuery(function($) {
 			data: '',
 			dataType: "json",
 			success: function(data){
-				var html = ''; 
+				var html = '';
 				$.each(data, function(commentIndex, comment){
 					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 				});
 				$("#scenic").html(html);
+				$("#scenic").chosen();
 			}
 		});
 	}
@@ -230,6 +231,7 @@ jQuery(function($) {
 				});
 				$("#guide").html(html);
 				$("#guideName").attr("value", $("#guideNo").find("option:selected").text());
+				$("#guide").chosen();
 			}
 		});
 	}
@@ -355,6 +357,9 @@ jQuery(function($) {
 					$(obj).parent().parent().find(".batch_accomadation").html(html);
 					getRoom($(obj).parent().parent().find(".batch_accomadation"));
 				}
+				$(obj).parent().parent().find(".batch_accomadation").attr("class", "width-80 chosen-select batch_accomadation form-control");
+				$(obj).parent().parent().find(".batch_accomadation").chosen(); 
+				$(obj).parent().parent().find(".batch_accomadation").next().attr("style","width:100px;"); 
 			}
 		});
 	}
