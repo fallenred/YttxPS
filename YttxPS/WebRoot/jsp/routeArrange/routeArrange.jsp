@@ -116,6 +116,33 @@
 							</div>
 							<table id="grid-table"></table>
 							<div id="grid-pager"></div>
+							<!-- 
+								add by marongcai
+								线路价格展示的模态框
+								2016-3-25
+								add by start
+							 -->
+							<!-- 模态框（价格） -->
+							<div class="modal fade" id="costModal" tabindex="-1" role="dialog" aria-labelledby="costModalLabel" aria-hidden="true">
+								<div class="modal-dialog" style="width: 1024px;">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+											<h4 class="modal-title" id="costModalLabel">线路价格展示</h4>
+										</div>
+										<div class="modal-body">
+											<iframe id="costIframe" width="100%" height="1200px" frameborder="0" scrolling="no"></iframe>
+										</div>
+
+										<!-- /.modal-content -->
+									</div>
+									<!-- /.modal-dialog -->
+								</div>
+								<!-- /.modal -->
+							</div>
+							<!-- 
+								add end
+							 -->
 
 							<!-- 模态框（新增） -->
 							<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
