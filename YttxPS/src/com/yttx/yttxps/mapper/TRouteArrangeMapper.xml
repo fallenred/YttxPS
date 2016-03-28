@@ -164,7 +164,7 @@
    -->
   <select id="selectCost" parameterType="java.util.Map" resultType="java.util.Map">
     select 
-    	t1.price1, t2.price2, to_char(t1.FT_DATE,'yyyy/mm/dd') AS ftDate
+    	t1.price1, t2.price2, t3.price3, to_char(t1.FT_DATE,'yyyy/mm/dd') AS ftDate
   	from 
   		(select 
   			sum(t.FD_PRICE) as price1, t.FT_DATE, t.FS_ROUTENO
@@ -172,6 +172,8 @@
          	VROUTECCPRICE t
          where 
          	<![CDATA[t.FS_RESTYPE <> 'cx' ]]>      	
+         and 
+         	<![CDATA[t.FS_RESTYPE <> 'bg' ]]>      	
          and 
          	t.FS_ROUTENO = #{fsRouteNo,jdbcType=CHAR}
          group by 
@@ -193,6 +195,22 @@
       	 t1.FS_ROUTENO = t2.FS_ROUTENO
    	  and 
    	     t1.FT_DATE = t2.FT_DATE
+   	 left join 
+  	 	(select 
+  	 		sum(t.FD_PRICE) as price3, t.FT_DATE, t.FS_ROUTENO
+         from 
+         	VROUTECCPRICE t
+         where 
+         	t.FS_RESTYPE = 'bg'
+         and 
+         	t.FS_ROUTENO = #{fsRouteNo,jdbcType=CHAR}
+         group by 
+         	t.FS_ROUTENO, t.FT_DATE
+         	) t3
+      on 
+      	 t1.FS_ROUTENO = t3.FS_ROUTENO
+   	  and 
+   	     t1.FT_DATE = t3.FT_DATE
       order by 
       	 t1.FT_DATE
   </select>
