@@ -14,6 +14,17 @@ function editCustom(id) {
     $('#editModal').modal({ show: true, backdrop: 'static' });
 };
 
+function priceCustom(id) {
+	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
+    var page = "/jsp/transportArrangePrice/transportArrangePrice.jsp?" +
+    		"fsResno=" + raw.fsNo +
+    		"&fiGenindex=" + raw.fiGenindex +
+    		"&fsTransNo=" + raw.fsTransNo +
+    		"&tgenname=" + escape(raw.fiGenName) +
+    		"&transName=" + escape(raw.fsTransName);
+    window.open(page);
+}
+
 function deleteCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	var frameSrc = "/jsp/transportArrange/delete.jsp?no=" + raw.fsNo;
@@ -31,20 +42,14 @@ function picCustom(id) {
 $("#showModal").on("shown.bs.modal", function() {
 	$(this).find("#reset").click();
 	$(this).find("#fiGenindex").val(raw.fiGenindex);
-	$(this).find("#fsTransno").val(raw.fsTransno);
-	$(this).find("#ftStartdate").val(raw.ftStartdate);
-	$(this).find("#ftEnddate").val(raw.ftEnddate);
-	$(this).find("#fdPrice").val(raw.fdPrice);
+	$(this).find("#fsTransNo").val(raw.fsTransNo);
 });
 
 $("#editIframe").on("load",function(){
 	$(this).contents().find("#reset").click();
 	$(this).contents().find("#fsNo").val(raw.fsNo);
 	$(this).contents().find("#fiGenindex").val(raw.fiGenindex);
-	$(this).contents().find("#fsTransno").val(raw.fsTransno);
-	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
-	$(this).contents().find("#ftEnddate").val(raw.ftEnddate);
-	$(this).contents().find("#fdPrice").val(raw.fdPrice);
+	$(this).contents().find("#fsTransNo").val(raw.fsTransNo);
 });
 
 /**
@@ -107,7 +112,6 @@ jQuery(function($) {
 //	jqGrid form提交
 	$("#submit").click(function() {
 		$("#collapseOne").collapse('hide');
-		// $("#collapseTwo").collapse('show');
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
 		postData["transportArrange.fiGenName"] = $("#queryfield").find("#fiGenName").val();
 		postData["transportArrange.fsTransName"] = $("#queryfield").find("#fsTransName").val();
@@ -141,7 +145,12 @@ jQuery(function($) {
 
 	// 定义按钮列
 	actFormatter = function(cellvalue, options, rawObject) {
-		var detail = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showCustom('
+	
+	var priceBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="roomButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="priceCustom('
+            + options.rowId
+            + ');" data-original-title="车型线路价格配置"><span class="ui-icon ace-icon fa fa-cog red"></span></div>';
+		
+	var detail = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showCustom('
 			+ options.rowId
 			+ ');" data-original-title="查看记录详情"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
 
@@ -152,7 +161,7 @@ jQuery(function($) {
 	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteCustom('
 			+ options.rowId
 			+ ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-	return detail + editBtn + deleteBtn;
+	return priceBtn + detail + editBtn + deleteBtn;
 	};
 
 	// resize to fit page size
@@ -189,11 +198,11 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', 'id', '路线编码', '路线名称', '车型编码', '车型名称', '起始日期', '截止日期', '价格'],
+				colNames : [ '操作', 'id', '路线编码', '路线名称', '车型编码', '车型名称'],
 				colModel : [ {
 					name : 'myac',
 					index : '',
-					width : 70,
+					width : 90,
 					fixed : true,
 					sortable : false,
 					resize : false,
@@ -223,8 +232,8 @@ jQuery(function($) {
 					editable : true,
 					sorttype : "char"
 				}, {
-					name : 'fsTransno',
-					index : 'fsTransno',
+					name : 'fsTransNo',
+					index : 'fsTransNo',
 					width : 85,
 					sorttype : "int",
 					hidden : true
@@ -237,38 +246,6 @@ jQuery(function($) {
 					/**
 					 * modify end
 					 */
-				}, {
-					name : 'ftStartdate',
-					index : 'ftStartdate',
-					width : 100,
-					editable : true,
-					sorttype : "char",
-					formatter : function(value){
-						var timestamp = "";
-						if(value != null){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy-MM-dd");
-						}
-						return timestamp;
-					}
-				}, {
-					name : 'ftEnddate',
-					index : 'ftEnddate',
-					width : 100,
-					editable : true,
-					sorttype : "char",
-					formatter : function(value){
-						var timestamp = "";
-						if(value != null){//rData[7]表示日期列
-							timestamp = (new Date(parseFloat(value))).format("yyyy-MM-dd");
-						}
-						return timestamp;
-					}
-				}, {
-					name : 'fdPrice',
-					index : 'fdPrice',
-					width : 100,
-					editable : true,
-					sorttype : "int"
 				}],
 
 				viewrecords : true,

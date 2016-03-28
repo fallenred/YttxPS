@@ -378,8 +378,7 @@
 											<td>${tt.paidAmt}</td>
 											<td>
 												<c:if test="${tt.stat==0}">未付款</c:if>
-												<c:if test="${tt.stat==1}">已付首款</c:if>
-												<c:if test="${tt.stat==2}">已付全款</c:if>
+												<c:if test="${tt.stat==1}">已付全款</c:if>
 											</td>
 										</tr>
 									</c:forEach>

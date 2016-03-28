@@ -27,7 +27,7 @@ public interface ITransportArrangeService {
 	void update(TtransportArrange record) throws ParseException;
 	
 	@Transactional
-	int deleteByNo(String no);
+	void deleteByNo(String no);
 	
 	List<TtransportArrangeKey> selectTtransportArrange(TtransportArrangeExample example);
 	
