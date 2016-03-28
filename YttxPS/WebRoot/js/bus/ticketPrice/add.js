@@ -85,6 +85,20 @@ jQuery(function($) {
 			return false;
 		}
 		
+		var isChecked = true;
+		$(".price").each(function(idx, e){
+			if($(e).val() == null || $(e).val() == undefined || $(e).val().trim() == ""){
+				$("#message").show();
+				$("#message").text($("label[for='" + $(e).attr("id") + "']").text() + "不能为空");
+				$(e).focus();
+				isChecked = false;
+				return false;
+			}
+		});
+		if(!isChecked){
+			return isChecked;
+		}
+		
 		$("#fsNo").removeAttr("disabled");
 
 		$.post("/ticket/addTicketPrice.htm",

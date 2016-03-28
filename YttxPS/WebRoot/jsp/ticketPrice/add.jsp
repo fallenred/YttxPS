@@ -74,12 +74,12 @@
 											<label class="col-sm-2 control-label no-padding-right" for="fdFullLowQp">挂牌价格全票</label>
 											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[0].fsCcno" value="000001">
-												<input class="form-control" maxlength="10" type="text" id="fdFullLowQp" name="tccPrices[0].fdPrice" placeholder="挂牌价格全票" />
+												<input class="form-control price" maxlength="10" type="text" id="fdFullLowQp" name="tccPrices[0].fdPrice" placeholder="挂牌价格全票" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fdHalfLowQp">挂牌价格半票</label>
 											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[1].fsCcno" value="000002">
-												<input class="form-control" maxlength="10" type="text" id="fdHalfLowQp" name="tccPrices[1].fdPrice" placeholder="挂牌价格半票" />
+												<input class="form-control price" maxlength="10" type="text" id="fdHalfLowQp" name="tccPrices[1].fdPrice" placeholder="挂牌价格半票" />
 											</div>
 										</div>
 									</div>
@@ -88,12 +88,12 @@
 											<label class="col-sm-2 control-label no-padding-right" for="fdChildLowQp">挂牌价格儿童票</label>
 											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[2].fsCcno" value="000003">
-												<input class="form-control" maxlength="10" type="text" id="fdChildLowQp" name="tccPrices[2].fdPrice" placeholder="挂牌价格儿童票" />
+												<input class="form-control price" maxlength="10" type="text" id="fdChildLowQp" name="tccPrices[2].fdPrice" placeholder="挂牌价格儿童票" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fdFreeLowQp">挂牌价格免票</label>
 											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[3].fsCcno" value="000004">
-												<input class="form-control" maxlength="10" type="text" id="fdFreeLowQp" name="tccPrices[3].fdPrice" placeholder="挂牌价格免票" />
+												<input class="form-control price" maxlength="10" type="text" id="fdFreeLowQp" name="tccPrices[3].fdPrice" placeholder="挂牌价格免票" />
 											</div>
 										</div>
 									</div>
@@ -102,12 +102,12 @@
 											<label class="col-sm-2 control-label no-padding-right" for="fdFullLowTp">团队价格全票</label>
 											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[4].fsCcno" value="000005">
-												<input class="form-control" maxlength="10" type="text" id="fdFullLowTp" name="tccPrices[4].fdPrice" placeholder="团队价格全票" />
+												<input class="form-control price" maxlength="10" type="text" id="fdFullLowTp" name="tccPrices[4].fdPrice" placeholder="团队价格全票" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fdHalfLowTp">团队价格半票</label>
 											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[5].fsCcno" value="000006">
-												<input class="form-control" maxlength="10" type="text" id="fdHalfLowTp" name="tccPrices[5].fdPrice" placeholder="团队价格半票" />
+												<input class="form-control price" maxlength="10" type="text" id="fdHalfLowTp" name="tccPrices[5].fdPrice" placeholder="团队价格半票" />
 											</div>
 										</div>
 									</div>
@@ -116,12 +116,12 @@
 											<label class="col-sm-2 control-label no-padding-right" for="fdChildLowTp">团队价格儿童票</label>
 											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[6].fsCcno" value="000007">
-												<input class="form-control" maxlength="10" type="text" id="fdChildLowTp" name="tccPrices[6].fdPrice" placeholder="团队价格儿童票" />
+												<input class="form-control price" maxlength="10" type="text" id="fdChildLowTp" name="tccPrices[6].fdPrice" placeholder="团队价格儿童票" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fdFreeLowTp">团队价格免票</label>
 											<div class="col-sm-3">
 												<input type="hidden" name="tccPrices[7].fsCcno" value="000008">
-												<input class="form-control" maxlength="10" type="text" id="fdFreeLowTp" name="tccPrices[7].fdPrice" placeholder="团队价格免票" />
+												<input class="form-control price" maxlength="10" type="text" id="fdFreeLowTp" name="tccPrices[7].fdPrice" placeholder="团队价格免票" />
 											</div>
 										</div>
 									</div>
