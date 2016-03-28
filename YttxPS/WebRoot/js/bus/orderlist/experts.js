@@ -126,7 +126,8 @@ jQuery(function($) {
 	
 	function setSchedule(){
 		str = $("#schedule").html() + "";
-		$("#fcSchedule").val(str);
+		CKEDITOR.instances["fcSchedule"].setData(str);   //日程快照
+		//$("#fcSchedule").val(str);
 	}
 	
 	//车型变更
