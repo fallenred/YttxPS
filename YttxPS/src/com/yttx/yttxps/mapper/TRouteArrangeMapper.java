@@ -105,6 +105,12 @@ public interface TRouteArrangeMapper<T> extends IBaseMapper<T> {
 	List<RouteCCType> selectRouteCCType(Map<String, Object> map);
 	
 	List<VResSnapshot> selectRessnapshot(Map<String, Object> map);
+	
+	/**
+	 * @author marongcai
+	 * 查询线路报价
+	 */
+	List<Map<String,Object>> selectCost(Map<String,String> map);
 
 	int selectFsId();
 }

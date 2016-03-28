@@ -53,4 +53,12 @@ public interface IRouteArrangeService {
 	
 	@Transactional(readOnly = true)
 	public TRouteArrangeWithBLOBs findTRouteArrange(String fsId);
+	
+	/**
+	 * @author marongcai
+	 * @param fsId
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public List<Map<String,Object>> selectRouteArrangeInfo(String fsId);
 }

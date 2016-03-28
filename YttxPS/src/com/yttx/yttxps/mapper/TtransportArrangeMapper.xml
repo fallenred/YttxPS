@@ -15,12 +15,9 @@
   <resultMap id="ExtendResultMap" extends="BaseResultMap" type="com.yttx.yttxps.model.TtransportArrange">
     <id column="FI_GENNAME" jdbcType="CHAR" property="fiGenName" />
     <id column="FS_TRANSNAME" jdbcType="CHAR" property="fsTransName" />
-    <id column="FD_PRICE" jdbcType="DECIMAL" property="fdPrice" />
   </resultMap>
   <resultMap id="ExtendResultMap4Price" extends="ExtendResultMap" type="com.yttx.yttxps.model.TtransportArrange">
     <id column="FS_TRANSNAME" jdbcType="CHAR" property="fsTransName" />
-    <id column="FT_STARTDATE" jdbcType="DATE" property="ftStartdate" />
-    <id column="FT_ENDDATE" jdbcType="DATE" property="ftEnddate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -241,35 +238,28 @@
     </if>
   </update>
   
+  <sql id="selectSelectiveCondition">
+    <if test="fiGenName != null and fiGenName != ''">
+	  and FI_GENNAME like '%'||#{fiGenName}||'%'
+	</if>
+	<if test="fsTransName != null and fsTransName != ''">
+	  and FS_TRANSNAME like '%'||#{fsTransName}||'%'
+	</if>
+  </sql>
+  
       <!-- 分页查询总数 -->
   <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
       select count(*) from VIEW_TTRANSPORTARRANGE
 	     where 1=1
-	      <if test="fiGenName != null and fiGenName != ''">
-	        and FI_GENNAME like '%'||#{fiGenName}||'%'
-	      </if>
-	      <if test="fsTransName != null and fsTransName != ''">
-	        and FS_TRANSNAME like '%'||#{fsTransName}||'%'
-	      </if>
-	       <if test="ftStartdate != null and ftStartdate != ''">
-	        and ft_Startdate &gt;= #{ftStartdate}
-	      </if>
+	     <include refid="selectSelectiveCondition" />
   </select>
   
   <!-- 分页查询 -->
   <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="ExtendResultMap4Price">
-      select * from (select ROWNUM as rowno, t.FS_NO, t.FI_GENINDEX, t.FS_TRANSNO, t.fs_transName, t.fi_genName, t.fd_price, t.ft_startdate, t.ft_enddate from 
+      select * from (select ROWNUM as rowno, t.FS_NO, t.FI_GENINDEX, t.FS_TRANSNO, t.fs_transName, t.fi_genName from 
       (select * from VIEW_TTRANSPORTARRANGE order by FI_GENNAME) t
     	where 1=1
-	      <if test="fiGenName != null and fiGenName != ''">
-	        and FI_GENNAME like '%'||#{fiGenName}||'%'
-	      </if>
-	      <if test="fsTransName != null and fsTransName != ''">
-	        and FS_TRANSNAME like '%'||#{fsTransName}||'%'
-	      </if>
-	       <if test="ftStartdate != null and ftStartdate != ''">
-	        and ft_Startdate &gt;= #{ftStartdate}
-	      </if>
+	      <include refid="selectSelectiveCondition" />
 	      <if test="endrow != null" >
 	        and ROWNUM &lt;= #{endrow}
 	      </if>

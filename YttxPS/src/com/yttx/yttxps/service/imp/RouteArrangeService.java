@@ -249,4 +249,32 @@ public class RouteArrangeService implements IRouteArrangeService {
 		record.setFcRessnapshot(snapshotString);
 		routeArrangeMapper.updateByPrimaryKeySelective(record);
 	}
+
+	/**
+	 * 获取到价格之后车辆价格除以25再求最终单人报价
+	 * @author marongcai
+	 * 2016-3-25
+	 */
+	@Override
+	public List<Map<String, Object>> selectRouteArrangeInfo(String fsRouteNo) {
+		Map<String,String> map = new HashMap<>();
+		map.put("fsRouteNo", fsRouteNo);
+		List<Map<String,Object>> list = routeArrangeMapper.selectCost(map);
+		for (Map<String, Object> resultMap : list) {
+			BigDecimal price1 = (BigDecimal) resultMap.get("PRICE1");
+			BigDecimal price2 = (BigDecimal) resultMap.get("PRICE2");
+			if (price2 != null ){
+				price2 = price2.divide(new BigDecimal(25));
+			}else {
+				price2 = BigDecimal.ZERO;
+			}
+			if(price1 == null){
+				price1 = BigDecimal.ZERO;
+			}
+			resultMap.remove("PRICE1");
+			resultMap.remove("PRICE2");
+			resultMap.put("price", price1.add(price2));
+		}
+		return list;
+	}
 }

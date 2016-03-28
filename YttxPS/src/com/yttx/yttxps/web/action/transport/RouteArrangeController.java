@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yttx.comm.DateEditor;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.RouteCCType;
+import com.yttx.yttxps.model.TRestaurant;
 import com.yttx.yttxps.model.TRouteArrange;
 import com.yttx.yttxps.model.TRouteArrangeExample;
 import com.yttx.yttxps.model.TRouteArrangeWithBLOBs;
@@ -70,6 +72,20 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
 		//对于需要转换为Date类型的属性，使用DateEditor进行处理  
 	    binder.registerCustomEditor(Date.class, new DateEditor());
 	}
+	
+	/**
+	 * 查询线路报价
+	 * @author marongcai 2016-3-25
+	 * @return
+	 */
+	@RequestMapping(value="cost.htm", method = RequestMethod.GET)
+	@ResponseBody
+	public Object ajaxfindCost(@RequestParam("fsId") String fsId)
+	{
+		List<Map<String, Object>> data = routeArrangeService.selectRouteArrangeInfo(fsId);
+		return JsonResult.jsonData(data);
+	}
+	
 	
 	/**
 	 * 分页查询线路信息

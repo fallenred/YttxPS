@@ -1,5 +1,21 @@
 //	显示详情
 var raw = {};
+/**
+ * add by marongcai
+ * 展示线路报价
+ * 2016-3-25
+ * add by start
+ */
+function costCustom(id) {
+	raw = jQuery("#grid-table").jqGrid('getRowData', id);
+	var frameSrc = "/jsp/routeArrange/cost.jsp?fsId=" + raw.fsId;
+    $("#costIframe").attr("src", frameSrc);
+    $('#costModal').modal({ show: true, backdrop: 'static' });
+};
+/**
+ * add end
+ */
+
 function showCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	var frameSrc = "/jsp/routeArrange/show.jsp?fsId=" + raw.fsId;
@@ -33,6 +49,20 @@ function picCustom(id) {
     $("#picIframe").attr("src", frameSrc);
     $('#picModal').modal({ show: true, backdrop: 'static' });
 };
+
+/**
+ * add by marongcai
+ * 展示线路报价
+ * 2016-3-25
+ * add by start
+ */
+$("#costModal", parent.document).on("hidden.bs.modal", function() {
+    $(this).removeData("bs.modal");
+	$("#grid-table").trigger("reloadGrid");
+});
+/**
+ * add end
+ */
 
 $("#addModal", parent.document).on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
@@ -104,6 +134,18 @@ jQuery(function($) {
 
 	// 定义按钮列
 	actFormatter = function(cellvalue, options, rawObject) {
+		/**
+		 * add by marongcai
+		 * 新增展示线路总价
+		 * 2016-3-25
+		 * add by start
+		 */
+		var costBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="costCustom('
+			+ options.rowId
+			+ ');" data-original-title="查看线路报价"><span class="ui-icon ace-icon fa  fa-calendar red"></span></div>';
+		/**
+		 * add by end
+		 */
 		var detail = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showCustom('
 			+ options.rowId
 			+ ');" data-original-title="查看记录详情"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
@@ -118,7 +160,7 @@ jQuery(function($) {
 	var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" id="picButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="picCustom('
 		+ options.rowId
 		+ ');" data-original-title="编辑资源图片"><span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
-	return detail + editBtn +/* deleteBtn + */picDtn;
+	return costBtn + detail + editBtn +/* deleteBtn + */picDtn;
 	};
 
 	// resize to fit page size
@@ -341,6 +383,7 @@ jQuery(function($) {
 			'navGrid',
 			pager_selector,
 			{ // navbar options
+				
 				edit : false,
 				editicon : 'ace-icon fa fa-pencil blue',
 				add : false,

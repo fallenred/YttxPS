@@ -289,11 +289,16 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			List<TOrderCusList> list = orderCusListService.selectByExample(example);
 			List<Map<String, String>> varList = new ArrayList<Map<String, String>>();
 			
+			//查询证件类型
+			DictExample example1 = new DictExample();
+			com.yttx.yttxps.model.DictExample.Criteria criteria1 = example1.createCriteria();
+			criteria1.andFsParentnoEqualTo("zjlx");
+			Map zjlxMap = dictService.selectDictMap(example1);
 			for(int i=0; i<list.size(); i++){
 				Map<String, String> vpd = new HashMap<String, String>();
 				vpd.put("var1", list.get(i).getFsName());	
 				vpd.put("var2", list.get(i).getFsTel());
-				vpd.put("var3", list.get(i).getFsIdtype());
+				vpd.put("var3", (String) zjlxMap.get(list.get(i).getFsIdtype()));
 				vpd.put("var4", list.get(i).getFsId());
 				vpd.put("var5", list.get(i).getFsMark());
 				varList.add(vpd);
