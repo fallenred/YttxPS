@@ -153,6 +153,7 @@ jQuery(function($) {
 					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 				});
 				$("#scenic").html(html);
+				$("#scenic").chosen("destroy"); 
 				$("#scenic").chosen();
 			}
 		});
@@ -231,6 +232,7 @@ jQuery(function($) {
 				});
 				$("#guide").html(html);
 				$("#guideName").attr("value", $("#guideNo").find("option:selected").text());
+				$("#guide").chosen("destroy");
 				$("#guide").chosen();
 			}
 		});
@@ -351,7 +353,10 @@ jQuery(function($) {
 			dataType: "json",
 			success: function(data){
 				if (data == '' || data == null) {
-					$(obj).parent().parent().find(".batch_accomadation").html('');
+					$(obj).parent().parent().find(".batch_accomadation").html('<option>' + "未查询到酒店" + '</option>');
+					$(obj).parent().parent().find(".batch_resno").html('');
+					$(obj).parent().parent().parent().next().find(".batch_ccno").html('');
+					$(obj).parent().parent().parent().next().find(".tccPrice").val(0);
 				} else {
 					var html = ''; 
 					$.each(data, function(commentIndex, comment){
@@ -361,6 +366,7 @@ jQuery(function($) {
 					getRoom($(obj).parent().parent().find(".batch_accomadation"));
 				}
 				$(obj).parent().parent().find(".batch_accomadation").attr("class", "width-80 chosen-select batch_accomadation form-control");
+				$(obj).parent().parent().find(".batch_accomadation").chosen("destroy");
 				$(obj).parent().parent().find(".batch_accomadation").chosen(); 
 				$(obj).parent().parent().find(".batch_accomadation").next().attr("style","width:100px;"); 
 			}
