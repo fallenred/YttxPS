@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,13 +77,13 @@ public class EntertainmentController extends BaseController {
 	 */
 	@RequestMapping(value="selectEntertainment.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object selectRestaurant(@RequestParam(value = "scenicNo[]") String[] scenicNo)
+	public Object selectRestaurant(String[] scenicNo, String stat)
 	{  
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (scenicNo == null || scenicNo.length < 1){
-			return null;
+		if (scenicNo != null && scenicNo.length > 0){
+			map.put("scenicNo", Arrays.asList(scenicNo));
 		}
-		map.put("scenicNo", Arrays.asList(scenicNo));
+		if (StringUtils.isNoneBlank(stat)) map.put("fiStat", stat);
 		return entertainmentService.selectEntertainment(map);
     }
 	

@@ -105,15 +105,15 @@ public class RestaurantController extends BaseController {
 	 */
 	@RequestMapping(value="selectRestaurant.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object selectRestaurant(@RequestParam(value = "scenicNo[]") String[] scenicNo, String lvl, String special)
+	public Object selectRestaurant(String[] scenicNo, String lvl, String special, String stat)
 	{  
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (scenicNo == null || scenicNo.length < 1){
-			return null;
+		if (scenicNo != null && scenicNo.length > 0){
+			map.put("scenicNo", Arrays.asList(scenicNo));
 		}
 		if (StringUtils.isNotBlank(lvl)) map.put("lvl", lvl);
 		if (StringUtils.isNotBlank(special)) map.put("special", special);
-		map.put("scenicNo", Arrays.asList(scenicNo));
+		if (StringUtils.isNotBlank(stat)) map.put("stat", stat);
 		return restaurantService.selectRestaurant(map);
     }
 	

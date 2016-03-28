@@ -1,5 +1,6 @@
 package com.yttx.yttxps.model.vo;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import com.yttx.yttxps.model.Tticket;
@@ -48,6 +49,8 @@ public class TicketRequest extends JqGridRequest implements
 			Criteria criteria = example.createCriteria();
 			if (ticket.getFsScenicno() != null)
 				criteria.andFsScenicnoEqualTo(ticket.getFsScenicno());
+			if (ticket.getFiStat() != null)
+				criteria.andFiStatEqualTo(new BigDecimal(ticket.getFiStat()));
 		}
 	}
 }

@@ -49,6 +49,8 @@ public class GuideRequest extends JqGridRequest implements
 			Criteria criteria = example.createCriteria();
 			if (guide.getLvl() != null)
 				criteria.andFsLvlEqualTo(guide.getLvl());
+			if (guide.getStat() != null)
+				criteria.andFiStatEqualTo(guide.getStat());
 		}
 	}
 }

@@ -397,7 +397,7 @@
 																					</select>
 																					<input type="hidden" id="dayflag" value="{{@index}}"  placeholder="日期天数">
 																				</div>
-																				<label class="col-sm-1 control-label">项目</label>
+																				<label class="select_ccno col-sm-1 control-label">项目</label>
 																				<div class="col-sm-2">
 																					<select id="ccno" class="select_ccno form-control">
 																					</select>

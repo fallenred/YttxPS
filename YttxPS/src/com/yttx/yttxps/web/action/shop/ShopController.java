@@ -67,6 +67,7 @@ public class ShopController extends BaseController {
 			CollectionUtils.addAll(li, scenicno.split(","));
 			map.put("scenicNo", li);
 		}
+		req.copyShop(map);
 		List<Tshop> list = shopService.selectTshopByMap(map);
 		return list;
     }

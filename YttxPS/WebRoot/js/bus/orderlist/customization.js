@@ -219,7 +219,10 @@ jQuery(function($) {
 		$.ajax({
 			type: "GET",
 			url: "/guide/selectGuide.htm",
-			data: "guide.lvl="+$("#guideLvl").val(),
+			data: {
+				"guide.lvl" : $("#guideLvl").val(),
+				"guide.stat" : "1"
+			},
 			dataType: "json",
 			success: function(data){
 				var html = ''; 
@@ -253,6 +256,7 @@ jQuery(function($) {
 	$(document).on('change key', '#restype', function(event){
 		var restype = $(this).val();
 		if(restype == 'mp'){
+			$(this).parent().parent().find(".select_ccno").show();
 			getTicket(this);
 		}
 		if(restype == 'ct'){
@@ -267,7 +271,7 @@ jQuery(function($) {
 		}
 		if(restype == 'gw'){
 			getShop(this);
-			$(this).parent().parent().find("#ccno").html('');
+			$(this).parent().parent().find(".select_ccno").hide();
 		}
 		if(restype == 'bg'){
 			$(this).parent().parent().find(".batch_ct").hide();
@@ -378,7 +382,10 @@ jQuery(function($) {
 			type: "GET",
 			traditional: true,
 			url: "/room/selectRoom.htm",
-			data: "room.fsAccomno=" + $(obj).val(),
+			data: {
+				"room.fsAccomno" : $(obj).val(),
+				"room.fiStat" : "1"
+			},
 			dataType: "json",
 			success: function(data){
 				if (data == '' || data == null) {
@@ -519,7 +526,10 @@ jQuery(function($) {
 			type: "GET",
 			traditional: true,
 			url: "/ticket/selectTicket.htm",
-			data: "scenicno=" + scenic,
+			data: {
+				"scenicno" : scenic,
+				"ticket.fiStat" : "1"
+			},
 			dataType: "json",
 			success: function(data){
 				var html = ''; 
@@ -553,16 +563,17 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		if(dataArr.length == 0){
+		/*if(dataArr.length == 0){
 			alert("请先添加景区资源！");
 			return;
-		}
+		}*/
 		$.ajax({
 			type: "POST",
 			url: "/restaurant/selectRestaurant.htm",
 			data: {"scenicNo" : dataArr,
 				   "lvl" : $(obj).parent().parent().find(".batch_Lvl").val(),
-				   "special" : $(obj).parent().parent().find(".ct_special").val()
+				   "special" : $(obj).parent().parent().find(".ct_special").val(),
+				   "stat" : "1"
 				},
 			dataType: "json",
 			success: function(data){
@@ -598,7 +609,10 @@ jQuery(function($) {
 			type: "GET",
 			traditional: true,
 			url: "/shop/selectShop.htm",
-			data: "scenicno=" + scenic,
+			data: {
+				"scenicno" : scenic,
+				"shop.stat" : "1"
+			},
 			dataType: "json",
 			success: function(data){
 				var html = ''; 
@@ -616,14 +630,17 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		if(dataArr.length == 0){
+		/*if(dataArr.length == 0){
 			alert("请先添加景区资源！");
 			return;
-		}
+		}*/
 		$.ajax({
 			type: "POST",
 			url: "/entertainment/selectEntertainment.htm",
-			data: {"scenicNo" : dataArr},
+			data: {
+				"scenicNo" : dataArr,
+				"stat" : "1"
+			},
 			dataType: "json",
 			success: function(data){
 				var html = ''; 
@@ -722,6 +739,7 @@ jQuery(function($) {
 		var restype = prevDiv.find("#restype").val();
 		var resno = prevDiv.find("#batch_resno").val();
 		var resname = prevDiv.find("#batch_resno").find("option:selected").text();
+		var batch_Lvl = prevDiv.find(".batch_Lvl").find("option:selected").text();
 		var accomadationName = prevDiv.find(".batch_accomadation").find("option:selected").text();
 		var data = {
 				"fiId" : batchIndex,
@@ -751,7 +769,7 @@ jQuery(function($) {
 			price = tccprice;
 		}
 		if (restype == 'bg') {
-			data["resname"] = accomadationName+'-'+resname;
+			data["resname"] = batch_Lvl + '-' + accomadationName + '-' + resname;
 		}
 		data["ccname"] = ccname;
 		data["price"] = price;
@@ -913,6 +931,8 @@ jQuery(function($) {
 		}
 		$("#remarksIndex").val(parseInt($("#remarksIndex").val())+1);
 		$('#table_remarks tbody').html($('#table_remarks tbody').html() + remarksTemplate(data));
+		$("#fsContent").val('');
+		$("#remarksAmt").val('');
 	});
 	
 	//	提交
@@ -934,21 +954,34 @@ jQuery(function($) {
 			return false;
 		});
 	});
+	
 	function getNowFormatDate() {
 	    var date = new Date();
 	    var seperator1 = "/";
 	    var seperator2 = ":";
 	    var month = date.getMonth() + 1;
 	    var strDate = date.getDate();
+	    var hours = date.getHours();
+	    var minutes = date.getMinutes();
+	    var seconds = date.getSeconds();
 	    if (month >= 1 && month <= 9) {
 	        month = "0" + month;
 	    }
 	    if (strDate >= 0 && strDate <= 9) {
 	        strDate = "0" + strDate;
 	    }
+	    if (hours >= 0 && hours <= 9) {
+	    	hours = "0" + hours;
+	    }
+	    if (minutes >= 0 && minutes <= 9) {
+	    	minutes = "0" + minutes;
+	    }
+	    if (seconds >= 0 && seconds <= 9) {
+	    	seconds = "0" + seconds;
+	    }
 	    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-	            + " " + date.getHours() + seperator2 + date.getMinutes()
-	            + seperator2 + date.getSeconds();
+	            + " " + hours + seperator2 + minutes
+	            + seperator2 + seconds;
 	    return currentdate;
 	}
 	//下载文件

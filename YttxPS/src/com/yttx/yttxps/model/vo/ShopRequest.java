@@ -44,8 +44,8 @@ public class ShopRequest extends JqGridRequest implements
 	public void copyTshop(TshopExample example) {
 		if (shop != null) {
 			Criteria criteria = example.createCriteria();
-			//if (shop.getLvl() != null)
-			//	criteria.andFsLvlEqualTo(shop.getLvl());
+			if (shop.getStat() != null)
+				criteria.andFiStatEqualTo(shop.getStat());
 		}
 	}
 }
