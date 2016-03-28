@@ -372,7 +372,7 @@ jQuery(function($) {
 				$(obj).parent().parent().find(".batch_accomadation").attr("class", "width-80 chosen-select batch_accomadation form-control");
 				$(obj).parent().parent().find(".batch_accomadation").chosen("destroy");
 				$(obj).parent().parent().find(".batch_accomadation").chosen(); 
-				$(obj).parent().parent().find(".batch_accomadation").next().attr("style","width:100px;"); 
+				$(obj).parent().parent().find(".batch_accomadation").next().attr("style","width:140px;"); 
 			}
 		});
 	}
