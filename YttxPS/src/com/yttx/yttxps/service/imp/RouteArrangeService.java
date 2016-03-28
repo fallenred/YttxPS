@@ -251,7 +251,7 @@ public class RouteArrangeService implements IRouteArrangeService {
 	}
 
 	/**
-	 * 获取到价格之后车辆价格除以25再求最终单人报价
+	 * 获取到价格之后车辆价格除以25，酒店除以2，再求最终单人报价
 	 * @author marongcai
 	 * 2016-3-25
 	 */
@@ -262,18 +262,25 @@ public class RouteArrangeService implements IRouteArrangeService {
 		List<Map<String,Object>> list = routeArrangeMapper.selectCost(map);
 		for (Map<String, Object> resultMap : list) {
 			BigDecimal price1 = (BigDecimal) resultMap.get("PRICE1");
-			BigDecimal price2 = (BigDecimal) resultMap.get("PRICE2");
+			BigDecimal price2 = (BigDecimal) resultMap.get("PRICE2");//车价
+			BigDecimal price3 = (BigDecimal) resultMap.get("PRICE3");//酒店价格
 			if (price2 != null ){
 				price2 = price2.divide(new BigDecimal(25));
 			}else {
 				price2 = BigDecimal.ZERO;
+			}
+			if (price3 != null ){
+				price3 = price3.divide(new BigDecimal(2));
+			}else {
+				price3 = BigDecimal.ZERO;
 			}
 			if(price1 == null){
 				price1 = BigDecimal.ZERO;
 			}
 			resultMap.remove("PRICE1");
 			resultMap.remove("PRICE2");
-			resultMap.put("price", price1.add(price2));
+			resultMap.remove("PRICE3");
+			resultMap.put("price", price1.add(price2).add(price3));
 		}
 		return list;
 	}

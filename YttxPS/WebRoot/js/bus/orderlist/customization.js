@@ -425,6 +425,26 @@ jQuery(function($) {
 		getTccprice(params, resno, date, $(this).parent().parent().find("#ccno"));
 	});
 	
+	//批次资源消费项变更
+	$(document).on('change key', '.batch_ccno', function(event){
+		var ccno = $(this).val();
+		var resno = $(this).parent().parent().parent().prev().find("#batch_resno").val();
+		var daylistIndex = $(this).parent().parent().find(".daylistIndex").val();
+		date = getDate(startdate, daylistIndex);
+		var price,ccname = '';
+		resMap.each(function(key,value,index){
+			if (key == resno+date){
+				$.each(value, function(commentIndex, comment){
+					if(comment['fsCcno'] == ccno){
+						price = comment['fdPrice'];
+						return;
+					}
+	        	});
+			}
+		});
+		$(this).parent().parent().find(".tccPrice").val(price);
+	});
+	
 	//菜单类型变更（午餐、晚餐）
 	$(document).on('change key', '.ct_special', function(event){
 		getRestaurant(this);
@@ -612,6 +632,11 @@ jQuery(function($) {
 				});
 				resMap.put('entertainment', html);
 				$(obj).parent().parent().find(".batch_resno").html(html);
+				var resno = $(obj).parent().parent().find("#batch_resno").val();
+				var restype = $(obj).parent().parent().find("#restype").val();
+				date = getDate(startdate, $(obj).parent().parent().parent().next().find(".daylistIndex").val());
+				params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resno+'&fsRestype='+restype;
+				getTccprice(params, resno, date, $(obj).parent().parent().parent().next().find(".batch_ccno"));
 			}
 		});
 	}
