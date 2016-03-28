@@ -21,10 +21,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.comm.DateEditor;
 import com.yttx.yttxps.comm.JsonResult;
+import com.yttx.yttxps.model.TCCPrice;
+import com.yttx.yttxps.model.TransportarrangePrice;
 import com.yttx.yttxps.model.TtransportArrange;
 import com.yttx.yttxps.model.TtransportArrangeExample;
 import com.yttx.yttxps.model.vo.TransportArrangeRequest;
+import com.yttx.yttxps.model.vo.TransportarrangePriceRequest;
 import com.yttx.yttxps.service.ITransportArrangeService;
+import com.yttx.yttxps.service.ITransportarrangePriceService;
 import com.yttx.yttxps.web.action.BaseController;
 
 /**
@@ -40,6 +44,9 @@ static Logger logger = LoggerFactory.getLogger(TransportArrangeController.class)
 	
 	@Autowired
 	private ITransportArrangeService transportArrangeService;
+	
+	@Autowired
+	private ITransportarrangePriceService transportarrangePriceService;
 	
 	/**
 	 * 视图数据类型转换
@@ -146,4 +153,60 @@ static Logger logger = LoggerFactory.getLogger(TransportArrangeController.class)
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();
     }
+	
+	/**
+	 * 分页查询车型线路价格信息
+	 * 
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value = "findTransportarrangePrice.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object findTransportarrangePrice(TransportarrangePriceRequest req) {
+		logger.debug("当前查询条件 {}", req.getTransportarrangePrice());
+		Map<String, Object> map = new HashMap<String, Object>();
+		req.copyPage(map);
+		req.copyTransportarrangePrice(map);
+		List<TransportarrangePrice> list = transportarrangePriceService.selectSelectivePage(map);
+		map.put("rows", list);
+		return map;
+	}
+	
+	/**
+	 * 新增房型信息
+	 * 
+	 * @param root
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "addTransportarrangePrice.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> addTransportarrangePrice(TCCPrice price) {
+		logger.debug("当前新增对象 {}", price);
+		try {
+			transportarrangePriceService.insertTransportarrangePrice(price);
+		} catch (Exception e) {
+			return (Map<String, Object>) JsonResult.jsonError("新增失败");
+		}
+		return (Map<String, Object>) JsonResult.jsonOk();
+	}
+	
+	/**
+	 * 删除房型价格信息
+	 * 
+	 * @param root
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "delTransportarrangePrice.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> delTransportarrangePrice(TCCPrice price) {
+		logger.debug("当前删除key {}", price);
+		try {
+			transportarrangePriceService.delTransportarrangePrice(price);
+		} catch (Exception e) {
+			return (Map<String, Object>) JsonResult.jsonError("删除失败");
+		}
+		return (Map<String, Object>) JsonResult.jsonOk();
+	}
 }

@@ -1,7 +1,6 @@
 package com.yttx.yttxps.service.imp;
 
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,12 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.yttx.yttxps.mapper.TCCPriceMapper;
 import com.yttx.yttxps.mapper.TtransportArrangeMapper;
-import com.yttx.yttxps.model.TCCPrice;
-import com.yttx.yttxps.model.TCCPriceExample;
-import com.yttx.yttxps.model.TCCPriceExample.Criteria;
-import com.yttx.yttxps.model.TCCPriceKey;
 import com.yttx.yttxps.model.TtransportArrange;
 import com.yttx.yttxps.model.TtransportArrangeExample;
 import com.yttx.yttxps.model.TtransportArrangeKey;
@@ -30,9 +24,6 @@ public class TransportArrangeService implements ITransportArrangeService {
 	
 	@Autowired
 	private TtransportArrangeMapper<TtransportArrange> transportArrangeMapper;
-	
-	@Autowired
-	private TCCPriceMapper priceMapper;
 
 	@Override
 	public int selectCountSelective(Map<String, Object> map) {

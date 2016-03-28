@@ -39,8 +39,11 @@
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
-												<li><a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg"> <img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
-												</a></li>
+												<li>
+													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg">
+														<img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
+													</a>
+												</li>
 											</div>
 										</ul>
 									</div>
@@ -56,27 +59,6 @@
 											<div class="col-sm-3">
 												<select id="fsTransno" name="fsTransno" class="form-control">
 												</select>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-
-											<label class="col-sm-2 control-label no-padding-right" for="ftStartdate">起始日期</label>
-											<div class="col-sm-3">
-												<input class="form-control datetimepicker" data-date-format="yyyy-mm-dd" readonly="readonly" type="text" id="ftStartdate" name="ftStartdate" placeholder="起始日期" />
-											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="ftEnddate">截止日期</label>
-											<div class="col-sm-3">
-												<input class="form-control datetimepicker" data-date-format="yyyy-mm-dd" readonly="readonly" type="text" id="ftEnddate" name="ftEnddate" placeholder="截止日期" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fdPrice">价格</label>
-											<div class="col-sm-3">
-												<input class="form-control" type="text" id="fdPrice" name="fdPrice" placeholder="价格" />
 											</div>
 										</div>
 									</div>
@@ -113,17 +95,5 @@
 		</script>
 
 	</c:if>
-	<script type="text/javascript">
-		$('.datetimepicker').datetimepicker({
-			language : 'zh-CN',
-			weekStart : 1,
-			todayBtn : 1,
-			autoclose : 1,
-			todayHighlight : 1,
-			startView : 2,
-			minView : 2,
-			forceParse : 0
-		});
-	</script>
 </body>
 </html>
