@@ -257,7 +257,7 @@ public class RouteArrangeService implements IRouteArrangeService {
 	 */
 	@Override
 	public List<Map<String, Object>> selectRouteArrangeInfo(String fsRouteNo) {
-		Map<String,String> map = new HashMap<>();
+		Map<String,String> map = new HashMap<String,String>();
 		map.put("fsRouteNo", fsRouteNo);
 		List<Map<String,Object>> list = routeArrangeMapper.selectCost(map);
 		for (Map<String, Object> resultMap : list) {
