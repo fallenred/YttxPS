@@ -51,9 +51,9 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">娱乐项目名称</label>
-											<div class="col-sm-2">
-												<input class="form-control" type="hidden" id="fsNo" name="fsNo" readonly="readonly"></input>
-												<input class="form-control" type="text" id="fsName" name="fsName" readonly="readonly"></input>
+											<div class="col-sm-3">
+												<input type="hidden" id="fsNo" name="fsNo" />
+												<input class="form-control" type="text" id="fsName" name="fsName" readonly="readonly" />
 											</div>
 										</div>
 									</div>

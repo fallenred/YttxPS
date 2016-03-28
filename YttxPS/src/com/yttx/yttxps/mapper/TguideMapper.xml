@@ -338,6 +338,9 @@
     <if test="no != null and no != ''">
 	  and fs_no = #{no,jdbcType=VARCHAR}
 	</if>
+	<if test="lvl != null and lvl != ''">
+	  and fs_lvl = #{lvl,jdbcType=VARCHAR}
+	</if>
 	<if test="name != null and name != ''">
 	  and fs_Name like '%'||#{name,jdbcType=VARCHAR}||'%'
 	</if>

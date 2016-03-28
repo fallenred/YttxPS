@@ -84,9 +84,8 @@
 										 -->
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right"
-													for="depno">部门编号</label>
-												<div class="col-sm-2">
+												<label class="col-sm-1 control-label no-padding-right" for="depno">部门编号</label>
+												<div class="col-sm-3">
 													<select class="form-horizontal"id="depno">
 														<option value="">--选择部门编号--</option>
 														<c:forEach items="${depts}" var="dept">
@@ -94,15 +93,13 @@
 														</c:forEach>
 													</select>
 												</div>
-												<label class="col-sm-1 control-label no-padding-right"
-													for="depname">部门名称</label>
-												<div class="col-sm-2">
+												<label class="col-sm-1 control-label no-padding-right" for="depname">部门名称</label>
+												<div class="col-sm-3">
 													<input class="form-horizontal" maxlength="128" type="text" id="depname"
 														placeholder="部门名称" />
 												</div>
-												<label class="col-sm-1 control-label no-padding-right"
-													for="stat">状态</label>
-												<div class="col-sm-2">
+												<label class="col-sm-1 control-label no-padding-right" for="stat">状态</label>
+												<div class="col-sm-3">
 													<select class="form-horizontal" id="stat">
 														<option value="">---请选择状态---</option>
 														<option value="1">正常</option>

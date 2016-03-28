@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -65,12 +66,6 @@
 								<div class="panel-collapse collapse in" id="collapseOne">
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
-											<!-- 
-												modify by marongcai
-												修改查询布局
-												2016-3-16
-												modify by start
-											 -->
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="no">导游编号</label>
 												<div class="col-sm-3">
@@ -80,17 +75,26 @@
 												<div class="col-sm-3">
 													<input class="form-control" maxlength="150" type="text" id="name" placeholder="姓名" />
 												</div>
-											</div>
-											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="gender">性别</label>
 												<div class="col-sm-3">
 													<select class="form-control" id="gender">
-														<option value="">--性别--</option>
+														<option value="">-- 性别 --</option>
 														<option value="1">男</option>
 														<option value="0">女</option>
 													</select>
 												</div>
-												<label class="col-sm-1 control-label no-padding-right" for="lvl">状态</label>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-1 control-label no-padding-right" for="lvl">导游级别</label>
+												<div class="col-sm-3">
+													<select class="form-control" id="lvl">
+														<option value="">-- 导游级别 --</option>
+														<c:forEach items="${codeMasterList['dy']}" var="item" varStatus="status">
+															<option value="${item.fsDictno}">${item.fsDictname}</option>
+														</c:forEach>
+													</select>
+												</div>
+												<label class="col-sm-1 control-label no-padding-right" for="stat">状态</label>
 												<div class="col-sm-3">
 													<select class="form-control" id="stat">
 														<option value="1">正常</option>
@@ -98,9 +102,6 @@
 													</select>
 												</div>
 											</div>
-											<!-- 
-												modify end
-											 -->
 
 											<div class="clearfix form-actions">
 												<div class="col-md-offset-3 col-md-9">

@@ -277,6 +277,8 @@
 		    Tremarks 
 		WHERE 
 		    TRIM(fs_Order_ID)=TRIM(#{orderId,jdbcType= VARCHAR})
+		  AND
+		    fi_Stat != 2
 		ORDER BY 
 		      ft_Date
 	</select>

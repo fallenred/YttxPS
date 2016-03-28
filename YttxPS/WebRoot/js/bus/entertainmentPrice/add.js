@@ -9,21 +9,6 @@ jQuery(function($) {
 		callback : localcallback
 	});
 	
-	//获取门票列表
-	$.ajax({
-        type: "GET",
-        url: "/entertainment/selectEntertainment.htm",
-        data: '',
-        dataType: "json",
-        success: function(data){
-        		var html = ''; 
-        		$.each(data, function(commentIndex, comment){
-        			html += '<option value=' + comment['fsNo'] + '>' + comment['fsName'] + '</option>';
-        		});
-        		$("#fsNo").html(html);
-        }
-    });
-	
 	//城市选择器
 	function localcallback(index, key, value, fullkey, fullname) {
 		$("#regionname", "#addform").val(fullname);

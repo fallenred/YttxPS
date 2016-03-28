@@ -7,6 +7,12 @@ function showEntertainment(id) {
 	}); 
 };
 
+function costEntertainment(id) {
+	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
+	var page = "/jsp/entertainmentPrice/entertainmentPrice.jsp?fsNo=" + raw.fsNo + "&fsName=" + escape(raw.fsName);
+	window.open(page);
+}
+
 function editEntertainment(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	var frameSrc = "/jsp/entertainment/edit.jsp";
@@ -137,21 +143,26 @@ jQuery(function($) {
 
 	// 定义按钮列
 	actFormatter = function(cellvalue, options, rawObject) {
+		var costBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="costBtn" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="costEntertainment('
+			+ options.rowId
+			+ ');" data-original-title="娱乐项目价格配置"><span class="ui-icon ace-icon fa fa-cog red"></span></div>';
+		
 		var detail = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showEntertainment('
 			+ options.rowId
 			+ ');" data-original-title="查看记录详情"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
 
-	var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editEntertainment('
+		var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editEntertainment('
 			+ options.rowId
 			+ ');" data-original-title="编辑本条记录"><span class="ui-icon ui-icon-pencil"></span></div>';
 
-	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteEntertainment('
+		var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteEntertainment('
 			+ options.rowId
 			+ ');" data-original-title="删除本条记录"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-	var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" id="picButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="picEntertainment('
-		+ options.rowId
-		+ ');" data-original-title="编辑资源图片"><span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
-	return detail + editBtn +/* deleteBtn + */picDtn;
+		var picDtn = '<div title="" class="ui-pg-div ui-inline-edit" id="picButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="picEntertainment('
+			+ options.rowId
+			+ ');" data-original-title="编辑资源图片"><span class="ui-icon ace-icon fa fa-file-image-o green"></span></div>';
+		
+		return costBtn + detail + editBtn + picDtn;
 	};
 
 	// resize to fit page size

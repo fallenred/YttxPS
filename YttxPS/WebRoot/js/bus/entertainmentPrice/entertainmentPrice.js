@@ -43,10 +43,6 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#reset").click();
 	$(this).contents().find("#fsNo").val(raw.fsNo);
 	$(this).contents().find("#fsName").val(raw.fsName);
-	$(this).contents().find("#fsScenicno").val(raw.fsScenicno);
-	$(this).contents().find("#fsType").val(raw.fsType);
-	$(this).contents().find("#fiStat").val(raw.fiStat);
-	$(this).contents().find("#fsDesc").val(raw.fsDesc);
 	$(this).contents().find("#ftStartdate").val(raw.ftStartdate);
 	$(this).contents().find("#ftEnddate").val(raw.ftEnddate);
 	
@@ -94,6 +90,9 @@ jQuery(function($) {
 		disturl : "/pub/findcity.htm",
 		callback : localcallback
 	});
+	
+	var fsNo = $.getUrlParam("fsNo");   //娱乐项目资源ID
+	var fsName = $.getUrlParam("fsName");   //娱乐项目名称
 	
 //	jqGrid form提交
 	$("#submit").click(function() {
@@ -172,6 +171,7 @@ jQuery(function($) {
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/entertainment/findEntertainmentPrice.htm",
+				postData : {"entertainment.fsNo" : fsNo},
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
@@ -367,6 +367,11 @@ jQuery(function($) {
 					var frameSrc = "/jsp/entertainmentPrice/add.jsp";
 			        $("#addIframe").attr("src", frameSrc);
 			        $('#addModal').modal({ show: true, backdrop: 'static' });
+			        $("#addIframe").on("load", function(){
+			        	$(this).contents().find("#reset").click();
+			        	$(this).contents().find("#fsNo").val(fsNo);
+			        	$(this).contents().find("#fsName").val(fsName);
+			        });
 				},
 				position : "first",
 				title : "新增记录",

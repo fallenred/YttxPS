@@ -52,28 +52,23 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-1 control-label no-padding-right" for="depNo">部门编号</label>
-											<div class="col-sm-8">
+											<div class="col-sm-3">
 												<input type="text" id="depNo" class="form-control"
 													placeholder="部门编号" readonly="readonly" value="${depInfo.depNo}"/>
 											</div>
-										</div>
-										<div class="form-group">
 											<label class="col-sm-1 control-label no-padding-right"for="depName">部门名称</label>
-											<div class="col-sm-8">
+											<div class="col-sm-3">
 												<input type="text" id="depName" name="depName" class="form-control col-sm-8"
 													placeholder="部门名称"  maxlength="128" value="${depInfo.depName}"/>
 											</div>
-										</div>
-										<c:if test="${depInfo.stat==2}">
-											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="stat">部门状态</label>
-												<div class="col-sm-8">
-													<select id="stat">
-														<option value="1" <c:if test="${depInfo.stat==1}">selected</c:if>>正常</option>
-													</select>
-												</div>
+											<label class="col-sm-1 control-label no-padding-right" for="stat">部门状态</label>
+											<div class="col-sm-3">
+												<select id="stat">
+													<option value="1" <c:if test="${depInfo.stat==1}">selected</c:if>>正常</option>
+													<option value="2" <c:if test="${depInfo.stat==2}">selected</c:if>>注销</option>
+												</select>
 											</div>
-										</c:if>
+										</div>
 									</div>
 									<h4>
 										部门权限

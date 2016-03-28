@@ -110,7 +110,7 @@ jQuery(function($){
 		var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="cancelDep('
 				+ options.rowId
 				+ ');" data-original-title="注销该部门"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-		return detail + editBtn + deleteBtn ;
+		return detail + editBtn ;
 	};
 
 	// resize to fit page size
@@ -158,7 +158,7 @@ jQuery(function($){
 				colModel : [ {
 					name : 'myac',
 					index : '',
-					width : 150,
+					width : 55,
 					fixed : true,
 					sortable : false,
 					resize : false,

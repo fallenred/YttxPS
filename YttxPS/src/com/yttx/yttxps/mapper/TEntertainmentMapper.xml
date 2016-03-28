@@ -333,18 +333,24 @@
   <select id="selectEntertainmentDynamic" parameterType="map" resultMap="BaseResultMap">
     SELECT A.*
       FROM tentertainment A
-     WHERE A.FS_REGIONNO IN(SELECT A.FS_REGIONNO
-                              FROM TSCENIC A
-                              WHERE 1 = 1
-                              <choose>
-                                <when test="scenicNo">
-                                  AND TRIM(A.FS_NO) IN
-                                  <foreach collection="scenicNo" open="(" close=")" separator="," item="listItem">
-                                    #{listItem}
-                                  </foreach>
-                                </when>
-                              </choose>
-                              )
+     WHERE 1 = 1
+       AND A.FS_REGIONNO IN(SELECT FS_NO
+                              FROM TREGIONMAP
+                             WHERE SUBSTR(FS_NO, 0, 4) IN(SELECT SUBSTR(A.FS_REGIONNO, 0, 4)
+                                                            FROM TSCENIC A
+                                                           WHERE 1 = 1
+                                                           <choose>
+                                                             <when test="scenicNo">
+                                                               AND TRIM(A.FS_NO) IN
+                                                               <foreach collection="scenicNo" open="(" close=")" separator="," item="listItem">
+                                                                 #{listItem}
+                                                               </foreach>
+                                                             </when>
+                                                           </choose>
+                                                          UNION
+                                                          SELECT '5101' FROM dual
+                                                          )
+                           )
     <if test="fsNo != null and fsNo != ''">
       and fs_no = #{fsNo}
     </if>
