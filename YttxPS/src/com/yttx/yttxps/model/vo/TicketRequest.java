@@ -44,9 +44,8 @@ public class TicketRequest extends JqGridRequest implements
 		}
 	}
 	
-	public void copyTicket(TticketExample example) {
+	public void copyTicket(Criteria criteria) {
 		if (ticket != null) {
-			Criteria criteria = example.createCriteria();
 			if (ticket.getFsScenicno() != null)
 				criteria.andFsScenicnoEqualTo(ticket.getFsScenicno());
 			if (ticket.getFiStat() != null)

@@ -27,6 +27,7 @@ import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.TCCPrice;
 import com.yttx.yttxps.model.Tticket;
 import com.yttx.yttxps.model.TticketExample;
+import com.yttx.yttxps.model.TticketExample.Criteria;
 import com.yttx.yttxps.model.vo.TicketRequest;
 import com.yttx.yttxps.service.ITicketService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -99,11 +100,12 @@ static Logger logger = LoggerFactory.getLogger(TicketController.class);
 	public Object ajaxSelectTicket(TicketRequest req, String scenicno)
     {  
 		TticketExample example = new TticketExample();
-		req.copyTicket(example);
+		Criteria criteria = example.createCriteria();
+		req.copyTicket(criteria);
 		if (StringUtils.isNotEmpty(scenicno)) {
 			List<String> li = new ArrayList<String>();
 			CollectionUtils.addAll(li, scenicno.split(","));
-			example.createCriteria().andFsScenicnoIn(li);
+			criteria.andFsScenicnoIn(li);
 		}
 		List<Tticket> list = ticketService.selectTticket(example);
 		return list;
