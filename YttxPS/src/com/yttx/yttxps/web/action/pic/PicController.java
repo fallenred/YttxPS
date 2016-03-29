@@ -47,7 +47,8 @@ static Logger logger = LoggerFactory.getLogger(PicController.class);
 			Model model) throws UnsupportedEncodingException
     {  
 		model.addAttribute("resNo", resNo);
-		model.addAttribute("resName",resName);
+		//处理中文乱码
+		model.addAttribute("resName",new String(resName.getBytes("iso-8859-1"),"utf-8"));
 		model.addAttribute("resType", resType);
 		return "pic/pic";
     }
