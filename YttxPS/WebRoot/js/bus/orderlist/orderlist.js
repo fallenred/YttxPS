@@ -282,7 +282,7 @@ jQuery(function($) {
 	//线路类型
 	var fsType = {
 			'02' : '专家线路',
-			'03' : '定制线路'
+			'03' : '订制线路'
 		};
 	var s1 = '';
 	for (k in fsType)
