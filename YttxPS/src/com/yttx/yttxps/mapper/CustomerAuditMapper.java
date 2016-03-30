@@ -1,5 +1,7 @@
 package com.yttx.yttxps.mapper;
 
+import java.util.Date;
+
 import com.yttx.yttxps.model.CustomInfo;
 
 public interface CustomerAuditMapper extends IBaseMapper<CustomInfo>{
@@ -13,4 +15,5 @@ public interface CustomerAuditMapper extends IBaseMapper<CustomInfo>{
 	 */
 	boolean updateByPrimaryKeySelective(CustomInfo auditRec);
 
+	Date getCurrentSysdate();
 }

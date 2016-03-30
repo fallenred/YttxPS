@@ -52,7 +52,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsName">娱乐项目名称</label>
 											<div class="col-sm-3">
-												<input class="form-control" type="text" id="fsName" name="fsName" placeholder="娱乐项目名称"  maxlength="10"/>
+												<input class="form-control" type="text" id="fsName" name="fsName" placeholder="娱乐项目名称"  maxlength="150"/>
 											</div>
 											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fsAddr">娱乐项目地址</label>
 											<div class="col-sm-3">

@@ -197,7 +197,6 @@ public class StatementController extends BaseController {
 	{
 		String message=null;
 		if("A".equalsIgnoreCase(oper)){//新增操作
-			fStatement.setCreatDateDesc(DateUtil.getSysCurrentTime());
 			fStatement.setOperId(sessionEntity.getId());
 			fStatement.setStat(0L);
 			String orderId = fStatement.getOrderId();

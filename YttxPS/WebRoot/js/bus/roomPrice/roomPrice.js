@@ -100,7 +100,16 @@ jQuery(function($) {
                     sortable : false,
                     editable : false,
                     edittype : 'select',
-                    sorttype : "char"
+                    sorttype : "char",
+                    formatter : function(v, opt, rec) {
+                        return resTypeDict[v];
+                    },
+                    unformat : function(v) {
+                        for (k in resTypeDict)
+                            if (resTypeDict[k] == v)
+                                return k;
+                        return v;
+                    }
                 }, {
 					name : 'ftStartdate',
 					index : 'ftStartdate',

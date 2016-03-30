@@ -113,6 +113,10 @@
 											<label class="col-sm-2 control-label no-padding-right" for="lvl">当前级别</label>
 											<div class="col-sm-3">
 												<select class="form-control" id="lvl" name="lvl">
+													<option value="">-- 请选择导游级别 --</option>
+													<c:forEach items="${codeMasterList['dy']}" var="item" varStatus="status">
+														<option value="${item.fsDictno}">${item.fsDictname}</option>
+													</c:forEach>
 												</select>
 											</div>
 										</div>
@@ -180,24 +184,6 @@
 	</div>
 	<!-- /.main-container -->
 	<script src="/js/bus/guide/show.js"></script>
-	<script>
-		//获取导游级别列表
-		$.ajax({
-			type : "GET",
-			traditional : true,
-			url : "/dict/selectDict.htm",
-			data : "dict.fsParentno=dy",
-			dataType : "json",
-			success : function(data) {
-				html = '<option value="">' + '--请选择--' + '</option>';
-				$.each(data, function(commentIndex, comment) {
-					html += '<option value=' + comment['fsDictno'] + '>'
-							+ comment['fsDictname'] + '</option>';
-				});
-				$("#lvl").html(html);
-			}
-		});
-	</script>
 	<script type="text/javascript">
 		$('.datetimepicker').datetimepicker({
 			language : 'zh-CN',

@@ -42,35 +42,27 @@ jQuery(function($) {
 			$("#message").text("车型名称不能为空，请输入");
 			$('#fsName').focus();
 			return false;
-		} 
-		if($("#fiLoadMin").val() == '' || $("#fiLoadMin").val() == undefined) {
-			$("#message").show();
-			$("#message").text("准载下限不能为空，请输入");
-			$('#fiLoadMin').focus();
-			return false;
-		} 
-		if($("#fiLoadMax").val() == '' || $("#fiLoadMax").val() == undefined) {
-			$("#message").show();
-			$("#message").text("准载上限不能为空，请输入");
-			$('#fiLoadMax').focus();
-			return false;
-		} 
-		if($("#fiFitMin").val() == '' || $("#fiFitMin").val() == undefined) {
-			$("#message").show();
-			$("#message").text("适应范围下限不能为空，请输入");
-			$('#fiFitMin').focus();
-			return false;
-		} 
-		if($("#fiFitMax").val() == '' || $("#fiFitMax").val() == undefined) {
-			$("#message").show();
-			$("#message").text("适应范围上限不能为空，请输入");
-			$('#fiFitMin').focus();
-			return false;
-		} 
+		}
+		
+		var isChecked = true;
+		$(".non-negative-integer").each(function(idx, element){
+			var num = $(element).val();
+			var reg = /^[1-9]*[1-9][0-9]*$/;
+			if(!reg.test(num)) {
+				$("#message").show();
+				$("#message").text($("label[for='" + $(element).attr("id") + "']").text() + "的输入不是合法的数值");
+				$(element).focus();
+				isChecked = false;
+				return false;
+			}
+		});
+		if(!isChecked)
+			return isChecked;
+		
 		$.post("/transport/addTransport.htm",
 				$("#addform").serialize(),
 				function(data){
-			var json = eval("("+data+")");
+			var json = eval("(" + data + ")");
 					if(json.result == "ok") {
 						$("#message").text("增加记录成功");
 						$("#message").show();

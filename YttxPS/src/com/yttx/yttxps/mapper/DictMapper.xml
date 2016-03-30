@@ -99,7 +99,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from TDICT
+    from view_wholedict
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>

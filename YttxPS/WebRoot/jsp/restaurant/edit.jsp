@@ -87,9 +87,9 @@
 									
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="menuDesc">菜单描述</label>
+											<label class="col-sm-2 control-label no-padding-right" for="menu">菜单描述</label>
 											<div class="col-sm-10">
-												<textarea id="menu" rows="4" cols="20"  name="menuDesc" class="form-control">${res.menu}</textarea>
+												<textarea id="menu" rows="4" cols="20"  name="menu" class="form-control">${res.menu}</textarea>
 											</div>
 										</div>
 									</div>

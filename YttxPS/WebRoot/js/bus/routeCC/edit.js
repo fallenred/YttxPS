@@ -466,21 +466,13 @@ jQuery(function($) {
 		}
 		$(window.parent.document).find("#editIframe").attr("height", height + "px");
 	}
-
-	//	重置
-	$("#reset").on("click", function() {
-			$("#selectCity").hide();
-			$("#regionno").val(null);
-			$("#message").hide();
-			$("#message").text("");
-	});
 	
 	// 关闭
 	$("#close").on("click", function () {
 			$("#editModal", parent.document).find(".close").click();
 	});
 	
-//	提交
+	//	提交
 	$("#submit").on("click", function () {
 		var index = 0;
 		var route = {};

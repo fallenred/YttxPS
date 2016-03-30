@@ -8,6 +8,9 @@
 <meta name="description" content="" />
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
+<script type="text/javascript">
+	var resTypeDict = ${codeMasterJson}['ResTypeDirc'];
+</script>
 </head>
 <body>
 	<div class="main-container" id="main-container">

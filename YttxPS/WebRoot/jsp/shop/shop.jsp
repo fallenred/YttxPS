@@ -68,9 +68,9 @@
 												modify by start
 											 -->
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="no">购物点代码</label>
+												<label class="col-sm-1 control-label no-padding-right" for="no">购物店代码</label>
 												<div class="col-sm-3">
-													<input class="form-control" maxlength="10" type="text" id="no" placeholder="购物点代码" />
+													<input class="form-control" maxlength="10" type="text" id="no" placeholder="购物店代码" />
 												</div>
 												<label class="col-sm-1 control-label no-padding-right" for="regionname">所属地区</label>
 												<div class="col-sm-3">

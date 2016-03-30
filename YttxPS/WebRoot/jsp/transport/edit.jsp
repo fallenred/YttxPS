@@ -57,7 +57,7 @@
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiLoadMin">准载下限</label>
 											<div class="col-sm-3">
-												<input class="form-control" maxlength="10" type="text"  class="form-control" id="fiLoadMin" name="fiLoadMin" placeholder="准载下限" />
+												<input class="form-control non-negative-integer" maxlength="10" type="text"  class="form-control" id="fiLoadMin" name="fiLoadMin" placeholder="准载下限" />
 											</div>
 										</div>
 									</div>
@@ -70,7 +70,7 @@
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiFitMin">适应范围下限</label>
 											<div class="col-sm-3">
-												<input class="form-control" maxlength="10" type="text"  class="form-control" id="fiFitMin" name="fiFitMin" placeholder="适应范围下限" />
+												<input class="form-control non-negative-integer" maxlength="10" type="text"  class="form-control" id="fiFitMin" name="fiFitMin" placeholder="适应范围下限" />
 											</div>
 										</div>
 									</div>
@@ -78,7 +78,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fiFitMax">适应范围上限</label>
 											<div class="col-sm-3">
-												<input class="form-control" type="text" id="fiFitMax" name="fiFitMax" class="form-control" placeholder="适应范围上限"  />
+												<input class="form-control non-negative-integer" type="text" id="fiFitMax" name="fiFitMax" class="form-control" placeholder="适应范围上限"  />
 											</div>
 										</div>
 										<div class="form-group">

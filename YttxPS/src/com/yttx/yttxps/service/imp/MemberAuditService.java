@@ -47,6 +47,7 @@ public class MemberAuditService implements IMemberAuditService {
 	@Override
 	public boolean auditCustomer(CustomInfo auditRec) {
 		//修改客户信息调整审核表：审核人，审核时间，审核结果，审核意见
+		auditRec.setAuditTime(customerAuditMapper.getCurrentSysdate());
 		customerAuditMapper.updateByPrimaryKeySelective(auditRec);
 		//修改客户信息表
 		int auditResult = auditRec.getAuditRet().intValue();//审核结果

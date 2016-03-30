@@ -168,6 +168,7 @@
 														</div>
 													</div>
 													
+													<c:if test="${oper=='A'}">
 													<div class="profile-info-row">
 														<div class="profile-info-name">订单预估全价:</div>
 														<div class="profile-info-value">
@@ -175,7 +176,9 @@
 																	name="orderTotolFee" value="${fStat.orderTotolFee}" readonly/>
 														</div>
 													</div>
+													</c:if>
 													
+													<c:if test="${oper=='A'}">
 													<div class="profile-info-row">
 														<div class="profile-info-name">订单备注金额统计:</div>
 														<div class="profile-info-value">
@@ -183,6 +186,7 @@
 																	name="remarksAmt" value="${fStat.remarksAmt}" readonly/>
 														</div>
 													</div>
+													</c:if>
 													
 													<div class="profile-info-row">
 														<div class="profile-info-name">结算单预估全价:</div>
@@ -255,7 +259,8 @@
 		 * 验证money
 		 */
 		function validMoney(money){
-			if(money!=null&&/^(([1-9][0-9]*)|0|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/.test(money))
+			var reg = /^-?\d+(\.\d{1,2})?$/;
+			if(money != null && reg.test(money))
 				return true
 			return false;
 		}
@@ -283,7 +288,7 @@
 			var amt = $.trim($("#amt").val())//早餐价格
 			if( !validMoney(amt)) {
 				$("#amt").focus();
-				alertWarning("双方需交易金额的输入格式(120.99)不正确");
+				alertWarning("双方需交易金额的输入格式(XXX.XX)不正确");
 				return false;
 			}
 			return true;

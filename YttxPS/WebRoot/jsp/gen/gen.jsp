@@ -78,16 +78,16 @@
 											 -->
 											<div class="form-group">
 												<label class="col-sm-1 control-label no-padding-right" for="fsName">路线名称</label>
-												<div class="col-sm-2">
-													<input maxlength="10" type="text" id="fsName" placeholder="路线名称" />
+												<div class="col-sm-3">
+													<input class="form-control" maxlength="10" type="text" id="fsName" placeholder="路线名称" />
 												</div>
 												<label class="col-sm-1 control-label no-padding-right" for="fiDays">路线天数</label>
-												<div class="col-sm-2">
-													<input maxlength="150" type="text" id="fiDays" placeholder="路线天数" />
+												<div class="col-sm-3">
+													<input class="form-control" maxlength="150" type="text" id="fiDays" placeholder="路线天数" />
 												</div>
 												<label class="col-sm-1 control-label no-padding-right" for="fiStat">状态</label>
-												<div class="col-sm-2">
-													<select class="form-control" id="fiStat">
+												<div class="col-sm-3">
+													<select class="form-control" class="form-control" id="fiStat">
 														<option value="">---线路概况状态---</option>
 														<option value="1">正常</option>
 														<option value="-100">已销</option>

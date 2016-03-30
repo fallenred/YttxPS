@@ -37,16 +37,32 @@ jQuery(function($) {
 	
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#fsName").val() == '') {
+		if($("#fsName").val() == '' || $("#fsName").val() == undefined) {
 			$("#message").show();
 			$("#message").text("路线名称不能为空，请输入");
-			$('#no').focus();
+			$('#fsName').focus();
 			return false;
-		} 
+		}
+		
+		var isChecked = true;
+		$(".non-negative-integer").each(function(idx, element){
+			var num = $(element).val();
+			var reg = /^[1-9]*[1-9][0-9]*$/;
+			if(!reg.test(num)) {
+				$("#message").show();
+				$("#message").text($("label[for='" + $(element).attr("id") + "']").text() + "的输入不是合法的数值");
+				$(element).focus();
+				isChecked = false;
+				return false;
+			}
+		});
+		if(!isChecked)
+			return isChecked;
+		
 		$.post("/transport/editTransport.htm",
 				$("#editform").serialize(),
 				function(data){
-			var json = eval("("+data+")");
+			var json = eval("(" + data + ")");
 					if(json.result == "ok") {
 						$("#message").text("修改记录成功");
 						$("#message").show();

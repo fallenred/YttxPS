@@ -188,4 +188,8 @@
 		   </set>
 	    	where FS_AUDITNO = #{auditno,jdbcType=VARCHAR}
 	  </update>
+	  
+	  <select id="getCurrentSysdate" resultType="java.util.Date">
+	    SELECT SYSDATE FROM dual
+	  </select>
 </mapper>

@@ -103,7 +103,7 @@ public class MemberAuditController extends BaseController {
 		
 		auditRec.setAuditRet(req.getAuditRet());//审核结果
 		auditRec.setAuditor(sessionEntity.getId());//审核人
-		auditRec.setAuditTime(new Date());//审核时间
+		//auditRec.setAuditTime(new Date());//审核时间
 		auditRec.setComment(req.getComment());//审核意见
 		if(!StringUtil.nullOrBlank(req.getSalesManID()))
 			auditRec.setSalesManID(req.getSalesManID());//销售人员id
