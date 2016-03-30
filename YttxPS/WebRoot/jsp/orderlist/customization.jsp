@@ -890,9 +890,9 @@
 		});
 		function fileType(obj){
 			var fileType=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
-		    if(fileType != '.xls'){
+		    if(fileType != '.xls'||fileType != '.xlsx'){
 		    	$("#excel").val('');
-		    	alert("请上传后缀xls格式的excel文件");
+		    	alert("请上传后缀xls或xlsx格式的excel文件");
 		    }
 		}
 		$(function() {
