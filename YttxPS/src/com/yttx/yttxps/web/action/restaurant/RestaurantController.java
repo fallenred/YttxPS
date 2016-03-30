@@ -105,7 +105,7 @@ public class RestaurantController extends BaseController {
 	 */
 	@RequestMapping(value="selectRestaurant.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object selectRestaurant(String[] scenicNo, String lvl, String special, String stat)
+	public Object selectRestaurant(@RequestParam(value="scenicNo[]", required=false)String[] scenicNo, String lvl, String special, String stat)
 	{  
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (scenicNo != null && scenicNo.length > 0){

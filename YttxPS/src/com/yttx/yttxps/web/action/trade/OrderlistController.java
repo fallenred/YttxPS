@@ -336,18 +336,27 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 					com.yttx.yttxps.model.DictExample.Criteria criteria = example.createCriteria();
 					criteria.andFsParentnoEqualTo("zjlx");
 					Map zjlxMap = dictService.selectDictMapName4key(example);
+					/**
+					 * modify by marongcai
+					 * 上传名单的处理有问题，之前只是把第一条重复插入，并且没有判断null
+					 * 2016-3-29
+					 * modify by start
+					 */
 					for (int i = 0; i < list.size(); i++) {
-						Map<String, String> map = list.get(0);
+						Map<String, String> map = list.get(i);
 						TOrderCusList orderCusList = new TOrderCusList();
 						orderCusList.setFsOrderId(orderId);
 						orderCusList.setFiSeq(new BigDecimal(i));
-						orderCusList.setFsName(map.get("var0").trim());
-						orderCusList.setFsTel(map.get("var1").trim());
-						orderCusList.setFsIdtype((String)zjlxMap.get(map.get("var2").trim()));
-						orderCusList.setFsId(map.get("var3").trim());
-						orderCusList.setFsMark(map.get("var4").trim());
+						orderCusList.setFsName(map.get("var0") == null ? "" : map.get("var0").trim());
+						orderCusList.setFsTel(map.get("var1") == null ? "" : map.get("var1").trim());
+						orderCusList.setFsIdtype((String)zjlxMap.get(map.get("var2") == null ? "" : map.get("var2").trim()));
+						orderCusList.setFsId(map.get("var3") == null ? "" : map.get("var3").trim());
+						orderCusList.setFsMark(map.get("var4") == null ? "" : map.get("var4").trim());
 						cusLists.add(orderCusList);
 					}
+					/**
+					 * modify end
+					 */
 					orderCusListService.inser(cusLists);
 				}
 			} catch (Exception e) {

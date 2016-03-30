@@ -9,6 +9,9 @@
 <meta name="description" content="" />
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
+<style type="text/css">
+
+</style>
 </head>
 <body class="no-skin">
 	<jsp:include page="/jsp/comm/topbar.jsp" flush="true" />
@@ -101,7 +104,7 @@
 													<select class="form-control" id="fsType">
 														<option value="">----线路类型----</option>
 														<option value="02">专家线路</option>
-														<option value="03">定制线路</option>
+														<option value="03">订制线路</option>
 													</select>
 												</div>
 												<label class="col-sm-1 control-label no-padding-right"
