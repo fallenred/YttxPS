@@ -523,7 +523,8 @@
 																							<thead>
 																								<tr>
 																									<th>资源类型</th>
-																									<th>资源标准</th>
+																									<th>服务标准</th>
+																									<th>服务选项</th>
 																									<th>资源备注</th>
 																								</tr>
 																							</thead>
@@ -767,7 +768,6 @@
 								<div class="modal-footer">
 									<button id="close" type="button" class="btn btn-sm btn-default"
 										data-dismiss="modal">关闭</button>
-									<button id="reset" type="reset" class="btn btn-sm">重置</button>
 									<button id="submit" type="button"
 										class="btn btn-sm btn-primary">提交</button>
 								</div>

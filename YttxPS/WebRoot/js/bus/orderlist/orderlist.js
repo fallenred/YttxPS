@@ -98,6 +98,8 @@ $("#editIframe").on("load",function(){
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
 		$(this).contents().find(".div_custList").show();
+	} else if (raw.fiStat == '32'){
+		$(this).contents().find("#submit").hide();
 	} else {
 		$(this).contents().find("#fiStat").html('<option value="'+raw.fiStat+'"></option>');
 	}
@@ -155,10 +157,11 @@ $("#customizationIframe").on("load",function(){
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
 		$(this).contents().find(".div_custList").show();
-	} else {
+	} else if (raw.fiStat == '32'){
+		$(this).contents().find("#submit").hide();
+	}  else {
 		$(this).contents().find("#fiStat").html('<option value="'+raw.fiStat+'"></option>');
 	}
-	//getGuide(obj, Lvl);
 });
 
 

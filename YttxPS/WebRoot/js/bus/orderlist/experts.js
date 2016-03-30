@@ -835,6 +835,12 @@ jQuery(function($) {
 						if (comment['resname'] != null) {
 							resname = comment['resname'];
 						}
+						ccname = '';
+						if (comment['cclist'] != null) {
+							$.each(comment['cclist'], function(index, cccomment){
+								ccname = cccomment['ccname'];
+							});
+						}
 						remark = '';
 						if (comment['remark'] != null) {
 							remark = comment['remark'];
@@ -842,6 +848,7 @@ jQuery(function($) {
 						html = '<tr class="warning">'+
 						'<td>'+	restype + '</td>'+
 						'<td>'+resname+'</td>'+
+						'<td>'+ccname+'</td>'+
 						'<td>'+remark+'</td>'+
 						'</tr>';
 						id = "#table_" + cuscomment['fiId'] +'_day'+bodyIndex + " tbody";
@@ -875,7 +882,7 @@ jQuery(function($) {
 		} else if(value == 'mp'){
 			return '门票';
 		} else if(value == 'ct'){
-			return '餐厅';
+			return '菜单';
 		} else if(value == 'bg'){
 			return '宾馆';
 		} else if(value == 'yl'){
