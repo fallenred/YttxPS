@@ -1,5 +1,7 @@
 package com.yttx.yttxps.web.action.transport;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -92,6 +94,24 @@ static Logger logger = LoggerFactory.getLogger(TransportArrangeController.class)
 		req.copyTransportArrange(example);
 		List<TtransportArrange> list = transportArrangeService.selectTtransportArrangeView(example);
 		return list;
+    }
+	
+	/**
+	 * 根据线路获取车型价格
+	 * @param req
+	 * @return
+	 * @throws ParseException 
+	 */
+	@RequestMapping(value="selectTransportPrice.htm", method = RequestMethod.GET)
+	@ResponseBody
+	public Object ajaxSelectTransportPrice(String genIndex, String transportId, String startDate) throws ParseException {  
+		Map<String, Object> map = new HashMap<String, Object>();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		map.put("fiGenindex", genIndex);
+		map.put("fsTransNo", transportId);
+		map.put("ftStartdate", df.parse(startDate));
+		map.put("ftEnddate", df.parse(startDate));
+		return transportarrangePriceService.selectTarrangePrice(map);
     }
 	
 	/**

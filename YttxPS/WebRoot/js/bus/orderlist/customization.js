@@ -809,7 +809,7 @@ jQuery(function($) {
 		} else if(value == 'mp'){
 			return '门票';
 		} else if(value == 'ct'){
-			return '餐厅';
+			return '菜单';
 		} else if(value == 'bg'){
 			return '宾馆';
 		} else if(value == 'yl'){

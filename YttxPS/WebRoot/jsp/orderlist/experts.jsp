@@ -538,7 +538,7 @@
 																									<select id="restype" class="form-control">
 																										<option value="bg">酒店</option>
 																										<option value="yl">娱乐</option>
-																										<option value="ct">餐饮</option>
+																										<option value="ct">菜单</option>
 																									</select>
 																								</div>
 																								<label style="display:none" class="batch_ct col-sm-1 control-label">类型</label>

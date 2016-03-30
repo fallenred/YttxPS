@@ -859,7 +859,7 @@ jQuery(function($) {
 		}
 	});
 	
-	function getBatchFuzz(){
+/*	function getBatchFuzz(){
 		$.ajax({
 			type: "POST",
 			url: "/orderCustom/selectOrderCustom.htm",
@@ -869,7 +869,7 @@ jQuery(function($) {
 			}
 		});
 		//alert($('#table_243_0').html());
-	}
+	}*/
 
 	//返回资源类型
 	Handlebars.registerHelper("getType",function(value){
@@ -1072,6 +1072,24 @@ jQuery(function($) {
 	//上传游客名单
 	$(document).on('click key', '.btn_import', function(event){
 		save();
+	});
+	
+	//车型切换
+	$(document).on('change key', '#transport', function(event){
+		var transportId = $(this).val()
+		$.ajax({
+			type: "GET",
+			url: "/transportArrange/selectTransportPrice.htm",
+			data: {
+				"genIndex":genIndex,
+				"transportId":transportId,
+				"startDate":startdate
+			},
+			dataType: "json",
+			success: function(data){
+				$("#transportPrice").val(data.fdPrice);
+			}
+		});
 	});
 	
 	//保存

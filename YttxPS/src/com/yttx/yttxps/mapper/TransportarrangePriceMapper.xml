@@ -74,4 +74,21 @@
 	  and tt.rowno &gt; #{startrow}
 	</if>
   </select>
+  
+    <!-- 查询线路车型价格-->
+  <select id="selectTarrangePrice" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from view_ttransportarrangeprice where 1 = 1 
+    <if test="fiGenindex != null"><!-- 线路统称自动序号 -->
+	  and fi_genindex = #{fiGenindex}
+	</if>
+		<if test="fsTransNo != null and fsTransNo != ''"><!-- 车型代码 -->
+	  and fs_transno = #{fsTransNo}
+	</if>
+		<if test="ftStartdate != null"><!-- 开始日期 -->
+	  and ft_startdate &lt;= #{ftStartdate}
+	</if>
+	<if test="ftEnddate != null"><!-- 结束日期 -->
+	  and ft_enddate &gt;= #{ftEnddate}
+	</if>
+  </select>
 </mapper>
