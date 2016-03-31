@@ -48,6 +48,7 @@ static Logger logger = LoggerFactory.getLogger(PicController.class);
     {  
 		model.addAttribute("resNo", resNo);
 		//处理中文乱码
+		logger.debug(String.format("PicController 资源名称-%s", resName));
 		model.addAttribute("resName",new String(resName.getBytes("iso-8859-1"),"utf-8"));
 		model.addAttribute("resType", resType);
 		return "pic/pic";
