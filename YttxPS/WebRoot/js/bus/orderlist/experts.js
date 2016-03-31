@@ -271,10 +271,11 @@ jQuery(function($) {
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
 					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
-					guideMap.put(comment['no'], comment['salary']);
-					if (commentIndex == 0) {
+					/*
+						guideMap.put(comment['no'], comment['salary']);
+					 	if (commentIndex == 0) {
 						$("#guidePrice").val(comment['salary']);
-					}
+					}*/
 				});
 				$("#guide").html(html);
 				$("#guideName").attr("value", $("#guideNo").find("option:selected").text());
@@ -287,14 +288,14 @@ jQuery(function($) {
 	$(document).on('change key', '#guideLvl', function(event){
 		getGuide();
 	});
-	//导游变更后修改价格
+/*	//导游变更后修改价格
 	$(document).on('change key', '#guide', function(event){
 		guideMap.each(function(key,value,index){
 			if (key == $("#guide").val())
 				$("#guidePrice").val(value);
 		});
 		$("#guideName").attr("value", $("#guide").find("option:selected").text());
-	});
+	});*/
 	//资源类型变更
 	$(document).on('change key', '#restype', function(event){
 		var restype = $(this).val();
