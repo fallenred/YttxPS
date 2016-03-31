@@ -2,6 +2,7 @@ package com.yttx.yttxps.web.action.trade;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -327,7 +328,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		if (null != file && !file.isEmpty()) {
 			String filePath = PathUtil.getClasspath();
 			
-			String fileName =  FileUpload.fileUp(file, filePath, DateUtil.getSysCurrentTime()+"custExcel");							//执行上传
+			String fileName =  FileUpload.fileUp(file, filePath, new Date().getTime()+"custExcel");							//执行上传
 			List<Map<String, String>> list = (List)RoadExcelRead.readExcel(filePath, fileName, 1, 0, 0);	
 			try {
 				if (CollectionUtils.isNotEmpty(list)) {

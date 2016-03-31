@@ -1071,25 +1071,8 @@ jQuery(function($) {
 	
 	//上传游客名单
 	$(document).on('click key', '.btn_import', function(event){
+		$("#orderId").val(fsNo);
 		save();
-	});
-	
-	//车型切换
-	$(document).on('change key', '#transport', function(event){
-		var transportId = $(this).val()
-		$.ajax({
-			type: "GET",
-			url: "/transportArrange/selectTransportPrice.htm",
-			data: {
-				"genIndex":genIndex,
-				"transportId":transportId,
-				"startDate":startdate
-			},
-			dataType: "json",
-			success: function(data){
-				$("#transportPrice").val(data.fdPrice);
-			}
-		});
 	});
 	
 	//保存
@@ -1159,7 +1142,24 @@ jQuery(function($) {
 				$.colorbox.resize();
 			}
 	};
-
+	//车型切换
+	$(document).on('change key', '#transport', function(event){
+		var transportId = $(this).val()
+		$.ajax({
+			type: "GET",
+			url: "/transportArrange/selectTransportPrice.htm",
+			data: {
+				"genIndex":genIndex,
+				"transportId":transportId,
+				"startDate":startdate
+			},
+			dataType: "json",
+			success: function(data){
+				$("#transportPrice").val(data.fdPrice);
+			}
+		});
+	});
+	
 	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
 	$("#cboxLoadingGraphic").html(
 	"<i class='ace-icon fa fa-spinner orange'></i>");// let's add a custom loading icon

@@ -1005,6 +1005,7 @@ jQuery(function($) {
 	
 	//上传游客名单
 	$(document).on('click key', '.btn_import', function(event){
+		$("#orderId").val(fsNo);
 		save();
 	});
 	
