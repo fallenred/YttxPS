@@ -330,15 +330,6 @@ $(document).ready(function(){
 			sortable : false,
 			resize : false,
 			formatter : function(v, opt, rec){
-				var showButton = "<button class='btn btn-info btn-xs'" + 
-							"onclick='showFStatement(\""+rec.statmentId+"\")'>查看</button>"
-				
-				var editButton ="<button class='btn btn-success btn-xs'"+
-							"onclick='editFStatement(\""+rec.statmentId+"\")'>修改</button>"
-				
-				var  closeButton = "<button class='btn btn-success btn-xs' "+
-				"onclick='closeFStatement(\""+rec.statmentId+"\")'>确认结算完毕</button>"
-				
 				var detailBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showFStatement(\''
 					+ rec.statmentId
 					+ '\');" data-original-title="查看"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
