@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.comm.DateEditor;
 import com.yttx.yttxps.comm.JsonResult;
+import com.yttx.yttxps.model.ResoucePrice;
 import com.yttx.yttxps.model.RouteCCType;
 import com.yttx.yttxps.model.TRestaurant;
 import com.yttx.yttxps.model.TRouteArrange;
@@ -72,15 +73,27 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
 		//对于需要转换为Date类型的属性，使用DateEditor进行处理  
 	    binder.registerCustomEditor(Date.class, new DateEditor());
 	}
+
+	/**
+	 * 线路资源定价-->打开线路资源价格展示页面
+	 */
+	@RequestMapping(value = "costPage.htm")
+	public String openCostPage(@RequestParam("fsId") String fsId,Model model)
+	{
+		TRouteArrange routeArrange = new TRouteArrange();
+		routeArrange.setFsId(fsId);
+		model.addAttribute("res",routeArrange);
+		return "routeArrange/cost";
+	}
 	
 	/**
-	 * 查询线路报价
-	 * @author marongcai 2016-3-25
-	 * @return
+	 * 线路资源定价-->ajax查询线路资源定价
 	 */
-	@RequestMapping(value="cost.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "costQuery.htm")
 	@ResponseBody
-	public Object ajaxfindCost(@RequestParam("fsId") String fsId)
+	public Object queryCostPrice(@RequestParam("fsId") String fsId,
+			@RequestParam("startdate") String startdate,
+			@RequestParam("enddate") String endDate)
 	{
 		List<Map<String, Object>> data = routeArrangeService.selectRouteArrangeInfo(fsId);
 		return JsonResult.jsonData(data);

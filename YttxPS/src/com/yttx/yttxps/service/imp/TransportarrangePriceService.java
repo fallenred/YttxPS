@@ -43,4 +43,10 @@ public class TransportarrangePriceService implements ITransportarrangePriceServi
 		priceMapper.deleteByPrimaryKey(price);
 	}
 
+	@Override
+	public TransportarrangePrice selectTarrangePrice(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return transportarrangePriceMapper.selectTarrangePrice(map);
+	}
+
 }

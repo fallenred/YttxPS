@@ -523,7 +523,8 @@
 																							<thead>
 																								<tr>
 																									<th>资源类型</th>
-																									<th>资源标准</th>
+																									<th>服务标准</th>
+																									<th>服务选项</th>
 																									<th>资源备注</th>
 																								</tr>
 																							</thead>
@@ -537,7 +538,7 @@
 																									<select id="restype" class="form-control">
 																										<option value="bg">酒店</option>
 																										<option value="yl">娱乐</option>
-																										<option value="ct">餐饮</option>
+																										<option value="ct">菜单</option>
 																									</select>
 																								</div>
 																								<label style="display:none" class="batch_ct col-sm-1 control-label">类型</label>
@@ -767,7 +768,6 @@
 								<div class="modal-footer">
 									<button id="close" type="button" class="btn btn-sm btn-default"
 										data-dismiss="modal">关闭</button>
-									<button id="reset" type="reset" class="btn btn-sm">重置</button>
 									<button id="submit" type="button"
 										class="btn btn-sm btn-primary">提交</button>
 								</div>
@@ -844,9 +844,9 @@
 		});
 		function fileType(obj){
 			var fileType=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
-		    if(fileType != '.xls'){
+		    if(fileType != '.xls'&&fileType != '.xlsx'){
 		    	$("#excel").val('');
-			    alert("请上传后缀xls格式的excel文件");
+			    alert("请上传后缀xls或xlsx格式的excel文件");
 		    }
 		}
 		$(function() {

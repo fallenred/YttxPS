@@ -835,6 +835,12 @@ jQuery(function($) {
 						if (comment['resname'] != null) {
 							resname = comment['resname'];
 						}
+						ccname = '';
+						if (comment['cclist'] != null) {
+							$.each(comment['cclist'], function(index, cccomment){
+								ccname = cccomment['ccname'];
+							});
+						}
 						remark = '';
 						if (comment['remark'] != null) {
 							remark = comment['remark'];
@@ -842,6 +848,7 @@ jQuery(function($) {
 						html = '<tr class="warning">'+
 						'<td>'+	restype + '</td>'+
 						'<td>'+resname+'</td>'+
+						'<td>'+ccname+'</td>'+
 						'<td>'+remark+'</td>'+
 						'</tr>';
 						id = "#table_" + cuscomment['fiId'] +'_day'+bodyIndex + " tbody";
@@ -852,7 +859,7 @@ jQuery(function($) {
 		}
 	});
 	
-	function getBatchFuzz(){
+/*	function getBatchFuzz(){
 		$.ajax({
 			type: "POST",
 			url: "/orderCustom/selectOrderCustom.htm",
@@ -862,7 +869,7 @@ jQuery(function($) {
 			}
 		});
 		//alert($('#table_243_0').html());
-	}
+	}*/
 
 	//返回资源类型
 	Handlebars.registerHelper("getType",function(value){
@@ -875,7 +882,7 @@ jQuery(function($) {
 		} else if(value == 'mp'){
 			return '门票';
 		} else if(value == 'ct'){
-			return '餐厅';
+			return '菜单';
 		} else if(value == 'bg'){
 			return '宾馆';
 		} else if(value == 'yl'){
@@ -1064,6 +1071,7 @@ jQuery(function($) {
 	
 	//上传游客名单
 	$(document).on('click key', '.btn_import', function(event){
+		$("#orderId").val(fsNo);
 		save();
 	});
 	
@@ -1134,7 +1142,24 @@ jQuery(function($) {
 				$.colorbox.resize();
 			}
 	};
-
+	//车型切换
+	$(document).on('change key', '#transport', function(event){
+		var transportId = $(this).val()
+		$.ajax({
+			type: "GET",
+			url: "/transportArrange/selectTransportPrice.htm",
+			data: {
+				"genIndex":genIndex,
+				"transportId":transportId,
+				"startDate":startdate
+			},
+			dataType: "json",
+			success: function(data){
+				$("#transportPrice").val(data.fdPrice);
+			}
+		});
+	});
+	
 	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
 	$("#cboxLoadingGraphic").html(
 	"<i class='ace-icon fa fa-spinner orange'></i>");// let's add a custom loading icon

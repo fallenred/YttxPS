@@ -2,6 +2,7 @@ package com.yttx.yttxps.web.action.trade;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.poifs.filesystem.NotOLE2FileException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yttx.comm.DateUtil;
 import com.yttx.comm.FileUpload;
 import com.yttx.comm.ObjectExcelView;
 import com.yttx.comm.PathUtil;
@@ -293,7 +294,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			DictExample example1 = new DictExample();
 			com.yttx.yttxps.model.DictExample.Criteria criteria1 = example1.createCriteria();
 			criteria1.andFsParentnoEqualTo("zjlx");
-			Map zjlxMap = dictService.selectDictMap(example1);
+			Map<String, Object> zjlxMap = dictService.selectDictMap(example1);
 			for(int i=0; i<list.size(); i++){
 				Map<String, String> vpd = new HashMap<String, String>();
 				vpd.put("var1", list.get(i).getFsName());	
@@ -326,7 +327,8 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	public void importExcel(HttpServletResponse response, @RequestParam(value="excel",required=false) MultipartFile file, String orderId) throws Exception{
 		if (null != file && !file.isEmpty()) {
 			String filePath = PathUtil.getClasspath();
-			String fileName =  FileUpload.fileUp(file, filePath, "companyExcel");							//执行上传
+			
+			String fileName =  FileUpload.fileUp(file, filePath, new Date().getTime()+"custExcel");							//执行上传
 			List<Map<String, String>> list = (List)RoadExcelRead.readExcel(filePath, fileName, 1, 0, 0);	
 			try {
 				if (CollectionUtils.isNotEmpty(list)) {
@@ -362,9 +364,6 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			} catch (Exception e) {
 				String mgs = "导入游客名单失败";
 				logger.error(mgs, e);
-				if(e instanceof NotOLE2FileException){
-					mgs = "Excel文件损坏，请将文件另存为xls为后缀的文件后再次导入";
-				}
 				response.getOutputStream().write(mgs.getBytes("utf-8"));
 				return;
 			}

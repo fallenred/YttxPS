@@ -8,9 +8,7 @@ var raw = {};
  */
 function costCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/routeArrange/cost.jsp?fsId=" + raw.fsId;
-    $("#costIframe").attr("src", frameSrc);
-    $('#costModal').modal({ show: true, backdrop: 'static' });
+	window.open("/routeArrange/costPage.htm?fsId=" + raw.fsId); 
 };
 /**
  * add end
@@ -49,20 +47,6 @@ function picCustom(id) {
     $("#picIframe").attr("src", frameSrc);
     $('#picModal').modal({ show: true, backdrop: 'static' });
 };
-
-/**
- * add by marongcai
- * 展示线路报价
- * 2016-3-25
- * add by start
- */
-$("#costModal", parent.document).on("hidden.bs.modal", function() {
-    $(this).removeData("bs.modal");
-	$("#grid-table").trigger("reloadGrid");
-});
-/**
- * add end
- */
 
 $("#addModal", parent.document).on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");

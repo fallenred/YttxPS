@@ -13,6 +13,9 @@ public interface ITransportarrangePriceService {
 	@Transactional(readOnly = true)
 	List<TransportarrangePrice> selectSelectivePage(Map<String, Object> map);
 	
+	@Transactional(readOnly = true)
+	TransportarrangePrice selectTarrangePrice(Map<String, Object> map);
+	
 	@Transactional
 	void insertTransportarrangePrice(TCCPrice price);
 	

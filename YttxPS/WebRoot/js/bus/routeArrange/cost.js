@@ -86,13 +86,13 @@ $(function(){
         dayNames: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],  
         dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],  
 		events:function(start, end, callback){
-			var uploadurl = "/routeArrange/cost.htm";
+			var uploadurl = "/routeArrange/costQuery.htm";
 			var param = new Object();
-			param.fsId = $.getUrlParam('fsId');
+			param.fsId = $('#fsId').val();
 			param.startdate = start.format("yyyy-MM-dd");
 			param.enddate = end.format("yyyy-MM-dd");
 			$.ajax({
-				method : "GET",
+				method : "POST",
 				url : uploadurl,
 				cache : false,
 				data: param
