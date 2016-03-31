@@ -123,7 +123,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="stat">购物店状态</label>
 											<div class="col-sm-3">
-												<select id="stat" name="stat">
+												<select id="stat" class="form-control" name="stat">
 													<option value="1">正常</option>
 													<option value="2">失效</option>
 												</select>
@@ -134,7 +134,6 @@
 								</div>
 								<div class="modal-footer">
 									<button id="close" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<!-- <button id="reset" type="reset" class="btn">重置</button> -->
 									<button id="submit" type="button" class="btn btn-primary">提交</button>
 								</div>
 							</form>

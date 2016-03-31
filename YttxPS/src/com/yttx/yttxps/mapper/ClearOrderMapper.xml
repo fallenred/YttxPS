@@ -14,9 +14,10 @@
 		<result  column="FS_TYPE"            property="type"           jdbcType="VARCHAR" />
 		<result  column="FS_ROUTE_ID"        property="routeId"        jdbcType="VARCHAR" />
 		<result  column="FS_PROPERTY"        property="property"       jdbcType="VARCHAR" />
-		<result  column="FI_DAYS"            property="days"            jdbcType="INTEGER" />
+		<result  column="FI_DAYS"            property="days"           jdbcType="INTEGER" />
 		<result  column="FT_STARTDATE"       property="startDate"      jdbcType="VARCHAR" />
 		<result  column="FS_STARTPLACE"      property="startPlace"     jdbcType="VARCHAR" />
+		<result  column="FS_STARTPLACENAME"  property="startPlaceName" jdbcType="VARCHAR" />
 		<result  column="FD_PRICE"           property="price"          jdbcType="DECIMAL" />
 		<result  column="FS_SUMMARY"         property="summary"        jdbcType="VARCHAR" />
 		<result  column="FD_TOTALFEE"        property="totalFee"       jdbcType="DECIMAL" />
@@ -42,7 +43,8 @@
 		<result  column="FS_PROPERTY"        property="property"       jdbcType="VARCHAR" />
 		<result  column="FI_DAYS"            property="days"           jdbcType="INTEGER" />
 		<result  column="FT_STARTDATE"       property="startDate"      jdbcType="TIMESTAMP" />
-		<result  column="FT_STARTPLACE"      property="startPlace"     jdbcType="VARCHAR" />
+		<result  column="FS_STARTPLACE"      property="startPlace"     jdbcType="VARCHAR" />
+		<result  column="FS_STARTPLACENAME"  property="startPlaceName" jdbcType="VARCHAR" />
 		<result  column="FD_PRICE"           property="price"          jdbcType="DECIMAL" />
 		<result  column="FS_SUMMARY"         property="summary"        jdbcType="VARCHAR" />
 		<result  column="FC_SCHEDULE"        property="schedule"       jdbcType="VARCHAR" />
@@ -173,6 +175,7 @@
 		        FI_DAYS,
 		       	FT_STARTDATE,
 		        FS_STARTPLACE,
+		        pkg_common.findRegionFullName(FS_STARTPLACE) FS_STARTPLACENAME,
 		        FD_PRICE,
 		       	FS_SUMMARY,
 		        FC_SCHEDULE,
@@ -245,6 +248,7 @@
 		     FI_DAYS,
 		     FT_STARTDATE,
 		     FS_STARTPLACE,
+		     pkg_common.findRegionFullName(FS_STARTPLACE) FS_STARTPLACENAME,
 		     FD_PRICE,
 		     FS_SUMMARY,
 		     FC_SCHEDULE,

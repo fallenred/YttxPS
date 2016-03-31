@@ -30,6 +30,7 @@ public class SimpleOrder {
 	
 	//创建时间
 	private Date createDate;
+	
 	private String createDateDesc;
 	
 	//线路类型
@@ -46,10 +47,13 @@ public class SimpleOrder {
 	
 	//发团日期
 	private Date startDate;
+	
 	private String startDateDesc;
 	
 	//发团地
 	private String startPlace;
+	
+	private String startPlaceName;
 	
 	//非空	线路初始报价(单人)
 	private BigDecimal price;	
@@ -185,6 +189,14 @@ public class SimpleOrder {
 		this.startPlace = (startPlace == null? null:startPlace.trim());
 	}
 
+	public String getStartPlaceName() {
+		return startPlaceName;
+	}
+
+	public void setStartPlaceName(String startPlaceName) {
+		this.startPlaceName = startPlaceName;
+	}
+
 	public BigDecimal getPrice() {
 		return price;
 	}
@@ -259,7 +271,8 @@ public class SimpleOrder {
 	
 
 	public String getCreateDateDesc() {
-		return DateUtil.getFullTimeFormatStr(createDate);
+		this.createDateDesc = DateUtil.getFullTimeFormatStr(createDate);
+		return createDateDesc;
 	}
 
 	public void setCreateDateDesc(String createDateDesc) {
@@ -267,7 +280,8 @@ public class SimpleOrder {
 	}
 
 	public String getStartDateDesc() {
-		return DateUtil.getDateFormatStr(startDate);
+		this.startDateDesc = DateUtil.getDateFormatStr(startDate);
+		return startDateDesc;
 	}
 
 	public void setStartDateDesc(String startDateDesc) {

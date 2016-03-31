@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -40,25 +39,21 @@
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
-												<li><a class="cboxElement" data-rel="colorbox"
-													href="http://127.0.0.1:81/1.jpg"> <img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
-												</a></li>
+												<li>
+													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg">
+														<img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
+													</a>
+												</li>
 											</div>
 										</ul>
 									</div>
 
 									<div class="row">
 										<div class="form-group">
-											<!-- <label class="col-sm-2 control-label no-padding-right" for="no">购物点代码</label>
-											<div class="col-sm-3">
-												<input type="text" id="no" name="no" class="form-control" placeholder="购物点代码需唯一" />
-											</div> -->
 											<label class="col-sm-2 control-label no-padding-right" for="regionname">所属地区</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="请选择行政区域" name="regionname"
-													data-key="0086" data-idx="0" data-full="中国"
-													id="regionname" class="inp-search" /> <input
-													type="hidden" name="regionno" id="regionno" />
+												<input type="text" placeholder="请选择行政区域" name="regionname" data-key="0086" data-idx="0" data-full="中国" id="regionname" class="form-control inp-search" />
+												<input type="hidden" name="regionno" id="regionno" />
 												<div id="selectCity" class="localcity"></div>
 											</div>
 										</div>
@@ -156,14 +151,14 @@
 	</c:if>
 	<script type="text/javascript">
 		$('.datetimepicker').datetimepicker({
-			language:  'zh-CN',
-	        weekStart: 1,
-	        todayBtn:  1,
-			autoclose: 1,
-			todayHighlight: 1,
-			startView: 2,
-			minView: 2,
-			forceParse: 0
+			language : 'zh-CN',
+			weekStart : 1,
+			todayBtn : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0
 		});
 	</script>
 </body>

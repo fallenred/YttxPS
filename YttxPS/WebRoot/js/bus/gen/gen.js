@@ -2,9 +2,9 @@
 var raw = {};
 function showCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	$("#showModal").modal({
-	    remote: "/jsp/gen/show.jsp"
-	}); 
+	var frameSrc = "/jsp/gen/show.jsp";
+    $("#showIframe").attr("src", frameSrc);
+    $('#showModal').modal({ show: true, backdrop: 'static' });
 };
 
 function editCustom(id) {
@@ -21,7 +21,7 @@ function deleteCustom(id) {
     $('#delModal').modal({ show: true, backdrop: 'static' });
 };
 
-$("#showModal").on("shown.bs.modal", function() {
+$("#showIframe").on("load", function() {
 	$(this).contents().find("#reset").click();
 	$(this).contents().find("#fiIndex").val(raw.fiIndex);
 	$(this).contents().find("#fsName").val(raw.fsName);
@@ -30,7 +30,7 @@ $("#showModal").on("shown.bs.modal", function() {
 	getScenicGen(this, raw.fiIndex);
 });
 
-$("#editIframe").on("load",function(){
+$("#editIframe").on("load", function(){
 	$(this).contents().find("#reset").click();
 	$(this).contents().find("#fiIndex").val(raw.fiIndex);
 	$(this).contents().find("#fsName").val(raw.fsName);

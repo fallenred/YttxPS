@@ -52,30 +52,31 @@ jQuery(function($) {
 	
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#no").val() == '') {
+		if($("#fsName").val() == '' || $("#fsName").val() == undefined) {
 			$("#message").show();
-			$("#message").text("景区编码不能为空，请输入");
-			$('#no').focus();
+			$("#message").text("票名称不能为空，请输入");
+			$('#fsName').focus();
 			return false;
-		} 
-		if($("#name").val() == '') {
+		}
+		if($("#fsScenicno").val() == '' || $("#fsScenicno").val() == undefined) {
 			$("#message").show();
-			$("#message").text("景区名称不能为空，请输入");
-			$('#name').focus();
+			$("#message").text("所属景区不能为空，请输入");
+			$('#fsScenicno').focus();
 			return false;
-		} 
-		if($("#lvl").val() == '') {
+		}
+		if($("#fsType").val() == '' || $("#fsType").val() == undefined) {
 			$("#message").show();
-			$("#message").text("景区等级不能为空，请输入");
-			$('#lvl').focus();
+			$("#message").text("门票类型不能为空，请输入");
+			$('#fsType').focus();
 			return false;
-		} 
-		if($("#regionno").val() == '') {
+		}
+		if($("#fiStat").val() == '' || $("#fiStat").val() == undefined) {
 			$("#message").show();
-			$("#message").text("景区地区不能为空，请输入");
-			$('#regionno').focus();
+			$("#message").text("状态不能为空，请输入");
+			$('#fiStat').focus();
 			return false;
-		} 
+		}
+		
 		$.post("/ticket/editTicket.htm",
 				$("#editform").serialize(),
 				function(data){

@@ -21,11 +21,11 @@ function picCustom(id) {
     $('#picModal').modal({ show: true, backdrop: 'static' });
 };
 
-function showCustom(id) {
+function showCustom(id) {	
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	$("#showModal").modal({
-	    remote: "/jsp/scenic/show.jsp"
-	});
+	var frameSrc = "/jsp/scenic/show.jsp";
+    $("#showIframe").attr("src", frameSrc);
+    $('#showModal').modal({ show: true, backdrop: 'static' });
 };
 
 function deleteCustom(id) {
@@ -36,24 +36,23 @@ function deleteCustom(id) {
 };
 
 
-$("#showModal").on("shown.bs.modal", function() {
-
-	$(this).find("#reset").click();
-	$(this).find("#no").val(raw.no);
-	$(this).find("#name").val(raw.name);
-	$(this).find("#lvl").val(raw.lvl);
-	$(this).find("#regionno").val(raw.regionno);
+$("#showIframe").on("load", function() {
+	$(this).contents().find("#reset").click();
+	$(this).contents().find("#no").val(raw.no);
+	$(this).contents().find("#name").val(raw.name);
+	$(this).contents().find("#lvl").val(raw.lvl);
+	$(this).contents().find("#regionno").val(raw.regionno);
 	getregionname(raw.regionno, function(name){
-		$("#showModal").find("#regionname").val(name);
+		$("#showIframe").contents().find("#regionname").val(name);
 	});
-	$(this).find("#stat").val(raw.stat);
-	$(this).find("#addr").val(raw.addr);
-	$(this).find("#desc").val(raw.desc);
-	$(this).find("#opentime").val(raw.opentime);
-	$(this).find("#speciality").val(raw.speciality);
+	$(this).contents().find("#stat").val(raw.stat);
+	$(this).contents().find("#addr").val(raw.addr);
+	$(this).contents().find("#desc").val(raw.desc);
+	$(this).contents().find("#opentime").val(raw.opentime);
+	$(this).contents().find("#speciality").val(raw.speciality);
 });
 
-$("#editIframe").on("load",function(){
+$("#editIframe").on("load", function(){
 	$(this).contents().find("#reset").click();
 	$(this).contents().find("#no").val(raw.no);
 	$(this).contents().find("#name").val(raw.name);

@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.yttx.yttxps.xml.SnapshotUtil;
-import com.yttx.yttxps.xml.bean.Daylist;
-import com.yttx.yttxps.xml.bean.Reslist;
 
 
 /**

@@ -34,12 +34,7 @@
 							<!-- 模态框（查询） -->
 
 							<form class="form-horizontal">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-									<h4 class="modal-title" id="showModalLabel">车型线路详情</h4>
-								</div>
 								<div class="modal-body">
-									<!-- 图片TODO： -->
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
@@ -69,8 +64,7 @@
 								</div>
 
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button id="reset" type="reset" class="btn" style="display: none;">重置</button>
+									<button type="button" id="close" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</form>
 							<!-- PAGE CONTENT ENDS -->

@@ -1,4 +1,9 @@
 jQuery(function($) {
+	
+	// 关闭
+	$("#close").on("click", function () {
+		$("#showModal", parent.document).find(".close").click();
+	});
 
 	//	colorbox
 	var $overflow = '';
@@ -24,9 +29,6 @@ jQuery(function($) {
 			$.colorbox.resize();
 		}
 	};
-	
-	$(".row input").attr("readonly", "readonly");
-	$(".row select").attr("disabled", "disabled");
 
 	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
 	$("#cboxLoadingGraphic").html(

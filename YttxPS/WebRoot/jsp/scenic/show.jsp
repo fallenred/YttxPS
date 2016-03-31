@@ -34,12 +34,7 @@
 							<!-- 模态框（查询） -->
 
 							<form class="form-horizontal">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-									<h4 class="modal-title" id="showModalLabel">景区详情</h4>
-								</div>
 								<div class="modal-body">
-									<!-- 图片TODO： -->
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
@@ -58,9 +53,9 @@
 											<div class="col-sm-2">
 												<input type="text" id="no" class="form-control" placeholder="景区编码" readonly="readonly" />
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="lvl">景区状态</label>
-											<div class="col-sm-1">
-												<select id="stat" disabled="disabled">
+											<label class="col-sm-1 control-label no-padding-right" for="lvl">景区状态</label>
+											<div class="col-sm-2">
+												<select id="stat" class="form-control" disabled="disabled">
 													<option value="1">正常</option>
 													<option value="2">失效</option>
 												</select>
@@ -70,22 +65,19 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-1 control-label no-padding-right" for="lvl">景区等级</label>
-											<div class="col-sm-1">
-												<select id="lvl" name="lvl" disabled="disabled">
+											<div class="col-sm-2">
+												<select id="lvl" name="lvl" class="form-control" disabled="disabled">
 													<option value="">请选择景区等级</option>
 													<c:forEach items="${codeMasterList['sc_lvl']}" var="lvl" varStatus="status">
 														<option value="${lvl.fsDictno}">${lvl.fsDictname}</option>
 													</c:forEach>
 												</select>
 											</div>
-											<label class="col-sm-3 control-label no-padding-right" for="regionname">所属地区</label>
-											<div class="col-sm-3">
+											<label class="col-sm-1 control-label no-padding-right" for="regionname">所属地区</label>
+											<div class="col-sm-2">
 												<input type="text" id="regionname" name="regionname" class="form-control" placeholder="所属地区" readonly="readonly" />
-											</div>
-											<div class="col-sm-1">
 												<input type="hidden" id="regionno" name="regionno" class="form-control" placeholder="所属地区" readonly="readonly" />
 											</div>
-
 										</div>
 									</div>
 									<div class="row">
@@ -135,11 +127,7 @@
 								</div>
 
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button id="reset" type="reset" class="btn" style="display: none;">重置</button>
-									<!--  
-											<button type="button" class="btn btn-primary">提交</button>
-											-->
+									<button type="button" id="close" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</form>
 							<!-- PAGE CONTENT ENDS -->

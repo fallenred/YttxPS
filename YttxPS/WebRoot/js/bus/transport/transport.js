@@ -2,9 +2,9 @@
 var raw = {};
 function showTransport(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	$("#showModal").modal({
-	    remote: "/jsp/transport/show.jsp"
-	}); 
+	var frameSrc = "/jsp/transport/show.jsp";
+    $("#showIframe").attr("src", frameSrc);
+    $('#showModal').modal({ show: true, backdrop: 'static' });
 };
 
 function editTransport(id) {
@@ -21,14 +21,14 @@ function deleteTransport(id) {
     $('#delModal').modal({ show: true, backdrop: 'static' });
 };
 
-$("#showModal").on("shown.bs.modal", function() {
-	$(this).find("#reset").click();
-	$(this).find("#fsName").val(raw.fsName);
-	$(this).find("#fiLoadMin").val(raw.fiLoadMin);
-	$(this).find("#fiLoadMax").val(raw.fiLoadMax);
-	$(this).find("#fiFitMin").val(raw.fiFitMin);
-	$(this).find("#fiFitMax").val(raw.fiFitMax);
-	$(this).find("#fiStat").val(raw.fiStat);
+$("#showIframe").on("load", function() {
+	$(this).contents().find("#reset").click();
+	$(this).contents().find("#fsName").val(raw.fsName);
+	$(this).contents().find("#fiLoadMin").val(raw.fiLoadMin);
+	$(this).contents().find("#fiLoadMax").val(raw.fiLoadMax);
+	$(this).contents().find("#fiFitMin").val(raw.fiFitMin);
+	$(this).contents().find("#fiFitMax").val(raw.fiFitMax);
+	$(this).contents().find("#fiStat").val(raw.fiStat);
 });
 
 /**
@@ -42,7 +42,7 @@ function openPicPage(resType,resName,resNo) {
 };
 
 
-$("#editIframe").on("load",function(){
+$("#editIframe").on("load", function(){
 	$(this).contents().find("#reset").click();
 	$(this).contents().find("#fsNo").val(raw.fsNo);
 	$(this).contents().find("#fsName").val(raw.fsName);

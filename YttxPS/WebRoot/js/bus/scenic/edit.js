@@ -37,34 +37,35 @@ jQuery(function($) {
 	
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#no").val() == '') {
+		if($("#no").val() == '' || $("#no").val() == undefined) {
 			$("#message").show();
 			$("#message").text("景区编码不能为空，请输入");
 			$('#no').focus();
 			return false;
-		} 
-		if($("#name").val() == '') {
+		}
+		if($("#name").val() == '' || $("#name").val() == undefined) {
 			$("#message").show();
 			$("#message").text("景区名称不能为空，请输入");
 			$('#name').focus();
 			return false;
-		} 
-		if($("#lvl").val() == '') {
+		}
+		if($("#lvl").val() == '' || $("#lvl").val() == undefined) {
 			$("#message").show();
 			$("#message").text("景区等级不能为空，请输入");
 			$('#lvl').focus();
 			return false;
-		} 
-		if($("#regionno").val() == '') {
+		}
+		if($("#regionname").val() == '' || $("#regionname").val() == undefined) {
 			$("#message").show();
 			$("#message").text("景区地区不能为空，请输入");
-			$('#regionno').focus();
+			$('#regionname').focus();
 			return false;
-		} 
+		}
+		
 		$.post("/scenic/editScenic.htm",
 				$("#editform").serialize(),
 				function(data){
-			var json = eval("("+data+")");
+			var json = eval("(" + data + ")");
 					if(json.result == "ok") {
 						$("#message").text("修改记录成功");
 						$("#message").show();

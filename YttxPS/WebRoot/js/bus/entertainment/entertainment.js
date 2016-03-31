@@ -2,9 +2,9 @@
 var raw = {};
 function showEntertainment(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	$("#showModal").modal({
-	    remote: "/jsp/entertainment/show.jsp"
-	}); 
+	var frameSrc = "/jsp/entertainment/show.jsp";
+    $("#showIframe").attr("src", frameSrc);
+    $('#showModal').modal({ show: true, backdrop: 'static' });
 };
 
 function costEntertainment(id) {
@@ -40,22 +40,25 @@ function picEntertainment(id) {
     $('#picModal').modal({ show: true, backdrop: 'static' });
 };
 
-$("#showModal").on("shown.bs.modal", function() {
-	$(this).find("#reset").click();
+$("#showIframe").on("load", function() {
+	$(this).contents().find("#reset").click();
 	
-	$(this).find("#fsNo").val(raw.fsNo);
-	$(this).find("#fsName").val(raw.fsName);
-	$(this).find("#fsType").val(raw.fsType);
-	$(this).find("#fiStat").val(raw.fiStat);
-	$(this).find("#fsDesc").val(raw.fsDesc);
-	$(this).find("#fsLvl").val(raw.fsLvl);
-	$(this).find("#fsAddr").val(raw.fsAddr);
-	$(this).find("#fsOpentime").val(raw.fsOpentime);
-	$(this).find("#fsRegionno").val(raw.fsRegionno);
-	$(this).find("#fsRegionName").val(raw.fsRegionName);
+	$(this).contents().find("#fsNo").val(raw.fsNo);
+	$(this).contents().find("#fsName").val(raw.fsName);
+	$(this).contents().find("#fsType").val(raw.fsType);
+	$(this).contents().find("#fiStat").val(raw.fiStat);
+	$(this).contents().find("#fsDesc").val(raw.fsDesc);
+	$(this).contents().find("#fsLvl").val(raw.fsLvl);
+	$(this).contents().find("#fsAddr").val(raw.fsAddr);
+	$(this).contents().find("#fsOpentime").val(raw.fsOpentime);
+	$(this).contents().find("#fsRegionno").val(raw.fsRegionno);
+	$(this).contents().find("#fsRegionName").val(raw.fsRegionName);
+	$(this).contents().find("input").attr("readonly", "readonly");
+	$(this).contents().find("textarea").attr("readonly", "readonly");
+	$(this).contents().find("select").attr("disabled", "disabled");
 });
 
-$("#editIframe").on("load",function(){
+$("#editIframe").on("load", function(){
 	$(this).contents().find("#reset").click();
 	
 	$(this).contents().find("#fsNo").val(raw.fsNo);

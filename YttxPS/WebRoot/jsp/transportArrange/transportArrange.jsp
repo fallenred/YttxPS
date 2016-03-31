@@ -33,20 +33,11 @@
 						} catch (e) {
 						}
 					</script>
-					<!-- 
-					<ul class="breadcrumb">
-						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">Home</a>
-						</li>
-
-						<li><a href="#">Other Pages</a></li>
-						<li class="active">Blank Page</li>
-					</ul>
-					.breadcrumb -->
-
 					<div class="nav-search" id="nav-search">
 						<form class="form-search">
-							<span class="input-icon"> <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" /> <i
-								class="ace-icon fa fa-search nav-search-icon"></i>
+							<span class="input-icon">
+								<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+								<i class="ace-icon fa fa-search nav-search-icon"></i>
 							</span>
 						</form>
 					</div>
@@ -153,12 +144,15 @@
 							<div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel" aria-hidden="false">
 								<div class="modal-dialog" style="width: 1024px;">
 									<div class="modal-content">
-
-										<!-- /.modal-content -->
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+											<h4 class="modal-title" id="showModalLabel">查看线路车型信息</h4>
+										</div>
+										<div class="modal-body">
+											<iframe id="showIframe" width="100%" height="450px" frameborder="0" scrolling="no"></iframe>
+										</div>
 									</div>
-									<!-- /.modal-dialog -->
 								</div>
-								<!-- /.modal -->
 							</div>
 
 							<!-- 图片上传 -->

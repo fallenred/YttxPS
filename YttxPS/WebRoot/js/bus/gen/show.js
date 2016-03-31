@@ -1,4 +1,9 @@
 jQuery(function($) {
+	
+	$("#close").on("click", function () {
+		$("#showModal", parent.document).find(".close").click();
+	});
+	
 	//获取景区列表
 	$.ajax({
 		type: "POST",

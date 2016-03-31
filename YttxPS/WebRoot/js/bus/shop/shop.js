@@ -23,9 +23,9 @@ function picCustom(id) {
 
 function showCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	$("#showModal").modal({
-	    remote: "/jsp/shop/show.jsp"
-	});
+	var frameSrc = "/jsp/shop/show.jsp";
+    $("#showIframe").attr("src", frameSrc);
+    $('#showModal').modal({ show: true, backdrop: 'static' });
 };
 
 function deleteCustom(id) {
@@ -36,28 +36,27 @@ function deleteCustom(id) {
 };
 
 
-$("#showModal").on("shown.bs.modal", function() {
-
-	$(this).find("#reset").click();
-	$(this).find("#no").val(raw.no);
-	$(this).find("#regionno").val(raw.regionno);
-	$(this).find("#name").val(raw.name);
-	$(this).find("#desc").val(raw.desc);
-	$(this).find("#opentime").val(raw.opentime);
-	$(this).find("#tel").val(raw.tel);
+$("#showIframe").on("load", function() {
+	$(this).contents().find("#reset").click();
+	$(this).contents().find("#no").val(raw.no);
+	$(this).contents().find("#regionno").val(raw.regionno);
+	$(this).contents().find("#name").val(raw.name);
+	$(this).contents().find("#desc").val(raw.desc);
+	$(this).contents().find("#opentime").val(raw.opentime);
+	$(this).contents().find("#tel").val(raw.tel);
 	getregionname(raw.regionno, function(name){
-		$("#showModal").find("#regionname").val(name);
+		$("#showIframe").contents().find("#regionname").val(name);
 	});
-	$(this).find("#singlereturn").val(raw.singlereturn);
-	$(this).find("#totalreturn").val(raw.totalreturn);
-	$(this).find("#mantip").val(raw.mantip);
-	$(this).find("#parktip").val(raw.parktip);
-	$(this).find("#staytime").val(raw.staytime);
-	$(this).find("#policy").val(raw.policy);
-	$(this).find("#stat").find("option[value='"+raw.stat+"']").attr("selected" ,true);
+	$(this).contents().find("#singlereturn").val(raw.singlereturn);
+	$(this).contents().find("#totalreturn").val(raw.totalreturn);
+	$(this).contents().find("#mantip").val(raw.mantip);
+	$(this).contents().find("#parktip").val(raw.parktip);
+	$(this).contents().find("#staytime").val(raw.staytime);
+	$(this).contents().find("#policy").val(raw.policy);
+	$(this).contents().find("#stat").find("option[value='" + raw.stat + "']").attr("selected", true);
 });
 
-$("#editIframe").on("load",function(){
+$("#editIframe").on("load", function(){
 	$(this).contents().find("#reset").click();
 	$(this).contents().find("#no").val(raw.no);
 	$(this).contents().find("#regionno").val(raw.regionno);
@@ -74,7 +73,7 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find("#parktip").val(raw.parktip);
 	$(this).contents().find("#staytime").val(raw.staytime);
 	$(this).contents().find("#policy").val(raw.policy);
-	$(this).find("#stat").find("option[value='"+raw.stat+"']").attr("selected" ,true);
+	$(this).find("#stat").find("option[value='" + raw.stat + "']").attr("selected", true);
 });
 
 

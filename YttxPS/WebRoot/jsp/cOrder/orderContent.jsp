@@ -75,7 +75,7 @@
 							<label class="control-label no-padding-right"><strong>发团地:</strong></label>
 						</div>
 						<div class="col-xs-4">
-							<label class="input-group">${order.startPlace}</label>
+							<label class="input-group">${order.startPlaceName}</label>
 						</div>
 					</div>
 				</div>

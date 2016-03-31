@@ -325,12 +325,12 @@ $(document).ready(function(){
 		},{
 			name : 'myaction',
 			index : '',
-			width : 200,
+			width : 120,
 			fixed : true,
 			sortable : false,
 			resize : false,
 			formatter : function(v, opt, rec){
-				var showButton = "<button class='btn btn-info btn-xs'"+
+				var showButton = "<button class='btn btn-info btn-xs'" + 
 							"onclick='showFStatement(\""+rec.statmentId+"\")'>查看</button>"
 				
 				var editButton ="<button class='btn btn-success btn-xs'"+
@@ -338,13 +338,26 @@ $(document).ready(function(){
 				
 				var  closeButton = "<button class='btn btn-success btn-xs' "+
 				"onclick='closeFStatement(\""+rec.statmentId+"\")'>确认结算完毕</button>"
+				
+				var detailBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showFStatement(\''
+					+ rec.statmentId
+					+ '\');" data-original-title="查看"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
+
+				var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editFStatement(\''
+					+ rec.statmentId
+					+ '\');" data-original-title="修改"><span class="ui-icon ui-icon-pencil"></span></div>';
+				
+				var closeBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="closeButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="closeFStatement(\''
+					+ rec.statmentId
+					+ '\');" data-original-title="确认结算完毕"><span class="ui-icon ace-icon fa fa-cog red"></span></div>';
+				
 				var retContent = null;
-				if(rec.stat==0){//当结算单状态为0的时候，只能查看
-					var retContent=showButton+"&nbsp; &nbsp; &nbsp;"+editButton;
-				}else if(rec.stat==1){
-					var retContent=showButton+"&nbsp; &nbsp; &nbsp;"+closeButton;
+				if(rec.stat == 0){   //当结算单状态为0的时候，只能查看
+					var retContent = detailBtn + "&nbsp; &nbsp; &nbsp;" + editBtn;
+				}else if(rec.stat == 1){
+					var retContent = detailBtn + "&nbsp; &nbsp; &nbsp;" + closeBtn;
 				}else{
-					var retContent=showButton;
+					var retContent = detailBtn;
 				}
 				return retContent;
 			}

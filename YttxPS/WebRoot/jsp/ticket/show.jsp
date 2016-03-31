@@ -21,34 +21,21 @@
 			} catch (e) {
 			}
 		</script>
-
 		<div class="main-container-inner">
-
 			<div class="main-content">
-
-
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-							<!-- PAGE CONTENT BEGINS -->
-
-							<!-- 模态框（查询） -->
-
 							<form class="form-horizontal">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">×</button>
-									<h4 class="modal-title" id="showModalLabel">门票详情</h4>
-								</div>
 								<div class="modal-body">
-									<!-- 图片TODO： -->
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
-												<li><a class="cboxElement" data-rel="colorbox"
-													href="http://127.0.0.1:81/1.jpg"> <img width="0"
-														height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
-												</a></li>
+												<li>
+													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg">
+														<img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
+													</a>
+												</li>
 											</div>
 										</ul>
 									</div>
@@ -89,20 +76,13 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsDesc">描述</label>
 											<div class="col-sm-8">
-												<input class="form-control" type="text" class="form-control" id="fsDesc" name="fsDesc" 
-													placeholder="描述" readonly="readonly"/>
+												<input class="form-control" type="text" class="form-control" id="fsDesc" name="fsDesc" placeholder="描述" readonly="readonly"/>
 											</div>
 										</div>
 									</div>
 
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">关闭</button>
-									<button id="reset" type="reset" class="btn"
-										style="display: none;">重置</button>
-									<!--  
-											<button type="button" class="btn btn-primary">提交</button>
-											-->
+									<button type="button" id="close" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</form>
 							<!-- PAGE CONTENT ENDS -->

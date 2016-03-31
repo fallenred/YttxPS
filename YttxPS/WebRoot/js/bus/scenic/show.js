@@ -1,4 +1,9 @@
 jQuery(function($) {
+	
+	// 关闭
+	$("#close").on("click", function () {
+		$("#showModal", parent.document).find(".close").click();
+	});
 
 	//	colorbox
 	var $overflow = '';

@@ -1,10 +1,10 @@
 //	显示详情
 var raw = {};
-function showCustom(id) {
+function showCustom(id) {	
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	$("#showModal").modal({
-	    remote: "/jsp/transportArrange/show.jsp"
-	}); 
+	var frameSrc = "/jsp/transportArrange/show.jsp";
+    $("#showIframe").attr("src", frameSrc);
+    $('#showModal').modal({ show: true, backdrop: 'static' });
 };
 
 function editCustom(id) {
@@ -39,13 +39,13 @@ function picCustom(id) {
     $('#picModal').modal({ show: true, backdrop: 'static' });
 };
 
-$("#showModal").on("shown.bs.modal", function() {
-	$(this).find("#reset").click();
-	$(this).find("#fiGenindex").val(raw.fiGenindex);
-	$(this).find("#fsTransNo").val(raw.fsTransNo);
+$("#showIframe").on("load", function() {
+	$(this).contents().find("#reset").click();
+	$(this).contents().find("#fiGenindex").val(raw.fiGenindex);
+	$(this).contents().find("#fsTransNo").val(raw.fsTransNo);
 });
 
-$("#editIframe").on("load",function(){
+$("#editIframe").on("load", function(){
 	$(this).contents().find("#reset").click();
 	$(this).contents().find("#fsNo").val(raw.fsNo);
 	$(this).contents().find("#fiGenindex").val(raw.fiGenindex);

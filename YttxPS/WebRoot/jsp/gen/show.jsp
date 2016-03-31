@@ -34,17 +34,14 @@
 							<!-- 模态框（查询） -->
 
 							<form class="form-horizontal">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-									<h4 class="modal-title" id="showModalLabel">路线详情</h4>
-								</div>
 								<div class="modal-body">
-									<!-- 图片TODO： -->
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
 												<li>
-													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg"> <img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0"></a>
+													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg">
+														<img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
+													</a>
 												</li>
 											</div>
 										</ul>
@@ -100,7 +97,7 @@
 								</div>
 
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button type="button" id="close" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</form>
 							<!-- PAGE CONTENT ENDS -->

@@ -30,13 +30,8 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<!-- PAGE CONTENT BEGINS -->
-
-							<!-- 模态框（新增） -->
-
-							<form class="form-horizontal" id="addform">
-
+							<form class="form-horizontal">
 								<div class="modal-body">
-									<!-- 图片TODO： -->
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">

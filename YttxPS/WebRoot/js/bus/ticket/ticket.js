@@ -9,17 +9,19 @@ function showTicketPrice(id){
 	var page = "/jsp/ticketPrice/ticketPrice.jsp?fsNo=" + raw.fsNo+"&fsName="+escape(raw.fsName);
 	window.open(page);
 };
+
 //批次管理配置
 function configOrderCustom(id) {
     var raw = jQuery("#grid-table").jqGrid('getRowData', id);
     var page = "/jsp/orderCustom/orderCustom.jsp?fsNo=" + raw.fsNo+"&fsName="+escape(raw.fsName);
     window.open(page);
 };
+
 function showTicket(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	$("#showModal").modal({
-	    remote: "/jsp/ticket/show.jsp"
-	}); 
+	var frameSrc = "/jsp/ticket/show.jsp";
+    $("#showIframe").attr("src", frameSrc);
+    $('#showModal').modal({ show: true, backdrop: 'static' });
 };
 
 function editTicket(id) {
@@ -36,17 +38,17 @@ function deleteTicket(id) {
     $('#delModal').modal({ show: true, backdrop: 'static' });
 };
 
-$("#showModal").on("shown.bs.modal", function() {
-	$(this).find("#reset").click();
-	$(this).find("#fsNo").val(raw.fsNo);
-	$(this).find("#fsName").val(raw.fsName);
-	$(this).find("#fsScenicno").val(raw.fsScenicno);
-	$(this).find("#fsType").val(raw.fsType);
-	$(this).find("#fiStat").val(raw.fiStat);
-	$(this).find("#fsDesc").val(raw.fsDesc);
+$("#showIframe").on("load", function() {
+	$(this).contents().find("#reset").click();
+	$(this).contents().find("#fsNo").val(raw.fsNo);
+	$(this).contents().find("#fsName").val(raw.fsName);
+	$(this).contents().find("#fsScenicno").val(raw.fsScenicno);
+	$(this).contents().find("#fsType").val(raw.fsType);
+	$(this).contents().find("#fiStat").val(raw.fiStat);
+	$(this).contents().find("#fsDesc").val(raw.fsDesc);
 });
 
-$("#editIframe").on("load",function(){
+$("#editIframe").on("load", function(){
 	$(this).contents().find("#reset").click();
 	$(this).contents().find("#fsNo").val(raw.fsNo);
 	$(this).contents().find("#fsName").val(raw.fsName);
@@ -288,10 +290,6 @@ jQuery(function($) {
 				rowList : [ 10, 20, 30 ],
 				pager : pager_selector,
 				altRows : true,
-
-//				multiselect : true,
-//				multiboxonly : true,
-//				multipleSearch : true,
 
 				loadComplete : function() {
 					var table = this;

@@ -64,7 +64,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsRegionName">所属地区</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="请选择行政区域" name="fsRegionName" data-key="0086" data-idx="0" data-full="中国" id="fsRegionName" class="inp-search" /> 
+												<input type="text" placeholder="请选择行政区域" name="fsRegionName" data-key="0086" data-idx="0" data-full="中国" id="fsRegionName" class="form-control inp-search" /> 
 												<input type="hidden" name="fsRegionno" id="fsRegionno" />
 												<div id="selectCity" class="localcity"></div>
 											</div>

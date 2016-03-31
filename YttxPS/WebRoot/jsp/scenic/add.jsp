@@ -54,9 +54,9 @@
 											<div class="col-sm-2">
 												<input type="text" id="no" name="no" class="form-control" placeholder="景区编码需唯一" maxlength="10" />
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="stat">景区状态</label>
-											<div class="col-sm-1">
-												<select id="stat" name="stat">
+											<label class="col-sm-1 control-label no-padding-right" for="stat">景区状态</label>
+											<div class="col-sm-2">
+												<select id="stat" class="form-control" name="stat">
 													<option value="1">正常</option>
 													<option value="2">失效</option>
 												</select>
@@ -67,16 +67,16 @@
 										<div class="form-group">
 											<label class="col-sm-1 control-label no-padding-right" for="lvl">景区等级</label>
 											<div class="col-sm-2">
-												<select id="lvl" name="lvl">
+												<select id="lvl" class="form-control" name="lvl">
 													<option value="">请选择景区等级</option>
 													<c:forEach items="${codeMasterList['sc_lvl']}" var="lvl" varStatus="status">
 														<option value="${lvl.fsDictno}">${lvl.fsDictname}</option>
 													</c:forEach>
 												</select>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="regionname">所属地区</label>
-											<div class="col-sm-3">
-												<input type="text" placeholder="请选择行政区域" name="regionname" data-key="0086" data-idx="0" data-full="中国" id="regionname" class="inp-search" />
+											<label class="col-sm-1 control-label no-padding-right" for="regionname">所属地区</label>
+											<div class="col-sm-2">
+												<input type="text" placeholder="请选择行政区域" name="regionname" data-key="0086" data-idx="0" data-full="中国" id="regionname" class="form-control inp-search" />
 												<input type="hidden" name="regionno" id="regionno" />
 												<div id="selectCity" class="localcity"></div>
 											</div>

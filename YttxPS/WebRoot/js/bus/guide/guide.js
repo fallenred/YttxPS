@@ -22,9 +22,9 @@ function picCustom(id) {
 
 function showCustom(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	$("#showModal").modal({
-		remote: "/jsp/guide/show.jsp"
-	});
+	var frameSrc = "/jsp/guide/show.jsp";
+	$("#showIframe").attr("src", frameSrc);
+	$('#showModal').modal({ show: true, backdrop: 'static' });
 };
 
 function deleteCustom(id) {
@@ -34,25 +34,26 @@ function deleteCustom(id) {
 	$('#delModal').modal({ show: true, backdrop: 'static' });
 };
 
-
-$("#showModal").on("shown.bs.modal", function() {
-	$(this).find("#reset").click();
-	$(this).find("#no").val(raw.no);
-	$(this).find("#name").val(raw.name);
-	$(this).find("#gender").val(raw.gender);
-	$(this).find("#idno").val(raw.idno);
+$("#showIframe").on("load", function() {
+	$(this).contents().find("#reset").click();
+	$(this).contents().find("#no").val(raw.no);
+	$(this).contents().find("#name").val(raw.name);
+	$(this).contents().find("#gender").val(raw.gender);
+	$(this).contents().find("#idno").val(raw.idno);
 	$(this).contents().find("#workdate").val(raw.workdate);
-	$(this).find("#contactno").val(raw.contactno);
-	$(this).find("#mainroute").val(raw.mainroute);
-	$(this).find("#preferteem").val(raw.preferteem);
-	$(this).find("#speciality").val(raw.speciality);
-	$(this).find("#desc").val(raw.desc);
-	$(this).find("#lvl").val(raw.lvl);
-	$(this).find("#salary").val(raw.salary);
-	$(this).find("#daysale").val(raw.daysale);
-	$(this).find("#weeksale").val(raw.weeksale);
-	$(this).find("#monthsale").val(raw.monthsale);
-	$(this).find("#stat").val(raw.stat);
+	$(this).contents().find("#contactno").val(raw.contactno);
+	$(this).contents().find("#mainroute").val(raw.mainroute);
+	$(this).contents().find("#preferteem").val(raw.preferteem);
+	$(this).contents().find("#speciality").val(raw.speciality);
+	$(this).contents().find("#desc").val(raw.desc);
+	$(this).contents().find("#lvl").val(raw.lvl);
+	$(this).contents().find("#salary").val(raw.salary);
+	$(this).contents().find("#daysale").val(raw.daysale);
+	$(this).contents().find("#weeksale").val(raw.weeksale);
+	$(this).contents().find("#monthsale").val(raw.monthsale);
+	$(this).contents().find("#stat").val(raw.stat);
+	$(this).contents().find("input").attr("readonly", "readonly");
+	$(this).contents().find("select").attr("disabled", "disabled");
 });
 
 $("#editIframe").on("load",function(){

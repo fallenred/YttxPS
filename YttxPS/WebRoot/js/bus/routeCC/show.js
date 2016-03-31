@@ -273,7 +273,7 @@ jQuery(function($) {
 	
 	// 关闭
 	$("#close").on("click", function () {
-			$("#showModal", parent.document).find(".close").click();
+		$("#showModal", parent.document).find(".close").click();
 	});
 	
 	//屏蔽部分组件

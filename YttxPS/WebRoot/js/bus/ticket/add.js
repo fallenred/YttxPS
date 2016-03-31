@@ -52,24 +52,31 @@ jQuery(function($) {
 	
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#fsNo").val() == '') {
+		if($("#fsName").val() == '' || $("#fsName").val() == undefined) {
 			$("#message").show();
-			$("#message").text("门票代码不能为空，请输入");
-			$('#no').focus();
+			$("#message").text("票名称不能为空，请输入");
+			$('#fsName').focus();
 			return false;
-		} 
-		if($("#fsScenicno").val() == '') {
+		}
+		if($("#fsScenicno").val() == '' || $("#fsScenicno").val() == undefined) {
 			$("#message").show();
 			$("#message").text("所属景区不能为空，请输入");
-			$('#name').focus();
+			$('#fsScenicno').focus();
 			return false;
-		} 
-		if($("#fsType").val() == '') {
+		}
+		if($("#fsType").val() == '' || $("#fsType").val() == undefined) {
 			$("#message").show();
 			$("#message").text("门票类型不能为空，请输入");
-			$('#lvl').focus();
+			$('#fsType').focus();
 			return false;
-		} 
+		}
+		if($("#fiStat").val() == '' || $("#fiStat").val() == undefined) {
+			$("#message").show();
+			$("#message").text("状态不能为空，请输入");
+			$('#fiStat').focus();
+			return false;
+		}
+		
 		$.post("/ticket/addTicket.htm",
 				$("#addform").serialize(),
 				function(data){

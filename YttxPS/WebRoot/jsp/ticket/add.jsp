@@ -71,7 +71,7 @@
 													<option value="03">小景区</option>
 												</select>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right" for="fsType">状态</label>
+											<label class="col-sm-2 control-label no-padding-right" for="fiStat">状态</label>
 											<div class="col-sm-3">
 												<select id="fiStat" name="fiStat" class="form-control">
 													<option value="1">正常</option>
