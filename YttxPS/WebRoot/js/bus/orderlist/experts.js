@@ -884,7 +884,7 @@ jQuery(function($) {
 		} else if(value == 'ct'){
 			return '菜单';
 		} else if(value == 'bg'){
-			return '宾馆';
+			return '酒店';
 		} else if(value == 'yl'){
 			return '娱乐';
 		} else if(value == 'gw'){

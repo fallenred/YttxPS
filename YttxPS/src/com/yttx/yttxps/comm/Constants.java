@@ -19,6 +19,8 @@ public class Constants {
 	public static final String CODE_MASTER_MAP = "codeMasterMap";
 
 	public static final String CODE_MASTER_JSON = "codeMasterJson";
+	
+	public static final String FILEPATHFILE = "uploadFiles/file/";		//文件上传路径
 
 	/**
 	 * 订单状态
