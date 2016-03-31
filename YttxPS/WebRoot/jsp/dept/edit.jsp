@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -35,16 +34,17 @@
 							<!-- PAGE CONTENT BEGINS -->
 
 							<!-- 模态框（新增） -->
-							<form class="form-horizontal" id="addform" >
+							<form class="form-horizontal" id="addform">
 								<div class="modal-body">
 									<!-- 图片TODO： -->
 									<div>
 										<ul class="ace-thumbnails clearfix">
 											<div style="visibility: hidden;">
-												<li><a class="cboxElement" data-rel="colorbox"
-													href="http://127.0.0.1:81/1.jpg"> <img width="0"
-														height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
-												</a></li>
+												<li>
+													<a class="cboxElement" data-rel="colorbox" href="http://127.0.0.1:81/1.jpg">
+														<img width="0" height="0" src="http://127.0.0.1:81/2.png" alt="0*0">
+													</a>
+												</li>
 											</div>
 										</ul>
 									</div>
@@ -53,17 +53,15 @@
 										<div class="form-group">
 											<label class="col-sm-1 control-label no-padding-right" for="depNo">部门编号</label>
 											<div class="col-sm-3">
-												<input type="text" id="depNo" class="form-control"
-													placeholder="部门编号" readonly="readonly" value="${depInfo.depNo}"/>
+												<input type="text" id="depNo" class="form-control" placeholder="部门编号" readonly="readonly" value="${depInfo.depNo}" />
 											</div>
-											<label class="col-sm-1 control-label no-padding-right"for="depName">部门名称</label>
+											<label class="col-sm-1 control-label no-padding-right" for="depName">部门名称</label>
 											<div class="col-sm-3">
-												<input type="text" id="depName" name="depName" class="form-control col-sm-8"
-													placeholder="部门名称"  maxlength="128" value="${depInfo.depName}"/>
+												<input type="text" id="depName" name="depName" class="form-control" placeholder="部门名称" maxlength="128" value="${depInfo.depName}" />
 											</div>
 											<label class="col-sm-1 control-label no-padding-right" for="stat">部门状态</label>
 											<div class="col-sm-3">
-												<select id="stat">
+												<select class="form-control" id="stat" disabled="disabled">
 													<option value="1" <c:if test="${depInfo.stat==1}">selected</c:if>>正常</option>
 													<option value="2" <c:if test="${depInfo.stat==2}">selected</c:if>>注销</option>
 												</select>
@@ -71,7 +69,7 @@
 										</div>
 									</div>
 									<h4>
-										部门权限
+										部门权限 
 										<small>
 											<input type="checkbox" id="add_right_all">全部权限
 										</small>
@@ -79,10 +77,9 @@
 									<div class="row">
 										<div id="edit_tree_div" class="ztree col-sm-offset-1"></div>
 									</div>
-									<div id = "message" class="alert alert-warning">
-									</div>
+									<div id="message" class="alert alert-warning"></div>
 								</div>
-									<div class="modal-footer">
+								<div class="modal-footer">
 									<button id="close" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 									<button id="submit" type="button" class="btn btn-primary">提交</button>
 								</div>
@@ -102,11 +99,11 @@
 
 	</div>
 	<!-- /.main-container -->
-	
+
 	<c:if test="${!empty succflag && succflag =='1'}">
 		<script type="text/javascript">
 	          $('.jump-step').removeClass('hide');
-	          setTimeout('window.location="/home.htm"',5000);
+	          setTimeout('window.location="/home.htm"', 5000);
 	    </script>
 	</c:if>
 	<script type="text/javascript">

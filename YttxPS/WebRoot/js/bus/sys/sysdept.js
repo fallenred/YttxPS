@@ -68,8 +68,6 @@ jQuery(function($){
 	$("#submit").on("click", function() {
 		$("#collapseOne").collapse('hide');//查询条件面板收缩
 		
-		//TODO 查询条件验证
-		
 		//封装查询条件数据
 		var postData = $("#grid-table").jqGrid("getGridParam", "postData");
 		postData["sysDep.depNo"] = $("#queryfield").find("#depno").val();//部门编号
@@ -110,7 +108,7 @@ jQuery(function($){
 		var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="cancelDep('
 				+ options.rowId
 				+ ');" data-original-title="注销该部门"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-		return detail + editBtn ;
+		return detail + editBtn + deleteBtn;
 	};
 
 	// resize to fit page size
@@ -158,7 +156,7 @@ jQuery(function($){
 				colModel : [ {
 					name : 'myac',
 					index : '',
-					width : 55,
+					width : 80,
 					fixed : true,
 					sortable : false,
 					resize : false,

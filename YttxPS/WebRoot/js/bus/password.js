@@ -7,8 +7,16 @@
 			event.preventDefault();
 			return false;
 		}
+		
 		if($('#targpwd').val() == ''){
 			$('.password-msg span').text('新密码不能为空');
+			$('#targpwd').focus();
+			event.preventDefault();
+			return false;
+		}
+		
+		if($('#origpwd').val() == $('#targpwd').val()){
+			$('.password-msg span').text('新密码不允许与原密码相同');
 			$('#targpwd').focus();
 			event.preventDefault();
 			return false;

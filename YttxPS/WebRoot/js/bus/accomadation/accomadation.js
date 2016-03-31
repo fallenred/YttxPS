@@ -315,7 +315,7 @@ jQuery(function($) {
                 datatype : "json",
                 mtype : 'POST',
                 height : 400,
-                colNames : [ '操作', '酒店代码', '所属地区编号', '等级', '酒店名称', '地址',
+                colNames : [ '操作', '酒店代码', '所属地区编号', '所属地区', '等级', '酒店名称', '地址',
                         '酒店介绍', '酒店相关设施', '状态' ],
                 colModel : [ {
                     name : 'myaction',
@@ -333,13 +333,14 @@ jQuery(function($) {
                 }, {
                     name : 'regionno',
                     index : 'regionno',
-                    /**
-                	 * modify by marongcai
-                	 * 调整了显示的宽度
-                	 * 2016-3-16
-                	 * modify by start
-                	 */
                     width : 50,
+                    editable : true,
+                    sorttype : "char",
+                    hidden : true
+                }, {
+                    name : 'regionname',
+                    index : 'regionname',
+                    width : 80,
                     editable : true,
                     sorttype : "char"
                 }, {

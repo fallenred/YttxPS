@@ -8,6 +8,7 @@
     -->
     <id column="FS_NO" property="no" jdbcType="VARCHAR" />
     <result column="FS_REGIONNO" property="regionno" jdbcType="VARCHAR" />
+    <result column="FS_REGIONNAME" property="regionname" jdbcType="VARCHAR" />
     <result column="FS_STARLVL" property="starlvl" jdbcType="VARCHAR" />
     <result column="FS_NAME" property="name" jdbcType="VARCHAR" />
     <result column="FS_ADDR" property="addr" jdbcType="VARCHAR" />
@@ -202,7 +203,8 @@
     select * from ( 
       select ROWNUM as rowno, t.*  from (
 	      select 
-	      	ta.* 
+	      	ta.*,
+	      	pkg_common.findRegionFullName(ta.FS_REGIONNO) FS_REGIONNAME
 	      from
 	      	 TACCOMADATION ta 
 	      where 1=1 

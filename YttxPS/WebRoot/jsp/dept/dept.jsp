@@ -136,18 +136,15 @@
 		</div>
 		<!-- /.main-container-inner -->
 		<!-- 模态框（新增） -->
-		<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
-			aria-labelledby="addModalLabel" aria-hidden="true">
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
 			<div class="modal-dialog" style="width: auto; height: auto">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">×</button>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title" id="addModalLabel">新增部门</h4>
 					</div>
 					<div class="modal-body">
-						<iframe id="addIframe" width="100%" height="600px" frameborder="0"
-							scrolling="yes"></iframe>
+						<iframe id="addIframe" width="100%" height="600px" frameborder="0" scrolling="yes"></iframe>
 
 					</div>
 
@@ -159,19 +156,15 @@
 		</div>
 
 		<!-- 模态框（修改） -->
-		<div class="modal fade" id="editModal" tabindex="-1" role="dialog"
-			aria-labelledby="editModalLabel" aria-hidden="true">
+		<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
 			<div class="modal-dialog" style="width: auto; height: auto">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">×</button>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title" id="editModalLabel">修改部门信息</h4>
 					</div>
 					<div class="modal-body">
-						<iframe id="editIframe" width="100%" height="600px"
-							frameborder="0" scrolling="auto"></iframe>
-
+						<iframe id="editIframe" width="100%" height="600px" frameborder="0" scrolling="auto"></iframe>
 					</div>
 
 					<!-- /.modal-content -->
@@ -182,18 +175,15 @@
 		</div>
 
 		<!-- 模态框（查询） -->
-		<div class="modal fade" id="showModal" tabindex="-1" role="dialog"
-			aria-labelledby="showModalLabel" aria-hidden="true">
+		<div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel" aria-hidden="true">
 			<div class="modal-dialog" style="width: auto; height: auto">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">×</button>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title" id="showModalLabel">部门详情</h4>
 					</div>
 					<div class="modal-body">
-						<iframe id="showIframe" width="100%" height="600px"
-							frameborder="0" scrolling="auto"></iframe>
+						<iframe id="showIframe" width="100%" height="600px" frameborder="0" scrolling="auto"></iframe>
 					</div>
 
 					<!-- /.modal-content -->
@@ -204,18 +194,15 @@
 		</div>
 
 		<!-- 模态框（删除） -->
-		<div class="modal fade" id="delModal" tabindex="-1" role="dialog"
-			aria-labelledby="delModalLabel" aria-hidden="false">
+		<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="delModalLabel" aria-hidden="false">
 			<div class="modal-dialog" style="width: 400px;">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">×</button>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title" id="delModalLabel">删除警告</h4>
 					</div>
 					<div class="modal-body">
-						<iframe id="delIframe" width="100%" height="200px" frameborder="0"
-							scrolling="no"></iframe>
+						<iframe id="delIframe" width="100%" height="200px" frameborder="0" scrolling="no"></iframe>
 					</div>
 					<!-- /.modal-content -->
 				</div>

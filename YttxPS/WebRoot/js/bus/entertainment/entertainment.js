@@ -222,7 +222,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : [ '操作', '娱乐项目代码', '景区代码', '所属景区代码', '所属地区代码', '所属地区', '娱乐项目地址', '娱乐项目名称',  '娱乐项目类型', '状态', '级别', '开放时间', '描述' ],
+				colNames : [ '操作', '娱乐项目代码', '娱乐项目名称', '景区代码', '所属景区代码', '所属地区代码', '所属地区', '娱乐项目地址', '娱乐项目类型', '状态', '级别', '开放时间', '描述' ],
 				colModel : [{
 					name : 'myac',
 					index : '',
@@ -238,6 +238,12 @@ jQuery(function($) {
 					sorttype : "int",
 					editable : true,
 					hidden : true
+				}, {
+					name : 'fsName',
+					index : 'fsName',
+					width : 50,
+					editable : true,
+					sorttype : "char"
 				}, {
 					name : 'fsScenicno',
 					index : 'fsScenicno',
@@ -268,12 +274,6 @@ jQuery(function($) {
 				}, {
 					name : 'fsAddr',
 					index : 'fsAddr',
-					width : 50,
-					editable : true,
-					sorttype : "char"
-				}, {
-					name : 'fsName',
-					index : 'fsName',
 					width : 50,
 					editable : true,
 					sorttype : "char"
