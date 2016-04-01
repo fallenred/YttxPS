@@ -319,8 +319,7 @@
 																					</select>
 																				</div>
 																				<div class="col-sm-1">
-																					<button type="button" onclick="javascript:addScenic(this);"
-																						class="btn btn-sm addScenicBtn btn-success pull-right">添加</button>
+																					<button type="button"  class="btn btn-sm addScenicBtn btn-success pull-right">添加</button>
 																				</div>
 																			</div>
 																		</div>
@@ -347,8 +346,8 @@
 																							{{#each reslist}}
       																						<tr>
          																						<td>
-																									<a style="cursor:pointer;" onclick="removeTr(this)">删除</a>
-																									<input type="hidden" name="commBody.reslist[{{@index}}].restype" value="{{restype}}" placeholder="资源类型">
+																									<a style="cursor:pointer;" class="removeTr">删除</a>
+																									<input type="hidden" id="restype" name="commBody.reslist[{{@index}}].restype" value="{{restype}}" placeholder="资源类型">
 																									<input type="hidden" name="commBody.reslist[{{@index}}].resprop" value="{{resprop}}" placeholder="资源属性">
 																									<input type="hidden" name="commBody.reslist[{{@index}}].resno" value="{{resno}}" class="{{isScenic restype}}" placeholder="资源编号">
 																									<input type="hidden" name="commBody.reslist[{{@index}}].resname" value="{{resname}}" placeholder="资源名称">
@@ -431,7 +430,7 @@
 																							{{#each reslist}}
       																						<tr>
          																						<td>
-																									<a style="cursor:pointer;" onclick="removeTr(this)">删除</a>
+																									<a style="cursor:pointer;" class="removeTr">删除</a>
 																									<input type="hidden" name="commBody.daylist[{{../dayflag}}].reslist[{{@index}}].restype" value="{{restype}}" placeholder="资源类型">
 																									<input type="hidden" name="commBody.daylist[{{../dayflag}}].reslist[{{@index}}].resprop" value="{{resprop}}" placeholder="资源属性">
 																									<input type="hidden" name="commBody.daylist[{{../dayflag}}].reslist[{{@index}}].resno" value="{{resno}}" placeholder="资源编号">
@@ -875,11 +874,6 @@
 		        }
 		    });      
 		}); 
-		//删除资源项
-		function removeTr(obj){
-			$(obj).parent().parent().remove();
-			totalAmount();
-		}
 		//删除订单备注
 		function removeRemarkTr(obj){
 			$(obj).parent().parent().remove();
@@ -978,8 +972,8 @@
 	<script id="tr-common" type="text/x-handlebars-template">
 		<tr>
 			<td>
-				<a style="cursor:pointer;" onclick="removeTr(this)">删除</a>
-				<input type="hidden" name="commBody.reslist[{{index}}].restype" value="{{restype}}" placeholder="资源类型">
+				<a style="cursor:pointer;" class="removeTr">删除</a>
+				<input type="hidden" id="restype" name="commBody.reslist[{{index}}].restype" value="{{restype}}" placeholder="资源类型">
 				<input type="hidden" name="commBody.reslist[{{index}}].resprop" value="{{resprop}}" placeholder="资源属性">
 				<input type="hidden" name="commBody.reslist[{{index}}].resno" value="{{resno}}"  class="{{isScenic restype}}" placeholder="资源编号">
 				<input type="hidden" name="commBody.reslist[{{index}}].resname" value="{{resname}}" placeholder="资源名称">
@@ -1000,7 +994,7 @@
 	<script id="tr-common1" type="text/x-handlebars-template">
 		<tr>
         	<td>
-				<a style="cursor:pointer;" onclick="removeTr(this)">删除</a>
+				<a style="cursor:pointer;" class="removeTr">删除</a>
 				<input type="hidden" name="commBody.daylist[{{dayflag}}].reslist[{{index}}].restype" value="{{restype}}" placeholder="资源类型">
 				<input type="hidden" name="commBody.daylist[{{dayflag}}].reslist[{{index}}].resprop" value="{{resprop}}" placeholder="资源属性">
 				<input type="hidden" name="commBody.daylist[{{dayflag}}].reslist[{{index}}].resno" value="{{resno}}" placeholder="资源编号">

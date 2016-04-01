@@ -1157,8 +1157,21 @@ jQuery(function($) {
 			dataType: "json",
 			success: function(data){
 				$("#transportPrice").val(data.fdPrice);
+			},
+			error: function(){
+				$("#transportPrice").val("");
 			}
 		});
+	});
+	
+	//删除资源项
+	$(document).on('click key', '.removeTr', function(obj){
+		type = $(this).parent().find("#restype").val();
+		$(this).parent().parent().remove();
+		if(type == 'jq'){
+			getTicket(null);
+		}
+		totalAmount();
 	});
 	
 	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
