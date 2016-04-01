@@ -174,7 +174,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="row">
+									<!-- <div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsSummary">路线摘要</label>
@@ -182,7 +182,7 @@
 												<textarea name="fsSummary" id="fsSummary" class="form-control" rows="3" placeholder="路线摘要"></textarea>
 											</div>
 										</div>
-									</div>
+									</div> -->
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
@@ -663,7 +663,8 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fdTotalfee">订单金额</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control" name="fdTotalfee" id="fdTotalfee">
+												<input type="text" class="form-control" id="totalfee" value="0">
+												<input type="hidden" class="form-control" name="fdTotalfee" id="fdTotalfee">
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fdPaidamt">已缴金额</label>
 											<div class="col-sm-3">
@@ -734,7 +735,7 @@
 																									<input type="hidden" name="remarks[{{@index}}].fsOrderId" value="{{fsOrderId}}" placeholder="订单编号">
 																									<input type="hidden" name="remarks[{{@index}}].fiSeq" value="{{fiSeq}}" placeholder="序号">
 																									<input type="hidden" name="remarks[{{@index}}].ftDate" value="{{ftDate}}" placeholder="备注时间">
-																									<input type="hidden" name="remarks[{{@index}}].fdAmt" value="{{fdAmt}}" placeholder="备注金额">
+																									<input type="hidden" class="remarkPrice" name="remarks[{{@index}}].fdAmt" value="{{fdAmt}}" placeholder="备注金额">
 																								</td>
          																						<td>{{ftDate}}</td>
          																						<td><input class="col-sm-12" type="text" name="remarks[{{@index}}].fsContent" value="{{fsContent}}" placeholder="备注内容"></td>
@@ -885,6 +886,7 @@
 			if (stat == '0' || stat == '1') {
 				$(obj).html('');
 				$(obj).parent().parent().find(".remark_stat ").html('<option value="2">作废</option>');
+				totalAmount();
 			}
 		}
 		
@@ -898,6 +900,7 @@
 		//合计订单金额
 		function totalAmount(){
 			var totalAmt = 0;
+			var remarkAmt = 0;
 			$(".price").each(function(){
 				var price = $(this).val();
 				var usernum = $(this).next().val();
@@ -906,8 +909,18 @@
 				}
 				totalAmt = parseFloat(totalAmt) + parseInt(usernum) * parseFloat(price);
 			});
+			$(".remarkPrice").each(function(){
+				var price = $(this).val();
+				var stat = $(this).parent().parent().find(".remark_stat").val();
+				if(isNaN(price) || isNaN(stat) || price=='' || stat=='2'){
+					return;
+				}
+				remarkAmt = parseFloat(remarkAmt) + parseFloat(price);
+			});
 			totalAmt = parseFloat(totalAmt) + parseFloat($("#fdInsuerprice").val());
+			remarkAmt = parseFloat(remarkAmt) + parseFloat(totalAmt);
 			$("#fdTotalfee").val(totalAmt.toFixed(2));
+			$("#totalfee").val(remarkAmt.toFixed(2));
 		}
 		
 		//合计订单批次金额
@@ -1042,7 +1055,7 @@
 				<input type="hidden" name="remarks[{{index}}].fsOrderId" value="{{fsOrderId}}" placeholder="订单编号">
 				<input type="hidden" name="remarks[{{index}}].fiSeq" value="{{fiSeq}}" placeholder="序号">
 				<input type="hidden" name="remarks[{{index}}].ftDate" value="{{ftDate}}" placeholder="备注时间">
-				<input type="hidden" name="remarks[{{index}}].fdAmt" value="{{fdAmt}}" placeholder="备注金额">
+				<input type="hidden" class="remarkPrice" name="remarks[{{index}}].fdAmt" value="{{fdAmt}}" placeholder="备注金额">
 			</td>
          	<td>{{ftDate}}</td>
          	<td><input class="col-sm-12" type="text" name="remarks[{{index}}].fsContent" value="{{fsContent}}" placeholder="备注内容"></td>

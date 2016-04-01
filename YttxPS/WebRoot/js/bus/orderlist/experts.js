@@ -119,7 +119,7 @@ jQuery(function($) {
 				getDictLvl(null, 'bg');
 				//资源快照
 				setTimeout(setSchedule, 1000);
-				
+				totalAmount();
 			}
 		});
 	});
@@ -129,34 +129,6 @@ jQuery(function($) {
 		CKEDITOR.instances["fcSchedule"].setData(str);   //日程快照
 		//$("#fcSchedule").val(str);
 	}
-	
-	//车型变更
-	/*$(document).on('change key', '#transport', function(event){
-		var resno = $(this).val();
-		var restype = "cx";
-		$.ajax({
-			type: "GET",
-			url: "/tccPrice/findTccPrice.htm",
-			data: {
-				"ftStartdate" : startdate,
-				"ftEnddate" : startdate,
-				"restype" : restype,
-				"resno" : resno
-			},
-			dataType: "json",
-			success: function(data){
-				if (data == null || data == '') {
-					//alert("未配置资源价格！");
-					$(obj).parent().find("#transportPrice").html('');
-					return;
-				}
-				html = '';
-				$.each(data, function(commentIndex, comment){
-					
-				});
-			}
-		});
-	});*/
 	
 	//查询线路景区
 	function getSceniceGen(){
@@ -288,14 +260,6 @@ jQuery(function($) {
 	$(document).on('change key', '#guideLvl', function(event){
 		getGuide();
 	});
-/*	//导游变更后修改价格
-	$(document).on('change key', '#guide', function(event){
-		guideMap.each(function(key,value,index){
-			if (key == $("#guide").val())
-				$("#guidePrice").val(value);
-		});
-		$("#guideName").attr("value", $("#guide").find("option:selected").text());
-	});*/
 	//资源类型变更
 	$(document).on('change key', '#restype', function(event){
 		var restype = $(this).val();
@@ -343,14 +307,6 @@ jQuery(function($) {
 	});
 	//获取字典标准
 	function getDictLvl(obj, type){
-		/*var flag = false;
-		resMap.each(function(key,value,index){
-			if (key == type){
-				$(obj).parent().parent().find(".batch_Lvl").html(value);
-				flag = true;
-			}
-		});
-		if(flag) return;*/
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -508,18 +464,6 @@ jQuery(function($) {
 	});
 	
 	function getTccprice(params, resno, date, obj){
-		/*var flag = false;
-		resMap.each(function(key,value,index){
-			if (key == resno+date){
-				html = '';
-				$.each(value, function(commentIndex, comment){
-					html += '<option value=' + comment['fsCcno'] + '>' + comment['fsCcname'] + '(' + comment['fdPrice'] + '￥)</option>';
-				});
-				$(".select_ccno").html(html);
-				flag = true;
-			}
-		});
-		if (flag) return;*/
 		$.ajax({
 			type: "GET",
 			url: "/tccPrice/findTccPrice.htm",
@@ -597,11 +541,6 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		/*if(dataArr.length == 0){
-			alert("请先添加景区资源！");
-			$(obj).parent().parent().find(".select_resno").html('');
-			return;
-		}*/
 		$.ajax({
 			type: "POST",
 			url: "/restaurant/selectRestaurant.htm",
@@ -860,18 +799,6 @@ jQuery(function($) {
 		}
 	});
 	
-/*	function getBatchFuzz(){
-		$.ajax({
-			type: "POST",
-			url: "/orderCustom/selectOrderCustom.htm",
-			data: 'fsOrderId='+fsNo,
-			dataType: "json",
-			success: function(data){
-			}
-		});
-		//alert($('#table_243_0').html());
-	}*/
-
 	//返回资源类型
 	Handlebars.registerHelper("getType",function(value){
 		if(value == 'cx'){
@@ -935,6 +862,7 @@ jQuery(function($) {
 	//合计订单金额
 	function totalAmount(){
 		var totalAmt = 0;
+		var remarkAmt = 0;
 		$(".price").each(function(){
 			var price = $(this).val();
 			var usernum = $(this).next().val();
@@ -943,8 +871,18 @@ jQuery(function($) {
 			}
 			totalAmt = parseFloat(totalAmt) + parseInt(usernum) * parseFloat(price);
 		});
+		$(".remarkPrice").each(function(){
+			var price = $(this).val();
+			var stat = $(this).parent().parent().find(".remark_stat").val();
+			if(isNaN(price) || isNaN(stat) || price=='' || stat=='2'){
+				return;
+			}
+			remarkAmt = parseFloat(remarkAmt) + parseFloat(price);
+		});
 		totalAmt = parseFloat(totalAmt) + parseFloat($("#fdInsuerprice").val());
+		remarkAmt = parseFloat(remarkAmt) + parseFloat(totalAmt);
 		$("#fdTotalfee").val(totalAmt.toFixed(2));
+		$("#totalfee").val(remarkAmt.toFixed(2));
 	}
 	
 	//合计订单批次金额
@@ -1007,6 +945,9 @@ jQuery(function($) {
 		$('#table_remarks tbody').html($('#table_remarks tbody').html() + remarksTemplate(data));
 		$("#fsContent").val('');
 		$("#remarksAmt").val('');
+		
+		totalAmt = parseFloat($("#totalfee").val()) + parseFloat(fdAmt);
+		$("#totalfee").val(totalAmt.toFixed(2));
 	});
 	//	提交
 	$("#submit").on("click", function () {

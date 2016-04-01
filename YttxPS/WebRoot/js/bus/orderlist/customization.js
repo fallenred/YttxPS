@@ -137,6 +137,7 @@ jQuery(function($) {
 				getTicket(null);
 				//获取酒店级别列表
 				getDictLvl(null, 'bg');
+				totalAmount();
 			}
 		});
 	}); 
@@ -245,14 +246,6 @@ jQuery(function($) {
 	$(document).on('change key', '#guideLvl', function(event){
 		getGuide();
 	});
-/*	//导游变更后修改价格
-	$(document).on('change key', '#guide', function(event){
-		guideMap.each(function(key,value,index){
-			if (key == $("#guide").val())
-				$("#guidePrice").val(value);
-		});
-		$("#guideName").attr("value", $("#guide").find("option:selected").text());
-	});*/
 	//资源类型变更
 	$(document).on('change key', '#restype', function(event){
 		var restype = $(this).val();
@@ -469,19 +462,6 @@ jQuery(function($) {
 	});
 	
 	function getTccprice(params, resno, date, obj){
-		/*var flag = false;
-		resMap.each(function(key,value,index){
-			if (key == resno+date){
-				html = '';
-				$.each(value, function(commentIndex, comment){
-					html += '<option value=' + comment['fsCcno'] + '>' + comment['fsCcname'] + '(' + comment['fdPrice'] + '￥)</option>';
-				});
-				$(".select_ccno").html(html);
-				flag = true;
-			}
-		});
-		if (flag) return;
-		*/
 		
 		$.ajax({
 			type: "GET",
@@ -518,10 +498,6 @@ jQuery(function($) {
 		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
 		});
-		/*if(scenic == ''){
-			alert("请先添加景区资源！");
-			return;
-		}*/
 		var resno = '';
 		$.ajax({
 			type: "GET",
@@ -564,10 +540,6 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		/*if(dataArr.length == 0){
-			alert("请先添加景区资源！");
-			return;
-		}*/
 		$.ajax({
 			type: "POST",
 			url: "/restaurant/selectRestaurant.htm",
@@ -602,10 +574,6 @@ jQuery(function($) {
 		$(".scenic").each(function(){
 			scenic += $(this).val() + ",";
 		});
-		/*if(scenic == ''){
-			alert("请先添加景区资源！");
-			return;
-		}*/
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -631,10 +599,6 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		/*if(dataArr.length == 0){
-			alert("请先添加景区资源！");
-			return;
-		}*/
 		$.ajax({
 			type: "POST",
 			url: "/entertainment/selectEntertainment.htm",
@@ -862,6 +826,7 @@ jQuery(function($) {
 	//合计订单金额
 	function totalAmount(){
 		var totalAmt = 0;
+		var remarkAmt = 0;
 		$(".price").each(function(){
 			var price = $(this).val();
 			var usernum = $(this).next().val();
@@ -870,8 +835,18 @@ jQuery(function($) {
 			}
 			totalAmt = parseFloat(totalAmt) + parseInt(usernum) * parseFloat(price);
 		});
+		$(".remarkPrice").each(function(){
+			var price = $(this).val();
+			var stat = $(this).parent().parent().find(".remark_stat").val();
+			if(isNaN(price) || isNaN(stat) || price=='' || stat=='2'){
+				return;
+			}
+			remarkAmt = parseFloat(remarkAmt) + parseFloat(price);
+		});
 		totalAmt = parseFloat(totalAmt) + parseFloat($("#fdInsuerprice").val());
+		remarkAmt = parseFloat(remarkAmt) + parseFloat(totalAmt);
 		$("#fdTotalfee").val(totalAmt.toFixed(2));
+		$("#totalfee").val(remarkAmt.toFixed(2));
 	}
 	
 	//合计订单批次金额
@@ -934,6 +909,9 @@ jQuery(function($) {
 		$('#table_remarks tbody').html($('#table_remarks tbody').html() + remarksTemplate(data));
 		$("#fsContent").val('');
 		$("#remarksAmt").val('');
+		
+		totalAmt = parseFloat($("#totalfee").val()) + parseFloat(fdAmt);
+		$("#totalfee").val(totalAmt.toFixed(2));
 	});
 	
 	//	提交
@@ -1037,6 +1015,16 @@ jQuery(function($) {
 	          }
 	     });
 	}
+	
+	//删除资源项
+	$(document).on('click key', '.removeTr', function(obj){
+		type = $(this).parent().find("#restype").val();
+		$(this).parent().parent().remove();
+		if(type == 'jq'){
+			getTicket(null);
+		}
+		totalAmount();
+	});
 	
 	//	colorbox
 	var $overflow = '';
