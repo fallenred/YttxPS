@@ -674,7 +674,7 @@
 									</div>
 									<div hidden="hidden" class="row div_custList">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fiStat">游客名单</label>
+											<label class="col-sm-2 control-label no-padding-right">游客名单</label>
 											<div class="col-sm-1">
 												<button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-success pull-right">上传名单</button>
 											</div>

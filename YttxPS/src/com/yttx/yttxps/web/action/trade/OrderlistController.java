@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yttx.comm.DateUtil;
 import com.yttx.comm.FileUpload;
 import com.yttx.comm.ObjectExcelView;
 import com.yttx.comm.PathUtil;
@@ -326,7 +325,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@RequestMapping(value="/importExcel.htm")
 	public void importExcel(HttpServletResponse response, @RequestParam(value="excel",required=false) MultipartFile file, String orderId) throws Exception{
 		if (null != file && !file.isEmpty()) {
-			String filePath = PathUtil.getClasspath();
+			String filePath = PathUtil.getClasspath() + Constants.FILEPATHFILE;
 			
 			String fileName =  FileUpload.fileUp(file, filePath, new Date().getTime()+"custExcel");							//执行上传
 			List<Map<String, String>> list = (List)RoadExcelRead.readExcel(filePath, fileName, 1, 0, 0);	
