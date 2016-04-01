@@ -63,6 +63,10 @@ function picCustom(id) {
 function roomConfigCustom(id) {
     var raw = jQuery("#grid-table").jqGrid('getRowData', id);
     var page = "/jsp/room/room.jsp?no=" + raw.no+"&name=" + escape(raw.name);
+    if(raw.stat == 2){
+    	bootbox.alert(raw.name + "已经失效，不允许配置房型", null);
+    	return false;
+    }
     window.open(page);
 };
 

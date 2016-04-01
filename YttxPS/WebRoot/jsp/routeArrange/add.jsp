@@ -127,9 +127,9 @@
 											<label class="col-sm-2 control-label no-padding-right" for="fsRegions">导游星级</label>
 											<div class="col-sm-3">
 												<select id="guideLvl" name="guideLvl" class="form-control">
-													<option value="01">金牌</option>
-													<option value="02">银牌</option>
-													<option value="03">铜牌</option>
+													<c:forEach items="${codeMasterList['dy']}" var="item" varStatus="status">
+														<option value="${item.fsDictno}">${item.fsDictname}</option>
+													</c:forEach>
 												</select>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiDays">导游选择</label>

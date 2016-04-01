@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.guide;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ import com.yttx.comm.DateEditor;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Tguide;
 import com.yttx.yttxps.model.TguideExample;
+import com.yttx.yttxps.model.TguideExample.Criteria;
 import com.yttx.yttxps.model.vo.GuideRequest;
 import com.yttx.yttxps.service.IGuideService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -78,7 +80,8 @@ public class GuideController extends BaseController {
 	public Object ajaxSelectGuide(GuideRequest req)
     {  
 		TguideExample example = new TguideExample();
-		req.copyTguide(example);
+		Criteria criteria = req.copyTguide(example);
+		criteria.andFiStatEqualTo(BigDecimal.ONE);
 		List<Tguide> list = guideService.selectTguide(example);
 		return list;
     }
@@ -114,7 +117,7 @@ public class GuideController extends BaseController {
 	{  
 		logger.debug("当前更新对象 {}", guide);
 		try{
-			int ret = guideService.update(guide);
+			guideService.update(guide);
 		}catch(Exception e){
 			logger.error(e.getMessage());
 			return (Map<String, Object>) JsonResult.jsonError("更新失败");
@@ -133,7 +136,7 @@ public class GuideController extends BaseController {
 	{  
 		logger.debug("当前删除key {}", no);
 		try{
-			int ret = guideService.delete(no);
+			guideService.delete(no);
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("删除失败");

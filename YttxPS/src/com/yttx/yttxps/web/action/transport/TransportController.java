@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Ttransport;
 import com.yttx.yttxps.model.TtransportExample;
-import com.yttx.yttxps.model.vo.GenRequest;
 import com.yttx.yttxps.model.vo.TransportRequest;
 import com.yttx.yttxps.service.ITransportService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -62,11 +61,12 @@ static Logger logger = LoggerFactory.getLogger(TransportController.class);
 	 */
 	@RequestMapping(value="selectTransport.htm", method = RequestMethod.GET)
 	@ResponseBody
-	public Object ajaxSelectTransport(GenRequest req)
+	public Object ajaxSelectTransport(TransportRequest req)
     {  
-		logger.debug("当前查询条件 {}", req.getGen());
+		logger.debug("当前查询条件 {}", req.getTransport());
 		TtransportExample example = new TtransportExample();
-		example.createCriteria().andFiStatEqualTo(new BigDecimal(1));
+		com.yttx.yttxps.model.TtransportExample.Criteria transportCriteria = req.copyTransport(example);
+		transportCriteria.andFiStatEqualTo(new BigDecimal(1));
 		List<Ttransport> list = transportService.selectTtransport(example);
 		return list;
     }
@@ -83,7 +83,7 @@ static Logger logger = LoggerFactory.getLogger(TransportController.class);
 		logger.debug("当前新增对象 {}", transport);
 		try{
 			transport.setFsNo(String.format("%010d", transportService.selectFsNo()));
-			int ret = transportService.insert(transport);
+			transportService.insert(transport);
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -103,7 +103,7 @@ static Logger logger = LoggerFactory.getLogger(TransportController.class);
     {  
 		logger.debug("当前更新对象 {}", transport);
 		try{
-			int ret = transportService.update(transport);
+			transportService.update(transport);
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("更新失败");
@@ -122,7 +122,7 @@ static Logger logger = LoggerFactory.getLogger(TransportController.class);
     {  
 		logger.debug("当前删除key {}", no);
 		try{
-			int ret = transportService.delete(no);
+			transportService.delete(no);
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("删除失败");

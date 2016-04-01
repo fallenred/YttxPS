@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.accomadation;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -87,6 +88,7 @@ static Logger logger = LoggerFactory.getLogger(AccomadationController.class);
 		logger.debug("当前查询条件 {}", req.getAccomadation());
 		Map<String, Object> map = new HashMap<String, Object>();
 		req.copyAccomadation(map);
+		map.put("stat", BigDecimal.ONE);
 		List<Accomadation> list = accomadationService.selectSelective(map);
 		return list;
     }

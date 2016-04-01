@@ -6,5 +6,9 @@ SELECT t.fi_index ,
        g.fi_days 
   FROM tscenicgen t, tscenic s, tgen g  
  WHERE t.fs_scenicno = s.fs_no 
-   AND t.fi_genindex = g.fi_index;
+   AND t.fi_genindex = g.fi_index
+   AND s.fi_stat = 1
+   AND g.fi_stat = 1;
+
+EXIT;
  

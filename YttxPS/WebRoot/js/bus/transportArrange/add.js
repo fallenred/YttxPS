@@ -13,7 +13,7 @@ jQuery(function($) {
 	$.ajax({
         type: "GET",
         url: "/gen/selectGen.htm",
-        data: '',
+        data: null,
         dataType: "json",
         success: function(data){
         		var html = ''; 
@@ -27,7 +27,7 @@ jQuery(function($) {
 	$.ajax({
         type: "GET",
         url: "/transport/selectTransport.htm",
-        data: '',
+        data: null,
         dataType: "json",
         success: function(data){
         		var html = ''; 

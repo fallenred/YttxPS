@@ -32,9 +32,9 @@ public class GenRequest extends JqGridRequest implements
 		}
 	}
 	
-	public void copyGen(TgenExample example) {
+	public Criteria copyGen(TgenExample example) {
+		Criteria criteria = example.createCriteria();
 		if (gen != null) {
-			Criteria criteria = example.createCriteria();
 			if (gen.getFsName() != null) 
 				criteria.andFsNameLike(gen.getFsName());
 			if (gen.getFiDays() != null)
@@ -42,5 +42,6 @@ public class GenRequest extends JqGridRequest implements
 			if (gen.getFiStat() != null)
 				criteria.andFiStatEqualTo(gen.getFiStat());
 		}
+		return criteria;
 	}
 }

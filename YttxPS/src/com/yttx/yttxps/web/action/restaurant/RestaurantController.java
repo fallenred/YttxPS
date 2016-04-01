@@ -113,7 +113,7 @@ public class RestaurantController extends BaseController {
 		}
 		if (StringUtils.isNotBlank(lvl)) map.put("lvl", lvl);
 		if (StringUtils.isNotBlank(special)) map.put("special", special);
-		if (StringUtils.isNotBlank(stat)) map.put("stat", stat);
+		if (StringUtils.isNotBlank(stat)) map.put("stat", stat); else map.put("stat", "1");
 		return restaurantService.selectRestaurant(map);
     }
 	

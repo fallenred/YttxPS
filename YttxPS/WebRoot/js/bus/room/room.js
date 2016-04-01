@@ -37,6 +37,13 @@ $("#showRoomModal").on("hidden.bs.modal", function() {
 function roomPriceCustom(id) {
     var raw = jQuery("#grid-table").jqGrid('getRowData', id);
     var page = "/jsp/roomPrice/roomPrice.jsp?no=" + raw.fsRoomno + "&name=" + escape(raw.fsName);
+    
+    //房型作废后不允许添加价格
+    if(raw.fiStat == 2){
+    	bootbox.alert(raw.fsName + "已经失效，不允许配置房型价格", null);
+    	return false;
+    }
+    
     window.open(page);
 };
 
@@ -428,8 +435,6 @@ function editCustom(id) {
 
 function showCustom(id) {
     var raw = jQuery("#grid-table").jqGrid('getRowData', id);
-    //loadFormData(raw, $("#showForm"));
-    
     $("#showForm").find("input[name='fsRoomno']").val(raw.fsRoomno);   //房型唯一编号
     $("#showForm").find("input[name='fsAccomno']").val(raw.fsAccomno);   //酒店代码
     $("#showForm").find("select[name='fsType']").val(raw.fsType);   //忽略房型类型

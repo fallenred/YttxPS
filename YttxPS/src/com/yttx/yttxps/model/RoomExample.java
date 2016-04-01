@@ -186,12 +186,12 @@ public class RoomExample {
         }
 
         public Criteria andFsAccomnoEqualTo(String value) {
-            addCriterion("FS_ACCOMNO =", value, "fsAccomno");
+            addCriterion("TRIM(FS_ACCOMNO) =", value, "fsAccomno");
             return (Criteria) this;
         }
 
         public Criteria andFsAccomnoNotEqualTo(String value) {
-            addCriterion("FS_ACCOMNO <>", value, "fsAccomno");
+            addCriterion("TRIM(FS_ACCOMNO) <>", value, "fsAccomno");
             return (Criteria) this;
         }
 
@@ -226,12 +226,12 @@ public class RoomExample {
         }
 
         public Criteria andFsAccomnoIn(List<String> values) {
-            addCriterion("FS_ACCOMNO in", values, "fsAccomno");
+            addCriterion("TRIM(FS_ACCOMNO) in", values, "fsAccomno");
             return (Criteria) this;
         }
 
         public Criteria andFsAccomnoNotIn(List<String> values) {
-            addCriterion("FS_ACCOMNO not in", values, "fsAccomno");
+            addCriterion("TRIM(FS_ACCOMNO) not in", values, "fsAccomno");
             return (Criteria) this;
         }
 

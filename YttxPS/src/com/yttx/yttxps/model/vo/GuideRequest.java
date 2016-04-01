@@ -44,13 +44,14 @@ public class GuideRequest extends JqGridRequest implements
 		}
 	}
 	
-	public void copyTguide(TguideExample example) {
+	public Criteria copyTguide(TguideExample example) {
+		Criteria criteria = example.createCriteria();
 		if (guide != null) {
-			Criteria criteria = example.createCriteria();
 			if (guide.getLvl() != null)
 				criteria.andFsLvlEqualTo(guide.getLvl());
 			if (guide.getStat() != null)
 				criteria.andFiStatEqualTo(guide.getStat());
 		}
+		return criteria;
 	}
 }

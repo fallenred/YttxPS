@@ -22,7 +22,7 @@ SELECT a.fs_routeno,
        c.fs_dictname AS resname
   FROM troutecc a,tentertainment b,tdict c,TResTypeDirc d
  WHERE a.fs_resno = b.fs_no
-   AND b.fs_type = c.fs_dictno
+   AND b.fs_lvl = c.fs_dictno
    AND a.fs_restype = d.fs_restype
    AND a.fs_restype = 'yl'
    AND c.fs_parentno = 'yl'

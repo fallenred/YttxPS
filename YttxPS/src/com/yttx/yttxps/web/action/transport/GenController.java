@@ -65,8 +65,8 @@ static Logger logger = LoggerFactory.getLogger(GenController.class);
     {  
 		logger.debug("当前查询条件 {}", req.getGen());
 		TgenExample example = new TgenExample();
-		req.copyGen(example);
-		example.createCriteria().andFiStatEqualTo(new BigDecimal(1));
+		com.yttx.yttxps.model.TgenExample.Criteria genCriteria = req.copyGen(example);
+		genCriteria.andFiStatEqualTo(new BigDecimal(1));
 		List<Tgen> list = genService.selectTgen(example);
 		return list;
     }

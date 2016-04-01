@@ -3,6 +3,13 @@
  */
 function showRestaurantCost(id){
 	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
+	
+	//菜单为作废状态时，不允许添加价格
+	if(raw.stat == 2){
+		bootbox.alert(raw.name + "已经失效，不允许配置价格", null);
+		return false;
+	}
+	
 	window.open("/restaurant/costPage.htm?no=" + raw.no);  
 };
 

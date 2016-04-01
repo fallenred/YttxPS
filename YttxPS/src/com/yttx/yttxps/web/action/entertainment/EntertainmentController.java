@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.entertainment;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -186,6 +187,7 @@ public class EntertainmentController extends BaseController {
 		logger.debug("当前查询条件 {}", scenicNo.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("scenicNo", Arrays.asList(scenicNo));
+		map.put("fiStat", BigDecimal.ONE);
 		List<TEntertainment> list = entertainmentService.selectEntertainmentDynamic(map);
 		return list;
     }

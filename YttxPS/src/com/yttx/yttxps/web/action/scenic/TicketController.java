@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.scenic;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -101,6 +102,7 @@ static Logger logger = LoggerFactory.getLogger(TicketController.class);
     {  
 		TticketExample example = new TticketExample();
 		Criteria criteria = example.createCriteria();
+		criteria.andFiStatEqualTo(BigDecimal.ONE);
 		req.copyTicket(criteria);
 		if (StringUtils.isNotEmpty(scenicno)) {
 			List<String> li = new ArrayList<String>();

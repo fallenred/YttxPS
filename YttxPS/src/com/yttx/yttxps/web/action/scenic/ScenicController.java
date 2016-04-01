@@ -95,7 +95,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
     {  
 		logger.debug("当前新增对象 {}", scenic);
 		try{
-		int ret = scenicService.insert(scenic);
+			scenicService.insert(scenic);
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("新增失败");
@@ -114,7 +114,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
     {  
 		logger.debug("当前更新对象 {}", scenic);
 		try{
-			int ret = scenicService.update(scenic);
+			scenicService.update(scenic);
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("更新失败");
@@ -133,7 +133,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
     {  
 		logger.debug("当前删除key {}", no);
 		try{
-			int ret = scenicService.delete(no);
+			scenicService.delete(no);
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("删除失败");

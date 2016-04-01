@@ -58,6 +58,7 @@ public class SysMenuListener  extends ContextLoaderListener{
 			DictExample example = new DictExample();
 			Criteria criteria = example.createCriteria();
 			criteria.andFsParentnoIsNotNull();
+			example.setOrderByClause("fs_parentno,fs_dictno");
 			List<Dict> dicts = dictMapper.selectByExample(example);//加载所有parantNo不为空的字典数据
 			Map<String,List<Dict>> codeMasterList = new HashMap<String,List<Dict>>();//存放：String --List
 			Map<String,Map<String,String>> codeMasterMap = new HashMap<String,Map<String,String>>();//存放：String --List

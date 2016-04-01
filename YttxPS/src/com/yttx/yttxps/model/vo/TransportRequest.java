@@ -3,6 +3,8 @@ package com.yttx.yttxps.model.vo;
 import java.util.Map;
 
 import com.yttx.yttxps.model.Ttransport;
+import com.yttx.yttxps.model.TtransportExample;
+import com.yttx.yttxps.model.TtransportExample.Criteria;
 
 public class TransportRequest extends JqGridRequest implements
 		java.io.Serializable {
@@ -29,5 +31,10 @@ public class TransportRequest extends JqGridRequest implements
 			map.put("fiLoadMax", transport.getFiLoadMax() == null ? "" : transport.getFiLoadMax());
 			map.put("fiStat", transport.getFiStat() == null ? "" : transport.getFiStat());
 		}
+	}
+	
+	public Criteria copyTransport(TtransportExample example) {
+		Criteria criteria = example.createCriteria();
+		return criteria;
 	}
 }

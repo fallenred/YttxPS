@@ -7,6 +7,13 @@ var raw = {};
 function showTicketPrice(id){
 	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	var page = "/jsp/ticketPrice/ticketPrice.jsp?fsNo=" + raw.fsNo+"&fsName="+escape(raw.fsName);
+	
+	//门票为作废状态时，不允许添加价格
+	if(raw.fiStat == 2){
+		bootbox.alert(raw.fsName + "已经失效，不允许配置价格", null);
+		return false;
+	}
+	
 	window.open(page);
 };
 

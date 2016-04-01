@@ -318,12 +318,12 @@ public class TticketExample {
 		}
 
 		public Criteria andFsScenicnoEqualTo(String value) {
-			addCriterion("FS_SCENICNO =", value, "fsScenicno");
+			addCriterion("TRIM(FS_SCENICNO) =", value, "fsScenicno");
 			return (Criteria) this;
 		}
 
 		public Criteria andFsScenicnoNotEqualTo(String value) {
-			addCriterion("FS_SCENICNO <>", value, "fsScenicno");
+			addCriterion("TRIM(FS_SCENICNO) <>", value, "fsScenicno");
 			return (Criteria) this;
 		}
 

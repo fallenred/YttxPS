@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.room;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -99,6 +100,7 @@ public class RoomController extends BaseController {
 		logger.debug("当前查询条件 {}", req.getRoom());
 		Map<String, Object> map = new HashMap<String, Object>();
 		req.copyRoom(map);
+		map.put("fiStat", BigDecimal.ONE);
 		List<Room> list = rootService.selectSelective(map);
 		return list;
 	}

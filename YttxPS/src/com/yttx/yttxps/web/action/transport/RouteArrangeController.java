@@ -25,9 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.comm.DateEditor;
 import com.yttx.yttxps.comm.JsonResult;
-import com.yttx.yttxps.model.ResoucePrice;
 import com.yttx.yttxps.model.RouteCCType;
-import com.yttx.yttxps.model.TRestaurant;
 import com.yttx.yttxps.model.TRouteArrange;
 import com.yttx.yttxps.model.TRouteArrangeExample;
 import com.yttx.yttxps.model.TRouteArrangeWithBLOBs;
@@ -129,7 +127,8 @@ static Logger logger = LoggerFactory.getLogger(RouteArrangeController.class);
     {  
 		logger.debug("当前查询条件 {}", req.getArrange());
 		TRouteArrangeExample example = new TRouteArrangeExample();
-		req.copyTRouteArrange(example);
+		com.yttx.yttxps.model.TRouteArrangeExample.Criteria routeArrangeCriteria = req.copyTRouteArrange(example);
+		routeArrangeCriteria.andFiStatEqualTo(BigDecimal.ONE);
 		List<TRouteArrange> list = routeArrangeService.selectTRouteArrange(example);
 		return list;
     }

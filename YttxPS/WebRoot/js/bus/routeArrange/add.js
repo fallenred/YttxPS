@@ -9,6 +9,8 @@ jQuery(function($) {
 		callback : localcallback
 	});
 	
+	getGuide({"lvl": $("#guideLvl").val()});
+	
 	//城市选择器
 	function localcallback(index, key, value, fullkey, fullname) {
 		$("#fsStartplaceName", "#addform").val(fullname);

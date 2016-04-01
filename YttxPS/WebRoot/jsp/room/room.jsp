@@ -32,13 +32,13 @@
 										<div class="form-group">
 											<label class="col-sm-1 control-label no-padding-right">房型类型</label>
 											<div class="col-sm-2">
-												<select id="fsType" name="fsType">
+												<select id="fsType" class="form-control" name="fsType">
 													<option value="">&nbsp;&nbsp;忽略房型类型&nbsp;&nbsp;</option>
 												</select>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="stat">状态</label>
 											<div class="col-sm-2">
-												<select id="fiStat" name="fiStat">
+												<select id="fiStat" class="form-control" name="fiStat">
 													<option value="">&nbsp;&nbsp;忽略状态&nbsp;&nbsp;</option>
 													<option value="1">正常</option>
 													<option value="2">失效</option>
@@ -130,7 +130,7 @@
 								<div class="form-group">
 									<label class="col-xs-2 col-sm-2 control-label no-padding-right" for="stat">状态</label>
 									<div class="col-xs-4 col-sm-4">
-										<select name="fiStat">
+										<select class="form-control" name="fiStat">
 											<option value="">&nbsp;&nbsp;请选择状态&nbsp;&nbsp;</option>
 											<option value="1">&nbsp;&nbsp;正常&nbsp;&nbsp;</option>
 											<option value="2">&nbsp;&nbsp;失效&nbsp;&nbsp;</option>
@@ -211,7 +211,7 @@
 								<div class="form-group">
 									<label class="col-xs-2 col-sm-2 control-label no-padding-right" for="stat">状态</label>
 									<div class="col-xs-4 col-sm-4">
-										<select name="fiStat">
+										<select class="form-control" name="fiStat">
 											<option value="">&nbsp;&nbsp;请选择状态&nbsp;&nbsp;</option>
 											<option value="1">&nbsp;&nbsp;正常&nbsp;&nbsp;</option>
 											<option value="2">&nbsp;&nbsp;失效&nbsp;&nbsp;</option>
@@ -291,7 +291,7 @@
 								<div class="form-group">
 									<label class="col-xs-2 col-sm-2 control-label no-padding-right" for="stat">状态</label>
 									<div class="col-xs-4 col-sm-4">
-										<select name="fiStat" disabled="disabled">
+										<select name="fiStat" class="form-control" disabled="disabled">
 											<option value="">&nbsp;&nbsp;请选择状态&nbsp;&nbsp;</option>
 											<option value="1">&nbsp;&nbsp;正常&nbsp;&nbsp;</option>
 											<option value="2">&nbsp;&nbsp;失效&nbsp;&nbsp;</option>

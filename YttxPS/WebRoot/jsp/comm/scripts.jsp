@@ -56,6 +56,9 @@
 
 <script src="/js/typeahead-bs2.min.js"></script>
 
+<!-- bootbox -->
+<script src="/js/bootbox.min.js"></script>
+
 <script src="/js/bus/localcity.js"></script>
 <script src="/js/bus/pub.js"></script>
 <script src="/js/bus/pub.js"></script>

@@ -201,8 +201,8 @@
 							<div class="row">
 								<div class="form-group">
 									<label class="col-xs-2 col-sm-2 control-label no-padding-right" for="stat">状态</label>
-									<div class="col-xs-4 col-sm-4">
-										<select name="stat">
+									<div class="col-sm-3">
+										<select class="form-control" name="stat">
 											<option value="">&nbsp;&nbsp;请选择状态&nbsp;&nbsp;</option>
 											<option value="1">&nbsp;&nbsp;正常&nbsp;&nbsp;</option>
 											<option value="2">&nbsp;&nbsp;失效&nbsp;&nbsp;</option>
@@ -297,8 +297,8 @@
 							<div class="row">
 								<div class="form-group">
 									<label class="col-xs-2 col-sm-2 control-label no-padding-right" for="stat">状态</label>
-									<div class="col-xs-4 col-sm-4">
-										<select name="stat">
+									<div class="col-sm-3">
+										<select class="form-control" name="stat">
 											<option value="">&nbsp;&nbsp;请选择状态&nbsp;&nbsp;</option>
 											<option value="1">&nbsp;&nbsp;正常&nbsp;&nbsp;</option>
 											<option value="2">&nbsp;&nbsp;失效&nbsp;&nbsp;</option>
@@ -312,7 +312,6 @@
 						</div>
 						<div class="modal-footer">
 							<button id="close" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-							<!-- <button id="reset" type="reset" class="btn">重置</button> -->
 							<button id="edit_submit" type="button" class="btn btn-primary">提交</button>
 						</div>
 					</form>
@@ -413,8 +412,8 @@
 							<div class="row">
 								<div class="form-group">
 									<label class="col-xs-2 col-sm-2 control-label no-padding-right" for="stat">状态</label>
-									<div class="col-xs-4 col-sm-4">
-										<select name="stat" disabled="disabled">
+									<div class="col-sm-3">
+										<select name="stat" class="form-control" disabled="disabled">
 											<option value="">&nbsp;&nbsp;请选择状态&nbsp;&nbsp;</option>
 											<option value="1">&nbsp;&nbsp;正常&nbsp;&nbsp;</option>
 											<option value="2">&nbsp;&nbsp;失效&nbsp;&nbsp;</option>

@@ -10,6 +10,13 @@ function showEntertainment(id) {
 function costEntertainment(id) {
 	var raw = jQuery("#grid-table").jqGrid('getRowData', id);
 	var page = "/jsp/entertainmentPrice/entertainmentPrice.jsp?fsNo=" + raw.fsNo + "&fsName=" + escape(raw.fsName);
+	
+	//娱乐项目为作废状态时，不允许添加价格
+	if(raw.fiStat == 2){
+		bootbox.alert(raw.fsName + "已经失效，不允许配置价格", null);
+		return false;
+	}
+	
 	window.open(page);
 }
 

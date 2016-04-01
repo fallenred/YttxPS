@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.shop;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -68,6 +69,7 @@ public class ShopController extends BaseController {
 			map.put("scenicNo", li);
 		}
 		req.copyShop(map);
+		map.put("stat", BigDecimal.ONE);
 		List<Tshop> list = shopService.selectTshopByMap(map);
 		return list;
     }
