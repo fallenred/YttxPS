@@ -270,10 +270,10 @@
 														</div>
 														<div class="row">
 															<div class="form-group">
-																<label class="col-sm-2 control-label" for="transName">报价金额</label>
+																<label class="col-sm-2 control-label" for="transName">单人报价</label>
 																<div class="col-sm-3">
 																	<input type="text" id="price" name="scheduleBody.price"
-																		class="form-control" placeholder="报价" />
+																		class="form-control number" placeholder="报价" />
 																</div>
 																<label class="col-sm-2 control-label" for="fsOperId">计调人员</label>
 																<div class="col-sm-3">
@@ -439,7 +439,7 @@
 																			<div class="form-group">
 																				<label class="col-sm-1 control-label">类型</label>
 																				<div class="col-sm-2">
-																					<select id="restype" class="form-control">
+																					<select id="restype" class="restype form-control">
 																						<option value="mp">门票</option>
 																						<option value="gw">购物</option>
 																					</select>
@@ -576,7 +576,7 @@
 																							<div class="form-group">
 																								<label class="col-sm-1 control-label">类型</label>
 																								<div class="col-sm-2">
-																									<select id="restype" class="form-control">
+																									<select id="restype" class="batch_restype form-control">
 																										<option value="bg">酒店</option>
 																										<option value="yl">娱乐</option>
 																										<option value="ct">菜单</option>

@@ -161,17 +161,6 @@
 												<input type="text" id="fdPrice" name="fdPrice"
 													class="form-control" placeholder="初始报价" />
 											</div>
-											<label hidden="hidden" class="div_transfer_stat col-sm-2 control-label no-padding-right"
-												for="fiStat">订单状态</label>
-											<div hidden="hidden" class="div_transfer_stat col-sm-3">
-												<select id="fiStat" name="fiStat"
-													class="form-control">
-													<option value="0">待审核</option>
-													<option value="1">已审核</option>
-													<option value="4">已付首款</option>
-													<option value="8">已付全款(可出团)</option>
-												</select>
-											</div>
 										</div>
 									</div>
 									<!-- <div class="row">
@@ -384,7 +373,7 @@
 																			<div class="form-group">
 																				<label class="col-sm-1 control-label">类型</label>
 																				<div class="col-sm-2">
-																					<select id="restype" class="form-control">
+																					<select id="restype" class="restype form-control">
 																						<option value="mp">门票</option>
 																						<option value="gw">购物</option>
 																					</select>
@@ -534,7 +523,7 @@
 																							<div class="form-group">
 																								<label class="col-sm-1 control-label">类型</label>
 																								<div class="col-sm-2">
-																									<select id="restype" class="form-control">
+																									<select id="restype" class="batch_restype form-control">
 																										<option value="bg">酒店</option>
 																										<option value="yl">娱乐</option>
 																										<option value="ct">菜单</option>
@@ -674,6 +663,17 @@
 									</div>
 									<div hidden="hidden" class="row div_custList">
 										<div class="form-group">
+											<label hidden="hidden" class="div_transfer_stat col-sm-2 control-label no-padding-right"
+												for="fiStat">订单状态</label>
+											<div hidden="hidden" class="div_transfer_stat col-sm-3">
+												<select id="fiStat" name="fiStat"
+													class="form-control">
+													<option value="0">待审核</option>
+													<option value="1">已审核</option>
+													<option value="4">已付首款</option>
+													<option value="8">已付全款(可出团)</option>
+												</select>
+											</div>
 											<label class="col-sm-2 control-label no-padding-right">游客名单</label>
 											<div class="col-sm-1">
 												<button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-success pull-right">上传名单</button>

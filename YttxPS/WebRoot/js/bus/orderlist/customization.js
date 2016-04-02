@@ -137,7 +137,8 @@ jQuery(function($) {
 				getTicket(null);
 				//获取酒店级别列表
 				getDictLvl(null, 'bg');
-				totalAmount();
+				//显示合计金额
+				setTimeout(totalAmount, 2000);
 			}
 		});
 	}); 
@@ -176,7 +177,14 @@ jQuery(function($) {
 		$("#reslistIndex").val(parseInt(index)+1);
 		//获取景区门票列表
 		getTicket(null);
+		$(".restype").val("mp");
+		$(".select_ccno").show();
 		//获取酒店级别列表
+		$(".batch_ct").hide();
+		$(".batch_lvl").show();
+		$(".batch_bg").show();
+		$(".batch_restype").val("bg");
+		$(".batch_resname").html("房型");
 		getDictLvl(null, 'bg');
 	});
 	
@@ -229,11 +237,6 @@ jQuery(function($) {
 				var html = ''; 
 				$.each(data, function(commentIndex, comment){
 					html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
-					/*
-						guideMap.put(comment['no'], comment['salary']);
-					 	if (commentIndex == 0) {
-						$("#guidePrice").val(comment['salary']);
-					}*/
 				});
 				$("#guide").html(html);
 				$("#guideName").attr("value", $("#guideNo").find("option:selected").text());
@@ -293,14 +296,6 @@ jQuery(function($) {
 	});
 	//获取字典标准
 	function getDictLvl(obj, type){
-		/*var flag = false;
-		resMap.each(function(key,value,index){
-			if (key == type){
-				$(obj).parent().parent().find(".batch_Lvl").html(value);
-				flag = true;
-			}
-		});
-		if(flag) return;*/
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -336,10 +331,6 @@ jQuery(function($) {
 		$(".scenic").each(function(i, item){
 			dataArr.push($(item).val());
 		});
-		/*if(dataArr.length == 0){
-			alert("请先添加景区资源！");
-			return;
-		}*/
 		$.ajax({
 			type: "GET",
 			traditional: true,
@@ -1021,7 +1012,17 @@ jQuery(function($) {
 		type = $(this).parent().find("#restype").val();
 		$(this).parent().parent().remove();
 		if(type == 'jq'){
+			//获取景区门票列表
 			getTicket(null);
+			$(".restype").val("mp");
+			$(".select_ccno").show();
+			//获取酒店级别列表
+			$(".batch_ct").hide();
+			$(".batch_lvl").show();
+			$(".batch_bg").show();
+			$(".batch_restype").val("bg");
+			$(".batch_resno").parent().prev().html("房型");
+			getDictLvl(null, 'bg');
 		}
 		totalAmount();
 	});

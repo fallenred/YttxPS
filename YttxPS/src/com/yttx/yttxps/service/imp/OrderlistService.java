@@ -195,6 +195,10 @@ public class OrderlistService implements IOrderlistService {
 				remarksMapper.insertSelective(remarks);
 			}
 		}
+		//预估费用
+		if (StringUtils.isNotBlank(scheduleBody.getPrice())){
+			record.setFdPrice(new BigDecimal(scheduleBody.getPrice()));
+		}
 		return orderlistMapper.updateByPrimaryKeySelective(record);
 	}
 

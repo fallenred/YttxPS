@@ -119,7 +119,8 @@ jQuery(function($) {
 				getDictLvl(null, 'bg');
 				//资源快照
 				setTimeout(setSchedule, 1000);
-				totalAmount();
+				//显示合计金额
+				setTimeout(totalAmount, 2000);
 			}
 		});
 	});
@@ -190,7 +191,14 @@ jQuery(function($) {
 		$("#reslistIndex").val(parseInt(index)+1);
 		//获取景区门票列表
 		getTicket(null);
+		$(".restype").val("mp");
+		$(".select_ccno").show();
 		//获取酒店级别列表
+		$(".batch_ct").hide();
+		$(".batch_Lvl").show();
+		$(".batch_bg").show();
+		$(".batch_restype").val("bg");
+		$(".batch_resno").parent().prev().html("房型");
 		getDictLvl(null, 'bg');
 	});
 	
@@ -1110,7 +1118,17 @@ jQuery(function($) {
 		type = $(this).parent().find("#restype").val();
 		$(this).parent().parent().remove();
 		if(type == 'jq'){
+			//获取景区门票列表
 			getTicket(null);
+			$(".restype").val("mp");
+			$(".select_ccno").show();
+			//获取酒店级别列表
+			$(".batch_ct").hide();
+			$(".batch_Lvl").show();
+			$(".batch_bg").show();
+			$(".batch_restype").val("bg");
+			$(".batch_resno").parent().prev().html("房型");
+			getDictLvl(null, 'bg');
 		}
 		totalAmount();
 	});
