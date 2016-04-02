@@ -42,6 +42,7 @@
 <script src="/js/jquery.colorbox-min.js"></script>
 
 <!-- validate -->
+<script src="/js/jquery.form.js"></script>
 <script src="/js/jquery.validate.min.js"></script>
 
 <!-- dropzone -->
