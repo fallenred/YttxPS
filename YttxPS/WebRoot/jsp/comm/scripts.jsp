@@ -201,7 +201,7 @@ Date.prototype.format = function(format) {
 <!-- 表单验证 -->
 <script>
 	$().ready(function() {
-		$("#editform").validate();
+		$("form").validate();
 	});
 	$.extend($.validator.messages, {
 	    required: "必选字段",
