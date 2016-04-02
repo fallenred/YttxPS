@@ -138,7 +138,7 @@
 												for="insurenum">保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;险</label>
 											<div class="col-sm-3">
 												<div class="input-group">
-													<input type="text" id="insurenum" class="form-control">
+													<input type="text" id="insurenum" class="digits form-control">
 													<span class="input-group-addon">份/人/天</span>
 												</div>
 											</div>
@@ -147,7 +147,7 @@
 											<div class="col-sm-3">
 												<div class="input-group">
 													<input type="text" id="fdInsuerprice"
-														name="scheduleBody.fdInsuerprice" class="form-control">
+														name="scheduleBody.fdInsuerprice" class="number form-control">
 													<span class="input-group-addon">￥</span>
 												</div>
 											</div>
@@ -159,7 +159,7 @@
 												for="fdPrice">单人报价</label>
 											<div class="col-sm-3">
 												<input type="text" id="fdPrice" name="fdPrice"
-													class="form-control" placeholder="初始报价" />
+													class="number form-control" placeholder="初始报价" />
 											</div>
 										</div>
 									</div>
@@ -256,7 +256,7 @@
 																				<label class="col-sm-1 control-label" for="fsRegions">价格</label>
 																				<div class="col-sm-2">
 																					<div class="input-group">
-																						<input type="text" id="transportPrice" class="form-control">
+																						<input type="text" id="transportPrice" class="number form-control">
 																						<span class="input-group-addon">￥</span>
 																					</div>
 																				</div>
@@ -264,7 +264,7 @@
 																					for="fsRegions">数量</label>
 																				<div class="col-sm-2">
 																					<div class="input-group">
-																						<input type="text" id="transportNum" value="1" class="form-control">
+																						<input type="text" id="transportNum" value="1" class="digits form-control">
 																						<span class="input-group-addon">辆</span>
 																					</div>
 																				</div>
@@ -288,7 +288,7 @@
 																				<label class="col-sm-1 control-label" for="fsRegions">价格</label>
 																				<div class="col-sm-2">
 																					<div class="input-group">
-																						<input type="text" id="guidePrice" class="form-control">
+																						<input type="text" id="guidePrice" class="number form-control">
 																						<span class="input-group-addon">￥</span>
 																					</div>
 																				</div>
@@ -392,7 +392,7 @@
 																				</div>
 																				<label class="col-sm-1 control-label">数量</label>
 																				<div class="col-sm-1">
-																					<input type="text" id="usernum" class="form-control" value="1" placeholder="数量">
+																					<input type="text" id="usernum" class="digits form-control" value="1" placeholder="数量">
 																				</div>
 																				<div class="col-sm-1">
 																					<button type="button" class="btn btn_add btn_res btn-sm btn-success">添加</button>
@@ -562,13 +562,13 @@
 																								<label class="col-sm-1 control-label">价格</label>
 																								<div class="col-sm-2">
 																									<div class="input-group">
-																										<input type="text" class="tccPrice form-control">
+																										<input type="text" class="number tccPrice form-control">
 																										<span class="input-group-addon">￥</span>
 																									</div>
 																								</div>
 																								<label class="col-sm-1 control-label">数量</label>
 																								<div class="col-sm-2">
-																									<input type="text" id="usernum" class="usernum form-control" value="1"/>
+																									<input type="text" id="usernum" class="usernum form-control digits" value="1"/>
 																								</div>
 																								<div class="col-sm-1">
 																									<button type="button" class="btn btn_add btn_batch btn-sm btn-success pull-right">添加</button>
@@ -633,7 +633,7 @@
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label" for="fdTotalfee">批次金额</label>
 																		<div class="col-sm-3">
-																			<input type="text" class="form-control" name="batchAmt[{{@index}}]" value="{{fdAmt}}" id="fdAmt">
+																			<input type="text" class="form-control digits" name="batchAmt[{{@index}}]" value="{{fdAmt}}" id="fdAmt">
 																		</div>
 																	</div>
 																</div>
@@ -652,12 +652,12 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fdTotalfee">订单金额</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control" id="totalfee" value="0">
+												<input type="text" class="number form-control" id="totalfee" value="0">
 												<input type="hidden" class="form-control" name="fdTotalfee" id="fdTotalfee">
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fdPaidamt">已缴金额</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control" name="fdPaidamt" id="fdPaidamt">
+												<input type="text" class="number form-control" name="fdPaidamt" id="fdPaidamt">
 											</div>
 										</div>
 									</div>
@@ -704,7 +704,7 @@
 																				</div>
 																				<label class="col-sm-1 control-label" for="fdAmt">金额</label>
 																				<div class="col-sm-1">
-																					<input id="remarksAmt" type="text" class="form-control" />
+																					<input id="remarksAmt" type="text" class="number form-control" />
 																				</div>
 																				<div class="col-sm-1">
 																					<button type="button" id="btn_remarks"

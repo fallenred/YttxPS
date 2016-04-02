@@ -960,22 +960,28 @@ jQuery(function($) {
 	//	提交
 	$("#submit").on("click", function () {
 		$("#fcSchedule").val(CKEDITOR.instances["fcSchedule"].getData());
-		$.post("/orderlist/editOrderlist.htm",
-				$("#editform").serialize(),
-				function(data){
-			var json = eval("("+data+")");
-			if(json.result == "ok") {
-				$("#message").text("修改记录成功");
-				$("#message").show();
-				return true;
-			}
-			else {
-				$("#message").text("修改记录失败:" + json.message );
-				$("#message").show();
+		if ($("#editform").valid()) {
+			$.post("/orderlist/editOrderlist.htm",
+					$("#editform").serialize(),
+					function(data){
+				var json = eval("("+data+")");
+				if(json.result == "ok") {
+					$("#message").text("修改记录成功");
+					$("#message").show();
+					return true;
+				}
+				else {
+					$("#message").text("修改记录失败:" + json.message );
+					$("#message").show();
+					return false;
+				}
 				return false;
-			}
+			});
+		} else {
+			$("#message").text("输入字段验证错误，请重新编辑后再提交");
+			$("#message").show();
 			return false;
-		});
+		}
 	});
 	function getNowFormatDate() {
 	    var date = new Date();
