@@ -616,7 +616,7 @@
 																								</div>
 																								<label class="col-sm-1 control-label">数量</label>
 																								<div class="col-sm-2">
-																									<input type="text" id="usernum" class="usernum form-control digits" value="1"/>
+																									<input type="text" id="usernum" class="usernum form-control number" value="1"/>
 																								</div>
 																								<div class="col-sm-1">
 																									<button type="button" class="btn btn_add btn_batch btn-sm btn-success pull-right">添加</button>
@@ -954,7 +954,7 @@
 				if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
 					return;
 				}
-				totalAmt = parseFloat(totalAmt) + parseInt(usernum) * parseFloat(price);
+				totalAmt = parseFloat(totalAmt) + parseFloat(usernum) * parseFloat(price);
 			});
 			$(".remarkPrice").each(function(){
 				var price = $(this).val();
@@ -981,7 +981,7 @@
 					if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
 						return;
 					}
-					fdAmt = parseFloat(fdAmt) + parseInt(usernum) * parseFloat(price);
+					fdAmt = parseFloat(fdAmt) + parseFloat(usernum) * parseFloat(price);
 				});
 				$(this).parent().next().find("#fdAmt").val(fdAmt);
 			});

@@ -267,7 +267,12 @@ jQuery(function($) {
 					}, 0);
 				}
 			});
-
+	/**
+	 * modify by marongcai
+	 * 32状态从已完结改为已结算
+	 * 2016-4-5
+	 * modify start
+	 */
 	var items = {
 		'-10' : '询价',
 		'-5' : '报价',
@@ -276,8 +281,11 @@ jQuery(function($) {
 		'2' : '已确认(待付款)',
 		'4' : '已付首款',
 		'8' : '已付全款(可出团)',
-		'32' : '已完结'
+		'32' : '已结算'
 	};
+	/**
+	 * modify end
+	 */
 	var s = '';
 	for (k in items)
 		s += ';' + k + ":" + items[k];

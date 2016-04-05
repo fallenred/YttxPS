@@ -158,6 +158,12 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fiStat">当前状态</label>
 											<div class="col-sm-3">
+												<!-- 
+													modify by marongcai
+													已完结状态改为已结算
+													2016-4-5
+													modify by start
+												 -->
 												<select id="currStat" class="form-control" disabled="disabled">
 													<option value="0">待审核</option>
 													<option value="1">已审核</option>
@@ -166,6 +172,9 @@
 													<option value="8">已付全款(可出团)</option>
 													<option value="32">已完结</option>
 												</select>
+												<!-- 
+													modify end
+												 -->
 											</div>
 										</div>
 									</div>
