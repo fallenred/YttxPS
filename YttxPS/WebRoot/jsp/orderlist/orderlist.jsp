@@ -24,6 +24,7 @@
 		</script>
 
 		<div class="main-container-inner">
+			<input type="hidden" id="adminType" value="${sessionEntity.level }">
 			<a class="menu-toggler" id="menu-toggler" href="#"> <span
 				class="menu-text"></span>
 			</a>
@@ -126,6 +127,7 @@
 														<option value="4">已付首款</option>
 														<option value="8">已付全款(可出团)</option>
 														<option value="32">已结算</option>
+														<option value="-100">已删除</option>
 													</select>
 													<!-- 
 														modify end

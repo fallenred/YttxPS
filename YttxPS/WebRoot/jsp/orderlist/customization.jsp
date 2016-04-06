@@ -65,7 +65,7 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsName">订单名称</label>
 											<div class="col-sm-8">
-												<input type="text" id="fsName" name="fsName" readonly="readonly"
+												<input type="text" id="fsName" name="fsName" 
 													class="form-control" placeholder="订单名称" />
 											</div>
 										</div>
@@ -75,14 +75,14 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsName">订单编号</label>
 											<div class="col-sm-3">
-												<input type="text" readonly="readonly" id="fsNo" name="fsNo" class="form-control" placeholder="订单id" />
+												<input type="text"  readonly="readonly" id="fsNo" name="fsNo" class="form-control" placeholder="订单id" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="ftStartdate">出发日期</label>
 											<div class="col-sm-3">
 												<input type="text" id="ftStartdate" name="ftStartdate"
 													class="form-control" data-date-format="yyyy/mm/dd"
-													readonly="readonly" placeholder="出发日期" />
+													 placeholder="出发日期" />
 											</div>
 										</div>
 									</div>
@@ -92,7 +92,7 @@
 												for="days">计划天数</label>
 											<div class="col-sm-3">
 												<div class="input-group">
-													<input type="text" id="days" readonly="readonly" class="form-control"> 
+													<input type="text" id="days"  class="form-control"> 
 													<span class="input-group-addon">天</span>
 												</div>
 											</div>
@@ -273,7 +273,7 @@
 																</div>
 																<label class="col-sm-2 control-label" for="fsOperId">计调人员</label>
 																<div class="col-sm-3">
-																	<input type="text" id="fsOperId" readonly="readonly" class="form-control" placeholder="计调人员" />
+																	<input type="text" id="fsOperId"  class="form-control" placeholder="计调人员" />
 																</div>
 															</div>
 														</div>

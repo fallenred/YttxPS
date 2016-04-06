@@ -244,18 +244,18 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	}
 	
 	/**
-	 * 删除订单信息
+	 * 删除订单信息（将状态改为已删除状态）
 	 * @param Orderlist
 	 * @return
 	 */
 	@SuppressWarnings({ "unused", "unchecked" })
 	@RequestMapping(value="delOrderlist.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxdelOrderlist(@RequestParam(value = "no") String  no)
+	public Map<String, Object> ajaxdelOrderlist(@RequestParam(value = "fsNo") String  fsNo)//修改参数名no to fsNo
     {  
-		logger.debug("当前删除key {}", no);
+		logger.debug("当前删除key {}", fsNo);
 		try{
-			int ret = orderlistService.delete(no);
+			int ret = orderlistService.delete(fsNo);
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("删除失败");

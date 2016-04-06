@@ -31,12 +31,21 @@ function editOrderlist(id) {
 	}
 };
 
+/**
+ * modify by marongcai
+ * 删除功能
+ * 2016-4-6
+ * modify by start
+ */
 function deleteOrderlist(id) {
 	raw = jQuery("#grid-table").jqGrid('getRowData', id);
-	var frameSrc = "/jsp/orderlist/delete.jsp?no=" + raw.fiIndex;
+	var frameSrc = "/jsp/orderlist/delete.jsp?fsNo=" + raw.fsNo;
 	$("#delIframe").attr("src", frameSrc);
     $('#delModal').modal({ show: true, backdrop: 'static' });
 };
+/**
+ * modify end
+ */
 
 $("#addIframe").on("load",function(){
 	$(this).contents().find("#reset").click();
@@ -107,6 +116,19 @@ $("#editIframe").on("load",function(){
 	$(this).contents().find('#fcSchedule').val($.base64.btoa(raw.fcSchedule));*/
 	//获取线路列表
 });
+/**
+ * add by marongcai
+ * 删除功能
+ * 2016-4-6
+ * add by start
+ */
+$("#delIframe").on("load",function(){
+	$(this).contents().find("#reset").click();
+	$(this).contents().find("#fsNo").val(raw.fsNo);
+});
+/**
+ * add end
+ */
 
 function getGenName(genindex, obj){
 	$.ajax({
@@ -232,7 +254,7 @@ jQuery(function($) {
 	//	jqgrid
 	var grid_selector = "#grid-table";
 	var pager_selector = "#grid-pager";
-
+	
 	// 定义按钮列
 	actFormatter = function(cellvalue, options, rawObject) {
 	var configBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="roomButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="configOrderCustom('
@@ -245,7 +267,20 @@ jQuery(function($) {
 	var deleteBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="deleteButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="deleteOrderlist('
 			+ options.rowId
 			+ ');" data-original-title="删除订单"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div>';
-	return editBtn;
+	/**
+	 * modify by marongcai
+	 * 添加删除功能
+	 * 2016-4-6
+	 * modify by start
+	 */
+	var returnBtn = editBtn;
+	if($("#adminType").val() == "2"){
+		returnBtn += deleteBtn;
+	}
+	return returnBtn;
+	/**
+	 * modify end
+	 */
 	};
 
 	// resize to fit page size
@@ -325,7 +360,7 @@ jQuery(function($) {
 				colModel : [ {
 					name : 'myac',
 					index : '',
-					width : 30,
+					width : 60,
 					fixed : true,
 					sortable : false,
 					resize : false,
