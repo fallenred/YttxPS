@@ -153,14 +153,6 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fsTitlepic">线路缩略图</label>
-											<div class="col-sm-8">
-												<input type="text" id="fsTitlepic" name="fsTitlepic" class="form-control" placeholder=""/>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fsSummary">线路摘要</label>
 											<div class="col-sm-8">
 												<textarea class="form-control" id="fsSummary" name="fsSummary" rows="3" placeholder="线路摘要"></textarea>
