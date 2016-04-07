@@ -51,44 +51,50 @@ jQuery(function($) {
 
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#fsName").val() == '') {
-			$("#message").show();
-			$("#message").text("路线名称不能为空，请输入");
-			$('#no').focus();
-			return false;
-		} 
-		if($("#fiDays").val() == '') {
-			$("#message").show();
-			$("#message").text("路线天数不能为空，请输入");
-			$('#name').focus();
-			return false;
-		}
-		
-		var tgen = {};
-		tgen.fiIndex = $("#fiIndex").val();
-		tgen.fsName = $("#fsName").val();
-		tgen.fiDays = $("#fiDays").val();
-		tgen.fiStat = $("#fiStat").val();
-		$("#editform input[name='scenicGen']").each(function(idx, e){
-			tgen["scenicGens[" + idx + "].fsScenicno"] = $(e).val();
-		});
-		
-		$.post("/gen/editGen.htm",
-				tgen,
-				function(data){
-			var json = eval("(" + data + ")");
-			if(json.result == "ok") {
-				$("#message").text("修改记录成功");
+		if($("#editform").valid()){
+			if($("#fsName").val() == '') {
 				$("#message").show();
-				return true;
-			}
-			else {
-				$("#message").text("修改记录失败:" + json.message );
+				$("#message").text("路线名称不能为空，请输入");
+				$('#no').focus();
+				return false;
+			} 
+			if($("#fiDays").val() == '') {
 				$("#message").show();
+				$("#message").text("路线天数不能为空，请输入");
+				$('#name').focus();
 				return false;
 			}
+			
+			var tgen = {};
+			tgen.fiIndex = $("#fiIndex").val();
+			tgen.fsName = $("#fsName").val();
+			tgen.fiDays = $("#fiDays").val();
+			tgen.fiStat = $("#fiStat").val();
+			$("#editform input[name='scenicGen']").each(function(idx, e){
+				tgen["scenicGens[" + idx + "].fsScenicno"] = $(e).val();
+			});
+			
+			$.post("/gen/editGen.htm",
+					tgen,
+					function(data){
+				var json = eval("(" + data + ")");
+				if(json.result == "ok") {
+					$("#message").text("修改记录成功");
+					$("#message").show();
+					return true;
+				}
+				else {
+					$("#message").text("修改记录失败:" + json.message );
+					$("#message").show();
+					return false;
+				}
+				return false;
+			});
+		} else {
+			$("#message").text("输入字段验证错误，请重新编辑后再提交");
+			$("#message").show();
 			return false;
-		});
+		}
 	});
 	//增加景区
 	$("#addScenicBtn").click(function(){

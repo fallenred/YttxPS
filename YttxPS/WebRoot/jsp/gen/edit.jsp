@@ -54,7 +54,7 @@
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiDays">路线天数</label>
 											<div class="col-sm-3">
-												<input class="form-control" maxlength="10" type="text" id="fiDays" name="fiDays" placeholder="路线天数" />
+												<input class="form-control isFloatGteZero digits" maxlength="10" type="text" id="fiDays" name="fiDays" placeholder="路线天数" />
 											</div>
 										</div>
 									</div>

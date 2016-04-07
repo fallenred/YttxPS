@@ -125,11 +125,11 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="salary">工资</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="工资" id="salary" name="salary" class="form-control"></input>
+												<input type="text" placeholder="工资" id="salary" name="salary" class="form-control isFloatGteZero number"></input>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="daysale">当日打单金额</label>
 											<div class="col-sm-3">
-												<input placeholder="当日打单金额" id="daysale" name="daysale" class="form-control"></input>
+												<input placeholder="当日打单金额" id="daysale" name="daysale" class="form-control isFloatGteZero number"></input>
 											</div>
 										</div>
 									</div>
@@ -137,11 +137,11 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="weeksale">本周打单金额</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="本周打单金额" id="weeksale" name="weeksale" class="form-control"></input>
+												<input type="text" placeholder="本周打单金额" id="weeksale" name="weeksale" class="form-control isFloatGteZero number"></input>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="monthsale">本月打单金额</label>
 											<div class="col-sm-3">
-												<input placeholder="本月打单金额" id="monthsale" name="monthsale" class="form-control"></input>
+												<input placeholder="本月打单金额" id="monthsale" name="monthsale" class="form-control isFloatGteZero number"></input>
 											</div>
 										</div>
 									</div>

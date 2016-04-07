@@ -181,36 +181,42 @@ jQuery(function($) {
 	
 	//	提交
 	$("#submit").on("click", function () {
-		//校验数量不能为空
-		flag = true;
-		$(".usernum").each(function(){
-			if ($(this).val() == null || $(this).val() == ''|| $(this).val() == 'null') {
-				$("#message").show();
-				$("#message").text("数量不能为空，请输入");
-				$(this).attr("placeholder", "数量不能为空，请输入");
-				$(this).focus();
-				flag = false;
+		if ($("#editorm").valid()) {
+			//校验数量不能为空
+			flag = true;
+			$(".usernum").each(function(){
+				if ($(this).val() == null || $(this).val() == ''|| $(this).val() == 'null') {
+					$("#message").show();
+					$("#message").text("数量不能为空，请输入");
+					$(this).attr("placeholder", "数量不能为空，请输入");
+					$(this).focus();
+					flag = false;
+				}
+			});
+			if (!flag) {
+				return;
 			}
-		});
-		if (!flag) {
-			return;
-		}
-		$.post("/orderCustom/editOrderCustom.htm",
-				$("#editform").serialize(),
-				function(data){
-			var json = eval("("+data+")");
-					if(json.result == "ok") {
-						$("#message").text("修改记录成功");
-						$("#message").show();
-						return true;
-					}
-					else {
-						$("#message").text("修改记录失败:" + json.message );
-						$("#message").show();
+			$.post("/orderCustom/editOrderCustom.htm",
+					$("#editform").serialize(),
+					function(data){
+				var json = eval("("+data+")");
+						if(json.result == "ok") {
+							$("#message").text("修改记录成功");
+							$("#message").show();
+							return true;
+						}
+						else {
+							$("#message").text("修改记录失败:" + json.message );
+							$("#message").show();
+							return false;
+						}
 						return false;
-					}
-					return false;
-				});
+					});
+		} else {
+			$("#message").text("输入字段验证错误，请重新编辑后再提交");
+			$("#message").show();
+			return false;
+		}
 	});
 	
 	//	colorbox

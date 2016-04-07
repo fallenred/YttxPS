@@ -94,11 +94,11 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fiTotal">总人数</label>
 											<div class="col-sm-3">
-												<input type="text" id="fiTotal" name="fiTotal" class="form-control" placeholder="总人数" />
+												<input type="text" id="fiTotal" name="fiTotal" class="form-control isFloatGteZero digits" placeholder="总人数" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiOlder">老人数量</label>
 											<div class="col-sm-3">
-												<input type="text" id="fiOlder" name="fiOlder" class="form-control" placeholder="老人数量" />
+												<input type="text" id="fiOlder" name="fiOlder" class="form-control isFloatGteZero digits" placeholder="老人数量" />
 											</div>
 										</div>
 									</div>
@@ -106,11 +106,11 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fiAdult">成年人数量</label>
 											<div class="col-sm-3">
-												<input type="text" id="fiAdult" name="fiAdult" class="form-control" placeholder="成年人数量" />
+												<input type="text" id="fiAdult" name="fiAdult" class="form-control isFloatGteZero digits" placeholder="成年人数量" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiChildren">儿童数量</label>
 											<div class="col-sm-3">
-												<input type="text" id="fiChildren" name="fiChildren" class="form-control" placeholder="儿童数量" />
+												<input type="text" id="fiChildren" name="fiChildren" class="form-control isFloatGteZero digits" placeholder="儿童数量" />
 											</div>
 										</div>
 									</div>
@@ -118,7 +118,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fdAmt">预估金额</label>
 											<div class="col-sm-3">
-												<input type="text" id="fdAmt" name="fdAmt" class="form-control" placeholder="预估金额" />
+												<input type="text" id="fdAmt" name="fdAmt" class="form-control isFloatGteZero number" placeholder="预估金额" />
 											</div>
 											<!-- <label class="col-sm-2 control-label no-padding-right" for="fiStat">订单状态</label>
 											<div class="col-sm-3">

@@ -91,7 +91,7 @@
 											</div>
 											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fdTotalfee">预估全价</label>
 											<div class="col-sm-2">
-												<input type="text" id="fdTotalfee" name="fdTotalfee" class="form-control" placeholder="预估全价"  />
+												<input type="text" id="fdTotalfee" name="fdTotalfee" class="form-control isFloatGteZero number" placeholder="预估全价"  />
 											</div>
 										</div>
 									</div>
@@ -100,11 +100,11 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fdPaidamt">已付金额</label>
 											<div class="col-sm-2">
-												<input type="text" id="fdPaidamt" name="fdPaidamt" class="form-control" placeholder="已付金额"  />
+												<input type="text" id="fdPaidamt" name="fdPaidamt" class="form-control isFloatGteZero number" placeholder="已付金额"  />
 											</div>
 											<label class="col-sm-2 col-md-offset-2 control-label no-padding-right" for="fdAmt">双方需交易金额</label>
 											<div class="col-sm-2">
-												<input type="text" id="fdAmt" name="fdAmt" class="form-control" placeholder="预估全价"  />
+												<input type="text" id="fdAmt" name="fdAmt" class="form-control number isFloatGteZero" placeholder="预估全价"  />
 											</div>
 										</div>
 									</div>
