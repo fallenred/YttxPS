@@ -824,7 +824,7 @@ jQuery(function($) {
 			if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
 				return;
 			}
-			totalAmt = parseFloat(totalAmt) + parseInt(usernum) * parseFloat(price);
+			totalAmt = parseFloat(totalAmt) + parseFloat(usernum) * parseFloat(price);
 		});
 		$(".remarkPrice").each(function(){
 			var price = $(this).val();
@@ -851,7 +851,7 @@ jQuery(function($) {
 				if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
 					return;
 				}
-				fdAmt = parseFloat(fdAmt) + parseInt(usernum) * parseFloat(price);
+				fdAmt = parseFloat(fdAmt) + parseFloat(usernum) * parseFloat(price);
 			});
 			$(this).parent().next().find("#fdAmt").val(fdAmt);
 		});

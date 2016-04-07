@@ -203,8 +203,11 @@ public class OrderlistService implements IOrderlistService {
 	}
 
 	@Override
-	public int delete(String no) {
-		return orderlistMapper.deleteByPrimaryKey(no);
+	public int delete(String fsNo) {
+		TOrderlistWithBLOBs record = new TOrderlistWithBLOBs();
+		record.setFsNo(fsNo);
+		record.setFiStat("-100");//设置为已删除状态
+		return orderlistMapper.updateByPrimaryKeySelective(record);
 	}
 
 	@Override

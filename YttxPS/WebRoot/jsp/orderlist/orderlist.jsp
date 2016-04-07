@@ -24,6 +24,7 @@
 		</script>
 
 		<div class="main-container-inner">
+			<input type="hidden" id="adminType" value="${sessionEntity.level }">
 			<a class="menu-toggler" id="menu-toggler" href="#"> <span
 				class="menu-text"></span>
 			</a>
@@ -110,6 +111,12 @@
 												<label class="col-sm-1 control-label no-padding-right"
 													for="fiStat">状态</label>
 												<div class="col-sm-2">
+													<!-- 
+														modify by marongcai
+														已完结状态改为已结算
+														2016-4-5
+														modify by start
+													 -->
 													<select class="form-control" id="fiStat">
 														<option value="">----状态----</option>
 														<option value="-10">询价</option>
@@ -119,8 +126,12 @@
 														<option value="2">已确认(待付款)</option>
 														<option value="4">已付首款</option>
 														<option value="8">已付全款(可出团)</option>
-														<option value="32">已完结</option>
+														<option value="32">已结算</option>
+														<option value="-100">已删除</option>
 													</select>
+													<!-- 
+														modify end
+													 -->
 												</div>
 											</div>
 

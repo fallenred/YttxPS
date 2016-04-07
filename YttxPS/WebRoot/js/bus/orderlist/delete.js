@@ -3,8 +3,8 @@ jQuery(function($) {
 	$("#submit").on("click", function () {
 		$.ajax({
 		     type: 'POST',
-		     url: '/gen/delGen.htm' ,
-		     data: 'no=' + $.getUrlParam('no'),
+		     url: '/orderlist/delOrderlist.htm' ,
+		     data: 'fsNo=' + $.getUrlParam('fsNo'),
 		     success: function(data){
 						if(data.result == "ok") {
 							$("#message").text("删除记录成功");

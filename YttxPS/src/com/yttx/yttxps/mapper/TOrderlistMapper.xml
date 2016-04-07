@@ -760,6 +760,10 @@
 	      <if test="fiStat != null and fiStat != ''">
 	        and o.fi_Stat = #{fiStat}
 	      </if>
+	      <if test="fiStat == null or fiStat == ''">
+	        <![CDATA[ AND o.fi_Stat <> '32' ]]>
+	        <![CDATA[ AND o.fi_Stat <> '-100' ]]>
+	      </if>
 	      <if test="fsId != null and fsId != ''">
 	        and c.fs_Id like '%'||#{fsId}||'%'
 	      </if>
@@ -801,6 +805,10 @@
 	      </if>
 	      <if test="fiStat != null and fiStat != ''">
 	        and t.fi_Stat = #{fiStat}
+	      </if>
+	      <if test="fiStat == null or fiStat == ''">
+	        <![CDATA[ AND t.fi_Stat <> '32' ]]>
+	        <![CDATA[ AND t.fi_Stat <> '-100' ]]>
 	      </if>
 	      <if test="fsId != null and fsId != ''">
 	        and t.fs_Id like '%'||#{fsId}||'%'

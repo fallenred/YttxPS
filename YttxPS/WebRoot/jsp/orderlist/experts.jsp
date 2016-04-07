@@ -65,8 +65,7 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsNo">订单名称</label>
 											<div class="col-sm-3">
-												<input type="hidden" id="fsNo" name="fsNo"
-													class="form-control" placeholder="订单id" /> <input readonly="readonly"
+												 <input 
 													type="text" id="fsName" name="fsName" class="form-control"
 													placeholder="订单名称" />
 											</div>
@@ -74,27 +73,33 @@
 												for="fiGenindex">所属线路</label>
 											<div class="col-sm-3">
 												<input type="hidden" class="form-control" id="fiGenindex">
-												<input type="text" readonly="readonly" class="form-control" id="genName">
+												<input type="text" class="form-control" id="genName">
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right"
+												for="fsName">订单编号</label>
+											<div class="col-sm-3">
+												<input type="text" id="fsNo" name="fsNo" readonly="readonly"
+													class="form-control" placeholder="订单id" />
+											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="ftCreatdate">创建日期</label>
 											<div class="col-sm-3">
-												<input type="text" id="ftCreatdate" readonly="readonly" name="ftCreatdate"
+												<input type="text" id="ftCreatdate" name="ftCreatdate"
 													class="form-control" placeholder="创建日期" />
-											</div>
-											<label class="col-sm-2 control-label no-padding-right"
-												for="fsOperId">计&nbsp;调&nbsp;&nbsp;员</label>
-											<div class="col-sm-3">
-												<input type="text" readonly="readonly" id="fsOperId" name="fsOperName" class="form-control" placeholder="计调员" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right"
+												for="fsOperId">计&nbsp;调&nbsp;&nbsp;员</label>
+											<div class="col-sm-3">
+												<input type="text" id="fsOperId" name="fsOperName" class="form-control" placeholder="计调员" />
+											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsType">路线类型</label>
 											<div class="col-sm-3">
@@ -103,6 +108,10 @@
 													<option value="02">专家线路</option>
 												</select>
 											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsProperty">组团类型</label>
 											<div class="col-sm-3">
@@ -111,16 +120,16 @@
 													<option value="02">散客拼团</option>
 												</select>
 											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="ftStartdate">发团日期</label>
 											<div class="col-sm-3">
 												<input type="text" id="ftStartdate" name="ftStartdate"
-													class="form-control" readonly="readonly" placeholder="发团日期" />
+													class="form-control"  placeholder="发团日期" />
 											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="regionname">发团地点</label>
 											<div class="col-sm-3">
@@ -130,10 +139,6 @@
 													type="hidden" name="fsStartplace" id="regionno" />
 												<div id="selectCity" class="localcity"></div>
 											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="insurenum">保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;险</label>
 											<div class="col-sm-3">
@@ -142,6 +147,10 @@
 													<span class="input-group-addon">份/人/天</span>
 												</div>
 											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fdInsuerprice">保险费用</label>
 											<div class="col-sm-3">
@@ -151,10 +160,6 @@
 													<span class="input-group-addon">￥</span>
 												</div>
 											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fdPrice">单人报价</label>
 											<div class="col-sm-3">
@@ -568,7 +573,7 @@
 																								</div>
 																								<label class="col-sm-1 control-label">数量</label>
 																								<div class="col-sm-2">
-																									<input type="text" id="usernum" class="usernum form-control digits" value="1"/>
+																									<input type="text" id="usernum" class="usernum form-control number" value="1"/>
 																								</div>
 																								<div class="col-sm-1">
 																									<button type="button" class="btn btn_add btn_batch btn-sm btn-success pull-right">添加</button>
@@ -907,7 +912,7 @@
 				if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
 					return;
 				}
-				totalAmt = parseFloat(totalAmt) + parseInt(usernum) * parseFloat(price);
+				totalAmt = parseFloat(totalAmt) + parseFloat(usernum) * parseFloat(price);
 			});
 			$(".remarkPrice").each(function(){
 				var price = $(this).val();
@@ -934,7 +939,7 @@
 					if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
 						return;
 					}
-					fdAmt = parseFloat(fdAmt) + parseInt(usernum) * parseFloat(price);
+					fdAmt = parseFloat(fdAmt) + parseFloat(usernum) * parseFloat(price);
 				});
 				$(this).parent().next().find("#fdAmt").val(fdAmt);
 			});
