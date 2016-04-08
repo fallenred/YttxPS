@@ -17,71 +17,64 @@ jQuery(function($) {
 
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#no").val() == '' || $("#no").val() == undefined) {
-			$("#message").show();
-			$("#message").text("景区编码不能为空，请输入");
-			$('#no').focus();
-			return false;
-		}
-		
-		if($("#name").val() == '' || $("#name").val() == undefined) {
-			$("#message").show();
-			$("#message").text("景区名称不能为空，请输入");
-			$('#name').focus();
-			return false;
-		}
-		
-		if($("#gender").val() == '' || $("#gender").val() == undefined) {
-			$("#message").show();
-			$("#message").text("性别不能为空，请输入");
-			$('#gender').focus();
-			return false;
-		}
-		
-		if($("#idno").val() == '' || $("#idno").val() == undefined) {
-			$("#message").show();
-			$("#message").text("身份证号不能为空，请输入");
-			$('#idno').focus();
-			return false;
-		} else {
-			var reg = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}(\d|X)$/;
-			if(!reg.test($("#idno").val())) {
+		if ($("#editform").valid()) {
+			if($("#no").val() == '' || $("#no").val() == undefined) {
 				$("#message").show();
-				$("#message").text("身份证号格式不正确，请重新输入");
+				$("#message").text("景区编码不能为空，请输入");
+				$('#no').focus();
+				return false;
+			} 
+			if($("#name").val() == '' || $("#name").val() == undefined) {
+				$("#message").show();
+				$("#message").text("景区名称不能为空，请输入");
+				$('#name').focus();
+				return false;
+			} 
+			if($("#gender").val() == '' || $("#gender").val() == undefined) {
+				$("#message").show();
+				$("#message").text("性别不能为空，请输入");
+				$('#gender').focus();
+				return false;
+			}
+			if($("#idno").val() == '' || $("#idno").val() == undefined) {
+				$("#message").show();
+				$("#message").text("身份证号不能为空，请输入");
 				$('#idno').focus();
 				return false;
 			}
-		}
-		
-		if($("#contactno").val() == '' || $("#contactno").val() == undefined) {
-			$("#message").show();
-			$("#message").text("联系方式不能为空，请输入");
-			$('#contactno').focus();
-			return false;
-		}
-		if($("#lvl").val() == '' || $("#lvl").val() == undefined) {
-			$("#message").show();
-			$("#message").text("等级不能为空，请输入");
-			$('#lvl').focus();
-			return false;
-		}
-		
-		$.post("/guide/editGuide.htm",
-				$("#editform").serialize(),
-				function(data){
-			var json = eval("(" + data + ")");
-			if(json.result == "ok") {
-				$("#message").text("修改记录成功");
+			if($("#contactno").val() == '' || $("#contactno").val() == undefined) {
 				$("#message").show();
-				return true;
-			}
-			else {
-				$("#message").text("修改记录失败:" + json.message );
-				$("#message").show();
+				$("#message").text("联系方式不能为空，请输入");
+				$('#contactno').focus();
 				return false;
 			}
+			if($("#lvl").val() == '' || $("#lvl").val() == undefined) {
+				$("#message").show();
+				$("#message").text("等级不能为空，请输入");
+				$('#lvl').focus();
+				return false;
+			} 
+			$.post("/guide/editGuide.htm",
+					$("#editform").serialize(),
+					function(data){
+				var json = eval("(" + data + ")");
+				if(json.result == "ok") {
+					$("#message").text("修改记录成功");
+					$("#message").show();
+					return true;
+				}
+				else {
+					$("#message").text("修改记录失败:" + json.message );
+					$("#message").show();
+					return false;
+				}
+				return false;
+			});
+		} else {
+			$("#message").text("输入字段验证错误，请重新编辑后再提交");
+			$("#message").show();
 			return false;
-		});
+		}
 	});
 
 	//	colorbox

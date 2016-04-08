@@ -86,7 +86,7 @@
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiDays">线路天数</label>
 											<div class="col-sm-3">
-												<input type="text" id="fiDays" name="fiDays" class="form-control" placeholder="线路天数"  />
+												<input type="text" id="fiDays" name="fiDays" class="form-control isFloatGteZero digits" placeholder="线路天数"  />
 											</div>
 										</div>
 									</div>

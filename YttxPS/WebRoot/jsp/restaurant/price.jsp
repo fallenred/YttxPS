@@ -82,7 +82,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="price">价格</label>
 											<div class="col-sm-9">
-												<input class="form-control"  style="width:150px" type="text" id="price" 
+												<input class="form-control isFloatGteZero number"  style="width:150px" type="text" id="price" 
 													name="price"  placeholder="价格" />
 											</div>
 										</div>

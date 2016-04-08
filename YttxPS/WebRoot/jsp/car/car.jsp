@@ -141,7 +141,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label no-padding-right" for="load">准载数</label>
 									<div class="col-sm-3">
-										<input type="text" name="load" class="form-control" placeholder="准载数" />
+										<input type="text" name="load" class="form-control isFloatGteZero digits" placeholder="准载数" />
 									</div>
 									<label class="col-sm-2 control-label no-padding-right" for="regdate">注册日期</label>
 									<div class="col-sm-3">
@@ -226,7 +226,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label no-padding-right" for="load">准载数</label>
 									<div class="col-sm-3">
-										<input type="text" name="load" class="form-control" placeholder="准载数" />
+										<input type="text" name="load" class="form-control isFloatGteZero digits" placeholder="准载数" />
 									</div>
 									<label class="col-sm-2 control-label no-padding-right" for="regdate">注册日期</label>
 									<div class="col-sm-3">
@@ -331,7 +331,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label no-padding-right" for="load">准载数</label>
 									<div class="col-sm-3">
-										<input type="text" name="load" class="form-control" placeholder="准载数" disabled="disabled" />
+										<input type="text" name="load" class="form-control isFloatGteZero digits" placeholder="准载数" disabled="disabled" />
 									</div>
 									<label class="col-sm-2 control-label no-padding-right" for="regdate">注册日期</label>
 									<div class="col-sm-3">

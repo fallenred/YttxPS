@@ -70,7 +70,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label no-padding-right" for="fdPrice">价格</label>
 									<div class="col-sm-4">
-										<input class="form-control" maxlength="10" type="text" id="fdPrice" name="fdPrice" placeholder="价格" />
+										<input class="form-control isFloatGteZero number" maxlength="10" type="text" id="fdPrice" name="fdPrice" placeholder="价格" />
 									</div>
 								</div>
 							</div>

@@ -87,11 +87,11 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="singlereturn">单价商品返点比例</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="单价商品返点比例" id="singlereturn" name="singlereturn" class="form-control"></input>
+												<input type="text" placeholder="单价商品返点比例" id="singlereturn" name="singlereturn" class="form-control isFloatGteZero number"></input>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="totalreturn">总体返点比例</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="总体返点比例" id="totalreturn" name="totalreturn" class="form-control"></input>
+												<input type="text" placeholder="总体返点比例" id="totalreturn" name="totalreturn" class="form-control isFloatGteZero number"></input>
 											</div>
 										</div>
 									</div>
@@ -99,11 +99,11 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="mantip">人头费用</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="人头费用" id="mantip" name="mantip" class="form-control"></input>
+												<input type="text" placeholder="人头费用" id="mantip" name="mantip" class="form-control isFloatGteZero number"></input>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="parktip">停车费</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="停车费" id="parktip" name="parktip" class="form-control"></input>
+												<input type="text" placeholder="停车费" id="parktip" name="parktip" class="form-control isFloatGteZero number"></input>
 											</div>
 										</div>
 									</div>
@@ -111,7 +111,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="staytime">停留时间</label>
 											<div class="col-sm-3">
-												<input type="text" placeholder="停留时间" id="staytime" name="staytime" class="form-control"></input>
+												<input type="text" placeholder="停留时间" id="staytime" name="staytime" class="form-control isFloatGteZero number"></input>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="policy">淡旺季政策</label>
 											<div class="col-sm-3">

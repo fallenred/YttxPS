@@ -51,35 +51,41 @@ jQuery(function($) {
 	
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#name").val() == '') {
+		if ($("#addform").valid()) {
+			if($("#name").val() == '') {
+				$("#message").show();
+				$("#message").text("购物店名称不能为空，请输入");
+				$('#name').focus();
+				return false;
+			} 
+			if($("#regionno").val() == '') {
+				$("#message").show();
+				$("#message").text("所属地区不能为空，请输入");
+				$('#regionno').focus();
+				return false;
+			}
+			
+			$.post("/shop/addShop.htm",
+					$("#addform").serialize(),
+					function(data){
+				var json = eval("(" + data + ")");
+						if(json.result == "ok") {
+							$("#message").text("增加记录成功");
+							$("#message").show();
+							return true;
+						}
+						else {
+							$("#message").text("增加记录失败:" + json.message );
+							$("#message").show();
+							return false;
+						}
+						return false;
+					});
+		} else {
+			$("#message").text("输入字段验证错误，请重新编辑后再提交");
 			$("#message").show();
-			$("#message").text("购物店名称不能为空，请输入");
-			$('#name').focus();
-			return false;
-		} 
-		if($("#regionno").val() == '') {
-			$("#message").show();
-			$("#message").text("所属地区不能为空，请输入");
-			$('#regionno').focus();
 			return false;
 		}
-		
-		$.post("/shop/addShop.htm",
-				$("#addform").serialize(),
-				function(data){
-			var json = eval("(" + data + ")");
-					if(json.result == "ok") {
-						$("#message").text("增加记录成功");
-						$("#message").show();
-						return true;
-					}
-					else {
-						$("#message").text("增加记录失败:" + json.message );
-						$("#message").show();
-						return false;
-					}
-					return false;
-				});
 	});
 	
 	//	colorbox

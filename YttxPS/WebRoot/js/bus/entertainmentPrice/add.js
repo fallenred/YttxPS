@@ -37,64 +37,70 @@ jQuery(function($) {
 	
 	//	提交
 	$("#submit").on("click", function () {
-		if($("#fsNo").val() == '' || $("#fsNo").val() == undefined) {
-			$("#message").show();
-			$("#message").text("门票代码不能为空，请输入");
-			$('#no').focus();
-			return false;
-		}
-		if($("#ftStartdate").val() == '' || $("#ftStartdate").val() == undefined) {
-			$("#message").show();
-			$("#message").text("开始日期不能为空，请输入");
-			$('#ftStartdate').focus();
-			return false;
-		}
-		
-		if($("#ftEnddate").val() == '' || $("#ftEnddate").val() == undefined) {
-			$("#message").show();
-			$("#message").text("结束日期不能为空，请输入");
-			$('#ftEnddate').focus();
-			return false;
-		}
-		
-		var ftStartdate = new Date($("#ftStartdate").val());
-		var ftEnddate = new Date($("#ftEnddate").val());
-		if(ftEnddate - ftStartdate < 0) {
-			$("#message").show();
-			$("#message").text("结束日期不能早于开始日期");
-			$('#ftStartdate').focus();
-			return false;
-		}
-		
-		var isChecked = true;
-		$(".price").each(function(idx, e){
-			if($(e).val() == null || $(e).val() == undefined || $(e).val().trim() == ""){
+		if ($("#addform").valid()) {
+			if($("#fsNo").val() == '' || $("#fsNo").val() == undefined) {
 				$("#message").show();
-				$("#message").text($("label[for='" + $(e).attr("id") + "']").text() + "不能为空");
-				$(e).focus();
-				isChecked = false;
+				$("#message").text("门票代码不能为空，请输入");
+				$('#no').focus();
 				return false;
 			}
-		});
-		if(!isChecked){
-			return isChecked;
-		}
-		
-		$.post("/entertainment/addEntertainmentPrice.htm",
-				$("#addform").serialize(),
-				function(data){
-				var json = eval("(" + data + ")");
-				if(json.result == "ok") {
-					$("#message").text("增加记录成功");
+			if($("#ftStartdate").val() == '' || $("#ftStartdate").val() == undefined) {
+				$("#message").show();
+				$("#message").text("开始日期不能为空，请输入");
+				$('#ftStartdate').focus();
+				return false;
+			}
+			
+			if($("#ftEnddate").val() == '' || $("#ftEnddate").val() == undefined) {
+				$("#message").show();
+				$("#message").text("结束日期不能为空，请输入");
+				$('#ftEnddate').focus();
+				return false;
+			}
+			
+			var ftStartdate = new Date($("#ftStartdate").val());
+			var ftEnddate = new Date($("#ftEnddate").val());
+			if(ftEnddate - ftStartdate < 0) {
+				$("#message").show();
+				$("#message").text("结束日期不能早于开始日期");
+				$('#ftStartdate').focus();
+				return false;
+			}
+			
+			var isChecked = true;
+			$(".price").each(function(idx, e){
+				if($(e).val() == null || $(e).val() == undefined || $(e).val().trim() == ""){
 					$("#message").show();
-					return true;
-				} else {
-					$("#message").text("增加记录失败:" + json.message );
-					$("#message").show();
+					$("#message").text($("label[for='" + $(e).attr("id") + "']").text() + "不能为空");
+					$(e).focus();
+					isChecked = false;
 					return false;
 				}
-				return false;
-		});
+			});
+			if(!isChecked){
+				return isChecked;
+			}
+			
+			$.post("/entertainment/addEntertainmentPrice.htm",
+					$("#addform").serialize(),
+					function(data){
+					var json = eval("(" + data + ")");
+					if(json.result == "ok") {
+						$("#message").text("增加记录成功");
+						$("#message").show();
+						return true;
+					} else {
+						$("#message").text("增加记录失败:" + json.message );
+						$("#message").show();
+						return false;
+					}
+					return false;
+			});
+		} else {
+			$("#message").text("输入字段验证错误，请重新编辑后再提交");
+			$("#message").show();
+			return false;
+		}
 	});
 	
 	//	colorbox
