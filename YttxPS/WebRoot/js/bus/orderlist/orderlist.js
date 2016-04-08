@@ -274,7 +274,7 @@ jQuery(function($) {
 	 * modify by start
 	 */
 	var returnBtn = editBtn;
-	if($("#adminType").val() == "2"){
+	if($("#depNo").val() == "5"){
 		returnBtn += deleteBtn;
 	}
 	return returnBtn;

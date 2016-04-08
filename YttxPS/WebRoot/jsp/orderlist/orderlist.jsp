@@ -24,7 +24,7 @@
 		</script>
 
 		<div class="main-container-inner">
-			<input type="hidden" id="adminType" value="${sessionEntity.level }">
+			<input type="hidden" id="depNo" value="${sessionEntity.depNo }">
 			<a class="menu-toggler" id="menu-toggler" href="#"> <span
 				class="menu-text"></span>
 			</a>
