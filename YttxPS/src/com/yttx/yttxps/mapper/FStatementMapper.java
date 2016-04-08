@@ -1,5 +1,7 @@
 package com.yttx.yttxps.mapper;
 
+import java.util.Date;
+
 import com.yttx.yttxps.model.corder.FStatement;
 
 /**
@@ -32,4 +34,6 @@ public interface FStatementMapper<T> extends IBaseMapper<T>{
 	 * 更新数据库中的一条结算单记录
 	 */
 	boolean updateFSSelective(FStatement fStatement);
+	
+	Date getCurrentSysdate();
 }

@@ -214,7 +214,7 @@
 													<div class="profile-info-row">
 														<div class="profile-info-name">整体备注:</div>
 														<div class="profile-info-value"> 
-															<textarea name="remark" cols="90" rows="5" class="col-sm-10"></textarea>
+															<textarea name="remark" id="remark" cols="90" rows="5" class="col-sm-10" maxlength="300">${fStat.remark}</textarea>
 														</div>
 													</div>
 												</div>

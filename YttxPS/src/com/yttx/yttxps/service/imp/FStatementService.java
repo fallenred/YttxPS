@@ -67,6 +67,7 @@ public class FStatementService implements IFStatementService{
 		if(fsFromDB.getStat()!=0){
 			throw new RuntimeException("该结算单已被客户确认或已结算完毕，不能修改");
 		}
+		fStatement.setCreatDate(fStatementMapper.getCurrentSysdate());
 		fStatementMapper.updateFSSelective(fStatement);
 		return true;
 	}

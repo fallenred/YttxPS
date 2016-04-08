@@ -22,25 +22,37 @@ jQuery(function($) {
 			$("#message").text("景区编码不能为空，请输入");
 			$('#no').focus();
 			return false;
-		} 
+		}
+		
 		if($("#name").val() == '' || $("#name").val() == undefined) {
 			$("#message").show();
 			$("#message").text("景区名称不能为空，请输入");
 			$('#name').focus();
 			return false;
-		} 
+		}
+		
 		if($("#gender").val() == '' || $("#gender").val() == undefined) {
 			$("#message").show();
 			$("#message").text("性别不能为空，请输入");
 			$('#gender').focus();
 			return false;
 		}
+		
 		if($("#idno").val() == '' || $("#idno").val() == undefined) {
 			$("#message").show();
 			$("#message").text("身份证号不能为空，请输入");
 			$('#idno').focus();
 			return false;
+		} else {
+			var reg = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}(\d|X)$/;
+			if(!reg.test($("#idno").val())) {
+				$("#message").show();
+				$("#message").text("身份证号格式不正确，请重新输入");
+				$('#idno').focus();
+				return false;
+			}
 		}
+		
 		if($("#contactno").val() == '' || $("#contactno").val() == undefined) {
 			$("#message").show();
 			$("#message").text("联系方式不能为空，请输入");
@@ -52,7 +64,8 @@ jQuery(function($) {
 			$("#message").text("等级不能为空，请输入");
 			$('#lvl').focus();
 			return false;
-		} 
+		}
+		
 		$.post("/guide/editGuide.htm",
 				$("#editform").serialize(),
 				function(data){

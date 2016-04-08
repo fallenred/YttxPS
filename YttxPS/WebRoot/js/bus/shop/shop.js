@@ -73,7 +73,7 @@ $("#editIframe").on("load", function(){
 	$(this).contents().find("#parktip").val(raw.parktip);
 	$(this).contents().find("#staytime").val(raw.staytime);
 	$(this).contents().find("#policy").val(raw.policy);
-	$(this).find("#stat").find("option[value='" + raw.stat + "']").attr("selected", true);
+	$(this).contents().find("#stat").find("option[value='" + raw.stat + "']").attr("selected", true);
 });
 
 

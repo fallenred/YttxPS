@@ -102,8 +102,8 @@ jQuery(function($) {
                     width : 50,
                     sortable : false,
                     editable : false,
-                    edittype : 'select',
-                    sorttype : "char"
+                    sorttype : "char",
+                    hidden : true
                 }, {
 					name : 'ftStartdate',
 					index : 'ftStartdate',

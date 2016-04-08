@@ -72,6 +72,14 @@ $(document).ready(function(){
 			$("#message").text("用户编号为空/用户编号的长度小于6或者大于16");
 			$('#sysOperId').focus();
 			return false;
+		} else {
+			var reg = /^\w{6,16}$/;
+			if(!reg.test(sysOperId)) {
+				$("#message").show();
+				$("#message").text("用户编号格式不正确");
+				$('#sysOperId').focus();
+				return false;
+			}
 		}
 		
 		var sysOperName = $.trim($("#sysOperName").val());//获取用户名称

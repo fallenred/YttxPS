@@ -247,7 +247,7 @@
 		      		fs_User_SubID=#{userSubID,jdbcType=VARCHAR},
 		      </if>
 		      <if test="creatDate != null and creatDate !=''">
-		      		ft_CreatDate=#{creatDate,jdbcType=DATE},
+		      		ft_CreatDate=SYSDATE,
 		      </if>
 		      <if test="orderContent != null and orderContent !=''">
 		      		fc_Content=#{orderContent,jdbcType=CLOB},
@@ -271,4 +271,8 @@
 		WHERE 
 			Trim(fs_no)=Trim(#{statmentId,jdbcType=VARCHAR})
 	</update>
+	
+	<select id="getCurrentSysdate" resultType="java.util.Date">
+	  SELECT SYSDATE FROM dual
+	</select>
 </mapper>

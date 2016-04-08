@@ -215,7 +215,6 @@ public class StatementController extends BaseController {
 			}
 		}else if("E".equalsIgnoreCase(oper)){//修改操作
 			try{
-				fStatement.setCreatDate(new Date());
 				fStatementService.editFStatement(fStatement);
 				message="该结算单更新成功";
 			}catch (Exception e) {

@@ -66,7 +66,7 @@
 											
 											<label class="col-sm-2 control-label no-padding-right" for="fiLoadMax">准载上限</label>
 											<div class="col-sm-3">
-												<input class="form-control" maxlength="10" type="text"  class="form-control" id="fiLoadMax" name="fiLoadMax" placeholder="准载上限" />
+												<input class="form-control non-negative-integer" maxlength="10" type="text"  class="form-control" id="fiLoadMax" name="fiLoadMax" placeholder="准载上限" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right" for="fiFitMin">适应范围下限</label>
 											<div class="col-sm-3">
