@@ -37,10 +37,12 @@ public class Constants {
 		WAITCONFIRM {public BigDecimal getVal(){return BigDecimal.ZERO;}},
 		/** 已审核 */
 		AUDITED {public BigDecimal getVal(){return BigDecimal.ONE;}},
-		/** 已确认（待付款） */
+		/** 已确认（弃用） */
 		WAITPAYMENT {public BigDecimal getVal(){return new BigDecimal(2);}},
-		/** 已付定金  */
-		PAYMENTdeposit {public BigDecimal getVal(){return new BigDecimal(4);}},
+		/** 已付定金（弃用）  */
+		PAYMENTDEPOSIT {public BigDecimal getVal(){return new BigDecimal(4);}},
+		/** 转账  */
+		TRANSFER {public BigDecimal getVal(){return new BigDecimal(6);}},
 		/** 已付全款（可出团）*/
 		PAYMENT {public BigDecimal getVal(){return new BigDecimal(8);}},
 		/** 已完成 */
