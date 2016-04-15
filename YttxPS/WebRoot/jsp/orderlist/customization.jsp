@@ -91,10 +91,7 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="days">计划天数</label>
 											<div class="col-sm-3">
-												<div class="input-group">
-													<input type="text" id="days"  class="form-control isFloatGteZero number"> 
-													<span class="input-group-addon">天</span>
-												</div>
+												<input type="text" id="days"  class="form-control isFloatGteZero number"> 
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fiVisitornum">游客人数</label>
@@ -108,10 +105,7 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="insurenum">保险</label>
 											<div class="col-sm-3">
-												<div class="input-group">
-													<input type="text" id="insurenum" class="form-control isFloatGteZero number">
-													<span class="input-group-addon">份/人/天</span>
-												</div>
+												<input type="text" id="insurenum" class="form-control isFloatGteZero number">
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fdInsuerprice">保险费用</label>
@@ -267,7 +261,7 @@
 														</div>
 														<div class="row">
 															<div class="form-group">
-																<label class="col-sm-2 control-label" for="transName">单人报价</label>
+																<label class="col-sm-2 control-label" for="transName">线路报价</label>
 																<div class="col-sm-3">
 																	<input type="text" id="price" name="scheduleBody.price" class="form-control isFloatGteZero number" placeholder="报价" />
 																</div>
@@ -319,14 +313,12 @@
 																				<div class="col-sm-2">
 																					<div class="input-group">
 																						<input type="text" id="transportPrice" class="form-control isFloatGteZero number">
-																						<span class="input-group-addon">￥</span>
 																					</div>
 																				</div>
 																				<label class="col-sm-1 control-label" for="fsRegions">数量</label>
 																				<div class="col-sm-2">
 																					<div class="input-group">
 																						<input type="text" id="transportNum" value="1" class="form-control isFloatGteZero digits">
-																						<span class="input-group-addon">辆</span>
 																					</div>
 																				</div>
 																				<div class="col-sm-1">
@@ -350,7 +342,6 @@
 																				<div class="col-sm-2">
 																					<div class="input-group">
 																						<input type="text" id="guidePrice" class="form-control isFloatGteZero number">
-																						<span class="input-group-addon">￥</span>
 																					</div>
 																				</div>
 																				<div class="col-sm-1">
@@ -611,7 +602,6 @@
 																								<div class="col-sm-2">
 																									<div class="input-group">
 																										<input type="text" class="tccPrice form-control isFloatGteZero number">
-																										<span class="input-group-addon">￥</span>
 																									</div>
 																								</div>
 																								<label class="col-sm-1 control-label">数量</label>
@@ -710,7 +700,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fiStat">订单状态</label>
 											<div class="col-sm-3">
-												<select id="fiStat" name="fiStat" class="form-control">
+												<select id="fiStat" name="fiStat" readonly="readonly" class="form-control">
 												</select>
 											</div>
 										</div>
@@ -989,43 +979,57 @@
 		
 		//增加车型addTransport
 		function addTransport(obj){
-			var index = $("#reslistIndex").val();
-			var data = {
-					"index" : index,
-					"restype" : "cx",
-					"resprop" : "comm",
-					"resno" : $("#transport").val(),
-					"resname" : $("#transport").find("option:selected").text(),
-					"ccno" : "000023"
+			$("#message").hide();
+			if($("#transportPrice").valid()&&$("#transportNum").valid()){
+				var index = $("#reslistIndex").val();
+				var data = {
+						"index" : index,
+						"restype" : "cx",
+						"resprop" : "comm",
+						"resno" : $("#transport").val(),
+						"resname" : $("#transport").find("option:selected").text(),
+						"ccno" : "000023"
+				}
+				data["ccname"] = "车辆消费";
+				data["price"] = $("#transportPrice").val();
+				data["cctype"] = "0";
+				data["usernum"] = $("#transportNum").val();
+				var template = Handlebars.compile($("#tr-common").html());
+				$("#table_common tbody").html($("#table_common tbody").html() + template(data));
+				$("#reslistIndex").val(parseInt(index)+1);
+				totalAmount();
+			} else {
+				$("#message").text("输入字段验证错误，请重新编辑后再提交");
+				$("#message").show();
+				return false;
 			}
-			data["ccname"] = "车辆消费";
-			data["price"] = $("#transportPrice").val();
-			data["cctype"] = "0";
-			data["usernum"] = $("#transportNum").val();
-			var template = Handlebars.compile($("#tr-common").html());
-			$("#table_common tbody").html($("#table_common tbody").html() + template(data));
-			$("#reslistIndex").val(parseInt(index)+1);
-			totalAmount();
 		}
 		//增加导游addGuide
 		function addGuide(obj){
-			var index = $("#reslistIndex").val();
-			var data = {
-					"index" : index,
-					"restype" : "dy",
-					"resprop" : "comm",
-					"resno" : $("#guide").val(),
-					"resname" : $("#guideLvl").find("option:selected").text() + "导游-" + $("#guide").find("option:selected").text(),
-					"ccno" : "000000"
+			$("#message").hide();
+			if($("#guidePrice").valid()){
+				var index = $("#reslistIndex").val();
+				var data = {
+						"index" : index,
+						"restype" : "dy",
+						"resprop" : "comm",
+						"resno" : $("#guide").val(),
+						"resname" : $("#guideLvl").find("option:selected").text() + "导游-" + $("#guide").find("option:selected").text(),
+						"ccno" : "000000"
+				}
+				data["ccname"] = "价格(通用)";
+				data["price"] = $("#guidePrice").val();
+				data["cctype"] = "0";
+				data["usernum"] = "1";
+				var template = Handlebars.compile($("#tr-common").html());
+				$("#table_common tbody").html($("#table_common tbody").html() + template(data));
+				$("#reslistIndex").val(parseInt(index)+1);
+				totalAmount();
+			} else {
+				$("#message").text("输入字段验证错误，请重新编辑后再提交");
+				$("#message").show();
+				return false;
 			}
-			data["ccname"] = "价格(通用)";
-			data["price"] = $("#guidePrice").val();
-			data["cctype"] = "0";
-			data["usernum"] = "1";
-			var template = Handlebars.compile($("#tr-common").html());
-			$("#table_common tbody").html($("#table_common tbody").html() + template(data));
-			$("#reslistIndex").val(parseInt(index)+1);
-			totalAmount();
 		}
 	</script>
 	<!-- 公共资源模板(车型、导游、景区) -->

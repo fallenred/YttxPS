@@ -89,25 +89,30 @@ $("#editIframe").on("load",function(){
 	if (raw.fiGenindex != null) {
 		getGenName(raw.fiGenindex, $(this).contents().find("#genName"));
 	}
-	html='<option value="">---订单状态---</option>';
-	if (raw.fiStat == '2') {
-		html +='<option value="4">已付首款</option>';
+	html='';
+	if (raw.fiStat == '0') {
+		html +='<option value="0">待审核</option>'
+		$(this).contents().find("#fiStat").html(html);
+		$(this).contents().find(".div_transfer_stat").show();
+	} else if (raw.fiStat == '1') {
+		html +='<option value="1">已审核</option>'
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
 		$(this).contents().find(".div_custList").show();
-	} else if (raw.fiStat == '4') {
-		//状态为已付收款时，页面状态只能选已付全款选项
-		html +='<option value="8">已付全款(可出团)</option>'
+	} else if (raw.fiStat == '6') {
+		html +='<option value="6">线下支付</option>'
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
 		$(this).contents().find(".div_custList").show();
 	} else if (raw.fiStat == '8') {
-		//状态为已付全款时，页面状态只做显示
 		html ='<option value="8">已付全款(可出团)</option>';
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
 		$(this).contents().find(".div_custList").show();
 	} else if (raw.fiStat == '32'){
+		html ='<option value="32">已入结算单</option>';
+		$(this).contents().find(".div_transfer_stat").show();
+		$(this).contents().find(".div_custList").show();
 		$(this).contents().find("#submit").hide();
 	} else {
 		$(this).contents().find("#fiStat").html('<option value="'+raw.fiStat+'"></option>');
@@ -157,29 +162,40 @@ $("#customizationIframe").on("load",function(){
 	$(this).contents().find("#fsOperId").val(raw.fsOperId);
 	$(this).contents().find("#fdInsuerprice").val(raw.fdInsuerprice);
 	$(this).contents().find("#fdTotalfee").val(raw.fdTotalfee);
-	//询价状态时隐藏计调资源配置界面
-	if (raw.fiStat == '-10' || raw.fiStat == '-5') {
+	html='';
+	if (raw.fiStat == '-10') {
+		html +='<option value="-10">询价</option>';
+		$(this).contents().find("#fiStat").html(html);
+		$(this).contents().find(".div_transfer_stat").show();
 		$(this).contents().find(".div_transfer").hide();
-	}
-	html='<option value="">---订单状态---</option>';
-	if (raw.fiStat == '2') {
-		html +='<option value="4">已付首款</option>';
+	} else if (raw.fiStat == '-5') {
+		html +='<option value="-5">报价</option>';
+		$(this).contents().find("#fiStat").html(html);
+		$(this).contents().find(".div_transfer_stat").show();
+		$(this).contents().find(".div_transfer").hide();
+	} else if (raw.fiStat == '0') {
+		html +='<option value="0">待审核</option>';
+		$(this).contents().find("#fiStat").html(html);
+		$(this).contents().find(".div_transfer_stat").show();
+	} else if (raw.fiStat == '1') {
+		html +='<option value="1">已审核</option>'
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
 		$(this).contents().find(".div_custList").show();
-	} else if (raw.fiStat == '4') {
-		//状态为已付收款时，页面状态只能选已付全款选项
-		html +='<option value="8">已付全款(可出团)</option>'
+	} else if (raw.fiStat == '6') {
+		html +='<option value="6">线下支付</option>'
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
 		$(this).contents().find(".div_custList").show();
 	} else if (raw.fiStat == '8') {
-		//状态为已付全款时，页面状态只做显示
 		html ='<option value="8">已付全款(可出团)</option>';
 		$(this).contents().find("#fiStat").html(html);
 		$(this).contents().find(".div_transfer_stat").show();
 		$(this).contents().find(".div_custList").show();
 	} else if (raw.fiStat == '32'){
+		html ='<option value="32">已入结算单</option>';
+		$(this).contents().find("#fiStat").html(html);
+		$(this).contents().find(".div_transfer_stat").show();
 		$(this).contents().find("#submit").hide();
 	}  else {
 		$(this).contents().find("#fiStat").html('<option value="'+raw.fiStat+'"></option>');

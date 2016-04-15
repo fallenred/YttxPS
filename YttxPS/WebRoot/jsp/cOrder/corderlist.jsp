@@ -133,20 +133,19 @@
 													<form class="form-horizontal" id="stat_filter_form">
 														<input type="hidden" id="statement_stat" value="1">
 														<div class="form-group">
-															<label class="col-sm-1 control-label no-padding-right" for="statement_id">结算单号</label>
-															<div class="col-sm-4 ">
-																<input type="text" id="statement_id" placeholder="忽略结算单号" class="col-xs-10 col-sm-10">
-															</div>
-															
-															<label class="col-sm-1 col-sm-offset-1 control-label no-padding-right" for="statement_order_id">订单号</label>
+															<label class="col-sm-1 control-label no-padding-right" for="statement_order_id">订单编号</label>
 															<div class="col-sm-4">
-																<input type="text" id="statement_order_id" placeholder="忽略订单号" class="col-xs-10 col-sm-10">
+																<input type="text" id="statement_order_id" placeholder="忽略订单编号" class="col-xs-10 col-sm-10">
+															</div>
+															<label class="col-sm-1 col-sm-offset-1 control-label no-padding-right" for="statement_order_name">订单名称</label>
+															<div class="col-sm-4">
+																<input type="text" id="statement_order_name" placeholder="忽略订单名称" class="col-xs-10 col-sm-10">
 															</div>
 														</div>
 														<div class="form-group">
-															<label class="col-sm-1 control-label no-padding-right" for="statement_user_id">客户ID</label>
+															<label class="col-sm-1 control-label no-padding-right" for="statement_user_id">客户编号</label>
 															<div class="col-sm-4 ">
-																<input type="text" id="statement_user_id" placeholder="忽略客户ID" class="col-xs-10 col-sm-10">
+																<input type="text" id="statement_user_id" placeholder="忽略客户编号" class="col-xs-10 col-sm-10">
 															</div>
 															<label class="col-sm-1 col-sm-offset-1 control-label no-padding-right" for="statment_date_range">创建时间</label>
 															<div class="col-sm-4">

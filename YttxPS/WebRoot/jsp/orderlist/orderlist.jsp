@@ -123,8 +123,7 @@
 														<option value="-5">报价</option>
 														<option value="0">待审核</option>
 														<option value="1">已审核</option>
-														<option value="2">已确认(待付款)</option>
-														<option value="4">已付首款</option>
+														<option value="6">线下支付</option>
 														<option value="8">已付全款(可出团)</option>
 														<option value="32">已结算</option>
 														<option value="-100">已删除</option>

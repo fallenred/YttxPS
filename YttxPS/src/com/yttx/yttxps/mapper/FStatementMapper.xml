@@ -20,6 +20,7 @@
 		<result  column="fd_Amt"             property="amt"              jdbcType="DECIMAL" />
 		<result  column="fs_Remark"          property="remark"           jdbcType="VARCHAR" />
 		<result  column="fi_Stat"            property="stat"             jdbcType="INTEGER" />
+		<result  column="FS_TANAME"          property="taname"           jdbcType="VARCHAR" />
 	</resultMap>
 	
 	
@@ -62,47 +63,52 @@
 	</select>
 
 
-	<!--select：找到满足条件的某页订单的总数  -->
+	<!--select：找到满足条件的某页订单 -->
 	<select id="selectSelectivePage" parameterType="java.util.Map" resultMap="fsResultMap">
 		SELECT * FROM(		
 			SELECT
 		        ROWNUM AS rowno, o.*
 		    from (
 			    select 
-			        fs_No,
-					fs_Route_ID,
-					fs_RouteName,
-					fs_Name,
-					fs_Order_ID,
-					fs_User_ID,
-					fs_User_SubID,
-					fs_Oper_ID,
+			        t1.fs_No,
+					t1.fs_Route_ID,
+					t1.fs_RouteName,
+					t1.fs_Name,
+					t1.fs_Order_ID,
+					t1.fs_User_ID,
+					t1.fs_User_SubID,
+					t1.fs_Oper_ID,
 					to_char(ft_CreatDate,'yyyy-mm-dd hh24:mi:ss') ft_CreatDate,
-					fc_Content,
-					fd_TotalFee,
-					fd_PaidAmt,
-					fd_Amt,
-					fs_Remark,
-					fi_Stat
+					t1.fc_Content,
+					t1.fd_TotalFee,
+					t1.fd_PaidAmt,
+					t1.fd_Amt,
+					t1.fs_Remark,
+					t1.fi_Stat,
+					t2.FS_TANAME
 			    FROM 
-			        TCloselist
+			        TCloselist t1
+			    left join
+			    	Tcustominfo t2
+			    on
+			    	t1.fs_User_ID = t2.FS_ID
 				WHERE
 					1=1
 					<if test="statementId != null and statementId !=''">
 						AND 
-							fs_No  like '%'||#{statementId,jdbcType = VARCHAR}||'%'
+							t1.fs_No  like '%'||#{statementId,jdbcType = VARCHAR}||'%'
 					</if>
 					<if test="orderId != null and orderId !=''">
 						AND
-							fs_Order_ID like '%'||#{orderId,jdbcType = VARCHAR}||'%'
+							t1.fs_Order_ID like '%'||#{orderId,jdbcType = VARCHAR}||'%'
 					</if>
 					<if test="userId != null and userId !=''">
 						AND
-							fs_User_ID like '%'||#{userId,jdbcType = VARCHAR}||'%'
+							t1.fs_User_ID like '%'||#{userId,jdbcType = VARCHAR}||'%'
 					</if>
 					<if test="operId != null and operId !=''">
 						AND
-							Trim(FS_OPER_ID) = Trim(#{operId,jdbcType=VARCHAR})
+							Trim(t1.FS_OPER_ID) = Trim(#{operId,jdbcType=VARCHAR})
 					</if>
 					<if test="startDate != null and startDate !=''">
 						AND
@@ -114,9 +120,9 @@
 					</if>
 					<if test="stat != null">
 						AND
-							fi_Stat = #{stat,jdbcType=INTEGER}
+							t1.fi_Stat = #{stat,jdbcType=INTEGER}
 					</if>
-					order by fs_No
+					order by t1.fs_No desc
 					) o
 				<if test="endrow != null">
 					where ROWNUM &lt;= #{endrow}

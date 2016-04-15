@@ -205,7 +205,7 @@ Date.prototype.format = function(format) {
 	    jQuery.validator.addMethod("isFloatGteZero", function(value, element) { 
 	         value=parseFloat(value);      
 	         return this.optional(element) || value>=0;       
-	    }, "只能输入非负数"); 
+	    }, "请输入正数"); 
 		$("form").validate();
 	});
 	$.extend($.validator.messages, {

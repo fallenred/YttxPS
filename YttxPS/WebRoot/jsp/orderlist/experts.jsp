@@ -64,42 +64,46 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsNo">订单名称</label>
-											<div class="col-sm-3">
+											<div class="col-sm-8">
 												 <input 
 													type="text" id="fsName" name="fsName" class="form-control"
 													placeholder="订单名称" />
 											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fiGenindex">所属线路</label>
 											<div class="col-sm-3">
 												<input type="hidden" class="form-control" id="fiGenindex">
 												<input type="text" class="form-control" id="genName">
 											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsName">订单编号</label>
 											<div class="col-sm-3">
 												<input type="text" id="fsNo" name="fsNo" readonly="readonly"
 													class="form-control" placeholder="订单id" />
 											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="ftCreatdate">创建日期</label>
 											<div class="col-sm-3">
 												<input type="text" id="ftCreatdate" name="ftCreatdate"
 													class="form-control" placeholder="创建日期" />
 											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsOperId">计&nbsp;调&nbsp;&nbsp;员</label>
 											<div class="col-sm-3">
 												<input type="text" id="fsOperId" name="fsOperName" class="form-control" placeholder="计调员" />
 											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsType">路线类型</label>
 											<div class="col-sm-3">
@@ -108,10 +112,6 @@
 													<option value="02">专家线路</option>
 												</select>
 											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsProperty">组团类型</label>
 											<div class="col-sm-3">
@@ -120,16 +120,16 @@
 													<option value="02">散客拼团</option>
 												</select>
 											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="ftStartdate">发团日期</label>
 											<div class="col-sm-3">
 												<input type="text" id="ftStartdate" name="ftStartdate"
 													class="form-control"  placeholder="发团日期" />
 											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="regionname">发团地点</label>
 											<div class="col-sm-3">
@@ -139,6 +139,10 @@
 													type="hidden" name="fsStartplace" id="regionno" />
 												<div id="selectCity" class="localcity"></div>
 											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="insurenum">保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;险</label>
 											<div class="col-sm-3">
@@ -147,21 +151,18 @@
 													<span class="input-group-addon">份/人/天</span>
 												</div>
 											</div>
+											<label class="col-sm-2 control-label no-padding-right"
+												for="fdInsuerprice">保险费用</label>
+											<div class="col-sm-3">
+												<input type="text" id="fdInsuerprice"
+													name="scheduleBody.fdInsuerprice" class="form-control isFloatGteZero number">
+											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
-												for="fdInsuerprice">保险费用</label>
-											<div class="col-sm-3">
-												<div class="input-group">
-													<input type="text" id="fdInsuerprice"
-														name="scheduleBody.fdInsuerprice" class="form-control isFloatGteZero number">
-													<span class="input-group-addon">￥</span>
-												</div>
-											</div>
-											<label class="col-sm-2 control-label no-padding-right"
-												for="fdPrice">单人报价</label>
+												for="fdPrice">线路报价</label>
 											<div class="col-sm-3">
 												<input type="text" id="fdPrice" name="fdPrice"
 													class="form-control isFloatGteZero number" placeholder="初始报价" />
@@ -262,7 +263,6 @@
 																				<div class="col-sm-2">
 																					<div class="input-group">
 																						<input type="text" id="transportPrice" class="form-control isFloatGteZero number">
-																						<span class="input-group-addon">￥</span>
 																					</div>
 																				</div>
 																				<label class="col-sm-1 control-label"
@@ -270,7 +270,6 @@
 																				<div class="col-sm-2">
 																					<div class="input-group">
 																						<input type="text" id="transportNum" value="1" class="form-control isFloatGteZero digits">
-																						<span class="input-group-addon">辆</span>
 																					</div>
 																				</div>
 																				<div class="col-sm-1">
@@ -294,7 +293,6 @@
 																				<div class="col-sm-2">
 																					<div class="input-group">
 																						<input type="text" id="guidePrice" class="form-control isFloatGteZero number">
-																						<span class="input-group-addon">￥</span>
 																					</div>
 																				</div>
 																				<div class="col-sm-1">
@@ -568,7 +566,6 @@
 																								<div class="col-sm-2">
 																									<div class="input-group">
 																										<input type="text" class="number tccPrice form-control">
-																										<span class="input-group-addon">￥</span>
 																									</div>
 																								</div>
 																								<label class="col-sm-1 control-label">数量</label>
@@ -666,25 +663,25 @@
 											</div>
 										</div>
 									</div>
-									<div hidden="hidden" class="row div_custList">
+									<div class="row div_transfer">
 										<div class="form-group">
-											<label hidden="hidden" class="div_transfer_stat col-sm-2 control-label no-padding-right"
-												for="fiStat">订单状态</label>
-											<div hidden="hidden" class="div_transfer_stat col-sm-3">
-												<select id="fiStat" name="fiStat"
-													class="form-control">
-													<option value="0">待审核</option>
-													<option value="1">已审核</option>
-													<option value="4">已付首款</option>
-													<option value="8">已付全款(可出团)</option>
-												</select>
+											<div hidden="hidden" class="div_transfer_stat">
+												<label class="col-sm-2 control-label no-padding-right"
+													for="fiStat">订单状态</label>
+												<div class="col-sm-3">
+													<select id="fiStat" name="fiStat" readonly="readonly"
+														class="form-control">
+													</select>
+												</div>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right">游客名单</label>
-											<div class="col-sm-1">
-												<button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-success pull-right">上传名单</button>
-											</div>
-											<div class="col-sm-1">
-												<button type="button" class="btn btn_export btn-sm btn-success pull-right">下载名单</button>
+											<div hidden="hidden" class="div_custList">
+												<label class="col-sm-2 control-label no-padding-right">游客名单</label>
+												<div class="col-sm-1">
+													<button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-success pull-right">上传名单</button>
+												</div>
+												<div class="col-sm-1">
+													<button type="button" class="btn btn_export btn-sm btn-success pull-right">下载名单</button>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -947,43 +944,57 @@
 		
 		//增加车型addTransport
 		function addTransport(obj){
-			var index = $("#reslistIndex").val();
-			var data = {
-					"index" : index,
-					"restype" : "cx",
-					"resprop" : "comm",
-					"resno" : $("#transport").val(),
-					"resname" : $("#transport").find("option:selected").text(),
-					"ccno" : "000023"
+			$("#message").hide();
+			if ($("#transportPrice").valid()&&$("#transportNum").valid()) {
+				var index = $("#reslistIndex").val();
+				var data = {
+						"index" : index,
+						"restype" : "cx",
+						"resprop" : "comm",
+						"resno" : $("#transport").val(),
+						"resname" : $("#transport").find("option:selected").text(),
+						"ccno" : "000023"
+				}
+				data["ccname"] = "车辆消费";
+				data["price"] = $("#transportPrice").val();
+				data["cctype"] = "0";
+				data["usernum"] = $("#transportNum").val();
+				var template = Handlebars.compile($("#tr-common").html());
+				$("#table_common tbody").html($("#table_common tbody").html() + template(data));
+				$("#reslistIndex").val(parseInt(index)+1);
+				totalAmount();
+			} else {
+				$("#message").text("输入字段验证错误，请重新编辑后再提交");
+				$("#message").show();
+				return false;
 			}
-			data["ccname"] = "车辆消费";
-			data["price"] = $("#transportPrice").val();
-			data["cctype"] = "0";
-			data["usernum"] = $("#transportNum").val();
-			var template = Handlebars.compile($("#tr-common").html());
-			$("#table_common tbody").html($("#table_common tbody").html() + template(data));
-			$("#reslistIndex").val(parseInt(index)+1);
-			totalAmount();
 		}
 		//增加导游addGuide
 		function addGuide(obj){
-			var index = $("#reslistIndex").val();
-			var data = {
-					"index" : index,
-					"restype" : "dy",
-					"resprop" : "comm",
-					"resno" : $("#guide").val(),
-					"resname" : $("#guideLvl").find("option:selected").text() + "导游-" + $("#guide").find("option:selected").text(),
-					"ccno" : "000000"
+			$("#message").hide();
+			if ($("#guidePrice").valid()) {
+				var index = $("#reslistIndex").val();
+				var data = {
+						"index" : index,
+						"restype" : "dy",
+						"resprop" : "comm",
+						"resno" : $("#guide").val(),
+						"resname" : $("#guideLvl").find("option:selected").text() + "导游-" + $("#guide").find("option:selected").text(),
+						"ccno" : "000000"
+				}
+				data["ccname"] = "价格(通用)";
+				data["price"] = $("#guidePrice").val();
+				data["cctype"] = "0";
+				data["usernum"] = "1";
+				var template = Handlebars.compile($("#tr-common").html());
+				$("#table_common tbody").html($("#table_common tbody").html() + template(data));
+				$("#reslistIndex").val(parseInt(index)+1);
+				totalAmount();
+			} else {
+				$("#message").text("输入字段验证错误，请重新编辑后再提交");
+				$("#message").show();
+				return false;
 			}
-			data["ccname"] = "价格(通用)";
-			data["price"] = $("#guidePrice").val();
-			data["cctype"] = "0";
-			data["usernum"] = "1";
-			var template = Handlebars.compile($("#tr-common").html());
-			$("#table_common tbody").html($("#table_common tbody").html() + template(data));
-			$("#reslistIndex").val(parseInt(index)+1);
-			totalAmount();
 		}
 	</script>
 	<!-- 公共资源模板(车型、导游、景区) -->

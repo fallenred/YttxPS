@@ -68,7 +68,7 @@ public class ClearOrderService implements IClearOrderService{
 	 */
 	@Override
 	public String addFStatement(FStatement fStatement){
-		fStatement.setStatmentId(generateFSId());
+		fStatement.setStatmentId(fStatement.getOrderId());
 		fStatementMapper.insert(fStatement);
 		clearOrderMapper.updateStatById(fStatement.getOrderId());
 		return fStatement.getStatmentId();
