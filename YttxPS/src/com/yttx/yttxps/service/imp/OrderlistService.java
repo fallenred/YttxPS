@@ -199,6 +199,8 @@ public class OrderlistService implements IOrderlistService {
 		if (StringUtils.isNotBlank(scheduleBody.getPrice())){
 			record.setFdPrice(new BigDecimal(scheduleBody.getPrice()));
 		}
+		if("-5".equals(record.getFiStat()))
+			record.setFdTotalfee(record.getFdPrice());
 		return orderlistMapper.updateByPrimaryKeySelective(record);
 	}
 
