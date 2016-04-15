@@ -77,6 +77,11 @@
 				<!-- <item id="13b0" name="订单批次管理" url="/jsp/orderCustom/orderCustom.jsp" /> -->
 				<item id="13c0" name="结算管理" url="/cOrder/page.htm" />
 			</submenu>
-		</item>	
+		</item>
+		<item id="1400" name="线下支付" icon="menu-icon fa fa-sitemap">
+			<submenu>
+				<item id="14a0" name="线下支付确认" url="/payConfir/page.htm" />
+			</submenu>
+		</item>		
 	</menu>
 </xml>
