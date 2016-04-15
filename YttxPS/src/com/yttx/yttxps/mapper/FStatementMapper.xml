@@ -12,7 +12,7 @@
 		<result  column="fs_Order_ID"        property="orderId"          jdbcType="VARCHAR" />
 		<result  column="fs_User_ID"         property="userID"           jdbcType="VARCHAR" />
 		<result  column="fs_User_SubID"      property="userSubID"        jdbcType="VARCHAR" />
-		<result  column="fs_Oper_ID"         property="OperId"           jdbcType="VARCHAR" />
+		<result  column="fs_Oper_ID"         property="operId"           jdbcType="VARCHAR" />
 		<result  column="ft_CreatDate"       property="creatDateDesc"    jdbcType="VARCHAR" />
 		<result  column="fc_Content"         property="orderContent"     jdbcType="CLOB" />
 		<result  column="fd_TotalFee"        property="totalFee"         jdbcType="DECIMAL" />
@@ -209,7 +209,7 @@
 			#{orderId,jdbcType=VARCHAR},
 			#{userID,jdbcType=VARCHAR},
 			#{userSubID,jdbcType=VARCHAR},
-			#{OperId,jdbcType=VARCHAR},
+			#{operId,jdbcType=VARCHAR},
 			sysdate,
 			#{orderContent,jdbcType=CLOB},
 			#{totalFee,jdbcType=DECIMAL},

@@ -2,7 +2,7 @@
  * 表格行事件 -->查看会员详细信息
  */
 function showCustomer(id){
-	var frameSrc = "/member/admin/show.htm?id=" +id;
+	var frameSrc = "/member/admin/show.htm?id=" +encodeURIComponent(id);
     $("#showIframe").attr("src", frameSrc);
     $('#showModal').modal({ show: true, backdrop: 'static' });
 };

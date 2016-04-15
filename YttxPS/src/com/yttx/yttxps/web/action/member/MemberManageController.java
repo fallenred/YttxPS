@@ -1,9 +1,11 @@
 package com.yttx.yttxps.web.action.member;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.CustomInfo;
+import com.yttx.yttxps.model.SysOper;
 import com.yttx.yttxps.model.vo.CostomPageRequest;
 import com.yttx.yttxps.service.IMemberService;
+import com.yttx.yttxps.service.ISysService;
 import com.yttx.yttxps.web.action.BaseController;
 
 /**
@@ -32,6 +36,8 @@ public class MemberManageController extends BaseController {
 	
 	@Autowired
 	private IMemberService memberService;
+	@Autowired
+	private ISysService sysService;
 	
 	/**
 	 * 打开会员管理界面
@@ -57,11 +63,20 @@ public class MemberManageController extends BaseController {
 	
 	/**
 	 * 根据id找到一个会员的详细信息
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value="show.htm")
 	public String  findCustomerById(@RequestParam("id") String id,
-			Model model){
+			Model model) throws UnsupportedEncodingException{
+		id = new String(id.getBytes("ISO-8859-1"),"utf-8");
 		CustomInfo customer = memberService.selectCusById(id);
+		//查询销售人员姓名
+		if (StringUtils.isNotEmpty(customer.getSalesManID())){
+			SysOper oper = sysService.findOperById(customer.getSalesManID());
+			if (oper != null) {
+				customer.setSalesManID(oper.getSysOperName());
+			}
+		}
 		model.addAttribute("cus", customer);
 		return "member/show";
 	}

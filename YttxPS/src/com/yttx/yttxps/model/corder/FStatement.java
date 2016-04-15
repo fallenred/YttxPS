@@ -31,7 +31,7 @@ public class FStatement {
 	private String userSubID;
 	
 	//计调ID
-	private String OperId;
+	private String operId;
 	
 	//创建时间
 	private Date creatDate;
@@ -119,11 +119,11 @@ public class FStatement {
 	}
 
 	public String getOperId() {
-		return OperId;
+		return operId;
 	}
 
 	public void setOperId(String operId) {
-		OperId = operId;
+		this.operId = operId;
 	}
 
 	public Date getCreatDate() {

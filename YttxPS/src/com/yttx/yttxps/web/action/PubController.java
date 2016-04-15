@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.RegionMap;
+import com.yttx.yttxps.model.SysOper;
 import com.yttx.yttxps.service.IPubService;
+import com.yttx.yttxps.service.ISysService;
 
 @Controller
 @Scope("prototype")
@@ -26,6 +28,9 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
 	private IPubService<?> pubService;
+	
+	@Autowired
+	private ISysService sysService;
 
 	/**
 	 * 查询省市县
@@ -59,5 +64,18 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		Map<String, Object> map = (Map<String, Object>) JsonResult.jsonOk();
 		map.put("name", name);
 		return map;
+    }
+	
+	/**
+	 * 查询操作员
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="findOperName.htm", method = RequestMethod.GET)
+	@ResponseBody
+	public Object ajaxfindOperName(String operid){  
+		logger.debug("当前查询的operid {}", operid);
+		SysOper oper = this.sysService.findOperById(operid);
+		return oper;
     }
 }
