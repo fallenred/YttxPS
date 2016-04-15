@@ -706,7 +706,7 @@
 																				</div>
 																				<label class="col-sm-1 control-label" for="fdAmt">金额</label>
 																				<div class="col-sm-1">
-																					<input id="remarksAmt" type="text" class="form-control isFloatGteZero number" />
+																					<input id="remarksAmt" type="text" class="form-control number" />
 																				</div>
 																				<div class="col-sm-1">
 																					<button type="button" id="btn_remarks"
