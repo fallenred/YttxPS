@@ -2,7 +2,6 @@
 	 *	订单支付确认提交
 	 */	
 	$("#orderConfir_submit").on("click", function () {
-		alert();
 		if ($("#editform").valid()) {
 			$.post("/payConfir/orderConfir.htm", $("#editform").serialize(),
 				function(data){
