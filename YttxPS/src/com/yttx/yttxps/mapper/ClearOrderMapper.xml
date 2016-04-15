@@ -25,6 +25,7 @@
 		<result  column="FS_REMARK"          property="remark"         jdbcType="VARCHAR" />
 		<result  column="FI_STAT"            property="stat"           jdbcType="INTEGER" />
 		<result  column="fi_VisitorNum"      property="visitorNum"     jdbcType="INTEGER" />
+		<result  column="FS_TANAME"          property="taname"         jdbcType="VARCHAR" />
 	</resultMap>
 	
 	
@@ -162,44 +163,49 @@
 				o.*
 			from (
 		      SELECT
-		        FS_NO,
-		        FI_GENINDEX,
-		        FS_NAME,
-		        FS_USER_ID,
-		        FS_USER_SUBID,
-		        FS_OPER_ID,
-		       	FT_CREATDATE,
-		        FS_TYPE,
-		        FS_ROUTE_ID,
-		        FS_PROPERTY,
-		        FI_DAYS,
-		       	FT_STARTDATE,
-		        FS_STARTPLACE,
+		        t1.FS_NO,
+		        t1.FI_GENINDEX,
+		        t1.FS_NAME,
+		        t1.FS_USER_ID,
+		        t1.FS_USER_SUBID,
+		        t1.FS_OPER_ID,
+		       	t1.FT_CREATDATE,
+		        t1.FS_TYPE,
+		        t1.FS_ROUTE_ID,
+		        t1.FS_PROPERTY,
+		        t1.FI_DAYS,
+		       	t1.FT_STARTDATE,
+		        t1.FS_STARTPLACE,
 		        pkg_common.findRegionFullName(FS_STARTPLACE) FS_STARTPLACENAME,
-		        FD_PRICE,
-		       	FS_SUMMARY,
-		        FC_SCHEDULE,
-		        FD_TOTALFEE,
-		       	FD_PAIDAMT,
-		        FS_REMARK,
-		        FI_STAT,
-		       	FC_COMMFUZZYSNAPSHOT,
-		        FC_COMMRESSNAPSHOT
+		        t1.FD_PRICE,
+		       	t1.FS_SUMMARY,
+		        t1.FC_SCHEDULE,
+		        t1.FD_TOTALFEE,
+		       	t1.FD_PAIDAMT,
+		        t1.FS_REMARK,
+		        t1.FI_STAT,
+		       	t1.FC_COMMFUZZYSNAPSHOT,
+		        t1.FC_COMMRESSNAPSHOT,
+		        t2.FS_TANAME
 		      FROM 
-		        Torderlist
+		        Torderlist t1 
+		      left join 
+		      	Tcustominfo t2
+		      ON 
+		      	t1.FS_USER_ID = t2.FS_ID
 			WHERE
 				1=1
 				<if test="orderId != null and orderId !=''">
 					AND 
-						FS_NO   like '%'||#{orderId,jdbcType = VARCHAR}||'%'
+						t1.FS_NO   like '%'||#{orderId,jdbcType = VARCHAR}||'%'
 				</if>
 				<if test="orderName != null and orderName !=''">
 					AND
-						FS_NAME like '%'||#{orderName,jdbcType = VARCHAR}||'%'
+						t1.FS_NAME like '%'||#{orderName,jdbcType = VARCHAR}||'%'
 				</if>
 				<if test="operId != null and operId !=''">
 					AND
-						FS_OPER_ID = #{operId,jdbcType=VARCHAR}
+						t1.FS_OPER_ID = #{operId,jdbcType=VARCHAR}
 				</if>
 				<if test="startDate != null and startDate !=''">
 					AND
@@ -211,17 +217,17 @@
 				</if>
 				<if test="routeType != null and routeType != ''">
 					AND
-						FS_TYPE = #{routeType,jdbcType=VARCHAR}
+						t1.FS_TYPE = #{routeType,jdbcType=VARCHAR}
 				</if>
 				<if test="itemProp != null and itemProp != ''">
 					AND
-						FS_PROPERTY = #{itemProp,jdbcType=VARCHAR}
+						t1.FS_PROPERTY = #{itemProp,jdbcType=VARCHAR}
 				</if>
 				<if test="stat != null">
 					AND
-					FI_stat = #{stat,jdbcType=VARCHAR}
+					t1.FI_stat = #{stat,jdbcType=VARCHAR}
 				</if>
-				order by FS_NO
+				order by t1.FS_NO
 				) o
 				<if test="endrow != null">
 					where ROWNUM &lt;= #{endrow}

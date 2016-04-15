@@ -61,6 +61,17 @@ public class FStatement {
 	
 	//状态
 	private Long stat;
+	
+	//旅行社名称
+	private String taname;
+
+	public String getTaname() {
+		return taname;
+	}
+
+	public void setTaname(String taname) {
+		this.taname = taname;
+	}
 
 	public String getStatmentId() {
 		return statmentId;

@@ -71,7 +71,7 @@ function setStateFilterParams(postData){
 	postData["fstatFilters.stat"] = $.trim($("#statement_stat").val());
 	//结算单号
 	postData["fstatFilters.statementId"] = $.trim($("#statement_id").val());
-	//订单号
+	//订单编号
 	postData["fstatFilters.orderId"] = $.trim($("#statement_order_id").val());
 	//客户ID
 	postData["fstatFilters.userId"] = $.trim($("#statement_user_id").val());
@@ -143,7 +143,7 @@ $(document).ready(function(){
 		datatype : "json",
 		mtype : 'POST',
 		height : 400,
-		colNames : ['订单ID','订单名称','用户ID','创建时间','状态' ,'操作'],
+		colNames : ['订单编号','订单名称','用户ID','旅行社名称','创建时间','状态' ,'操作'],
 		colModel : [{
 			name : 'no',
 			index : 'no',
@@ -153,6 +153,12 @@ $(document).ready(function(){
 			name : 'name',
 			index : 'name',
 			width : 200,
+			sortable : false,
+		},
+		{
+			name : 'taname',
+			index : 'taname',
+			width : 100,
 			sortable : false,
 		},
 		{
@@ -281,39 +287,33 @@ $(document).ready(function(){
 		datatype : "json",
 		mtype : 'POST',
 		height : 400,
-		colNames : ['结算单号','结算单名称','订单号','客户编号','创建时间' ,'状态','操作'],
+		colNames : ['订单编号','订单名称','用户ID','旅行社名称','创建时间' ,'状态','操作'],
 		colModel : [{
-			name : 'statmentId',
-			index : 'statmentId',
-			width : 90,
-			formatter : function(v, opt, rec) {
-				return "<div><a href='/cOrder/showFS.htm?fsId="
-				+rec.statmentId+"'>"+rec.statmentId+"</a></div>";
-			},
-		},
-		{
-			name : 'statmentName',
-			index :'statmentName',
-			width : 300,
-			sortable : false,
-		},
-		{
 			name : 'orderId',
 			index : 'orderId',
 			width : 160,
 			sortable : false,
-		}, {
+		},{
+			name : 'statmentName',
+			index :'statmentName',
+			width : 300,
+			sortable : false,
+		},{
 			name : 'userID',
 			index : 'userID',
 			width : 140,
 			sortable : false,
-		}, {
+		},{
+			name : 'taname',
+			index : 'taname',
+			width : 100,
+			sortable : false,
+		},{
 			name : 'creatDateDesc',
 			index : 'creatDateDesc',
 			width : 150,
 			sortable : false,
-		},  
-		{
+		},{
 			name : 'stat',
 			index : 'stat',
 			width : 120,

@@ -875,34 +875,41 @@ jQuery(function($) {
 	
 	//添加备注项
 	$(document).on('click key', '#btn_remarks', function(event){
-		var remarksTemplate = Handlebars.compile($("#tr-remarks").html());
-		var fsOrderId = $("#fsNo").val();
-		var reslistIndex = $("#remarksIndex").val();
-		var ftDate = getNowFormatDate();
-		var fsContent = $("#fsContent").val();
-		var fdAmt = $("#remarksAmt").val();
-		if (fdAmt == '') {
-			alert("备注金额不能为空！");
-			return;
+		$("#message").hide();
+		if($("#remarksAmt").valid()){
+			var remarksTemplate = Handlebars.compile($("#tr-remarks").html());
+			var fsOrderId = $("#fsNo").val();
+			var reslistIndex = $("#remarksIndex").val();
+			var ftDate = getNowFormatDate();
+			var fsContent = $("#fsContent").val();
+			var fdAmt = $("#remarksAmt").val();
+			if (fdAmt == '') {
+				alert("备注金额不能为空！");
+				return;
+			}
+			var fiStat = '0';
+			var data = {
+					"index" : reslistIndex,
+					"fsOrderId" : fsOrderId,
+					"fiSeq" : reslistIndex,
+					"fsOperId" : fsOperId,
+					"ftDate" : ftDate,
+					"fsContent" : fsContent,
+					"fdAmt" : fdAmt,
+					"fiStat" : fiStat
+			}
+			$("#remarksIndex").val(parseInt($("#remarksIndex").val())+1);
+			$('#table_remarks tbody').html($('#table_remarks tbody').html() + remarksTemplate(data));
+			$("#fsContent").val('');
+			$("#remarksAmt").val('');
+			
+			totalAmt = parseFloat($("#totalfee").val()) + parseFloat(fdAmt);
+			$("#totalfee").val(totalAmt.toFixed(2));
+		} else {
+			$("#message").text("输入字段验证错误，请重新编辑后再提交");
+			$("#message").show();
+			return false;
 		}
-		var fiStat = '0';
-		var data = {
-				"index" : reslistIndex,
-				"fsOrderId" : fsOrderId,
-				"fiSeq" : reslistIndex,
-				"fsOperId" : fsOperId,
-				"ftDate" : ftDate,
-				"fsContent" : fsContent,
-				"fdAmt" : fdAmt,
-				"fiStat" : fiStat
-		}
-		$("#remarksIndex").val(parseInt($("#remarksIndex").val())+1);
-		$('#table_remarks tbody').html($('#table_remarks tbody').html() + remarksTemplate(data));
-		$("#fsContent").val('');
-		$("#remarksAmt").val('');
-		
-		totalAmt = parseFloat($("#totalfee").val()) + parseFloat(fdAmt);
-		$("#totalfee").val(totalAmt.toFixed(2));
 	});
 	
 	//	提交

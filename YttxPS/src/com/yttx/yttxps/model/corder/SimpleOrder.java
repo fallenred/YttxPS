@@ -83,6 +83,16 @@ public class SimpleOrder {
 	protected String commResSnapshot;
 	
 	private Integer visitorNum;
+	
+	private String taname;
+
+	public String getTaname() {
+		return taname;
+	}
+
+	public void setTaname(String taname) {
+		this.taname = taname;
+	}
 
 	public String getNo() {
 		return no;
