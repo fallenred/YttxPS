@@ -876,7 +876,7 @@ jQuery(function($) {
 	//添加备注项
 	$(document).on('click key', '#btn_remarks', function(event){
 		$("#message").hide();
-		if($("#remarksAmt").valid()){
+		if($("#remarksAmt").valid() && $("#fsContent").valid()){
 			var remarksTemplate = Handlebars.compile($("#tr-remarks").html());
 			var fsOrderId = $("#fsNo").val();
 			var reslistIndex = $("#remarksIndex").val();

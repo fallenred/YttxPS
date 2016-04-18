@@ -262,7 +262,7 @@
 																				<label class="col-sm-1 control-label" for="fsRegions">价格</label>
 																				<div class="col-sm-2">
 																					<div class="input-group">
-																						<input type="text" id="transportPrice" class="form-control isFloatGteZero number">
+																						<input type="text" id="transportPrice" class="form-control isFloatGteZero number required">
 																					</div>
 																				</div>
 																				<label class="col-sm-1 control-label"
@@ -292,7 +292,7 @@
 																				<label class="col-sm-1 control-label" for="fsRegions">价格</label>
 																				<div class="col-sm-2">
 																					<div class="input-group">
-																						<input type="text" id="guidePrice" class="form-control isFloatGteZero number">
+																						<input type="text" id="guidePrice" class="form-control isFloatGteZero number required">
 																					</div>
 																				</div>
 																				<div class="col-sm-1">
@@ -395,7 +395,7 @@
 																				</div>
 																				<label class="col-sm-1 control-label">数量</label>
 																				<div class="col-sm-1">
-																					<input type="text" id="usernum" class="digits form-control" value="1" placeholder="数量">
+																					<input type="text" id="usernum" class="digits form-control required" value="1" placeholder="数量">
 																				</div>
 																				<div class="col-sm-1">
 																					<button type="button" class="btn btn_add btn_res btn-sm btn-success">添加</button>
@@ -565,7 +565,7 @@
 																								<label class="col-sm-1 control-label">价格</label>
 																								<div class="col-sm-2">
 																									<div class="input-group">
-																										<input type="text" class="number tccPrice form-control">
+																										<input type="text" class="number tccPrice form-control required">
 																									</div>
 																								</div>
 																								<label class="col-sm-1 control-label">数量</label>
@@ -702,11 +702,11 @@
 																			<div class="form-group">
 																				<label class="col-sm-1 control-label" for="fsContent">内容</label>
 																				<div class="col-sm-7">
-																					<input id="fsContent" type="text" class="form-control" />
+																					<input id="fsContent" type="text" class="form-control required" />
 																				</div>
 																				<label class="col-sm-1 control-label" for="fdAmt">金额</label>
-																				<div class="col-sm-1">
-																					<input id="remarksAmt" type="text" class="form-control number" />
+																				<div class="col-sm-2">
+																					<input id="remarksAmt" type="text" class="form-control number required" />
 																				</div>
 																				<div class="col-sm-1">
 																					<button type="button" id="btn_remarks"
