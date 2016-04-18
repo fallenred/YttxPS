@@ -104,6 +104,7 @@ public class PayConfirService implements IPayConfirService{
 		trlist.setFdAmt(statement.getAmt());
 		trlist.setFiStat(BigDecimal.ONE);
 		trlistMapper.updateByPrimaryKeySelective(trlist);
+		this.fStatementMapper.updateFSSelective(statement);
 	}
 	
 	/**

@@ -73,9 +73,11 @@
 												</li>
 												<c:forEach items="${fsmt_stat_list}" var="item">
 													<li>
-														<a data-toggle="tab" data-stat="${item.fsDictno}" href="#stat_div" class="statPane">
-															<i></i>${item.fsDictname}
-														</a>
+														<c:if test="${item.fsDictno != -1}">
+															<a data-toggle="tab" data-stat="${item.fsDictno}" href="#stat_div" class="statPane">
+																<i></i>${item.fsDictname}
+															</a>
+														</c:if>
 													</li>
 												</c:forEach>
 											</ul>

@@ -190,6 +190,17 @@ $(document).ready(function(){
 		 reloadFStatmentTable();
 	})
 	
+	/**
+	 * 结算单--重新加载结算单列表
+	 */
+	function reloadFStatmentTable(){
+		var postData = $("#stat_table").jqGrid("getGridParam","postData");
+		setStateFilterParams(postData);//封装查询条件参数
+		$("#stat_table").jqGrid("setGridParam", {//重新加载数据
+			datatype : 'json',
+			postData : postData
+		}).trigger("reloadGrid");
+	}
 	
 	/**
 	 * 结算单--"标签卡"的点击响应函数

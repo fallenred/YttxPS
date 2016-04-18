@@ -135,7 +135,7 @@
 												</div>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
-												for="fdPrice">已付金额</label>
+												>已付金额</label>
 											<div class="col-sm-3">
 												<div class="input-group">
 													<input type="text" id="paidAmt"
@@ -147,12 +147,18 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right"
-												for="fdPrice">收款金额</label>
+											<label class="col-sm-2 control-label no-padding-right">应收金额</label>
+											<div class="col-sm-3">
+												<div class="input-group">
+													<input type="text" class="form-control" value="${statement.amt}" readonly="readonly"/>
+													<span class="input-group-addon">￥</span>
+												</div>
+											</div>
+											<label class="col-sm-2 control-label no-padding-right">收款金额</label>
 											<div class="col-sm-3">
 												<div class="input-group">
 													<input type="text" id="amt"
-														name="amt" class="form-control required isFloatGteZero number" value="${order.amt }"/>
+														name="amt" class="form-control required isFloatGteZero number" value=""/>
 													<span class="input-group-addon">￥</span>
 												</div>
 											</div>

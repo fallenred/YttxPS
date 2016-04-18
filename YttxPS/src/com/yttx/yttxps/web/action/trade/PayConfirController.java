@@ -156,7 +156,7 @@ public class PayConfirController extends BaseController {
 		String operid = sessionEntity.getId();
 		try {
 			statement.setStatmentId(fsId);
-			statement.setAmt(amt);
+			statement.setPaidAmt(amt);
 			statement.setStat(1l);
 			payConfirService.statementConfir(statement, operid);
 		} catch (Exception e) {
