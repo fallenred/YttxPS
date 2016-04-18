@@ -139,7 +139,7 @@
 											<div class="col-sm-3">
 												<div class="input-group">
 													<input type="text" id="paidAmt"
-														name="paidAmt" class="form-control" value="${statement.paidAmt }" readonly="readonly"/>
+														name="paidAmt" class="form-control" value="${statement.totalFee - statement.amt}" readonly="readonly"/>
 													<span class="input-group-addon">￥</span>
 												</div>
 											</div>

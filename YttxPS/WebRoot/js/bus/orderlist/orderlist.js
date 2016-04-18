@@ -372,7 +372,7 @@ jQuery(function($) {
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
-				colNames : ['操作', '订单编号', '线路统称Idx', '订单名称', '用户ID', '用户子ID', '计调ID', '创建时间', '线路类型', 'fs_Route_ID', '组团类型', '线路天数','旅行社名称',
+				colNames : ['操作', '订单编号', '线路统称Idx', '订单名称', '用户编号', '子用户编号', '计调ID', '创建时间', '线路类型', 'fs_Route_ID', '组团类型', '线路天数','旅行社名称',
 				            '发团日期', '发团地id', '发团地', '线路报价', '线路摘要', '预估全价', '已缴金额', '整体备注', '状态', '验证码', '日程快照', '资源快照', '总人数','保险费用'],
 				colModel : [ {
 					name : 'myac',
@@ -403,17 +403,15 @@ jQuery(function($) {
 				}, {
 					name : 'fsUserId',
 					index : 'fsUserId',
-					width : 100,
+					width : 50,
 					editable : true,
-					sorttype : "int",
-					hidden : true
+					sorttype : "int"
 				}, {
 					name : 'fsUserSubid',
 					index : 'fsUserSubid',
-					width : 100,
+					width : 50,
 					editable : true,
-					sorttype : "int",
-					hidden : true
+					sorttype : "int"
 				}, {
 					name : 'fsOperId',
 					index : 'fsOperId',
@@ -511,7 +509,8 @@ jQuery(function($) {
 					index : 'regionname',
 					width : 50,
 					editable : true,
-					sorttype : "int"
+					sorttype : "int",
+					hidden : true
 				}, {
 					name : 'fdPrice',
 					index : 'fdPrice',

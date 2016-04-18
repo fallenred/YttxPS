@@ -105,7 +105,7 @@ $(document).ready(function(){
 		datatype : "json",
 		mtype : 'POST',
 		height : 400,
-		colNames : ['订单ID','订单名称','用户ID','创建时间','状态' ,'操作'],
+		colNames : ['订单ID','订单名称','用户编号','创建时间','状态' ,'操作'],
 		colModel : [{
 			name : 'no',
 			index : 'no',
