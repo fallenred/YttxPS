@@ -77,7 +77,7 @@
 												for="fiGenindex">所属线路</label>
 											<div class="col-sm-3">
 												<input type="hidden" class="form-control" id="fiGenindex">
-												<input type="text" class="form-control" id="genName">
+												<input type="text" class="form-control" id="genName" readonly="readonly">
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsName">订单编号</label>
@@ -93,12 +93,12 @@
 												for="ftCreatdate">创建日期</label>
 											<div class="col-sm-3">
 												<input type="text" id="ftCreatdate" name="ftCreatdate"
-													class="form-control" placeholder="创建日期" />
+													class="form-control" placeholder="创建日期" readonly="readonly"/>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsOperId">计&nbsp;调&nbsp;&nbsp;员</label>
 											<div class="col-sm-3">
-												<input type="text" id="fsOperId" name="fsOperName" class="form-control" placeholder="计调员" />
+												<input type="text" id="fsOperId" name="fsOperName" class="form-control" placeholder="计调员" readonly="readonly"/>
 											</div>
 										</div>
 									</div>
@@ -128,7 +128,7 @@
 												for="ftStartdate">发团日期</label>
 											<div class="col-sm-3">
 												<input type="text" id="ftStartdate" name="ftStartdate"
-													class="form-control"  placeholder="发团日期" />
+													class="form-control"  placeholder="发团日期" readonly="readonly"/>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="regionname">发团地点</label>
@@ -166,6 +166,13 @@
 											<div class="col-sm-3">
 												<input type="text" id="fdPrice" name="fdPrice"
 													class="form-control isFloatGteZero number" placeholder="初始报价" />
+											</div>
+											<label class="col-sm-2 control-label no-padding-right"
+													for="fiStat">订单状态</label>
+											<div class="col-sm-3">
+												<select id="fiStat" name="fiStat" readonly="readonly"
+															class="form-control">
+												</select>
 											</div>
 										</div>
 									</div>
@@ -665,7 +672,7 @@
 									</div>
 									<div class="row div_transfer">
 										<div class="form-group">
-											<div hidden="hidden" class="div_transfer_stat">
+											<!-- <div hidden="hidden" class="div_transfer_stat">
 												<label class="col-sm-2 control-label no-padding-right"
 													for="fiStat">订单状态</label>
 												<div class="col-sm-3">
@@ -673,7 +680,7 @@
 														class="form-control">
 													</select>
 												</div>
-											</div>
+											</div> -->
 											<div hidden="hidden" class="div_custList">
 												<label class="col-sm-2 control-label no-padding-right">游客名单</label>
 												<div class="col-sm-1">

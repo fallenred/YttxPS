@@ -161,7 +161,7 @@
 											<div class="col-sm-3">
 												<div class="input-group">
 													<input type="text" id="paidAmt"
-														name="paidAmt" class="form-control required isFloatGteZero number" value="${order.paidAmt }"/>
+														name="paidAmt" class="form-control required number" value="${order.paidAmt }"/>
 													<span class="input-group-addon">￥</span>
 												</div>
 											</div>
