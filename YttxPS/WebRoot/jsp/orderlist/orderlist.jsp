@@ -10,7 +10,6 @@
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
 <style type="text/css">
-
 </style>
 </head>
 <body class="no-skin">
@@ -82,25 +81,34 @@
 									<div class="panel-body">
 										<form class="form-horizontal" role="form" id="queryfield">
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="fsNo">订单编号</label>
+												<label class="col-sm-1 control-label no-padding-right"
+													for="fsNo">订单编号</label>
 												<div class="col-sm-2">
-													<input class="form-control" maxlength="20" type="text" id="fsNo" placeholder="订单编号" />
+													<input class="form-control" maxlength="20" type="text"
+														id="fsNo" placeholder="订单编号" />
 												</div>
-												<label class="col-sm-1 control-label no-padding-right" for="fsName">订单名称</label>
+												<label class="col-sm-1 control-label no-padding-right"
+													for="fsName">订单名称</label>
 												<div class="col-sm-2">
-													<input class="form-control" maxlength="150" type="text" id="fsName" placeholder="订单名称" />
+													<input class="form-control" maxlength="150" type="text"
+														id="fsName" placeholder="订单名称" />
 												</div>
-												<label class="col-sm-1 control-label no-padding-right" for="fsTaName">旅行社名称</label>
+												<label class="col-sm-1 control-label no-padding-right"
+													for="fsTaName">旅行社名称</label>
 												<div class="col-sm-2">
-													<input class="form-control" maxlength="100" type="text" id="fsTaName" placeholder="旅行社名称" />
+													<input class="form-control" maxlength="100" type="text"
+														id="fsTaName" placeholder="旅行社名称" />
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-1 control-label no-padding-right" for="fsId">旅行社账号</label>
+												<label class="col-sm-1 control-label no-padding-right"
+													for="fsId">旅行社账号</label>
 												<div class="col-sm-2">
-													<input class="form-control" maxlength="100" type="text" id="fsId" placeholder="旅行社账号" />
+													<input class="form-control" maxlength="100" type="text"
+														id="fsId" placeholder="旅行社账号" />
 												</div>
-												<label class="col-sm-1 control-label no-padding-right" for="fsType">线路类型</label>
+												<label class="col-sm-1 control-label no-padding-right"
+													for="fsType">线路类型</label>
 												<div class="col-sm-2">
 													<select class="form-control" id="fsType">
 														<option value="">----线路类型----</option>
@@ -133,30 +141,28 @@
 													 -->
 												</div>
 											</div>
+											<div class="col-md-offset-3 col-md-9">
+												<button class="btn btn-xs btn-info" type="button"
+													id="submit">
+													<i class="ace-icon fa fa-check bigger-110"></i> 查询
+												</button>
 
-											<div class="clearfix form-actions">
-												<div class="col-md-offset-3 col-md-9">
-													<button class="btn btn-info" type="button" id="submit">
-														<i class="ace-icon fa fa-check bigger-110"></i> 提交
-													</button>
-
-													&nbsp; &nbsp; &nbsp;
-													<button class="btn" type="reset" id="reset">
-														<i class="ace-icon fa fa-undo bigger-110"></i> 重置
-													</button>
-												</div>
+												&nbsp; &nbsp; &nbsp;
+												<button class="btn btn-xs" type="reset" id="reset">
+													<i class="ace-icon fa fa-undo bigger-110"></i> 重置
+												</button>
 											</div>
 										</form>
 									</div>
-
 								</div>
 							</div>
 							<table id="grid-table"></table>
 							<div id="grid-pager"></div>
 
 							<!-- 定制线路 -->
-							<div class="modal fade" id="customizationModal" tabindex="-1" role="dialog"
-								aria-labelledby="customizationModalLabel" aria-hidden="true">
+							<div class="modal fade" id="customizationModal" tabindex="-1"
+								role="dialog" aria-labelledby="customizationModalLabel"
+								aria-hidden="true">
 								<div class="modal-dialog" style="width: 100%;">
 									<div class="modal-content">
 										<div class="modal-header">
