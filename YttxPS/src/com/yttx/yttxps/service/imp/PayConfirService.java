@@ -92,7 +92,7 @@ public class PayConfirService implements IPayConfirService{
 		Criteria criteria = example.createCriteria();
 		criteria.andFsCloseIdEqualTo(String.format("%-20s", statement.getStatmentId()));
 		criteria.andFsTrcodeEqualTo("1004");
-		criteria.andFiTrtypeEqualTo(BigDecimal.ONE);
+		//criteria.andFiTrtypeEqualTo(BigDecimal.ONE);//支付状态
 		criteria.andFsTrchannelEqualTo("06");
 		List<Trlist> list = trlistMapper.selectByExample(example);
 		if (CollectionUtils.isEmpty(list) || list.size() > 1) {

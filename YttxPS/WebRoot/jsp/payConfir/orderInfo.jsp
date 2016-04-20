@@ -183,7 +183,7 @@
 									<button onclick="history.go(-1)" type="button" class="btn btn-sm btn-default"
 										data-dismiss="modal">返回</button>
 									<button id="orderConfir_submit" type="button"
-										class="btn btn-sm btn-primary">确认收款</button>
+										class="btn btn-sm btn-primary">确认支付</button>
 								</div>
 							</form>
 							<!-- PAGE CONTENT ENDS -->

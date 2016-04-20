@@ -50,4 +50,40 @@ public class Constants {
 
 		public abstract BigDecimal getVal();
 	}
+	
+	/**
+	 * 消息接收角色
+	 */
+	public enum RecRole {
+		/** 忽略 */
+		CANCEL {public int getVal(){return -1;}},
+		/** 所有人 */
+		ALL {public int getVal(){return 0;}},
+		/** 主管 */
+		DIRECTOR {public int getVal(){return 1;}},
+		/** 操作员 */
+		OPERATOR {public int getVal(){return 2;}};
+
+		public abstract int getVal();
+	}
+	
+	/**
+	 * 消息模板
+	 */
+	public enum MsgTemp {
+		/** 用户审核 */
+		AUDIT {public int getVal(){return 1002;}},
+		/** 报价 */
+		DIRECTOR {public int getVal(){return 1;}},
+		/** 订单审核 */
+		ORDER_AUDIT {public int getVal(){return 2;}},
+		/** 出团 */
+		TOURS {public int getVal(){return 2;}},
+		/** 订单备注 */
+		ORDER_REMARK {public int getVal(){return 2;}},
+		/** 结算单 */
+		STATEMENT {public int getVal(){return 2;}};
+
+		public abstract int getVal();
+	}
 }
