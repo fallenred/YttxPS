@@ -72,18 +72,22 @@ public class Constants {
 	 */
 	public enum MsgTemp {
 		/** 用户审核 */
-		AUDIT {public int getVal(){return 1002;}},
+		AUDIT {public String getVal(){return "1002";}},
 		/** 报价 */
-		DIRECTOR {public int getVal(){return 1;}},
-		/** 订单审核 */
-		ORDER_AUDIT {public int getVal(){return 2;}},
+		DIRECTOR {public String getVal(){return "1002";}},
+		/** 订制线路订单审核 */
+		CUS_ORDER_AUDIT {public String getVal(){return "1002";}},
+		/** 专家线路订单审核 */
+		EXP_ORDER_AUDIT {public String getVal(){return "1002";}},
 		/** 出团 */
-		TOURS {public int getVal(){return 2;}},
+		TOURS {public String getVal(){return "1002";}},
 		/** 订单备注 */
-		ORDER_REMARK {public int getVal(){return 2;}},
+		ORDER_REMARK {public String getVal(){return "1002";}},
 		/** 结算单 */
-		STATEMENT {public int getVal(){return 2;}};
+		STATEMENT {public String getVal(){return "1002";}},
+		/** 结算完毕 */
+		STATEMENT_DONE {public String getVal(){return "1002";}};
 
-		public abstract int getVal();
+		public abstract String getVal();
 	}
 }
