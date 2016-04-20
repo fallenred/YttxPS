@@ -130,7 +130,7 @@
 												for="fdInsuerprice">预估全价</label>
 											<div class="col-sm-3">
 												<div class="input-group">
-													<input type="text" id="totalFee" class="form-control" value="${statement.totalFee }" readonly="readonly">
+													<input type="text" id="totalFee" name="totalFee" class="form-control" value="${statement.totalFee }" readonly="readonly">
 													<span class="input-group-addon">￥</span>
 												</div>
 											</div>
@@ -138,8 +138,7 @@
 												>已付金额</label>
 											<div class="col-sm-3">
 												<div class="input-group">
-													<input type="text" id="paidAmt"
-														name="paidAmt" class="form-control" value="${statement.totalFee - statement.amt}" readonly="readonly"/>
+													<input type="text" name="paidAmt" class="form-control" value="${statement.totalFee - statement.amt}" readonly="readonly"/>
 													<span class="input-group-addon">￥</span>
 												</div>
 											</div>

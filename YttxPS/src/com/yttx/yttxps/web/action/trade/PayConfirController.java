@@ -122,7 +122,10 @@ public class PayConfirController extends BaseController {
 	}
 	
 	/**
-	 * ajax订单支付确认
+	 * 订单确认支付
+	 * @param orderId
+	 * @param paidAmt 支付金额
+	 * @return
 	 */
 	@RequestMapping(value="orderConfir.htm")
 	@ResponseBody
@@ -145,18 +148,24 @@ public class PayConfirController extends BaseController {
 	}
 	
 	/**
-	 * ajax结算单支付确认
+	 * 结算单支付确认
+	 * @param fsId
+	 * @param totalFee 预估金额
+	 * @param paidAmt 支付金额
+	 * @param amt 双方需交易金额
+	 * @return
 	 */
 	@RequestMapping(value="statementConfir.htm")
 	@ResponseBody
-	public Object ajaxStatementConfir(@RequestParam("fsId") String fsId, BigDecimal amt){
+	public Object ajaxStatementConfir(@RequestParam("fsId") String fsId, BigDecimal totalFee, BigDecimal paidAmt, BigDecimal amt){
 		FStatement statement = new FStatement();
 		HttpSession session = request.getSession();
 		SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
 		String operid = sessionEntity.getId();
 		try {
 			statement.setStatmentId(fsId);
-			statement.setPaidAmt(amt);
+			statement.setPaidAmt(paidAmt.add(amt));
+			statement.setAmt(totalFee.subtract(statement.getPaidAmt()));
 			statement.setStat(1l);
 			payConfirService.statementConfir(statement, operid);
 		} catch (Exception e) {
