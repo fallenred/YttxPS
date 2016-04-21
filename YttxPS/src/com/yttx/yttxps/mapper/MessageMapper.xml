@@ -226,6 +226,34 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  
+  <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
+    select count(*) from TMESSAGE where 1=1 
+      <if test="msgStat != null" >
+        and FI_MSGSTAT = #{msgStat}
+      </if>
+  </select>
+  
+  <select id="selectSelectivePage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from ( 
+      select ROWNUM as rowno, t.*  from(
+      	 select tm.* from TMESSAGE tm where 1=1 
+		      <if test="msgStat != null" >
+		        and FI_MSGSTAT = #{msgStat}
+		      </if>
+		    order by 
+		    	FT_MSGDATE
+		)t
+		where 1=1
+      <if test="endrow != null" >
+        and ROWNUM &lt;= #{endrow}
+      </if>
+      ) tt 
+      where 1=1
+      <if test="startrow != null" >
+        and tt.rowno &gt; #{startrow}
+      </if>
+  </select>
   <update id="updateByExampleSelective" parameterType="map" >
     <!--
       WARNING - @mbggenerated
