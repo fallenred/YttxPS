@@ -143,15 +143,10 @@ $(document).ready(function(){
 		datatype : "json",
 		mtype : 'POST',
 		height : 400,
-		colNames : ['结算单编号','订单编号','订单名称','用户ID','旅行社名称','创建时间','状态' ,'操作'],
+		colNames : ['订单编号','订单名称','用户ID','旅行社名称','创建时间','状态' ,'操作'],
 		colModel : [{
 			name : 'no',
 			index : 'no',
-			width : 140,
-			hidden : true
-		}, {
-			name : 'orderId',
-			index : 'orderId',
 			width : 140
 		}, {
 			name : 'name',
