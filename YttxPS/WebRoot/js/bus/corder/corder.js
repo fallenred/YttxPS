@@ -152,8 +152,7 @@ $(document).ready(function(){
 		}, {
 			name : 'orderId',
 			index : 'orderId',
-			width : 140,
-			hidden : true
+			width : 140
 		}, {
 			name : 'name',
 			index : 'name',
