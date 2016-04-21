@@ -71,14 +71,12 @@ public class Constants {
 	 * 消息模板
 	 */
 	public enum MsgTemp {
-		/** 用户审核 */
-		AUDIT {public String getVal(){return "1002";}},
+		/** 用户审核通过 */
+		AUDIT_SUCCESS {public String getVal(){return "1030";}},
 		/** 报价 */
-		DIRECTOR {public String getVal(){return "1002";}},
-		/** 订制线路订单审核 */
-		CUS_ORDER_AUDIT {public String getVal(){return "1002";}},
-		/** 专家线路订单审核 */
-		EXP_ORDER_AUDIT {public String getVal(){return "1002";}},
+		DIRECTOR {public String getVal(){return "2020";}},
+		/** 订单审核 */
+		ORDER_AUDIT {public String getVal(){return "2040";}},
 		/** 出团 */
 		TOURS {public String getVal(){return "1002";}},
 		/** 订单备注 */

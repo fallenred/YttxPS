@@ -14,5 +14,5 @@ public interface IMsgService {
 	 * 保存需要推送的消息
 	 * @param obj
 	 */
-	void saveMsg(Object obj);
+	void saveMsg(Object obj, String sendid);
 }

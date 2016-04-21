@@ -44,7 +44,7 @@ public class OrderlistService implements IOrderlistService {
 	private TOrderCustomMapper<TOrderCustomWithBLOBs> orderCustomMapper;
 
 	@Autowired
-	private TRemarksMapper<TRemarks> remarksMapper ;
+	private TRemarksMapper<TRemarks> remarksMapper;
 	
 	@Override
 	public int selectCountSelective(Map<String, Object> map) {

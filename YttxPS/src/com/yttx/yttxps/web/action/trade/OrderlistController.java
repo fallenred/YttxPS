@@ -40,12 +40,12 @@ import com.yttx.yttxps.model.TOrderlistWithBLOBs;
 import com.yttx.yttxps.model.TRemarksExample;
 import com.yttx.yttxps.model.vo.OrderlistRequest;
 import com.yttx.yttxps.service.IDictService;
+import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.service.IOrderCusListService;
 import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.service.IRemarksService;
 import com.yttx.yttxps.web.action.BaseController;
-import com.yttx.yttxps.web.action.LoginController;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
 import com.yttx.yttxps.xml.bean.Body;
 import com.yttx.yttxps.xml.bean.Daylist;
@@ -56,7 +56,7 @@ import com.yttx.yttxps.xml.bean.Root;
 @RequestMapping("orderlist/")
 public class OrderlistController extends BaseController {
 	
-static Logger logger = LoggerFactory.getLogger(LoginController.class);
+static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 	
 	@Autowired
 	private IOrderCusListService orderCusListService;
@@ -65,9 +65,11 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@Autowired
 	private IPubService<?> pubService;
 	@Autowired
-	private IRemarksService remarksService;;
+	private IRemarksService remarksService;
 	@Autowired
-	private IDictService dictService;;
+	private IDictService dictService;
+	@Autowired
+	private IMsgService msgService;
 	
 	/**
 	 * 分页查询订单信息
@@ -210,6 +212,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
 			orderlist.setFsOperId(sessionEntity.getId());
 			orderlistService.update(orderlist);
+			this.msgService.saveMsg(orderlist, sessionEntity.getId());
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -234,6 +237,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
 			orderlist.setFsOperId(sessionEntity.getId());
 			orderlistService.update4custom(orderlist);
+			this.msgService.saveMsg(orderlist, sessionEntity.getId());
 		}
 		catch(Exception e){
 			e.printStackTrace();

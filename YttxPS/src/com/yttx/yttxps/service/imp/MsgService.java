@@ -19,12 +19,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.yttx.except.BusinessException;
 import com.yttx.yttxps.comm.Constants.MsgTemp;
 import com.yttx.yttxps.comm.Constants.RecRole;
+import com.yttx.yttxps.mapper.CustomInfoMapper;
 import com.yttx.yttxps.mapper.CustomOperMapper;
 import com.yttx.yttxps.mapper.MessageAuthMapper;
 import com.yttx.yttxps.mapper.MessageMapper;
+import com.yttx.yttxps.mapper.TOrderlistMapper;
 import com.yttx.yttxps.model.CustomInfo;
 import com.yttx.yttxps.model.CustomOper;
 import com.yttx.yttxps.model.CustomOperExample;
@@ -34,6 +37,7 @@ import com.yttx.yttxps.model.TOrderlist;
 import com.yttx.yttxps.model.TRemarks;
 import com.yttx.yttxps.model.corder.FStatement;
 import com.yttx.yttxps.service.IMsgService;
+import com.yttx.yttxps.xml.ResScheduleXMLConverter;
 
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
@@ -55,12 +59,16 @@ public class MsgService implements IMsgService {
 	private MessageAuthMapper authMapper;
 	@Autowired
 	private CustomOperMapper operMapper;
+	@Autowired
+	private CustomInfoMapper infoMapper;
+	@Autowired
+	private TOrderlistMapper<TOrderlist> orderlistMapper;
 	
 	@Override
 	@Transactional(rollbackFor=Exception.class)
-	public void saveMsg(Object obj) {
+	public void saveMsg(Object obj, String sendid) {
 		// TODO Auto-generated method stub
-		List<Message> list = this.getMessage(obj);
+		List<Message> list = this.getMessage(obj, sendid);
 		if (CollectionUtils.isEmpty(list)) return;
 		for(Message message : list){
 			messageMapper.insert(message);
@@ -70,9 +78,10 @@ public class MsgService implements IMsgService {
 	/**
 	 * 根据业务类型获取消息集合
 	 * @param obj
+	 * @param operid 消息发送者id
 	 * @return
 	 */
-	private List<Message> getMessage(Object obj) {
+	private List<Message> getMessage(Object obj, String sendid) {
 		String tempid = "";	//消息模板id
 		String custid = "";	//客户id
 		String subid = "";	//子客户id
@@ -84,25 +93,25 @@ public class MsgService implements IMsgService {
 			int stat = customInfo.getStat();
 			//审核通过
 			if (stat == 1) {
-				tempid = MsgTemp.AUDIT.getVal();
+				tempid = MsgTemp.AUDIT_SUCCESS.getVal();
 				custid = customInfo.getId();
 				tempParam.put("", "");
 			}
 		} else if (obj instanceof TOrderlist) {//订单
 			TOrderlist orderlist = (TOrderlist) obj;
+			orderlist = orderlistMapper.selectByPrimaryKey(orderlist.getFsNo());
 			custid = orderlist.getFsUserId();
 			subid = orderlist.getFsUserSubid();
 			int stat = Integer.valueOf(orderlist.getFiStat());
 			switch (stat) {
 				case -5://报价
 					tempid = MsgTemp.DIRECTOR.getVal();
+					tempParam.put("orderID", orderlist.getFsNo());
+					tempParam.put("taName", this.getTaName(orderlist.getFsUserId()));
+					tempParam.put("operID", orderlist.getFsOperId());
 					break;
 				case 1: //审核
-					if ("02".equals(orderlist.getFsType())) {//专家线路
-						tempid = MsgTemp.EXP_ORDER_AUDIT.getVal();
-					} else if("03".equals(orderlist.getFsType())) {//订制线路
-						tempid = MsgTemp.CUS_ORDER_AUDIT.getVal();
-					}
+					tempid = MsgTemp.ORDER_AUDIT.getVal();
 					break;
 				default:
 					break;
@@ -125,19 +134,20 @@ public class MsgService implements IMsgService {
 					break;
 			}
 		}
-		msgList = this.getMessage4Auth(tempid, custid, subid, tempParam);
+		msgList = this.getMessage4Auth(tempid, sendid, custid, subid, tempParam);
 		return msgList;
 	}
 	
 	/**
 	 * 根据消息模板权限获取需要发送的消息提醒集合
 	 * @param tempid 模板id
+	 * @param operid 操作员id
 	 * @param custid 客户id
 	 * @param subid 客户子id
 	 * @param tempParam 模板参数
 	 * @return
 	 */
-	private List<Message> getMessage4Auth(String tempid, String custid, String subid, Map<String, Object> tempParam){
+	private List<Message> getMessage4Auth(String tempid, String operid, String custid, String subid, Map<String, Object> tempParam){
 		List<CustomOper> list = null;
 		//查询消息模板权限表
 		MessageAuth messageAuth = authMapper.selectByPrimaryKey(tempid);
@@ -152,7 +162,7 @@ public class MsgService implements IMsgService {
 			if(StringUtils.isEmpty(receive)) return null;
 			JSONArray jsonArr = JSONArray.fromObject(receive);
 			JSONObject json = jsonArr.getJSONObject(0);
-			int recRole = Integer.valueOf(json.getString("recRole"));
+			int recRole = Integer.valueOf(json.getString("recRole"));//消息接收角色
 			CustomOperExample operExample = new CustomOperExample();
 			com.yttx.yttxps.model.CustomOperExample.Criteria criteria = operExample.createCriteria();
 			//不发送消息提醒
@@ -191,29 +201,75 @@ public class MsgService implements IMsgService {
 				Configuration cfg = new Configuration();
 		        StringTemplateLoader stringLoader = new StringTemplateLoader();
 		        String templateContent = temp;
-		        stringLoader.putTemplate("template",templateContent);
+		        stringLoader.putTemplate("mytemplate",templateContent);
 		        StringWriter writer = new StringWriter();
 		        try {
-					Template template = cfg.getTemplate("template","utf-8");
+		        	cfg.setTemplateLoader(stringLoader);
+		            cfg.setDefaultEncoding("UTF-8");
+		            Template template = cfg.getTemplate("mytemplate");
 					template.process(tempParam, writer);
+					//将消息模板转为msg对象
+					String msgText = writer.toString().replace("\\n", "");
+					Msg msg = ResScheduleXMLConverter.fromXml(null, msgText, Msg.class);
+					//根据推送客户创建消息
+					for (CustomOper oper : list) {
+						Message message = new Message();
+						message.setId(messageMapper.selectFsNo());
+						message.setSendType("1");
+						message.setMsgHead(msg.getTitle());
+						message.setMsgText(msg.getContent());
+						message.setRecvid(oper.getId());
+						message.setSubid(oper.getSubid());
+						message.setMsgDate(new Date());
+						message.setSendid(operid);
+						message.setMsgStat(BigDecimal.ZERO);
+						msgList.add(message);
+					}
 				} catch (Exception e) {
 					String resMsg = "消息模板格式化错误";
 					logger.error(String.format("[errMsg] retMsg-%1$s，temp-%2$s", resMsg, temp));
 					throw new BusinessException(resMsg, e);
 				}
-				for (CustomOper oper : list) {
-					Message msg = new Message();
-					msg.setSendType("1");
-					msg.setMsgText(writer.toString());
-					msg.setRecvId(oper.getId());
-					msg.setSubId(oper.getSubid());
-					msg.setMsgDate(new Date());
-					msg.setMsgStat(BigDecimal.ZERO);
-				}
 				return msgList;
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * 根据id获取旅行社名称
+	 * @return
+	 */
+	private String getTaName(String cusid){
+		CustomInfo info = this.infoMapper.selectByPrimaryKey(cusid);
+		if (info != null)
+			return info.getTaname();
+		return null;
+	}
+	
+	/**
+	 * 消息模板xml映射实体
+	 */
+	@XStreamAlias("msg")
+	private class Msg {
+		@XStreamAlias("title")
+		private String title;
+		@XStreamAlias("content")
+		private String content;
+		public String getTitle() {
+			return title;
+		}
+		@SuppressWarnings("unused")
+		public void setTitle(String title) {
+			this.title = title;
+		}
+		public String getContent() {
+			return content;
+		}
+		@SuppressWarnings("unused")
+		public void setContent(String content) {
+			this.content = content;
+		}
 	}
 
 }
