@@ -26,4 +26,6 @@ public interface IMsgService {
 	List<Message> selectSelectivePage(Map<String, Object> map);
 	
 	boolean readMsg(String id);
+
+	void delete(String id);
 }

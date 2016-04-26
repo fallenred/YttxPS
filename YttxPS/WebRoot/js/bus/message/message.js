@@ -210,11 +210,13 @@ jQuery(function($) {
 			'navGrid',
 			pager_selector,
 			{ // navbar options
+				edit : false,
+				editicon : 'ace-icon fa fa-pencil blue',
 				del : false,
 				delicon : 'ace-icon fa fa-trash-o red',
 				search : false,
 				searchicon : 'ace-icon fa fa-search orange',
-				refresh : true,
+				refresh : false,
 				refreshicon : 'ace-icon fa fa-refresh green',
 				view : false,
 				viewicon : 'ace-icon fa fa-search-plus grey'

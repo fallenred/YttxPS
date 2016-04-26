@@ -335,5 +335,10 @@ public class MsgService implements IMsgService {
 		messageMapper.updateByPrimaryKey(message);
 		return false;
 	}
+
+	@Override
+	public void delete(String id) {
+		messageMapper.deleteByPrimaryKey(new BigDecimal(id));
+	}
 	
 }
