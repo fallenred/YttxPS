@@ -73,7 +73,7 @@
 		
 		<item id="1300" name="交易管理" icon="menu-icon fa fa-sitemap">
 			<submenu>
-				<item id="13a0" name="订单管理" url="/jsp/orderlist/orderlist.jsp" />
+				<item id="13a0" name="订单管理" url="/orderlist/page.htm" />
 				<!-- <item id="13b0" name="订单批次管理" url="/jsp/orderCustom/orderCustom.jsp" /> -->
 				<item id="13c0" name="结算管理" url="/cOrder/page.htm" />
 			</submenu>
