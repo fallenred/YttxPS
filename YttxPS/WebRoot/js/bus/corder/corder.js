@@ -140,6 +140,7 @@ $(document).ready(function(){
 	
 	$(order_grid_selector).jqGrid({
 		url : "/cOrder/simplelist.htm",
+		postData : {"orderFilters.orderId":$("#order_id").val()},
 		datatype : "json",
 		mtype : 'POST',
 		height : 400,
@@ -283,6 +284,8 @@ $(document).ready(function(){
 	 */
 	$(statement_grid).jqGrid({
 		url : "/cOrder/FSList.htm",
+		postData : {"fstatFilters.orderId":$("#statement_order_id").val(),
+					"fstatFilters.stat":$("#statement_stat").val()},
 		datatype : "json",
 		mtype : 'POST',
 		height : 400,

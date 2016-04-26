@@ -104,6 +104,7 @@ jQuery(function($){
 	 */
 	$(grid_selector).jqGrid({
 		url:"/member/audit/listpage.htm",
+		postData : {"filters.id":$("#id").val()},
 		datatype : "json",
 		mtype : 'POST',
 		height : 400,

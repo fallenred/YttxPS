@@ -66,13 +66,13 @@
 										<!-- 选项卡开始 -->
 										<div class="tabbable">
 											<ul class="nav nav-tabs" id="tab">
-												<li class="active">
+												<li <c:if test="${statement_stat == null}">class="active"</c:if>>
 													<a data-toggle="tab" id="all_order_a" href="#all_order">
 														<i></i>待结算订单
 													</a>
 												</li>
 												<c:forEach items="${fsmt_stat_list}" var="item">
-													<li>
+													<li <c:if test="${item.fsDictno == statement_stat}">class="active"</c:if>>
 														<c:if test="${item.fsDictno != -1}">
 															<a data-toggle="tab" data-stat="${item.fsDictno}" href="#stat_div" class="statPane">
 																<i></i>${item.fsDictname}
@@ -80,17 +80,18 @@
 														</c:if>
 													</li>
 												</c:forEach>
+
 											</ul>
 											
 											<div class="tab-content">
 												<!--全部订单 pane-->
-												<div id="all_order" class="tab-pane in active">
+												<div id="all_order" class="tab-pane in <c:if test="${statement_stat == null }">active</c:if>">
 													<!-- 全部订单的过滤条件 -->
 													<form class="form-horizontal" id="order_filter_form">
 														<div class="form-group">
 															<label class="col-sm-1 control-label no-padding-right" for="order_id">订单编号</label>
 															<div class="col-sm-4 ">
-																<input type="text" id="order_id" placeholder="忽略订单编号" class="col-xs-10 col-sm-10">
+																<input type="text" id="order_id" value="${orderID }" placeholder="忽略订单编号" class="col-xs-10 col-sm-10">
 															</div>
 															<label class="col-sm-1 col-sm-offset-1 control-label no-padding-right" for="order_name">订单名称</label>
 															<div class="col-sm-4">
@@ -130,14 +131,14 @@
 													<div id="order_pager"></div>
 												</div>
 												<!--全部订单 pane 结束-->
-												<div id="stat_div" class="tab-pane">
+												<div id="stat_div" class="tab-pane <c:if test="${statement_stat != null }">active</c:if>">
 													<!-- 全部订单的过滤条件 -->
 													<form class="form-horizontal" id="stat_filter_form">
-														<input type="hidden" id="statement_stat" value="1">
+														<input type="hidden" id="statement_stat" value="${statement_stat }">
 														<div class="form-group">
 															<label class="col-sm-1 control-label no-padding-right" for="statement_order_id">订单编号</label>
 															<div class="col-sm-4">
-																<input type="text" id="statement_order_id" placeholder="忽略订单编号" class="col-xs-10 col-sm-10">
+																<input type="text" id="statement_order_id" value="${orderID }" placeholder="忽略订单编号" class="col-xs-10 col-sm-10">
 															</div>
 															<label class="col-sm-1 col-sm-offset-1 control-label no-padding-right" for="statement_order_name">订单名称</label>
 															<div class="col-sm-4">

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,14 @@ public class StatementController extends BaseController {
 	 * 打开结算单管理的界面
 	 */
 	@RequestMapping(value="page.htm")
-	public String openPage(Model model){
+	public String openPage(Model model,String orderID,String closeID){
+		if(StringUtils.isNoneEmpty(orderID)){
+			model.addAttribute("orderID",orderID);
+		} else if (StringUtils.isNoneEmpty(closeID)){
+			FStatement fStatement = fStatementService.findFStatByFSId(closeID);
+			model.addAttribute("orderID",fStatement.getOrderId());
+			model.addAttribute("statement_stat",fStatement.getStat());
+		}
 		//将结算单状态发送到web端
 		List<Dict> fsmt_stat_list = getDictListByParentNo("fsmt_stat");
 		Object fsmt_stat_item = getDictMapJsonByParentNo("fsmt_stat");

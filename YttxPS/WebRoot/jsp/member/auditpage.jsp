@@ -80,7 +80,7 @@
 														<div class="form-group">
 															<label class="col-sm-1 control-label no-padding-right" for="id">客户ID</label>
 															<div class="col-sm-3">
-																<input class="form-control" maxlength="16" name="id" type="text" id="id" placeholder="忽略客户Id" />
+																<input class="form-control" maxlength="16" name="id" type="text" id="id" value="${cusID}" placeholder="忽略客户Id" />
 															</div>
 															<label class="col-sm-1 control-label no-padding-right" for="name">客户名称</label>
 															<div class="col-sm-3">

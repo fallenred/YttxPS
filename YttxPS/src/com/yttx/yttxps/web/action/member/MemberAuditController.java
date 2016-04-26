@@ -52,12 +52,12 @@ public class MemberAuditController extends BaseController {
 	 * 打开会员管理界面
 	 */
 	@RequestMapping(value="page.htm")
-	public String openManagePage(Model model){
+	public String openManagePage(Model model,String cusID){
 		List<Dict> auditRet_list= getDictListByParentNo("cus_adtret");
 		Object auditRet_Json = getDictMapJsonByParentNo("cus_adtret");
 		model.addAttribute("auditRet_list", auditRet_list);
 		model.addAttribute("auditRet_Json", auditRet_Json);
-		
+		model.addAttribute("cusID", cusID);
 		List<Dict> auditType_list = getDictListByParentNo("cus_attype");
 		Object auditType_Json = getDictMapJsonByParentNo("cus_attype");
 		model.addAttribute("auditType_list", auditType_list);

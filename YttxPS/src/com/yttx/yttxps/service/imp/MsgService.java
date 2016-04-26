@@ -320,7 +320,11 @@ public class MsgService implements IMsgService {
 
 	@Override
 	public List<Message> selectSelectivePage(Map<String, Object> map) {
-		return pubService.doPage(map, messageMapper);
+		List<Message> list = pubService.doPage(map, messageMapper);
+		for (Message  message: list) {
+			message.setMsgText(message.getMsgText().trim());
+		}
+		return list;
 	}
 
 	@Override
