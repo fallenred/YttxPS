@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Dict;
+import com.yttx.yttxps.model.FStatementFilters;
 import com.yttx.yttxps.model.OrderFilters;
 import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.TOrderlist;
@@ -60,16 +62,19 @@ public class PayConfirController extends BaseController {
 	 */
 	@RequestMapping(value="page.htm")
 	public String openPage(Model model, String orderID, String closeID){
+		if(StringUtils.isNoneEmpty(orderID)){
+			model.addAttribute("orderID", orderID);
+		} else if (StringUtils.isNoneEmpty(closeID)){
+			model.addAttribute("closeID", closeID);
+		}
+		//将订单状态发送到web端
+		Object order_stat_item = getDictMapJsonByParentNo("order_stat");
+		model.addAttribute("order_stat_item",order_stat_item);
 		//将结算单状态发送到web端
 		List<Dict> fsmt_stat_list = getDictListByParentNo("fsmt_stat");
 		Object fsmt_stat_item = getDictMapJsonByParentNo("fsmt_stat");
 		model.addAttribute("fsmt_stat_list",fsmt_stat_list);
 		model.addAttribute("fsmt_stat_item",fsmt_stat_item);
-		
-		//将订单状态发送到web端
-		Object order_stat_item = getDictMapJsonByParentNo("order_stat");
-		model.addAttribute("order_stat_item",order_stat_item);
-		
 		return "payConfir/corderlist";
 	}
 	

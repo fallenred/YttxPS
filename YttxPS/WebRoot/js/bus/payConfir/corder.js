@@ -59,7 +59,7 @@ $(document).ready(function(){
 			.each(function(){
 				$(this).find("option[value='']").prop("selected",true);
 			});
-	})
+	});
 	
 	/**
 	 * 全部订单--"查询按钮"
@@ -74,7 +74,7 @@ $(document).ready(function(){
 			datatype : 'json',
 			postData : postData
 		}).trigger("reloadGrid");
-	})
+	});
 	
 	
 	var order_grid_selector = "#order_table";
@@ -102,6 +102,7 @@ $(document).ready(function(){
 	 */
 	$(order_grid_selector).jqGrid({
 		url : "/payConfir/simplelist.htm",
+		postData : {"filters.orderId":$("#order_id").val()},
 		datatype : "json",
 		mtype : 'POST',
 		height : 400,
@@ -202,6 +203,7 @@ $(document).ready(function(){
 		}).trigger("reloadGrid");
 	}
 	
+	
 	/**
 	 * 结算单--"标签卡"的点击响应函数
 	 */
@@ -244,6 +246,7 @@ $(document).ready(function(){
 	 */
 	$(statement_grid).jqGrid({
 		url : "/payConfir/FSList.htm",
+		postData : {"fstatFilters.statementId":$("#statement_order_id").val()},
 		datatype : "json",
 		mtype : 'POST',
 		height : 400,

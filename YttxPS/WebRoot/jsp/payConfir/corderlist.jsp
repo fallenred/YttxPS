@@ -66,12 +66,12 @@
 										<!-- 选项卡开始 -->
 										<div class="tabbable">
 											<ul class="nav nav-tabs" id="tab">
-												<li class="active">
+												<li<c:if test="${closeID == null }"> class="active"</c:if>>
 													<a data-toggle="tab" id="all_order_a" href="#orderlist">
 														<i></i>订单支付确认
 													</a>
 												</li>
-												<li>
+												<li<c:if test="${closeID != null }"> class="active"</c:if>>
 													<a data-toggle="tab" id="stat_div_a" href="#closelist" class="statPane">
 														<i></i>结算单支付确认
 													</a>
@@ -91,7 +91,7 @@
 														<div class="form-group">
 															<label class="col-sm-1 control-label no-padding-right" for="order_id">订单编号</label>
 															<div class="col-sm-4 ">
-																<input type="text" id="order_id" placeholder="忽略订单编号" class="col-xs-10 col-sm-10">
+																<input type="text" id="order_id" value="<c:if test="${orderID != null }">${orderID }</c:if>" placeholder="忽略订单编号" class="col-xs-10 col-sm-10">
 															</div>
 															<label class="col-sm-1 col-sm-offset-1 control-label no-padding-right" for="order_name">订单名称</label>
 															<div class="col-sm-4">
@@ -138,7 +138,7 @@
 														<div class="form-group">
 															<label class="col-sm-1 control-label no-padding-right" for="statement_order_id">订单号</label>
 															<div class="col-sm-4 ">
-																<input type="text" id="statement_order_id" placeholder="忽略订单号" class="col-xs-10 col-sm-10">
+																<input type="text" id="statement_order_id" value="${closeID }" placeholder="忽略订单号" class="col-xs-10 col-sm-10">
 															</div>
 															
 															<label class="col-sm-1 col-sm-offset-1 control-label no-padding-right" for="statement_order_id">客户ID</label>
