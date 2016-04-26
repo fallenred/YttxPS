@@ -19,6 +19,7 @@ public class SessionEntity {
 	private String currId;
 	private String lastId;
 	private String menuext;
+	private List<Message> message;
 	public String getId() {
 		return id;
 	}
@@ -108,6 +109,12 @@ public class SessionEntity {
 	}
 	public void setCustomRejectMap(Map<String, Menu> customRejectMap) {
 		this.customRejectMap = customRejectMap;
+	}
+	public List<Message> getMessage() {
+		return message;
+	}
+	public void setMessage(List<Message> message) {
+		this.message = message;
 	}
 	
 	

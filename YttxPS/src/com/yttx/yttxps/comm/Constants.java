@@ -62,7 +62,9 @@ public class Constants {
 		/** 主管 */
 		DIRECTOR {public int getVal(){return 1;}},
 		/** 操作员 */
-		OPERATOR {public int getVal(){return 2;}};
+		OPERATOR {public int getVal(){return 2;}},
+		/** 主管及接单人员(后台)或用户管理员及下单人员(前台) */
+		MIXED {public int getVal(){return 3;}};
 
 		public abstract int getVal();
 	}
@@ -78,11 +80,11 @@ public class Constants {
 		/** 订单审核 */
 		ORDER_AUDIT {public String getVal(){return "2040";}},
 		/** 出团 */
-		TOURS {public String getVal(){return "1002";}},
+		TOURS {public String getVal(){return "2052";}},
 		/** 订单备注 */
-		ORDER_REMARK {public String getVal(){return "1002";}},
+		ORDER_REMARK {public String getVal(){return "2060";}},
 		/** 结算单 */
-		STATEMENT {public String getVal(){return "1002";}},
+		STATEMENT {public String getVal(){return "3010";}},
 		/** 结算完毕 */
 		STATEMENT_DONE {public String getVal(){return "1002";}};
 

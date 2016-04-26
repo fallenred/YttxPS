@@ -22,6 +22,7 @@ import com.yttx.yttxps.model.TOrderlistWithBLOBs;
 import com.yttx.yttxps.model.TRemarks;
 import com.yttx.yttxps.model.TRemarksExample;
 import com.yttx.yttxps.model.TRemarksExample.Criteria;
+import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
@@ -36,6 +37,9 @@ public class OrderlistService implements IOrderlistService {
 
 	@Autowired
 	private IPubService<TOrderlistWithBLOBs> pubService;
+	
+	@Autowired
+	private IMsgService msgService;
 	
 	@Autowired
 	private TOrderlistMapper<TOrderlistWithBLOBs> orderlistMapper;
@@ -119,6 +123,7 @@ public class OrderlistService implements IOrderlistService {
 					remarks.setFdPaidamt(BigDecimal.ZERO);
 				}
 				remarksMapper.insertSelective(remarks);
+				msgService.saveMsg(remarks, record.getFsOperId());
 			}
 		}
 		return orderlistMapper.updateByPrimaryKeySelective(record);
@@ -193,6 +198,8 @@ public class OrderlistService implements IOrderlistService {
 				}
 				remarks.setFiClosestat(BigDecimal.ZERO);
 				remarksMapper.insertSelective(remarks);
+				msgService.saveMsg(remarks,record.getFsOperId());
+				
 			}
 		}
 		//预估费用

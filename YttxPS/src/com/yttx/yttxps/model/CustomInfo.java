@@ -64,6 +64,7 @@ public class CustomInfo {
     
     private String comment;
 
+    private String fsOperId;
 
     public String getId() {
         return id;
@@ -340,4 +341,16 @@ public class CustomInfo {
 	public void setComment(String comment) {
 		this.comment = comment == null?null:comment.trim();
 	}
+
+
+	public String getFsOperId() {
+		return fsOperId;
+	}
+
+
+	public void setFsOperId(String fsOperId) {
+		this.fsOperId = fsOperId;
+	}
+	
+	
 }

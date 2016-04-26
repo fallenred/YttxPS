@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
+import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.TCloselist;
 import com.yttx.yttxps.model.vo.CloselistRequest;
 import com.yttx.yttxps.service.ICloselistService;
+import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.web.action.LoginController;
 
@@ -30,6 +35,9 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
 	private ICloselistService closelistService;
+	
+	@Autowired
+	private IMsgService msgService;
 	
 	/**
 	 * 分页查询结算单信息
@@ -56,11 +64,15 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	 */
 	@RequestMapping(value="addCloselist.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ajaxaddTicket(TCloselist orderlist)
+	public Map<String, Object> ajaxaddTicket(TCloselist closelist)
     {  
-		logger.debug("当前新增对象 {}", orderlist);
+		logger.debug("当前新增对象 {}", closelist);
 		try{
-			closelistService.insert(orderlist);
+			closelistService.insert(closelist);
+			HttpSession session = request.getSession();
+			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
+			closelist.setFsOperId(sessionEntity.getId());
+			this.msgService.saveMsg(closelist, sessionEntity.getId());
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("新增失败");

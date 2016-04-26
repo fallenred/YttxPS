@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
 <!-- basic scripts -->
 <script src="/js/ace-extra.min.js"></script>
 
@@ -200,6 +199,42 @@ Date.prototype.format = function(format) {
 </script>
 <!-- 表单验证 -->
 <script>
+	function refreshMsg(){
+		$.ajax({
+			type: "POST",
+			url: "/message/findNewMsg.htm",
+			dataType: "json",
+			success: function(data){
+				var html = '';
+				var count = 0;
+				$.each(data, function(commentIndex, comment){
+					if(commentIndex == 'rows'){
+						for(var i = 0; i < comment.length; i++){
+							/**
+							
+							html += '<a href="#"><span class="msg-body"><span class="msg-title"><span class="blue">'+ comment[i]['sendid'] +'</span>';
+							html += comment[i]['msgText'] +'</span><span class="msg-time"><i class="icon-time"></i><span>';
+							html += (new Date(parseFloat(comment[i]['msgDate']))).format("yyyy-MM-dd HH:mm:ss") +'</span></span></span></a>';
+							*/
+							html += '<a><span>'+ comment[i]['msgHead'] +'</span></a>';
+							count += 1;
+						}
+						
+					}
+				});
+				$("#newMsg").html(html);
+				if(count <3){
+					html = count + '条未读信息';
+				} else {
+					html = '至少' + count + '条未读信息';
+				}
+				$("#msgCount").html(html);
+				$(".msgCount").html(count);
+			}
+		});
+	}
+	refreshMsg();
+	setInterval(refreshMsg,120000);
 	$().ready(function() {
 		// 判断浮点数value是否大于或等于0
 	    jQuery.validator.addMethod("isFloatGteZero", function(value, element) { 

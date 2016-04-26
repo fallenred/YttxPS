@@ -2,6 +2,7 @@ package com.yttx.yttxps.service.imp;
 
 import java.io.StringWriter;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,10 +34,13 @@ import com.yttx.yttxps.model.CustomOper;
 import com.yttx.yttxps.model.CustomOperExample;
 import com.yttx.yttxps.model.Message;
 import com.yttx.yttxps.model.MessageAuth;
+import com.yttx.yttxps.model.Room;
 import com.yttx.yttxps.model.TOrderlist;
+import com.yttx.yttxps.model.TOrderlistWithBLOBs;
 import com.yttx.yttxps.model.TRemarks;
 import com.yttx.yttxps.model.corder.FStatement;
 import com.yttx.yttxps.service.IMsgService;
+import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
 
 import freemarker.cache.StringTemplateLoader;
@@ -53,6 +57,8 @@ import freemarker.template.Template;
 public class MsgService implements IMsgService {
 	static Logger logger = LoggerFactory.getLogger(MsgService.class);
 	
+	@Autowired
+	private IPubService<Message> pubService;
 	@Autowired
 	private MessageMapper messageMapper;
 	@Autowired
@@ -95,7 +101,8 @@ public class MsgService implements IMsgService {
 			if (stat == 1) {
 				tempid = MsgTemp.AUDIT_SUCCESS.getVal();
 				custid = customInfo.getId();
-				tempParam.put("", "");
+				tempParam.put("cusID", custid);
+				tempParam.put("taName", customInfo.getTaname());
 			}
 		} else if (obj instanceof TOrderlist) {//订单
 			TOrderlist orderlist = (TOrderlist) obj;
@@ -107,17 +114,32 @@ public class MsgService implements IMsgService {
 				case -5://报价
 					tempid = MsgTemp.DIRECTOR.getVal();
 					tempParam.put("orderID", orderlist.getFsNo());
-					tempParam.put("taName", this.getTaName(orderlist.getFsUserId()));
-					tempParam.put("operID", orderlist.getFsOperId());
+					//tempParam.put("taName", this.getTaName(orderlist.getFsUserId()));
+					//tempParam.put("operID", orderlist.getFsOperId());
 					break;
 				case 1: //审核
 					tempid = MsgTemp.ORDER_AUDIT.getVal();
+					tempParam.put("orderID", orderlist.getFsNo());
+					tempParam.put("orderAmt", orderlist.getFdTotalfee());
 					break;
+				case 8: //已付全款
+					tempid = MsgTemp.TOURS.getVal();
+					tempParam.put("orderID", orderlist.getFsNo());
+					tempParam.put("orderAmt", orderlist.getFdTotalfee());
+					tempParam.put("startDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(orderlist.getFtStartdate()));
+					tempParam.put("visitorNum", orderlist.getFiVisitornum());
 				default:
 					break;
 			}
 		} else if (obj instanceof TRemarks) {//订单备注
-			
+			TRemarks remarks = (TRemarks) obj;
+			TOrderlist orderlist = orderlistMapper.selectByPrimaryKey(remarks.getFsOrderId());
+			custid = orderlist.getFsUserId();
+			subid = orderlist.getFsUserSubid();
+			int stat = Integer.valueOf(remarks.getFiStat().toString());
+			if (stat == 1){//未结算
+				
+			}
 		} else if (obj instanceof FStatement) {//结算单
 			FStatement statement = (FStatement) obj;
 			custid = statement.getUserID();
@@ -126,9 +148,12 @@ public class MsgService implements IMsgService {
 			switch (stat) {
 				case 0:	//待确认
 					tempid = MsgTemp.STATEMENT.getVal();
+					tempParam.put("orderID", statement.getOrderId());
+					tempParam.put("closeID", statement.getStatmentId());
 					break;
 				case 2: //结算完毕
 					tempid = MsgTemp.STATEMENT_DONE.getVal();
+					
 					break;
 				default:
 					break;
@@ -194,6 +219,20 @@ public class MsgService implements IMsgService {
 				criteria.andIdEqualTo(custid);
 				criteria.andSubidEqualTo(subid);
 				list = this.operMapper.selectByExample(operExample);
+			} else if (RecRole.MIXED.getVal() == recRole){//发送给主管及接单人员(后台)或用户管理员及下单人员(前台)
+				if(StringUtils.isBlank(custid) || StringUtils.isBlank(subid)) {
+					String resMsg = "消息提醒-查询下单用户失败，客户id为空";
+					logger.error(String.format("[errMsg] retMsg-%1$s，recRole-%2$s,custid-%3$s", resMsg, recRole, custid));
+					throw new BusinessException(resMsg);
+				}
+				criteria.andIdEqualTo(custid);
+				criteria.andTypeEqualTo("00");
+				list = this.operMapper.selectByExample(operExample);
+				if(!"0000".equals(subid)){
+					CustomOperExample operExample1 = new CustomOperExample();
+					operExample1.createCriteria().andIdEqualTo(custid).andSubidEqualTo(subid);
+					list.addAll(this.operMapper.selectByExample(operExample1));
+				}
 			}
 			if (CollectionUtils.isNotEmpty(list)) {
 				List<Message> msgList = new ArrayList<Message>();
@@ -214,7 +253,7 @@ public class MsgService implements IMsgService {
 					//根据推送客户创建消息
 					for (CustomOper oper : list) {
 						Message message = new Message();
-						message.setId(messageMapper.selectFsNo());
+						//message.setId(messageMapper.selectFsNo());
 						message.setSendType("1");
 						message.setMsgHead(msg.getTitle());
 						message.setMsgText(msg.getContent());
@@ -222,7 +261,7 @@ public class MsgService implements IMsgService {
 						message.setSubid(oper.getSubid());
 						message.setMsgDate(new Date());
 						message.setSendid(operid);
-						message.setMsgStat(BigDecimal.ZERO);
+						message.setMsgStat("0");
 						msgList.add(message);
 					}
 				} catch (Exception e) {
@@ -271,5 +310,26 @@ public class MsgService implements IMsgService {
 			this.content = content;
 		}
 	}
+	
+	@Override
+	public List<Message> selectNewMsg(Map<String, Object> map) {
+		List<Message> list = messageMapper.selectUnreadMsg(map);
+		int i = list.size() < 3 ? list.size() : 3;
+		return list.subList(0, i);
+	}
 
+	@Override
+	public List<Message> selectSelectivePage(Map<String, Object> map) {
+		return pubService.doPage(map, messageMapper);
+	}
+
+	@Override
+	public boolean readMsg(String id) {
+		Message message = new Message();
+		message.setId(new BigDecimal(id));
+		message.setMsgStat("1");
+		messageMapper.updateByPrimaryKey(message);
+		return false;
+	}
+	
 }

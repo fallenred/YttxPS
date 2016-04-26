@@ -30,6 +30,7 @@ import com.yttx.yttxps.model.corder.SimpleOrder;
 import com.yttx.yttxps.model.vo.FStatementPageRequest;
 import com.yttx.yttxps.model.vo.OrderPageRequest;
 import com.yttx.yttxps.service.IFStatementService;
+import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.service.IPayConfirService;
 import com.yttx.yttxps.web.action.BaseController;
 
@@ -51,11 +52,14 @@ public class PayConfirController extends BaseController {
 	@Autowired
 	private IFStatementService fStatementService;
 	
+	@Autowired
+	private IMsgService msgService;
+	
 	/**
 	 * 打开结算单管理的界面
 	 */
 	@RequestMapping(value="page.htm")
-	public String openPage(Model model){
+	public String openPage(Model model, String orderID, String closeID){
 		//将结算单状态发送到web端
 		List<Dict> fsmt_stat_list = getDictListByParentNo("fsmt_stat");
 		Object fsmt_stat_item = getDictMapJsonByParentNo("fsmt_stat");
@@ -139,6 +143,10 @@ public class PayConfirController extends BaseController {
 			order.setFdPaidamt(paidAmt);
 			order.setFiStat("8");
 			payConfirService.orderConfir(order, operid);
+			
+			order.setFsOperId(sessionEntity.getId());
+			this.msgService.saveMsg(order, sessionEntity.getId());
+			
 			logger.debug("orderId为"+orderId+"的详细信息：{}", order);
 		} catch (Exception e) {
 			logger.error("订单支付失败，订单id："+orderId, e);
@@ -168,6 +176,9 @@ public class PayConfirController extends BaseController {
 			statement.setAmt(totalFee.subtract(statement.getPaidAmt()));
 			statement.setStat(1l);
 			payConfirService.statementConfir(statement, operid);
+			
+			statement.setOperId(sessionEntity.getId());
+			this.msgService.saveMsg(statement, sessionEntity.getId());
 		} catch (Exception e) {
 			logger.error("结算单支付失败，结算单id："+fsId, e);
 			return JsonResult.jsonError("订单支付确认失败");

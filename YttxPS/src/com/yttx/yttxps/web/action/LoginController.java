@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import com.yttx.yttxps.model.Menu;
+import com.yttx.yttxps.model.Message;
 import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.SysDep;
 import com.yttx.yttxps.model.SysOper;
@@ -127,6 +128,8 @@ public class LoginController extends BaseController{
 					rights.add("02a0");
 					rights.add("02b0");
 				}
+				rights.add("1500");
+				rights.add("15a0");
 			}		
 			List<Menu> customTree = getCustomTree(request, rights, null,sysOper.getAdminType());
 			Map<String,Menu> customAllowMap = new HashMap<String,Menu>();
@@ -136,7 +139,8 @@ public class LoginController extends BaseController{
 				if(!customAllowMap.containsKey(entry.getKey())){
 					customRejectMap.put(entry.getKey(), entry.getValue());
 				}
-			}  
+			} 
+			//List<Message> message = 
 			
 			SessionEntity  sessionEntity = new SessionEntity();
 			sessionEntity.setCustomTree(customTree);

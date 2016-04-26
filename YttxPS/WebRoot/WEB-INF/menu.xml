@@ -82,6 +82,11 @@
 			<submenu>
 				<item id="14a0" name="线下支付确认" url="/payConfir/page.htm" />
 			</submenu>
+		</item>	
+		<item id="1500" name="消息管理" icon="menu-icon fa fa-envelope">
+			<submenu>
+				<item id="15a0" name="消息" url="/message/page.htm" />
+			</submenu>
 		</item>		
 	</menu>
 </xml>

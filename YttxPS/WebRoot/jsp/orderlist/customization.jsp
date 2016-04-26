@@ -501,10 +501,21 @@
 															</script>
 															<!-- 公共资源体 end -->
 														</div>
+														
 														<!-- 
 														</script>
 														公共精确资源 end -->
 													</div>
+													<!-- 
+													<div class="row div_transfer">
+														<div class="form-group">
+															<label class="col-sm-2 control-label" for="fdTotalfee">公共资源总金额</label>
+															<div class="col-sm-3">
+																<input type="text" class="form-control isFloatGteZero number" name="batchAmt[{{@index}}]" value="{{fdAmt}}" id="fdAmt">
+															</div>
+														</div> 
+													</div>
+													-->
 												</div>
 											</div>
 										</div>

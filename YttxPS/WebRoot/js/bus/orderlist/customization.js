@@ -839,6 +839,23 @@ jQuery(function($) {
 		$("#fdTotalfee").val(totalAmt.toFixed(2));
 		$("#totalfee").val(remarkAmt.toFixed(2));
 	}
+
+	//合计公共资源金额
+	function totalBatchAmt(){
+		//循环批次
+		$(".batch_div").each(function(){
+			var fdAmt = 0;
+			$(this).find(".price").each(function(){
+				var price = $(this).val();
+				var usernum = $(this).next().val();
+				if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
+					return;
+				}
+				fdAmt = parseFloat(fdAmt) + parseFloat(usernum) * parseFloat(price);
+			});
+			$(this).parent().next().find("#fdAmt").val(fdAmt);
+		});
+	}
 	
 	//合计订单批次金额
 	function totalBatchAmt(){

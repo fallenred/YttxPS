@@ -4,6 +4,8 @@ import com.yttx.yttxps.model.Message;
 import com.yttx.yttxps.model.MessageExample;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface MessageMapper extends IBaseMapper<Message>{
@@ -80,5 +82,8 @@ public interface MessageMapper extends IBaseMapper<Message>{
      * @return
      */
     BigDecimal selectFsNo();
+
+	List<Message> selectUnreadMsg(Map<String, Object> map);
+
     
 }

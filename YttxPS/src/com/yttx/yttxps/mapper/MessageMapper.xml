@@ -14,8 +14,8 @@
     <result column="FS_SENDID" jdbcType="VARCHAR" property="sendid" />
     <result column="FS_RECVID" jdbcType="VARCHAR" property="recvid" />
     <result column="FS_SUBID" jdbcType="VARCHAR" property="subid" />
-    <result column="FT_MSGDATE" jdbcType="DATE" property="msgDate" />
-    <result column="FI_MSGSTAT" jdbcType="DECIMAL" property="msgStat" />
+    <result column="FT_MSGDATE" jdbcType="TIMESTAMP" property="msgDate" />
+    <result column="FI_MSGSTAT" jdbcType="VARCHAR" property="msgStat" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -152,9 +152,9 @@
     -->
     insert into TMESSAGE (FI_ID, FS_SENDTYPE, FS_MSGHEAD, 
       FS_MSGTEXT, FS_SENDID, FS_RECVID, 
-      FS_SUBID, FT_MSGDATE, FI_MSGSTAT
+      FS_SUBID, to_date(to_char(FT_MSGDATE,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss'), FI_MSGSTAT
       )
-    values (#{id,jdbcType=DECIMAL}, #{sendType,jdbcType=VARCHAR}, #{msgHead,jdbcType=VARCHAR}, 
+    values (message_sequence.nextval, #{sendType,jdbcType=VARCHAR}, #{msgHead,jdbcType=VARCHAR}, 
       #{msgText,jdbcType=VARCHAR}, #{sendid,jdbcType=VARCHAR}, #{recvid,jdbcType=VARCHAR}, 
       #{subid,jdbcType=VARCHAR}, #{msgDate,jdbcType=DATE}, #{msgStat,jdbcType=DECIMAL}
       )
@@ -338,21 +338,44 @@
       This element was generated on Thu Apr 21 15:42:12 CST 2016.
     -->
     update TMESSAGE
-    set FS_SENDTYPE = #{sendType,jdbcType=VARCHAR},
-      FS_MSGHEAD = #{msgHead,jdbcType=VARCHAR},
-      FS_MSGTEXT = #{msgText,jdbcType=VARCHAR},
-      FS_SENDID = #{sendid,jdbcType=VARCHAR},
-      FS_RECVID = #{recvid,jdbcType=VARCHAR},
-      FS_SUBID = #{subid,jdbcType=VARCHAR},
-      FT_MSGDATE = #{msgDate,jdbcType=DATE},
-      FI_MSGSTAT = #{msgStat,jdbcType=DECIMAL}
-    where FI_ID = #{id,jdbcType=DECIMAL}
+    set 
+      <if test="sendType != null">
+        FS_SENDTYPE = #{sendType,jdbcType=VARCHAR},
+      </if>
+      <if test="msgHead != null">
+        FS_MSGHEAD = #{msgHead,jdbcType=VARCHAR},
+      </if>
+      <if test="msgText != null">
+        FS_MSGTEXT = #{msgText,jdbcType=VARCHAR},
+      </if>
+      <if test="sendid != null">
+        FS_SENDID = #{sendid,jdbcType=VARCHAR},
+      </if>
+      <if test="recvid != null">
+        FS_RECVID = #{recvid,jdbcType=VARCHAR},
+      </if>
+      <if test="subid != null">
+        FS_SUBID = #{subid,jdbcType=VARCHAR},
+      </if>
+      <if test="msgDate != null">
+        FT_MSGDATE = #{msgDate,jdbcType=DATE},</if>
+      <if test="msgStat != null">
+        FI_MSGSTAT = #{msgStat,jdbcType=DECIMAL}
+      </if>
+    where 1=1
+    	and
+      	<if test="id != null">
+    	  FI_ID = #{id,jdbcType=DECIMAL}
+    	</if>
   </update>
   
   <select id="selectCountSelective" parameterType="java.util.Map" resultType="int">
     select count(*) from TMESSAGE where 1=1 
-      <if test="msgStat != null">
+      <if test="msgStat != null and msgStat != ''">
         and FI_MSGSTAT = #{msgStat}
+      </if>
+      <if test="recvId != null">
+        and FS_RECVID = #{recvId}
       </if>
   </select>
   
@@ -360,11 +383,39 @@
     select * from ( 
       select ROWNUM as rowno, t.*  from(
       	 select tm.* from TMESSAGE tm where 1=1 
+		      <if test="msgStat != null and msgStat != ''">
+		        and FI_MSGSTAT = #{msgStat}
+		      </if>
+		      <if test="recvId != null">
+		        and FS_RECVID = #{recvId}
+		      </if>
+		    order by 
+		    	FT_MSGDATE desc
+		)t
+		where 1=1
+      <if test="endrow != null">
+        and ROWNUM &lt;= #{endrow}
+      </if>
+      ) tt 
+      where 1=1
+      <if test="startrow != null">
+        and tt.rowno &gt; #{startrow}
+      </if>
+  </select>
+  
+    <select id="selectUnreadMsg" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from ( 
+      select ROWNUM as rowno, t.*  from(
+      	 select tm.* from TMESSAGE tm where 1=1 
 		      <if test="msgStat != null">
 		        and FI_MSGSTAT = #{msgStat}
 		      </if>
+		      <if test="recvId != null">
+		        and FS_RECVID = #{recvId}
+		      </if>
+		      and FI_MSGSTAT = '0'
 		    order by 
-		    	FT_MSGDATE
+		    	FT_MSGDATE desc
 		)t
 		where 1=1
       <if test="endrow != null">

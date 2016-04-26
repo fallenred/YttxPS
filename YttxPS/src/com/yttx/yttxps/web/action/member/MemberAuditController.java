@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.comm.StringUtil;
+import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.CustomInfo;
 import com.yttx.yttxps.model.Dict;
+import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.vo.CostomPageRequest;
 import com.yttx.yttxps.service.IMemberAuditService;
 import com.yttx.yttxps.service.IMemberService;
+import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.web.action.BaseController;
 
 /**
@@ -39,6 +44,9 @@ public class MemberAuditController extends BaseController {
 	
 	@Autowired
 	private IMemberAuditService memberAuditService;
+	
+	@Autowired
+	private IMsgService msgService;
 	
 	/**
 	 * 打开会员管理界面
@@ -113,6 +121,10 @@ public class MemberAuditController extends BaseController {
 			e.printStackTrace();
 			return JsonResult.jsonError(e.getMessage());
 		}
+		HttpSession session = request.getSession();
+		SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
+		auditRec.setFsOperId(sessionEntity.getId());
+		this.msgService.saveMsg(auditRec, sessionEntity.getId());
 		return JsonResult.jsonOk();
 	}
 }

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.comm.StringUtil;
+import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Dict;
 import com.yttx.yttxps.model.OrderFilters;
+import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.corder.DetailOrder;
 import com.yttx.yttxps.model.corder.FStatement;
 import com.yttx.yttxps.model.corder.ORemark;
@@ -28,6 +32,7 @@ import com.yttx.yttxps.model.vo.FStatementPageRequest;
 import com.yttx.yttxps.model.vo.OrderPageRequest;
 import com.yttx.yttxps.service.IClearOrderService;
 import com.yttx.yttxps.service.IFStatementService;
+import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.web.action.BaseController;
 
 /**
@@ -47,6 +52,9 @@ public class StatementController extends BaseController {
 	
 	@Autowired
 	private  IFStatementService fStatementService;
+	
+	@Autowired
+	private IMsgService msgService;
 	
 	/**
 	 * 打开结算单管理的界面
@@ -213,6 +221,9 @@ public class StatementController extends BaseController {
 			}else{
 				message ="该订单已生成结算单";
 			}
+			HttpSession session = request.getSession();
+			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
+			this.msgService.saveMsg(fStatement, sessionEntity.getId());
 		}else if("E".equalsIgnoreCase(oper)){//修改操作
 			try{
 				fStatementService.editFStatement(fStatement);

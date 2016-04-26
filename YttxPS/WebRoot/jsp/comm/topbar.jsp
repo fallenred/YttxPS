@@ -64,24 +64,25 @@
 						<li><a href="#"> 查看所有通知  <i
 								class="fa fa-arrow-right"></i> </a></li>
 					</ul></li>
+				-->
 
 				<li class="green"><a data-toggle="dropdown"
 					class="dropdown-toggle" href="#"> <i class="fa fa-envelope"></i>
-						<span class="badge badge-success">1</span> </a>					
+						<span class="badge badge-success msgCount" ></span> </a>					
 					<ul
 						class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-						<li class="dropdown-header"><i class="fa fa-envelope-alt"></i>1 条信息 </li>
+						<li class="dropdown-header" id="msgCount"><i class="fa fa-envelope-alt"></i><!-- 1 条信息  --></li>
 						
-						<li><a href="#"><span
+						<li id="newMsg">
+						<!--  <a href="#"><span
 								class="msg-body"> <span class="msg-title"> <span
 										class="blue">Bob:</span> Nullam quis risus eget urna mollis
 										ornare ... </span> <span class="msg-time"> <i
-										class="icon-time"></i> <span>3:15 pm</span> </span> </span> </a></li>
+										class="icon-time"></i> <span>3:15 pm</span> </span> </span> </a>--></li>
 						
-						<li><a href="inbox.html"> 查看所有消息  <i class="fa fa-arrow-right"></i> </a></li>
+						<li><a href="/message/page.htm"> 查看所有消息  <i class="fa fa-arrow-right"></i> </a></li>
 					</ul>
 				</li>
-				-->
 				
 
 				<li class="light-blue"><a data-toggle="dropdown" href="#"

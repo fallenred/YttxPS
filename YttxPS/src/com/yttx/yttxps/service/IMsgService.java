@@ -1,5 +1,10 @@
 package com.yttx.yttxps.service;
 
+import java.util.List;
+import java.util.Map;
+
+import com.yttx.yttxps.model.Message;
+
 
 
 /**
@@ -15,4 +20,10 @@ public interface IMsgService {
 	 * @param obj
 	 */
 	void saveMsg(Object obj, String sendid);
+
+	List<Message> selectNewMsg(Map<String, Object> map);
+
+	List<Message> selectSelectivePage(Map<String, Object> map);
+	
+	boolean readMsg(String id);
 }
