@@ -85,7 +85,7 @@
 											
 											<div class="tab-content">
 												<!--全部订单 pane-->
-												<div id="orderlist" class="tab-pane in active">
+												<div id="orderlist" class="tab-pane <c:if test="${closeID == null }">in active</c:if>">
 													<!-- 全部订单的过滤条件 -->
 													<form class="form-horizontal" id="order_filter_form">
 														<div class="form-group">
@@ -131,7 +131,7 @@
 													<div id="order_pager"></div>
 												</div>
 												<!--全部订单 pane 结束-->
-												<div id="closelist" class="tab-pane">
+												<div id="closelist" class="tab-pane <c:if test="${closeID != null }">in active</c:if>">
 													<!-- 全部订单的过滤条件 -->
 													<form class="form-horizontal" id="stat_filter_form">
 														<input type="hidden" id="statement_stat" value="1">
