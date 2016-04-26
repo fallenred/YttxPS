@@ -84,8 +84,7 @@
 												<label class="col-sm-1 control-label no-padding-right"
 													for="fsNo">订单编号</label>
 												<div class="col-sm-2">
-													<input class="form-control" maxlength="20" type="text"
-														id="fsNo" placeholder="订单编号" />
+													<input class="form-control" maxlength="20" type="text" value="${orderID }" id="fsNo" placeholder="订单编号" />
 												</div>
 												<label class="col-sm-1 control-label no-padding-right"
 													for="fsName">订单名称</label>

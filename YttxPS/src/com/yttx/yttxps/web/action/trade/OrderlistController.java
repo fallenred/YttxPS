@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +31,7 @@ import com.yttx.comm.PathUtil;
 import com.yttx.comm.road.RoadExcelRead;
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
+import com.yttx.yttxps.model.Dict;
 import com.yttx.yttxps.model.DictExample;
 import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.TOrderCusList;
@@ -70,6 +72,15 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 	private IDictService dictService;
 	@Autowired
 	private IMsgService msgService;
+	
+	/**
+	 * 打开订单管理界面
+	 */
+	@RequestMapping(value="page.htm")
+	public String openPage(Model model, String orderID){
+		model.addAttribute("orderID", orderID);
+		return "orderlist/orderlist";
+	}
 	
 	/**
 	 * 分页查询订单信息

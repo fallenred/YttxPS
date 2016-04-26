@@ -369,6 +369,7 @@ jQuery(function($) {
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/orderlist/findOrderlist.htm",
+				postData : {"orderlistWithBLOBs.fsNo":$("#fsNo").val()},
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
