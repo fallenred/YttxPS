@@ -103,10 +103,33 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
+												for="aduit">成人</label>
+											<div class="col-sm-3">
+												<input type="text" id="aduit" class="form-control isFloatGteZero digits" />
+											</div>
+											<label class="col-sm-2 control-label no-padding-right"
+												for="children">儿童</label>
+											<div class="col-sm-3">
+												<input type="text" id="children" class="form-control isFloatGteZero digits" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<label class="col-sm-2 control-label no-padding-right"
+												for="fullguide">全陪</label>
+											<div class="col-sm-3">
+												<input type="text" id="fullguide" class="form-control isFloatGteZero digits"/>
+											</div>
+											<label class="col-sm-2 control-label no-padding-right"
 												for="insurenum">保险</label>
 											<div class="col-sm-3">
 												<input type="text" id="insurenum" class="form-control isFloatGteZero number">
 											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fdInsuerprice">保险费用</label>
 											<div class="col-sm-3">

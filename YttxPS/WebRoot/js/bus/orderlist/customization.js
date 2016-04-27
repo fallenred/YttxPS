@@ -99,8 +99,12 @@ jQuery(function($) {
 				$("#svcstdcontent").val(data.fcSchedule.svcstdcontent);
 				//保险金额
 				$("#insuerprice").val(data.fcSchedule.insuerprice);
-				//预估金额
-				$("#price").val(data.fcSchedule.price);
+				//成人
+				$("#aduit").val(data.fcSchedule.aduit);
+				//儿童
+				$("#children").val(data.fcSchedule.children);
+				//全陪
+				$("#fullguide").val(data.fcSchedule.fullguide);
 				var daylistTemplate = Handlebars.compile($("#daylist-template").html());
 				//处理早午晚餐页面勾选
 				Handlebars.registerHelper('compare',function(value, options) {

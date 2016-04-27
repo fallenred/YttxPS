@@ -42,13 +42,13 @@ public class Body {
 	@XStreamOmitField
 	private String fiId;
 	//成人
-	@XStreamOmitField
+	@XStreamAlias("aduit")
 	private String aduit;
 	//儿童
-	@XStreamOmitField
+	@XStreamAlias("children")
 	private String children;
 	//全陪
-	@XStreamOmitField
+	@XStreamAlias("fullguide")
 	private String fullguide;
 
 	public List<Daylist> getDaylist() {

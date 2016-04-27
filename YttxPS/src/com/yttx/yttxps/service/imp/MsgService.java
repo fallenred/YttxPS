@@ -312,9 +312,7 @@ public class MsgService implements IMsgService {
 	
 	@Override
 	public List<Message> selectNewMsg(Map<String, Object> map) {
-		List<Message> list = messageMapper.selectUnreadMsg(map);
-		int i = list.size() < 3 ? list.size() : 3;
-		return list.subList(0, i);
+		return messageMapper.selectUnreadMsg(map);
 	}
 
 	@Override
