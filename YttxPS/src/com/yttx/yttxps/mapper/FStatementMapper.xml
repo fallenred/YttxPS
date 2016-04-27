@@ -106,6 +106,10 @@
 						AND
 							t1.fs_User_ID like '%'||#{userId,jdbcType = VARCHAR}||'%'
 					</if>
+					<if test="name != null and name !=''">
+						AND
+							t1.fs_name like '%'||#{name,jdbcType = VARCHAR}||'%'
+					</if>
 					<if test="operId != null and operId !=''">
 						AND
 							Trim(t1.FS_OPER_ID) = Trim(#{operId,jdbcType=VARCHAR})

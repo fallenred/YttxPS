@@ -39,6 +39,7 @@ public class FStatementPageRequest extends JqGridRequest implements Serializable
 			map.put("startDate",fstatFilters.getStartDate());
 			map.put("endDate",fstatFilters.getEndDate());
 			map.put("stat",fstatFilters.getStat());
+			map.put("name",fstatFilters.getName());
 		}
 	}
 }

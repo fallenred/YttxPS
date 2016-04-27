@@ -29,6 +29,9 @@ public class FStatementFilters {
 		
 	private Long stat=0L;
 
+	//结算单名称
+	private String name;
+
 	public String getStatementId() {
 		return statementId;
 	}
@@ -91,5 +94,13 @@ public class FStatementFilters {
 
 	public void setStat(Long stat) {
 		this.stat = stat;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

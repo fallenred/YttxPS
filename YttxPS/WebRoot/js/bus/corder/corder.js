@@ -77,6 +77,8 @@ function setStateFilterParams(postData){
 	postData["fstatFilters.userId"] = $.trim($("#statement_user_id").val());
 	//
 	postData["fstatFilters.createDateRange"] = $.trim($("#statment_date_range").val());
+	//订单名称
+	postData["fstatFilters.name"] = $.trim($("#statement_order_name").val());
 }
 
 
