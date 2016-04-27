@@ -105,6 +105,8 @@ jQuery(function($) {
 				$("#children").val(data.fcSchedule.children);
 				//全陪
 				$("#fullguide").val(data.fcSchedule.fullguide);
+				//报价
+				$("#price").val(data.fcSchedule.price);
 				var daylistTemplate = Handlebars.compile($("#daylist-template").html());
 				//处理早午晚餐页面勾选
 				Handlebars.registerHelper('compare',function(value, options) {

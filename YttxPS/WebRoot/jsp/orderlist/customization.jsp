@@ -105,12 +105,12 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="aduit">成人</label>
 											<div class="col-sm-3">
-												<input type="text" id="aduit" class="form-control isFloatGteZero digits" />
+												<input type="text" id="aduit" name="scheduleBody.aduit" class="form-control isFloatGteZero digits" />
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="children">儿童</label>
 											<div class="col-sm-3">
-												<input type="text" id="children" class="form-control isFloatGteZero digits" />
+												<input type="text" id="children" name="scheduleBody.children" class="form-control isFloatGteZero digits" />
 											</div>
 										</div>
 									</div>
@@ -119,7 +119,7 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fullguide">全陪</label>
 											<div class="col-sm-3">
-												<input type="text" id="fullguide" class="form-control isFloatGteZero digits"/>
+												<input type="text" id="fullguide" name="scheduleBody.fullguide" class="form-control isFloatGteZero digits"/>
 											</div>
 											<label class="col-sm-2 control-label no-padding-right"
 												for="insurenum">保险</label>
