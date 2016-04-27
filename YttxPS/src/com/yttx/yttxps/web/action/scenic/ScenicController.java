@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -96,6 +97,10 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		logger.debug("当前新增对象 {}", scenic);
 		try{
 			scenicService.insert(scenic);
+		}
+		catch(DuplicateKeyException e1){
+			logger.error("景区代码已存在", e1);
+			return (Map<String, Object>) JsonResult.jsonError("景区代码已存在");
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("新增失败");
