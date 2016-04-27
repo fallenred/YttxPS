@@ -41,6 +41,15 @@ public class Body {
 	//订单批次主键
 	@XStreamOmitField
 	private String fiId;
+	//成人
+	@XStreamOmitField
+	private String aduit;
+	//儿童
+	@XStreamOmitField
+	private String children;
+	//全陪
+	@XStreamOmitField
+	private String fullguide;
 
 	public List<Daylist> getDaylist() {
 		return daylist;
@@ -104,5 +113,29 @@ public class Body {
 
 	public void setFiId(String fiId) {
 		this.fiId = fiId;
+	}
+
+	public String getAduit() {
+		return aduit;
+	}
+
+	public void setAduit(String aduit) {
+		this.aduit = aduit;
+	}
+
+	public String getChildren() {
+		return children;
+	}
+
+	public void setChildren(String children) {
+		this.children = children;
+	}
+
+	public String getFullguide() {
+		return fullguide;
+	}
+
+	public void setFullguide(String fullguide) {
+		this.fullguide = fullguide;
 	}
 }
