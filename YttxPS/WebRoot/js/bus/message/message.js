@@ -105,6 +105,7 @@ jQuery(function($) {
 	jQuery(grid_selector).jqGrid(
 			{
 				url : "/message/findMsg.htm",
+				postData : {"message.msgStat":$("#msgStat").val()},
 				datatype : "json",
 				mtype : 'POST',
 				height : 400,
