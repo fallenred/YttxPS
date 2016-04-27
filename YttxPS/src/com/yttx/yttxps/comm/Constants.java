@@ -85,6 +85,8 @@ public class Constants {
 		ORDER_REMARK {public String getVal(){return "2060";}},
 		/** 结算单 */
 		STATEMENT {public String getVal(){return "3010";}},
+		/** 结算单已确认 */
+		STATEMENT_CONFIRM {public String getVal(){return "3040";}},
 		/** 结算完毕 */
 		STATEMENT_DONE {public String getVal(){return "1002";}};
 

@@ -150,6 +150,10 @@ public class MsgService implements IMsgService {
 					tempParam.put("orderID", statement.getOrderId());
 					tempParam.put("closeID", statement.getStatmentId());
 					break;
+				case 1: //已确认
+					tempid = MsgTemp.STATEMENT_CONFIRM.getVal();
+					tempParam.put("closeID", statement.getStatmentId());
+					tempParam.put("closeAmt", statement.getAmt());
 				case 2: //结算完毕
 					tempid = MsgTemp.STATEMENT_DONE.getVal();
 					
