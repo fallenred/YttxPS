@@ -65,6 +65,7 @@
 <script src="/js/bus/localcity.js"></script>
 <script src="/js/bus/pub.js"></script>
 <script src="/js/bus/pub.js"></script>
+<script src="/js/jquery.jgrowl.js"></script>
 <script type="text/javascript">
 /** 
  * 时间对象的格式化; 
@@ -199,6 +200,7 @@ Date.prototype.format = function(format) {
 </script>
 <!-- 表单验证 -->
 <script>
+	var msgMap = new Map();
 	function refreshMsg(){
 		$.ajax({
 			type: "POST",
@@ -209,7 +211,7 @@ Date.prototype.format = function(format) {
 				var count = 0;
 				$.each(data, function(commentIndex, comment){
 					if(commentIndex == 'rows'){
-						for(var i = 0; i < comment.length; i++){
+						for(var i = 0; i < 3; i++){
 							/**
 							
 							html += '<a href="#"><span class="msg-body"><span class="msg-title"><span class="blue">'+ comment[i]['sendid'] +'</span>';
@@ -218,10 +220,25 @@ Date.prototype.format = function(format) {
 							*/
 							html += '<a><span>'+ comment[i]['msgHead'] +'</span></a>';
 							count += 1;
+							var msg = msgMap.get(comment[i]['id']);
+							if (msg == null) {
+								msgMap.put(comment[i]['id'], comment[i]['id']);
+								$.jGrowl.defaults.closerTemplate = '<div class="alert alert-info">全部关闭</div>';
+								var alertTypes = ['info'];
+								$.jGrowl(comment[i]['msgText'], {
+									header: comment[i]['msgHead'],
+									theme:  'manilla',
+									sticky: true,
+									click: function(msg) {
+										//alert("You clicked me");
+									}
+								});
+							}
 						}
 						
 					}
 				});
+				
 				$("#newMsg").html(html);
 				if(count <3){
 					html = count + '条未读信息';
@@ -233,7 +250,7 @@ Date.prototype.format = function(format) {
 			}
 		});
 	}
-	refreshMsg();
+	//refreshMsg();
 	setInterval(refreshMsg,120000);
 	$().ready(function() {
 		// 判断浮点数value是否大于或等于0
@@ -265,8 +282,28 @@ Date.prototype.format = function(format) {
 	});
 </script>
 <style>
-	.error{
-		color:red;
+	.error {
+		color: red;
+	}
+	
+	.jGrowl-notification {
+		background-color: #000000;
+		opacity: 0.9;
+		filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=(0.9*100 ) );
+		-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=(0.9*100 ) );
+		zoom: 1;
+		width: 250px;
+		padding: 10px;
+		margin: 10px;
+		text-align: left;
+		display: none;
+		border-radius: 5px;
+		min-height: 40px;
+	}
+	
+	.jGrowl .manilla {
+		background-color: #FFF1C2;
+		color: navy;
 	}
 </style>
 <script src="/js/date-time/bootstrap-datetimepicker.min.js"></script>

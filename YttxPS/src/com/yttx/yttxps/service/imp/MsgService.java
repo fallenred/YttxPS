@@ -2,6 +2,7 @@ package com.yttx.yttxps.service.imp;
 
 import java.io.StringWriter;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,9 +35,7 @@ import com.yttx.yttxps.model.CustomOper;
 import com.yttx.yttxps.model.CustomOperExample;
 import com.yttx.yttxps.model.Message;
 import com.yttx.yttxps.model.MessageAuth;
-import com.yttx.yttxps.model.Room;
 import com.yttx.yttxps.model.TOrderlist;
-import com.yttx.yttxps.model.TOrderlistWithBLOBs;
 import com.yttx.yttxps.model.TRemarks;
 import com.yttx.yttxps.model.corder.FStatement;
 import com.yttx.yttxps.service.IMsgService;
@@ -259,7 +258,7 @@ public class MsgService implements IMsgService {
 						message.setMsgText(msg.getContent());
 						message.setRecvid(oper.getId());
 						message.setSubid(oper.getSubid());
-						message.setMsgDate(new Date());
+						message.setMsgDate(new Timestamp(new Date().getTime()));
 						message.setSendid(operid);
 						message.setMsgStat("0");
 						msgList.add(message);

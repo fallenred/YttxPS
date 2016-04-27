@@ -251,8 +251,7 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 			this.msgService.saveMsg(orderlist, sessionEntity.getId());
 		}
 		catch(Exception e){
-			e.printStackTrace();
-			logger.error("更新订单失败, 订单编号："+orderlist.getFsNo() + "\n" + e);
+			logger.error("更新订单失败, 订单编号："+orderlist.getFsNo() + "\n", e);
 			return (Map<String, Object>) JsonResult.jsonError("更新失败");
 		}
 		return (Map<String, Object>) JsonResult.jsonOk();

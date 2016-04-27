@@ -152,11 +152,11 @@
     -->
     insert into TMESSAGE (FI_ID, FS_SENDTYPE, FS_MSGHEAD, 
       FS_MSGTEXT, FS_SENDID, FS_RECVID, 
-      FS_SUBID, to_date(to_char(FT_MSGDATE,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss'), FI_MSGSTAT
+      FS_SUBID, FT_MSGDATE, FI_MSGSTAT
       )
     values (message_sequence.nextval, #{sendType,jdbcType=VARCHAR}, #{msgHead,jdbcType=VARCHAR}, 
       #{msgText,jdbcType=VARCHAR}, #{sendid,jdbcType=VARCHAR}, #{recvid,jdbcType=VARCHAR}, 
-      #{subid,jdbcType=VARCHAR}, #{msgDate,jdbcType=DATE}, #{msgStat,jdbcType=DECIMAL}
+      #{subid,jdbcType=VARCHAR}, #{msgDate,jdbcType=TIMESTAMP}, #{msgStat,jdbcType=DECIMAL}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.yttx.yttxps.model.Message">

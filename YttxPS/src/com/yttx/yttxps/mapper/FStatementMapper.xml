@@ -120,11 +120,11 @@
 					</if>
 					<if test="stat != null">
 						AND
-							t1.fi_Stat = #{stat,jdbcType=INTEGER}
-					</if>
-					<if test="stat == 1">
-						OR
-							t1.fi_Stat = -1
+							(t1.fi_Stat = #{stat,jdbcType=INTEGER}
+						<if test="stat == 1">
+							OR
+								t1.fi_Stat = -1
+						</if>)
 					</if>
 					order by t1.fs_No desc
 					) o

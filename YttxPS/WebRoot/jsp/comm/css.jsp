@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="/css/ui.jqgrid.css" />
 <link rel="stylesheet" href="/css/dropzone.css" />
 <link rel="stylesheet" href="/css/chosen.css" />
+<link rel="stylesheet" href="/css/jquery.jgrowl.css" />
 
 <!-- fonts -->
 <link rel="stylesheet" href="/css/ace-fonts.css" />
@@ -41,7 +42,7 @@
 <link rel="stylesheet" href="/css/localcity.css">
 <link rel="stylesheet" href="/css/my.css" />
 <style>
-	.btn{
+	.btn {
 		border-radius: 4px;
 	}
 </style>
