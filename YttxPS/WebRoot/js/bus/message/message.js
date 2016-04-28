@@ -33,6 +33,24 @@ $("#showModal").on("hidden.bs.modal", function() {
 	$("#grid-table").trigger("reloadGrid");
 });
 
+function refreshMsg(stat){
+	$("#collapseOne").collapse('hide');
+	var postData = $("#grid-table").jqGrid("getGridParam", "postData");
+	/*postData["message.id"] = $("#queryfield").find("#id").val();
+	postData["message.sendType"] = $("#queryfield").find("#sendType").val();
+	postData["message.msgText"] = $("#queryfield").find("#msgText").val();
+	postData["message.sendId"] = $("#queryfield").find("#sendId").val();
+	postData["message.recvId"] = $("#queryfield").find("#recvId").val();
+	postData["message.subId"] = $("#queryfield").find("#subId").val();
+	postData["message.msgDate"] = $("#queryfield").find("#msgDate").val();*/
+	$("#msgStat").val(stat);
+	postData["message.msgStat"] = stat;
+	$("#grid-table").jqGrid("setGridParam", {
+		datatype : 'json',
+		postData : postData
+	}).trigger("reloadGrid");
+};
+
 jQuery(function($) {
 	//	jqGrid form提交
 	$("#submit").on("click", function() {
