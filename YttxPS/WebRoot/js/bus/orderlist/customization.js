@@ -100,7 +100,7 @@ jQuery(function($) {
 				//保险金额
 				$("#insuerprice").val(data.fcSchedule.insuerprice);
 				//成人
-				$("#aduit").val(data.fcSchedule.aduit);
+				$("#adult").val(data.fcSchedule.adult);
 				//儿童
 				$("#children").val(data.fcSchedule.children);
 				//全陪

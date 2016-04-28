@@ -42,8 +42,8 @@ public class Body {
 	@XStreamOmitField
 	private String fiId;
 	//成人
-	@XStreamAlias("aduit")
-	private String aduit;
+	@XStreamAlias("adult")
+	private String adult;
 	//儿童
 	@XStreamAlias("children")
 	private String children;
