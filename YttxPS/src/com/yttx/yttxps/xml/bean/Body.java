@@ -115,12 +115,12 @@ public class Body {
 		this.fiId = fiId;
 	}
 
-	public String getAduit() {
-		return aduit;
+	public String getAdult() {
+		return adult;
 	}
 
-	public void setAduit(String aduit) {
-		this.aduit = aduit;
+	public void setAdult(String adult) {
+		this.adult = adult;
 	}
 
 	public String getChildren() {
