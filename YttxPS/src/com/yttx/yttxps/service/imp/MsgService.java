@@ -95,13 +95,18 @@ public class MsgService implements IMsgService {
 		//会员审核
 		if (obj instanceof CustomInfo) {
 			CustomInfo customInfo = (CustomInfo)obj;
-			int stat = customInfo.getStat();
+			int auditRet = customInfo.getAuditRet();//审核结果
 			//审核通过
-			if (stat == 1) {
+			if (auditRet == 1) {
 				tempid = MsgTemp.AUDIT_SUCCESS.getVal();
 				custid = customInfo.getId();
 				tempParam.put("cusID", custid);
 				tempParam.put("taName", customInfo.getTaname());
+			} else if (auditRet == -1){
+				tempid = MsgTemp.AUDIT_FAILD.getVal();
+				custid = customInfo.getId();
+				tempParam.put("cusID", custid);
+				tempParam.put("comment", customInfo.getComment());
 			}
 		} else if (obj instanceof TOrderlist) {//订单
 			TOrderlist orderlist = (TOrderlist) obj;

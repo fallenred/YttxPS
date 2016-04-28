@@ -75,6 +75,8 @@ public class Constants {
 	public enum MsgTemp {
 		/** 用户审核通过 */
 		AUDIT_SUCCESS {public String getVal(){return "1030";}},
+		/** 用户审核未通过 */
+		AUDIT_FAILD {public String getVal(){return "1031";}},
 		/** 报价 */
 		DIRECTOR {public String getVal(){return "2020";}},
 		/** 订单审核 */
