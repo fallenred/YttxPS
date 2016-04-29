@@ -177,6 +177,7 @@ public class PayConfirController extends BaseController {
 		SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
 		String operid = sessionEntity.getId();
 		try {
+			statement.setAmt_(amt);
 			statement.setStatmentId(fsId);
 			statement.setPaidAmt(paidAmt.add(amt));
 			statement.setAmt(totalFee.subtract(statement.getPaidAmt()));

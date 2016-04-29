@@ -27,6 +27,7 @@ import com.yttx.yttxps.comm.Constants.MsgTemp;
 import com.yttx.yttxps.comm.Constants.RecRole;
 import com.yttx.yttxps.mapper.CustomInfoMapper;
 import com.yttx.yttxps.mapper.CustomOperMapper;
+import com.yttx.yttxps.mapper.FStatementMapper;
 import com.yttx.yttxps.mapper.MessageAuthMapper;
 import com.yttx.yttxps.mapper.MessageMapper;
 import com.yttx.yttxps.mapper.TOrderlistMapper;
@@ -68,6 +69,8 @@ public class MsgService implements IMsgService {
 	private CustomInfoMapper infoMapper;
 	@Autowired
 	private TOrderlistMapper<TOrderlist> orderlistMapper;
+	@Autowired
+	private FStatementMapper<FStatement> statementMapper;
 	
 	@Override
 	//@Transactional(rollbackFor=Exception.class)
@@ -151,6 +154,7 @@ public class MsgService implements IMsgService {
 			}
 		} else if (obj instanceof FStatement) {//结算单
 			FStatement statement = (FStatement) obj;
+			statement = statementMapper.selectFSById(statement.getStatmentId());
 			custid = statement.getUserID();
 			subid = statement.getUserSubID();
 //			int stat = Integer.valueOf(statement.getStat().toString());
@@ -164,7 +168,7 @@ public class MsgService implements IMsgService {
 					tempid = MsgTemp.STATEMENT_CONFIRM.getVal();
 					tempParam.put("orderID", statement.getOrderId());
 					tempParam.put("closeID", statement.getStatmentId());
-					tempParam.put("closeAmt", statement.getAmt());
+					tempParam.put("closeAmt", statement.getAmt_());
 				default:
 					break;
 			}
