@@ -168,7 +168,7 @@ public class MsgService implements IMsgService {
 					tempid = MsgTemp.STATEMENT_CONFIRM.getVal();
 					tempParam.put("orderID", statement.getOrderId());
 					tempParam.put("closeID", statement.getStatmentId());
-					tempParam.put("closeAmt", statement.getAmt());
+					tempParam.put("closeAmt", statement.getAmt_());
 				default:
 					break;
 			}

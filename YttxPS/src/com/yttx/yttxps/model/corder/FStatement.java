@@ -56,6 +56,9 @@ public class FStatement {
 	//双方需交易金额
 	private BigDecimal amt;
 	
+	//支付金额
+	private BigDecimal amt_;
+	
 	//整体备注
 	private String remark;
 	
@@ -215,6 +218,14 @@ public class FStatement {
 
 	public void setCreatDateDesc(String creatDateDesc) {
 		this.creatDateDesc = creatDateDesc;
+	}
+
+	public BigDecimal getAmt_() {
+		return amt_;
+	}
+
+	public void setAmt_(BigDecimal amt_) {
+		this.amt_ = amt_;
 	}
 	
 }
