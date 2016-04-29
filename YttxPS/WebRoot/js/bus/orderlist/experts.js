@@ -1,10 +1,32 @@
 jQuery(function($) {
 	$("#message").hide();
-	
+
 	var fsNo = $.getUrlParam('fsNo');
 	var genIndex = $.getUrlParam('genIndex');
 	var startdate = $.getUrlParam('startdate');
+	$("#fiGenindex").val(genIndex);
+	$.ajax({
+		type: "GET",
+		url: "/gen/findGenByIndex.htm",
+		data: 'index='+genIndex,
+		dataType: "json",
+		success: function(data){
+			$("#genName").val(data.fsName);
+		}
+	});
 	
+	var stat = $("#fiStat").val();
+	if (stat == '1') {
+		$(".div_custList").show();
+	} else if (stat == '6') {
+		$(".div_custList").show();
+	} else if (stat == '8') {
+		$(".div_custList").show();
+	} else if (stat == '32'){
+		$(".div_custList").show();
+		$("#submit").hide();
+	}
+
 	var localsel = $("#selectCity", "#editform").localCity({
 		provurl : "/pub/findcity.htm",
 		cityurl : "/pub/findcity.htm",
@@ -23,7 +45,7 @@ jQuery(function($) {
 	$("#regionname", "#editform").click(function() {
 		$("#selectCity", "#editform").show();
 	});
-	
+
 	//	重置
 	$("#reset").on("click", function() {
 		$("#selectCity").hide();
@@ -68,7 +90,7 @@ jQuery(function($) {
 		html = '';
 		if (v1 == '0') {
 			html = '<option value="0">未付款</option>' +
-				   '<option value="1">已付款</option>';
+			'<option value="1">已付款</option>';
 			return html;
 		} else if(v1 == '1'){
 			return '<option value="1">已付款</option>';
@@ -124,13 +146,13 @@ jQuery(function($) {
 			}
 		});
 	});
-	
+
 	function setSchedule(){
 		str = $("#schedule").html() + "";
 		CKEDITOR.instances["fcSchedule"].setData(str);   //日程快照
 		//$("#fcSchedule").val(str);
 	}
-	
+
 	//查询线路景区
 	function getSceniceGen(){
 		$.ajax({
@@ -142,19 +164,19 @@ jQuery(function($) {
 				html = '';
 				$.each(data, function(commentIndex, comment){
 					html += '<tr>'+
-								'<td><input type="hidden" value="'+comment['fsScenicno']+'" class="scenic" placeholder="资源编号"></td>'+
-								'<td>景区</td>'+
-								'<td>'+comment['fsScenicname']+'</td>'+
-								'<td></td>'+
-								'<td></td>'+
-								'<td></td>'+
-							'</tr>';	
+					'<td><input type="hidden" value="'+comment['fsScenicno']+'" class="scenic" placeholder="资源编号"></td>'+
+					'<td>景区</td>'+
+					'<td>'+comment['fsScenicname']+'</td>'+
+					'<td></td>'+
+					'<td></td>'+
+					'<td></td>'+
+					'</tr>';	
 				});
 				$("#tbody_common").html($("#tbody_common").html() + html);
 			}
 		});
 	}
-	
+
 	//查询景区列表
 	function getScenic(){
 		$.ajax({
@@ -174,7 +196,7 @@ jQuery(function($) {
 			}
 		});
 	}
-	
+
 	//增加景区addScenic
 	$(document).on('click key', '.addScenicBtn', function(event){
 		var index = $("#reslistIndex").val();
@@ -201,7 +223,7 @@ jQuery(function($) {
 		$(".batch_resno").parent().prev().html("房型");
 		getDictLvl(null, 'bg');
 	});
-	
+
 	//获取车型列表selectTransport.htm
 	function getTransport(){
 		$.ajax({
@@ -357,7 +379,7 @@ jQuery(function($) {
 			data: {"scenicNo" : dataArr,
 				"accomadation.starlvl" : $(obj).val(),
 				"accomadation.stat" : "1"
-				},
+			},
 			dataType: "json",
 			success: function(data){
 				if (data == '' || data == null) {
@@ -414,9 +436,9 @@ jQuery(function($) {
 	function getDate(d, num){
 		date=new Date(d);
 		date.setDate(date.getDate() + parseInt(num));
-        return date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate();
-    }
-	
+		return date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate();
+	}
+
 	//批次资源变更
 	$(document).on('change key', '.batch_resno', function(event){
 		var resno = $(this).val();
@@ -426,7 +448,7 @@ jQuery(function($) {
 		params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resno+'&fsRestype='+restype;
 		getTccprice(params, resno, date, $(this).parent().parent().parent().next().find(".batch_ccno"));
 	});
-	
+
 	//资源变更
 	$(document).on('change key', '.select_resno', function(event){
 		var resno = $(this).val();
@@ -435,7 +457,7 @@ jQuery(function($) {
 		params = 'ftStartdate='+date+'&ftEnddate='+date+'&fsResno='+resno+'&fsRestype='+restype;
 		getTccprice(params, resno, date, $(this).parent().parent().find("#ccno"));
 	});
-	
+
 	//批次资源消费项变更
 	$(document).on('change key', '.batch_ccno', function(event){
 		var ccno = $(this).val();
@@ -450,17 +472,17 @@ jQuery(function($) {
 						price = comment['fdPrice'];
 						return;
 					}
-	        	});
+				});
 			}
 		});
 		$(this).parent().parent().find(".tccPrice").val(price);
 	});
-	
+
 	//菜单类型变更（午餐、晚餐）
 	$(document).on('change key', '.ct_special', function(event){
 		getRestaurant(this);
 	});
-	
+
 	//餐标类型变更（人均）
 	$(document).on('change key', '.batch_Lvl', function(event){
 		resType = $(this).parent().parent().find("#restype").val();
@@ -470,7 +492,7 @@ jQuery(function($) {
 			getAccomadation(this);
 		}
 	});
-	
+
 	function getTccprice(params, resno, date, obj){
 		$.ajax({
 			type: "GET",
@@ -496,7 +518,7 @@ jQuery(function($) {
 			}
 		});
 	}
-	
+
 	var resMap = new Map();
 	//景区是否变更
 	var isChange_jq = false;
@@ -553,10 +575,10 @@ jQuery(function($) {
 			type: "POST",
 			url: "/restaurant/selectRestaurant.htm",
 			data: {"scenicNo" : dataArr,
-				   "lvl" : $(obj).parent().parent().find(".batch_Lvl").val(),
-				   "special" : $(obj).parent().parent().find(".ct_special").val(),
-				   "stat" : "1"
-				},
+				"lvl" : $(obj).parent().parent().find(".batch_Lvl").val(),
+				"special" : $(obj).parent().parent().find(".ct_special").val(),
+				"stat" : "1"
+			},
 			dataType: "json",
 			success: function(data){
 				if(data == null || data == ''){
@@ -612,9 +634,9 @@ jQuery(function($) {
 			type: "POST",
 			url: "/entertainment/selectEntertainment.htm",
 			data: {
-					"scenicNo" : dataArr,
-					"stat" : "1"
-				},
+				"scenicNo" : dataArr,
+				"stat" : "1"
+			},
 			dataType: "json",
 			success: function(data){
 				var html = ''; 
@@ -622,7 +644,7 @@ jQuery(function($) {
 					html += '<option value=' + comment['fsNo'] + '>' + comment['fsName'] + '</option>';
 				});
 				resMap.put('entertainment', html);
-				
+
 				$(obj).parent().parent().find(".batch_resno").html(html);
 				var resno = $(obj).parent().parent().find("#batch_resno").val();
 				var restype = $(obj).parent().parent().find("#restype").val();
@@ -632,7 +654,7 @@ jQuery(function($) {
 			}
 		});
 	}
-	
+
 	//添加资源项
 	$(document).on('click key', '.btn_res', function(event){
 		var ccno = $(this).parent().parent().find("#ccno").val();
@@ -671,7 +693,7 @@ jQuery(function($) {
 						ccname = comment['fsCcname'];
 						return;
 					}
-	        	});
+				});
 			}
 		});
 		data["ccname"] = ccname;
@@ -691,8 +713,9 @@ jQuery(function($) {
 		$("#table_common" + dayflag + " tbody").html($("#table_common" + dayflag + " tbody").html() + template(data));
 		$(this).parent().find(".reslistIndex").val(parseInt(reslistIndex)+1);
 		totalAmount();
+		totalCommAmt();
 	});
-	
+
 	//添加批次资源项
 	$(document).on('click key', '.btn_batch', function(event){
 		var ccno = $(this).parent().parent().find(".batch_ccno").val();
@@ -709,7 +732,7 @@ jQuery(function($) {
 		var dayflag = $(this).parent().find(".daylistIndex").val();
 		//资源名称所在的div
 		var prevDiv = $(this).parent().parent().parent().prev();
-		
+
 		var restype = prevDiv.find("#restype").val();
 		var resno = prevDiv.find("#batch_resno").val();
 		var resname = prevDiv.find("#batch_resno").find("option:selected").text();
@@ -755,7 +778,7 @@ jQuery(function($) {
 		totalAmount();
 		totalBatchAmt();
 	});
-	
+
 	//查询订单所有批次信息
 	$.ajax({
 		type: "POST",
@@ -764,7 +787,7 @@ jQuery(function($) {
 		dataType: "json",
 		success: function(data){
 			var orderCustoms = {
-				"orderCustoms" : data
+					"orderCustoms" : data
 			}
 			var batchTemplate = Handlebars.compile($("#batch-template").html());
 			//返回数组长度
@@ -806,7 +829,7 @@ jQuery(function($) {
 			});
 		}
 	});
-	
+
 	//返回资源类型
 	Handlebars.registerHelper("getType",function(value){
 		if(value == 'cx'){
@@ -852,7 +875,7 @@ jQuery(function($) {
 		$("#myTab").html(html);
 		return;
 	});
-	
+
 	//批次信息切换
 	$(document).on('click key', '.tr_batch', function(event){
 		//显示
@@ -893,6 +916,23 @@ jQuery(function($) {
 		$("#totalfee").val(remarkAmt.toFixed(2));
 	}
 	
+	//合计公共资源金额
+	function totalCommAmt(){
+		//循环批次
+		var fdAmt = 0;
+		$(".div_comm").each(function(){
+			$(this).find(".price").each(function(){
+				var price = $(this).val();
+				var usernum = $(this).next().val();
+				if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
+					return;
+				}
+				fdAmt = parseFloat(fdAmt) + parseFloat(usernum) * parseFloat(price);
+			});
+		});
+		$("#commAmt").val(fdAmt);
+	}
+
 	//合计订单批次金额
 	function totalBatchAmt(){
 		//循环批次
@@ -909,7 +949,7 @@ jQuery(function($) {
 			$(this).parent().next().find("#fdAmt").val(fdAmt);
 		});
 	}
-	
+
 	//查询订单所有备注信息
 	$.ajax({
 		type: "POST",
@@ -918,14 +958,14 @@ jQuery(function($) {
 		dataType: "json",
 		success: function(data){
 			var remarks = {
-				"remarks" : data
+					"remarks" : data
 			}
 			var remarksTemplate = Handlebars.compile($("#remarks-template").html());
 			//返回数组长度
 			$('#table_remarks tbody').html(remarksTemplate(remarks));
 		}
 	});
-	
+
 	//添加备注项
 	$(document).on('click key', '#btn_remarks', function(event){
 		$("#message").hide();
@@ -955,7 +995,7 @@ jQuery(function($) {
 			$('#table_remarks tbody').html($('#table_remarks tbody').html() + remarksTemplate(data));
 			$("#fsContent").val('');
 			$("#remarksAmt").val('');
-			
+
 			totalAmt = parseFloat($("#totalfee").val()) + parseFloat(fdAmt);
 			$("#totalfee").val(totalAmt.toFixed(2));
 		} else {
@@ -991,35 +1031,35 @@ jQuery(function($) {
 		}
 	});
 	function getNowFormatDate() {
-	    var date = new Date();
-	    var seperator1 = "/";
-	    var seperator2 = ":";
-	    var month = date.getMonth() + 1;
-	    var strDate = date.getDate();
-	    var hours = date.getHours();
-	    var minutes = date.getMinutes();
-	    var seconds = date.getSeconds();
-	    if (month >= 1 && month <= 9) {
-	        month = "0" + month;
-	    }
-	    if (strDate >= 0 && strDate <= 9) {
-	        strDate = "0" + strDate;
-	    }
-	    if (hours >= 0 && hours <= 9) {
-	    	hours = "0" + hours;
-	    }
-	    if (minutes >= 0 && minutes <= 9) {
-	    	minutes = "0" + minutes;
-	    }
-	    if (seconds >= 0 && seconds <= 9) {
-	    	seconds = "0" + seconds;
-	    }
-	    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-	            + " " + hours + seperator2 + minutes
-	            + seperator2 + seconds;
-	    return currentdate;
+		var date = new Date();
+		var seperator1 = "/";
+		var seperator2 = ":";
+		var month = date.getMonth() + 1;
+		var strDate = date.getDate();
+		var hours = date.getHours();
+		var minutes = date.getMinutes();
+		var seconds = date.getSeconds();
+		if (month >= 1 && month <= 9) {
+			month = "0" + month;
+		}
+		if (strDate >= 0 && strDate <= 9) {
+			strDate = "0" + strDate;
+		}
+		if (hours >= 0 && hours <= 9) {
+			hours = "0" + hours;
+		}
+		if (minutes >= 0 && minutes <= 9) {
+			minutes = "0" + minutes;
+		}
+		if (seconds >= 0 && seconds <= 9) {
+			seconds = "0" + seconds;
+		}
+		var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+		+ " " + hours + seperator2 + minutes
+		+ seperator2 + seconds;
+		return currentdate;
 	}
-	
+
 	//下载游客名单
 	$(document).on('click key', '.btn_export', function(event){
 		var orderId = $("#fsNo").val();
@@ -1031,56 +1071,56 @@ jQuery(function($) {
 		parm+="&orderId="+encodeURIComponent(orderId);
 		window.location.href = '../../orderlist/exportOrderCusList.htm?1=1'+parm;
 	});
-	
+
 	//上传游客名单
 	$(document).on('click key', '.btn_import', function(event){
 		$("#orderId").val(fsNo);
 		save();
 	});
-	
+
 	//保存
 	function save(){
 		if($("#excel").val()=="" || document.getElementById("excel").files[0] =='请选择xls格式的文件'){
 			$("#excel").tips({
 				side:3,
-	            msg:'请选择文件',
-	            bg:'#AE81FF',
-	            time:3
-	        });
+				msg:'请选择文件',
+				bg:'#AE81FF',
+				time:3
+			});
 			return false;
 		}
 		$("#excel1").val($("#excel").val());
 		var formData = new FormData($("#uploadForm")[0]);
 		$.ajax({  
-	          url: '../../orderlist/importExcel.htm' ,  
-	          type: 'POST',  
-	          data: formData,  
-	          async: false,  
-	          cache: false,  
-	          contentType: false,  
-	          processData: false,  
-	          success: function (data) { 
-	  			$("#upload_message").text(data);
-	  			$("#upload_message").show();
-	          }
-	     });
-	}
-	
-	function fileType(obj){
-		var fileType=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
-	    if(fileType != '.xls'){
-	    	$("#excel").tips({
-				side:3,
-	            msg:'请上传xls格式的文件',
-	            bg:'#AE81FF',
-	            time:3
-	        });
-	    	$("#excel").val('');
-	    	document.getElementById("excel").files[0] = '请选择xls格式的文件';
-	    }
+			url: '../../orderlist/importExcel.htm' ,  
+			type: 'POST',  
+			data: formData,  
+			async: false,  
+			cache: false,  
+			contentType: false,  
+			processData: false,  
+			success: function (data) { 
+				$("#upload_message").text(data);
+				$("#upload_message").show();
+			}
+		});
 	}
 
-	
+	function fileType(obj){
+		var fileType=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
+		if(fileType != '.xls'){
+			$("#excel").tips({
+				side:3,
+				msg:'请上传xls格式的文件',
+				bg:'#AE81FF',
+				time:3
+			});
+			$("#excel").val('');
+			document.getElementById("excel").files[0] = '请选择xls格式的文件';
+		}
+	}
+
+
 	//	colorbox
 	var $overflow = '';
 	var colorbox_params = {
@@ -1125,7 +1165,7 @@ jQuery(function($) {
 			}
 		});
 	});
-	
+
 	//删除资源项
 	$(document).on('click key', '.removeTr', function(obj){
 		type = $(this).parent().find("#restype").val();
@@ -1144,8 +1184,9 @@ jQuery(function($) {
 			getDictLvl(null, 'bg');
 		}
 		totalAmount();
+		totalCommAmt();
 	});
-	
+
 	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
 	$("#cboxLoadingGraphic").html(
 	"<i class='ace-icon fa fa-spinner orange'></i>");// let's add a custom loading icon

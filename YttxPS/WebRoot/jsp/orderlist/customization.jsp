@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix='fmt'%>
 
 <!DOCTYPE html>
 <html lang="zh">
@@ -24,18 +25,44 @@
 	}
 </style>
 </head>
-<body>
+<body class="no-skin">
+	<jsp:include page="/jsp/comm/topbar.jsp" flush="true" />
 	<div class="main-container" id="main-container">
 		<script type="text/javascript">
 			try {
 				ace.settings.check('main-container', 'fixed')
-			} catch (e) {
-			}
+			}catch(e){}
 		</script>
-
+		
 		<div class="main-container-inner">
-
+			<a class="menu-toggler" id="menu-toggler" href="#"> 
+				<span class="menu-text"></span>
+			</a>
+			<jsp:include page="/jsp/comm/sidebar.jsp" flush="true" />
+			
 			<div class="main-content">
+				<!-- 上面的搜索栏 -->
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+					</script>
+					<ul class="breadcrumb">
+						<li>
+							<a href="/payConfir/page.htm">订单管理</a>
+						</li>
+						<li>${orderlist.fsName}</li>
+					</ul>
+					<div class="nav-search" id="nav-search">
+						<form class="form-search">
+							<span class="input-icon"> <input type="text"
+								placeholder="Search ..." class="nav-search-input"
+								id="nav-search-input" autocomplete="off" /> <i
+								class="ace-icon fa fa-search nav-search-icon"></i>
+							</span>
+						</form>
+					</div>
+				</div>
+				<!-- 搜索栏结束 -->
 
 				<div class="page-content">
 					<div class="row">
@@ -64,8 +91,8 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsName">订单名称</label>
-											<div class="col-sm-8">
-												<input type="text" id="fsName" name="fsName" 
+											<div class="col-sm-9">
+												<input type="text" id="fsName" name="fsName" value="${orderlist.fsName }"
 													class="form-control" placeholder="订单名称" />
 											</div>
 										</div>
@@ -75,13 +102,13 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsName">订单编号</label>
 											<div class="col-sm-3">
-												<input type="text"  readonly="readonly" id="fsNo" name="fsNo" class="form-control" placeholder="订单id" />
+												<input type="text"  readonly="readonly" id="fsNo" name="fsNo" value="${orderlist.fsNo }" class="form-control" placeholder="订单id" />
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
+											<label class="col-sm-3 control-label no-padding-right"
 												for="ftStartdate">出发日期</label>
 											<div class="col-sm-3">
 												<input type="text" id="ftStartdate" name="ftStartdate"
-													class="form-control" data-date-format="yyyy/mm/dd"
+													class="form-control" value="<fmt:formatDate value="${orderlist.ftStartdate }" pattern="yyyy/MM/dd"/>" data-date-format="yyyy/mm/dd"
 													 placeholder="出发日期" />
 											</div>
 										</div>
@@ -93,10 +120,10 @@
 											<div class="col-sm-3">
 												<input type="text" id="days"  class="form-control isFloatGteZero number"> 
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
+											<label class="col-sm-3 control-label no-padding-right"
 												for="fiVisitornum">游客人数</label>
 											<div class="col-sm-3">
-												<input type="text" id="fiVisitornum" class="form-control isFloatGteZero digits" placeholder="游客人数" />
+												<input type="text" id="fiVisitornum" value="${orderlist.fiVisitornum }" class="form-control isFloatGteZero digits" placeholder="游客人数" />
 											</div>
 										</div>
 									</div>
@@ -107,7 +134,7 @@
 											<div class="col-sm-3">
 												<input type="text" id="adult" name="scheduleBody.adult" class="form-control isFloatGteZero digits" />
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
+											<label class="col-sm-3 control-label no-padding-right"
 												for="children">儿童</label>
 											<div class="col-sm-3">
 												<input type="text" id="children" name="scheduleBody.children" class="form-control isFloatGteZero digits" />
@@ -121,10 +148,10 @@
 											<div class="col-sm-3">
 												<input type="text" id="fullguide" name="scheduleBody.fullguide" class="form-control isFloatGteZero digits"/>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
+											<label class="col-sm-3 control-label no-padding-right"
 												for="insurenum">保险</label>
 											<div class="col-sm-3">
-												<input type="text" id="insurenum" class="form-control isFloatGteZero number">
+												<input type="text" id="insurenum" value="${orderlist.fiVisitornum }" class="form-control isFloatGteZero number">
 											</div>
 										</div>
 									</div>
@@ -134,17 +161,29 @@
 												for="fdInsuerprice">保险费用</label>
 											<div class="col-sm-3">
 												<div class="input-group">
-													<input type="text" id="fdInsuerprice" name="scheduleBody.fdInsuerprice" class="form-control isFloatGteZero number">
+													<input type="text" id="fdInsuerprice" name="scheduleBody.fdInsuerprice" value="${orderlist.fdInsuerprice }" class="form-control isFloatGteZero number">
 													<span class="input-group-addon">￥</span>
 												</div>
 											</div>
+											<label class="col-sm-3 control-label no-padding-right"
+												for="fdInsuerprice">订单状态</label>
+											<div class="col-sm-3">
+												<select id="fiStat" name="fiStat" readonly="readonly" class="form-control">
+													<c:forEach items="${dicts}" varStatus="i" var="item" >
+														<c:if test="${item.fsDictno == orderlist.fiStat}" >
+													 		<option value="${orderlist.fiStat }">${item.fsDictname }</option>
+													 	</c:if>
+											        </c:forEach>
+												</select>
+											</div>
+											
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsRemark">订单备注</label>
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												<textarea name="fsRemark" id="fsRemark" class="form-control"
 													rows="3" placeholder="整体备注"></textarea>
 											</div>
@@ -154,7 +193,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="editTable">行程要求</label>
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												<table class="table table-bordered" id="editTable">
 													<thead>
 														<tr>
@@ -220,7 +259,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="">文件下载</label>
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												<table class="table table-bordered">
 													<thead>
 														<tr>
@@ -253,7 +292,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="svcstdcontent">服务标准</label>
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												<textarea name="scheduleBody.svcstdcontent"
 													id="svcstdcontent" class="form-control" rows="3"
 													placeholder="服务标准"></textarea>
@@ -265,7 +304,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fdPrice">计调预估</label>
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												<div class="panel panel-default">
 													<div class="panel-heading">
 														<h3 class="panel-title">行程安排&报价</h3>
@@ -290,7 +329,7 @@
 																</div>
 																<label class="col-sm-2 control-label" for="fsOperId">计调人员</label>
 																<div class="col-sm-3">
-																	<input type="text" id="fsOperId"  class="form-control" placeholder="计调人员" />
+																	<input type="text" id="fsOperId" value="${sessionEntity.name}" class="form-control" placeholder="计调人员" />
 																</div>
 															</div>
 														</div>
@@ -305,12 +344,12 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="commResSnapshot">公共资源</label>
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												<div class="panel panel-default">
 													<div class="panel-heading">
 														<h4 class="panel-title">公共资源配置</h4>
 													</div>
-													<div class="panel-body" id="commResSnapshot">
+													<div class="panel-body div_comm" id="commResSnapshot">
 														<!-- 公共精确资源 start -->
 														<ul id="myTab" class="nav nav-tabs">
 														<script id="commRes-template" type="text/x-handlebars-template">
@@ -524,21 +563,18 @@
 															</script>
 															<!-- 公共资源体 end -->
 														</div>
-														
 														<!-- 
 														</script>
 														公共精确资源 end -->
 													</div>
-													<!-- 
 													<div class="row div_transfer">
 														<div class="form-group">
-															<label class="col-sm-2 control-label" for="fdTotalfee">公共资源总金额</label>
+															<label class="col-sm-2 control-label" for="fdTotalfee">公共资源金额</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control isFloatGteZero number" name="batchAmt[{{@index}}]" value="{{fdAmt}}" id="fdAmt">
+																<input type="text" class="form-control isFloatGteZero number" name="" value="" id="commAmt">
 															</div>
-														</div> 
+														</div>
 													</div>
-													-->
 												</div>
 											</div>
 										</div>
@@ -549,7 +585,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="transType">订单批次</label>
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												<table id="table_batch" class="table table-hover table-expandable">
 													<thead>
 														<tr>
@@ -730,15 +766,6 @@
 											</div>
 										</div>
 									</div>
-									<div hidden="hidden" class="row div_transfer_stat">
-										<div class="form-group">
-											<label class="col-sm-2 control-label no-padding-right" for="fiStat">订单状态</label>
-											<div class="col-sm-3">
-												<select id="fiStat" name="fiStat" readonly="readonly" class="form-control">
-												</select>
-											</div>
-										</div>
-									</div>
 									<div hidden="hidden" class="row div_custList">
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fiStat">游客名单</label>
@@ -756,7 +783,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="remarks">订单备注</label>
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												<div class="panel panel-default">
 													<div class="panel-body" id="remarks">
 														<div id="remarksTab" class="tab-content">
@@ -832,8 +859,8 @@
 									<div id="message" class="alert alert-warning"></div>
 								</div>
 								<div class="modal-footer">
-									<button id="close" type="button" class="btn btn-sm btn-default"
-										data-dismiss="modal">关闭</button>
+									<button onclick="history.go(-1)" type="button" class="btn btn-sm btn-default"
+										data-dismiss="modal">返回</button>
 									<button id="submit" type="button"
 										class="btn btn-sm btn-primary">提交</button>
 								</div>
@@ -994,6 +1021,23 @@
 			$("#totalfee").val(remarkAmt.toFixed(2));
 		}
 		
+		//合计公共资源金额
+		function totalCommAmt(){
+			//循环批次
+			var fdAmt = 0;
+			$(".div_comm").each(function(){
+				$(this).find(".price").each(function(){
+					var price = $(this).val();
+					var usernum = $(this).next().val();
+					if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
+						return;
+					}
+					fdAmt = parseFloat(fdAmt) + parseFloat(usernum) * parseFloat(price);
+				});
+			});
+			$("#commAmt").val(fdAmt);
+		}
+		
 		//合计订单批次金额
 		function totalBatchAmt(){
 			//循环批次
@@ -1032,6 +1076,7 @@
 				$("#table_common tbody").html($("#table_common tbody").html() + template(data));
 				$("#reslistIndex").val(parseInt(index)+1);
 				totalAmount();
+				totalCommAmt();
 			} else {
 				$("#message").text("输入字段验证错误，请重新编辑后再提交");
 				$("#message").show();
@@ -1059,6 +1104,7 @@
 				$("#table_common tbody").html($("#table_common tbody").html() + template(data));
 				$("#reslistIndex").val(parseInt(index)+1);
 				totalAmount();
+				totalCommAmt();
 			} else {
 				$("#message").text("输入字段验证错误，请重新编辑后再提交");
 				$("#message").show();

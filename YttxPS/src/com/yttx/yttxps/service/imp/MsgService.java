@@ -19,7 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.yttx.except.BusinessException;
@@ -27,6 +26,7 @@ import com.yttx.yttxps.comm.Constants.MsgTemp;
 import com.yttx.yttxps.comm.Constants.RecRole;
 import com.yttx.yttxps.mapper.CustomInfoMapper;
 import com.yttx.yttxps.mapper.CustomOperMapper;
+import com.yttx.yttxps.mapper.FStatementMapper;
 import com.yttx.yttxps.mapper.MessageAuthMapper;
 import com.yttx.yttxps.mapper.MessageMapper;
 import com.yttx.yttxps.mapper.TOrderlistMapper;
@@ -68,6 +68,8 @@ public class MsgService implements IMsgService {
 	private CustomInfoMapper infoMapper;
 	@Autowired
 	private TOrderlistMapper<TOrderlist> orderlistMapper;
+	@Autowired
+	private FStatementMapper<FStatement> statementMapper;
 	
 	@Override
 	//@Transactional(rollbackFor=Exception.class)
@@ -114,7 +116,8 @@ public class MsgService implements IMsgService {
 			orderlist = orderlistMapper.selectByPrimaryKey(orderlist.getFsNo());
 			custid = orderlist.getFsUserId();
 			subid = orderlist.getFsUserSubid();
-			//int stat = Integer.valueOf(orderlist.getFiStat());
+			int stat = Integer.valueOf(orderlist.getFiStat());
+			if (stat == Integer.parseInt(oldStat)) return null;
 			switch (Integer.parseInt(oldStat)) {
 				case -10://询价
 					tempid = MsgTemp.DIRECTOR.getVal();
@@ -151,6 +154,7 @@ public class MsgService implements IMsgService {
 			}
 		} else if (obj instanceof FStatement) {//结算单
 			FStatement statement = (FStatement) obj;
+			statement = statementMapper.selectFSById(statement.getStatmentId());
 			custid = statement.getUserID();
 			subid = statement.getUserSubID();
 //			int stat = Integer.valueOf(statement.getStat().toString());

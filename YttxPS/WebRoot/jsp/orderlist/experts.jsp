@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix='fmt'%>
 
 <!DOCTYPE html>
 <html lang="zh">
@@ -24,18 +25,44 @@
 	}
 </style>
 </head>
-<body>
+<body class="no-skin">
+	<jsp:include page="/jsp/comm/topbar.jsp" flush="true" />
 	<div class="main-container" id="main-container">
 		<script type="text/javascript">
 			try {
 				ace.settings.check('main-container', 'fixed')
-			} catch (e) {
-			}
+			}catch(e){}
 		</script>
-
+		
 		<div class="main-container-inner">
-
+			<a class="menu-toggler" id="menu-toggler" href="#"> 
+				<span class="menu-text"></span>
+			</a>
+			<jsp:include page="/jsp/comm/sidebar.jsp" flush="true" />
+			
 			<div class="main-content">
+				<!-- 上面的搜索栏 -->
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+					</script>
+					<ul class="breadcrumb">
+						<li>
+							<a href="/payConfir/page.htm">订单管理</a>
+						</li>
+						<li>${orderlist.fsName}</li>
+					</ul>
+					<div class="nav-search" id="nav-search">
+						<form class="form-search">
+							<span class="input-icon"> <input type="text"
+								placeholder="Search ..." class="nav-search-input"
+								id="nav-search-input" autocomplete="off" /> <i
+								class="ace-icon fa fa-search nav-search-icon"></i>
+							</span>
+						</form>
+					</div>
+				</div>
+				<!-- 搜索栏结束 -->
 
 				<div class="page-content">
 					<div class="row">
@@ -64,9 +91,9 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsNo">订单名称</label>
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												 <input 
-													type="text" id="fsName" name="fsName" class="form-control"
+													type="text" id="fsName" name="fsName" value="${orderlist.fsName}" class="form-control"
 													placeholder="订单名称" />
 											</div>
 										</div>
@@ -79,10 +106,10 @@
 												<input type="hidden" class="form-control" id="fiGenindex">
 												<input type="text" class="form-control" id="genName" readonly="readonly">
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
+											<label class="col-sm-3 control-label no-padding-right"
 												for="fsName">订单编号</label>
 											<div class="col-sm-3">
-												<input type="text" id="fsNo" name="fsNo" readonly="readonly"
+												<input type="text" id="fsNo" name="fsNo" value="${orderlist.fsNo}" readonly="readonly"
 													class="form-control" placeholder="订单id" />
 											</div>
 										</div>
@@ -92,13 +119,13 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="ftCreatdate">创建日期</label>
 											<div class="col-sm-3">
-												<input type="text" id="ftCreatdate" name="ftCreatdate"
+												<input type="text" id="ftCreatdate" name="ftCreatdate" value="${orderlist.ftCreatdate}"
 													class="form-control" placeholder="创建日期" readonly="readonly"/>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
+											<label class="col-sm-3 control-label no-padding-right"
 												for="fsOperId">计&nbsp;调&nbsp;&nbsp;员</label>
 											<div class="col-sm-3">
-												<input type="text" id="fsOperId" name="fsOperName" class="form-control" placeholder="计调员" readonly="readonly"/>
+												<input type="text" id="fsOperId" name="fsOperName" value="${sessionEntity.name}" class="form-control" placeholder="计调员" readonly="readonly"/>
 											</div>
 										</div>
 									</div>
@@ -112,7 +139,7 @@
 													<option value="02">专家线路</option>
 												</select>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
+											<label class="col-sm-3 control-label no-padding-right"
 												for="fsProperty">组团类型</label>
 											<div class="col-sm-3">
 												<select id="fsProperty" name="fsProperty" class="form-control" disabled="disabled">
@@ -127,10 +154,10 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="ftStartdate">发团日期</label>
 											<div class="col-sm-3">
-												<input type="text" id="ftStartdate" name="ftStartdate"
+												<input type="text" id="ftStartdate" name="ftStartdate" value="<fmt:formatDate value="${orderlist.ftStartdate }" pattern="yyyy/MM/dd"/>"
 													class="form-control"  placeholder="发团日期" readonly="readonly"/>
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
+											<label class="col-sm-3 control-label no-padding-right"
 												for="regionname">发团地点</label>
 											<div class="col-sm-3">
 												<input class="form-control" type="text" placeholder="请选择行政区域" name="regionname"
@@ -146,15 +173,12 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="insurenum">保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;险</label>
 											<div class="col-sm-3">
-												<div class="input-group">
-													<input type="text" id="insurenum" class="form-control isFloatGteZero digits">
-													<span class="input-group-addon">份/人/天</span>
-												</div>
+												<input type="text" id="insurenum" value="${orderlist.fiVisitornum }" class="form-control isFloatGteZero digits">
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
+											<label class="col-sm-3 control-label no-padding-right"
 												for="fdInsuerprice">保险费用</label>
 											<div class="col-sm-3">
-												<input type="text" id="fdInsuerprice"
+												<input type="text" id="fdInsuerprice" value="${orderlist.fdInsuerprice }" 
 													name="scheduleBody.fdInsuerprice" class="form-control isFloatGteZero number">
 											</div>
 										</div>
@@ -164,14 +188,18 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fdPrice">线路报价</label>
 											<div class="col-sm-3">
-												<input type="text" id="fdPrice" name="fdPrice"
+												<input type="text" id="fdPrice" name="fdPrice" value="${orderlist.fdPrice }"
 													class="form-control isFloatGteZero number" placeholder="初始报价" />
 											</div>
-											<label class="col-sm-2 control-label no-padding-right"
+											<label class="col-sm-3 control-label no-padding-right"
 													for="fiStat">订单状态</label>
 											<div class="col-sm-3">
-												<select id="fiStat" name="fiStat" readonly="readonly"
-															class="form-control">
+												<select id="fiStat" name="fiStat" readonly="readonly" class="form-control">
+													<c:forEach items="${dicts}" varStatus="i" var="item" >
+														<c:if test="${item.fsDictno == orderlist.fiStat}" >
+													 		<option value="${orderlist.fiStat }">${item.fsDictname }</option>
+													 	</c:if>
+											        </c:forEach>
 												</select>
 											</div>
 										</div>
@@ -180,7 +208,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsSummary">路线摘要</label>
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												<textarea name="fsSummary" id="fsSummary" class="form-control" rows="3" placeholder="路线摘要"></textarea>
 											</div>
 										</div>
@@ -189,7 +217,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="fsRemark">整体备注</label>
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												<textarea name="fsRemark" id="fsRemark" class="form-control" rows="3" placeholder="整体备注"></textarea>
 											</div>
 										</div>
@@ -198,7 +226,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right" for="fcSchedule">日程快照</label>
 											<input type="hidden"  id="hSchedule" name="hSchedule" />
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												<textarea class="ckeditor" id="fcSchedule" name="fcSchedule"></textarea>
 												<div hidden="hidden" id="schedule"></div>
 											</div>
@@ -210,12 +238,12 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="commResSnapshot">公共资源</label>
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												<div class="panel panel-default">
 													<div class="panel-heading">
 														<h4 class="panel-title">公共资源配置</h4>
 													</div>
-													<div class="panel-body" id="commResSnapshot">
+													<div class="panel-body div_comm" id="commResSnapshot">
 														<!-- 公共精确资源 start -->
 														<ul id="myTab" class="nav nav-tabs">
 															<script id="commRes-template" type="text/x-handlebars-template">
@@ -461,6 +489,14 @@
 														</div>
 														<!-- 公共精确资源 end -->
 													</div>
+													<div class="row div_transfer">
+														<div class="form-group">
+															<label class="col-sm-2 control-label" for="fdTotalfee">公共资源金额</label>
+															<div class="col-sm-3">
+																<input type="text" class="form-control isFloatGteZero number" name="" value="" id="commAmt">
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -471,7 +507,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="transType">订单批次</label>
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												<table id="table_batch" class="table table-hover table-expandable">
 													<thead>
 														<tr>
@@ -698,7 +734,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label no-padding-right"
 												for="remarks">订单备注</label>
-											<div class="col-sm-8">
+											<div class="col-sm-9">
 												<div class="panel panel-default">
 													<div class="panel-body" id="remarks">
 														<div id="remarksTab" class="tab-content">
@@ -775,8 +811,8 @@
 									<div id="message" class="alert alert-warning"></div>
 								</div>
 								<div class="modal-footer">
-									<button id="close" type="button" class="btn btn-sm btn-default"
-										data-dismiss="modal">关闭</button>
+									<button onclick="history.go(-1)" type="button" class="btn btn-sm btn-default"
+										data-dismiss="modal">返回</button>
 									<button id="submit" type="button"
 										class="btn btn-sm btn-primary">提交</button>
 								</div>
@@ -932,6 +968,23 @@
 			$("#totalfee").val(remarkAmt.toFixed(2));
 		}
 		
+		//合计公共资源金额
+		function totalCommAmt(){
+			//循环批次
+			var fdAmt = 0;
+			$(".div_comm").each(function(){
+				$(this).find(".price").each(function(){
+					var price = $(this).val();
+					var usernum = $(this).next().val();
+					if(isNaN(price) || isNaN(usernum) || price=='' || usernum==''){
+						return;
+					}
+					fdAmt = parseFloat(fdAmt) + parseFloat(usernum) * parseFloat(price);
+				});
+			});
+			$("#commAmt").val(fdAmt);
+		}
+		
 		//合计订单批次金额
 		function totalBatchAmt(){
 			//循环批次
@@ -970,6 +1023,7 @@
 				$("#table_common tbody").html($("#table_common tbody").html() + template(data));
 				$("#reslistIndex").val(parseInt(index)+1);
 				totalAmount();
+				totalCommAmt();
 			} else {
 				$("#message").text("输入字段验证错误，请重新编辑后再提交");
 				$("#message").show();
@@ -997,6 +1051,7 @@
 				$("#table_common tbody").html($("#table_common tbody").html() + template(data));
 				$("#reslistIndex").val(parseInt(index)+1);
 				totalAmount();
+				totalCommAmt();
 			} else {
 				$("#message").text("输入字段验证错误，请重新编辑后再提交");
 				$("#message").show();

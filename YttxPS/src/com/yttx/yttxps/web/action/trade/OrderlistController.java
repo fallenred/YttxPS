@@ -37,6 +37,7 @@ import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.TOrderCusList;
 import com.yttx.yttxps.model.TOrderCusListExample;
 import com.yttx.yttxps.model.TOrderCusListExample.Criteria;
+import com.yttx.yttxps.model.TOrderlist;
 import com.yttx.yttxps.model.TOrderlistExample;
 import com.yttx.yttxps.model.TOrderlistWithBLOBs;
 import com.yttx.yttxps.model.TRemarksExample;
@@ -116,6 +117,21 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 		map.put("rows", list);
 		return map;
     }
+	
+	/**
+	 * 打开订单编辑页面
+	 */
+	@RequestMapping(value="showOrder.htm")
+	public String openOrderPage(Model model, String pageName, String fsNo){
+		TOrderlist orderlist = this.orderlistService.selectByPrimaryKey(fsNo);
+		DictExample example = new DictExample();
+		com.yttx.yttxps.model.DictExample.Criteria criteria = example.createCriteria();
+		criteria.andFsParentnoEqualTo("order_stat");
+		List<Dict> list = this.dictService.selectDict(example);
+		model.addAttribute("dicts", list);
+		model.addAttribute("orderlist", orderlist);
+		return "orderlist/"+pageName;
+	}
 	
 	/**
 	 * 查询订单备注信息

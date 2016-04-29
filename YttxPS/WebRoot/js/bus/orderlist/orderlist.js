@@ -20,14 +20,43 @@ function editOrderlist(id) {
 	var frameSrc = '';
 	if (raw.fsType == '02') {
 		//专家线路
-		frameSrc = "/jsp/orderlist/experts.jsp?fsNo="+raw.fsNo+"&genIndex="+raw.fiGenindex+"&startdate="+raw.ftStartdate;
+		/*frameSrc = "/jsp/orderlist/experts.jsp?fsNo="+raw.fsNo+"&genIndex="+raw.fiGenindex+"&startdate="+raw.ftStartdate;
 		$("#editIframe").attr("src", frameSrc);
-		$('#editModal').modal({ show: true, backdrop: 'static' });
+		$('#editModal').modal({ show: true, backdrop: 'static' });*/
+		window.location.href = "/orderlist/showOrder.htm?pageName=experts&fsNo=" + raw.fsNo+"&startdate="+raw.ftStartdate+"&genIndex="+raw.fiGenindex;
+		if (raw.fiStat == '0') {
+			html +='<option value="0">待审核</option>'
+			$(this).contents().find("#fiStat").html(html);
+			$(this).contents().find(".div_transfer_stat").show();
+		} else if (raw.fiStat == '1') {
+			html +='<option value="1">已审核</option>'
+			$(this).contents().find("#fiStat").html(html);
+			$(this).contents().find(".div_transfer_stat").show();
+			$(this).contents().find(".div_custList").show();
+		} else if (raw.fiStat == '6') {
+			html +='<option value="6">线下支付</option>'
+			$(this).contents().find("#fiStat").html(html);
+			$(this).contents().find(".div_transfer_stat").show();
+			$(this).contents().find(".div_custList").show();
+		} else if (raw.fiStat == '8') {
+			html ='<option value="8">已付全款(可出团)</option>';
+			$(this).contents().find("#fiStat").html(html);
+			$(this).contents().find(".div_transfer_stat").show();
+			$(this).contents().find(".div_custList").show();
+		} else if (raw.fiStat == '32'){
+			html ='<option value="32">已入结算单</option>';
+			$(this).contents().find(".div_transfer_stat").show();
+			$(this).contents().find(".div_custList").show();
+			$(this).contents().find("#submit").hide();
+		} else {
+			$(this).contents().find("#fiStat").html('<option value="'+raw.fiStat+'"></option>');
+		}
 	} else if(raw.fsType == '03') {
 		//定制线路
-		frameSrc = "/jsp/orderlist/customization.jsp?fsNo="+raw.fsNo+"&startdate="+raw.ftStartdate;
+		/*frameSrc = "/jsp/orderlist/customization.jsp?fsNo="+raw.fsNo+"&startdate="+raw.ftStartdate;
 		$("#customizationIframe").attr("src", frameSrc);
-		$('#customizationModal').modal({ show: true, backdrop: 'static' });
+		$('#customizationModal').modal({ show: true, backdrop: 'static' });*/
+		window.location.href = "/orderlist/showOrder.htm?pageName=customization&fsNo=" + raw.fsNo+"&startdate="+raw.ftStartdate;
 	}
 };
 

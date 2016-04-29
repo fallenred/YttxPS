@@ -11,6 +11,23 @@ jQuery(function($) {
 		disturl : "/pub/findcity.htm",
 		callback : localcallback
 	});
+	
+	var stat = $("#fiStat").val();
+	if (stat == '-10') {
+		$(".div_transfer").hide();
+	} else if (stat == '-5') {
+		$(".div_transfer").hide();
+	} else if (stat == '0') {
+		$(".div_transfer_stat").show();
+	} else if (stat == '1') {
+		$(".div_custList").show();
+	} else if (stat == '6') {
+		$(".div_custList").show();
+	} else if (stat == '8') {
+		$(".div_custList").show();
+	} else if (stat == '32'){
+		$("#submit").hide();
+	}
 
 	//城市选择器
 	function localcallback(index, key, value, fullkey, fullname) {
@@ -145,6 +162,7 @@ jQuery(function($) {
 				getDictLvl(null, 'bg');
 				//显示合计金额
 				setTimeout(totalAmount, 2000);
+				setTimeout(totalCommAmt, 5000);
 			}
 		});
 	}); 
@@ -678,6 +696,7 @@ jQuery(function($) {
 		$("#table_common" + dayflag + " tbody").html($("#table_common" + dayflag + " tbody").html() + template(data));
 		$(this).parent().find(".reslistIndex").val(parseInt(reslistIndex)+1);
 		totalAmount();
+		totalCommAmt();
 	});
 	
 	//添加批次资源项
@@ -845,12 +864,12 @@ jQuery(function($) {
 		$("#fdTotalfee").val(totalAmt.toFixed(2));
 		$("#totalfee").val(remarkAmt.toFixed(2));
 	}
-
+	
 	//合计公共资源金额
-	function totalBatchAmt(){
+	function totalCommAmt(){
 		//循环批次
-		$(".batch_div").each(function(){
-			var fdAmt = 0;
+		var fdAmt = 0;
+		$(".div_comm").each(function(){
 			$(this).find(".price").each(function(){
 				var price = $(this).val();
 				var usernum = $(this).next().val();
@@ -859,8 +878,8 @@ jQuery(function($) {
 				}
 				fdAmt = parseFloat(fdAmt) + parseFloat(usernum) * parseFloat(price);
 			});
-			$(this).parent().next().find("#fdAmt").val(fdAmt);
 		});
+		$("#commAmt").val(fdAmt);
 	}
 	
 	//合计订单批次金额
@@ -1061,6 +1080,7 @@ jQuery(function($) {
 			getDictLvl(null, 'bg');
 		}
 		totalAmount();
+		totalCommAmt();
 	});
 	
 	//	colorbox
