@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,10 @@ public class MemberAuditController extends BaseController {
 	 * 打开会员管理界面
 	 */
 	@RequestMapping(value="page.htm")
-	public String openManagePage(Model model,String cusID){
+	public String openManagePage(Model model,String cusID, String msgid){
+		if(StringUtils.isNoneEmpty(msgid)){
+			msgService.readMsg(msgid);
+		}
 		List<Dict> auditRet_list= getDictListByParentNo("cus_adtret");
 		Object auditRet_Json = getDictMapJsonByParentNo("cus_adtret");
 		model.addAttribute("auditRet_list", auditRet_list);
@@ -124,7 +128,7 @@ public class MemberAuditController extends BaseController {
 		HttpSession session = request.getSession();
 		SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
 		auditRec.setFsOperId(sessionEntity.getId());
-		this.msgService.saveMsg(auditRec, sessionEntity.getId());
+		this.msgService.saveMsg(auditRec, sessionEntity.getId(),null);
 		return JsonResult.jsonOk();
 	}
 }

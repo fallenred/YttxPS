@@ -61,7 +61,10 @@ public class StatementController extends BaseController {
 	 * 打开结算单管理的界面
 	 */
 	@RequestMapping(value="page.htm")
-	public String openPage(Model model,String orderID,String closeID){
+	public String openPage(Model model,String orderID,String closeID,String msgid){
+		if(StringUtils.isNoneEmpty(msgid)){
+			msgService.readMsg(msgid);
+		}
 		if(StringUtils.isNoneEmpty(orderID)){
 			model.addAttribute("orderID",orderID);
 		} else if (StringUtils.isNoneEmpty(closeID)){
@@ -231,7 +234,7 @@ public class StatementController extends BaseController {
 			}
 			HttpSession session = request.getSession();
 			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
-			this.msgService.saveMsg(fStatement, sessionEntity.getId());
+			this.msgService.saveMsg(fStatement, sessionEntity.getId(),"");
 		}else if("E".equalsIgnoreCase(oper)){//修改操作
 			try{
 				fStatementService.editFStatement(fStatement);

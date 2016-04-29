@@ -77,7 +77,10 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 	 * 打开订单管理界面
 	 */
 	@RequestMapping(value="page.htm")
-	public String openPage(Model model, String orderID){
+	public String openPage(Model model, String orderID, String msgid){
+		if(StringUtils.isNoneEmpty(msgid)){
+			msgService.readMsg(msgid);
+		}
 		model.addAttribute("orderID", orderID);
 		return "orderlist/orderlist";
 	}
@@ -222,8 +225,10 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 			HttpSession session = request.getSession();
 			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
 			orderlist.setFsOperId(sessionEntity.getId());
+			String oldStat = orderlist.getFiStat();
 			orderlistService.update(orderlist);
-			this.msgService.saveMsg(orderlist, sessionEntity.getId());
+			this.msgService.saveMsg(orderlist, sessionEntity.getId(),oldStat);
+		
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -247,8 +252,9 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 			HttpSession session = request.getSession();
 			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
 			orderlist.setFsOperId(sessionEntity.getId());
+			String oldStat = orderlist.getFiStat();
 			orderlistService.update4custom(orderlist);
-			this.msgService.saveMsg(orderlist, sessionEntity.getId());
+			this.msgService.saveMsg(orderlist, sessionEntity.getId(),oldStat);
 		}
 		catch(Exception e){
 			logger.error("更新订单失败, 订单编号："+orderlist.getFsNo() + "\n", e);

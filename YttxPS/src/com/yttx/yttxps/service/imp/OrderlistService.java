@@ -123,7 +123,7 @@ public class OrderlistService implements IOrderlistService {
 					remarks.setFdPaidamt(BigDecimal.ZERO);
 				}
 				remarksMapper.insertSelective(remarks);
-				msgService.saveMsg(remarks, record.getFsOperId());
+//				msgService.saveMsg(remarks, record.getFsOperId());
 			}
 		}
 		return orderlistMapper.updateByPrimaryKeySelective(record);
@@ -198,7 +198,7 @@ public class OrderlistService implements IOrderlistService {
 				}
 				remarks.setFiClosestat(BigDecimal.ZERO);
 				remarksMapper.insertSelective(remarks);
-				msgService.saveMsg(remarks,record.getFsOperId());
+//				msgService.saveMsg(remarks,record.getFsOperId());
 				
 			}
 		}

@@ -61,11 +61,14 @@ public class PayConfirController extends BaseController {
 	 * 打开结算单管理的界面
 	 */
 	@RequestMapping(value="page.htm")
-	public String openPage(Model model, String orderID, String closeID){
+	public String openPage(Model model, String orderID, String closeID, String msgid){
 		if(StringUtils.isNoneEmpty(orderID)){
 			model.addAttribute("orderID", orderID);
 		} else if (StringUtils.isNoneEmpty(closeID)){
 			model.addAttribute("closeID", closeID);
+		}
+		if(StringUtils.isNoneEmpty(msgid)){
+			msgService.readMsg(msgid);
 		}
 		//将订单状态发送到web端
 		Object order_stat_item = getDictMapJsonByParentNo("order_stat");
@@ -148,10 +151,8 @@ public class PayConfirController extends BaseController {
 			order.setFdPaidamt(paidAmt);
 			order.setFiStat("8");
 			payConfirService.orderConfir(order, operid);
-			
 			order.setFsOperId(sessionEntity.getId());
-			this.msgService.saveMsg(order, sessionEntity.getId());
-			
+			this.msgService.saveMsg(order, sessionEntity.getId(),"6");
 			logger.debug("orderId为"+orderId+"的详细信息：{}", order);
 		} catch (Exception e) {
 			logger.error("订单支付失败，订单id："+orderId, e);
@@ -183,7 +184,7 @@ public class PayConfirController extends BaseController {
 			payConfirService.statementConfir(statement, operid);
 			
 			statement.setOperId(sessionEntity.getId());
-			this.msgService.saveMsg(statement, sessionEntity.getId());
+			this.msgService.saveMsg(statement, sessionEntity.getId(), "-1");
 		} catch (Exception e) {
 			logger.error("结算单支付失败，结算单id："+fsId, e);
 			return JsonResult.jsonError("订单支付确认失败");

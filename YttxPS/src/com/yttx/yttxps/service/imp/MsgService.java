@@ -71,9 +71,9 @@ public class MsgService implements IMsgService {
 	
 	@Override
 	//@Transactional(rollbackFor=Exception.class)
-	public void saveMsg(Object obj, String sendid) {
+	public void saveMsg(Object obj, String sendid, String oldStat) {
 		// TODO Auto-generated method stub
-		List<Message> list = this.getMessage(obj, sendid);
+		List<Message> list = this.getMessage(obj, sendid, oldStat);
 		if (CollectionUtils.isEmpty(list)) return;
 		for(Message message : list){
 			messageMapper.insert(message);
@@ -83,10 +83,11 @@ public class MsgService implements IMsgService {
 	/**
 	 * 根据业务类型获取消息集合
 	 * @param obj
+	 * @param oldStat 
 	 * @param operid 消息发送者id
 	 * @return
 	 */
-	private List<Message> getMessage(Object obj, String sendid) {
+	private List<Message> getMessage(Object obj, String sendid, String oldStat) {
 		String tempid = "";	//消息模板id
 		String custid = "";	//客户id
 		String subid = "";	//子客户id
@@ -113,25 +114,29 @@ public class MsgService implements IMsgService {
 			orderlist = orderlistMapper.selectByPrimaryKey(orderlist.getFsNo());
 			custid = orderlist.getFsUserId();
 			subid = orderlist.getFsUserSubid();
-			int stat = Integer.valueOf(orderlist.getFiStat());
-			switch (stat) {
-				case -5://报价
+			//int stat = Integer.valueOf(orderlist.getFiStat());
+			switch (Integer.parseInt(oldStat)) {
+				case -10://询价
 					tempid = MsgTemp.DIRECTOR.getVal();
 					tempParam.put("orderID", orderlist.getFsNo());
-					//tempParam.put("taName", this.getTaName(orderlist.getFsUserId()));
-					//tempParam.put("operID", orderlist.getFsOperId());
 					break;
-				case 1: //审核
+				case 0://待审核
 					tempid = MsgTemp.ORDER_AUDIT.getVal();
 					tempParam.put("orderID", orderlist.getFsNo());
 					tempParam.put("orderAmt", orderlist.getFdTotalfee());
 					break;
-				case 8: //已付全款
+				case 6: //线下支付
 					tempid = MsgTemp.TOURS.getVal();
 					tempParam.put("orderID", orderlist.getFsNo());
 					tempParam.put("orderAmt", orderlist.getFdTotalfee());
 					tempParam.put("startDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(orderlist.getFtStartdate()));
 					tempParam.put("visitorNum", orderlist.getFiVisitornum());
+					break;
+				case -5://报价
+				case 1: //已审核
+				case 8: //已付全款
+//					tempid = MsgTemp.ORDER_MODIFY.getVal();
+//					tempParam.put("orderID", orderlist.getFsNo());
 				default:
 					break;
 			}
@@ -148,25 +153,18 @@ public class MsgService implements IMsgService {
 			FStatement statement = (FStatement) obj;
 			custid = statement.getUserID();
 			subid = statement.getUserSubID();
-			int stat = Integer.valueOf(statement.getStat().toString());
-			switch (stat) {
-				case 0:	//待确认
+//			int stat = Integer.valueOf(statement.getStat().toString());
+			switch (oldStat) {
+				case "":	//新生成结算单
 					tempid = MsgTemp.STATEMENT.getVal();
 					tempParam.put("orderID", statement.getOrderId());
 					tempParam.put("closeID", statement.getStatmentId());
 					break;
-				case 1: //已确认
+				case "-1": //线下支付确认
 					tempid = MsgTemp.STATEMENT_CONFIRM.getVal();
 					tempParam.put("orderID", statement.getOrderId());
 					tempParam.put("closeID", statement.getStatmentId());
 					tempParam.put("closeAmt", statement.getAmt());
-				case 2: //结算完毕
-					tempid = MsgTemp.STATEMENT_DONE.getVal();
-					tempParam.put("orderID", statement.getOrderId());
-					tempParam.put("closeID", statement.getStatmentId());
-					tempParam.put("closeAmt", statement.getAmt());
-					
-					break;
 				default:
 					break;
 			}

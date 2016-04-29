@@ -81,6 +81,8 @@ public class Constants {
 		DIRECTOR {public String getVal(){return "2020";}},
 		/** 订单审核 */
 		ORDER_AUDIT {public String getVal(){return "2040";}},
+		/** 订单修改 */
+		ORDER_MODIFY {public String getVal(){return "2090";}},
 		/** 出团 */
 		TOURS {public String getVal(){return "2052";}},
 		/** 订单备注 */

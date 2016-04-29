@@ -72,7 +72,7 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			HttpSession session = request.getSession();
 			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
 			closelist.setFsOperId(sessionEntity.getId());
-			this.msgService.saveMsg(closelist, sessionEntity.getId());
+			this.msgService.saveMsg(closelist, sessionEntity.getId(),"");
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("新增失败");
