@@ -70,7 +70,7 @@ public class MsgService implements IMsgService {
 	private TOrderlistMapper<TOrderlist> orderlistMapper;
 	
 	@Override
-	@Transactional(rollbackFor=Exception.class)
+	//@Transactional(rollbackFor=Exception.class)
 	public void saveMsg(Object obj, String sendid) {
 		// TODO Auto-generated method stub
 		List<Message> list = this.getMessage(obj, sendid);
@@ -249,23 +249,25 @@ public class MsgService implements IMsgService {
 			if (CollectionUtils.isNotEmpty(list)) {
 				List<Message> msgList = new ArrayList<Message>();
 				//将消息模板转为具体消息内容
-				Configuration cfg = new Configuration();
-		        StringTemplateLoader stringLoader = new StringTemplateLoader();
-		        String templateContent = temp;
-		        stringLoader.putTemplate("mytemplate",templateContent);
-		        StringWriter writer = new StringWriter();
 		        try {
-		        	cfg.setTemplateLoader(stringLoader);
-		            cfg.setDefaultEncoding("UTF-8");
-		            Template template = cfg.getTemplate("mytemplate");
-					template.process(tempParam, writer);
-					//将消息模板转为msg对象
-					String msgText = writer.toString().replace("\\n", "");
-					Msg msg = ResScheduleXMLConverter.fromXml(null, msgText, Msg.class);
-					//根据推送客户创建消息
-					for (CustomOper oper : list) {
+			        for (CustomOper oper : list) {
+			        	StringWriter writer = new StringWriter();
+			        	Configuration cfg = new Configuration();
+			        	StringTemplateLoader stringLoader = new StringTemplateLoader();
+			        	String templateContent = temp;
+			        	stringLoader.putTemplate("mytemplate",templateContent);
+			        	cfg.setTemplateLoader(stringLoader);
+			            cfg.setDefaultEncoding("UTF-8");
+			            Template template = cfg.getTemplate("mytemplate");
+			            BigDecimal id = messageMapper.selectFsNo();
+			            tempParam.put("msgID", id);
+						template.process(tempParam, writer);
+						//将消息模板转为msg对象
+						String msgText = writer.toString().replace("\\n", "");
+						Msg msg = ResScheduleXMLConverter.fromXml(null, msgText, Msg.class);
+						//根据推送客户创建消息
 						Message message = new Message();
-						//message.setId(messageMapper.selectFsNo());
+						message.setId(id);
 						message.setSendType("1");
 						message.setMsgHead(msg.getTitle());
 						message.setMsgText(msg.getContent());

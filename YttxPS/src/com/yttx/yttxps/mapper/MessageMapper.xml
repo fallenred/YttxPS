@@ -154,7 +154,7 @@
       FS_MSGTEXT, FS_SENDID, FS_RECVID, 
       FS_SUBID, FT_MSGDATE, FI_MSGSTAT
       )
-    values (message_sequence.nextval, #{sendType,jdbcType=VARCHAR}, #{msgHead,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{sendType,jdbcType=VARCHAR}, #{msgHead,jdbcType=VARCHAR}, 
       #{msgText,jdbcType=VARCHAR}, #{sendid,jdbcType=VARCHAR}, #{recvid,jdbcType=VARCHAR}, 
       #{subid,jdbcType=VARCHAR}, #{msgDate,jdbcType=TIMESTAMP}, #{msgStat,jdbcType=DECIMAL}
       )
