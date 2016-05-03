@@ -1,12 +1,14 @@
 package com.yttx.yttxps.web.action.trade;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.yttx.comm.FileUpload;
 import com.yttx.comm.ObjectExcelView;
 import com.yttx.comm.PathUtil;
+import com.yttx.comm.TimestampEditor;
 import com.yttx.comm.road.RoadExcelRead;
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
@@ -73,6 +78,18 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 	private IDictService dictService;
 	@Autowired
 	private IMsgService msgService;
+	
+	/**
+	 * 视图数据类型转换
+	 * @param request
+	 * @param binder
+	 * @throws Exception
+	 */
+	@InitBinder
+	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
+		//对于需要转换为Date类型的属性，使用DateEditor进行处理  
+	    binder.registerCustomEditor(Timestamp.class, new TimestampEditor());
+	}
 	
 	/**
 	 * 打开订单管理界面
