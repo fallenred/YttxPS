@@ -6,7 +6,6 @@ jQuery(function($) {
 	});
 
 	$(document).on('click', '.urlClick', function(event){
-		alert($(".urlClick").attr("href"));
 		window.parent.location.href=$(".urlClick").attr("href");
 		
 	});
