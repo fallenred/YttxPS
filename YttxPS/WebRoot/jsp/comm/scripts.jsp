@@ -200,58 +200,7 @@ Date.prototype.format = function(format) {
 </script>
 <!-- 表单验证 -->
 <script>
-	var msgMap = new Map();
-	function refreshMsg(){
-		$.ajax({
-			type: "POST",
-			url: "/message/findNewMsg.htm",
-			dataType: "json",
-			success: function(data){
-				var html = '';
-				var count = 0;
-				$.each(data, function(commentIndex, comment){
-					if(commentIndex == 'rows'){
-						for(var i = 0; i < 3; i++){
-							/**
-							
-							html += '<a href="#"><span class="msg-body"><span class="msg-title"><span class="blue">'+ comment[i]['sendid'] +'</span>';
-							html += comment[i]['msgText'] +'</span><span class="msg-time"><i class="icon-time"></i><span>';
-							html += (new Date(parseFloat(comment[i]['msgDate']))).format("yyyy-MM-dd HH:mm:ss") +'</span></span></span></a>';
-							*/
-							html += '<a><span>'+ comment[i]['msgHead'] +'</span></a>';
-							count += 1;
-							var msg = msgMap.get(comment[i]['id']);
-							if (msg == null) {
-								msgMap.put(comment[i]['id'], comment[i]['id']);
-								$.jGrowl.defaults.closerTemplate = '<div class="alert alert-info">全部关闭</div>';
-								var alertTypes = ['info'];
-								$.jGrowl(comment[i]['msgText'], {
-									header: comment[i]['msgHead'],
-									theme:  'manilla',
-									sticky: true,
-									click: function(msg) {
-										//alert("You clicked me");
-									}
-								});
-							}
-						}
-						
-					}
-				});
-				
-				$("#newMsg").html(html);
-				if(count <3){
-					html = count + '条未读信息';
-				} else {
-					html = '至少' + count + '条未读信息';
-				}
-				$("#msgCount").html(html);
-				$(".msgCount").html(count);
-			}
-		});
-	}
-	//refreshMsg();
-	setInterval(refreshMsg,120000);
+	
 	$().ready(function() {
 		// 判断浮点数value是否大于或等于0
 	    jQuery.validator.addMethod("isFloatGteZero", function(value, element) { 
