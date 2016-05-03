@@ -6,7 +6,9 @@ jQuery(function($) {
 	});
 
 	$(document).on('click', '.urlClick', function(event){
-		window.parent.location.href=$(".urlClick").attr("href");
+		url = $(".urlClick").attr("href");
+		$(".urlClick").attr("href", "#");
+		window.parent.location.href=url;
 		
 	});
 	//	colorbox
