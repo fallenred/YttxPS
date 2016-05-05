@@ -23,7 +23,7 @@ public class Car {
 	 * 数据集合
 	 */
 	@XStreamImplicit(itemFieldName="reslist")
-	private List<ResultList> resultList;
+	private List<Reslist> reslist;
 
 	public String getTotal() {
 		return total;
@@ -33,12 +33,12 @@ public class Car {
 		this.total = total;
 	}
 
-	public List<ResultList> getResultList() {
-		return resultList;
+	public List<Reslist> getReslist() {
+		return reslist;
 	}
 
-	public void setResultList(List<ResultList> resultList) {
-		this.resultList = resultList;
+	public void setReslist(List<Reslist> reslist) {
+		this.reslist = reslist;
 	}
 
 }

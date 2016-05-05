@@ -11,13 +11,13 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
  *
  */
 @XStreamAlias("reslist")
-public class ResultList {
+public class Reslist {
 
 	/**
 	 * 编号
 	 */
 	@XStreamAlias("resno")
-	private String resNo;
+	private String resno;
 	
 	/**
 	 * 名字
@@ -41,7 +41,7 @@ public class ResultList {
 	 * 单价
 	 */
 	@XStreamAlias("unitprice")
-	private String unitPrice;
+	private String unitprice;
 	
 	/**
 	 * 数量
@@ -53,31 +53,31 @@ public class ResultList {
 	 * 总价
 	 */
 	@XStreamAlias("totalprice")
-	private String totalPrice;
+	private String totalprice;
 	
 	/**
 	 * 宾馆编号
 	 */
 	@XStreamAlias("accomno")
-	private String accomNo;
+	private String accomno;
 	
 	/**
 	 * 房型编号 字典表中房型编号
 	 */
 	@XStreamAlias("roomtypeno")
-	private String roomTypeNo;
+	private String roomtypeno;
 	
 	/**
 	 * 房间类型名
 	 */
 	@XStreamAlias("roomtype")
-	private String roomType;
+	private String roomtype;
 	
 	/**
 	 * 门票类型名
 	 */
 	@XStreamAlias("typename")
-	private String typeName;
+	private String typename;
 	
 	/**
 	 * 人数
@@ -89,7 +89,7 @@ public class ResultList {
 	 * 人头返款总额
 	 */
 	@XStreamAlias("peopleprofit")
-	private String peopleProfit;
+	private String peopleprofit;
 	
 	/**
 	 * 打单总金额
@@ -101,7 +101,7 @@ public class ResultList {
 	 * 总利润
 	 */
 	@XStreamAlias("totalprofit")
-	private String totalProfit;
+	private String totalprofit;
 	
 	/**
 	 * 单人收取金额
@@ -126,7 +126,7 @@ public class ResultList {
 	 * 项目编号
 	 */
 	@XStreamAlias("typeno")
-	private String typeNo;
+	private String typeno;
 	
 	/**
 	 * 备注
@@ -140,12 +140,12 @@ public class ResultList {
 	@XStreamImplicit(itemFieldName="cclist")
 	private List<Stuff> cclist;
 
-	public String getResNo() {
-		return resNo;
+	public String getResno() {
+		return resno;
 	}
 
-	public void setResNo(String resNo) {
-		this.resNo = resNo;
+	public void setResno(String resno) {
+		this.resno = resno;
 	}
 
 	public String getName() {
@@ -172,12 +172,12 @@ public class ResultList {
 		this.time = time;
 	}
 
-	public String getUnitPrice() {
-		return unitPrice;
+	public String getUnitprice() {
+		return unitprice;
 	}
 
-	public void setUnitPrice(String unitPrice) {
-		this.unitPrice = unitPrice;
+	public void setUnitprice(String unitprice) {
+		this.unitprice = unitprice;
 	}
 
 	public String getNumber() {
@@ -188,44 +188,44 @@ public class ResultList {
 		this.number = number;
 	}
 
-	public String getTotalPrice() {
-		return totalPrice;
+	public String getTotalprice() {
+		return totalprice;
 	}
 
-	public void setTotalPrice(String totalPrice) {
-		this.totalPrice = totalPrice;
+	public void setTotalprice(String totalprice) {
+		this.totalprice = totalprice;
 	}
 
-	public String getAccomNo() {
-		return accomNo;
+	public String getAccomno() {
+		return accomno;
 	}
 
-	public void setAccomNo(String accomNo) {
-		this.accomNo = accomNo;
+	public void setAccomno(String accomno) {
+		this.accomno = accomno;
 	}
 
-	public String getRoomTypeNo() {
-		return roomTypeNo;
+	public String getRoomtypeno() {
+		return roomtypeno;
 	}
 
-	public void setRoomTypeNo(String roomTypeNo) {
-		this.roomTypeNo = roomTypeNo;
+	public void setRoomtypeno(String roomtypeno) {
+		this.roomtypeno = roomtypeno;
 	}
 
-	public String getRoomType() {
-		return roomType;
+	public String getRoomtype() {
+		return roomtype;
 	}
 
-	public void setRoomType(String roomType) {
-		this.roomType = roomType;
+	public void setRoomtype(String roomtype) {
+		this.roomtype = roomtype;
 	}
 
-	public String getTypeName() {
-		return typeName;
+	public String getTypename() {
+		return typename;
 	}
 
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
+	public void setTypename(String typename) {
+		this.typename = typename;
 	}
 
 	public String getPeople() {
@@ -236,20 +236,28 @@ public class ResultList {
 		this.people = people;
 	}
 
-	public String getPeopleProfit() {
-		return peopleProfit;
+	public String getPeopleprofit() {
+		return peopleprofit;
 	}
 
-	public void setPeopleProfit(String peopleProfit) {
-		this.peopleProfit = peopleProfit;
+	public void setPeopleprofit(String peopleprofit) {
+		this.peopleprofit = peopleprofit;
 	}
 
-	public String getTotalProfit() {
-		return totalProfit;
+	public String getTotalconsp() {
+		return totalconsp;
 	}
 
-	public void setTotalProfit(String totalProfit) {
-		this.totalProfit = totalProfit;
+	public void setTotalconsp(String totalconsp) {
+		this.totalconsp = totalconsp;
+	}
+
+	public String getTotalprofit() {
+		return totalprofit;
+	}
+
+	public void setTotalprofit(String totalprofit) {
+		this.totalprofit = totalprofit;
 	}
 
 	public String getConsumption() {
@@ -276,12 +284,12 @@ public class ResultList {
 		this.proportion = proportion;
 	}
 
-	public String getTypeNo() {
-		return typeNo;
+	public String getTypeno() {
+		return typeno;
 	}
 
-	public void setTypeNo(String typeNo) {
-		this.typeNo = typeNo;
+	public void setTypeno(String typeno) {
+		this.typeno = typeno;
 	}
 
 	public String getRemark() {
@@ -300,12 +308,4 @@ public class ResultList {
 		this.cclist = cclist;
 	}
 
-	public String getTotalconsp() {
-		return totalconsp;
-	}
-
-	public void setTotalconsp(String totalconsp) {
-		this.totalconsp = totalconsp;
-	}
-	
 }

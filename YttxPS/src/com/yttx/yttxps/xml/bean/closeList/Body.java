@@ -32,13 +32,13 @@ public class Body {
 	 * 成本明细
 	 */
 	@XStreamAlias("costdetails")
-	private CostDetails costDetails;
+	private CostDetails costdetails;
 	
 	/**
 	 * 收入明细
 	 */
 	@XStreamAlias("incomedetails")
-	private IncomeDetails incomeDetails;
+	private IncomeDetails incomedetails;
 
 	public String getIncome() {
 		return income;
@@ -64,20 +64,20 @@ public class Body {
 		this.profit = profit;
 	}
 
-	public CostDetails getCostDetails() {
-		return costDetails;
+	public CostDetails getCostdetails() {
+		return costdetails;
 	}
 
-	public void setCostDetails(CostDetails costDetails) {
-		this.costDetails = costDetails;
+	public void setCostdetails(CostDetails costdetails) {
+		this.costdetails = costdetails;
 	}
 
-	public IncomeDetails getIncomeDetails() {
-		return incomeDetails;
+	public IncomeDetails getIncomedetails() {
+		return incomedetails;
 	}
 
-	public void setIncomeDetails(IncomeDetails incomeDetails) {
-		this.incomeDetails = incomeDetails;
+	public void setIncomedetails(IncomeDetails incomedetails) {
+		this.incomedetails = incomedetails;
 	}
-	
+
 }

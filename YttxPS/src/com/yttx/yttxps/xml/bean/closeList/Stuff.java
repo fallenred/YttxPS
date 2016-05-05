@@ -14,13 +14,13 @@ public class Stuff {
 	 * 购物消费项目类型编号 字典编号 牦牛肉 水晶店 银器
 	 */
 	@XStreamAlias("typeno")
-	private String typeNo;
+	private String typeno;
 	
 	/**
 	 * 购物消费项目类型名 牦牛肉 水晶店 银器
 	 */
 	@XStreamAlias("typename")
-	private String typeName;
+	private String typename;
 	
 	/**
 	 * 打单金额
@@ -46,20 +46,20 @@ public class Stuff {
 	@XStreamAlias("remark")
 	private String remark;
 
-	public String getTypeNo() {
-		return typeNo;
+	public String getTypeno() {
+		return typeno;
 	}
 
-	public void setTypeNo(String typeNo) {
-		this.typeNo = typeNo;
+	public void setTypeno(String typeno) {
+		this.typeno = typeno;
 	}
 
-	public String getTypeName() {
-		return typeName;
+	public String getTypename() {
+		return typename;
 	}
 
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
+	public void setTypename(String typename) {
+		this.typename = typename;
 	}
 
 	public String getConsumption() {
