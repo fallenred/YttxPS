@@ -11,18 +11,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 public class Body {
 
 	/**
-	 * 结算单ID
-	 */
-	@XStreamAlias("closeid")
-	private String closeid;
-	
-	/**
-	 * 订单ID
-	 */
-	@XStreamAlias("orderid")
-	private String orderid;
-	
-	/**
 	 * 总收入
 	 */
 	@XStreamAlias("income")
@@ -51,22 +39,6 @@ public class Body {
 	 */
 	@XStreamAlias("incomedetails")
 	private IncomeDetails incomeDetails;
-
-	public String getCloseid() {
-		return closeid;
-	}
-
-	public void setCloseid(String closeid) {
-		this.closeid = closeid;
-	}
-
-	public String getOrderid() {
-		return orderid;
-	}
-
-	public void setOrderid(String orderid) {
-		this.orderid = orderid;
-	}
 
 	public String getIncome() {
 		return income;

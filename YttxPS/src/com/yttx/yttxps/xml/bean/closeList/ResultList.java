@@ -104,16 +104,29 @@ public class ResultList {
 	private String totalProfit;
 	
 	/**
-	 * 收取金额
+	 * 单人收取金额
 	 */
 	@XStreamAlias("consumption")
 	private String consumption;
 	
 	/**
-	 * 成本
+	 * 单人成本
 	 */
 	@XStreamAlias("cost")
 	private String cost;
+	
+	/**
+	 * 返佣比例(收取金额-成本)*返佣比例=利润
+	 */
+	@XStreamAlias("proportion")
+	private String proportion;
+	
+	
+	/**
+	 * 项目编号
+	 */
+	@XStreamAlias("typeno")
+	private String typeNo;
 	
 	/**
 	 * 备注
@@ -253,6 +266,22 @@ public class ResultList {
 
 	public void setCost(String cost) {
 		this.cost = cost;
+	}
+
+	public String getProportion() {
+		return proportion;
+	}
+
+	public void setProportion(String proportion) {
+		this.proportion = proportion;
+	}
+
+	public String getTypeNo() {
+		return typeNo;
+	}
+
+	public void setTypeNo(String typeNo) {
+		this.typeNo = typeNo;
 	}
 
 	public String getRemark() {
