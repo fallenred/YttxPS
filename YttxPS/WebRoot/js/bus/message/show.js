@@ -5,6 +5,12 @@ jQuery(function($) {
 		$("#showModal", parent.document).find(".close").click();
 	});
 
+	$(document).on('click', '.urlClick', function(event){
+		url = $(".urlClick").attr("href");
+		$(".urlClick").attr("href", "#");
+		window.parent.location.href=url;
+		
+	});
 	//	colorbox
 	var $overflow = '';
 	var colorbox_params = {

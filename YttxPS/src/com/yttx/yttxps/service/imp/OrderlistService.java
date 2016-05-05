@@ -80,6 +80,7 @@ public class OrderlistService implements IOrderlistService {
 				daylist.setReslist(handleResListIndex(daylist.getReslist()));
 			}
 			commBody.setDaylist(record.getCommBody().getDaylist());
+			commBody.setCommprice(record.getCommBody().getCommprice());
 		}
 		//将公共精确资源转换为xml
 		ResScheduleXMLConverter.toXml("http://www.cnacex.com/", commBody);
@@ -156,6 +157,7 @@ public class OrderlistService implements IOrderlistService {
 				daylist.setReslist(handleResListIndex(daylist.getReslist()));
 			}
 			commBody.setDaylist(record.getCommBody().getDaylist());
+			commBody.setCommprice(record.getCommBody().getCommprice());
 		}
 		//将公共精确资源转换为xml
 		ResScheduleXMLConverter.toXml("http://www.cnacex.com/", commBody);

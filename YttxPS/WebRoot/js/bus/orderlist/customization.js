@@ -147,6 +147,7 @@ jQuery(function($) {
 				var commResTemplate1 = Handlebars.compile($("#commRes-template1").html());
 				//公共资源体（门票、购物、餐厅）
 				var commResTemplate2 = Handlebars.compile($("#commRes-template2").html());
+				$('#commAmt').val(data.commResSnapshot.commprice);
 				$('#myTab').html(commResTemplate(data.commResSnapshot));
 				$('#tbody_common').html(commResTemplate1(data.commResSnapshot));
 				$('#myTabContent').html($('#myTabContent').html() + commResTemplate2(data.commResSnapshot));

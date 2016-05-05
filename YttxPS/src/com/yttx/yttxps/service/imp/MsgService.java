@@ -154,6 +154,7 @@ public class MsgService implements IMsgService {
 			}
 		} else if (obj instanceof FStatement) {//结算单
 			FStatement statement = (FStatement) obj;
+			tempParam.put("closeAmt", statement.getAmt_());
 			statement = statementMapper.selectFSById(statement.getStatmentId());
 			custid = statement.getUserID();
 			subid = statement.getUserSubID();
@@ -168,7 +169,6 @@ public class MsgService implements IMsgService {
 					tempid = MsgTemp.STATEMENT_CONFIRM.getVal();
 					tempParam.put("orderID", statement.getOrderId());
 					tempParam.put("closeID", statement.getStatmentId());
-					tempParam.put("closeAmt", statement.getAmt_());
 				default:
 					break;
 			}

@@ -50,6 +50,9 @@ public class Body {
 	//全陪
 	@XStreamAlias("fullguide")
 	private String fullguide;
+	//公共价格
+	@XStreamAlias("commprice")
+	private String commprice;
 
 	public List<Daylist> getDaylist() {
 		return daylist;
@@ -137,5 +140,13 @@ public class Body {
 
 	public void setFullguide(String fullguide) {
 		this.fullguide = fullguide;
+	}
+	
+	public String getCommprice() {
+		return commprice;
+	}
+
+	public void setCommprice(String commprice) {
+		this.commprice = commprice;
 	}
 }

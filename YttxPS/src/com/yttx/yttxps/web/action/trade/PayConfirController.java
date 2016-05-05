@@ -188,7 +188,7 @@ public class PayConfirController extends BaseController {
 			this.msgService.saveMsg(statement, sessionEntity.getId(), "-1");
 		} catch (Exception e) {
 			logger.error("结算单支付失败，结算单id："+fsId, e);
-			return JsonResult.jsonError("订单支付确认失败");
+			return JsonResult.jsonError("结算单支付确认失败");
 		}
 		return JsonResult.jsonData(statement);
 	}

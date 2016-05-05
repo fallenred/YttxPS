@@ -119,8 +119,9 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="ftCreatdate">创建日期</label>
 											<div class="col-sm-3">
-												<input type="text" id="ftCreatdate" name="ftCreatdate" value="${orderlist.ftCreatdate}"
+												<input type="text" value="<fmt:formatDate value="${orderlist.ftCreatdate}" pattern="yyyy/MM/dd HH:mm:ss"/>"
 													class="form-control" placeholder="创建日期" readonly="readonly"/>
+												<input type="hidden" id="ftCreatdate" name="ftCreatdate" value="${orderlist.ftCreatdate}"/>
 											</div>
 											<label class="col-sm-3 control-label no-padding-right"
 												for="fsOperId">计&nbsp;调&nbsp;&nbsp;员</label>
@@ -493,7 +494,7 @@
 														<div class="form-group">
 															<label class="col-sm-2 control-label" for="fdTotalfee">公共资源金额</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control isFloatGteZero number" name="" value="" id="commAmt">
+																<input type="text" class="form-control isFloatGteZero number" name="commBody.commprice" value="" id="commAmt">
 															</div>
 														</div>
 													</div>
