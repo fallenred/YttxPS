@@ -1,7 +1,6 @@
 package com.yttx.yttxps.xml.bean.closeList;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 /**
  * 收入明细
@@ -14,19 +13,19 @@ public class IncomeDetails {
 	/**
 	 * 购物店
 	 */
-	@XStreamImplicit(itemFieldName="shop")
+	@XStreamAlias("shop")
 	private Shop shop;
 	
 	/**
 	 * 娱乐
 	 */
-	@XStreamImplicit(itemFieldName="entertainment")
+	@XStreamAlias("entertainment")
 	private Entertainment entertainment;
 	
 	/**
 	 * 其它收入
 	 */
-	@XStreamImplicit(itemFieldName="other")
+	@XStreamAlias("other")
 	private Other other;
 
 	public Shop getShop() {

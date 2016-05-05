@@ -16,103 +16,109 @@ public class ResultList {
 	/**
 	 * 编号
 	 */
-	@XStreamImplicit(itemFieldName="resno")
+	@XStreamAlias("resno")
 	private String resNo;
 	
 	/**
 	 * 名字
 	 */
-	@XStreamImplicit(itemFieldName="name")
+	@XStreamAlias("name")
 	private String name;
 	
 	/**
 	 * 类型
 	 */
-	@XStreamImplicit(itemFieldName="type")
+	@XStreamAlias("type")
 	private String type;
 	
 	/**
 	 * 日期
 	 */
-	@XStreamImplicit(itemFieldName="time")
+	@XStreamAlias("time")
 	private String time;
 	
 	/**
 	 * 单价
 	 */
-	@XStreamImplicit(itemFieldName="unitprice")
+	@XStreamAlias("unitprice")
 	private String unitPrice;
 	
 	/**
 	 * 数量
 	 */
-	@XStreamImplicit(itemFieldName="number")
+	@XStreamAlias("number")
 	private String number;
 	
 	/**
 	 * 总价
 	 */
-	@XStreamImplicit(itemFieldName="totalprice")
+	@XStreamAlias("totalprice")
 	private String totalPrice;
 	
 	/**
 	 * 宾馆编号
 	 */
-	@XStreamImplicit(itemFieldName="accomno")
+	@XStreamAlias("accomno")
 	private String accomNo;
 	
 	/**
 	 * 房型编号 字典表中房型编号
 	 */
-	@XStreamImplicit(itemFieldName="roomtypeno")
+	@XStreamAlias("roomtypeno")
 	private String roomTypeNo;
 	
 	/**
 	 * 房间类型名
 	 */
-	@XStreamImplicit(itemFieldName="roomtype")
+	@XStreamAlias("roomtype")
 	private String roomType;
 	
 	/**
 	 * 门票类型名
 	 */
-	@XStreamImplicit(itemFieldName="typename")
+	@XStreamAlias("typename")
 	private String typeName;
 	
 	/**
 	 * 人数
 	 */
-	@XStreamImplicit(itemFieldName="people")
+	@XStreamAlias("people")
 	private String people;
 	
 	/**
 	 * 人头返款总额
 	 */
-	@XStreamImplicit(itemFieldName="peopleprofit")
+	@XStreamAlias("peopleprofit")
 	private String peopleProfit;
+	
+	/**
+	 * 打单总金额
+	 */
+	@XStreamAlias("totalconsp")
+	private String totalconsp;
 	
 	/**
 	 * 总利润
 	 */
-	@XStreamImplicit(itemFieldName="totalprofit")
+	@XStreamAlias("totalprofit")
 	private String totalProfit;
 	
 	/**
 	 * 收取金额
 	 */
-	@XStreamImplicit(itemFieldName="consumption")
+	@XStreamAlias("consumption")
 	private String consumption;
 	
 	/**
 	 * 成本
 	 */
-	@XStreamImplicit(itemFieldName="cost")
+	@XStreamAlias("cost")
 	private String cost;
 	
 	/**
 	 * 备注
 	 */
-	@XStreamImplicit(itemFieldName="remark")
+	@XStreamAlias("remark")
 	private String remark;
 	
 	/**
@@ -263,6 +269,14 @@ public class ResultList {
 
 	public void setCclist(List<Stuff> cclist) {
 		this.cclist = cclist;
+	}
+
+	public String getTotalconsp() {
+		return totalconsp;
+	}
+
+	public void setTotalconsp(String totalconsp) {
+		this.totalconsp = totalconsp;
 	}
 	
 }

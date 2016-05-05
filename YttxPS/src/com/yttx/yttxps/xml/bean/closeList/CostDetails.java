@@ -1,7 +1,6 @@
 package com.yttx.yttxps.xml.bean.closeList;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 /**
  * 成本明细
@@ -14,31 +13,31 @@ public class CostDetails {
 	/**
 	 * 餐
 	 */
-	@XStreamImplicit(itemFieldName="restaurant")
+	@XStreamAlias("restaurant")
 	private Restaurant restaurant;
 	
 	/**
 	 * 房
 	 */
-	@XStreamImplicit(itemFieldName="accomadation")
+	@XStreamAlias("accomadation")
 	private Accomadation accomadation;
 	
 	/**
 	 * 车
 	 */
-	@XStreamImplicit(itemFieldName="car")
+	@XStreamAlias("car")
 	private Car car;
 	
 	/**
 	 * 门票
 	 */
-	@XStreamImplicit(itemFieldName="ticket")
+	@XStreamAlias("ticket")
 	private Ticket ticket;
 	
 	/**
 	 * 其他支出
 	 */
-	@XStreamImplicit(itemFieldName="other")
+	@XStreamAlias("other")
 	private Other other;
 
 	public Restaurant getRestaurant() {
