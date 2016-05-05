@@ -14,12 +14,6 @@ import org.dom4j.io.XMLWriter;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.QNameMap;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
-import com.yttx.yttxps.comm.Constants;
-import com.yttx.yttxps.xml.bean.Body;
-import com.yttx.yttxps.xml.bean.Cclist;
-import com.yttx.yttxps.xml.bean.Daylist;
-import com.yttx.yttxps.xml.bean.Reslist;
-import com.yttx.yttxps.xml.bean.Root;
 
 /**
  * 资源快照转换

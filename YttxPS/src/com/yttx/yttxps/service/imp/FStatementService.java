@@ -31,6 +31,14 @@ public class FStatementService implements IFStatementService{
 	}
 	
 	/**
+	 * 通过订单号找到结算单
+	 */
+	@Override
+	public FStatement findFStatByOrderid(String orderid) {
+		return fStatementMapper.selectFSByOrderId(orderid);
+	}
+	
+	/**
 	 * 通过结算单号找到结算单
 	 */
 	@Override

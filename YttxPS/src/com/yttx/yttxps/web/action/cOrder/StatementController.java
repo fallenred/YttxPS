@@ -1,7 +1,6 @@
 package com.yttx.yttxps.web.action.cOrder;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +15,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,6 +35,10 @@ import com.yttx.yttxps.service.IClearOrderService;
 import com.yttx.yttxps.service.IFStatementService;
 import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.web.action.BaseController;
+import com.yttx.yttxps.xml.ResScheduleXMLConverter;
+import com.yttx.yttxps.xml.bean.closeList.ResultList;
+import com.yttx.yttxps.xml.bean.closeList.Root;
+import com.yttx.yttxps.xml.bean.closeList.Shop;
 
 /**
  * 类描述：结算管理的Controller
@@ -83,6 +87,37 @@ public class StatementController extends BaseController {
 		model.addAttribute("order_stat_item",order_stat_item);
 		
 		return "cOrder/corderlist";
+	}
+	
+	/**
+	 * 打开购物店详情新增页面
+	 */
+	@RequestMapping(value="showCloselist.htm")
+	public String openOrderPage(Model model, String orderid){
+		FStatement fStatement = fStatementService.findFStatByOrderid(orderid);
+		try{
+			Root root = ResScheduleXMLConverter.fromXml("www.yttx.co", fStatement.getOrderContent(), Root.class);
+			model.addAttribute("content", root.getBody());
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("结算单xml转bean错误", e);
+		}
+		model.addAttribute("fStatement",fStatement);
+		return "orderlist/closelist";
+	}
+	
+	/**
+	 * 保存购物店信息
+	 */
+	@RequestMapping(value="saveGwinfo.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object saveGwinfo(Shop shop){
+		try{
+			System.out.println(shop);
+		}catch(Exception e){
+			return JsonResult.jsonError(e.getMessage());
+		}
+		return JsonResult.jsonOk();
 	}
 	
 	/**

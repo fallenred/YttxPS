@@ -44,4 +44,11 @@ public interface IFStatementService {
 	@Transactional
 	boolean editFStatement(FStatement fStatement);
 
+	/**
+	 * 通过订单号查询结算单
+	 * @param orderid
+	 * @return
+	 */
+	FStatement findFStatByOrderid(String orderid);
+
 }

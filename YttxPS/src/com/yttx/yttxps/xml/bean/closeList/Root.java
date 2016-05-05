@@ -1,9 +1,8 @@
 package com.yttx.yttxps.xml.bean.closeList;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.yttx.yttxps.xml.bean.Body;
+import com.yttx.yttxps.xml.bean.closeList.Body;;
 
-@XStreamAlias("body")
 public class Root {
 
 	@XStreamAlias("body")
