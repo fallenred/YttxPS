@@ -9,7 +9,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
  *
  */
 @XStreamAlias("body")
-public class CloseListDetail {
+public class Body {
 
 	/**
 	 * 结算单ID
