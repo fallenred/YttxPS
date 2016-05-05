@@ -29,36 +29,6 @@ import com.yttx.yttxps.xml.bean.Root;
 public class ResScheduleXMLConverter {
 	public static XStream xStream = null;
 
-	static
-	{
-		QNameMap qmap = new QNameMap();
-		qmap.setDefaultNamespace(Constants.SNAPSHOT_NAMESPACE);
-		StaxDriver staxDriver = new StaxDriver(qmap); 
-		staxDriver.setQnameMap(qmap);
-		xStream = new XStream(staxDriver);
-		xStream.alias("root", Root.class);
-		xStream.aliasField("body", Body.class, "body");
-		xStream.addImplicitCollection(Body.class, "reslist", "reslist", Reslist.class);
-		xStream.addImplicitCollection(Body.class, "daylist", "daylist", Daylist.class);
-		xStream.aliasField("dayflag", Daylist.class, "dayflag");
-
-		xStream.aliasField("ccno", Cclist.class, "ccno");
-		xStream.aliasField("ccname", Cclist.class, "ccname");
-		xStream.aliasField("price", Cclist.class, "price");
-		xStream.addImplicitArray(Daylist.class, "reslist", Reslist.class);
-		xStream.aliasField("restype", Reslist.class, "restype");
-		xStream.aliasField("resprop", Reslist.class, "resprop");
-		xStream.aliasField("resno", Reslist.class, "resno");
-		xStream.aliasField("resname", Reslist.class, "resname");
-		xStream.aliasField("cclist", Reslist.class, "cclist");
-
-		xStream.aliasField("ccno", Cclist.class, "ccno");
-		xStream.aliasField("ccname", Cclist.class, "ccname");
-		xStream.aliasField("price", Cclist.class, "price");
-		xStream.aliasField("cctype", Cclist.class, "cctype");
-		xStream.aliasField("usernum", Cclist.class, "usernum");
-
-	}
 
 	static String CHARS = "abcdefghijklmnopqrstuvwxyz";
 
