@@ -16,7 +16,7 @@ public class Car {
 	/**
 	 * 合计
 	 */
-	@XStreamImplicit(itemFieldName="total")
+	@XStreamAlias("total")
 	private String total;
 
 	/**

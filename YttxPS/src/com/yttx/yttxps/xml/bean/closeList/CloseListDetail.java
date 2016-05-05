@@ -1,7 +1,6 @@
 package com.yttx.yttxps.xml.bean.closeList;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 /**
  * 结算单收支明细
@@ -14,43 +13,43 @@ public class CloseListDetail {
 	/**
 	 * 结算单ID
 	 */
-	@XStreamImplicit(itemFieldName="closeid")
+	@XStreamAlias("closeid")
 	private String closeid;
 	
 	/**
 	 * 订单ID
 	 */
-	@XStreamImplicit(itemFieldName="orderid")
+	@XStreamAlias("orderid")
 	private String orderid;
 	
 	/**
 	 * 总收入
 	 */
-	@XStreamImplicit(itemFieldName="income")
+	@XStreamAlias("income")
 	private String income;
 	
 	/**
 	 * 总支出
 	 */
-	@XStreamImplicit(itemFieldName="expenditure")
+	@XStreamAlias("expenditure")
 	private String expenditure;
 	
 	/**
 	 * 总利润
 	 */
-	@XStreamImplicit(itemFieldName="profit")
+	@XStreamAlias("profit")
 	private String profit;
 	
 	/**
 	 * 成本明细
 	 */
-	@XStreamImplicit(itemFieldName="costdetails")
+	@XStreamAlias("costdetails")
 	private CostDetails costDetails;
 	
 	/**
 	 * 收入明细
 	 */
-	@XStreamImplicit(itemFieldName="incomedetails")
+	@XStreamAlias("incomedetails")
 	private IncomeDetails incomeDetails;
 
 	public String getCloseid() {

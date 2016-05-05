@@ -1,7 +1,6 @@
 package com.yttx.yttxps.xml.bean.closeList;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 /**
  * 商品明细
@@ -14,37 +13,37 @@ public class Stuff {
 	/**
 	 * 购物消费项目类型编号 字典编号 牦牛肉 水晶店 银器
 	 */
-	@XStreamImplicit(itemFieldName="typeno")
+	@XStreamAlias("typeno")
 	private String typeNo;
 	
 	/**
 	 * 购物消费项目类型名 牦牛肉 水晶店 银器
 	 */
-	@XStreamImplicit(itemFieldName="typename")
+	@XStreamAlias("typename")
 	private String typeName;
 	
 	/**
 	 * 打单金额
 	 */
-	@XStreamImplicit(itemFieldName="consumption")
+	@XStreamAlias("consumption")
 	private String consumption;
 	
 	/**
 	 * 返佣比例
 	 */
-	@XStreamImplicit(itemFieldName="proportion")
+	@XStreamAlias("proportion")
 	private String proportion;
 	
 	/**
 	 * 返佣金额
 	 */
-	@XStreamImplicit(itemFieldName="profit")
+	@XStreamAlias("profit")
 	private String profit;
 	
 	/**
 	 * 备注
 	 */
-	@XStreamImplicit(itemFieldName="remark")
+	@XStreamAlias("remark")
 	private String remark;
 
 	public String getTypeNo() {

@@ -16,7 +16,7 @@ public class Accomadation {
 	/**
 	 * 合计
 	 */
-	@XStreamImplicit(itemFieldName="total")
+	@XStreamAlias("total")
 	private String total;
 
 	/**
