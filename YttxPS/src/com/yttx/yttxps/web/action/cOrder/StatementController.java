@@ -36,6 +36,7 @@ import com.yttx.yttxps.service.IFStatementService;
 import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
+import com.yttx.yttxps.xml.bean.closeList.Reslist;
 import com.yttx.yttxps.xml.bean.closeList.Root;
 import com.yttx.yttxps.xml.bean.closeList.Shop;
 
@@ -108,11 +109,11 @@ public class StatementController extends BaseController {
 	/**
 	 * 保存购物店信息
 	 */
-	@RequestMapping(value="saveGwinfo.htm", method = RequestMethod.POST)
+	@RequestMapping(value="addGwinfo.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object saveGwinfo(Shop shop){
+	public Object saveGwinfo(Shop shop, String orderid){
 		try{
-			System.out.println(shop);
+			this.fStatementService.addShopInfo(shop, orderid);
 		}catch(Exception e){
 			return JsonResult.jsonError(e.getMessage());
 		}
