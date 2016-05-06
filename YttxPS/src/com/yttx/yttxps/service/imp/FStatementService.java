@@ -92,7 +92,7 @@ public class FStatementService implements IFStatementService{
 	}
 
 	@Override
-	public void addShopInfo(Shop shop, String orderid) {
+	public Shop addShopReslist(Shop shop, String orderid) {
 		// TODO Auto-generated method stub
 		FStatement fStatement = fStatementMapper.selectFSByOrderId(orderid);
 		if (fStatement == null) {
@@ -127,7 +127,7 @@ public class FStatementService implements IFStatementService{
 				list.add(reslist2);
 			}
 			//总金额
-			total.add(new BigDecimal(list.get(i).getTotalprofit()));
+			total = total.add(new BigDecimal(list.get(i).getTotalprofit()));
 		}
 		origShop.setReslist(list);
 		origShop.setTotal(total.toString());
@@ -139,6 +139,13 @@ public class FStatementService implements IFStatementService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return origShop;
+	}
+
+	@Override
+	public void delShopReslist(String orderid, String resno) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

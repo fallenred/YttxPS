@@ -108,24 +108,28 @@ public class StatementController extends BaseController {
 	/**
 	 * 保存购物店信息
 	 */
-	@RequestMapping(value="getGwinfo.htm", method = RequestMethod.POST)
+	@RequestMapping(value="addShopReslist.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getGwinfo(String orderid){
+	public Object addShopReslist(Shop shop, String orderid){
 		try{
+			shop = this.fStatementService.addShopReslist(shop, orderid);
 		}catch(Exception e){
 			return JsonResult.jsonError(e.getMessage());
 		}
-		return JsonResult.jsonOk();
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("result", "ok");
+		result.put("shopInfo", shop);
+		return result;
 	}
 	
 	/**
-	 * 保存购物店信息
+	 * 删除购物店信息
 	 */
-	@RequestMapping(value="addGwinfo.htm", method = RequestMethod.POST)
+	@RequestMapping(value="delShopReslist.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object saveGwinfo(Shop shop, String orderid){
+	public Object delShopReslist(String orderid, String resno){
 		try{
-			this.fStatementService.addShopInfo(shop, orderid);
+			this.fStatementService.delShopReslist(orderid, resno);
 		}catch(Exception e){
 			return JsonResult.jsonError(e.getMessage());
 		}
