@@ -36,7 +36,6 @@ import com.yttx.yttxps.service.IFStatementService;
 import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
-import com.yttx.yttxps.xml.bean.closeList.Reslist;
 import com.yttx.yttxps.xml.bean.closeList.Root;
 import com.yttx.yttxps.xml.bean.closeList.Shop;
 
@@ -90,7 +89,7 @@ public class StatementController extends BaseController {
 	}
 	
 	/**
-	 * 打开购物店详情新增页面
+	 * 打开结算单页面
 	 */
 	@RequestMapping(value="showCloselist.htm")
 	public String openOrderPage(Model model, String orderid){
@@ -104,6 +103,19 @@ public class StatementController extends BaseController {
 		}
 		model.addAttribute("fStatement",fStatement);
 		return "orderlist/closelist";
+	}
+	
+	/**
+	 * 保存购物店信息
+	 */
+	@RequestMapping(value="getGwinfo.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object getGwinfo(String orderid){
+		try{
+		}catch(Exception e){
+			return JsonResult.jsonError(e.getMessage());
+		}
+		return JsonResult.jsonOk();
 	}
 	
 	/**
