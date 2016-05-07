@@ -36,7 +36,6 @@ import com.yttx.yttxps.service.IFStatementService;
 import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
-import com.yttx.yttxps.xml.bean.closeList.ResultList;
 import com.yttx.yttxps.xml.bean.closeList.Root;
 import com.yttx.yttxps.xml.bean.closeList.Shop;
 
@@ -90,7 +89,7 @@ public class StatementController extends BaseController {
 	}
 	
 	/**
-	 * 打开购物店详情新增页面
+	 * 打开结算单页面
 	 */
 	@RequestMapping(value="showCloselist.htm")
 	public String openOrderPage(Model model, String orderid){
@@ -109,11 +108,28 @@ public class StatementController extends BaseController {
 	/**
 	 * 保存购物店信息
 	 */
-	@RequestMapping(value="saveGwinfo.htm", method = RequestMethod.POST)
+	@RequestMapping(value="addShopReslist.htm", method = RequestMethod.POST)
 	@ResponseBody
-	public Object saveGwinfo(Shop shop){
+	public Object addShopReslist(Shop shop, String orderid){
 		try{
-			System.out.println(shop);
+			shop = this.fStatementService.addShopReslist(shop, orderid);
+		}catch(Exception e){
+			return JsonResult.jsonError(e.getMessage());
+		}
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("result", "ok");
+		result.put("shopInfo", shop);
+		return result;
+	}
+	
+	/**
+	 * 删除购物店信息
+	 */
+	@RequestMapping(value="delShopReslist.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object delShopReslist(String orderid, String resno){
+		try{
+			this.fStatementService.delShopReslist(orderid, resno);
 		}catch(Exception e){
 			return JsonResult.jsonError(e.getMessage());
 		}

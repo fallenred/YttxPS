@@ -70,14 +70,14 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-							<!-- <ul class="nav nav-tabs" id="tab">
+							<ul class="nav nav-tabs" id="tab">
 								<li class="active"><a data-toggle="tab" id="all_order_a"
 									href="#orderlist"> <i></i>订单详情
 								</a></li>
 								<li><a data-toggle="tab" id="stat_div_a" href="#closelist"
 									class="statPane"> <i></i>结算单详情
 								</a></li>
-							</ul> -->
+							</ul>
 						</div>
 						<div class="col-xs-12">
 							<!-- PAGE CONTENT BEGINS -->
@@ -443,8 +443,7 @@
 																					<label class="col-sm-1 control-label"
 																						for="fsRegions">导游</label>
 																					<div class="col-sm-2">
-																						<select id="guide"
-																							class="width-80 chosen-select form-control"></select>
+																						<select id="guide" class="width-80 chosen-select form-control"></select>
 																					</div>
 																					<label class="col-sm-1 control-label"
 																						for="fsRegions">价格</label>
@@ -848,6 +847,7 @@
 											</div>
 										</div>
 										<hr>
+										
 										<!-- 订单备注start -->
 										<div class="row div_transfer">
 											<div class="form-group">
@@ -943,7 +943,8 @@
 									</form>
 								</div>
 								<div class="tab-pane fade" id="closelist">
-									<jsp:include page="/jsp/orderlist/closelist.jsp" />
+									<jsp:include page="/cOrder/showCloselist.htm?orderid=${orderlist.fsNo }" flush="true"/>
+									<%-- <jsp:include page="/jsp/orderlist/closelist.jsp" flush="true"/> --%>
 								</div>
 							</div>
 							<!-- PAGE CONTENT ENDS -->

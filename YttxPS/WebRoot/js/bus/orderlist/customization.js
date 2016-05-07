@@ -118,10 +118,13 @@ jQuery(function($) {
 				$("#insuerprice").val(data.fcSchedule.insuerprice);
 				//成人
 				$("#adult").val(data.fcSchedule.adult);
+				$("#lab_adult").html(data.fcSchedule.adult);
 				//儿童
 				$("#children").val(data.fcSchedule.children);
+				$("#lab_children").html(data.fcSchedule.children);
 				//全陪
 				$("#fullguide").val(data.fcSchedule.fullguide);
+				$("#lab_fullguide").html(data.fcSchedule.fullguide);
 				//报价
 				$("#price").val(data.fcSchedule.price);
 				var daylistTemplate = Handlebars.compile($("#daylist-template").html());

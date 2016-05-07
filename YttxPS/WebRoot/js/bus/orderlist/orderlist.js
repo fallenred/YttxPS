@@ -231,17 +231,6 @@ $("#customizationIframe").on("load",function(){
 	}
 });
 
-
-$("#addModal", parent.document).on("hidden.bs.modal", function() {
-    $(this).removeData("bs.modal");
-    $("#grid-table").trigger("reloadGrid");
-});
-
-$("#editModal", parent.document).on("hidden.bs.modal", function() {
-    $(this).removeData("bs.modal");
-    $("#grid-table").trigger("reloadGrid");
-});
-
 $("#customizationModal", parent.document).on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
     $("#grid-table").trigger("reloadGrid");

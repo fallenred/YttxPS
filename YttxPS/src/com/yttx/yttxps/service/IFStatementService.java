@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yttx.yttxps.model.corder.FStatement;
+import com.yttx.yttxps.xml.bean.closeList.Shop;
 
 /**
  * 类描述：结算单service
@@ -50,5 +51,20 @@ public interface IFStatementService {
 	 * @return
 	 */
 	FStatement findFStatByOrderid(String orderid);
+	
+	/**
+	 * 新增购物店Reslist
+	 * @param shop 返回保存后的所有购物信息
+	 * @param orderid
+	 * @return
+	 */
+	Shop addShopReslist(Shop shop, String orderid);
+
+	/**
+	 * 删除购物店Reslist
+	 * @param orderid
+	 * @param resno
+	 */
+	void delShopReslist(String orderid, String resno);
 
 }

@@ -1,15 +1,26 @@
 package com.yttx.yttxps.service.imp;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yttx.except.BusinessException;
 import com.yttx.yttxps.mapper.FStatementMapper;
 import com.yttx.yttxps.model.corder.FStatement;
 import com.yttx.yttxps.service.IFStatementService;
 import com.yttx.yttxps.service.IPubService;
+import com.yttx.yttxps.xml.ResScheduleXMLConverter;
+import com.yttx.yttxps.xml.bean.closeList.Reslist;
+import com.yttx.yttxps.xml.bean.closeList.Root;
+import com.yttx.yttxps.xml.bean.closeList.Shop;
+import com.yttx.yttxps.xml.bean.closeList.Stuff;
 
 /**
  * 类描述：结算单相关service
@@ -80,4 +91,61 @@ public class FStatementService implements IFStatementService{
 		return true;
 	}
 
+	@Override
+	public Shop addShopReslist(Shop shop, String orderid) {
+		// TODO Auto-generated method stub
+		FStatement fStatement = fStatementMapper.selectFSByOrderId(orderid);
+		if (fStatement == null) {
+			throw new BusinessException("购物信息保存失败");
+		}
+		Root root = ResScheduleXMLConverter.fromXml("www.yttx.co", fStatement.getOrderContent(), Root.class);
+		//cclist不为空，清理cclist下标为空null的节点
+		Reslist reslist = shop.getReslist().get(0);
+		if (CollectionUtils.isNotEmpty(reslist.getCclist())){
+			List<Stuff> list = reslist.getCclist();
+			Iterator<Stuff> it = list.iterator();
+			List<Stuff> cclist = new ArrayList<Stuff>();
+			while (it.hasNext()) {
+				Stuff stuff = it.next();
+				if (StringUtils.isNotBlank(stuff.getTypeno())) {
+					cclist.add(stuff);
+				}
+			}
+			reslist.setCclist(cclist);
+		}
+		Shop origShop = root.getBody().getIncomedetails().getShop();
+		//遍历原始购物店list，替换id相同的购物店信息
+		List<Reslist> reslists = origShop.getReslist();
+		BigDecimal total = BigDecimal.ZERO;
+		List<Reslist> list = new ArrayList<Reslist>();
+		for (int i = 0; i < reslists.size(); i++) {
+			Reslist reslist2 = reslists.get(i);
+			//如果新增的购物店id与content中购物店id相同，则替换
+			if (reslist.getResno().equals(reslist2.getResno())) {
+				list.add(reslist);
+			} else {
+				list.add(reslist2);
+			}
+			//总金额
+			total = total.add(new BigDecimal(list.get(i).getTotalprofit()));
+		}
+		origShop.setReslist(list);
+		origShop.setTotal(total.toString());
+		try {
+			String content = ResScheduleXMLConverter.toXml("www.yttx.co", root);
+			fStatement.setOrderContent(content);
+			this.fStatementMapper.updateFSSelective(fStatement);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return origShop;
+	}
+
+	@Override
+	public void delShopReslist(String orderid, String resno) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
