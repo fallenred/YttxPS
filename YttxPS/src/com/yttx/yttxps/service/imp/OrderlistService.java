@@ -22,6 +22,7 @@ import com.yttx.yttxps.model.TOrderlistWithBLOBs;
 import com.yttx.yttxps.model.TRemarks;
 import com.yttx.yttxps.model.TRemarksExample;
 import com.yttx.yttxps.model.TRemarksExample.Criteria;
+import com.yttx.yttxps.service.ICloselistService;
 import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.service.IOrderlistService;
 import com.yttx.yttxps.service.IPubService;
@@ -37,6 +38,9 @@ public class OrderlistService implements IOrderlistService {
 
 	@Autowired
 	private IPubService<TOrderlistWithBLOBs> pubService;
+	
+	@Autowired
+	private ICloselistService closelistService;
 	
 	@Autowired
 	private IMsgService msgService;
@@ -127,6 +131,7 @@ public class OrderlistService implements IOrderlistService {
 //				msgService.saveMsg(remarks, record.getFsOperId());
 			}
 		}
+		
 		return orderlistMapper.updateByPrimaryKeySelective(record);
 	}
 	
@@ -165,6 +170,7 @@ public class OrderlistService implements IOrderlistService {
 		record.setFcCommressnapshot(fcCommressnapshot);
 		
 		//批次精确资源:ordercustom-fc_ResSnapshot
+		List<TOrderCustomWithBLOBs> orderCustomList = new ArrayList<TOrderCustomWithBLOBs>();
 		if (CollectionUtils.isNotEmpty(record.getBatchBody())){
 			for (int i = 0; i < record.getBatchBody().size(); i++) {
 				Body body = record.getBatchBody().get(i);
@@ -177,6 +183,7 @@ public class OrderlistService implements IOrderlistService {
 				customWithBLOBs.setFcRessnapshot(fcRessnapshot);
 				customWithBLOBs.setFiId(new BigDecimal(body.getFiId()));
 				customWithBLOBs.setFdAmt(record.getBatchAmt().get(i));
+				orderCustomList.add(customWithBLOBs);
 				orderCustomMapper.updateByPrimaryKeySelective(customWithBLOBs);
 			}
 		}
@@ -210,6 +217,11 @@ public class OrderlistService implements IOrderlistService {
 		}
 		if("-5".equals(record.getFiStat()))
 			record.setFdTotalfee(record.getFdPrice());
+		
+		if (OrderStat.AUDITED.getVal().compareTo(new BigDecimal(record.getFiStat())) == 0) {
+			closelistService.creatCloseList(record, orderCustomList);
+		}
+		
 		return orderlistMapper.updateByPrimaryKeySelective(record);
 	}
 

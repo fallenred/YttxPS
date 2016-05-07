@@ -11,6 +11,18 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 public class Body {
 
 	/**
+	 * 成本明细
+	 */
+	@XStreamAlias("costdetails")
+	private CostDetails costdetails;
+	
+	/**
+	 * 收入明细
+	 */
+	@XStreamAlias("incomedetails")
+	private IncomeDetails incomedetails;
+
+	/**
 	 * 总收入
 	 */
 	@XStreamAlias("income")
@@ -28,17 +40,21 @@ public class Body {
 	@XStreamAlias("profit")
 	private String profit;
 	
-	/**
-	 * 成本明细
-	 */
-	@XStreamAlias("costdetails")
-	private CostDetails costdetails;
-	
-	/**
-	 * 收入明细
-	 */
-	@XStreamAlias("incomedetails")
-	private IncomeDetails incomedetails;
+	public CostDetails getCostdetails() {
+		return costdetails;
+	}
+
+	public void setCostdetails(CostDetails costdetails) {
+		this.costdetails = costdetails;
+	}
+
+	public IncomeDetails getIncomedetails() {
+		return incomedetails;
+	}
+
+	public void setIncomedetails(IncomeDetails incomedetails) {
+		this.incomedetails = incomedetails;
+	}
 
 	public String getIncome() {
 		return income;
@@ -62,22 +78,6 @@ public class Body {
 
 	public void setProfit(String profit) {
 		this.profit = profit;
-	}
-
-	public CostDetails getCostdetails() {
-		return costdetails;
-	}
-
-	public void setCostdetails(CostDetails costdetails) {
-		this.costdetails = costdetails;
-	}
-
-	public IncomeDetails getIncomedetails() {
-		return incomedetails;
-	}
-
-	public void setIncomedetails(IncomeDetails incomedetails) {
-		this.incomedetails = incomedetails;
 	}
 
 }

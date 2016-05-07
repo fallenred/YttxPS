@@ -14,25 +14,17 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 public class Car {
 
 	/**
-	 * 合计
-	 */
-	@XStreamAlias("total")
-	private String total;
-
-	/**
 	 * 数据集合
 	 */
 	@XStreamImplicit(itemFieldName="reslist")
 	private List<Reslist> reslist;
 
-	public String getTotal() {
-		return total;
-	}
-
-	public void setTotal(String total) {
-		this.total = total;
-	}
-
+	/**
+	 * 合计
+	 */
+	@XStreamAlias("total")
+	private String total;
+	
 	public List<Reslist> getReslist() {
 		return reslist;
 	}
@@ -41,4 +33,12 @@ public class Car {
 		this.reslist = reslist;
 	}
 
+	public String getTotal() {
+		return total;
+	}
+
+	public void setTotal(String total) {
+		this.total = total;
+	}
+	
 }
