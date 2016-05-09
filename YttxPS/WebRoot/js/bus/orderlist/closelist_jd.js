@@ -29,7 +29,6 @@ jQuery(function($) {
 				$(this).next().attr("style","width:160px;");
 				getRoom($(this));
 				$(this).next().next().val($(this).find("option:selected").text());
-				$(this).parent().next().find(".jdType").next().next().val($(this).parent().next().find(".jdType").find("option:selected").text());
 			});
 			setJdTotal();
 		}
@@ -63,6 +62,7 @@ jQuery(function($) {
 				//roomNode.chosen("destroy");
 				roomNode.chosen();
 				roomNode.next().attr("style","width:140px;");
+				roomNode.next().next().val(roomNode.find("option:selected").text());
 			}
 		});
 	}
@@ -179,7 +179,6 @@ jQuery(function($) {
 		$(".jd:last").chosen(); 
 		$(".jd:last").next().attr("style","width:160px;");
 		getRoom($(".jd:last"));
-		setTimeout('$(".jdType:last").next().next().val($(".jdType:last").find("option:selected").text());', 1000 );
 		$(".jd:last").next().next().val($(".jd:last").find("option:selected").text());
 		
 		setJdSum($(".jd:last"));
