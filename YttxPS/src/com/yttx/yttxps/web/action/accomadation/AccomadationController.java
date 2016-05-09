@@ -94,6 +94,25 @@ static Logger logger = LoggerFactory.getLogger(AccomadationController.class);
     }
 	
 	/**
+	 * 查询宾馆列表（不与地区挂钩）
+	 * add by marongcai
+	 * 2016-05-4
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="selectAccomadation2.htm", method = RequestMethod.GET)
+	@ResponseBody
+	public Object ajaxselectAccomadation2(AccomadationRequest req)
+    {
+		logger.debug("当前查询条件 {}", req.getAccomadation());
+		Map<String, Object> map = new HashMap<String, Object>();
+		req.copyAccomadation(map);
+		map.put("stat", BigDecimal.ONE);
+		List<Accomadation> list = accomadationService.selectSelectiveRgUnnecessary(map);
+		return list;
+    }
+	
+	/**
 	 * 查询宾馆详情
 	 * @param index
 	 * @return

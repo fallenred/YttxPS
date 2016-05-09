@@ -34,6 +34,7 @@ import com.yttx.comm.ObjectExcelView;
 import com.yttx.comm.PathUtil;
 import com.yttx.comm.TimestampEditor;
 import com.yttx.comm.road.RoadExcelRead;
+import com.yttx.except.BusinessException;
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Dict;
@@ -262,8 +263,9 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 			orderlistService.update(orderlist);
 			this.msgService.saveMsg(orderlist, sessionEntity.getId(),oldStat);
 		
-		}
-		catch(Exception e){
+		}catch (BusinessException e) {
+			logger.error("消息生成失败："+"\n" + e.getMessage(), e);
+		} catch (Exception e){
 			e.printStackTrace();
 			logger.error("更新订单失败, 订单编号："+orderlist.getFsNo() + "\n" + e.getMessage());
 			return (Map<String, Object>) JsonResult.jsonError("更新失败");
@@ -288,6 +290,8 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 			String oldStat = orderlist.getFiStat();
 			orderlistService.update4custom(orderlist);
 			this.msgService.saveMsg(orderlist, sessionEntity.getId(),oldStat);
+		}catch (BusinessException e) {
+			logger.error("消息生成失败："+"\n" + e.getMessage(), e);
 		}
 		catch(Exception e){
 			logger.error("更新订单失败, 订单编号："+orderlist.getFsNo() + "\n", e);

@@ -73,4 +73,6 @@ public interface AccomadationMapper<T>  extends IBaseMapper<T> {
     List<T> selectSelective(Map<String, Object> map);
     
     BigDecimal selectSequence();
+    
+    List<T> selectSelectiveRgUnnecessary(Map<String, Object> map);
 }

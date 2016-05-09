@@ -282,7 +282,7 @@ public class MsgService implements IMsgService {
 					}
 				} catch (Exception e) {
 					String resMsg = "消息模板格式化错误";
-					logger.error(String.format("[errMsg] retMsg-%1$s，temp-%2$s", resMsg, temp));
+					logger.error(String.format("[errMsg] retMsg-%1$s，temp-%2$s", resMsg, temp), e);
 					throw new BusinessException(resMsg, e);
 				}
 				return msgList;

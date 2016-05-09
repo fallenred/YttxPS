@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yttx.except.BusinessException;
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Dict;
@@ -154,6 +155,8 @@ public class PayConfirController extends BaseController {
 			order.setFsOperId(sessionEntity.getId());
 			this.msgService.saveMsg(order, sessionEntity.getId(),"6");
 			logger.debug("orderId为"+orderId+"的详细信息：{}", order);
+		} catch (BusinessException e) {
+			logger.error("消息生成失败："+"\n" + e.getMessage(), e);
 		} catch (Exception e) {
 			logger.error("订单支付失败，订单id："+orderId, e);
 			return JsonResult.jsonError("订单支付确认失败");
@@ -186,6 +189,8 @@ public class PayConfirController extends BaseController {
 			
 			statement.setOperId(sessionEntity.getId());
 			this.msgService.saveMsg(statement, sessionEntity.getId(), "-1");
+		} catch (BusinessException e) {
+			logger.error("消息生成失败："+"\n" + e.getMessage(), e);
 		} catch (Exception e) {
 			logger.error("结算单支付失败，结算单id："+fsId, e);
 			return JsonResult.jsonError("结算单支付确认失败");

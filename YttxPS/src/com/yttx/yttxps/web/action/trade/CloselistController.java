@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yttx.except.BusinessException;
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.SessionEntity;
@@ -73,6 +74,8 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
 			closelist.setFsOperId(sessionEntity.getId());
 			this.msgService.saveMsg(closelist, sessionEntity.getId(),"");
+		}catch (BusinessException e) {
+			logger.error("消息生成失败："+"\n" + e.getMessage(), e);
 		}
 		catch(Exception e){
 			return (Map<String, Object>) JsonResult.jsonError("新增失败");
