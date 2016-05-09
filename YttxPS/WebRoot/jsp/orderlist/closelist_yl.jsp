@@ -34,7 +34,7 @@
 			<tr class="width-13">
 				<td><select style="width:150px;text-align:center" class="yl" name="body.incomedetails.entertainment.reslist[${status.index }].resno"><option value="${reslist.resno }">${reslist.name }</option></select>
 					<input type="hidden" name="body.incomedetails.entertainment.reslist[${status.index }].name" value="${reslist.name }"/> </td>
-				<td><input type="text" value="${reslist.time }" class="form-control datetimepicker ylDate" data-date-format="yyyy-mm-dd" placeholder="消费日期" name="body.incomedetails.entertainment.reslist[${status.index }].time" class="ylDate"/>
+				<td><input type="text" value="${reslist.time }" class="form-control datetimepicker ylDate" data-date-format="yyyy-mm-dd" placeholder="消费日期" name="body.incomedetails.entertainment.reslist[${status.index }].time" class="ylDate"/></td>
 				<td><input type="text" value="${reslist.people }" style="width:100%;text-align:center" class="ylCount isFloatGteZero digits" name="body.incomedetails.entertainment.reslist[${status.index }].people"></td>
 				<td><input type="text" value="${reslist.consumption }" style="width:100%;text-align:center" name="body.incomedetails.entertainment.reslist[${status.index }].consumption" class="ylFee isFloatGteZero number"></td>
 				<td><input type="text" value="${reslist.cost }" style="width:100%;text-align:center" name="body.incomedetails.entertainment.reslist[${status.index }].cost" class="ylCost isFloatGteZero number"></td>
@@ -52,16 +52,15 @@
 </table>
 <script id="tr-yllist" type="text/x-handlebars-template">
 	<tr class="width-13">
-		<td><select style="width:150px;text-align:center" class="yl" name="resultList[0].yllist[{{index}}].yl"></select>
+		<td><select style="width:150px;text-align:center" class="yl" name="resultList[0].yllist[{{index}}].resno"></select>
 			<input type="hidden" name="body.incomedetails.entertainment.reslist[${status.index }].name" value="${reslist.name }"/> </td>
-		<td><input class="ylDate" type="text" value="${reslist.time }" class="form-control datetimepicker ylDate" data-date-format="yyyy-mm-dd" placeholder="消费日期" name="body.incomedetails.entertainment.reslist[${status.index }].time"/>
-			<input class="ylType" type="hidden" name="body.incomedetails.entertainment.reslist[${status.index }].type" value="${reslist.type }"/></td>
-		<td><input type="text" value="{{ylConut}}" style="width:100%;text-align:center" name="resultList[0].yllist[{{index}}].ylConut" class="ylConut isFloatGteZero digits"></td>
-		<td><input type="text" value="{{ylFee}}" style="width:100%;text-align:center" name="resultList[0].yllist[{{index}}].ylFee" class="ylFee isFloatGteZero number"></td>
-		<td><input type="text" value="{{ylCost}}" style="width:100%;text-align:center" name="resultList[0].yllist[{{index}}].ylCost" class="ylCost isFloatGteZero number"></td>
-		<td><input type="text" value="{{ylProfit}}" style="width:100%;text-align:center" readonly="readonly" name="resultList[0].yllist[{{index}}].ylProfit" class="ylProfit"></td>
-		<td><input type="text" value="{{ylRemark}}" style="width:100%;text-align:center" name="resultList[0].yllist[{{index}}].ylRemark" class="ylRemark"></td>
-		<td><a style="cursor:pointer;" class="batch_remove">删除</a></td>
+		<td><input type="text" value="${reslist.time }" class="form-control datetimepicker ylDate" data-date-format="yyyy-mm-dd" placeholder="消费日期" name="body.incomedetails.entertainment.reslist[${status.index }].time"/></td>
+		<td><input type="text" value="{{ylConut}}" style="width:100%;text-align:center" name="resultList[0].yllist[{{index}}].people" class="ylCount isFloatGteZero digits"></td>
+		<td><input type="text" value="{{ylFee}}" style="width:100%;text-align:center" name="resultList[0].yllist[{{index}}].consumption" class="ylFee isFloatGteZero number"></td>
+		<td><input type="text" value="{{ylCost}}" style="width:100%;text-align:center" name="resultList[0].yllist[{{index}}].cost" class="ylCost isFloatGteZero number"></td>
+		<td><input type="text" value="{{ylProfit}}" style="width:100%;text-align:center" readonly="readonly" name="resultList[0].yllist[{{index}}].totalprofit" class="ylProfit"></td>
+		<td><input type="text" value="{{ylRemark}}" style="width:100%;text-align:center" name="resultList[0].yllist[{{index}}].remark" class="ylRemark"></td>
+		<td><a style="cursor:pointer;" class="deleteYl">删除</a></td>
 	</tr>
 </script>
 

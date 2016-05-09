@@ -59,6 +59,6 @@
 		<td><input type="text" value="{{mpCount}}" style="width:100%;text-align:center" class="mpCount isFloatGteZero number" name="body.costdetails.ticket.reslist[${status.index }].number"></td>
 		<td><input type="text" value="{{mpSum}}" readonly="readonly" style="width:100%;text-align:center" class="mpSum" name="body.costdetails.ticket.reslist[${status.index }].totalprice"></td>
 		<td><input type="text" value="{{mpRemark}}" style="width:100%;text-align:center" class="mpRemark" name="body.costdetails.ticket.reslist[${status.index }].remark"></td>
-		<td><a style="cursor:pointer;" class="batch_remove">删除</a></td>
+		<td><a style="cursor:pointer;" class="deleteMp">删除</a></td>
 	</tr>
 </script>

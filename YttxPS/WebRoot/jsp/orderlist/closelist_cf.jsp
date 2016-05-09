@@ -60,7 +60,7 @@
 		<td><input type="text" value="{{cfCount}}" style="width:100%;text-align:center" class="cfCount isFloatGteZero digits" name="body.costdetails.restaurant.reslist[${status.index }].number"></td>
 		<td><input type="text" value="{{cfSum}}" style="width:100%;text-align:center" class="cfSum" readonly="readonly" name="body.costdetails.restaurant.reslist[${status.index }].totalprice"></td>
 		<td><input type="text" value="{{cfRemark}}" style="width:100%;text-align:center" class="cfRemark" name="body.costdetails.restaurant.reslist[${status.index }].remark"></td>
-		<td><a style="cursor:pointer;" class="batch_remove">删除</a></td>
+		<td><a style="cursor:pointer;" class="deleteCf">删除</a></td>
 	</tr>
 </script>
 

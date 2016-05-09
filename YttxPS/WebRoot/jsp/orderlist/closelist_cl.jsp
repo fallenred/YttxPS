@@ -56,6 +56,6 @@
 		<td><input type="text" value="{{clCount}}" style="width:100%;text-align:center" class="clCount isFloatGteZero digits" name="resultList[0].cllist[{{index}}].clCount"></td>
 		<td><input type="text" value="{{clSum}}" style="width:100%;text-align:center" readonly="readonly" class="clSum" name="resultList[0].cllist[{{index}}].clSum"></td>
 		<td><input type="text" value="{{clRemark}}" style="width:100%;text-align:center" class="clRemark" name="resultList[0].cllist[{{index}}].clRemark"></td>
-		<td><a style="cursor:pointer;" class="batch_remove">删除</a></td>
+		<td><a style="cursor:pointer;" class="deleteCl">删除</a></td>
 	</tr>
 </script>

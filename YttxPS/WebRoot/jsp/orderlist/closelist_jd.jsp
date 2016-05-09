@@ -64,6 +64,6 @@
 		<td><input type="text" value="{{jdCount}}" style="width:100%;text-align:center" class="jdCount isFloatGteZero digits" name="body.costdetails.accomadation.reslist[${status.index }].number"></td>
 		<td><input type="text" value="{{jdSum}}" style="width:100%;text-align:center" class="jdSum" readonly="readonly" name="body.costdetails.accomadation.reslist[${status.index }].totalprice"></td>
 		<td><input type="text" value="{{jdRemark}}" style="width:100%;text-align:center" class="jdRemark" name="body.costdetails.accomadation.reslist[${status.index }].remark"></td>
-		<td><a style="cursor:pointer;" class="batch_remove">删除</a></td>
+		<td><a style="cursor:pointer;" class="deleteJd">删除</a></td>
 	</tr>
 </script>
