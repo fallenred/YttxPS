@@ -33,10 +33,10 @@
 			<tr class="width-15">
 				<td><select style="width:160px;text-align:center" class="cl" name="body.costdetails.car.reslist[${status.index }].resno"><option value="${reslist.resno }">${reslist.name }</option></select>
 					<input type="hidden" name="body.costdetails.car.reslist[${status.index }].name" value="${reslist.name }" class="clName" /> </td>
-				<td><input type="text" value="${reslist.unitprice }" style="width:100%;text-align:center" class="clPrice isFloatGteZero number" name="body.costdetails.car.reslist[${status.index }].unitprice"></td>
-				<td><input type="text" value="${reslist.number }" style="width:100%;text-align:center" class="clCount isFloatGteZero digits" name="body.costdetails.car.reslist[${status.index }].number"></td>
-				<td><input type="text" value="${reslist.totalprice }" style="width:100%;text-align:center" readonly="readonly" class="clSum" name="body.costdetails.car.reslist[${status.index }].totalprice"></td>
-				<td><input type="text" value="${reslist.remark }" style="width:100%;text-align:center" class="clRemark" name="body.costdetails.car.reslist[${status.index }].remark"></td>
+				<td><input type="text" value="${reslist.unitprice }"  class="clPrice isFloatGteZero number input-text" name="body.costdetails.car.reslist[${status.index }].unitprice"></td>
+				<td><input type="text" value="${reslist.number }"  class="clCount isFloatGteZero digits input-text" name="body.costdetails.car.reslist[${status.index }].number"></td>
+				<td><input type="text" value="${reslist.totalprice }"  readonly="readonly" class="clSum input-text"  name="body.costdetails.car.reslist[${status.index }].totalprice"></td>
+				<td><input type="text" value="${reslist.remark }"  class="clRemark input-text" name="body.costdetails.car.reslist[${status.index }].remark"></td>
 				<td><a style="cursor:pointer;" class="deleteCl">删除</a></td>
 			</tr>
 		</c:forEach>
@@ -52,10 +52,10 @@
 	<tr class="width-15">
 		<td><select style="width:160px;text-align:center" class="cl" name="resultList[0].cllist[{{index}}].cl"></select>
 			<input type="hidden" name="body.costdetails.car.reslist[${status.index }].name" value=""/> </td>
-		<td><input type="text" value="{{clPrice}}" style="width:100%;text-align:center" class="clPrice isFloatGteZero number" name="resultList[0].cllist[{{index}}].clPrice"></td>
-		<td><input type="text" value="{{clCount}}" style="width:100%;text-align:center" class="clCount isFloatGteZero digits" name="resultList[0].cllist[{{index}}].clCount"></td>
-		<td><input type="text" value="{{clSum}}" style="width:100%;text-align:center" readonly="readonly" class="clSum" name="resultList[0].cllist[{{index}}].clSum"></td>
-		<td><input type="text" value="{{clRemark}}" style="width:100%;text-align:center" class="clRemark" name="resultList[0].cllist[{{index}}].clRemark"></td>
+		<td><input type="text" value="{{clPrice}}"  class="clPrice isFloatGteZero number input-text" name="resultList[0].cllist[{{index}}].clPrice"></td>
+		<td><input type="text" value="{{clCount}}" class="clCount isFloatGteZero digits input-text" name="resultList[0].cllist[{{index}}].clCount"></td>
+		<td><input type="text" value="{{clSum}}"  readonly="readonly" class="clSum input-text" name="resultList[0].cllist[{{index}}].clSum"></td>
+		<td><input type="text" value="{{clRemark}}"  class="clRemark input-text" name="resultList[0].cllist[{{index}}].clRemark"></td>
 		<td><a style="cursor:pointer;" class="deleteCl">删除</a></td>
 	</tr>
 </script>

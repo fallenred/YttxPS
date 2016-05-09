@@ -11,6 +11,7 @@
 .width-13 th{
 	width:13%;
 }
+
 </style>
 <table class="table table-bordered">
 	<thead>
@@ -36,10 +37,10 @@
 				<td><select style="width:160px;text-align:center" class="cf" name="body.costdetails.restaurant.reslist[${status.index }].resno"><option value="${reslist.resno }">${reslist.name }</option></select>
 					<input type="hidden" name="body.costdetails.restaurant.reslist[${status.index }].name" value="${reslist.name }" /> </td>
 				<td><select style="width:100px;text-align:center"  class="cfType" name="body.costdetails.restaurant.reslist[${status.index }].type"><option value="${reslist.type }"></option></select></td>
-				<td><input type="text" value="${reslist.unitprice }" style="width:100%;text-align:center" class="cfPrice isFloatGteZero number" name="body.costdetails.restaurant.reslist[${status.index }].unitprice"></td>
-				<td><input type="text" value="${reslist.number }" style="width:100%;text-align:center" class="cfCount isFloatGteZero digits" name="body.costdetails.restaurant.reslist[${status.index }].number"></td>
-				<td><input type="text" value="${reslist.totalprice }" style="width:100%;text-align:center" readonly="readonly" class="cfSum" name="body.costdetails.restaurant.reslist[${status.index }].totalprice"></td>
-				<td><input type="text" value="${reslist.remark }" style="width:100%;text-align:center" class="cfRemark" name="body.costdetails.restaurant.reslist[${status.index }].remark"></td>
+				<td><input type="text" value="${reslist.unitprice }" class="cfPrice isFloatGteZero number input-text" name="body.costdetails.restaurant.reslist[${status.index }].unitprice"></td>
+				<td><input type="text" value="${reslist.number }" class="cfCount isFloatGteZero digits input-text" name="body.costdetails.restaurant.reslist[${status.index }].number"></td>
+				<td><input type="text" value="${reslist.totalprice }" readonly="readonly" class="cfSum input-text" name="body.costdetails.restaurant.reslist[${status.index }].totalprice"></td>
+				<td><input type="text" value="${reslist.remark }" class="cfRemark input-text" name="body.costdetails.restaurant.reslist[${status.index }].remark"></td>
 				<td><a style="cursor:pointer;" class="deleteCf">删除</a></td>
 			</tr>
 		</c:forEach>
@@ -56,10 +57,10 @@
 		<td><select style="width:160px;text-align:center" class="cf" name="body.costdetails.restaurant.reslist[${status.index }].resno"></select>
 			<input class="cfName" type="hidden" name="body.costdetails.restaurant.reslist[${status.index }].name" value="${reslist.name }" /> </td>
 		<td><select style="width:100px;text-align:center"  class="cfType" name="body.costdetails.restaurant.reslist[${status.index }].type"></select></td>
-		<td><input type="text" value="{{cfPrice}}" style="width:100%;text-align:center" class="cfPrice isFloatGteZero number" name="body.costdetails.restaurant.reslist[${status.index }].unitprice"></td>
-		<td><input type="text" value="{{cfCount}}" style="width:100%;text-align:center" class="cfCount isFloatGteZero digits" name="body.costdetails.restaurant.reslist[${status.index }].number"></td>
-		<td><input type="text" value="{{cfSum}}" style="width:100%;text-align:center" class="cfSum" readonly="readonly" name="body.costdetails.restaurant.reslist[${status.index }].totalprice"></td>
-		<td><input type="text" value="{{cfRemark}}" style="width:100%;text-align:center" class="cfRemark" name="body.costdetails.restaurant.reslist[${status.index }].remark"></td>
+		<td><input type="text" value="{{cfPrice}}" class="cfPrice isFloatGteZero number input-text" name="body.costdetails.restaurant.reslist[${status.index }].unitprice"></td>
+		<td><input type="text" value="{{cfCount}}" class="cfCount isFloatGteZero digits input-text" name="body.costdetails.restaurant.reslist[${status.index }].number"></td>
+		<td><input type="text" value="{{cfSum}}" class="cfSum input-text" readonly="readonly" name="body.costdetails.restaurant.reslist[${status.index }].totalprice"></td>
+		<td><input type="text" value="{{cfRemark}}" class="cfRemark input-text" name="body.costdetails.restaurant.reslist[${status.index }].remark"></td>
 		<td><a style="cursor:pointer;" class="deleteCf">删除</a></td>
 	</tr>
 </script>
