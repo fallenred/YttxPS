@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.comm.StringUtil;
+import com.yttx.except.BusinessException;
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Dict;
@@ -36,6 +37,7 @@ import com.yttx.yttxps.service.IFStatementService;
 import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
+import com.yttx.yttxps.xml.bean.closeList.Reslist;
 import com.yttx.yttxps.xml.bean.closeList.Root;
 import com.yttx.yttxps.xml.bean.closeList.Shop;
 
@@ -123,17 +125,46 @@ public class StatementController extends BaseController {
 	}
 	
 	/**
+	 * 查询购物店信息
+	 */
+	@RequestMapping(value="getShopReslist.htm", method = RequestMethod.POST)
+	@ResponseBody
+	public Object getShopReslist(String orderid, String resno){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try{
+			FStatement fStatement = fStatementService.findFStatByOrderid(orderid);
+			Root root = ResScheduleXMLConverter.fromXml("www.yttx.co", fStatement.getOrderContent(), Root.class);
+			Shop shop = root.getBody().getIncomedetails().getShop();
+			int length = shop.getReslist().size();
+			for (int i = 0; i < length; i++) {
+				Reslist reslist = shop.getReslist().get(i);
+				if (resno.equals(reslist.getResno())) {
+					result.put("result", "ok");
+					result.put("reslist", reslist);
+					return result;
+				}
+			}
+		}catch(Exception e){
+			return JsonResult.jsonError(e.getMessage());
+		}
+		return result;
+	}
+	
+	/**
 	 * 删除购物店信息
 	 */
 	@RequestMapping(value="delShopReslist.htm", method = RequestMethod.POST)
 	@ResponseBody
 	public Object delShopReslist(String orderid, String resno){
+		Map<String, Object> result = new HashMap<String, Object>();
 		try{
-			this.fStatementService.delShopReslist(orderid, resno);
+			Shop shop = this.fStatementService.delShopReslist(orderid, resno);
+			result.put("result", "ok");
+			result.put("shopInfo", shop);
 		}catch(Exception e){
 			return JsonResult.jsonError(e.getMessage());
 		}
-		return JsonResult.jsonOk();
+		return result;
 	}
 	
 	/**
@@ -271,11 +302,16 @@ public class StatementController extends BaseController {
 			String orderId = fStatement.getOrderId();
 			FStatement exitFS = clearOrderService.findFStatByOrderId(orderId);
 			
+			HttpSession session = request.getSession();
+			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
 			if(exitFS==null){
 				try {
 					String statId=clearOrderService.addFStatement(fStatement);
 					message="结算单生成成功，"+
 					"单号<a href='/cOrder/showFS.htm?fsId="+statId+"'>"+statId+"</a>";
+					this.msgService.saveMsg(fStatement, sessionEntity.getId(),"");
+				} catch (BusinessException e) {
+					logger.error("消息生成失败："+"\n" + e.getMessage(), e);
 				} catch (Exception e) {
 					message="新增结算单失败,请联系管理员!";
 					logger.error(e.getMessage());
@@ -283,9 +319,6 @@ public class StatementController extends BaseController {
 			}else{
 				message ="该订单已生成结算单";
 			}
-			HttpSession session = request.getSession();
-			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
-			this.msgService.saveMsg(fStatement, sessionEntity.getId(),"");
 		}else if("E".equalsIgnoreCase(oper)){//修改操作
 			try{
 				fStatementService.editFStatement(fStatement);

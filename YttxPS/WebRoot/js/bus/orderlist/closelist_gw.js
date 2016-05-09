@@ -1,5 +1,6 @@
 jQuery(function($) {
 	//加载购物店下拉列表
+	var map = new Map();
 	$.ajax({
 		type: "GET",
 		traditional: true,
@@ -17,7 +18,14 @@ jQuery(function($) {
 			$("#shop").attr("class", "width-80 chosen-select form-control");
 			$("#shop").chosen(); 
 			$("#shop").next().attr("style","width:240px;");
+			$("#resno_gw").val($("#shop").find("option:selected").text());
+			map.put("shop", html);
 		}
+	});
+	
+	//购物店变更事件
+	$(document).on('change key', '#shop', function(event){
+		$("#resno_gw").val($("#shop").find("option:selected").text());
 	});
 
 	//购物店项目
@@ -50,37 +58,38 @@ jQuery(function($) {
 
 	//打开模态框
 	$(document).on('click', '.btn_gw_add', function(event){
-		$(".cc_tbody").html($(".cc_tbody tr:last").html());
-		$("#gw_index").val(0);
+		$(".tr_cclist").remove();
+		$("#gwxm_index").val(0);
 		$("#totalconsp").html(0);
 		$("#totalprofit").html(0);
 		$('#addModal').modal('show');
 	});
-	//关闭模态框
-	$(function () { $('#addModal').on('hide.bs.modal', function () {
-		alert('嘿，我听说您喜欢模态框...');})
-	});
 
 	//新增购物项目
 	$(document).on('click', '.btn_cclist_add', function(event){
-		index = $("#gw_index").val();
-		var data = {
-				"name" : $("#shop").find("option:selected").text(),
+		index = $("#gwxm_index").val();
+		var data = {"name" : $("#shop").find("option:selected").text(),cclist:[{
 				"typeno" : $("#typeno").val(),
-				"typenname" : $("#typeno").find("option:selected").text(),
+				"typename" : $("#typeno").find("option:selected").text(),
 				"consumption" : $("#consumption").val(),
 				"proportion" : $("#proportion").val(),
 				"profit" : $("#profit").val(),
 				"remark" : $("#cc_remark").val(),
 				"index" : index
-		}
+		}]};
 		var template = Handlebars.compile($("#tr-cclist").html());
-		$(".cc_tbody").html(template(data) + $(".cc_tbody").html());
-		$("#gw_index").val(parseInt(index) + 1);
+		$("#total_cclist").before(template(data));
+		$("#gwxm_index").val(parseInt(index) + 1);
 		totalConsp();
 		totalProfit();
 	});
-
+	//删除购物项目
+	$(document).on('click', '.cclist_remove', function(event){
+		$(this).parent().parent().remove();
+		totalConsp();
+		totalProfit();
+	});
+	
 	//合计打单金额
 	function totalConsp(){
 		var totalconsp = 0;
@@ -110,13 +119,16 @@ jQuery(function($) {
 
 	//购物信息提交
 	$("#submit_gw").on("click", function () {
-		$.post("/cOrder/addGwinfo.htm?orderid="+$("#fsNo").val(),
+		$.post("/cOrder/addShopReslist.htm?orderid="+$("#fsNo").val(),
 				$("#form_gw").serialize(),
 				function(data){
 			var json = eval("("+data+")");
 			if(json.result == "ok") {
 				$("#message_gw").text("修改记录成功");
 				$("#message_gw").show();
+				$.each(json.shopInfo.reslist, function(index, comment){
+					
+				});
 				return true;
 			}
 			else {

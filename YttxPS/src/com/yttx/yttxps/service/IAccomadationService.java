@@ -44,5 +44,8 @@ public interface IAccomadationService {
 	
 	@Transactional
 	int delete(String no);
+
+	public List<Accomadation> selectSelectiveRgUnnecessary(
+			Map<String, Object> map);
 	
 }

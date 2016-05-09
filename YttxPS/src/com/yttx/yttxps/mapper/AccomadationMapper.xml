@@ -246,6 +246,31 @@
 	</if>
   </sql>
   
+   <!-- 查询宾馆列表（不与地区挂钩） -->
+  <select id="selectSelectiveRgUnnecessary" parameterType="map" resultMap="ResultMapWithBLOBs">
+    SELECT A.*
+      FROM TACCOMADATION A
+     WHERE 1 = 1
+    <if test="regionno != null and regionno !=''">
+      and FS_REGIONNO = #{regionno,jdbcType=VARCHAR}
+    </if>
+    <if test="starlvl != null and starlvl !=''">
+     and FS_STARLVL = #{starlvl,jdbcType=VARCHAR}
+    </if>
+    <if test="name != null and name != ''">
+     and FS_NAME like like #{name,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="addr != null and addr != ''">
+     and FS_ADDR = #{addr,jdbcType=VARCHAR}
+    </if>
+    <if test="speciality != null and speciality != ''">
+      and FS_SPECIALITY = #{speciality,jdbcType=VARCHAR}
+    </if>
+    <if test="stat != null and stat != ''">
+      and FI_STAT = #{stat,jdbcType=DECIMAL}
+    </if>
+  </select>
+  
   <!-- 查询宾馆列表（线路配置时使用） -->
   <select id="selectSelective" parameterType="map" resultMap="ResultMapWithBLOBs">
     SELECT A.*

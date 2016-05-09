@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.comm.StringUtil;
+import com.yttx.except.BusinessException;
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.CustomInfo;
@@ -117,18 +118,20 @@ public class MemberAuditController extends BaseController {
 		auditRec.setAuditor(sessionEntity.getId());//审核人
 		//auditRec.setAuditTime(new Date());//审核时间
 		auditRec.setComment(req.getComment());//审核意见
+		HttpSession session = request.getSession();
+		SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
+		auditRec.setFsOperId(sessionEntity.getId());
 		if(!StringUtil.nullOrBlank(req.getSalesManID()))
 			auditRec.setSalesManID(req.getSalesManID());//销售人员id
 		try {
 			memberAuditService.auditCustomer(auditRec);
+			this.msgService.saveMsg(auditRec, sessionEntity.getId(),null);
+		} catch (BusinessException e) {
+			logger.error("消息生成失败："+"\n" + e.getMessage(), e);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return JsonResult.jsonError(e.getMessage());
 		}
-		HttpSession session = request.getSession();
-		SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
-		auditRec.setFsOperId(sessionEntity.getId());
-		this.msgService.saveMsg(auditRec, sessionEntity.getId(),null);
 		return JsonResult.jsonOk();
 	}
 }

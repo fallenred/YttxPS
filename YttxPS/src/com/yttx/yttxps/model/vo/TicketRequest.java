@@ -35,10 +35,10 @@ public class TicketRequest extends JqGridRequest implements
 			 * 2016-3-16
 			 * modify by start
 			 */
-			map.put("fsScenicname", ticket.getFsScenicname() == null ? "" : ticket.getFsScenicname());
 			/**
 			 * modify end
 			 */
+			map.put("fsScenicno", ticket.getFsScenicno() == null ? "" : ticket.getFsScenicno());
 			map.put("fsType", ticket.getFsType() == null ? "" : ticket.getFsType());
 			map.put("fiStat", ticket.getFiStat() == null ? "" : ticket.getFiStat());
 		}

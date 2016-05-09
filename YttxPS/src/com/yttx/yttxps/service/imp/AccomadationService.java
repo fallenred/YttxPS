@@ -79,6 +79,12 @@ public class AccomadationService implements IAccomadationService {
 		return accomadationMapper.selectByPrimaryKey(no);
 	}
 
+	@Override
+	public List<Accomadation> selectSelectiveRgUnnecessary(
+			Map<String, Object> map) {
+		return accomadationMapper.selectSelectiveRgUnnecessary(map);
+	}
+
 
 
 

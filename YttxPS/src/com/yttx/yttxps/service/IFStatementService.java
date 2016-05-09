@@ -65,6 +65,6 @@ public interface IFStatementService {
 	 * @param orderid
 	 * @param resno
 	 */
-	void delShopReslist(String orderid, String resno);
+	Shop delShopReslist(String orderid, String resno);
 
 }
