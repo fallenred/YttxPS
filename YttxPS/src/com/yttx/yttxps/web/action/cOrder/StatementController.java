@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.comm.StringUtil;
+import com.yttx.except.BusinessException;
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Dict;
@@ -301,11 +302,16 @@ public class StatementController extends BaseController {
 			String orderId = fStatement.getOrderId();
 			FStatement exitFS = clearOrderService.findFStatByOrderId(orderId);
 			
+			HttpSession session = request.getSession();
+			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
 			if(exitFS==null){
 				try {
 					String statId=clearOrderService.addFStatement(fStatement);
 					message="结算单生成成功，"+
 					"单号<a href='/cOrder/showFS.htm?fsId="+statId+"'>"+statId+"</a>";
+					this.msgService.saveMsg(fStatement, sessionEntity.getId(),"");
+				} catch (BusinessException e) {
+					logger.error("消息生成失败："+"\n" + e.getMessage(), e);
 				} catch (Exception e) {
 					message="新增结算单失败,请联系管理员!";
 					logger.error(e.getMessage());
@@ -313,9 +319,6 @@ public class StatementController extends BaseController {
 			}else{
 				message ="该订单已生成结算单";
 			}
-			HttpSession session = request.getSession();
-			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
-			this.msgService.saveMsg(fStatement, sessionEntity.getId(),"");
 		}else if("E".equalsIgnoreCase(oper)){//修改操作
 			try{
 				fStatementService.editFStatement(fStatement);
