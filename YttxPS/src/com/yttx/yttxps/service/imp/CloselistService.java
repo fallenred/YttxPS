@@ -58,8 +58,8 @@ public class CloselistService implements ICloselistService {
 		closeList.setFsNo(orderList.getFsNo());
 		closeList.setFsOrderId(orderList.getFsNo());
 		closeList.setFsName(orderList.getFsName());
-		closeList.setFsUserId(orderList.getFsUserId() == null ? "201600000001" : orderList.getFsUserId());
-		closeList.setFsUserSubid(orderList.getFsUserSubid() == null ? "0001" : orderList.getFsUserSubid());
+		closeList.setFsUserId(orderList.getFsUserId() == null ? "201600000001" : orderList.getFsUserId());//待订单修改
+		closeList.setFsUserSubid(orderList.getFsUserSubid() == null ? "0001" : orderList.getFsUserSubid());//待订单修改
 		closeList.setFsOperId(orderList.getFsOperId() == null ? "" : orderList.getFsOperId());
 		closeList.setFtCreatdate(new Date());
 		closeList.setFdTotalfee(orderList.getFdTotalfee());
@@ -83,7 +83,7 @@ public class CloselistService implements ICloselistService {
 			bodyList.add(customRoot.getBody());
 		}
 		
-		dataTransfer(orderList.getFtStartdate(), orderList.getFdInsuerprice().toString(), bodyList, closeBody);
+		dataTransfer(orderList.getFtStartdate(), orderList.getFdInsuerprice(), bodyList, closeBody);
 		calculateTotalPrice(closeBody);
 		
 		com.yttx.yttxps.xml.bean.closeList.Root closeRoot = new com.yttx.yttxps.xml.bean.closeList.Root(closeBody);
@@ -93,7 +93,7 @@ public class CloselistService implements ICloselistService {
 		return null;
 	}
 	
-	protected void dataTransfer(Date startDate, String insurance, List<Body> bodyList, com.yttx.yttxps.xml.bean.closeList.Body closeBody) {
+	protected void dataTransfer(Date startDate, BigDecimal insurance, List<Body> bodyList, com.yttx.yttxps.xml.bean.closeList.Body closeBody) {
 		Restaurant restaurant = new Restaurant();
 		List<com.yttx.yttxps.xml.bean.closeList.Reslist> restReslist = new ArrayList<com.yttx.yttxps.xml.bean.closeList.Reslist>();
 		restaurant.setReslist(restReslist);
@@ -117,7 +117,8 @@ public class CloselistService implements ICloselistService {
 		com.yttx.yttxps.xml.bean.closeList.Reslist insuranceResList = new com.yttx.yttxps.xml.bean.closeList.Reslist();
 		insuranceResList.setTypeno(null);//待定字段
 		insuranceResList.setName("保险");
-		insuranceResList.setTotalprice(insurance);
+		insuranceResList.setTotalprice(insurance == null ? "0" : insurance.toString());//待订单修改
+		otherReslist.add(insuranceResList);
 		
 		for (Body body : bodyList) {
 			if(body.getReslist() != null && body.getReslist().size() > 0) {
@@ -168,7 +169,7 @@ public class CloselistService implements ICloselistService {
 						Cclist ctlist = reslist.getCclist().get(0);
 						ctResList.setResno(reslist.getResno());
 						ctResList.setName(reslist.getResname());
-						ctResList.setType("");//待定字段
+						ctResList.setType("");//待订单修改
 						ctResList.setTime(startDate.toString());
 						ctResList.setUnitprice(ctlist.getPrice().toString());
 						ctResList.setNumber(ctlist.getUsernum());
@@ -180,8 +181,8 @@ public class CloselistService implements ICloselistService {
 						Cclist bglist = reslist.getCclist().get(0);
 						bgResList.setAccomno(reslist.getResno());
 						bgResList.setName(reslist.getResname());
-						bgResList.setRoomtypeno(null);
-						bgResList.setRoomtype(null);
+						bgResList.setRoomtypeno(null);//待定字段
+						bgResList.setRoomtype(null);//待定字段
 						bgResList.setTime(startDate.toString());
 						bgResList.setUnitprice(bglist.getPrice().toString());
 						bgResList.setNumber(bglist.getUsernum());
