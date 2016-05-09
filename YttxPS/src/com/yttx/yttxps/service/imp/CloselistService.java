@@ -83,7 +83,7 @@ public class CloselistService implements ICloselistService {
 			bodyList.add(customRoot.getBody());
 		}
 		
-		dataTransfer(orderList.getFtStartdate(), bodyList, closeBody);
+		dataTransfer(orderList.getFtStartdate(), orderList.getFdInsuerprice().toString(), bodyList, closeBody);
 		calculateTotalPrice(closeBody);
 		
 		com.yttx.yttxps.xml.bean.closeList.Root closeRoot = new com.yttx.yttxps.xml.bean.closeList.Root(closeBody);
@@ -93,7 +93,7 @@ public class CloselistService implements ICloselistService {
 		return null;
 	}
 	
-	protected void dataTransfer(Date startDate, List<Body> bodyList, com.yttx.yttxps.xml.bean.closeList.Body closeBody) {
+	protected void dataTransfer(Date startDate, String insurance, List<Body> bodyList, com.yttx.yttxps.xml.bean.closeList.Body closeBody) {
 		Restaurant restaurant = new Restaurant();
 		List<com.yttx.yttxps.xml.bean.closeList.Reslist> restReslist = new ArrayList<com.yttx.yttxps.xml.bean.closeList.Reslist>();
 		restaurant.setReslist(restReslist);
@@ -114,6 +114,11 @@ public class CloselistService implements ICloselistService {
 		List<com.yttx.yttxps.xml.bean.closeList.Reslist> otherReslist = new ArrayList<com.yttx.yttxps.xml.bean.closeList.Reslist>();
 		other.setReslist(otherReslist);
 		
+		com.yttx.yttxps.xml.bean.closeList.Reslist insuranceResList = new com.yttx.yttxps.xml.bean.closeList.Reslist();
+		insuranceResList.setTypeno(null);//待定字段
+		insuranceResList.setName("保险");
+		insuranceResList.setTotalprice(insurance);
+		
 		for (Body body : bodyList) {
 			if(body.getReslist() != null && body.getReslist().size() > 0) {
 				for (Reslist reslist : body.getReslist()) {
@@ -130,7 +135,7 @@ public class CloselistService implements ICloselistService {
 					} else if(reslist.getRestype().equals("dy")) {   //导游
 						com.yttx.yttxps.xml.bean.closeList.Reslist dyResList = new com.yttx.yttxps.xml.bean.closeList.Reslist();
 						Cclist dylist = reslist.getCclist().get(0);
-						dyResList.setTypeno(null); //待定字段
+						dyResList.setTypeno(null);//待定字段
 						dyResList.setName(reslist.getResname());
 						dyResList.setUnitprice(dylist.getPrice().toString());
 						dyResList.setNumber(dylist.getUsernum());
@@ -163,7 +168,7 @@ public class CloselistService implements ICloselistService {
 						Cclist ctlist = reslist.getCclist().get(0);
 						ctResList.setResno(reslist.getResno());
 						ctResList.setName(reslist.getResname());
-						ctResList.setType(ctlist.getCcno());//待定字段
+						ctResList.setType("");//待定字段
 						ctResList.setTime(startDate.toString());
 						ctResList.setUnitprice(ctlist.getPrice().toString());
 						ctResList.setNumber(ctlist.getUsernum());
