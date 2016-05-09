@@ -143,9 +143,33 @@ public class FStatementService implements IFStatementService{
 	}
 
 	@Override
-	public void delShopReslist(String orderid, String resno) {
+	public Shop delShopReslist(String orderid, String resno) {
 		// TODO Auto-generated method stub
-		
+		FStatement fStatement = fStatementMapper.selectFSByOrderId(orderid);
+		if (fStatement == null) {
+			throw new BusinessException("购物信息删除失败");
+		}
+		Root root = ResScheduleXMLConverter.fromXml("www.yttx.co", fStatement.getOrderContent(), Root.class);
+		Shop shop = root.getBody().getIncomedetails().getShop();
+		List<Reslist> list = shop.getReslist();
+		if (CollectionUtils.isNotEmpty(list)) {
+			//遍历购物店reslist
+			Iterator<Reslist> it = list.iterator();
+			List<Reslist> reslists = new ArrayList<Reslist>();
+			BigDecimal total = BigDecimal.ZERO;
+			while(it.hasNext()){
+				Reslist reslist = it.next();
+				//如果resno不同，则添加到reslists中
+				if (!resno.equals(reslist.getResno())) {
+					reslists.add(reslist);
+					//计算总利润
+					total = total.add(new BigDecimal(reslist.getTotalprofit()).add(new BigDecimal(reslist.getPeopleprofit())));
+				}
+			}
+			shop.setTotal(total.toString());
+			shop.setReslist(reslists);
+		}
+		return shop;
 	}
 	
 }

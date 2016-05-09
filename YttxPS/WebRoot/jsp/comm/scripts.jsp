@@ -66,6 +66,7 @@
 <script src="/js/bus/pub.js"></script>
 <script src="/js/bus/pub.js"></script>
 <script src="/js/jquery.jgrowl.js"></script>
+<script src="/js/jquery.confirm.js"></script>
 <script type="text/javascript">
 /** 
  * 时间对象的格式化; 
