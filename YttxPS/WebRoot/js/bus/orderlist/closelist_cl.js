@@ -19,6 +19,8 @@ jQuery(function($) {
 				$(this).attr("class", "cl chosen-select");
 				$(this).chosen(); 
 				$(this).next().attr("style","width:160px;");
+				$(this).next().next().val($(this).find("option:selected").text());
+				$(".cl:last").next().next().val($(".cl:last").find("option:selected").text());
 			});
 			setClTotal();
 		}
@@ -94,6 +96,11 @@ jQuery(function($) {
 		setClTotal();
 	});
 	
+	//设置隐藏域
+	$(document).on('change key', '.cl', function(){
+		$(this).next().next().val($(this).find("option:selected").text());		
+	});
+	
 	//事件计算
 	$(document).on('change key','.clPrice',function(){
 		if(validate($(this))){
@@ -126,6 +133,7 @@ jQuery(function($) {
 		$(".cl:last").attr("class", "cl chosen-select");
 		$(".cl:last").chosen(); 
 		$(".cl:last").next().attr("style","width:160px;");
+		$(".cl:last").next().next().val($(".cl:last").find("option:selected").text());
 		setClSum($(".cl:last"));
 		setClTotal();
 		$("#cl_index").val(parseInt(index) + 1);

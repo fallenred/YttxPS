@@ -34,7 +34,9 @@
 			<tr class="width-13">
 				<td><select style="width:160px;text-align:center" class="jd" name="body.costdetails.accomadation.reslist[${status.index }].accomno"><option value="${reslist.accomno }">${reslist.name }</option></select>
 					<input type="hidden" name="body.costdetails.accomadation.reslist[${status.index }].name" value="${reslist.name }"/> </td>
-				<td><select style="width:140px;text-align:center"  class="jdType" name="body.costdetails.accomadation.reslist[${status.index }].roomtypeno"><option value="${reslist.roomtypeno }">${reslist.roomtype }</option></select>
+				<td><select style="width:140px;text-align:center"  class="jdType" name="body.costdetails.accomadation.reslist[${status.index }].roomtypeno">
+						<option value="${reslist.roomtypeno }">${reslist.roomtype }</option>
+					</select>
 					<input type="hidden" name="body.costdetails.accomadation.reslist[${status.index }].roomtype" value="${reslist.roomtype }" /></td>
 				<td><input type="text" value="${reslist.time }" class="form-control datetimepicker jdDate" data-date-format="yyyy-mm-dd" placeholder="入住日期" name="body.costdetails.accomadation.reslist[${status.index }].time"/></td>
 				<td><input type="text" value="${reslist.unitprice }" style="width:100%;text-align:center" class="jdPrice isFloatGteZero number" name="body.costdetails.accomadation.reslist[${status.index }].unitprice"></td>

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <div class="page-content">
 	<div class="row">
 		<div class="col-xs-12">
@@ -54,11 +55,11 @@
 							<h3 class="panel-title">成本明细</h3>
 						</div>
 						<div class="panel-body">
-							<%-- <jsp:include page="/jsp/orderlist/closelist_cl.jsp"></jsp:include><!-- 车辆 -->
+							<jsp:include page="/jsp/orderlist/closelist_cl.jsp"></jsp:include><!-- 车辆 -->
 							<jsp:include page="/jsp/orderlist/closelist_jd.jsp"></jsp:include><!-- 酒店 -->
-							<jsp:include page="/jsp/orderlist/closelist_cf.jsp"></jsp:include><!-- 餐费 -->
 							<jsp:include page="/jsp/orderlist/closelist_mp.jsp"></jsp:include><!-- 门票 -->
-							<jsp:include page="/jsp/orderlist/closelist_qtzc.jsp"></jsp:include><!-- 其他支出 --> --%>
+							<jsp:include page="/jsp/orderlist/closelist_cf.jsp"></jsp:include><!-- 餐费 -->
+							<%-- <jsp:include page="/jsp/orderlist/closelist_qtzc.jsp"></jsp:include><!-- 其他支出 --> --%>
 						</div>
 					</div>
 					<div class="panel panel-default">
@@ -67,8 +68,8 @@
 						</div>
 						<div class="panel-body">
 							<jsp:include page="/jsp/orderlist/closelist_gw.jsp" flush="true"></jsp:include><!-- 购物 -->
-							<%-- <jsp:include page="/jsp/orderlist/closelist_yl.jsp"></jsp:include><!-- 娱乐 -->
-							<jsp:include page="/jsp/orderlist/closelist_qtsr.jsp"></jsp:include><!-- 其他收入 --> --%>
+							<jsp:include page="/jsp/orderlist/closelist_yl.jsp"></jsp:include><!-- 娱乐 -->
+							<%-- <jsp:include page="/jsp/orderlist/closelist_qtsr.jsp"></jsp:include><!-- 其他收入 --> --%>
 						</div>
 					</div>
 

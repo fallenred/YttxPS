@@ -17,6 +17,8 @@ jQuery(function($) {
 				$(this).html(mpmap);
 				$(this).val(value);
 				getMpType($(this));
+				setTimeout('$(".mp:last").next().next().val($(".mp:last").find("option:selected").text());','1000');
+				setTimeout('$(".mpType:last").next().next().val($(".mpType:last").find("option:selected").text());','1000');
 				$(this).attr("class", "mp chosen-select");
 				//mp.chosen("destroy");
 				$(this).chosen(); 
@@ -48,7 +50,7 @@ jQuery(function($) {
 				}
 				mpTypeNode.val(value);
 				mpTypeNode.attr("class","mpType chosen-select");
-				mpTypeNode.chosen("destroy");
+				//mpTypeNode.chosen("destroy");
 				mpTypeNode.chosen();
 				mpTypeNode.next().attr("style","width:140px;");
 				
@@ -126,6 +128,14 @@ jQuery(function($) {
 		setMpTotal();
 	});
 	
+	//设置隐藏域
+	$(document).on('change key', '.mp', function(){
+		$(".mp:last").next().next().val($(".mp:last").find("option:selected").text());
+	});
+	$(document).on('change key', '.mpType', function(){
+		$(".mpType:last").next().next().val($(".mpType:last").find("option:selected").text());
+	});
+	
 	//事件计算
 	$(document).on('change key','.mpPrice',function(){
 		if(validate($(this))){
@@ -160,6 +170,8 @@ jQuery(function($) {
 		$(".mp:last").chosen(); 
 		$(".mp:last").next().attr("style","width:160px;");
 		getMpType($(".mp:last"));
+		$(".mp:last").next().next().val($(".mp:last").find("option:selected").text());
+		setTimeout('$(".mpType:last").next().next().val($(".mpType:last").find("option:selected").text());','1000');
 		setMpSum($(".mp:last"));
 		setMpTotal();
 		$("#mp_index").val(parseInt(index) + 1);

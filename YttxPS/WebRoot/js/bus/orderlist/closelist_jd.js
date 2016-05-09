@@ -28,6 +28,8 @@ jQuery(function($) {
 				$(this).chosen(); 
 				$(this).next().attr("style","width:160px;");
 				getRoom($(this));
+				$(this).next().next().val($(this).find("option:selected").text());
+				$(this).parent().next().find(".jdType").next().next().val($(this).parent().next().find(".jdType").find("option:selected").text());
 			});
 			setJdTotal();
 		}
@@ -58,10 +60,9 @@ jQuery(function($) {
 				}
 				roomNode.val(value);
 				roomNode.attr("class","jdType chosen-select");
-				roomNode.chosen("destroy");
+				//roomNode.chosen("destroy");
 				roomNode.chosen();
 				roomNode.next().attr("style","width:140px;");
-				
 			}
 		});
 	}
@@ -128,6 +129,14 @@ jQuery(function($) {
 		$("#jdTotal").val(jdTotal.toFixed(2));
 	}
 	
+	//设置隐藏域
+	$(document).on('change key', '.jd', function(){
+		$(this).next().next().val($(this).find("option:selected").text());
+	});
+	$(document).on('change key', '.jdType', function(){
+		$(this).next().next().val($(this).find("option:selected").text());
+	});
+	
 	//初始计算
 	$(document).on('ready',function(){
 		$(".jdSum").each(function(){
@@ -170,8 +179,9 @@ jQuery(function($) {
 		$(".jd:last").chosen(); 
 		$(".jd:last").next().attr("style","width:160px;");
 		getRoom($(".jd:last"));
+		setTimeout('$(".jdType:last").next().next().val($(".jdType:last").find("option:selected").text());', 1000 );
 		$(".jd:last").next().next().val($(".jd:last").find("option:selected").text());
-		$(".jdType:last").next().next().val($(".jdType:last").find("option:selected").text());
+		
 		setJdSum($(".jd:last"));
 		setJdTotal();
 		$("#jd_index").val(parseInt(index) + 1);

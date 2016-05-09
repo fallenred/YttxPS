@@ -29,6 +29,7 @@ jQuery(function($) {
 				$(this).attr("class", "cf chosen-select");
 				$(this).chosen(); 
 				$(this).next().attr("style","width:160px;");
+				$(this).next().next().val($(this).find("option:selected").text());
 				var typeNode = $(this).parent().next().find(".cfType");
 				var typeValue = typeNode.val();
 				typeNode.html(type);
