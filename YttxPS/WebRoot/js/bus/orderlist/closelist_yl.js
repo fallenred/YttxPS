@@ -108,20 +108,20 @@ jQuery(function($) {
 	});
 	
 	//事件计算
-	$(document).on('change key','.ylFee',function(){
+	$(document).on('change key','.ylFee,.ylCost',function(){
 		if($(this).val().trim() == '')$(this).val(0);
 		if(validate($(this))){
 			setYlProfit($(this));
 			setYlTotal();
 		}
 	});
-	$(document).on('change key','.ylCost',function(){
+/*	$(document).on('change key','.ylCost',function(){
 		if($(this).val().trim() == '')$(this).val(0);
 		if(validate($(this))){
 			setYlProfit($(this));
 			setYlTotal();
 		}
-	});
+	});*/
 	
 	//添加酒店
 	$(document).on('click', '#addYl', function(event){
