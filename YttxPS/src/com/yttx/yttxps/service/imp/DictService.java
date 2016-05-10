@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.yttx.yttxps.mapper.DictMapper;
 import com.yttx.yttxps.model.Dict;
 import com.yttx.yttxps.model.DictExample;
+import com.yttx.yttxps.model.DictKey;
 import com.yttx.yttxps.service.IDictService;
 
 
@@ -42,5 +43,10 @@ public class DictService implements IDictService {
 			map.put(dict.getFsDictname(), dict.getFsDictno());
 		}
 		return map;
+	}
+	
+	@Override
+	public List<DictKey> selectDictByParentNo(String parentNo) {
+		return dictMapper.selectByParentNo(parentNo);
 	}
 }

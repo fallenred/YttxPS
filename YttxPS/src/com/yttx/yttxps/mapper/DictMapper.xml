@@ -268,4 +268,11 @@
     where FS_DICTNO = #{fsDictno,jdbcType=VARCHAR}
       and FS_PARENTNO = #{fsParentno,jdbcType=VARCHAR}
   </update>
+  <!-- 通过ParentNo查询dict -->
+   <select id="selectByParentNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from TDICT
+    where FS_PARENTNO = #{fsParentno,jdbcType=VARCHAR}
+  </select>
 </mapper>

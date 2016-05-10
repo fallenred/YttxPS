@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.yttx.yttxps.model.Dict;
 import com.yttx.yttxps.model.DictExample;
+import com.yttx.yttxps.model.DictKey;
 
 
 public interface IDictService {
@@ -14,5 +15,7 @@ public interface IDictService {
 	Map<String, Object> selectDictMap(DictExample example);
 
 	Map<String, Object> selectDictMapName4key(DictExample example);
+
+	List<DictKey> selectDictByParentNo(String parentNo);
 }
 
