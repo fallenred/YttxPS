@@ -13,22 +13,22 @@
 	width:15%;
 }
 </style>
-<form id="clForm">
+<form id="form_cl">
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th colspan="6">车费</th>
-			</tr>
-			<tr class="width-15">
-				<th>车型</th>
-				<th>车型单价</th>
-				<th>辆数</th>
-				<th>小计</th>
-				<th>备注</th>
-				<th>操作</th>
+				<th colspan="6">车费</td>
 			</tr>
 		</thead>
 		<tbody class="cl_tbody">
+			<tr class="width-15">
+				<td>车型</td>
+				<td>车型单价</td>
+				<td>辆数</td>
+				<td>小计</td>
+				<td>备注</td>
+				<td>操作</td>
+			</tr>
 			<c:forEach items="${content.costdetails.car.reslist }"
 				var="reslist" varStatus="status">
 				<tr class="width-15">

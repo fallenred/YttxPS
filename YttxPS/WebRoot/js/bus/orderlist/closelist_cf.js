@@ -43,7 +43,7 @@ jQuery(function($) {
 		}
 	});
 	
-	//验证数字
+/*	//验证数字
 	function validate(node){
 		if(node.next().find('[class="validMsg"]')){
 			node.next().remove();
@@ -84,7 +84,7 @@ jQuery(function($) {
 		}
 		return true;
 	}
-	
+	*/
 	//计算小计
 	function setCfSum(children){
 		var node = children.parent().parent();
@@ -120,14 +120,14 @@ jQuery(function($) {
 	
 	//事件计算
 	$(document).on('change key','.cfPrice',function(){
-		if(validate($(this))){
+		if($(this).valid()){
 			setCfSum($(this));
 			setCfTotal();
 		}
 	});
 	$(document).on('change key','.cfCount',function(){
 		if($(this).val().trim() == '')$(this).val(1);
-		if(validate($(this))){
+		if($(this).valid()){
 			setCfSum($(this));
 			setCfTotal();
 		}

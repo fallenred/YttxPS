@@ -27,7 +27,7 @@
 		</thead>
 		<tbody id="tbody_reslist">
 			<tr>
-				<td />
+				<td/>
 				<td colspan="3">人头返佣</td>
 				<td colspan="2">购物明细</td>
 				<td colspan="2">返佣明细</td>
@@ -54,7 +54,7 @@
 					varStatus="cc_status">
 					<tr>
 						<c:if test="${cc_status.index == 0 }">
-							<td rowspan=${fn:length(reslist.cclist) }><a onClick="getShopInfo('/cOrder/getShopReslist.htm?orderid=${orderlist.fsNo }&resno=${reslist.resno }')">${reslist.name }</a></td>
+							<td rowspan=${fn:length(reslist.cclist) }><a onClick="getShopInfo('/cOrder/getShopReslist.htm?orderid=${order.no }&resno=${reslist.resno }')">${reslist.name }</a></td>
 						</c:if>
 						<c:if test="${cc_status.index == 0 }">
 							<td rowspan=${fn:length(reslist.cclist) }>${reslist.unitprice }</td>
@@ -83,7 +83,7 @@
 						</c:if>
 						<c:if test="${cc_status.index == 0 }">
 							<td rowspan=${fn:length(reslist.cclist) }><a
-								onClick="delShopConfirm('/cOrder/delShopReslist.htm?orderid=${orderlist.fsNo }&resno=${reslist.resno }')">删除</a></td>
+								onClick="delShopConfirm('/cOrder/delShopReslist.htm?orderid=${order.no }&resno=${reslist.resno }')">删除</a></td>
 						</c:if>
 					</tr>
 				</c:forEach>
@@ -148,16 +148,15 @@
 							<div class="col-sm-5">
 								<table>
 									<tr>
-										<td style="width: 60px;"><input type="text" id="people"
-											name="reslist[0].people"
+										<td style="width: 110px;"><input type="text" id="people" name="reslist[0].people"
 											class="form-control isFloatGteZero digits required peopleprofit"></td>
 										<td style="width: 50px; text-align: right;">单价</td>
-										<td style="width: 60px;"><input type="text"
+										<td style="width: 110px;"><input type="text"
 											id="unitprice" name="reslist[0].unitprice"
 											class="form-control isFloatGteZero digits required peopleprofit"
 											style="margin-left: 5px;" /></td>
 										<td style="width: 70px; text-align: right;">人头费</td>
-										<td style="width: 60px;"><input type="text"
+										<td style="width: 110px;"><input type="text"
 											name="reslist[0].peopleprofit" id="peopleprofit" value=""
 											readonly="readonly"
 											class="form-control isFloatGteZero digits required"
@@ -173,26 +172,28 @@
 								for="fsName">备注</label>
 							<div class="col-sm-8">
 								<input type="text" id="res_remark" name="reslist[0].remark"
-									class="form-control isFloatGteZero digits required width-600" />
+									class="form-control width-600" />
 							</div>
 						</div>
 					</div>
+					</form>
 					<hr>
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">购物项目</h3>
 						</div>
 						<div class="panel-body">
+							<form id="gw" class="form-horizontal">
 							<div class="row">
 								<div class="form-group">
 									<label class="col-sm-2 control-label no-padding-right"
-										for="fsName">项目</label>
+										for="typeno">项目</label>
 									<div class="col-sm-3">
 										<select id="typeno" class="width-240" style="height: 30px">
 										</select>
 									</div>
 									<label class="col-sm-2 control-label no-padding-right"
-										for="fsName">购物金额</label>
+										for="consumption">购物金额</label>
 									<div class="col-sm-3">
 										<input type="text" id="consumption"
 											class="form-control isFloatGteZero digits required width-240 profit" />
@@ -202,34 +203,36 @@
 							<div class="row">
 								<div class="form-group">
 									<label class="col-sm-2 control-label no-padding-right"
-										for="fsName">返佣比%</label>
+										for="proportion">返佣比%</label>
 									<div class="col-sm-3">
 										<input type="text" id="proportion"
 											class="form-control isFloatGteZero digits required width-240 profit" />
 									</div>
 									<label class="col-sm-2 control-label no-padding-right"
-										for="fsName">返佣金额</label>
+										for="profit">返佣金额</label>
 									<div class="col-sm-3">
 										<input type="text" id="profit" readonly="readonly"
-											class="form-control isFloatGteZero digits required width-240" />
+											class="form-control isFloatGteZero required width-240" />
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group">
 									<label class="col-sm-2 control-label no-padding-right"
-										for="fsName">项目备注</label>
+										for="cc_remark">项目备注</label>
 									<div class="col-sm-8">
 										<input type="text" id="cc_remark"
-											class="form-control isFloatGteZero digits required width-600" />
+											class="form-control width-600" />
 									</div>
 									<div class="col-sm-1">
 										<button type="button"
 											class="btn btn_cclist_add btn-sm btn-success">添加</button>
-										<input type="hidden" id="gwxm_index" value="0" />
 									</div>
 								</div>
 							</div>
+							</form>
+							<input type="hidden" id="gwxm_index" value="0" />
+							<form id="form_gwmx" class="form-horizontal">
 							<table class="table table-bordered">
 								<thead>
 									<tr>
@@ -255,6 +258,7 @@
 									</tr>
 								</tbody>
 							</table>
+							</form>
 						</div>
 					</div>
 					<div id="message_gw" class="alert alert-warning"></div>
@@ -265,7 +269,6 @@
 							class="btn btn-sm btn-primary">确定</button>
 						<input type="hidden" id="gw_index" value="0" />
 					</div>
-				</form>
 			</div>
 			<!-- /.modal-content -->
 		</div>
@@ -323,6 +326,7 @@
 					$("#res_remark").val(json.reslist.remark);//备注
 					$("#totalconsp").html(json.reslist.totalconsp);//打单总金额
 					$("#totalprofit").html(json.reslist.totalprofit);//打单总利润
+					$("#gw").find("input").val('');
 					var template = Handlebars.compile($("#tr-cclist").html());
 					$("#total_cclist").before(template(json.reslist));
 					$('#addModal').modal('show');
@@ -355,7 +359,7 @@
          <td>
 			<a style="cursor:pointer;" class="cclist_remove">删除</a>
 			<input name="reslist[{{@index}}].cclist[{{index}}].typeno" type="hidden" class="" value="{{typeno}}" placeholder="项目类型编号">
-			<input name="reslist[{{@index}}].cclist[{{index}}].typename" type="hidden" class="" value="{{typenname}}" placeholder="项目类型名">
+			<input name="reslist[{{@index}}].cclist[{{index}}].typename" type="hidden" class="" value="{{typename}}" placeholder="项目类型名">
 			<input name="reslist[{{@index}}].cclist[{{index}}].consumption" type="hidden" class="gw_consumption" value="{{consumption}}" placeholder="打单金额">
 			<input name="reslist[{{@index}}].cclist[{{index}}].proportion" type="hidden" class="" value="{{proportion}}" placeholder="返佣比例">
 			<input name="reslist[{{@index}}].cclist[{{index}}].profit" type="hidden" class="gw_profit" value="{{profit}}" placeholder="返佣金额">

@@ -12,23 +12,23 @@
 	width:14%;
 }
 </style>
-<form id="mpForm">
+<form id="form_mp">
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th colspan="7">门票</th>
-			</tr>
-			<tr class="width-14">
-				<th>门票名称</th>
-				<th>门票类型</th>
-				<th>门票单价</th>
-				<th>门票数量</th>
-				<th>小计</th>
-				<th>备注</th>
-				<th>操作</th>
+				<th colspan="7">门票</td>
 			</tr>
 		</thead>
 		<tbody>
+			<tr class="width-14">
+				<td>门票名称</td>
+				<td>门票类型</td>
+				<td>门票单价</td>
+				<td>门票数量</td>
+				<td>小计</td>
+				<td>备注</td>
+				<td>操作</td>
+			</tr>
 			<c:forEach items="${content.costdetails.ticket.reslist }"
 				var="reslist" varStatus="status">
 				<tr class="width-14">

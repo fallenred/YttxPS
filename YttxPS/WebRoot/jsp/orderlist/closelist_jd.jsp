@@ -12,24 +12,24 @@
 	width:13%;
 }
 </style>
-<form id="jdForm">
+<form id="form_jd">
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th colspan="8">房费</th>
-			</tr>
-			<tr class="width-13">
-				<th>酒店名称</th>
-				<th>房间类型</th>
-				<th>入住日期</th>
-				<th>房间单价</th>
-				<th>房间数量</th>
-				<th>小计</th>
-				<th>备注</th>
-				<th>操作</th>
+				<th colspan="8">房费</td>
 			</tr>
 		</thead>
 		<tbody class="jd_tbody">
+			<tr class="width-13">
+				<td>酒店名称</td>
+				<td>房间类型</td>
+				<td>入住日期</td>
+				<td>房间单价</td>
+				<td>房间数量</td>
+				<td>小计</td>
+				<td>备注</td>
+				<td>操作</td>
+			</tr>
 			<c:forEach items="${content.costdetails.accomadation.reslist }"
 				var="reslist" varStatus="status">
 				<tr class="width-13">

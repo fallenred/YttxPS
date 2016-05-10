@@ -28,7 +28,7 @@ jQuery(function($) {
 		}
 	});
 	
-	//数字验证
+/*	//数字验证
 	function validate(node){
 		if(node.next().find('[class="validMsg"]')){
 			node.next().remove();
@@ -68,7 +68,7 @@ jQuery(function($) {
 			}
 		}
 		return true;
-	}
+	}*/
 	
 	//设置娱乐利润
 	function setYlProfit(children){
@@ -99,7 +99,7 @@ jQuery(function($) {
 	});
 	$(document).on('change key', '.ylCount',function(){
 		$(this).val($(this).val().trim());
-		validate($(this));
+		$(this).valid();
 	});
 	
 	//隐藏域值设置
@@ -110,7 +110,7 @@ jQuery(function($) {
 	//事件计算
 	$(document).on('change key','.ylFee,.ylCost',function(){
 		if($(this).val().trim() == '')$(this).val(0);
-		if(validate($(this))){
+		if($(this).valid()){
 			setYlProfit($(this));
 			setYlTotal();
 		}

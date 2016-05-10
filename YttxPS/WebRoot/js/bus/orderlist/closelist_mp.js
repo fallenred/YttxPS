@@ -58,7 +58,7 @@ jQuery(function($) {
 		});
 	}
 	
-	//数字验证
+/*	//数字验证
 	function validate(node){
 		if(node.next().find('[class="validMsg"]')){
 			node.next().remove();
@@ -98,7 +98,7 @@ jQuery(function($) {
 			}
 		}
 		return true;
-	}
+	}*/
 	
 	//设置门票小计
 	function setMpSum(children){
@@ -138,14 +138,14 @@ jQuery(function($) {
 	
 	//事件计算
 	$(document).on('change key','.mpPrice',function(){
-		if(validate($(this))){
+		if($(this).valid()){
 			setMpSum($(this));
 			setMpTotal();
 		}
 	});
 	$(document).on('change key','.mpCount',function(){
 		if($(this).val().trim() == '')$(this).val(1);
-		if(validate($(this))){
+		if($(this).valid()){
 			setMpSum($(this));
 			setMpTotal();
 		}

@@ -13,24 +13,24 @@
 }
 
 </style>
-<form id="cfForm">
+<form id="form_cf">
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th colspan="8">餐费</th>
-			</tr>
-			<tr class="width-13">
-				<th>用餐时间</th>
-				<th>菜单名称</th>
-				<th>类别</th>
-				<th>单价</th>
-				<th>数量</th>
-				<th>小计</th>
-				<th>备注</th>
-				<th>操作</th>
+				<th colspan="8">餐费</td>
 			</tr>
 		</thead>
 		<tbody>
+			<tr class="width-13">
+				<td>用餐时间</td>
+				<td>菜单名称</td>
+				<td>类别</td>
+				<td>单价</td>
+				<td>数量</td>
+				<td>小计</td>
+				<td>备注</td>
+				<td>操作</td>
+			</tr>
 			<c:forEach items="${content.costdetails.restaurant.reslist }"
 				var="reslist" varStatus="status">
 				<tr class="width-13">

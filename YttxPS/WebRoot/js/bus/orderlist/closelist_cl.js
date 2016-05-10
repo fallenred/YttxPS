@@ -26,7 +26,7 @@ jQuery(function($) {
 		}
 	});
 	
-	//验证数字
+	/*//验证数字
 	function validate(node){
 		if(node.next().find('[class="validMsg"]')){
 			node.next().remove();
@@ -66,7 +66,7 @@ jQuery(function($) {
 			}
 		}
 		return true;
-	}
+	}*/
 	
 	//计算小计
 	function setClSum(children){
@@ -103,14 +103,14 @@ jQuery(function($) {
 	
 	//事件计算
 	$(document).on('change key','.clPrice',function(){
-		if(validate($(this))){
+		if($(this).valid()){
 			setClSum($(this));
 			setClTotal();
 		}
 	});
 	$(document).on('change key','.clCount',function(){
 		if($(this).val().trim() == '')$(this).val(1);
-		if(validate($(this))){
+		if($(this).valid()){
 			setClSum($(this));
 			setClTotal();
 		}

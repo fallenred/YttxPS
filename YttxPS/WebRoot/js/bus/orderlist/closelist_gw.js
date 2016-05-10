@@ -59,16 +59,16 @@ jQuery(function($) {
 	//打开模态框
 	$(document).on('click', '.btn_gw_add', function(event){
 		$(".tr_cclist").remove();
-		$("#gwxm_index").val(0);
-		$("#totalconsp").html(0);
-		$("#totalprofit").html(0);
+		$("#gw").find("input").val('');
+		$("#form_gw").find("input").val('');
 		$('#addModal').modal('show');
 	});
 
 	//新增购物项目
 	$(document).on('click', '.btn_cclist_add', function(event){
-		index = $("#gwxm_index").val();
-		var data = {"name" : $("#shop").find("option:selected").text(),cclist:[{
+		if($("#consumption").valid() && $("#proportion").valid()){
+			index = $("#gwxm_index").val();
+			var data = {"name" : $("#shop").find("option:selected").text(),cclist:[{
 				"typeno" : $("#typeno").val(),
 				"typename" : $("#typeno").find("option:selected").text(),
 				"consumption" : $("#consumption").val(),
@@ -76,12 +76,13 @@ jQuery(function($) {
 				"profit" : $("#profit").val(),
 				"remark" : $("#cc_remark").val(),
 				"index" : index
-		}]};
-		var template = Handlebars.compile($("#tr-cclist").html());
-		$("#total_cclist").before(template(data));
-		$("#gwxm_index").val(parseInt(index) + 1);
-		totalConsp();
-		totalProfit();
+			}]};
+			var template = Handlebars.compile($("#tr-cclist").html());
+			$("#total_cclist").before(template(data));
+			$("#gwxm_index").val(parseInt(index) + 1);
+			totalConsp();
+			totalProfit();
+		}
 	});
 	//删除购物项目
 	$(document).on('click', '.cclist_remove', function(event){
@@ -119,25 +120,26 @@ jQuery(function($) {
 
 	//购物信息提交
 	$("#submit_gw").on("click", function () {
-		$.post("/cOrder/addShopReslist.htm?orderid="+$("#fsNo").val(),
-				$("#form_gw").serialize(),
-				function(data){
-			var json = eval("("+data+")");
-			if(json.result == "ok") {
-				$("#message_gw").text("修改记录成功");
-				$("#message_gw").show();
-				$.each(json.shopInfo.reslist, function(index, comment){
-					
-				});
-				return true;
-			}
-			else {
-				$("#message_gw").text("修改记录失败:" + json.message );
-				$("#message_gw").show();
+		if ($("#form_gwmx").valid() && $("#form_gw").valid()) {
+			$.post("/cOrder/addShopReslist.htm?orderid="+$("#fsNo").val(),
+					$("#form_gw").serialize()+"&"+$("#form_gwmx").serialize(),
+					function(data){
+				var json = eval("("+data+")");
+				if(json.result == "ok") {
+					$("#message_gw").text("修改记录成功");
+					$("#message_gw").show();
+					var template = Handlebars.compile($("#tr-reslist").html());
+					$("#tbody_reslist").html(template(json.shopInfo));
+					return true;
+				}
+				else {
+					$("#message_gw").text("修改记录失败:" + json.message );
+					$("#message_gw").show();
+					return false;
+				}
 				return false;
-			}
-			return false;
-		});
+			});
+		}
 	});
 	
 });

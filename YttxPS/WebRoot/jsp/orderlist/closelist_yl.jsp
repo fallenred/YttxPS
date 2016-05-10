@@ -12,24 +12,24 @@
 	width:13%;
 }
 </style>
-<form id="ylForm">
+<form id="form_yl">
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th colspan="8">自费项目</th>
-			</tr>
-			<tr>
-				<th>自费项目</th>
-				<th>消费日期</th>
-				<th>参与人数</th>
-				<th>收取金额</th>
-				<th>成本</th>
-				<th>利润</th>
-				<th>备注</th>
-				<th>操作</th>
+				<th colspan="8">自费项目</td>
 			</tr>
 		</thead>
 		<tbody>
+			<tr>
+				<td>自费项目</td>
+				<td>消费日期</td>
+				<td>参与人数</td>
+				<td>收取金额</td>
+				<td>成本</td>
+				<td>利润</td>
+				<td>备注</td>
+				<td>操作</td>
+			</tr>
 			<c:forEach items="${content.incomedetails.entertainment.reslist }"
 				var="reslist" varStatus="status">
 				<tr class="width-13">

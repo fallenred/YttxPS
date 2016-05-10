@@ -67,7 +67,7 @@ jQuery(function($) {
 		});
 	}
 	
-	//数字验证
+/*	//数字验证
 	function validate(node){
 		if(node.next().find('[class="validMsg"]')){
 			node.next().remove();
@@ -107,7 +107,7 @@ jQuery(function($) {
 			}
 		}
 		return true;
-	}
+	}*/
 	
 	//设置酒店小计
 	function setJdSum(children){
@@ -147,14 +147,14 @@ jQuery(function($) {
 	
 	//事件计算
 	$(document).on('change key','.jdPrice',function(){
-		if(validate($(this))){
+		if($(this).valid()){
 			setJdSum($(this));
 			setJdTotal();
 		}
 	});
 	$(document).on('change key','.jdCount',function(){
 		if($(this).val().trim() == '')$(this).val(1);
-		if(validate($(this))){
+		if($(this).valid()){
 			setJdSum($(this));
 			setJdTotal();
 		}
