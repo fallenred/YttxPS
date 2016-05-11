@@ -15,6 +15,7 @@ import com.yttx.yttxps.comm.Constants.OrderStat;
 import com.yttx.yttxps.mapper.TOrderCustomMapper;
 import com.yttx.yttxps.mapper.TOrderlistMapper;
 import com.yttx.yttxps.mapper.TRemarksMapper;
+import com.yttx.yttxps.model.TCloselist;
 import com.yttx.yttxps.model.TOrderCustomWithBLOBs;
 import com.yttx.yttxps.model.TOrderlist;
 import com.yttx.yttxps.model.TOrderlistExample;
@@ -219,6 +220,10 @@ public class OrderlistService implements IOrderlistService {
 			record.setFdTotalfee(record.getFdPrice());
 		
 		if (OrderStat.AUDITED.getVal().compareTo(new BigDecimal(record.getFiStat())) == 0) {
+			TCloselist closeList = closelistService.selectByOrderId(record.getFsNo());
+			if(closeList != null) {
+				closelistService.delete(closeList.getFsNo());
+			}
 			closelistService.creatCloseList(record, orderCustomList);
 		}
 		

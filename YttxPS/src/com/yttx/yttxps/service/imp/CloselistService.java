@@ -69,7 +69,7 @@ public class CloselistService implements ICloselistService {
 		closeList.setFdPaidamt(orderList.getFdPaidamt());
 		closeList.setFdAmt(orderList.getFdTotalfee().subtract(orderList.getFdPaidamt()));
 		closeList.setFsRemark(orderList.getFsRemark());
-		closeList.setFiStat(new BigDecimal(-5));
+		closeList.setFiStat(new BigDecimal(-10));
 		
 		com.yttx.yttxps.xml.bean.closeList.Body closeBody = new com.yttx.yttxps.xml.bean.closeList.Body();
 		
@@ -241,6 +241,11 @@ public class CloselistService implements ICloselistService {
 		
 		BigDecimal totalPrice = otherTotalPrice.add(ticketTotalPrice).add(restTotalPrice).add(carTotalPrice).add(accoTotalPrice);
 		closeBody.setIncome(totalPrice.toString());
+	}
+	
+	@Override
+	public TCloselist selectByOrderId(String orderId) {
+		return closelistMapper.selectByPrimaryKey(orderId);
 	}
 	
 	@Override

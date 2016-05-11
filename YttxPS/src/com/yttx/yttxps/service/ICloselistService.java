@@ -33,5 +33,7 @@ public interface ICloselistService {
 	int delete(String no);
 
 	List<TCloselist> selectTOrderlist(TCloselistExample example);
+
+	TCloselist selectByOrderId(String orderId);
 	
 }
