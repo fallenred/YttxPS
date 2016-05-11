@@ -82,8 +82,8 @@
 								+ reslist.peopleprofit }</td>
 						</c:if>
 						<c:if test="${cc_status.index == 0 }">
-							<td rowspan=${fn:length(reslist.cclist) }><a
-								onClick="delShopConfirm('/cOrder/delShopReslist.htm?orderid=${order.no }&resno=${reslist.resno }')">删除</a></td>
+							<td rowspan=${fn:length(reslist.cclist) }>
+							<a class="remove_tr" onClick="delShopConfirm('/cOrder/delShopReslist.htm?orderid=${order.no }&resno=${reslist.resno }')">删除</a></td>
 						</c:if>
 					</tr>
 				</c:forEach>
@@ -92,7 +92,7 @@
 				<td>总计收入</td>
 				<td colspan="10" style="text-align: left;">
 					${content.incomedetails.shop.total }&nbsp;元</td>
-				<td><button class="btn btn-success btn-xs btn_gw_add"
+				<td><button id="btn_gw_add" class="btn btn-success btn-xs btn_add"
 						data-toggle="modal" type="button">新增</button></td>
 			</tr>
 		</tbody>

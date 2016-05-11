@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <script src="/js/chosen.jquery.min.js"></script>
 <script src="/js/bus/orderlist/closelist_yl.js"></script>
 <style>
@@ -41,27 +42,27 @@
 					<td><input type="text" value="${reslist.cost }" name="body.incomedetails.entertainment.reslist[${status.index }].cost" class="ylCost isFloatGteZero number input-text"></td>
 					<td><input type="text" value="${reslist.totalprofit }" readonly="readonly" name="body.incomedetails.entertainment.reslist[${status.index }].totalprofit" class="ylProfit input-text"></td>
 					<td><input type="text" value="${reslist.remark }" class="ylRemark input-text" name="body.incomedetails.entertainment.reslist[${status.index }].remark"></td>
-					<td><a style="cursor:pointer;" class="deleteYl">删除</a></td>
+					<td><a style="cursor:pointer;" class="deleteYl remove_tr">删除</a></td>
 				</tr>
 			</c:forEach>
 			<tr>
-				<td>总计<input type="hidden" id="yl_index" value="0"/></td>
-				<td colspan="6" style="text-align: left;"><input type="text" readonly="readonly" value="" style="width:100%;" name="body.incomedetails.entertainment.reslist[${status.index }].total" class="ylTotal" id="ylTotal"></td>
-				<td><button id="addYl" type="button" class="btn btn-success btn-xs">新增</button></td>
+				<td>总计<input type="hidden" id="yl_index" value="${fn:length(content.incomedetails.entertainment.reslist)}"/></td>
+				<td colspan="6" style="text-align: left;"><input type="text" readonly="readonly" value="" style="width:100%;" name="body.incomedetails.entertainment.total" class="ylTotal" id="ylTotal"></td>
+				<td><button id="addYl" type="button" class="btn btn-success btn-xs btn_add">新增</button></td>
 			</tr>
 		</tbody>
 	</table>
 </form>
 <script id="tr-yllist" type="text/x-handlebars-template">
 	<tr class="width-13">
-		<td><select style="width:150px;text-align:center" class="yl" name="body.incomedetails.entertainment.reslist[${status.index }].resno"></select>
-			<input type="hidden" name="body.incomedetails.entertainment.reslist[${status.index }].name" value="${reslist.name }"/> </td>
-		<td><input type="text" value="${reslist.time }" class="form-control datetimepicker ylDate" data-date-format="yyyy-mm-dd" placeholder="消费日期" name="body.incomedetails.entertainment.reslist[${status.index }].time"/></td>
-		<td><input type="text" value="{{ylConut}}" name="body.incomedetails.entertainment.reslist[${status.index }].people" class="ylCount isFloatGteZero digits input-text"></td>
-		<td><input type="text" value="{{ylFee}}" name="body.incomedetails.entertainment.reslist[${status.index }].consumption" class="ylFee isFloatGteZero number input-text"></td>
-		<td><input type="text" value="{{ylCost}}" name="body.incomedetails.entertainment.reslist[${status.index }].cost" class="ylCost isFloatGteZero number input-text"></td>
-		<td><input type="text" value="{{ylProfit}}" readonly="readonly" name="body.incomedetails.entertainment.reslist[${status.index }].totalprofit" class="ylProfit input-text"></td>
-		<td><input type="text" value="{{ylRemark}}" name="body.incomedetails.entertainment.reslist[${status.index }].remark" class="ylRemark input-text"></td>
+		<td><select style="width:150px;text-align:center" class="yl" name="body.incomedetails.entertainment.reslist[{{index}}].resno"></select>
+			<input type="hidden" name="body.incomedetails.entertainment.reslist[{{index}}].name" value="${reslist.name }"/> </td>
+		<td><input type="text" value="${reslist.time }" class="form-control datetimepicker ylDate" data-date-format="yyyy-mm-dd" placeholder="消费日期" name="body.incomedetails.entertainment.reslist[{{index}}].time"/></td>
+		<td><input type="text" value="{{ylConut}}" name="body.incomedetails.entertainment.reslist[{{index}}].people" class="ylCount isFloatGteZero digits input-text"></td>
+		<td><input type="text" value="{{ylFee}}" name="body.incomedetails.entertainment.reslist[{{index}}].consumption" class="ylFee isFloatGteZero number input-text"></td>
+		<td><input type="text" value="{{ylCost}}" name="body.incomedetails.entertainment.reslist[{{index}}].cost" class="ylCost isFloatGteZero number input-text"></td>
+		<td><input type="text" value="{{ylProfit}}" readonly="readonly" name="body.incomedetails.entertainment.reslist[{{index}}].totalprofit" class="ylProfit input-text"></td>
+		<td><input type="text" value="{{ylRemark}}" name="body.incomedetails.entertainment.reslist[{{index}}].remark" class="ylRemark input-text"></td>
 		<td><a style="cursor:pointer;" class="deleteYl">删除</a></td>
 	</tr>
 </script>

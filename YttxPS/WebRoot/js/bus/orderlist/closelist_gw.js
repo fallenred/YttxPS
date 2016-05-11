@@ -22,17 +22,29 @@ jQuery(function($) {
 			map.put("shop", html);
 		}
 	});
-	
+
+	//购物项目
+	$.ajax({
+		type: "GET",
+		url: "/dict/selectDict.htm",
+		data : {"dict.fsParentno" : "gw_xf"},
+		dataType: "json",
+		success: function(data){
+			var html = '';
+			$.each(data, function(commentIndex, comment){
+				html += '<option value='+ comment['fsDictno'] +'>'+ comment['fsDictname'] +'</option>';
+			});
+			$("#typeno").html(html);
+			$("#typeno").attr("class", "width-80 chosen-select form-control");
+			$("#typeno").chosen(); 
+			$("#typeno").next().attr("style","width:240px;");
+		}
+	});
+
 	//购物店变更事件
 	$(document).on('change key', '#shop', function(event){
 		$("#resno_gw").val($("#shop").find("option:selected").text());
 	});
-
-	//购物店项目
-	$("#typeno").html("<option value='0'>高原特产</option><option value='1'>藏红花</option><option value='1'>牛角梳</option>");
-	$("#typeno").attr("class", "width-80 chosen-select form-control");
-	$("#typeno").chosen(); 
-	$("#typeno").next().attr("style","width:240px;");
 
 	//计算人头费
 	$(document).on('change key', '.peopleprofit', function(event){
@@ -57,7 +69,7 @@ jQuery(function($) {
 	});
 
 	//打开模态框
-	$(document).on('click', '.btn_gw_add', function(event){
+	$(document).on('click', '#btn_gw_add', function(event){
 		$(".tr_cclist").remove();
 		$("#gw").find("input").val('');
 		$("#form_gw").find("input").val('');
@@ -90,7 +102,7 @@ jQuery(function($) {
 		totalConsp();
 		totalProfit();
 	});
-	
+
 	//合计打单金额
 	function totalConsp(){
 		var totalconsp = 0;
@@ -141,5 +153,5 @@ jQuery(function($) {
 			});
 		}
 	});
-	
+
 });

@@ -349,7 +349,7 @@
 																	<div class="form-group" style="padding: 10px;">
 																		<textarea name="fcRessnapshot" id="fcRessnapshot"
 																			class="form-control" rows="3"
-																			placeholder="为定制线路客户预估一个大致行程安排，通过此行程安排再预估一个价格"></textarea>
+																			placeholder="为定制线路客户预估一个大致行程安排，通过此行程安排再预估一个价格">${orderlist.fcRessnapshot }</textarea>
 																	</div>
 																</div>
 															</div>
@@ -941,10 +941,6 @@
 												class="btn btn-sm btn-primary">提交</button>
 										</div>
 									</form>
-								</div>
-								<div class="tab-pane fade" id="closelist">
-									<jsp:include page="/cOrder/showCloselist.htm?orderid=${orderlist.fsNo }" flush="true"/>
-									<%-- <jsp:include page="/jsp/orderlist/closelist.jsp" flush="true"/> --%>
 								</div>
 							</div>
 							<!-- PAGE CONTENT ENDS -->

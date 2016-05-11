@@ -43,8 +43,7 @@
 						</li>
 						<li>
 							<a href="javascript:void(0)">
-								<c:if test="${oper=='A' }">结算单预生成</c:if>
-								<c:if test="${oper=='E' }">结算单修改</c:if>
+								结算单详情
 							</a>
 						</li>
 					</ul>
@@ -58,7 +57,7 @@
 					</div>
 				</div>
 	
-				<!-- 右边页面的主页面 -->
+<%-- 				<!-- 右边页面的主页面 -->
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
@@ -233,7 +232,8 @@
 					</div>
 				</div>
 				<!-- 右边页面的主页面 -->
-			</div>
+ --%>		<jsp:include page="/cOrder/showCloselist.htm?orderid=${order.no }" flush="true" />	
+ 			</div>
 		</div>
 						
 		<!-- 模态框数据验证弹出框 -->

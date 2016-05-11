@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yttx.yttxps.model.corder.FStatement;
+import com.yttx.yttxps.xml.bean.closeList.Root;
 import com.yttx.yttxps.xml.bean.closeList.Shop;
 
 /**
@@ -64,7 +65,16 @@ public interface IFStatementService {
 	 * 删除购物店Reslist
 	 * @param orderid
 	 * @param resno
+	 * @throws Exception 
 	 */
-	Shop delShopReslist(String orderid, String resno);
+	Shop delShopReslist(String orderid, String resno) throws Exception;
 
+	/**
+	 * 保存结算单
+	 * @param root 协议
+	 * @param orderid 订单号
+	 * @param stat 状态
+	 * @throws Exception 
+	 */
+	void saveCloselist(Root root, String orderid, String stat) throws Exception;
 }

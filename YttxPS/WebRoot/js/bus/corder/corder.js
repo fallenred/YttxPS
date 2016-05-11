@@ -11,7 +11,7 @@ function showOrder(id){
  */
 function prodStatement(id){
 	var raw = jQuery("#order_table").jqGrid('getRowData', id);
-	window.location.href = "/cOrder/prodStat.htm?orderId=" + raw.no;
+	window.location.href = "/cOrder/prodStat.htm?orderId=" + raw.orderId+"&taname="+encodeURIComponent(raw.taname);
 }
 
 /*
@@ -24,8 +24,9 @@ function showFStatement(fsId){
 /*
  *生成结算单
  */
-function editFStatement(fsId){
-	window.location.href = "/cOrder/openEditFS.htm?fsId="+fsId;
+function editFStatement(id){
+	var raw = jQuery("#stat_table").jqGrid('getRowData', id);
+	window.location.href = "/cOrder/prodStat.htm?orderId=" + raw.orderId+"&taname="+encodeURIComponent(raw.taname);
 }
 
 
@@ -141,52 +142,52 @@ $(document).ready(function(){
 			});
 	
 	$(order_grid_selector).jqGrid({
-		url : "/cOrder/simplelist.htm",
-		postData : {"orderFilters.orderId":$("#order_id").val()},
+		url : "/cOrder/FSList.htm",
+		postData : {"fstatFilters.orderId":$("#statement_order_id").val(),
+					"fstatFilters.stat": '-10'},
 		datatype : "json",
 		mtype : 'POST',
 		height : 400,
 		colNames : ['订单编号','订单名称','用户ID','旅行社名称','创建时间','状态' ,'操作'],
 		colModel : [{
-			name : 'no',
-			index : 'no',
-			width : 140
-		}, {
-			name : 'name',
-			index : 'name',
-			width : 200,
+			name : 'orderId',
+			index : 'orderId',
+			width : 160,
 			sortable : false,
-		},
-		{
+		},{
+			name : 'statmentName',
+			index :'statmentName',
+			width : 300,
+			sortable : false,
+		},{
+			name : 'userID',
+			index : 'userID',
+			width : 140,
+			sortable : false,
+		},{
 			name : 'taname',
 			index : 'taname',
 			width : 100,
 			sortable : false,
-		},
-		{
-			name : 'userId',
-			index : 'userId',
-			width : 100,
-			sortable : false,
-		}, {
-			name : 'createDateDesc',
-			index : 'createDateDesc',
+		},{
+			name : 'creatDateDesc',
+			index : 'creatDateDesc',
 			width : 150,
 			sortable : false,
-		}, 
-		{
+		},{
 			name : 'stat',
 			index : 'stat',
-			width : 150,
+			width : 120,
 			sortable : false,
+			hidden : true,
 			formatter : function(v, opt, rec) {
-				return order_stat_item[v];
+				return fsmt_stat_item[v];
 			},
 			
 		},{
 			name : 'myaction',
 			index : '',
-			width : 100,
+			width : 50,
 			fixed : true,
 			sortable : false,
 			resize : false,
@@ -202,9 +203,9 @@ $(document).ready(function(){
 					'style="display: block; cursor: pointer; float: left;" '+
 					'onmouseover="jQuery(this).addClass(\'ui-state-hover\');" '+
 					'onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" '+
-					'onclick="prodStatement('+ opt.rowId+ ');" data-original-title="生成结算单">'+
-					'<span class="ui-icon ace-icon fa fa-cog red"></span></div>';
-				return rec.stat==32?detailBtn:detailBtn+clearBtn;
+					'onclick="prodStatement('+ opt.rowId+ ');" data-original-title="编辑结算单">'+
+					'<span class="ui-icon ui-icon-pencil"></span></div>';
+				return rec.stat==32?detailBtn:clearBtn;
 			}
 		}],
 		viewrecords : true,
@@ -300,7 +301,7 @@ $(document).ready(function(){
 		},{
 			name : 'statmentName',
 			index :'statmentName',
-			width : 300,
+			width : 350,
 			sortable : false,
 		},{
 			name : 'userID',
@@ -329,17 +330,17 @@ $(document).ready(function(){
 		},{
 			name : 'myaction',
 			index : '',
-			width : 120,
+			width : 50,
 			fixed : true,
 			sortable : false,
 			resize : false,
 			formatter : function(v, opt, rec){
-				var detailBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="showFStatement(\''
-					+ rec.statmentId
-					+ '\');" data-original-title="查看"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
+				var detailBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="detailButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editFStatement(\''
+					+ opt.rowId
+					+ '\');;" data-original-title="查看"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div>';
 
 				var editBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="editButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="editFStatement(\''
-					+ rec.statmentId
+					+ opt.rowId
 					+ '\');" data-original-title="修改"><span class="ui-icon ui-icon-pencil"></span></div>';
 				
 				var closeBtn = '<div title="" class="ui-pg-div ui-inline-edit" id="closeButton" style="display: block; cursor: pointer; float: left;" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onclick="closeFStatement(\''
@@ -348,9 +349,9 @@ $(document).ready(function(){
 				
 				var retContent = null;
 				if(rec.stat == 0){   //当结算单状态为0的时候，只能查看
-					var retContent = detailBtn + "&nbsp; &nbsp; &nbsp;" + editBtn;
+					var retContent = editBtn;
 				}else if(rec.stat == 1){
-					var retContent = detailBtn + "&nbsp; &nbsp; &nbsp;" + closeBtn;
+					var retContent = closeBtn;
 				}else{
 					var retContent = detailBtn;
 				}

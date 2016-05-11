@@ -25,6 +25,9 @@ public class DetailOrder extends SimpleOrder{
 	
 	//游客信息
 	private List<Tourist> tourists;
+	
+	//其他信息
+	private Map<String, Object> map;
 
 	public Map<String, List<Map<String, Object>>> getResMap() {
 		return SnapshotUtil.parseCommRes(commResSnapshot);
@@ -64,5 +67,13 @@ public class DetailOrder extends SimpleOrder{
 
 	public void setTourists(List<Tourist> tourists) {
 		this.tourists = tourists;
+	}
+
+	public Map<String, Object> getMap() {
+		return map;
+	}
+
+	public void setMap(Map<String, Object> map) {
+		this.map = map;
 	}
 }

@@ -28,13 +28,13 @@ public class DictController {
 	private IDictService dictService;
 
 	/**
-	 * 获取导游列表
+	 * 根据父节点查询字典项
 	 * @param req
 	 * @return
 	 */
 	@RequestMapping(value="selectDict.htm", method = RequestMethod.GET)
 	@ResponseBody
-	public Object ajaxSelectGuide(DictRequest req) {  
+	public Object ajaxSelectDict(DictRequest req) {  
 		DictExample example = new DictExample();
 		req.copyExample(example);
 		List<Dict> list = dictService.selectDict(example);

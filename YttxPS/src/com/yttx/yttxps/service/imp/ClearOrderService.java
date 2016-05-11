@@ -1,5 +1,6 @@
 package com.yttx.yttxps.service.imp;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yttx.yttxps.mapper.ClearOrderMapper;
+import com.yttx.yttxps.mapper.CustomOperMapper;
 import com.yttx.yttxps.mapper.FStatementMapper;
+import com.yttx.yttxps.model.CustomOper;
+import com.yttx.yttxps.model.CustomOperKey;
 import com.yttx.yttxps.model.corder.DetailOrder;
 import com.yttx.yttxps.model.corder.FStatement;
 import com.yttx.yttxps.model.corder.SimpleOrder;
@@ -31,6 +35,9 @@ public class ClearOrderService implements IClearOrderService{
 	@Autowired
 	private FStatementMapper< FStatement>  fStatementMapper;
 	
+	@Autowired
+	private CustomOperMapper customOper;
+	
 	/**
 	 * 分页查询简单订单列表
 	 */
@@ -44,7 +51,15 @@ public class ClearOrderService implements IClearOrderService{
 	 */
 	@Override
 	public DetailOrder findOrderDetail(String orderId) {
-		return clearOrderMapper.findOrderDetail(orderId);
+		DetailOrder order = clearOrderMapper.findOrderDetail(orderId);
+		CustomOperKey key = new CustomOperKey();
+		key.setId(order.getUserId());
+		key.setSubid(order.getUserSubId());
+		CustomOper customOper = this.customOper.selectByPrimaryKey(key);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("subName", customOper.getName());
+		order.setMap(map);
+		return order;
 	}
 
 	/**

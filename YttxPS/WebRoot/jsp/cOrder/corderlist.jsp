@@ -108,7 +108,7 @@
 															<div class="col-sm-4">
 																<select id="order_route_type" class="col-xs-10 col-sm-10">
 																	<option value="" selected>请选择线路类型...</option>
-																	<option value="02">衍生线路</option>
+																	<option value="02">专家线路</option>
 																	<option value="03">定制线路</option>
 																</select>
 															</div>

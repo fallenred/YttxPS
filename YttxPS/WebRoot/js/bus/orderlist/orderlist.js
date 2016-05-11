@@ -443,7 +443,14 @@ jQuery(function($) {
 					index : 'ftCreatdate',
 					width : 50,
 					editable : true,
-					sorttype : "date"
+					sorttype : "date",
+					formatter : function(value){
+						var timestamp = "";
+						if(value != ''){//rData[7]表示日期列
+							timestamp = (new Date(parseFloat(value))).format("yyyy/MM/dd hh:mm:ss");
+						}
+						return timestamp;
+					}
 				}, {
 					name : 'fsType',
 					index : 'fsType',

@@ -1,5 +1,6 @@
 package com.yttx.yttxps.web.action.cOrder;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yttx.comm.StringUtil;
 import com.yttx.except.BusinessException;
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
@@ -28,7 +28,6 @@ import com.yttx.yttxps.model.OrderFilters;
 import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.corder.DetailOrder;
 import com.yttx.yttxps.model.corder.FStatement;
-import com.yttx.yttxps.model.corder.ORemark;
 import com.yttx.yttxps.model.corder.SimpleOrder;
 import com.yttx.yttxps.model.vo.FStatementPageRequest;
 import com.yttx.yttxps.model.vo.OrderPageRequest;
@@ -37,6 +36,7 @@ import com.yttx.yttxps.service.IFStatementService;
 import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
+import com.yttx.yttxps.xml.bean.closeList.Body;
 import com.yttx.yttxps.xml.bean.closeList.Reslist;
 import com.yttx.yttxps.xml.bean.closeList.Root;
 import com.yttx.yttxps.xml.bean.closeList.Shop;
@@ -94,7 +94,7 @@ public class StatementController extends BaseController {
 	 * 打开结算单页面
 	 */
 	@RequestMapping(value="showCloselist.htm")
-	public String openOrderPage(Model model, String orderid){
+	public String openCloselist(Model model, String orderid){
 		FStatement fStatement = fStatementService.findFStatByOrderid(orderid);
 		try{
 			Root root = ResScheduleXMLConverter.fromXml("www.yttx.co", fStatement.getOrderContent(), Root.class);
@@ -105,6 +105,24 @@ public class StatementController extends BaseController {
 		}
 		model.addAttribute("fStatement",fStatement);
 		return "orderlist/closelist";
+	}
+	
+	/**
+	 * 保存结算单
+	 * @param orderid
+	 * @param root
+	 * @param stat
+	 * @return
+	 */
+	@RequestMapping(value="saveCloselist.htm")
+	@ResponseBody
+	public Object saveCloselist(String orderid, Root root, String stat){
+		try{
+			this.fStatementService.saveCloselist(root, orderid, stat);
+		}catch(Exception e){
+			return JsonResult.jsonError(e.getMessage());
+		}
+		return JsonResult.jsonOk();
 	}
 	
 	/**
@@ -145,6 +163,7 @@ public class StatementController extends BaseController {
 				}
 			}
 		}catch(Exception e){
+			logger.error("查询购物信息错误", e);
 			return JsonResult.jsonError(e.getMessage());
 		}
 		return result;
@@ -226,50 +245,18 @@ public class StatementController extends BaseController {
 	
 	/**
 	 * 打开生成结算单页面
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value="prodStat.htm")
-	public String openProdFStatPage(@RequestParam("orderId") String orderId,
-			Model model)
-	{
-		
-		Map<String, String> zy_map = getDictMapByParentNo("zy");
-		model.addAttribute("zy_map", zy_map);
-		
-		//订单的详细信息
-		DetailOrder dOrder = clearOrderService.findOrderDetail(orderId);
-		
-		//生成结算单对象
-		FStatement fs = new FStatement();
-		String routeId =dOrder.getRouteId();
-		fs.setRouteID(routeId);//设置线路ID
-		
-		if(!StringUtil.nullOrBlank(routeId)){
-			String routeName = clearOrderService.findRouteName(routeId.trim());
-			fs.setRouteName(routeName);//线路名称
-		}
-		fs.setStatmentName(dOrder.getName());//结算单名称
-		fs.setOrderId(dOrder.getNo());//	订单ID
-		fs.setUserID(dOrder.getUserId());
-		fs.setUserSubID(dOrder.getUserSubId());
-		fs.setOrderTotolFee(dOrder.getTotalFee());
-		
-		List<ORemark> remarks =dOrder.getRemarks();
-		BigDecimal remarkAmt =new BigDecimal(0);
-		BigDecimal remarkPaidAmt = new BigDecimal(0);
-		if(remarks!=null){
-			for(ORemark remark:remarks){
-				remarkAmt=add(remarkAmt,remark.getAmt());
-				remarkPaidAmt = add(remarkPaidAmt, remark.getPaidAmt());
-			}
-		}
-		fs.setRemarksAmt(remarkAmt);
-		fs.setTotalFee(add(dOrder.getTotalFee(),remarkAmt));
-		fs.setPaidAmt(add(dOrder.getPaidAmt(), remarkPaidAmt));
-		fs.setAmt(add(fs.getTotalFee(),fs.getPaidAmt().negate()));
-		model.addAttribute("oper", "A");
-		model.addAttribute("order", dOrder);
-		model.addAttribute("fStat",fs);
-		return "cOrder/preStatment";	//返回欲生成结算单页面
+	public String openProdFStatPage(String taname, String orderId, Model model) throws UnsupportedEncodingException {
+		DetailOrder detailOrder = this.clearOrderService.findOrderDetail(orderId);
+		com.yttx.yttxps.xml.bean.Root root = ResScheduleXMLConverter.fromXml("www.yttx.co", detailOrder.getSchedule(), com.yttx.yttxps.xml.bean.Root.class);
+		model.addAttribute("adult", root.getBody().getAdult());//成人
+		model.addAttribute("children", root.getBody().getChildren());//儿童
+		model.addAttribute("fullguide", root.getBody().getFullguide());//全陪
+		model.addAttribute("order", detailOrder);	//订单详情
+		model.addAttribute("taname", new String(taname.getBytes("ISO-8859-1"),"utf-8"));
+		return "cOrder/preStatment";				//返回欲生成结算单页面
 	}
 	
 	/**
