@@ -219,12 +219,14 @@ public class OrderlistService implements IOrderlistService {
 		if("-5".equals(record.getFiStat()))
 			record.setFdTotalfee(record.getFdPrice());
 		
+		TCloselist closeList = closelistService.selectByOrderId(record.getFsNo());
 		if (OrderStat.AUDITED.getVal().compareTo(new BigDecimal(record.getFiStat())) == 0) {
-			TCloselist closeList = closelistService.selectByOrderId(record.getFsNo());
-			if(closeList != null) {
+			if(closeList != null && closeList.getFiStat().compareTo(new BigDecimal("-10")) == 0) {
 				closelistService.delete(closeList.getFsNo());
+				closelistService.creatCloseList(record, orderCustomList);
+			} else if(closeList == null) {
+				closelistService.creatCloseList(record, orderCustomList);
 			}
-			closelistService.creatCloseList(record, orderCustomList);
 		}
 		
 		return orderlistMapper.updateByPrimaryKeySelective(record);
