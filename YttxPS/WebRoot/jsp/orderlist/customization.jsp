@@ -134,11 +134,14 @@
 												<label class="col-sm-3 control-label no-padding-right"
 													for="fiVisitornum">游客人数</label>
 												<div class="col-sm-3">
-													<input type="text" id="fiVisitornum"
+													<input type="text" id="fiVisitornum" name="fiVisitornum"
 														value="${orderlist.fiVisitornum }"
 														class="form-control isFloatGteZero digits"
 														placeholder="游客人数" />
 												</div>
+												<input type="hidden" name="fsUserId" value="${orderlist.fsUserId }"></input>
+												<input type="hidden" name="fsUserSubid" value="${orderlist.fsUserSubid }"></input>
+												<input type="hidden" name="fsOperId" value="${orderlist.fsOperId }"></input>
 											</div>
 										</div>
 										<div class="row">
@@ -196,8 +199,7 @@
 														class="form-control">
 														<c:forEach items="${dicts}" varStatus="i" var="item">
 															<c:if test="${item.fsDictno == orderlist.fiStat}">
-																<option value="${orderlist.fiStat }">${item.fsDictname
-																	}</option>
+																<option value="${orderlist.fiStat }">${item.fsDictname}</option>
 															</c:if>
 														</c:forEach>
 													</select>

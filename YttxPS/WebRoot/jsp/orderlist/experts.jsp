@@ -174,7 +174,11 @@
 											<label class="col-sm-2 control-label no-padding-right"
 												for="insurenum">保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;险</label>
 											<div class="col-sm-3">
-												<input type="text" id="insurenum" value="${orderlist.fiVisitornum }" class="form-control isFloatGteZero digits">
+												<input type="text" id="insurenum" name="fiVisitornum" value="${orderlist.fiVisitornum }" class="form-control isFloatGteZero digits">
+												<input type="hidden" name="fsUserId" value="${orderlist.fsUserId }"></input>
+												<input type="hidden" name="fsUserSubid" value="${orderlist.fsUserSubid }"></input>
+												<input type="hidden" name="fsOperId" value="${orderlist.fsOperId }"></input>
+												
 											</div>
 											<label class="col-sm-3 control-label no-padding-right"
 												for="fdInsuerprice">保险费用</label>
