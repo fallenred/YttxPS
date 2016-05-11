@@ -182,8 +182,10 @@
 								<div class="modal-footer">
 									<button onclick="history.go(-1)" type="button" class="btn btn-sm btn-default"
 										data-dismiss="modal">返回</button>
-									<button id="orderConfir_submit" type="button"
-										class="btn btn-sm btn-primary">确认支付</button>
+										<c:if test="${order.stat == 6 }">
+											<button id="orderConfir_submit" type="button"
+												class="btn btn-sm btn-primary">确认支付</button>
+										</c:if>
 								</div>
 							</form>
 							<!-- PAGE CONTENT ENDS -->

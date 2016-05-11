@@ -937,8 +937,10 @@
 										<div class="modal-footer">
 											<button onclick="history.go(-1)" type="button"
 												class="btn btn-sm btn-default" data-dismiss="modal">返回</button>
-											<button id="submit" type="button"
-												class="btn btn-sm btn-primary">提交</button>
+											<c:if test="${orderlist.fiStat != -100 && orderlist.fiStat != 32 }">
+												<button id="submit" type="button"
+													class="btn btn-sm btn-primary">提交</button>
+											</c:if>
 										</div>
 									</form>
 								</div>

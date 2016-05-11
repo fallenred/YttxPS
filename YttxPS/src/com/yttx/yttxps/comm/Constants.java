@@ -85,6 +85,8 @@ public class Constants {
 		ORDER_MODIFY {public String getVal(){return "2090";}},
 		/** 出团 */
 		TOURS {public String getVal(){return "2052";}},
+		/** 订单线下支付确认 */
+		ORDER_CONFIRM {public String getVal(){return "2053";}},
 		/** 订单备注 */
 		ORDER_REMARK {public String getVal(){return "2060";}},
 		/** 结算单 */

@@ -140,7 +140,10 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 	 * 打开订单编辑页面
 	 */
 	@RequestMapping(value="showOrder.htm")
-	public String openOrderPage(Model model, String pageName, String fsNo){
+	public String openOrderPage(Model model, String pageName, String fsNo, String msgid){
+		if(StringUtils.isNoneEmpty(msgid)){
+			msgService.readMsg(msgid);
+		}
 		TOrderlist orderlist = this.orderlistService.selectByPrimaryKey(fsNo);
 		DictExample example = new DictExample();
 		com.yttx.yttxps.model.DictExample.Criteria criteria = example.createCriteria();

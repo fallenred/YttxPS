@@ -29,12 +29,15 @@ import com.yttx.yttxps.mapper.CustomOperMapper;
 import com.yttx.yttxps.mapper.FStatementMapper;
 import com.yttx.yttxps.mapper.MessageAuthMapper;
 import com.yttx.yttxps.mapper.MessageMapper;
+import com.yttx.yttxps.mapper.SysOperMapper;
 import com.yttx.yttxps.mapper.TOrderlistMapper;
 import com.yttx.yttxps.model.CustomInfo;
 import com.yttx.yttxps.model.CustomOper;
 import com.yttx.yttxps.model.CustomOperExample;
 import com.yttx.yttxps.model.Message;
 import com.yttx.yttxps.model.MessageAuth;
+import com.yttx.yttxps.model.SysOper;
+import com.yttx.yttxps.model.SysOperExample;
 import com.yttx.yttxps.model.TOrderlist;
 import com.yttx.yttxps.model.TRemarks;
 import com.yttx.yttxps.model.corder.FStatement;
@@ -64,6 +67,8 @@ public class MsgService implements IMsgService {
 	private MessageAuthMapper authMapper;
 	@Autowired
 	private CustomOperMapper operMapper;
+	@Autowired
+	private SysOperMapper sysOperMapper;
 	@Autowired
 	private CustomInfoMapper infoMapper;
 	@Autowired
@@ -95,6 +100,7 @@ public class MsgService implements IMsgService {
 		String subid = "";	//子客户id
 		Map<String, Object> tempParam = new HashMap<String, Object>();
 		List<Message> msgList = null;
+		List<Message> list = null;
 		//会员审核
 		if (obj instanceof CustomInfo) {
 			CustomInfo customInfo = (CustomInfo)obj;
@@ -134,7 +140,21 @@ public class MsgService implements IMsgService {
 					tempParam.put("orderAmt", orderlist.getFdTotalfee());
 					tempParam.put("startDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(orderlist.getFtStartdate()));
 					tempParam.put("visitorNum", orderlist.getFiVisitornum());
+					if("02".equals(orderlist.getFsType())){
+						tempParam.put("type", "experts");
+					} else if ("03".equals(orderlist.getFsType())){
+						tempParam.put("type", "customization");
+					}
+					String fsOperId = orderlist.getFsOperId();
+					System.out.println(String.format("%-16s",fsOperId).length());
+					System.out.println("-"+String.format("%-16s",fsOperId)+"-");
+					SysOper selectByPrimaryKey = this.sysOperMapper.selectByPrimaryKey(String.format("%-16s",fsOperId));
+					System.out.println(selectByPrimaryKey == null);
+					Long depNo = selectByPrimaryKey.getDepNo();
+					list = this.getMessage4Auth2(MsgTemp.ORDER_CONFIRM.getVal(), sendid, depNo.toString(), orderlist.getFsOperId(), tempParam);
+					System.out.println(list == null);
 					break;
+					
 				case -5://报价
 				case 1: //已审核
 				case 8: //已付全款
@@ -169,12 +189,128 @@ public class MsgService implements IMsgService {
 					tempid = MsgTemp.STATEMENT_CONFIRM.getVal();
 					tempParam.put("orderID", statement.getOrderId());
 					tempParam.put("closeID", statement.getStatmentId());
+					
 				default:
 					break;
 			}
 		}
 		msgList = this.getMessage4Auth(tempid, sendid, custid, subid, tempParam);
+		if(list != null){
+			msgList.addAll(list);
+		}
 		return msgList;
+	}
+	
+	/**
+	 * 根据消息模板权限获取需要发送的消息提醒集合
+	 * @param tempid 模板id
+	 * @param operid 操作员id
+	 * @param recDepNo 接收部门id
+	 * @param recOprId 接收子id
+	 * @param tempParam 模板参数
+	 * @return
+	 */
+	private List<Message> getMessage4Auth2(String tempid, String operid, String recDepNo, String recOperId, Map<String, Object> tempParam){
+		List<SysOper> list = null;
+		//查询消息模板权限表
+		MessageAuth messageAuth = authMapper.selectByPrimaryKey(tempid);
+		if (messageAuth != null && BigDecimal.ONE.compareTo(messageAuth.getStat()) == 0) {
+			String temp = messageAuth.getMsgTemp();//消息模板
+			if (StringUtils.isBlank(temp)) {
+				String resMsg = "消息模板内容为空";
+				logger.error(String.format("[errMsg] retMsg-%1$s，tempid-%2$s", resMsg, messageAuth.getId()));
+				throw new BusinessException(resMsg);
+			}
+			String receive = messageAuth.getReceiveConf();//消息接收者
+			if(StringUtils.isEmpty(receive)) return null;
+			JSONArray jsonArr = JSONArray.fromObject(receive);
+			JSONObject json = jsonArr.getJSONObject(0);
+			int recRole = Integer.valueOf(json.getString("recRole"));//消息接收角色
+			SysOperExample operExample = new SysOperExample();
+			com.yttx.yttxps.model.SysOperExample.Criteria criteria = operExample.createCriteria();
+			if (RecRole.CANCEL.getVal() == recRole) {//不发送消息提醒
+				return null;
+			} else if (RecRole.ALL.getVal() == recRole){//发送给所有人
+				if (StringUtils.isBlank(recDepNo)) {
+					String resMsg = "消息提醒-查询消息接收部门失败";
+					logger.error(String.format("[errMsg] retMsg-%1$s，recRole-%2$s, recDepNo-%3$s", resMsg, recRole, recDepNo));
+					throw new BusinessException(resMsg);
+				}
+				criteria.andDepNoEqualTo(new BigDecimal(recDepNo));
+				list = this.sysOperMapper.selectByExample(operExample);
+			} else if (RecRole.DIRECTOR.getVal() == recRole){//发送给主管
+				if (StringUtils.isBlank(recDepNo)) {
+					String resMsg = "消息提醒-查询消息接收部门失败";
+					logger.error(String.format("[errMsg] retMsg-%1$s，recRole-%2$s, recDepNo-%3$s", resMsg, recRole, recDepNo));
+					throw new BusinessException(resMsg);
+				}
+				criteria.andDepNoEqualTo(new BigDecimal(recDepNo));
+				criteria.andAdminTypeEqualTo(new BigDecimal(2));
+				list = this.sysOperMapper.selectByExample(operExample);
+			} else if (RecRole.OPERATOR.getVal() == recRole){//发送给下单员
+				if (StringUtils.isBlank(recDepNo) || StringUtils.isBlank(recOperId)) {
+					String resMsg = "消息提醒-查询接单计调人员失败，部门号为空";
+					logger.error(String.format("[errMsg] retMsg-%1$s，recRole-%2$s, recDepNo-%3$s, recOperId-%4$s", resMsg, recRole, recDepNo, recOperId));
+					throw new BusinessException(resMsg);
+				}
+				criteria.andSysOperIdEqualTo(recOperId);
+				list = new  ArrayList<SysOper>();
+				list.add(this.sysOperMapper.selectByPrimaryKey(String.format("%-16s", recOperId)));
+			} else if (RecRole.MIXED.getVal() == recRole){//发送给主管及接单人员(后台)或用户管理员及下单人员(前台)
+				if(StringUtils.isBlank(recDepNo) || StringUtils.isBlank(recOperId)) {
+					String resMsg = "消息提醒-查询接单计调人员失败，部门号为空";
+					logger.error(String.format("[errMsg] retMsg-%1$s，recRole-%2$s,recDepNo-%3$s, recOperId-%4$s", resMsg, recRole, recDepNo, recOperId));
+					throw new BusinessException(resMsg);
+				}
+				criteria.andDepNoEqualTo(new BigDecimal(recDepNo));
+				criteria.andAdminTypeEqualTo(new BigDecimal(2));
+				list = this.sysOperMapper.selectByExample(operExample);
+				if(!"2".equals(this.sysOperMapper.selectByPrimaryKey(recOperId).getAdminType().toString())){
+					SysOperExample sysOperExample1 = new SysOperExample();
+					sysOperExample1.createCriteria().andSysOperIdEqualTo(recOperId);
+					list.addAll(this.sysOperMapper.selectByExample(sysOperExample1));
+				}
+			}
+			if (CollectionUtils.isNotEmpty(list)) {
+				List<Message> msgList = new ArrayList<Message>();
+				//将消息模板转为具体消息内容
+		        try {
+			        for (SysOper oper : list) {
+			        	StringWriter writer = new StringWriter();
+			        	Configuration cfg = new Configuration();
+			        	StringTemplateLoader stringLoader = new StringTemplateLoader();
+			        	String templateContent = temp;
+			        	stringLoader.putTemplate("mytemplate",templateContent);
+			        	cfg.setTemplateLoader(stringLoader);
+			            cfg.setDefaultEncoding("UTF-8");
+			            Template template = cfg.getTemplate("mytemplate");
+			            BigDecimal id = messageMapper.selectFsNo();
+			            tempParam.put("msgID", id);
+						template.process(tempParam, writer);
+						//将消息模板转为msg对象
+						String msgText = writer.toString().replace("\\n", "");
+						Msg msg = ResScheduleXMLConverter.fromXml(null, msgText, Msg.class);
+						//根据推送客户创建消息
+						Message message = new Message();
+						message.setId(id);
+						message.setSendType("0");
+						message.setMsgHead(msg.getTitle());
+						message.setMsgText(msg.getContent());
+						message.setRecvid(oper.getSysOperId().trim());
+						message.setMsgDate(new Timestamp(new Date().getTime()));
+						message.setSendid(operid);
+						message.setMsgStat("0");
+						msgList.add(message);
+					}
+				} catch (Exception e) {
+					String resMsg = "消息模板格式化错误";
+					logger.error(String.format("[errMsg] retMsg-%1$s，temp-%2$s", resMsg, temp), e);
+					throw new BusinessException(resMsg, e);
+				}
+				return msgList;
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -290,6 +426,7 @@ public class MsgService implements IMsgService {
 		}
 		return null;
 	}
+	
 	
 	/**
 	 * 根据id获取旅行社名称
