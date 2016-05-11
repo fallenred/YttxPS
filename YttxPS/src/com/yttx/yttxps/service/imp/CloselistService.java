@@ -12,17 +12,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yttx.yttxps.mapper.CustomInfoMapper;
+import com.yttx.yttxps.mapper.CustomOperMapper;
 import com.yttx.yttxps.mapper.DictMapper;
 import com.yttx.yttxps.mapper.RoomMapper;
+import com.yttx.yttxps.mapper.SysOperMapper;
 import com.yttx.yttxps.mapper.TCloselistMapper;
 import com.yttx.yttxps.mapper.TRestaurantMapper;
 import com.yttx.yttxps.mapper.TticketMapper;
 import com.yttx.yttxps.xml.bean.closeList.Car;
 import com.yttx.yttxps.xml.bean.closeList.CostDetails;
 import com.yttx.yttxps.xml.bean.closeList.Other;
+import com.yttx.yttxps.model.CustomInfo;
+import com.yttx.yttxps.model.CustomOper;
+import com.yttx.yttxps.model.CustomOperKey;
 import com.yttx.yttxps.model.Dict;
 import com.yttx.yttxps.model.DictKey;
 import com.yttx.yttxps.model.Room;
+import com.yttx.yttxps.model.SysOper;
 import com.yttx.yttxps.model.TCloselist;
 import com.yttx.yttxps.model.TCloselistExample;
 import com.yttx.yttxps.model.TOrderCustomWithBLOBs;
@@ -58,6 +65,15 @@ public class CloselistService implements ICloselistService {
 	private TticketMapper<Tticket> ticketMapper;
 	
 	@Autowired
+	private CustomInfoMapper customInfoMapper;
+	
+	@Autowired
+	private CustomOperMapper customOperMapper;
+	
+	@Autowired
+	private SysOperMapper<SysOper> sysOperMapper;
+	
+	@Autowired
 	private DictMapper dictMapper;
 	
 	@Autowired
@@ -80,9 +96,9 @@ public class CloselistService implements ICloselistService {
 		closeList.setFsNo(orderList.getFsNo());
 		closeList.setFsOrderId(orderList.getFsNo());
 		closeList.setFsName(orderList.getFsName());
-		closeList.setFsUserId(orderList.getFsUserId() == null ? "201600000001" : orderList.getFsUserId());//待订单修改
-		closeList.setFsUserSubid(orderList.getFsUserSubid() == null ? "0001" : orderList.getFsUserSubid());//待订单修改
-		closeList.setFsOperId(orderList.getFsOperId() == null ? "" : orderList.getFsOperId());
+		closeList.setFsUserId(orderList.getFsUserId());
+		closeList.setFsUserSubid(orderList.getFsUserSubid());
+		closeList.setFsOperId(orderList.getFsOperId());
 		closeList.setFtCreatdate(new Date());
 		closeList.setFdTotalfee(orderList.getFdTotalfee());
 		if(orderList.getFdPaidamt() == null) {
@@ -94,6 +110,18 @@ public class CloselistService implements ICloselistService {
 		closeList.setFiStat(new BigDecimal(-10));
 		
 		com.yttx.yttxps.xml.bean.closeList.Body closeBody = new com.yttx.yttxps.xml.bean.closeList.Body();
+		
+		CustomOperKey customOperKey = new CustomOperKey();
+		customOperKey.setId(orderList.getFsUserId());
+		customOperKey.setSubid(orderList.getFsUserSubid());
+		CustomOper customOper = customOperMapper.selectByPrimaryKey(customOperKey);
+		CustomInfo customInfo = customInfoMapper.selectByPrimaryKey(orderList.getFsUserId());
+		SysOper sysOper = sysOperMapper.selectByPrimaryKey(orderList.getFsOperId() + "    ");
+		
+		closeBody.setTname(customInfo.getTaname());
+		closeBody.setCustopername(customOper.getName());
+		closeBody.setOpername(sysOper.getSysOperName().trim());
+		closeBody.setVisitornum(orderList.getFiVisitornum().toString());
 		
 		List<Body> bodyList = new ArrayList<Body>();
 		
@@ -139,7 +167,7 @@ public class CloselistService implements ICloselistService {
 		com.yttx.yttxps.xml.bean.closeList.Reslist insuranceResList = new com.yttx.yttxps.xml.bean.closeList.Reslist();
 		insuranceResList.setTypeno("01");
 		insuranceResList.setName("保险");
-		insuranceResList.setNumber(orderList.getFiVisitornum() == null ? "0" : orderList.getFdInsuerprice().toString());//待订单修改
+		insuranceResList.setNumber(orderList.getFiVisitornum() == null ? "0" : orderList.getFiVisitornum().toString());//待订单修改
 		insuranceResList.setTotalprice(orderList.getFdInsuerprice() == null ? "0" : orderList.getFdInsuerprice().toString());//待订单修改
 		otherReslist.add(insuranceResList);
 		

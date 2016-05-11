@@ -185,11 +185,9 @@
 													for="fdInsuerprice">保险费用</label>
 												<div class="col-sm-3">
 													<div class="input-group">
-														<input type="text" id="fdInsuerprice"
-															name="scheduleBody.fdInsuerprice"
-															value="${orderlist.fdInsuerprice }"
-															class="form-control isFloatGteZero number"> <span
-															class="input-group-addon">￥</span>
+														<input type="text" id="fdInsuerprice" name="scheduleBody.fdInsuerprice" value="${orderlist.fdInsuerprice }" class="form-control isFloatGteZero number">
+														<input type="hidden" class="form-control" name="fdInsuerprice" id="fdInsuerprice" value="${orderlist.fdInsuerprice }" /> 
+														<span class="input-group-addon">￥</span>
 													</div>
 												</div>
 												<label class="col-sm-3 control-label no-padding-right"
@@ -819,7 +817,7 @@
 													<input type="text"
 														class="form-control isFloatGteZero number" id="totalfee"
 														value="0"> <input type="hidden"
-														class="form-control" name="fdTotalfee" id="fdTotalfee">
+														class="form-control" name="fdTotalfee" id="fdTotalfee" value="${orderlist.fdTotalfee }" />
 												</div>
 												<label class="col-sm-2 control-label no-padding-right"
 													for="fdPaidamt">已缴金额</label>

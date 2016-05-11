@@ -9,6 +9,30 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  */
 @XStreamAlias("body")
 public class Body {
+	
+	/**
+	 * 旅行社名字
+	 */
+	@XStreamAlias("tname")
+	private String tname;
+	
+	/**
+	 * 前台操作员
+	 */
+	@XStreamAlias("custopername")
+	private String custopername;
+	
+	/**
+	 * 计调人员
+	 */
+	@XStreamAlias("opername")
+	private String opername;
+	
+	/**
+	 * 团队总人数
+	 */
+	@XStreamAlias("visitornum")
+	private String visitornum;
 
 	/**
 	 * 成本明细
@@ -40,6 +64,38 @@ public class Body {
 	@XStreamAlias("profit")
 	private String profit;
 	
+	public String getTname() {
+		return tname;
+	}
+
+	public void setTname(String tname) {
+		this.tname = tname;
+	}
+
+	public String getCustopername() {
+		return custopername;
+	}
+
+	public void setCustopername(String custopername) {
+		this.custopername = custopername;
+	}
+
+	public String getOpername() {
+		return opername;
+	}
+
+	public void setOpername(String opername) {
+		this.opername = opername;
+	}
+
+	public String getVisitornum() {
+		return visitornum;
+	}
+
+	public void setVisitornum(String visitornum) {
+		this.visitornum = visitornum;
+	}
+
 	public CostDetails getCostdetails() {
 		return costdetails;
 	}
