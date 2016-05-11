@@ -330,7 +330,7 @@
 												</div>
 											</div>
 										</div>
-										<hr>
+										<%-- <hr>
 										<div class="row">
 											<div class="form-group">
 												<label class="col-sm-2 control-label no-padding-right"
@@ -374,7 +374,7 @@
 													</div>
 												</div>
 											</div>
-										</div>
+										</div> --%>
 										<hr>
 										<!-- 计调配置公共资源start -->
 										<div class="row div_transfer">
@@ -937,7 +937,7 @@
 										<div class="modal-footer">
 											<button onclick="history.go(-1)" type="button"
 												class="btn btn-sm btn-default" data-dismiss="modal">返回</button>
-											<c:if test="${orderlist.fiStat != -100 && orderlist.fiStat != 32 }">
+											<c:if test="${orderlist.fiStat != -100 && orderlist.fiStat != 32 && orderlist.fiStat != 6}">
 												<button id="submit" type="button"
 													class="btn btn-sm btn-primary">提交</button>
 											</c:if>
