@@ -159,7 +159,7 @@ jQuery(function($) {
 		setCfSum($(".cf:last"));
 		setCfTotal();
 		$("#cf_index").val(parseInt(index) + 1);
-		$('.datetimepicker').datetimepicker({
+		$(".tr_list:last").find(".datetimepicker").datetimepicker({
 			language:  'zh-CN',
 	        weekStart: 1,
 	        todayBtn:  1,
@@ -169,7 +169,6 @@ jQuery(function($) {
 			minView: 2,
 			forceParse: 0
 		});
-
 	});
 	
 	//删除餐费

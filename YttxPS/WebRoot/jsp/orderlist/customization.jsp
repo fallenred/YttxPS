@@ -74,9 +74,6 @@
 								<li class="active"><a data-toggle="tab" id="all_order_a"
 									href="#orderlist"> <i></i>订单详情
 								</a></li>
-								<li><a data-toggle="tab" id="stat_div_a" href="#closelist"
-									class="statPane"> <i></i>结算单详情
-								</a></li>
 							</ul>
 						</div>
 						<div class="col-xs-12">

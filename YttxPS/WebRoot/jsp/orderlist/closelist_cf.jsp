@@ -55,8 +55,8 @@
 	</table>
 </form>
 <script id="tr-cflist" type="text/x-handlebars-template">
-	<tr class="width-14">
-		<td><input type="text" class="form-control datetimepicker" data-date-format="yyyy-mm-dd" placeholder="用餐日期" class="cfDate" name="body.costdetails.restaurant.reslist[{{index}}].time"/></td>
+	<tr class="width-14 tr_list">
+		<td><input type="text" class="form-control datetimepicker cfDate" data-date-format="yyyy-mm-dd" placeholder="用餐日期" name="body.costdetails.restaurant.reslist[{{index}}].time"/></td>
 		<td><select style="width:160px;text-align:center" class="cf" name="body.costdetails.restaurant.reslist[{{index}}].resno"></select>
 			<input class="cfName" type="hidden" name="body.costdetails.restaurant.reslist[{{index}}].name" value="${reslist.name }" /> </td>
 		<td><select style="width:100px;text-align:center"  class="cfType" name="body.costdetails.restaurant.reslist[{{index}}].type"></select></td>

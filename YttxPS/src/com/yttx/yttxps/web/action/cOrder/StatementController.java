@@ -36,7 +36,6 @@ import com.yttx.yttxps.service.IFStatementService;
 import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.web.action.BaseController;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
-import com.yttx.yttxps.xml.bean.closeList.Body;
 import com.yttx.yttxps.xml.bean.closeList.Reslist;
 import com.yttx.yttxps.xml.bean.closeList.Root;
 import com.yttx.yttxps.xml.bean.closeList.Shop;

@@ -49,6 +49,12 @@
 							<label class="col-sm-3 control-label no-padding-right">${sessionEntity.name}</label>
 						</div>
 						<div class="row">
+							<label class="col-sm-3 control-label" style="text-align: right;">总支出：</label>
+							<label class="col-sm-3 control-label no-padding-right">${content.expenditure }</label> 
+							<label class="col-sm-2 control-label" style="text-align: right;">总收入：</label> 
+							<label class="col-sm-3 control-label no-padding-right">${content.income}</label>
+						</div>
+						<div class="row">
 							<label class="col-sm-3 control-label" style="text-align: right;">总人数：</label>
 							<label class="col-sm-3"> <label id="lab_adult">${adult }</label><label>
 									-</label> <label id="lab_children">${children }</label><label style="height: 20px;">/2-</label>
@@ -107,6 +113,16 @@ jQuery(function($) {
 		$(".btn_add").remove();
 		$(".remove_tr").remove();
 	}
+	$('.datetimepicker').datetimepicker({
+		language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: true,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+	});
 })
 $("#zancun").on("click", function () {
 	var data = $("#form_cf").serialize() + "&" +
