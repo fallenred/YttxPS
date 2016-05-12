@@ -45,7 +45,7 @@ jQuery(function($) {
 				var value = mpTypeNode.val();
 				mpTypeNode.html(html);
 				if(value == '' || value == null){
-					value = '01';
+					value = '000001';
 				}
 				mpTypeNode.val(value);
 				mpTypeNode.attr("class","mpType chosen-select");
