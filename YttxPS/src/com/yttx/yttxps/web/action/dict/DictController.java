@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yttx.yttxps.model.Dict;
 import com.yttx.yttxps.model.DictExample;
-import com.yttx.yttxps.model.DictKey;
 import com.yttx.yttxps.model.vo.DictRequest;
 import com.yttx.yttxps.service.IDictService;
 import com.yttx.yttxps.web.action.LoginController;
@@ -38,30 +37,6 @@ public class DictController {
 		DictExample example = new DictExample();
 		req.copyExample(example);
 		List<Dict> list = dictService.selectDict(example);
-		return list;
-    }
-	
-	/**
-	 * 其他支出类型
-	 * @param req
-	 * @return
-	 */
-	@RequestMapping(value="selectDictExpense.htm", method = RequestMethod.GET)
-	@ResponseBody
-	public Object ajaxSelectExpense(DictRequest req) {
-		List<DictKey> list = dictService.selectDictByParentNo("expense");
-		return list;
-    }
-	
-	/**
-	 * 其他收入类型
-	 * @param req
-	 * @return
-	 */
-	@RequestMapping(value="selectDictIncome.htm", method = RequestMethod.GET)
-	@ResponseBody
-	public Object ajaxSelectIncome(DictRequest req) {
-		List<DictKey> list = dictService.selectDictByParentNo("income");
 		return list;
     }
 	

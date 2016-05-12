@@ -19,7 +19,6 @@ import com.yttx.yttxps.mapper.RoomMapper;
 import com.yttx.yttxps.mapper.SysOperMapper;
 import com.yttx.yttxps.mapper.TCloselistMapper;
 import com.yttx.yttxps.mapper.TRestaurantMapper;
-import com.yttx.yttxps.mapper.TticketMapper;
 import com.yttx.yttxps.xml.bean.closeList.Car;
 import com.yttx.yttxps.xml.bean.closeList.CostDetails;
 import com.yttx.yttxps.xml.bean.closeList.Other;
@@ -35,7 +34,6 @@ import com.yttx.yttxps.model.TCloselistExample;
 import com.yttx.yttxps.model.TOrderCustomWithBLOBs;
 import com.yttx.yttxps.model.TOrderlistWithBLOBs;
 import com.yttx.yttxps.model.TRestaurant;
-import com.yttx.yttxps.model.Tticket;
 import com.yttx.yttxps.service.ICloselistService;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
@@ -60,9 +58,6 @@ public class CloselistService implements ICloselistService {
 	
 	@Autowired
 	private TRestaurantMapper<Restaurant> restaurantMapper;
-	
-	@Autowired
-	private TticketMapper<Tticket> ticketMapper;
 	
 	@Autowired
 	private CustomInfoMapper customInfoMapper;
@@ -209,8 +204,7 @@ public class CloselistService implements ICloselistService {
 						Cclist mplist = reslist.getCclist().get(0);
 						mpResList.setResno(reslist.getResno());
 						mpResList.setName(reslist.getResname());
-						Tticket tmp = ticketMapper.selectByPrimaryKey(reslist.getResno());
-						mpResList.setType(tmp == null ? "" : tmp.getFsType());
+						mpResList.setType(mplist.getCcno());
 						mpResList.setTypename(mplist.getCcname());
 						mpResList.setUnitprice(mplist.getPrice().toString());
 						mpResList.setNumber(mplist.getUsernum());

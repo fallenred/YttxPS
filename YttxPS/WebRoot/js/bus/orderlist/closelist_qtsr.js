@@ -4,12 +4,15 @@ jQuery(function($) {
 	var qtsrmap = '';
 	$.ajax({
 		type: "GET",
-		url: "/dict/selectDictIncome.htm",
+		url: "/dict/selectDict.htm",
+		data: {
+			"dict.fsParentno": "income",
+		},
 		dataType: "json",
 		success: function(data){
 			var html = '';
 			$.each(data, function(commentIndex, comment){
-				html += '<option value='+ comment['fsDictno'] +'>'+ comment['fsDictname'] +'</option>';
+				html += '<option value=' + comment['fsDictno'] + '>' + comment['fsDictname'] + '</option>';
 			});
 			qtsrmap = html;
 			$(".qtsr").each(function(){

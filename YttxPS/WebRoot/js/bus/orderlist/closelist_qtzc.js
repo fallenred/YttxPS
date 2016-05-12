@@ -4,12 +4,15 @@ jQuery(function($) {
 	var qtzcmap = '';
 	$.ajax({
 		type: "GET",
-		url: "/dict/selectDictExpense.htm",
+		url: "/dict/selectDict.htm",
+		data: {
+			"dict.fsParentno": "expense",
+		},
 		dataType: "json",
 		success: function(data){
 			var html = '';
 			$.each(data, function(commentIndex, comment){
-				html += '<option value='+ comment['fsDictno'] +'>'+ comment['fsDictname'] +'</option>';
+				html += '<option value=' + comment['fsDictno'] + '>' + comment['fsDictname'] + '</option>';
 			});
 			qtzcmap = html;
 			$(".qtzc").each(function(){

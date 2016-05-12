@@ -33,7 +33,7 @@ jQuery(function($) {
 			type: "GET",
 			url: "/dict/selectDict.htm",
 			data: {
-				"dict.fsParentno": "mp",
+				"dict.fsParentno": "mp_xf",
 			},
 			dataType: "json",
 			success: function(data){
