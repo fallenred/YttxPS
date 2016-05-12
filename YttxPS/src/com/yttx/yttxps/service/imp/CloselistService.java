@@ -198,53 +198,55 @@ public class CloselistService implements ICloselistService {
 				cal.add(Calendar.DATE,Integer.parseInt(daylist.getDayflag()));
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 				String startDate = formatter.format(cal.getTime());
-				for (Reslist reslist : daylist.getReslist()) {
-					if(reslist.getRestype().equals("mp")) {   //门票
-						com.yttx.yttxps.xml.bean.closeList.Reslist mpResList = new com.yttx.yttxps.xml.bean.closeList.Reslist();
-						Cclist mplist = reslist.getCclist().get(0);
-						mpResList.setResno(reslist.getResno());
-						mpResList.setName(reslist.getResname());
-						mpResList.setType(mplist.getCcno());
-						mpResList.setTypename(mplist.getCcname());
-						mpResList.setUnitprice(mplist.getPrice().toString());
-						mpResList.setNumber(mplist.getUsernum());
-						mpResList.setTotalprice((mplist.getPrice().multiply(new BigDecimal(mplist.getUsernum()))).toString());
-						mpResList.setRemark(reslist.getRemark());
-						ticketReslist.add(mpResList);
-					} else if(reslist.getRestype().equals("ct")) {   //餐
-						com.yttx.yttxps.xml.bean.closeList.Reslist ctResList = new com.yttx.yttxps.xml.bean.closeList.Reslist();
-						Cclist ctlist = reslist.getCclist().get(0);
-						ctResList.setResno(reslist.getResno());
-						ctResList.setName(reslist.getResname());
-						TRestaurant tmp = restaurantMapper.selectByPrimaryKey(reslist.getResno());
-						ctResList.setType(tmp == null ? "" : tmp.getSpecial());
-						ctResList.setTime(startDate);
-						ctResList.setUnitprice(ctlist.getPrice().toString());
-						ctResList.setNumber(ctlist.getUsernum());
-						ctResList.setTotalprice((ctlist.getPrice().multiply(new BigDecimal(ctlist.getUsernum()))).toString());
-						ctResList.setRemark(reslist.getRemark());
-						restReslist.add(ctResList);
-					} else if(reslist.getRestype().equals("bg")) {   //房
-						com.yttx.yttxps.xml.bean.closeList.Reslist bgResList = new com.yttx.yttxps.xml.bean.closeList.Reslist();
-						Cclist bglist = reslist.getCclist().get(0);
-						Room tmp = roomMapper.selectByPrimaryKey(reslist.getResno());
-						bgResList.setAccomno(tmp == null ? "" : tmp.getFsAccomno());
-						bgResList.setName(reslist.getResname());
-						Dict dict = null;
-						if(tmp != null) {
-							DictKey dictKey = new DictKey();
-							dictKey.setFsDictno(tmp.getFsType());
-							dictKey.setFsParentno("fx");
-							dict = dictMapper.selectByPrimaryKey(dictKey);
+				if(daylist.getReslist() != null) {
+					for (Reslist reslist : daylist.getReslist()) {
+						if(reslist.getRestype().equals("mp")) {   //门票
+							com.yttx.yttxps.xml.bean.closeList.Reslist mpResList = new com.yttx.yttxps.xml.bean.closeList.Reslist();
+							Cclist mplist = reslist.getCclist().get(0);
+							mpResList.setResno(reslist.getResno());
+							mpResList.setName(reslist.getResname());
+							mpResList.setType(mplist.getCcno());
+							mpResList.setTypename(mplist.getCcname());
+							mpResList.setUnitprice(mplist.getPrice().toString());
+							mpResList.setNumber(mplist.getUsernum());
+							mpResList.setTotalprice((mplist.getPrice().multiply(new BigDecimal(mplist.getUsernum()))).toString());
+							mpResList.setRemark(reslist.getRemark());
+							ticketReslist.add(mpResList);
+						} else if(reslist.getRestype().equals("ct")) {   //餐
+							com.yttx.yttxps.xml.bean.closeList.Reslist ctResList = new com.yttx.yttxps.xml.bean.closeList.Reslist();
+							Cclist ctlist = reslist.getCclist().get(0);
+							ctResList.setResno(reslist.getResno());
+							ctResList.setName(reslist.getResname());
+							TRestaurant tmp = restaurantMapper.selectByPrimaryKey(reslist.getResno());
+							ctResList.setType(tmp == null ? "" : tmp.getSpecial());
+							ctResList.setTime(startDate);
+							ctResList.setUnitprice(ctlist.getPrice().toString());
+							ctResList.setNumber(ctlist.getUsernum());
+							ctResList.setTotalprice((ctlist.getPrice().multiply(new BigDecimal(ctlist.getUsernum()))).toString());
+							ctResList.setRemark(reslist.getRemark());
+							restReslist.add(ctResList);
+						} else if(reslist.getRestype().equals("bg")) {   //房
+							com.yttx.yttxps.xml.bean.closeList.Reslist bgResList = new com.yttx.yttxps.xml.bean.closeList.Reslist();
+							Cclist bglist = reslist.getCclist().get(0);
+							Room tmp = roomMapper.selectByPrimaryKey(reslist.getResno());
+							bgResList.setAccomno(tmp == null ? "" : tmp.getFsAccomno());
+							bgResList.setName(reslist.getResname());
+							Dict dict = null;
+							if(tmp != null) {
+								DictKey dictKey = new DictKey();
+								dictKey.setFsDictno(tmp.getFsType());
+								dictKey.setFsParentno("fx");
+								dict = dictMapper.selectByPrimaryKey(dictKey);
+							}
+							bgResList.setRoomtypeno(dict == null ? "" : dict.getFsDictno());
+							bgResList.setRoomtype(dict == null ? "" : dict.getFsDictname());
+							bgResList.setTime(startDate);
+							bgResList.setUnitprice(bglist.getPrice().toString());
+							bgResList.setNumber(bglist.getUsernum());
+							bgResList.setTotalprice((bglist.getPrice().multiply(new BigDecimal(bglist.getUsernum()))).toString());
+							bgResList.setRemark(reslist.getRemark());
+							accoReslist.add(bgResList);
 						}
-						bgResList.setRoomtypeno(dict == null ? "" : dict.getFsDictno());
-						bgResList.setRoomtype(dict == null ? "" : dict.getFsDictname());
-						bgResList.setTime(startDate);
-						bgResList.setUnitprice(bglist.getPrice().toString());
-						bgResList.setNumber(bglist.getUsernum());
-						bgResList.setTotalprice((bglist.getPrice().multiply(new BigDecimal(bglist.getUsernum()))).toString());
-						bgResList.setRemark(reslist.getRemark());
-						accoReslist.add(bgResList);
 					}
 				}
 			}
