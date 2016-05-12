@@ -66,8 +66,8 @@
 			<select style="width:160px;text-align:center" class="qtzc" name="body.costdetails.other.reslist[{{index}}].typeno"></select>
 			<input class="qtzcName" type="hidden" name="body.costdetails.other.reslist[{{index}}].name" value="${reslist.name }" />
 		</td>
-		<td><input type="text" value="{{qtzcPrice}}" class="qtzcPrice required isFloatGteZero number input-text" name="body.incomedetails.other.reslist[{{index}}].unitprice"></td>
-		<td><input type="text" value="{{qtzcCount}}" class="qtzcCount required isFloatGteZero digits input-text" name="body.incomedetails.other.reslist[{{index}}].number"></td>
+		<td><input type="text" value="{{qtzcPrice}}" class="qtzcPrice required isFloatGteZero number input-text" name="body.costdetails.other.reslist[{{index}}].unitprice"></td>
+		<td><input type="text" value="{{qtzcCount}}" class="qtzcCount required isFloatGteZero digits input-text" name="body.costdetails.other.reslist[{{index}}].number"></td>
 		<td><input type="text" value="{{qtzcSum}}" class="qtzcSum required input-text" readonly="readonly" name="body.costdetails.other.reslist[{{index}}].totalprice"></td>
 		<td><input type="text" value="{{qtzcRemark}}" class="qtzcRemark input-text" name="body.costdetails.other.reslist[{{index}}].remark"></td>
 		<td><a style="cursor:pointer;" class="deleteQtzc">删除</a></td>
