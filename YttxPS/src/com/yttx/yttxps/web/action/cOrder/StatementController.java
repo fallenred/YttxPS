@@ -119,7 +119,8 @@ public class StatementController extends BaseController {
 		try{
 			this.fStatementService.saveCloselist(root, orderid, stat);
 		}catch(Exception e){
-			return JsonResult.jsonError(e.getMessage());
+			logger.error("保存结算单失败", e);
+			return JsonResult.jsonError("保存结算单失败");
 		}
 		return JsonResult.jsonOk();
 	}

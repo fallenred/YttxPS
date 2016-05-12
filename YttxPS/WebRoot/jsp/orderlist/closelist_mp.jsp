@@ -46,7 +46,9 @@
 			</c:forEach>
 			<tr>
 				<td>总计<input type="hidden" id="mp_index" value="${fn:length(content.costdetails.ticket.reslist)}"/></td>
-				<td colspan="5" style="text-align: left;"><input type="text" readonly="readonly" value="" style="width:100%;" id="mpTotal" name="body.costdetails.ticket.total"></td>
+				<td colspan="5" style="text-align: left;">
+					<input type="text" readonly="readonly" value="" style="width:100%;text-align: left;" id="mpTotal" name="body.costdetails.ticket.total">
+				</td>
 				<td><button id="addMp" type="button" class="btn btn-success btn-xs btn_add">新增</button></td>
 			</tr>
 		</tbody>

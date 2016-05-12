@@ -3,7 +3,7 @@
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
-	.input-text{
+	input{
 		width:100%;
 		text-align:center;
 	}
@@ -64,7 +64,6 @@
 					</div>
 				</div>
 				<hr/>
-				<input type="text" class="form-control" id="startDate" value="07/01/2015">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">成本明细</h3>
@@ -113,23 +112,23 @@ jQuery(function($) {
 		$(".btn_add").remove();
 		$(".remove_tr").remove();
 	}
-	$('.datetimepicker').datetimepicker({
-		language:  'zh-CN',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: true,
-		todayHighlight: 1,
-		startView: 2,
-		minView: 2,
-		forceParse: 0
-	});
-	$('#startDate').daterangepicker({
-        singleDatePicker: true,
+	$('.datetimepicker').daterangepicker({
+		singleDatePicker: true,
+		locale : {
+			format: 'YYYY-MM-DD',
+			applyLabel : '确定',
+			cancelLabel : '取消',
+			fromLabel : '起始时间',
+			toLabel : '结束时间',
+			customRangeLabel : '自定义',
+			daysOfWeek : [ '日', '一', '二', '三', '四', '五', '六' ],
+			monthNames : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月' ],
+			firstDay : 1
+		},
         startDate: moment().subtract(6, 'days')
-      });
-
-
+	});
 })
+
 $("#zancun").on("click", function () {
 	var data = $("#form_cf").serialize() + "&" +
 	   $("#form_cl").serialize() + "&" +

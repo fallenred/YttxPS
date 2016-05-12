@@ -52,7 +52,9 @@
 			</c:forEach>
 			<tr>
 				<td>总计<input type="hidden" id="qtsr_index" value="${fn:length(content.incomedetails.other.reslist)}"/></td>
-				<td colspan="4" style="text-align: left;"><input type="text" readonly="readonly" value="" style="width:100%;" class="qtsrTotal" id="qtsrTotal" name="body.incomedetails.other.total"></td>
+				<td colspan="4" style="text-align: left;">
+					<input type="text" readonly="readonly" value="" style="width:100%;text-align: left;" class="qtsrTotal" id="qtsrTotal" name="body.incomedetails.other.total">
+				</td>
 				<td><button id="addQtsr" type="button" class="btn btn-success btn-xs btn_add">新增</button></td>
 			</tr>
 		</tbody>

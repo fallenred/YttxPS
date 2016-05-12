@@ -48,7 +48,9 @@
 			</c:forEach>
 			<tr>
 				<td>总计<input type="hidden" id="cf_index" value="${fn:length(content.costdetails.restaurant.reslist)}"/></td>
-				<td colspan="6" style="text-align: left;"><input type="text" readonly="readonly" value="" style="width:100%;" class="cfTotal" id="cfTotal" name="body.costdetails.restaurant.total"></td>
+				<td colspan="6" style="text-align: left;">
+					<input type="text" readonly="readonly" value="" style="width:100%;text-align: left;" class="cfTotal" id="cfTotal" name="body.costdetails.restaurant.total">
+				</td>
 				<td><button id="addCf" type="button" class="btn btn-success btn-xs btn_add">新增</button></td>
 			</tr>
 		</tbody>

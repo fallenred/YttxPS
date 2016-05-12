@@ -22,6 +22,7 @@ import com.yttx.yttxps.xml.ResScheduleXMLConverter;
 import com.yttx.yttxps.xml.bean.closeList.Body;
 import com.yttx.yttxps.xml.bean.closeList.CostDetails;
 import com.yttx.yttxps.xml.bean.closeList.IncomeDetails;
+import com.yttx.yttxps.xml.bean.closeList.Other;
 import com.yttx.yttxps.xml.bean.closeList.Reslist;
 import com.yttx.yttxps.xml.bean.closeList.Root;
 import com.yttx.yttxps.xml.bean.closeList.Shop;
@@ -103,10 +104,19 @@ public class FStatementService implements IFStatementService{
 			throw new BusinessException("结算单信息不存在");
 		}
 		Root origRoot = ResScheduleXMLConverter.fromXml("www.yttx.co", fStatement.getOrderContent(), Root.class);
-		Shop shop = origRoot.getBody().getIncomedetails().getShop();
+		IncomeDetails incomeDetails = origRoot.getBody().getIncomedetails();
+		if (incomeDetails == null) {
+			incomeDetails = new IncomeDetails();
+			Shop shop = new Shop();
+			shop.setTotal("0");
+			Other other = new Other();
+			other.setTotal("0");
+			incomeDetails.setShop(shop);
+			incomeDetails.setOther(other);
+		}
 		Body body = root.getBody();
+		Shop shop = incomeDetails.getShop();
 		CostDetails costDetails = body.getCostdetails();
-		IncomeDetails incomeDetails = body.getIncomedetails();
 		BigDecimal income = BigDecimal.ZERO;		//总收入
 		BigDecimal shopTotal = new BigDecimal(shop.getTotal());	//购物收入
 		BigDecimal entertainmentTotal = new BigDecimal(incomeDetails.getEntertainment().getTotal());	//娱乐收入

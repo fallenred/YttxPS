@@ -43,7 +43,9 @@
 			</c:forEach>
 			<tr class="cl_end">
 				<td>总计<input type="hidden" id="cl_index" value="${fn:length(content.costdetails.car.reslist)}"/></td>
-				<td colspan="4" style="text-align: left;"><input type="text" readonly="readonly" value="" style="width:100%;" class="clTotal" id="clTotal" name="body.costdetails.car.total"></td>
+				<td colspan="4" style="text-align: left;">
+					<input type="text" readonly="readonly" value="" style="width:100%;text-align: left;" class="clTotal" id="clTotal" name="body.costdetails.car.total">
+				</td>
 				<td><button id="addCl" type="button" class="btn btn-success btn-xs btn_add">新增</button></td>
 			</tr>
 		</tbody>

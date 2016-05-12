@@ -50,7 +50,9 @@
 			</c:forEach>
 			<tr class="jd_end">
 				<td>总计<input type="hidden" id="jd_index" value="${fn:length(content.costdetails.accomadation.reslist)}"/></td>
-				<td colspan="6" style="text-align: left;"><input type="text" readonly="readonly" value="" style="width:100%;" class="jdTotal" id="jdTotal" name="body.costdetails.accomadation.total"></td>
+				<td colspan="6" style="text-align: left;">
+					<input type="text" readonly="readonly" value="" style="width:100%;text-align: left;" class="jdTotal" id="jdTotal" name="body.costdetails.accomadation.total">
+				</td>
 				<td><button id="addJd" type="button" class="btn btn-success btn-xs btn_add">新增</button></td>
 			</tr>
 		</tbody>

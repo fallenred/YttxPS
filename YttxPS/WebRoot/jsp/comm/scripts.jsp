@@ -258,10 +258,6 @@ Date.prototype.format = function(format) {
 <script src="/js/date-time/bootstrap-datetimepicker.min.js"></script>
 <script src="/js/date-time/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 
-<script type="text/javascript" src="/js/daterangepicker/moment.min.js"></script>
-<script type="text/javascript" src="/js/daterangepicker/daterangepicker.js"></script>
-<link rel="stylesheet" href="/js/daterangepicker/daterangepicker.css" />
-
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
 <!--[if lt IE 9]>

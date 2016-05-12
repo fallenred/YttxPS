@@ -11,9 +11,9 @@
 <meta name="description" content="" />
 <jsp:include page="/jsp/comm/css.jsp" flush="true" />
 <jsp:include page="/jsp/comm/scripts.jsp" flush="true" />
-<link rel="stylesheet" href="/css/daterangepicker.css" />
-<script src="/js/date-time/moment.min.js"></script>
-<script src="/js/date-time/daterangepicker.min.js"></script>
+<script type="text/javascript" src="/js/daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="/js/daterangepicker/daterangepicker.js"></script>
+<link rel="stylesheet" href="/js/daterangepicker/daterangepicker.css" />
 
 <script src="/js/handlebars.js"></script>
 </head>
