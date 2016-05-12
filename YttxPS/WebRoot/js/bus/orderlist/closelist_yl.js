@@ -75,8 +75,11 @@ jQuery(function($) {
 		var node = children.parent().parent();
 		var ylFee = node.find(".ylFee").val(node.find(".ylFee").val().trim()).val();
 		var ylCost = node.find(".ylCost").val(node.find(".ylCost").val().trim()).val();
-		if(isNaN(ylFee) || isNaN(ylCost) || ylFee == '' || ylCost == '')return;
-		node.find(".ylProfit").val((parseFloat(ylFee) - parseFloat(ylCost)).toFixed(2));
+		var ylCount = node.find(".ylCount").val(node.find(".ylCount").val().trim()).val();
+		var proportion = node.find(".proportion").val(node.find(".proportion").val().trim()).val();
+		if(isNaN(ylFee) || isNaN(ylCost) || isNaN(proportion) || ylFee == '' || ylCost == '' || proportion == '')return;
+		profit = ((parseFloat(ylFee) - parseFloat(ylCost))*parseFloat(ylCount)*parseFloat(proportion)*parseFloat(0.01)).toFixed(2)
+		node.find(".ylProfit").val(profit);
 	}
 	
 	//设置娱乐总计
@@ -108,7 +111,7 @@ jQuery(function($) {
 	});
 	
 	//事件计算
-	$(document).on('change key','.ylFee,.ylCost',function(){
+	$(document).on('change key','.ylFee,.ylCost,.proportion,.ylCount',function(){
 		if($(this).val().trim() == '')$(this).val(0);
 		if($(this).valid()){
 			setYlProfit($(this));

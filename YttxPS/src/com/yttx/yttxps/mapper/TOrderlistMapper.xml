@@ -784,8 +784,7 @@
 		    , c.fs_Id, c.fs_TaName
 		from
 		    (select * from torderlist t 
-		    	where (t.fs_type = '02' and t.fi_stat = '0') or 
-		    			(t.fs_type = '03' and t.fi_stat = '-10') or 
+		    	where t.fi_stat = '0' or 
 		    			(1=1 <if test="fsOperId != null and fsOperId != ''">
 						        and t.fs_oper_id = #{fsOperId}
 						     </if>

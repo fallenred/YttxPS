@@ -94,15 +94,15 @@ public class StatementController extends BaseController {
 	 */
 	@RequestMapping(value="showCloselist.htm")
 	public String openCloselist(Model model, String orderid){
-		FStatement fStatement = fStatementService.findFStatByOrderid(orderid);
 		try{
+			FStatement fStatement = fStatementService.findFStatByOrderid(orderid);
 			Root root = ResScheduleXMLConverter.fromXml("www.yttx.co", fStatement.getOrderContent(), Root.class);
 			model.addAttribute("content", root.getBody());
+			model.addAttribute("fStatement",fStatement);
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error("结算单xml转bean错误", e);
 		}
-		model.addAttribute("fStatement",fStatement);
 		return "orderlist/closelist";
 	}
 	

@@ -11,14 +11,13 @@ jQuery(function($) {
 		dataType: "json",
 		success: function(data){
 			var html = ''; 
-			$.each(data, function(commentIndex, comment){
+			$.each(data, function(index, comment){
 				html += '<option value=' + comment['no'] + '>' + comment['name'] + '</option>';
 			});
 			$("#shop").html(html);
 			$("#shop").attr("class", "width-80 chosen-select form-control");
 			$("#shop").chosen(); 
 			$("#shop").next().attr("style","width:240px;");
-			$("#resno_gw").val($("#shop").find("option:selected").text());
 			map.put("shop", html);
 		}
 	});
@@ -73,6 +72,9 @@ jQuery(function($) {
 		$(".tr_cclist").remove();
 		$("#gw").find("input").val('');
 		$("#form_gw").find("input").val('');
+		$("#message_gw").hide();
+		$("label.error").remove();
+		$("#resno_gw").val($("#shop").find("option:selected").text());
 		$('#addModal').modal('show');
 	});
 

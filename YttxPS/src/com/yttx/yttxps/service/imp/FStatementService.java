@@ -159,40 +159,55 @@ public class FStatementService implements IFStatementService{
 			}
 			reslist.setCclist(cclist);
 		}
-		Shop origShop = root.getBody().getIncomedetails().getShop();
-		//遍历原始购物店list，替换id相同的购物店信息
-		List<Reslist> reslists = origShop.getReslist();
-		BigDecimal total = BigDecimal.ZERO;
-		List<Reslist> list = new ArrayList<Reslist>();
-		boolean isAdd = true;
-		for (int i = 0; i < reslists.size(); i++) {
-			Reslist reslist2 = reslists.get(i);
-			//如果新增的购物店id与content中购物店id相同，则为修改
-			if (reslist.getResno().equals(reslist2.getResno())) {
-				list.add(reslist);
-				isAdd = false;	//设置状态为修改
-			} else {
-				list.add(reslist2);
+		IncomeDetails incomeDetails = root.getBody().getIncomedetails();
+		if (incomeDetails == null || incomeDetails.getShop() == null) {
+			incomeDetails = new IncomeDetails();
+			incomeDetails.setShop(shop);
+			shop.setTotal(reslist.getTotalprofit());
+			root.getBody().setIncomedetails(incomeDetails);
+		} else {
+			Shop origShop = incomeDetails.getShop();
+			//遍历原始购物店list，替换id相同的购物店信息
+			List<Reslist> reslists = origShop.getReslist();
+			BigDecimal total = BigDecimal.ZERO;
+			List<Reslist> list = new ArrayList<Reslist>();
+			boolean isAdd = true;
+			if (CollectionUtils.isNotEmpty(reslists)) {
+				for (int i = 0; i < reslists.size(); i++) {
+					Reslist reslist2 = reslists.get(i);
+					//如果新增的购物店id与content中购物店id相同，则为修改
+					if (reslist.getResno().equals(reslist2.getResno())) {
+						list.add(reslist);
+						isAdd = false;	//设置状态为修改
+					} else {
+						list.add(reslist2);
+					}
+					BigDecimal totalprofit = new BigDecimal(list.get(i).getTotalprofit());//打单总利润
+					BigDecimal peopleprofit = new BigDecimal(list.get(i).getPeopleprofit());//人头费
+					//总利润
+					total = total.add(totalprofit).add(peopleprofit);
+				}
 			}
-			//总金额
-			total = total.add(new BigDecimal(list.get(i).getTotalprofit()));
+			//新增
+			if (isAdd) {
+				list.add(reslist);
+				BigDecimal totalprofit = new BigDecimal(reslist.getTotalprofit());//打单总利润
+				BigDecimal peopleprofit = new BigDecimal(reslist.getPeopleprofit());//人头费
+				total = total.add(totalprofit).add(peopleprofit);
+			}
+			origShop.setReslist(list);
+			origShop.setTotal(total.toString());
+			shop = origShop;
 		}
-		//新增
-		if (isAdd) {
-			list.add(reslist);
-			total = total.add(new BigDecimal(reslist.getTotalprofit()));
-		}
-		origShop.setReslist(list);
-		origShop.setTotal(total.toString());
 		try {
-			String content = ResScheduleXMLConverter.toXml("www.yttx.co", root);
+			String content = ResScheduleXMLConverter.toXml("www.yttx.co", root).replace("<cclist/>", "");
 			fStatement.setOrderContent(content);
 			this.fStatementMapper.updateFSSelective(fStatement);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return origShop;
+		return shop;
 	}
 
 	@Override

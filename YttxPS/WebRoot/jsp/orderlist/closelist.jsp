@@ -64,7 +64,7 @@
 					</div>
 				</div>
 				<hr/>
-
+				<input type="text" class="form-control" id="startDate" value="07/01/2015">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">成本明细</h3>
@@ -123,6 +123,12 @@ jQuery(function($) {
 		minView: 2,
 		forceParse: 0
 	});
+	$('#startDate').daterangepicker({
+        singleDatePicker: true,
+        startDate: moment().subtract(6, 'days')
+      });
+
+
 })
 $("#zancun").on("click", function () {
 	var data = $("#form_cf").serialize() + "&" +

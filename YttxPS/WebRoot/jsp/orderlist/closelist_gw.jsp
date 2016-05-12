@@ -315,9 +315,9 @@
 				if (json.result == "ok") {
 					$(".tr_cclist").remove();
 					$("#gwxm_index").val(json.reslist.cclist.length);
-					$("#totalconsp").html(0);
-					$("#totalprofit").html(0);
+					$("#message_gw").hide();
 					$("#shop").val(json.reslist.resno);//购物店
+					$("#resno_gw").val($("#shop").find("option:selected").text());
 					$("#shop").next().find("span").html(json.reslist.name);
 					$("#time").val(json.reslist.time);//进店日期
 					$("#people").val(json.reslist.people);//进店人数
@@ -327,7 +327,7 @@
 					$("#totalconsp").html(json.reslist.totalconsp);//打单总金额
 					$("#totalprofit").html(json.reslist.totalprofit);//打单总利润
 					$("#gw").find("input").val('');
-					var template = Handlebars.compile($("#tr-cclist").html());
+					var template = Handlebars.compile($("#tr-cclist1").html());
 					$("#total_cclist").before(template(json.reslist));
 					$('#addModal').modal('show');
 				}
@@ -347,7 +347,7 @@
 			}
 		}
 	</script>
-<script id="tr-cclist" type="text/x-handlebars-template">
+	<script id="tr-cclist" type="text/x-handlebars-template">
 	{{#each cclist}}
 	  <tr class="tr_cclist">
          <td>{{../name}}</td>
@@ -358,16 +358,37 @@
          <td>{{remark}}</td>
          <td>
 			<a style="cursor:pointer;" class="cclist_remove">删除</a>
-			<input name="reslist[{{@index}}].cclist[{{index}}].typeno" type="hidden" class="" value="{{typeno}}" placeholder="项目类型编号">
-			<input name="reslist[{{@index}}].cclist[{{index}}].typename" type="hidden" class="" value="{{typename}}" placeholder="项目类型名">
-			<input name="reslist[{{@index}}].cclist[{{index}}].consumption" type="hidden" class="gw_consumption" value="{{consumption}}" placeholder="打单金额">
-			<input name="reslist[{{@index}}].cclist[{{index}}].proportion" type="hidden" class="" value="{{proportion}}" placeholder="返佣比例">
-			<input name="reslist[{{@index}}].cclist[{{index}}].profit" type="hidden" class="gw_profit" value="{{profit}}" placeholder="返佣金额">
-			<input name="reslist[{{@index}}].cclist[{{index}}].remark" type="hidden" class="" value="{{remark}}" placeholder="备注">
+			<input name="reslist[0].cclist[{{index}}].typeno" type="hidden" value="{{typeno}}" placeholder="项目类型编号">
+			<input name="reslist[0].cclist[{{index}}].typename" type="hidden" value="{{typename}}" placeholder="项目类型名">
+			<input name="reslist[0].cclist[{{index}}].consumption" type="hidden" class="gw_consumption" value="{{consumption}}" placeholder="打单金额">
+			<input name="reslist[0].cclist[{{index}}].proportion" type="hidden" value="{{proportion}}" placeholder="返佣比例">
+			<input name="reslist[0].cclist[{{index}}].profit" type="hidden" class="gw_profit" value="{{profit}}" placeholder="返佣金额">
+			<input name="reslist[0].cclist[{{index}}].remark" type="hidden" value="{{remark}}" placeholder="备注">
 		 </td>
       </tr>
 	{{/each}}
-</script>
+	</script>
+	<script id="tr-cclist1" type="text/x-handlebars-template">
+	{{#each cclist}}
+	  <tr class="tr_cclist">
+         <td>{{../name}}</td>
+         <td>{{typename}}</td>
+         <td>{{consumption}}</td>
+         <td>{{proportion}}</td>
+         <td>{{profit}}</td>
+         <td>{{remark}}</td>
+         <td>
+			<a style="cursor:pointer;" class="cclist_remove">删除</a>
+			<input name="reslist[0].cclist[{{@index}}].typeno" type="hidden" value="{{typeno}}" placeholder="项目类型编号">
+			<input name="reslist[0].cclist[{{@index}}].typename" type="hidden" value="{{typename}}" placeholder="项目类型名">
+			<input name="reslist[0].cclist[{{@index}}].consumption" type="hidden" class="gw_consumption" value="{{consumption}}" placeholder="打单金额">
+			<input name="reslist[0].cclist[{{@index}}].proportion" type="hidden" value="{{proportion}}" placeholder="返佣比例">
+			<input name="reslist[0].cclist[{{@index}}].profit" type="hidden" class="gw_profit" value="{{profit}}" placeholder="返佣金额">
+			<input name="reslist[0].cclist[{{@index}}].remark" type="hidden" value="{{remark}}" placeholder="备注">
+		 </td>
+      </tr>
+	{{/each}}
+	</script>
 	<script id="tr-reslist" type="text/x-handlebars-template">
 			<tr>
 				<td />
@@ -413,7 +434,7 @@
 				<td>总计收入</td>
 				<td colspan="10" style="text-align: left;">
 					{{total }}&nbsp;元</td>
-				<td><button class="btn btn-success btn-xs btn_gw_add"
+				<td><button id="btn_gw_add" class="btn btn-success btn-xs btn_add"
 						data-toggle="modal" type="button">新增</button></td>
 			</tr>
 </script>
