@@ -64,6 +64,24 @@ public class Body {
 	@XStreamAlias("profit")
 	private String profit;
 	
+	/**
+	 * 保底
+	 */
+	@XStreamAlias("minproceeds")
+	private String minproceeds;
+	
+	/**
+	 * 客户总支出
+	 */
+	@XStreamAlias("custexpend")
+	private String custexpend;
+	
+	/**
+	 * 客户实际利润
+	 */
+	@XStreamAlias("custprofit")
+	private String custprofit;
+	
 	public String getTname() {
 		return tname;
 	}
@@ -134,6 +152,30 @@ public class Body {
 
 	public void setProfit(String profit) {
 		this.profit = profit;
+	}
+
+	public String getMinproceeds() {
+		return minproceeds;
+	}
+
+	public void setMinproceeds(String minproceeds) {
+		this.minproceeds = minproceeds;
+	}
+
+	public String getCustexpend() {
+		return custexpend;
+	}
+
+	public void setCustexpend(String custexpend) {
+		this.custexpend = custexpend;
+	}
+
+	public String getCustprofit() {
+		return custprofit;
+	}
+
+	public void setCustprofit(String custprofit) {
+		this.custprofit = custprofit;
 	}
 
 }
