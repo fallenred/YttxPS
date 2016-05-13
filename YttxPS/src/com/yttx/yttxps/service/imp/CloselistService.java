@@ -117,6 +117,7 @@ public class CloselistService implements ICloselistService {
 		closeBody.setCustopername(customOper.getName());
 		closeBody.setOpername(sysOper.getSysOperName().trim());
 		closeBody.setVisitornum(orderList.getFiVisitornum().toString());
+		closeBody.setMinproceeds("0");
 		
 		List<Body> bodyList = new ArrayList<Body>();
 		
