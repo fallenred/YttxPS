@@ -285,7 +285,7 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 			HttpSession session = request.getSession();
 			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
 			orderlist.setFsOperId(sessionEntity.getId());
-			String oldStat = orderlist.getFiStat();
+			String oldStat = orderlistService.selectByPrimaryKey(orderlist.getFsNo()).getFiStat();
 			orderlistService.update4custom(orderlist);
 			this.msgService.saveMsg(orderlist, sessionEntity.getId(),oldStat);
 		}catch (BusinessException e) {
