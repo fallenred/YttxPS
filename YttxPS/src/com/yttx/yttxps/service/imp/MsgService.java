@@ -36,6 +36,8 @@ import com.yttx.yttxps.model.CustomOper;
 import com.yttx.yttxps.model.CustomOperExample;
 import com.yttx.yttxps.model.Message;
 import com.yttx.yttxps.model.MessageAuth;
+import com.yttx.yttxps.model.MessageExample;
+import com.yttx.yttxps.model.MessageExample.Criteria;
 import com.yttx.yttxps.model.SysOper;
 import com.yttx.yttxps.model.SysOperExample;
 import com.yttx.yttxps.model.TOrderlist;
@@ -48,7 +50,6 @@ import com.yttx.yttxps.xml.ResScheduleXMLConverter;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-
 /**
  * 
  * 消息提醒service
@@ -180,7 +181,7 @@ public class MsgService implements IMsgService {
 			subid = statement.getUserSubID();
 //			int stat = Integer.valueOf(statement.getStat().toString());
 			switch (oldStat) {
-				case "":	//新生成结算单
+				case "-10": //新生成结算单
 					tempid = MsgTemp.STATEMENT.getVal();
 					tempParam.put("orderID", statement.getOrderId());
 					tempParam.put("closeID", statement.getStatmentId());
@@ -494,8 +495,25 @@ public class MsgService implements IMsgService {
 	}
 
 	@Override
-	public void delete(String id) {
-		messageMapper.deleteByPrimaryKey(new BigDecimal(id));
+	public boolean delete(String id) {
+		return messageMapper.deleteByPrimaryKey(new BigDecimal(id)) > 0 ? true : false;
+	}
+
+	@Override
+	public int deleteGroup(String operid, String id,String... msgTemp) {
+		if(!org.apache.commons.lang3.StringUtils.isNoneEmpty(id)){
+			return 0;
+		}
+		int count = 0;
+		for (String temp : msgTemp) {
+			MessageExample example = new MessageExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andAuthidEqualTo(temp);
+			criteria.andFsIdEqualTo(id);
+			criteria.andRecvidNotEqualTo(operid);
+			count += messageMapper.deleteByExample(example);
+		}
+		return count;
 	}
 	
 }

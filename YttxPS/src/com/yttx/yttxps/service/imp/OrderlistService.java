@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yttx.yttxps.comm.Constants.MsgTemp;
 import com.yttx.yttxps.comm.Constants.OrderStat;
 import com.yttx.yttxps.mapper.TOrderCustomMapper;
 import com.yttx.yttxps.mapper.TOrderlistMapper;
@@ -297,6 +298,11 @@ public class OrderlistService implements IOrderlistService {
 		if (OrderStat.WAITCONFIRM.getVal().compareTo(stat) == 0) {
 			//修改状态为已审核
 			orderlist.setFiStat(OrderStat.AUDITED.getVal().toString());
+			if("03".equals(orderlist.getFsType())){
+				msgService.deleteGroup(orderlist.getFsOperId(), orderlist.getFsNo(),"2010");//2010专家线路下单消息模板
+			} else if("02".equals(orderlist.getFsType())){
+				msgService.deleteGroup(orderlist.getFsOperId(), orderlist.getFsNo(),"2031");//2031订制线路下单消息模板
+			}
 		}
 	}
 		

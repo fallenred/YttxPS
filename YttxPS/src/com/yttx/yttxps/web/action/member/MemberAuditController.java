@@ -124,6 +124,7 @@ public class MemberAuditController extends BaseController {
 		try {
 			memberAuditService.auditCustomer(auditRec);
 			this.msgService.saveMsg(auditRec, sessionEntity.getId(),null);
+			this.msgService.deleteGroup(sessionEntity.getId(), auditRec.getId(),"1010","1020");//1010：新用户申请，1020：用户信息更改
 		} catch (BusinessException e) {
 			logger.error("消息生成失败："+"\n" + e.getMessage(), e);
 		} catch (Exception e) {

@@ -115,7 +115,10 @@ public class StatementController extends BaseController {
 	@ResponseBody
 	public Object saveCloselist(String orderid, Root root, String stat){
 		try{
+			HttpSession session = request.getSession();
+			SessionEntity sessionEntity =  (SessionEntity) session.getAttribute(Constants.SESSIONID);
 			this.fStatementService.saveCloselist(root, orderid, stat);
+			this.msgService.saveMsg(fStatementService.findFStatByOrderid(orderid), sessionEntity.getId(), "-10");
 		}catch(Exception e){
 			logger.error("保存结算单失败", e);
 			return JsonResult.jsonError("保存结算单失败");
@@ -294,7 +297,6 @@ public class StatementController extends BaseController {
 					String statId=clearOrderService.addFStatement(fStatement);
 					message="结算单生成成功，"+
 					"单号<a href='/cOrder/showFS.htm?fsId="+statId+"'>"+statId+"</a>";
-					this.msgService.saveMsg(fStatement, sessionEntity.getId(),"");
 				} catch (BusinessException e) {
 					logger.error("消息生成失败："+"\n" + e.getMessage(), e);
 				} catch (Exception e) {

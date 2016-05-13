@@ -101,6 +101,7 @@
 													<input type="text" id="fsName" name="fsName"
 														value="${orderlist.fsName }" class="form-control"
 														placeholder="订单名称" />
+														<input type="hidden" value="${orderlist.fsType }" id="fsType" name="fsType">
 												</div>
 											</div>
 										</div>

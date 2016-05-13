@@ -155,6 +155,7 @@ public class PayConfirController extends BaseController {
 			payConfirService.orderConfir(order, operid);
 			order.setFsOperId(sessionEntity.getId());
 			this.msgService.saveMsg(order, sessionEntity.getId(),"6");
+			this.msgService.deleteGroup(sessionEntity.getId(), orderId,"2050");//2050订单线下支付消息模板
 			logger.debug("orderId为"+orderId+"的详细信息：{}", order);
 		} catch (BusinessException e) {
 			logger.error("消息生成失败："+"\n" + e.getMessage(), e);
@@ -190,6 +191,7 @@ public class PayConfirController extends BaseController {
 			
 			statement.setOperId(sessionEntity.getId());
 			this.msgService.saveMsg(statement, sessionEntity.getId(), "-1");
+			this.msgService.deleteGroup(sessionEntity.getId(), fStatementService.findFStatByFSId(fsId).getOrderId(),"3021","3030");//3021、3030，结算单线下支付和结算单客户确认消息模板
 		} catch (BusinessException e) {
 			logger.error("消息生成失败："+"\n" + e.getMessage(), e);
 		} catch (Exception e) {

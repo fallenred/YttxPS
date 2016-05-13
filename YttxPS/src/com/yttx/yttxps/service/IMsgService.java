@@ -28,5 +28,7 @@ public interface IMsgService {
 	
 	boolean readMsg(String id);
 
-	void delete(String id);
+	boolean delete(String id);
+	
+	int deleteGroup(String operid, String fsNo, String... msgTemp);
 }
