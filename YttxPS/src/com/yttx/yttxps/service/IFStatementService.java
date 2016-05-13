@@ -72,9 +72,8 @@ public interface IFStatementService {
 	/**
 	 * 保存结算单
 	 * @param root 协议
-	 * @param orderid 订单号
-	 * @param stat 状态
+	 * @param fStatement 结算单
 	 * @throws Exception 
 	 */
-	void saveCloselist(Root root, String orderid, String stat) throws Exception;
+	void saveCloselist(Root root, FStatement fStatement) throws Exception;
 }

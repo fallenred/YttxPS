@@ -130,6 +130,7 @@ jQuery(function($) {
 		});
 		$("#totalprofit").html(totalprofit);
 		$("#input_totalprofit").val(totalprofit);
+		getIncome();
 	}
 
 	//购物信息提交

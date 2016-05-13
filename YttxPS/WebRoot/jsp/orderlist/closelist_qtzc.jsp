@@ -53,7 +53,7 @@
 			<tr>
 				<td>总计<input type="hidden" id="qtzc_index" value="${fn:length(content.costdetails.other.reslist)}"/></td>
 				<td colspan="4" style="text-align: left;">
-					<input type="text" readonly="readonly" value="" style="width:100%;text-align: left;" class="qtzcTotal" id="qtzcTotal" name="body.costdetails.other.total">
+					<input type="text" readonly="readonly" value="${content.costdetails.other.total }" style="width:100%;text-align: left;" class="qtzcTotal expTotal" id="qtzcTotal" name="body.costdetails.other.total">
 				</td>
 				<td><button id="addQtzc" type="button" class="btn btn-success btn-xs btn_add">新增</button></td>
 			</tr>

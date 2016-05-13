@@ -30,7 +30,7 @@ jQuery(function($) {
 				getRoom($(this));
 				$(this).next().next().val($(this).find("option:selected").text());
 			});
-			setJdTotal();
+			//setJdTotal();
 		}
 	});
 /*	$(document).on('change key','.jd',function(){
@@ -127,6 +127,7 @@ jQuery(function($) {
 			jdTotal += value;
 		});
 		$("#jdTotal").val(jdTotal.toFixed(2));
+		getExpenditure();
 	}
 	
 	//设置隐藏域
@@ -142,7 +143,7 @@ jQuery(function($) {
 		$(".jdSum").each(function(){
 			setJdSum($(this));
 		});
-		setJdTotal();
+//		setJdTotal();
 	});
 	
 	//事件计算
@@ -182,7 +183,7 @@ jQuery(function($) {
 		$(".jd:last").next().next().val($(".jd:last").find("option:selected").text());
 		
 		setJdSum($(".jd:last"));
-		setJdTotal();
+//		setJdTotal();
 		$("#jd_index").val(parseInt(index) + 1);
 	    $('.datetimepicker').daterangepicker({
 			singleDatePicker: true,
@@ -196,8 +197,7 @@ jQuery(function($) {
 				daysOfWeek : [ '日', '一', '二', '三', '四', '五', '六' ],
 				monthNames : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月' ],
 				firstDay : 1
-			},
-	        startDate: moment().subtract(6, 'days')
+			}
 		});
 	});
 

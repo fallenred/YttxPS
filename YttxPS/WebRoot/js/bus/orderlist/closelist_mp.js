@@ -23,7 +23,7 @@ jQuery(function($) {
 				$(this).next().attr("style","width:160px;");
 				$(".mp:last").next().next().val($(".mp:last").find("option:selected").text());
 			});
-			setMpTotal();
+//			setMpTotal();
 		}
 	});
 	
@@ -118,6 +118,7 @@ jQuery(function($) {
 			mpTotal += value;
 		});
 		$("#mpTotal").val(mpTotal.toFixed(2));
+		getExpenditure();
 	}
 	
 	//初始计算
@@ -125,7 +126,7 @@ jQuery(function($) {
 		$(".mpSum").each(function(){
 			setMpSum($(this));
 		});
-		setMpTotal();
+		//setMpTotal();
 	});
 	
 	//设置隐藏域
@@ -172,7 +173,7 @@ jQuery(function($) {
 		getMpType($(".mp:last"));
 		$(".mp:last").next().next().val($(".mp:last").find("option:selected").text());
 		setMpSum($(".mp:last"));
-		setMpTotal();
+		//setMpTotal();
 		$("#mp_index").val(parseInt(index) + 1);
 	});
 

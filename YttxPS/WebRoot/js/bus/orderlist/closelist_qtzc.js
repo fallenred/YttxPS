@@ -25,7 +25,7 @@ jQuery(function($) {
 				$(this).next().next().val($(this).find("option:selected").text());
 				$(".qtzc:last").next().next().val($(".qtzc:last").find("option:selected").text());
 			});
-			setQtzcTotal();
+//			setQtzcTotal();
 		}
 	});
 	
@@ -89,6 +89,7 @@ jQuery(function($) {
 			qtzcTotal += qtzcSum;
 		});
 		$("#qtzcTotal").val(qtzcTotal.toFixed(2));
+		getExpenditure();
 	}
 	
 	//初始计算
@@ -96,7 +97,7 @@ jQuery(function($) {
 		$(".qtzcSum").each(function(){
 			setQtzcSum($(this));
 		});
-		setQtzcTotal();
+//		setQtzcTotal();
 	});
 	
 	//隐藏域值设置
@@ -138,7 +139,7 @@ jQuery(function($) {
 		$(".qtzc:last").next().attr("style","width:160px;");
 		$(".qtzc:last").next().next().val($(".qtzc:last").find("option:selected").text());
 		setQtzcSum($(".qtzc:last"));
-		setQtzcTotal();
+//		setQtzcTotal();
 		$("#qtzc_index").val(parseInt(index) + 1);
 
 	});
