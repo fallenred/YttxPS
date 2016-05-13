@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.yttx.yttxps.comm.Constants.MsgTemp;
 import com.yttx.yttxps.comm.Constants.OrderStat;
 import com.yttx.yttxps.mapper.TOrderCustomMapper;
 import com.yttx.yttxps.mapper.TOrderlistMapper;
@@ -94,6 +93,7 @@ public class OrderlistService implements IOrderlistService {
 		record.setFcCommressnapshot(fcCommressnapshot);
 		
 		//批次精确资源:ordercustom-fc_ResSnapshot
+		List<TOrderCustomWithBLOBs> orderCustomList = new ArrayList<TOrderCustomWithBLOBs>();
 		if (CollectionUtils.isNotEmpty(record.getBatchBody())){
 			for (int i = 0; i < record.getBatchBody().size(); i++) {
 				Body body = record.getBatchBody().get(i);
@@ -106,6 +106,7 @@ public class OrderlistService implements IOrderlistService {
 				customWithBLOBs.setFcRessnapshot(fcRessnapshot);
 				customWithBLOBs.setFiId(new BigDecimal(body.getFiId()));
 				customWithBLOBs.setFdAmt(record.getBatchAmt().get(i));
+				orderCustomList.add(customWithBLOBs);
 				orderCustomMapper.updateByPrimaryKeySelective(customWithBLOBs);
 			}
 		}
@@ -131,6 +132,16 @@ public class OrderlistService implements IOrderlistService {
 				}
 				remarksMapper.insertSelective(remarks);
 //				msgService.saveMsg(remarks, record.getFsOperId());
+			}
+		}
+		//生成结算单
+		TCloselist closeList = closelistService.selectByOrderId(record.getFsNo());
+		if (OrderStat.AUDITED.getVal().compareTo(new BigDecimal(record.getFiStat())) == 0) {
+			if(closeList != null && closeList.getFiStat().compareTo(new BigDecimal("-10")) == 0) {
+				closelistService.delete(closeList.getFsNo());
+				closelistService.creatCloseList(record, orderCustomList);
+			} else if(closeList == null) {
+				closelistService.creatCloseList(record, orderCustomList);
 			}
 		}
 		
@@ -220,6 +231,7 @@ public class OrderlistService implements IOrderlistService {
 		if("-5".equals(record.getFiStat()))
 			record.setFdTotalfee(record.getFdPrice());
 		
+		//生成结算单
 		TCloselist closeList = closelistService.selectByOrderId(record.getFsNo());
 		if (OrderStat.AUDITED.getVal().compareTo(new BigDecimal(record.getFiStat())) == 0) {
 			if(closeList != null && closeList.getFiStat().compareTo(new BigDecimal("-10")) == 0) {
