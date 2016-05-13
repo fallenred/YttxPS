@@ -21,6 +21,8 @@ import com.yttx.yttxps.mapper.TCloselistMapper;
 import com.yttx.yttxps.mapper.TRestaurantMapper;
 import com.yttx.yttxps.xml.bean.closeList.Car;
 import com.yttx.yttxps.xml.bean.closeList.CostDetails;
+import com.yttx.yttxps.xml.bean.closeList.Entertainment;
+import com.yttx.yttxps.xml.bean.closeList.IncomeDetails;
 import com.yttx.yttxps.xml.bean.closeList.Other;
 import com.yttx.yttxps.model.CustomInfo;
 import com.yttx.yttxps.model.CustomOper;
@@ -44,6 +46,7 @@ import com.yttx.yttxps.xml.bean.Reslist;
 import com.yttx.yttxps.xml.bean.Root;
 import com.yttx.yttxps.xml.bean.closeList.Accomadation;
 import com.yttx.yttxps.xml.bean.closeList.Restaurant;
+import com.yttx.yttxps.xml.bean.closeList.Shop;
 import com.yttx.yttxps.xml.bean.closeList.Ticket;
 
 
@@ -158,9 +161,9 @@ public class CloselistService implements ICloselistService {
 		List<com.yttx.yttxps.xml.bean.closeList.Reslist> accoReslist = new ArrayList<com.yttx.yttxps.xml.bean.closeList.Reslist>();
 		accomadation.setReslist(accoReslist);
 		
-		Other other = new Other();
+		Other otherCost = new Other();
 		List<com.yttx.yttxps.xml.bean.closeList.Reslist> otherReslist = new ArrayList<com.yttx.yttxps.xml.bean.closeList.Reslist>();
-		other.setReslist(otherReslist);
+		otherCost.setReslist(otherReslist);
 		
 		com.yttx.yttxps.xml.bean.closeList.Reslist insuranceResList = new com.yttx.yttxps.xml.bean.closeList.Reslist();
 		insuranceResList.setTypeno("01");
@@ -258,10 +261,22 @@ public class CloselistService implements ICloselistService {
 		CostDetails costDetails = new CostDetails();
 		costDetails.setAccomadation(accomadation);
 		costDetails.setCar(car);
-		costDetails.setOther(other);
+		costDetails.setOther(otherCost);
 		costDetails.setRestaurant(restaurant);
 		costDetails.setTicket(ticket);
 		closeBody.setCostdetails(costDetails);
+		
+		IncomeDetails incomeDetails = new IncomeDetails();
+		Shop shop = new Shop();
+		shop.setTotal("0");
+		Entertainment entertainment = new Entertainment();
+		entertainment.setTotal("0");
+		Other otherIncome = new Other();
+		otherIncome.setTotal("0");
+		incomeDetails.setShop(shop);
+		incomeDetails.setEntertainment(entertainment);
+		incomeDetails.setOther(otherIncome);
+		closeBody.setIncomedetails(incomeDetails);
 	}
 	
 	protected void calculateTotalPrice(com.yttx.yttxps.xml.bean.closeList.Body closeBody) {
