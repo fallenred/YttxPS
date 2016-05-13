@@ -97,9 +97,7 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 	 */
 	@RequestMapping(value="page.htm")
 	public String openPage(Model model, String orderID, String msgid){
-		if(StringUtils.isNoneEmpty(msgid)){
-			msgService.readMsg(msgid);
-		}
+//		msgService.readMsg(msgid);
 		model.addAttribute("orderID", orderID);
 		return "orderlist/orderlist";
 	}
@@ -141,9 +139,7 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 	 */
 	@RequestMapping(value="showOrder.htm")
 	public String openOrderPage(Model model, String pageName, String fsNo, String msgid){
-		if(StringUtils.isNoneEmpty(msgid)){
-			msgService.readMsg(msgid);
-		}
+		msgService.readMsg(msgid);
 		TOrderlist orderlist = this.orderlistService.selectByPrimaryKey(fsNo);
 		DictExample example = new DictExample();
 		com.yttx.yttxps.model.DictExample.Criteria criteria = example.createCriteria();

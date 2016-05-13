@@ -68,9 +68,7 @@ public class PayConfirController extends BaseController {
 		} else if (StringUtils.isNoneEmpty(closeID)){
 			model.addAttribute("closeID", closeID);
 		}
-		if(StringUtils.isNoneEmpty(msgid)){
-			msgService.readMsg(msgid);
-		}
+		msgService.readMsg(msgid);
 		//将订单状态发送到web端
 		Object order_stat_item = getDictMapJsonByParentNo("order_stat");
 		model.addAttribute("order_stat_item",order_stat_item);
@@ -112,9 +110,7 @@ public class PayConfirController extends BaseController {
 	@RequestMapping(value="showOrder.htm")
 	public String openOrderPage(@RequestParam("orderId") String orderId,
 			Model model, String msgid){
-		if(StringUtils.isNoneEmpty(msgid)){
-			msgService.readMsg(msgid);
-		}
+		msgService.readMsg(msgid);
 		Map<String, String> zy_map = getDictMapByParentNo("zy");
 		model.addAttribute("zy_map", zy_map);
 		DetailOrder dOrder = payConfirService.findOrderDetail(orderId);
@@ -129,9 +125,7 @@ public class PayConfirController extends BaseController {
 	@RequestMapping(value="showStatement.htm")
 	public String openStatementPage(@RequestParam("fsId") String fsId,
 			Model model, String msgid){
-		if(StringUtils.isNoneEmpty(msgid)){
-			msgService.readMsg(msgid);
-		}
+		msgService.readMsg(msgid);
 		Map<String, String> zy_map = getDictMapByParentNo("zy");
 		model.addAttribute("zy_map", zy_map);
 		FStatement statement = fStatementService.findFStatByFSId(fsId);
@@ -149,9 +143,7 @@ public class PayConfirController extends BaseController {
 	@RequestMapping(value="orderConfir.htm")
 	@ResponseBody
 	public Object ajaxOrderConfir(@RequestParam("orderId") String orderId, BigDecimal paidAmt, String msgid){
-		if(StringUtils.isNoneEmpty(msgid)){
-			msgService.readMsg(msgid);
-		}
+		msgService.readMsg(msgid);
 		TOrderlist order = new TOrderlistWithBLOBs();
 		HttpSession session = request.getSession();
 		SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);

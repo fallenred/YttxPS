@@ -55,9 +55,7 @@ public class MemberAuditController extends BaseController {
 	 */
 	@RequestMapping(value="page.htm")
 	public String openManagePage(Model model,String cusID, String msgid){
-		if(StringUtils.isNoneEmpty(msgid)){
-			msgService.readMsg(msgid);
-		}
+		msgService.readMsg(msgid);
 		List<Dict> auditRet_list= getDictListByParentNo("cus_adtret");
 		Object auditRet_Json = getDictMapJsonByParentNo("cus_adtret");
 		model.addAttribute("auditRet_list", auditRet_list);

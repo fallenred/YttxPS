@@ -478,13 +478,19 @@ public class MsgService implements IMsgService {
 		return list;
 	}
 
+	/**
+	 * @return 返回是否成功设置msg状态为已读（之前已是已读也算） 
+	 */
 	@Override
 	public boolean readMsg(String id) {
+		if(!org.apache.commons.lang3.StringUtils.isNoneEmpty(id)){
+			return false;
+		}
 		Message message = new Message();
 		message.setId(new BigDecimal(id));
 		message.setMsgStat("1");
 		messageMapper.updateByPrimaryKey(message);
-		return false;
+		return true;
 	}
 
 	@Override

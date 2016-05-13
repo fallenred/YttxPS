@@ -112,15 +112,6 @@ static Logger logger = LoggerFactory.getLogger(LoginController.class);
 		return "message/show";
 	}
 	
-	/**
-	 * 打开消息管理的界面
-	 */
-	@RequestMapping(value="delMsg.htm")
-	public String deleteMsg(@RequestParam(value = "id") String  id,Model model){
-		msgService.readMsg(id);
-		return "message/show";
-	}
-	
 	
 	/**
 	 * 删除消息

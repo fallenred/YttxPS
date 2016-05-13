@@ -66,9 +66,7 @@ public class StatementController extends BaseController {
 	 */
 	@RequestMapping(value="page.htm")
 	public String openPage(Model model,String orderID,String closeID,String msgid){
-		if(StringUtils.isNoneEmpty(msgid)){
-			msgService.readMsg(msgid);
-		}
+		msgService.readMsg(msgid);
 		if(StringUtils.isNoneEmpty(orderID)){
 			model.addAttribute("orderID",orderID);
 		} else if (StringUtils.isNoneEmpty(closeID)){
