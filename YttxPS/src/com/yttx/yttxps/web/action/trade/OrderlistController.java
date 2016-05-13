@@ -258,10 +258,9 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 			HttpSession session = request.getSession();
 			SessionEntity sessionEntity = (SessionEntity)session.getAttribute(Constants.SESSIONID);
 			orderlist.setFsOperId(sessionEntity.getId());
-			String oldStat = orderlist.getFiStat();
+			String oldStat = orderlistService.selectByPrimaryKey(orderlist.getFsNo()).getFiStat();
 			orderlistService.update(orderlist);
 			this.msgService.saveMsg(orderlist, sessionEntity.getId(),oldStat);
-		
 		}catch (BusinessException e) {
 			logger.error("消息生成失败："+"\n" + e.getMessage(), e);
 		} catch (Exception e){
