@@ -134,16 +134,9 @@ public class OrderlistService implements IOrderlistService {
 //				msgService.saveMsg(remarks, record.getFsOperId());
 			}
 		}
+		
 		//生成结算单
-		TCloselist closeList = closelistService.selectByOrderId(record.getFsNo());
-		if (OrderStat.AUDITED.getVal().compareTo(new BigDecimal(record.getFiStat())) == 0) {
-			if(closeList != null && closeList.getFiStat().compareTo(new BigDecimal("-10")) == 0) {
-				closelistService.delete(closeList.getFsNo());
-				closelistService.creatCloseList(record, orderCustomList);
-			} else if(closeList == null) {
-				closelistService.creatCloseList(record, orderCustomList);
-			}
-		}
+		closeListGenerate(record, orderCustomList);
 		
 		return orderlistMapper.updateByPrimaryKeySelective(record);
 	}
@@ -232,19 +225,27 @@ public class OrderlistService implements IOrderlistService {
 			record.setFdTotalfee(record.getFdPrice());
 		
 		//生成结算单
-		TCloselist closeList = closelistService.selectByOrderId(record.getFsNo());
-		if (OrderStat.AUDITED.getVal().compareTo(new BigDecimal(record.getFiStat())) == 0) {
-			if(closeList != null && closeList.getFiStat().compareTo(new BigDecimal("-10")) == 0) {
-				closelistService.delete(closeList.getFsNo());
-				closelistService.creatCloseList(record, orderCustomList);
-			} else if(closeList == null) {
-				closelistService.creatCloseList(record, orderCustomList);
-			}
-		}
+		closeListGenerate(record, orderCustomList);
 		
 		return orderlistMapper.updateByPrimaryKeySelective(record);
 	}
 
+	/**
+	 * 生成结算单
+	 * @throws Exception 
+	 */
+	private void closeListGenerate(TOrderlistWithBLOBs orderList, List<TOrderCustomWithBLOBs> orderCustomList) throws Exception {
+		TCloselist closeList = closelistService.selectByOrderId(orderList.getFsNo());
+		if (OrderStat.AUDITED.getVal().compareTo(new BigDecimal(orderList.getFiStat())) == 0) {
+			if(closeList != null && closeList.getFiStat().compareTo(new BigDecimal("-10")) == 0) {
+				closelistService.delete(closeList.getFsNo());
+				closelistService.creatCloseList(orderList, orderCustomList);
+			} else if(closeList == null) {
+				closelistService.creatCloseList(orderList, orderCustomList);
+			}
+		}
+	}
+	
 	@Override
 	public int delete(String fsNo) {
 		TOrderlistWithBLOBs record = new TOrderlistWithBLOBs();
