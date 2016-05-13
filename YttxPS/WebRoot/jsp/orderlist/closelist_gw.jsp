@@ -91,7 +91,7 @@
 			<tr>
 				<td>总计收入</td>
 				<td colspan="10" style="text-align: left;">
-					${content.incomedetails.shop.total }&nbsp;元<input type="hidden" class="total" value="${content.incomedetails.shop.total }"/></td>
+					${content.incomedetails.shop.total }&nbsp;元<input type="hidden" class="total incTotal" value="${content.incomedetails.shop.total }"/></td>
 				<td><button id="btn_gw_add" class="btn btn-success btn-xs btn_add"
 						data-toggle="modal" type="button">新增</button></td>
 			</tr>
@@ -342,6 +342,7 @@
 					if (json.result == "ok") {
 						var template = Handlebars.compile($("#tr-reslist").html());
 						$("#tbody_reslist").html(template(json.shopInfo));
+						getIncome();
 						return true;
 					}
 				});
@@ -434,7 +435,7 @@
 			<tr>
 				<td>总计收入</td>
 				<td colspan="10" style="text-align: left;">
-					{{total }}&nbsp;元<input type="hidden" class="incTotal" value="{{total }}"/></td>
+					{{total }}&nbsp;元<input type="hidden" class="total incTotal" value="{{total }}"/></td>
 				<td><button id="btn_gw_add" class="btn btn-success btn-xs btn_add"
 						data-toggle="modal" type="button">新增</button></td>
 			</tr>

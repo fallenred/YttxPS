@@ -145,6 +145,7 @@ jQuery(function($) {
 					$("#message_gw").show();
 					var template = Handlebars.compile($("#tr-reslist").html());
 					$("#tbody_reslist").html(template(json.shopInfo));
+					getIncome();
 					return true;
 				}
 				else {

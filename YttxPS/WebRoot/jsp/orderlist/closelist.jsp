@@ -108,7 +108,7 @@ input {
 									<input type="hidden" id="income" value="${content.income - content.minproceeds }"/>
 								</td>
 								<td><input type="text" id="minproceeds" value="${content.minproceeds }" class="form-control number required total" name="body.minproceeds"></td>
-								<td><input type="text" id="customExpenditure" value="${content.expenditure - content.minproceeds}" class="form-control number required total" name=""></td>
+								<td><input type="text" id="customExpenditure" value="${content.expenditure - content.minproceeds}" class="form-control number required total" name="body.custexpend"></td>
 								<td>
 									<c:if test="${content.custprofit == 0}">
 										<input type="text" id="customIncome" value="${content.income - content.minproceeds }" class="form-control number required total" name="body.custprofit">

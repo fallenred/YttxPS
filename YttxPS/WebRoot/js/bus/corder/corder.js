@@ -110,10 +110,10 @@ $(document).ready(function(){
 	 */
 	$("#order_submit").click(function(){
 		var postData = $("#order_table").jqGrid("getGridParam","postData");
-		postData["filters.orderId"] = $.trim($("#order_id").val());
-		postData["filters.oderName"] = $.trim($("#order_name").val());
-		postData["filters.createDateRange"] = $.trim($("#order_date_range").val());
-		postData["filters.routeType"] = $("#order_route_type").val();
+		postData["fstatFilters.orderId"] = $.trim($("#order_id").val());
+		postData["fstatFilters.oderName"] = $.trim($("#order_name").val());
+		postData["fstatFilters.createDateRange"] = $.trim($("#order_date_range").val());
+		postData["fstatFilters.routeType"] = $("#order_route_type").val();
 		$("#order_table").jqGrid("setGridParam", {
 			datatype : 'json',
 			postData : postData
