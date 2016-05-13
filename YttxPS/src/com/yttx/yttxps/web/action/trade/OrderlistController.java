@@ -262,7 +262,7 @@ static Logger logger = LoggerFactory.getLogger(OrderlistController.class);
 			orderlistService.update(orderlist);
 			this.msgService.saveMsg(orderlist, sessionEntity.getId(),oldStat);
 		}catch (BusinessException e) {
-			logger.error("消息生成失败："+"\n" + e.getMessage(), e);
+			logger.error("消息生成失败：\n" + e.getMessage(), e);
 		} catch (Exception e){
 			e.printStackTrace();
 			logger.error("更新订单失败, 订单编号："+orderlist.getFsNo() + "\n" + e.getMessage());

@@ -490,7 +490,7 @@ public class MsgService implements IMsgService {
 		Message message = new Message();
 		message.setId(new BigDecimal(id));
 		message.setMsgStat("1");
-		messageMapper.updateByPrimaryKey(message);
+		messageMapper.updateByPrimaryKeySelective(message);
 		return true;
 	}
 
