@@ -24,7 +24,7 @@ jQuery(function($) {
 				$(this).next().attr("style","width:150px;");
 				$(this).next().next().val($(this).find("option:selected").text());
 			});
-			setYlTotal();
+//			setYlTotal();
 		}
 	});
 	
@@ -91,6 +91,7 @@ jQuery(function($) {
 			ylTotal += value;
 		});
 		$("#ylTotal").val(ylTotal.toFixed(2));
+		getIncome();
 	}
 	
 	//初始计算
@@ -98,7 +99,7 @@ jQuery(function($) {
 		$(".ylProfit").each(function(){
 			setYlProfit($(this));
 		});
-		setYlTotal();
+//		setYlTotal();
 	});
 	$(document).on('change key', '.ylCount',function(){
 		$(this).val($(this).val().trim());
@@ -146,7 +147,7 @@ jQuery(function($) {
 		$(".yl:last").next().attr("style","width:150px;");
 		$(".yl:last").next().next().val($(".yl:last").find("option:selected").text());
 		setYlProfit($(".yl:last"));
-		setYlTotal();
+//		setYlTotal();
 		$("#yl_index").val(parseInt(index) + 1);
 		$('.datetimepicker').daterangepicker({
 			singleDatePicker: true,
@@ -160,8 +161,7 @@ jQuery(function($) {
 				daysOfWeek : [ '日', '一', '二', '三', '四', '五', '六' ],
 				monthNames : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月' ],
 				firstDay : 1
-			},
-	        startDate: moment().subtract(6, 'days')
+			}
 		});
 	});
 

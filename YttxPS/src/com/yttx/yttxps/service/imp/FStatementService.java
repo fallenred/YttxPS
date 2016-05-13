@@ -10,17 +10,19 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yttx.except.BusinessException;
-import com.yttx.yttxps.mapper.CustomOperMapper;
 import com.yttx.yttxps.mapper.FStatementMapper;
-import com.yttx.yttxps.model.CustomOper;
+import com.yttx.yttxps.mapper.TOrderlistMapper;
+import com.yttx.yttxps.model.TOrderlist;
 import com.yttx.yttxps.model.corder.FStatement;
 import com.yttx.yttxps.service.IFStatementService;
 import com.yttx.yttxps.service.IPubService;
 import com.yttx.yttxps.xml.ResScheduleXMLConverter;
 import com.yttx.yttxps.xml.bean.closeList.Body;
 import com.yttx.yttxps.xml.bean.closeList.CostDetails;
+import com.yttx.yttxps.xml.bean.closeList.Entertainment;
 import com.yttx.yttxps.xml.bean.closeList.IncomeDetails;
 import com.yttx.yttxps.xml.bean.closeList.Other;
 import com.yttx.yttxps.xml.bean.closeList.Reslist;
@@ -41,6 +43,9 @@ public class FStatementService implements IFStatementService{
 	
 	@Autowired
 	private FStatementMapper<FStatement>  fStatementMapper;
+	
+	@Autowired
+	private TOrderlistMapper<TOrderlist> orderlistMapper;
 
 	@Override
 	public List<FStatement> selectSelectivePage(Map<String, Object> map) {
@@ -98,21 +103,21 @@ public class FStatementService implements IFStatementService{
 	}
 
 	@Override
-	public void saveCloselist(Root root, String orderid, String stat) throws Exception{
-		FStatement fStatement = this.fStatementMapper.selectFSByOrderId(orderid);
-		if (fStatement == null) {
-			throw new BusinessException("结算单信息不存在");
-		}
+	@Transactional(rollbackFor=Exception.class)
+	public void saveCloselist(Root root, FStatement fStatement) throws Exception{
 		Root origRoot = ResScheduleXMLConverter.fromXml("www.yttx.co", fStatement.getOrderContent(), Root.class);
 		IncomeDetails incomeDetails = origRoot.getBody().getIncomedetails();
 		if (incomeDetails == null) {
 			incomeDetails = new IncomeDetails();
 			Shop shop = new Shop();
 			shop.setTotal("0");
+			Entertainment entertainment = new Entertainment();
+			entertainment.setTotal("0");
 			Other other = new Other();
 			other.setTotal("0");
 			incomeDetails.setShop(shop);
 			incomeDetails.setOther(other);
+			incomeDetails.setEntertainment(entertainment);
 		}
 		Body body = root.getBody();
 		Shop shop = incomeDetails.getShop();
@@ -122,7 +127,7 @@ public class FStatementService implements IFStatementService{
 		BigDecimal entertainmentTotal = new BigDecimal(incomeDetails.getEntertainment().getTotal());	//娱乐收入
 		BigDecimal otherTotal = new BigDecimal(incomeDetails.getOther().getTotal());	//其他收入
 		income = shopTotal.add(entertainmentTotal).add(otherTotal);
-		body.setIncome(income.toString());
+		body.setIncome(income);
 		BigDecimal expenditure = BigDecimal.ZERO;	//总支出
 		BigDecimal carTotal = new BigDecimal(costDetails.getCar().getTotal());	//车辆支出
 		BigDecimal accomadationTotal = new BigDecimal(costDetails.getAccomadation().getTotal());//酒店支出
@@ -130,20 +135,22 @@ public class FStatementService implements IFStatementService{
 		BigDecimal ticketTotal = new BigDecimal(costDetails.getTicket().getTotal());	//门票支出
 		BigDecimal otherTotal1 = new BigDecimal(costDetails.getOther().getTotal());	//其他支出
 		expenditure = carTotal.add(accomadationTotal).add(restaurant).add(ticketTotal).add(otherTotal1);
-		body.setExpenditure(expenditure.toString());
+		body.setExpenditure(expenditure);
 		BigDecimal profit = BigDecimal.ZERO;		//总利润
 		profit = income.subtract(profit);
-		body.setProfit(profit.toString());
+		body.setProfit(profit);
 		root.getBody().getIncomedetails().setShop(shop);
 		String content = ResScheduleXMLConverter.toXml("www.yttx.co", root);
 		//清楚空节点
 		content = content.replace("<reslist/>", "");
 		fStatement.setOrderContent(content);
-		//设置结算单状态
-		if (StringUtils.isNotBlank(stat)){
-			fStatement.setStat(Long.parseLong(stat));
-		}
 		this.fStatementMapper.updateFSSelective(fStatement);
+		if (fStatement.getStat() == 0) {
+			TOrderlist orderlist = this.orderlistMapper.selectByPrimaryKey(fStatement.getOrderId());
+			//设置订单状态为已入结算单
+			orderlist.setFiStat("32");
+			this.orderlistMapper.updateByPrimaryKey(orderlist);
+		}
 		
 	}
 	

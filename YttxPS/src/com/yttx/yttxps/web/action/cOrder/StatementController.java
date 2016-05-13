@@ -109,15 +109,26 @@ public class StatementController extends BaseController {
 	 * @param orderid
 	 * @param root
 	 * @param stat
+	 * @param paidAmt 已付金额
+	 * @param amt 应付金额
 	 * @return
 	 */
 	@RequestMapping(value="saveCloselist.htm")
 	@ResponseBody
-	public Object saveCloselist(String orderid, Root root, String stat){
+	public Object saveCloselist(String orderid, Root root, String stat, BigDecimal paidAmt, BigDecimal amt){
 		try{
-			HttpSession session = request.getSession();
-			SessionEntity sessionEntity =  (SessionEntity) session.getAttribute(Constants.SESSIONID);
-			this.fStatementService.saveCloselist(root, orderid, stat);
+			FStatement fStatement = this.fStatementService.findFStatByOrderid(orderid);
+			if (fStatement == null) {
+				throw new BusinessException("结算单信息不存在");
+			}
+			fStatement.setPaidAmt(paidAmt);
+			fStatement.setAmt(amt);
+			fStatement.setTotalFee(paidAmt.add(amt));
+			//客户待确认
+			if (StringUtils.isNotBlank(stat)){
+				fStatement.setStat(Long.valueOf(stat));
+			}
+			this.fStatementService.saveCloselist(root, fStatement);
 			this.msgService.saveMsg(fStatementService.findFStatByOrderid(orderid), sessionEntity.getId(), "-10");
 		}catch(Exception e){
 			logger.error("保存结算单失败", e);

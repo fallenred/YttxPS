@@ -126,8 +126,6 @@
 													 -->
 													<select class="form-control" id="fiStat">
 														<option value="">----状态----</option>
-														<option value="-10">询价</option>
-														<option value="-5">报价</option>
 														<option value="0">待审核</option>
 														<option value="1">已审核</option>
 														<option value="6">线下支付</option>

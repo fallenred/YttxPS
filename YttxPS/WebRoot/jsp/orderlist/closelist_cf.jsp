@@ -39,8 +39,8 @@
 					<td><select style="width:160px;text-align:center" class="cf" name="body.costdetails.restaurant.reslist[${status.index }].resno"><option value="${reslist.resno }">${reslist.name }</option></select>
 						<input type="hidden" name="body.costdetails.restaurant.reslist[${status.index }].name" value="${reslist.name }" /> </td>
 					<td><select style="width:100px;text-align:center"  class="cfType" name="body.costdetails.restaurant.reslist[${status.index }].type"><option value="${reslist.type }"></option></select></td>
-					<td><input type="text" value="${reslist.unitprice }" class="cfPrice isFloatGteZero number input-text" name="body.costdetails.restaurant.reslist[${status.index }].unitprice"></td>
-					<td><input type="text" value="${reslist.number }" class="cfCount isFloatGteZero digits input-text" name="body.costdetails.restaurant.reslist[${status.index }].number"></td>
+					<td><input type="text" value="${reslist.unitprice }" class="cfPrice isFloatGteZero required input-text" name="body.costdetails.restaurant.reslist[${status.index }].unitprice"></td>
+					<td><input type="text" value="${reslist.number }" class="cfCount digits required input-text" name="body.costdetails.restaurant.reslist[${status.index }].number"></td>
 					<td><input type="text" value="${reslist.totalprice }" readonly="readonly" class="cfSum input-text" name="body.costdetails.restaurant.reslist[${status.index }].totalprice"></td>
 					<td><input type="text" value="${reslist.remark }" class="cfRemark input-text" name="body.costdetails.restaurant.reslist[${status.index }].remark"></td>
 					<td><a style="cursor:pointer;" class="deleteCf remove_tr">删除</a></td>
@@ -49,7 +49,7 @@
 			<tr>
 				<td>总计<input type="hidden" id="cf_index" value="${fn:length(content.costdetails.restaurant.reslist)}"/></td>
 				<td colspan="6" style="text-align: left;">
-					<input type="text" readonly="readonly" value="" style="width:100%;text-align: left;" class="cfTotal" id="cfTotal" name="body.costdetails.restaurant.total">
+					<input type="text" readonly="readonly" value="${content.costdetails.restaurant.total }" style="width:100%;text-align: left;" class="cfTotal expTotal" id="cfTotal" name="body.costdetails.restaurant.total">
 				</td>
 				<td><button id="addCf" type="button" class="btn btn-success btn-xs btn_add">新增</button></td>
 			</tr>

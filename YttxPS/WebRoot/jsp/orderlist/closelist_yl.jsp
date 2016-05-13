@@ -50,7 +50,7 @@
 			<tr>
 				<td>总计<input type="hidden" id="yl_index" value="${fn:length(content.incomedetails.entertainment.reslist)}"/></td>
 				<td colspan="7" style="text-align: left;">
-					<input type="text" readonly="readonly" value="" style="width:100%;text-align: left;" name="body.incomedetails.entertainment.total" class="ylTotal" id="ylTotal">
+					<input type="text" readonly="readonly" value="${content.incomedetails.entertainment.total }" style="width:100%;text-align: left;" name="body.incomedetails.entertainment.total" class="ylTotal incTotal" id="ylTotal">
 				</td>
 				<td><button id="addYl" type="button" class="btn btn-success btn-xs btn_add">新增</button></td>
 			</tr>

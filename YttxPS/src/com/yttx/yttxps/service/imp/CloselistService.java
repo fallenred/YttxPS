@@ -120,9 +120,9 @@ public class CloselistService implements ICloselistService {
 		closeBody.setCustopername(customOper.getName());
 		closeBody.setOpername(sysOper.getSysOperName().trim());
 		closeBody.setVisitornum(orderList.getFiVisitornum().toString());
-		closeBody.setMinproceeds("0");
-		closeBody.setCustexpend("0");
-		closeBody.setCustprofit("0");
+		closeBody.setMinproceeds(BigDecimal.ZERO);
+		closeBody.setCustexpend(BigDecimal.ZERO);
+		closeBody.setCustprofit(BigDecimal.ZERO);
 		
 		List<Body> bodyList = new ArrayList<Body>();
 		
@@ -315,7 +315,7 @@ public class CloselistService implements ICloselistService {
 		other.setTotal(otherTotalPrice.toString());
 		
 		BigDecimal totalPrice = otherTotalPrice.add(ticketTotalPrice).add(restTotalPrice).add(carTotalPrice).add(accoTotalPrice);
-		closeBody.setIncome(totalPrice.toString());
+		closeBody.setIncome(totalPrice);
 	}
 	
 	@Override

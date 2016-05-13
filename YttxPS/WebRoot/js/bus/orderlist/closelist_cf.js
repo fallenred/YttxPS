@@ -39,7 +39,7 @@ jQuery(function($) {
 				typeNode.next().attr("style","width:100px;");
 				
 			});
-			setCfTotal();
+			//setCfTotal();
 		}
 	});
 	
@@ -103,6 +103,7 @@ jQuery(function($) {
 			cfTotal += cfSum;
 		});
 		$("#cfTotal").val(cfTotal.toFixed(2));
+		getExpenditure();
 	}
 	
 	//初始计算
@@ -110,7 +111,7 @@ jQuery(function($) {
 		$(".cfSum").each(function(){
 			setCfSum($(this));
 		});
-		setCfTotal();
+		//setCfTotal();
 	});
 	
 	//隐藏域值设置
@@ -157,7 +158,7 @@ jQuery(function($) {
 		typeNode.next().attr("style","width:100px;");
 		$(".cf:last").next().next().val($(".cf:last").find("option:selected").text());
 		setCfSum($(".cf:last"));
-		setCfTotal();
+		//setCfTotal();
 		$("#cf_index").val(parseInt(index) + 1);
 		$(".tr_list:last").find(".datetimepicker").daterangepicker({
 			singleDatePicker: true,
@@ -171,8 +172,7 @@ jQuery(function($) {
 				daysOfWeek : [ '日', '一', '二', '三', '四', '五', '六' ],
 				monthNames : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月' ],
 				firstDay : 1
-			},
-	        startDate: moment().subtract(6, 'days')
+			}
 		});
 	});
 	

@@ -1,5 +1,7 @@
 package com.yttx.yttxps.xml.bean.closeList;
 
+import java.math.BigDecimal;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -50,37 +52,37 @@ public class Body {
 	 * 总收入
 	 */
 	@XStreamAlias("income")
-	private String income;
+	private BigDecimal income;
 	
 	/**
 	 * 总支出
 	 */
 	@XStreamAlias("expenditure")
-	private String expenditure;
+	private BigDecimal expenditure;
 	
 	/**
 	 * 总利润
 	 */
 	@XStreamAlias("profit")
-	private String profit;
+	private BigDecimal profit;
 	
 	/**
 	 * 保底
 	 */
 	@XStreamAlias("minproceeds")
-	private String minproceeds;
+	private BigDecimal minproceeds;
 	
 	/**
 	 * 客户总支出
 	 */
 	@XStreamAlias("custexpend")
-	private String custexpend;
+	private BigDecimal custexpend;
 	
 	/**
 	 * 客户实际利润
 	 */
 	@XStreamAlias("custprofit")
-	private String custprofit;
+	private BigDecimal custprofit;
 	
 	public String getTname() {
 		return tname;
@@ -130,51 +132,51 @@ public class Body {
 		this.incomedetails = incomedetails;
 	}
 
-	public String getIncome() {
+	public BigDecimal getIncome() {
 		return income;
 	}
 
-	public void setIncome(String income) {
+	public void setIncome(BigDecimal income) {
 		this.income = income;
 	}
 
-	public String getExpenditure() {
+	public BigDecimal getExpenditure() {
 		return expenditure;
 	}
 
-	public void setExpenditure(String expenditure) {
+	public void setExpenditure(BigDecimal expenditure) {
 		this.expenditure = expenditure;
 	}
 
-	public String getProfit() {
+	public BigDecimal getProfit() {
 		return profit;
 	}
 
-	public void setProfit(String profit) {
+	public void setProfit(BigDecimal profit) {
 		this.profit = profit;
 	}
 
-	public String getMinproceeds() {
+	public BigDecimal getMinproceeds() {
 		return minproceeds;
 	}
 
-	public void setMinproceeds(String minproceeds) {
+	public void setMinproceeds(BigDecimal minproceeds) {
 		this.minproceeds = minproceeds;
 	}
 
-	public String getCustexpend() {
+	public BigDecimal getCustexpend() {
 		return custexpend;
 	}
 
-	public void setCustexpend(String custexpend) {
+	public void setCustexpend(BigDecimal custexpend) {
 		this.custexpend = custexpend;
 	}
 
-	public String getCustprofit() {
+	public BigDecimal getCustprofit() {
 		return custprofit;
 	}
 
-	public void setCustprofit(String custprofit) {
+	public void setCustprofit(BigDecimal custprofit) {
 		this.custprofit = custprofit;
 	}
 
