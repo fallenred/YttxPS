@@ -14,7 +14,7 @@
     <result column="FS_SENDID" jdbcType="VARCHAR" property="sendid" />
     <result column="FS_RECVID" jdbcType="VARCHAR" property="recvid" />
     <result column="FS_SUBID" jdbcType="VARCHAR" property="subid" />
-    <result column="FT_MSGDATE" jdbcType="DATE" property="msgDate" />
+    <result column="FT_MSGDATE" jdbcType="TIMESTAMP" property="msgDate" />
     <result column="FI_MSGSTAT" jdbcType="DECIMAL" property="MsgStat" />
     <result column="FS_AUTHID" jdbcType="VARCHAR" property="authid" />
     <result column="FS_ID" jdbcType="VARCHAR" property="fsId" />
@@ -158,7 +158,7 @@
       FS_AUTHID, FS_ID)
     values (#{id,jdbcType=DECIMAL}, #{sendType,jdbcType=VARCHAR}, #{msgHead,jdbcType=VARCHAR}, 
       #{msgText,jdbcType=VARCHAR}, #{sendid,jdbcType=VARCHAR}, #{recvid,jdbcType=VARCHAR}, 
-      #{subid,jdbcType=VARCHAR}, #{msgDate,jdbcType=DATE}, #{MsgStat,jdbcType=DECIMAL}, 
+      #{subid,jdbcType=VARCHAR},to_date(to_char(SYSDATE, 'YYYY-MM-DD hh24:mi:ss'),'YYYY-MM-DD hh24:mi:ss'), #{MsgStat,jdbcType=DECIMAL}, 
       #{authid,jdbcType=VARCHAR}, #{fsId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yttx.yttxps.model.Message">
@@ -226,7 +226,7 @@
         #{subid,jdbcType=VARCHAR},
       </if>
       <if test="msgDate != null">
-        #{msgDate,jdbcType=DATE},
+        #{msgDate,jdbcType=TIMESTAMP},
       </if>
       <if test="MsgStat != null">
         #{MsgStat,jdbcType=DECIMAL},
@@ -280,7 +280,7 @@
         FS_SUBID = #{record.subid,jdbcType=VARCHAR},
       </if>
       <if test="record.msgDate != null">
-        FT_MSGDATE = #{record.msgDate,jdbcType=DATE},
+        FT_MSGDATE = #{record.msgDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.MsgStat != null">
         FI_MSGSTAT = #{record.MsgStat,jdbcType=DECIMAL},
@@ -310,7 +310,7 @@
       FS_SENDID = #{record.sendid,jdbcType=VARCHAR},
       FS_RECVID = #{record.recvid,jdbcType=VARCHAR},
       FS_SUBID = #{record.subid,jdbcType=VARCHAR},
-      FT_MSGDATE = #{record.msgDate,jdbcType=DATE},
+      FT_MSGDATE = #{record.msgDate,jdbcType=TIMESTAMP},
       FI_MSGSTAT = #{record.MsgStat,jdbcType=DECIMAL},
       FS_AUTHID = #{record.authid,jdbcType=VARCHAR},
       FS_ID = #{record.fsId,jdbcType=VARCHAR}
@@ -345,7 +345,7 @@
         FS_SUBID = #{subid,jdbcType=VARCHAR},
       </if>
       <if test="msgDate != null">
-        FT_MSGDATE = #{msgDate,jdbcType=DATE},
+        FT_MSGDATE = #{msgDate,jdbcType=TIMESTAMP},
       </if>
       <if test="MsgStat != null">
         FI_MSGSTAT = #{MsgStat,jdbcType=DECIMAL},
@@ -372,7 +372,7 @@
       FS_SENDID = #{sendid,jdbcType=VARCHAR},
       FS_RECVID = #{recvid,jdbcType=VARCHAR},
       FS_SUBID = #{subid,jdbcType=VARCHAR},
-      FT_MSGDATE = #{msgDate,jdbcType=DATE},
+      FT_MSGDATE = #{msgDate,jdbcType=TIMESTAMP},
       FI_MSGSTAT = #{MsgStat,jdbcType=DECIMAL},
       FS_AUTHID = #{authid,jdbcType=VARCHAR},
       FS_ID = #{fsId,jdbcType=VARCHAR}
