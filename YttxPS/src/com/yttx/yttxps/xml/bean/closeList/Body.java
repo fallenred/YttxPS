@@ -71,6 +71,12 @@ public class Body {
 	private String minproceeds;
 	
 	/**
+	 * 客户总支出
+	 */
+	@XStreamAlias("custexpend")
+	private String custexpend;
+	
+	/**
 	 * 客户实际利润
 	 */
 	@XStreamAlias("custprofit")
@@ -154,6 +160,14 @@ public class Body {
 
 	public void setMinproceeds(String minproceeds) {
 		this.minproceeds = minproceeds;
+	}
+
+	public String getCustexpend() {
+		return custexpend;
+	}
+
+	public void setCustexpend(String custexpend) {
+		this.custexpend = custexpend;
 	}
 
 	public String getCustprofit() {
