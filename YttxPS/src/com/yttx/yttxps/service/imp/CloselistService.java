@@ -170,8 +170,9 @@ public class CloselistService implements ICloselistService {
 		com.yttx.yttxps.xml.bean.closeList.Reslist insuranceResList = new com.yttx.yttxps.xml.bean.closeList.Reslist();
 		insuranceResList.setTypeno("01");
 		insuranceResList.setName("保险");
-		insuranceResList.setNumber(orderList.getFiVisitornum() == null ? "0" : orderList.getFiVisitornum().toString());//待订单修改
-		insuranceResList.setTotalprice(orderList.getFdInsuerprice() == null ? "0" : orderList.getFdInsuerprice().toString());//待订单修改
+		insuranceResList.setUnitprice(orderList.getFdInsuerprice().toString());
+		insuranceResList.setNumber("1");//待订单修改
+		insuranceResList.setTotalprice(orderList.getFdInsuerprice().toString());//待订单修改
 		otherReslist.add(insuranceResList);
 		
 		for (Body body : bodyList) {
