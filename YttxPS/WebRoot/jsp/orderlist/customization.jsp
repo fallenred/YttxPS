@@ -820,13 +820,13 @@
 														value="0"> <input type="hidden"
 														class="form-control" name="fdTotalfee" id="fdTotalfee" value="${orderlist.fdTotalfee }" />
 												</div>
-												<label class="col-sm-2 control-label no-padding-right"
+												<!-- <label class="col-sm-2 control-label no-padding-right"
 													for="fdPaidamt">已缴金额</label>
 												<div class="col-sm-3">
 													<input type="text"
 														class="form-control isFloatGteZero number"
 														name="fdPaidamt" id="fdPaidamt">
-												</div>
+												</div> -->
 											</div>
 										</div>
 										<div hidden="hidden" class="row div_custList">

@@ -120,6 +120,10 @@ public class FStatementService implements IFStatementService{
 			incomeDetails.setEntertainment(entertainment);
 		}
 		Body body = root.getBody();
+		body.setTname(origRoot.getBody().getTname());
+		body.setCustopername(origRoot.getBody().getCustopername());
+		body.setOpername(origRoot.getBody().getOpername());
+		body.setVisitornum(origRoot.getBody().getVisitornum());
 		Shop shop = incomeDetails.getShop();
 		CostDetails costDetails = body.getCostdetails();
 		BigDecimal income = body.getIncome();

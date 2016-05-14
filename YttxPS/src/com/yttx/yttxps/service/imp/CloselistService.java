@@ -103,7 +103,7 @@ public class CloselistService implements ICloselistService {
 			orderList.setFdPaidamt(new BigDecimal(0));
 		}
 		closeList.setFdPaidamt(orderList.getFdPaidamt());
-		closeList.setFdAmt(orderList.getFdTotalfee().subtract(orderList.getFdPaidamt()));
+		closeList.setFdAmt(BigDecimal.ZERO);
 		closeList.setFsRemark(orderList.getFsRemark());
 		closeList.setFiStat(new BigDecimal(-10));
 		

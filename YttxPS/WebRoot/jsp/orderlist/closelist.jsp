@@ -112,22 +112,19 @@ input {
 								<td><input type="text" id="minproceeds" value="${content.minproceeds }" class="form-control number required total" name="body.minproceeds"></td>
 								<td><input type="text" id="customExpenditure" value="${content.expenditure - content.minproceeds}" class="form-control number required total" name="body.custexpend"></td>
 								<td>
-									<c:if test="${content.custprofit == 0}">
-										<input type="text" id="customIncome" value="${content.income - content.minproceeds }" class="form-control number required total" name="body.custprofit">
-									</c:if>
-									<c:if test="${content.custprofit != 0}">
-										<input type="text" id="customIncome" value="${content.custprofit}" class="form-control number required total" name="body.custprofit">
-									</c:if>
+									<input type="text" id="customIncome" value="${content.custprofit}" class="form-control number required total" name="body.custprofit">
 								</td>
-								<td><input type="text" id="paidAmt" value="${order.paidAmt }" class="form-control number required total" name="paidAmt"></td>
 								<td>
-									<c:if test="${fStatement.amt == 0}">
-										<input type="text" id="amt" value="${(content.expenditure - content.minproceeds) - (content.income - content.minproceeds) - order.paidAmt}" class="form-control number required total" name="amt">
-									</c:if>
-									<c:if test="${fStatement.amt != 0}">
-										<input type="text" id="amt" value="${fStatement.amt}" class="form-control number required total" name="amt">
-									</c:if>
-									
+									<c:choose>  
+									   <c:when test="${fStatement.paidAmt == 0 || fStatement.paidAmt == null}">
+											<input type="text" id="paidAmt" value="${order.paidAmt }" class="form-control number required total" name="paidAmt"></td>
+									   </c:when>
+									   <c:otherwise>
+											<input type="text" id="paidAmt" value="${fStatement.paidAmt }" class="form-control number required total" name="paidAmt"></td>
+									   </c:otherwise>
+									</c:choose> 
+								<td>
+									<input type="text" id="amt" value="${fStatement.amt}" class="form-control number required total" name="amt">
 								</td>
 							</tr>
 						</tbody>
