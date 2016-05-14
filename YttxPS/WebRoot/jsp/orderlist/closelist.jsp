@@ -104,7 +104,7 @@ input {
 							<tr>
 								<td><input type="text" id="expenditure" value="${content.expenditure }" class="form-control number required" readonly="readonly"></td>
 								<td>
-									<input type="text" id="totalIncome" value="${content.income}" class="form-control number required" readonly="readonly">
+									<input type="text" id="totalIncome" name="body.income" value="${content.income}" class="form-control number required" readonly="readonly">
 									<input type="hidden" id="income" value="${content.income - content.minproceeds }"/>
 								</td>
 								<td><input type="text" id="minproceeds" value="${content.minproceeds }" class="form-control number required total" name="body.minproceeds"></td>

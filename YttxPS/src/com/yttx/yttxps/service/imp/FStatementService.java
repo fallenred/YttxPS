@@ -122,12 +122,15 @@ public class FStatementService implements IFStatementService{
 		Body body = root.getBody();
 		Shop shop = incomeDetails.getShop();
 		CostDetails costDetails = body.getCostdetails();
-		BigDecimal income = BigDecimal.ZERO;		//总收入
-		BigDecimal shopTotal = new BigDecimal(shop.getTotal());	//购物收入
-		BigDecimal entertainmentTotal = new BigDecimal(incomeDetails.getEntertainment().getTotal());	//娱乐收入
-		BigDecimal otherTotal = new BigDecimal(incomeDetails.getOther().getTotal());	//其他收入
-		income = shopTotal.add(entertainmentTotal).add(otherTotal);
-		body.setIncome(income);
+		BigDecimal income = body.getIncome();
+		if (body.getIncome() == null) {
+			income = BigDecimal.ZERO;		//总收入
+			BigDecimal shopTotal = new BigDecimal(shop.getTotal());	//购物收入
+			BigDecimal entertainmentTotal = new BigDecimal(incomeDetails.getEntertainment().getTotal());	//娱乐收入
+			BigDecimal otherTotal = new BigDecimal(incomeDetails.getOther().getTotal());	//其他收入
+			income = shopTotal.add(entertainmentTotal).add(otherTotal);
+			body.setIncome(income);
+		}
 		BigDecimal expenditure = BigDecimal.ZERO;	//总支出
 		BigDecimal carTotal = new BigDecimal(costDetails.getCar().getTotal());	//车辆支出
 		BigDecimal accomadationTotal = new BigDecimal(costDetails.getAccomadation().getTotal());//酒店支出

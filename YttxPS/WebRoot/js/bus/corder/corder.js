@@ -351,7 +351,7 @@ $(document).ready(function(){
 				if(rec.stat == 0){   //当结算单状态为0的时候，只能查看
 					var retContent = editBtn;
 				}else if(rec.stat == 1){
-					var retContent = closeBtn;
+					var retContent = detailBtn + closeBtn;
 				}else{
 					var retContent = detailBtn;
 				}
