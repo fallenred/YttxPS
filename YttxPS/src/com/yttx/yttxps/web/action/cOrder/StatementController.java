@@ -24,6 +24,9 @@ import com.yttx.except.BusinessException;
 import com.yttx.yttxps.comm.Constants;
 import com.yttx.yttxps.comm.JsonResult;
 import com.yttx.yttxps.model.Dict;
+import com.yttx.yttxps.model.DictExample;
+import com.yttx.yttxps.model.DictExample.Criteria;
+import com.yttx.yttxps.model.DictKey;
 import com.yttx.yttxps.model.OrderFilters;
 import com.yttx.yttxps.model.SessionEntity;
 import com.yttx.yttxps.model.corder.DetailOrder;
@@ -32,6 +35,7 @@ import com.yttx.yttxps.model.corder.SimpleOrder;
 import com.yttx.yttxps.model.vo.FStatementPageRequest;
 import com.yttx.yttxps.model.vo.OrderPageRequest;
 import com.yttx.yttxps.service.IClearOrderService;
+import com.yttx.yttxps.service.IDictService;
 import com.yttx.yttxps.service.IFStatementService;
 import com.yttx.yttxps.service.IMsgService;
 import com.yttx.yttxps.web.action.BaseController;
@@ -60,6 +64,9 @@ public class StatementController extends BaseController {
 	
 	@Autowired
 	private IMsgService msgService;
+	
+	@Autowired
+	private IDictService dictService;
 	
 	/**
 	 * 打开结算单管理的界面
@@ -124,12 +131,12 @@ public class StatementController extends BaseController {
 			fStatement.setPaidAmt(paidAmt);
 			fStatement.setAmt(amt);
 			fStatement.setTotalFee(paidAmt.add(amt));
-			//客户待确认
+			//客户待确认才传stat
 			if (StringUtils.isNotBlank(stat)){
 				fStatement.setStat(Long.valueOf(stat));
+				this.msgService.saveMsg(fStatementService.findFStatByOrderid(orderid), sessionEntity.getId(), "-10");
 			}
 			this.fStatementService.saveCloselist(root, fStatement);
-			this.msgService.saveMsg(fStatementService.findFStatByOrderid(orderid), sessionEntity.getId(), "-10");
 		}catch(Exception e){
 			logger.error("保存结算单失败", e);
 			return JsonResult.jsonError("保存结算单失败");
@@ -268,6 +275,10 @@ public class StatementController extends BaseController {
 		model.addAttribute("fullguide", root.getBody().getFullguide());//全陪
 		model.addAttribute("order", detailOrder);	//订单详情
 		model.addAttribute("taname", new String(taname.getBytes("ISO-8859-1"),"utf-8"));
+		DictKey key = new DictKey();
+		key.setFsDictno(detailOrder.getStat().toString());
+		key.setFsParentno("order_stat");
+		model.addAttribute("stat", dictService.selectDict(key).getFsDictname());
 		return "cOrder/preStatment";				//返回欲生成结算单页面
 	}
 	

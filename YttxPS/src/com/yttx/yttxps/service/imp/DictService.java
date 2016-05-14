@@ -26,6 +26,11 @@ public class DictService implements IDictService {
 	}
 	
 	@Override
+	public Dict selectDict(DictKey key){
+		return this.dictMapper.selectByPrimaryKey(key);
+	}
+	
+	@Override
 	public Map<String, Object> selectDictMap(DictExample example) {
 		List<Dict> list = selectDict(example);
 		Map<String, Object> map = new HashMap<String, Object>();

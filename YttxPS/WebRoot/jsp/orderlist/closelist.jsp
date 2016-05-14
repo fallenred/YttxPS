@@ -57,6 +57,8 @@ input {
 							<label id="lab_fullguide">${fullguide }</label>&nbsp;
 							<label>人</label>
 							</label>
+							<label class="col-sm-2 control-label" style="text-align: right;">订单状态：</label>
+							<label class="col-sm-3 control-label no-padding-right">${stat}</label>
 						</div>
 					</div>
 				</div>

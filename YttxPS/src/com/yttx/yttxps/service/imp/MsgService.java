@@ -147,13 +147,9 @@ public class MsgService implements IMsgService {
 						tempParam.put("type", "customization");
 					}
 					String fsOperId = orderlist.getFsOperId();
-					System.out.println(String.format("%-16s",fsOperId).length());
-					System.out.println("-"+String.format("%-16s",fsOperId)+"-");
-					SysOper selectByPrimaryKey = this.sysOperMapper.selectByPrimaryKey(String.format("%-16s",fsOperId));
-					System.out.println(selectByPrimaryKey == null);
-					Long depNo = selectByPrimaryKey.getDepNo();
-					list = this.getMessage4Auth2(MsgTemp.ORDER_CONFIRM.getVal(), sendid, depNo.toString(), orderlist.getFsOperId(), tempParam);
-					System.out.println(list == null);
+					SysOper sysOper = this.sysOperMapper.selectByPrimaryKey(String.format("%-16s",fsOperId));
+					Long depNo = sysOper.getDepNo();
+					list = this.getMessage4Auth2(MsgTemp.ORDER_CONFIRM.getVal(), sendid, depNo.toString(), fsOperId, tempParam);
 					break;
 					
 				case -5://报价
@@ -190,7 +186,10 @@ public class MsgService implements IMsgService {
 					tempid = MsgTemp.STATEMENT_CONFIRM.getVal();
 					tempParam.put("orderID", statement.getOrderId());
 					tempParam.put("closeID", statement.getStatmentId());
-					
+					String fsOperId = statement.getOperId();
+					SysOper sysOper = this.sysOperMapper.selectByPrimaryKey(String.format("%-16s",fsOperId));
+					Long depNo = sysOper.getDepNo();
+					list = this.getMessage4Auth2(MsgTemp.STATEMENT_CONFIRM2.getVal(), sendid, depNo.toString(), fsOperId, tempParam);
 				default:
 					break;
 			}

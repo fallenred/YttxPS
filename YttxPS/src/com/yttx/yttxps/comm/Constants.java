@@ -93,6 +93,8 @@ public class Constants {
 		STATEMENT {public String getVal(){return "3010";}},
 		/** 结算单已确认 */
 		STATEMENT_CONFIRM {public String getVal(){return "3040";}},
+		/** 结算单已确认 */
+		STATEMENT_CONFIRM2 {public String getVal(){return "3031";}},
 		/** 结算完毕 */
 		STATEMENT_DONE {public String getVal(){return "1002";}};
 

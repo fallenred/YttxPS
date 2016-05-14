@@ -17,5 +17,7 @@ public interface IDictService {
 	Map<String, Object> selectDictMapName4key(DictExample example);
 
 	List<DictKey> selectDictByParentNo(String parentNo);
+
+	Dict selectDict(DictKey key);
 }
 
