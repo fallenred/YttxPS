@@ -38,10 +38,10 @@
 					<td><select style="width:150px;text-align:center" class="yl" name="body.incomedetails.entertainment.reslist[${status.index }].resno"><option value="${reslist.resno }">${reslist.name }</option></select>
 						<input type="hidden" name="body.incomedetails.entertainment.reslist[${status.index }].name" value="${reslist.name }"/> </td>
 					<td><input type="text" value="${reslist.time }" class="form-control datetimepicker ylDate" data-date-format="yyyy-mm-dd" placeholder="消费日期" name="body.incomedetails.entertainment.reslist[${status.index }].time" class="ylDate"/></td>
-					<td><input type="text" value="${reslist.people }" class="ylCount isFloatGteZero digits input-text" name="body.incomedetails.entertainment.reslist[${status.index }].people"></td>
-					<td><input type="text" value="${reslist.consumption }" name="body.incomedetails.entertainment.reslist[${status.index }].consumption" class="ylFee isFloatGteZero number input-text"></td>
-					<td><input type="text" value="${reslist.cost }" name="body.incomedetails.entertainment.reslist[${status.index }].cost" class="ylCost isFloatGteZero number input-text"></td>
-					<td><input type="text" value="${reslist.proportion }" name="body.incomedetails.entertainment.reslist[${status.index }].proportion" class="proportion input-text"></td>
+					<td><input type="text" value="${reslist.people }" class="ylCount isFloatGteZero digits required input-text" name="body.incomedetails.entertainment.reslist[${status.index }].people"></td>
+					<td><input type="text" value="${reslist.consumption }" name="body.incomedetails.entertainment.reslist[${status.index }].consumption" class="ylFee isFloatGteZero number required input-text"></td>
+					<td><input type="text" value="${reslist.cost }" name="body.incomedetails.entertainment.reslist[${status.index }].cost" class="ylCost isFloatGteZero number required input-text"></td>
+					<td><input type="text" value="${reslist.proportion }" name="body.incomedetails.entertainment.reslist[${status.index }].proportion" class="proportion number required input-text"></td>
 					<td><input type="text" value="${reslist.totalprofit }" readonly="readonly" name="body.incomedetails.entertainment.reslist[${status.index }].totalprofit" class="ylProfit input-text"></td>
 					<td><input type="text" value="${reslist.remark }" class="ylRemark input-text" name="body.incomedetails.entertainment.reslist[${status.index }].remark"></td>
 					<td><a style="cursor:pointer;" class="deleteYl remove_tr">删除</a></td>
@@ -62,10 +62,10 @@
 		<td><select style="width:150px;text-align:center" class="yl" name="body.incomedetails.entertainment.reslist[{{index}}].resno"></select>
 			<input type="hidden" name="body.incomedetails.entertainment.reslist[{{index}}].name" value="${reslist.name }"/> </td>
 		<td><input type="text" value="${reslist.time }" class="form-control datetimepicker ylDate" data-date-format="yyyy-mm-dd" placeholder="消费日期" name="body.incomedetails.entertainment.reslist[{{index}}].time"/></td>
-		<td><input type="text" value="{{ylConut}}" name="body.incomedetails.entertainment.reslist[{{index}}].people" class="ylCount isFloatGteZero digits input-text"></td>
-		<td><input type="text" value="{{ylFee}}" name="body.incomedetails.entertainment.reslist[{{index}}].consumption" class="ylFee isFloatGteZero number input-text"></td>
-		<td><input type="text" value="{{ylCost}}" name="body.incomedetails.entertainment.reslist[{{index}}].cost" class="ylCost isFloatGteZero number input-text"></td>
-		<td><input type="text" value="{{proportion}}" name="body.incomedetails.entertainment.reslist[{{index}}].proportion" class="proportion input-text"></td>
+		<td><input type="text" value="{{ylConut}}" name="body.incomedetails.entertainment.reslist[{{index}}].people" class="ylCount isFloatGteZero digits required input-text"></td>
+		<td><input type="text" value="{{ylFee}}" name="body.incomedetails.entertainment.reslist[{{index}}].consumption" class="ylFee isFloatGteZero number required input-text"></td>
+		<td><input type="text" value="{{ylCost}}" name="body.incomedetails.entertainment.reslist[{{index}}].cost" class="ylCost isFloatGteZero number required input-text"></td>
+		<td><input type="text" value="{{proportion}}" name="body.incomedetails.entertainment.reslist[{{index}}].proportion" class="proportion number required input-text"></td>
 		<td><input type="text" value="{{ylProfit}}" readonly="readonly" name="body.incomedetails.entertainment.reslist[{{index}}].totalprofit" class="ylProfit input-text"></td>
 		<td><input type="text" value="{{ylRemark}}" name="body.incomedetails.entertainment.reslist[{{index}}].remark" class="ylRemark input-text"></td>
 		<td><a style="cursor:pointer;" class="deleteYl">删除</a></td>

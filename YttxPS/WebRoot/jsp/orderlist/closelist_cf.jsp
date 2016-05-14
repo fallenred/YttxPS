@@ -62,8 +62,8 @@
 		<td><select style="width:160px;text-align:center" class="cf" name="body.costdetails.restaurant.reslist[{{index}}].resno"></select>
 			<input class="cfName" type="hidden" name="body.costdetails.restaurant.reslist[{{index}}].name" value="${reslist.name }" /> </td>
 		<td><select style="width:100px;text-align:center"  class="cfType" name="body.costdetails.restaurant.reslist[{{index}}].type"></select></td>
-		<td><input type="text" value="{{cfPrice}}" class="cfPrice isFloatGteZero number input-text" name="body.costdetails.restaurant.reslist[{{index}}].unitprice"></td>
-		<td><input type="text" value="{{cfCount}}" class="cfCount isFloatGteZero digits input-text" name="body.costdetails.restaurant.reslist[{{index}}].number"></td>
+		<td><input type="text" value="{{cfPrice}}" class="cfPrice isFloatGteZero number required input-text" name="body.costdetails.restaurant.reslist[{{index}}].unitprice"></td>
+		<td><input type="text" value="{{cfCount}}" class="cfCount isFloatGteZero digits required input-text" name="body.costdetails.restaurant.reslist[{{index}}].number"></td>
 		<td><input type="text" value="{{cfSum}}" class="cfSum input-text" readonly="readonly" name="body.costdetails.restaurant.reslist[{{index}}].totalprice"></td>
 		<td><input type="text" value="{{cfRemark}}" class="cfRemark input-text" name="body.costdetails.restaurant.reslist[{{index}}].remark"></td>
 		<td><a style="cursor:pointer;" class="deleteCf">删除</a></td>

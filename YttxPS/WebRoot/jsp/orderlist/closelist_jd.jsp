@@ -65,8 +65,8 @@
 		<td><select style="width:140px;text-align:center"  class="jdType" name="body.costdetails.accomadation.reslist[{{index}}].roomtypeno"></select>
 			<input type="hidden" name="body.costdetails.accomadation.reslist[{{index}}].roomtype" value=""/></td>
 		<td><input type="text" class="form-control datetimepicker" data-date-format="yyyy-mm-dd" placeholder="入住日期" class="jdDate" name="body.costdetails.accomadation.reslist[{{index}}].time"/></td>
-		<td><input type="text" value="{{jdPrice}}" class="jdPrice isFloatGteZero number input-text" name="body.costdetails.accomadation.reslist[{{index}}].unitprice"></td>
-		<td><input type="text" value="{{jdCount}}" class="jdCount isFloatGteZero digits input-text" name="body.costdetails.accomadation.reslist[{{index}}].number"></td>
+		<td><input type="text" value="{{jdPrice}}" class="jdPrice isFloatGteZero number required input-text" name="body.costdetails.accomadation.reslist[{{index}}].unitprice"></td>
+		<td><input type="text" value="{{jdCount}}" class="jdCount isFloatGteZero digits required input-text" name="body.costdetails.accomadation.reslist[{{index}}].number"></td>
 		<td><input type="text" value="{{jdSum}}" class="jdSum input-text" readonly="readonly" name="body.costdetails.accomadation.reslist[{{index}}].totalprice"></td>
 		<td><input type="text" value="{{jdRemark}}" class="jdRemark input-text" name="body.costdetails.accomadation.reslist[{{index}}].remark"></td>
 		<td><a style="cursor:pointer;" class="deleteJd">删除</a></td>

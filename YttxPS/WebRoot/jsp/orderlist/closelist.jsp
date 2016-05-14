@@ -273,7 +273,7 @@ input {
 		$("#totalIncome").val(incTotal);
 		$("#income").val(incTotal - minproceeds);
 	}
-	$(document).on('change key', '.total',function(){
+	/* $(document).on('change key', '.total',function(){
 		if(isNaN($(this).val()) || $(this).val() == '') {
 			$(this).val(0);
 		}
@@ -290,6 +290,6 @@ input {
 		customIncome = $("#customIncome").val();//客户总收入
 		customExpenditure = $("#customExpenditure").val();//客户总支出
 		$("#amt").val(parseFloat(customExpenditure) - parseFloat(paidAmt) - parseFloat(customIncome));//应付款 = 已付金额 + 客户利润 - 客户支出
-	});
+	}); */
 </script>
 

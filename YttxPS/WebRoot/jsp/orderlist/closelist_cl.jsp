@@ -55,8 +55,8 @@
 	<tr class="width-15">
 		<td><select style="width:160px;text-align:center" class="cl" name="body.costdetails.car.reslist[{{index}}].resno"></select>
 			<input type="hidden" name="body.costdetails.car.reslist[{{index}}].name" value=""/> </td>
-		<td><input type="text" value="{{clPrice}}"  class="clPrice isFloatGteZero number input-text" name="body.costdetails.car.reslist[{{index}}].unitprice"></td>
-		<td><input type="text" value="{{clCount}}" class="clCount isFloatGteZero digits input-text" name="body.costdetails.car.reslist[{{index}}].number"></td>
+		<td><input type="text" value="{{clPrice}}"  class="clPrice isFloatGteZero required input-text" name="body.costdetails.car.reslist[{{index}}].unitprice"></td>
+		<td><input type="text" value="{{clCount}}" class="clCount isFloatGteZero digits required input-text" name="body.costdetails.car.reslist[{{index}}].number"></td>
 		<td><input type="text" value="{{clSum}}"  readonly="readonly" class="clSum input-text" name="body.costdetails.car.reslist[{{index}}].totalprice"></td>
 		<td><input type="text" value="{{clRemark}}"  class="clRemark input-text" name="body.costdetails.car.reslist[{{index}}].remark"></td>
 		<td><a style="cursor:pointer;" class="deleteCl">删除</a></td>
