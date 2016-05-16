@@ -130,7 +130,7 @@
 								<input type="text" placeholder="进店日期" id="time"
 									name="reslist[0].time"
 									class="form-control datetimepicker width-240"
-									data-date-format="yyyy-mm-dd" readonly="readonly" />
+									data-date-format="yyyy-mm-dd" />
 							</div>
 						</div>
 					</div>
@@ -141,26 +141,24 @@
 						<div class="col-sm-3">
 							<input type="text" placeholder="进店日期" name="shoppingDate"
 								class="form-control datetimepicker width-240"
-								data-date-format="yyyy-mm-dd" readonly="readonly" />
+								data-date-format="yyyy-mm-dd" />
 						</div> -->
 							<label class="col-sm-2 control-label no-padding-right"
 								for="fsName">进店人数</label>
 							<div class="col-sm-5">
 								<table>
 									<tr>
-										<td style="width: 110px;"><input type="text" id="people" name="reslist[0].people"
-											class="form-control isFloatGteZero digits required peopleprofit"></td>
+										<td style="width: 110px;">
+											<input type="text" id="people" name="reslist[0].people" class="form-control isFloatGteZero digits required peopleprofit">
+										</td>
 										<td style="width: 50px; text-align: right;">单价</td>
-										<td style="width: 110px;"><input type="text"
-											id="unitprice" name="reslist[0].unitprice"
-											class="form-control isFloatGteZero digits required peopleprofit"
-											style="margin-left: 5px;" /></td>
+										<td style="width: 110px;">
+											<input type="text" id="unitprice" name="reslist[0].unitprice" class="form-control isFloatGteZero digits required peopleprofit" style="margin-left: 5px;" />
+										</td>
 										<td style="width: 70px; text-align: right;">人头费</td>
-										<td style="width: 110px;"><input type="text"
-											name="reslist[0].peopleprofit" id="peopleprofit" value=""
-											readonly="readonly"
-											class="form-control isFloatGteZero digits required"
-											style="margin-left: 5px;" /></td>
+										<td style="width: 110px;">
+											<input type="text" name="reslist[0].peopleprofit" id="peopleprofit" value="" class="form-control isFloatGteZero digits required" style="margin-left: 5px;" />
+										</td>
 									</tr>
 								</table>
 							</div>
@@ -171,8 +169,7 @@
 							<label class="col-sm-2 control-label no-padding-right"
 								for="fsName">备注</label>
 							<div class="col-sm-8">
-								<input type="text" id="res_remark" name="reslist[0].remark"
-									class="form-control width-600" />
+								<input type="text" id="res_remark" name="reslist[0].remark" class="form-control width-600" />
 							</div>
 						</div>
 					</div>
@@ -211,8 +208,7 @@
 									<label class="col-sm-2 control-label no-padding-right"
 										for="profit">返佣金额</label>
 									<div class="col-sm-3">
-										<input type="text" id="profit" readonly="readonly"
-											class="form-control isFloatGteZero required width-240" />
+										<input type="text" id="profit" class="form-control isFloatGteZero required width-240" />
 									</div>
 								</div>
 							</div>

@@ -44,7 +44,7 @@
 	 					<input type="text" value="${reslist.number }" class="qtzcCount isFloatGteZero required digits input-text" name="body.costdetails.other.reslist[${status.index }].number">
 					</td>
 					<td>
-						<input type="text" value="${reslist.totalprice }" readonly="readonly" class="qtzcSum required input-text" name="body.costdetails.other.reslist[${status.index }].totalprice">
+						<input type="text" value="${reslist.totalprice }" class="qtzcSum required input-text" name="body.costdetails.other.reslist[${status.index }].totalprice">
 					</td>
 					<td><input type="text" value="${reslist.remark }" class="qtzcRemark input-text" name="body.costdetails.other.reslist[${status.index }].remark"></td>
 					<td><a style="cursor:pointer;" class="deleteQtzc remove_tr">删除</a></td>
@@ -53,7 +53,7 @@
 			<tr>
 				<td>总计<input type="hidden" id="qtzc_index" value="${fn:length(content.costdetails.other.reslist)}"/></td>
 				<td colspan="4" style="text-align: left;">
-					<input type="text" readonly="readonly" value="${content.costdetails.other.total }" style="width:100%;text-align: left;" class="qtzcTotal expTotal" id="qtzcTotal" name="body.costdetails.other.total">
+					<input type="text" value="${content.costdetails.other.total }" style="width:100%;text-align: left;" class="qtzcTotal expTotal" id="qtzcTotal" name="body.costdetails.other.total">
 				</td>
 				<td><button id="addQtzc" type="button" class="btn btn-success btn-xs btn_add">新增</button></td>
 			</tr>
@@ -68,7 +68,7 @@
 		</td>
 		<td><input type="text" value="{{qtzcPrice}}" class="qtzcPrice required isFloatGteZero number input-text" name="body.costdetails.other.reslist[{{index}}].unitprice"></td>
 		<td><input type="text" value="{{qtzcCount}}" class="qtzcCount required isFloatGteZero digits input-text" name="body.costdetails.other.reslist[{{index}}].number"></td>
-		<td><input type="text" value="{{qtzcSum}}" class="qtzcSum required input-text" readonly="readonly" name="body.costdetails.other.reslist[{{index}}].totalprice"></td>
+		<td><input type="text" value="{{qtzcSum}}" class="qtzcSum required input-text" name="body.costdetails.other.reslist[{{index}}].totalprice"></td>
 		<td><input type="text" value="{{qtzcRemark}}" class="qtzcRemark input-text" name="body.costdetails.other.reslist[{{index}}].remark"></td>
 		<td><a style="cursor:pointer;" class="deleteQtzc">删除</a></td>
 	</tr>

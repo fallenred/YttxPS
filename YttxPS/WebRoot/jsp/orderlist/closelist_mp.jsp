@@ -39,7 +39,7 @@
 						<input type="hidden" name="body.costdetails.ticket.reslist[${status.index }].typename" value="${reslist.typename }" /></td>
 					<td><input type="text" value="${reslist.unitprice }" class="mpPrice isFloatGteZero number required input-text" name="body.costdetails.ticket.reslist[${status.index }].unitprice"></td>
 					<td><input type="text" value="${reslist.number }" class="mpCount isFloatGteZero number required input-text" name="body.costdetails.ticket.reslist[${status.index }].number"></td>
-					<td><input type="text" value="${reslist.totalprice }" readonly="readonly" class="mpSum input-text" name="body.costdetails.ticket.reslist[${status.index }].totalprice"></td>
+					<td><input type="text" value="${reslist.totalprice }" class="mpSum input-text" name="body.costdetails.ticket.reslist[${status.index }].totalprice"></td>
 					<td><input type="text" value="${reslist.remark }" class="mpRemark input-text" name="body.costdetails.ticket.reslist[${status.index }].remark"></td>
 					<td><a style="cursor:pointer;" class="deleteMp remove_tr">删除</a></td>
 				</tr>
@@ -47,7 +47,7 @@
 			<tr>
 				<td>总计<input type="hidden" id="mp_index" value="${fn:length(content.costdetails.ticket.reslist)}"/></td>
 				<td colspan="5" style="text-align: left;">
-					<input type="text" readonly="readonly" value="${content.costdetails.ticket.total }" class="expTotal" style="width:100%;text-align: left;" id="mpTotal" name="body.costdetails.ticket.total">
+					<input type="text" value="${content.costdetails.ticket.total }" class="expTotal" style="width:100%;text-align: left;" id="mpTotal" name="body.costdetails.ticket.total">
 				</td>
 				<td><button id="addMp" type="button" class="btn btn-success btn-xs btn_add">新增</button></td>
 			</tr>
@@ -62,7 +62,7 @@
 			<input type="hidden" name="body.costdetails.ticket.reslist[{{index}}].typename" value="${reslist.typename }"/></td>
 		<td><input type="text" value="{{mpPrice}}" class="mpPrice isFloatGteZero number required input-text" name="body.costdetails.ticket.reslist[{{index}}].unitprice"></td>
 		<td><input type="text" value="{{mpCount}}" class="mpCount isFloatGteZero number required input-text" name="body.costdetails.ticket.reslist[{{index}}].number"></td>
-		<td><input type="text" value="{{mpSum}}" readonly="readonly" class="mpSum input-text" name="body.costdetails.ticket.reslist[{{index}}].totalprice"></td>
+		<td><input type="text" value="{{mpSum}}" class="mpSum input-text" name="body.costdetails.ticket.reslist[{{index}}].totalprice"></td>
 		<td><input type="text" value="{{mpRemark}}" class="mpRemark input-text" name="body.costdetails.ticket.reslist[{{index}}].remark"></td>
 		<td><a style="cursor:pointer;" class="deleteMp">删除</a></td>
 	</tr>
