@@ -272,6 +272,10 @@ input {
 		$("#totalIncome").val(incTotal);
 		$("#income").val(incTotal - minproceeds);
 	}
+	//抹零
+	function ignoreSingleDigits(number){
+		return (Math.floor(number/10))*10;
+	}
 	/* $(document).on('change key', '.total',function(){
 		if(isNaN($(this).val()) || $(this).val() == '') {
 			$(this).val(0);

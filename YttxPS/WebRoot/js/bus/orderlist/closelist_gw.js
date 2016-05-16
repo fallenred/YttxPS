@@ -53,7 +53,7 @@ jQuery(function($) {
 			$("#peopleprofit").val(0);
 			return;
 		}
-		$("#peopleprofit").val(parseFloat(people) * parseFloat(unitprice));
+		$("#peopleprofit").val(ignoreSingleDigits(parseFloat(people) * parseFloat(unitprice)));
 	});
 
 	//计算返佣金额
@@ -64,7 +64,7 @@ jQuery(function($) {
 			$("#profit").val(0);
 			return;
 		}
-		$("#profit").val(parseFloat(consumption) * parseFloat(proportion) * parseFloat(0.01));
+		$("#profit").val(ignoreSingleDigits(parseFloat(consumption) * parseFloat(proportion) * parseFloat(0.01)));
 	});
 
 	//打开模态框
