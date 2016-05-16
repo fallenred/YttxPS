@@ -109,6 +109,11 @@ jQuery(function($) {
 		node.find(".mpSum").val((parseFloat(mpPrice)*parseFloat(mpCount)).toFixed(2));
 	}
 	
+	//门票小计修改事件
+	$(document).on('change key', '.mpSum', function(event){
+		setMpTotal();
+	});
+	
 	//设置门票总计
 	function setMpTotal(){
 		var mpTotal = 0;

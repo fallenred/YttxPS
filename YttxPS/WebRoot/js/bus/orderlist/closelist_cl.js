@@ -77,6 +77,12 @@ jQuery(function($) {
 		node.find(".clSum").val((parseFloat(clPrice)*parseFloat(clCount)).toFixed(2));
 	}
 	
+	
+	//小计修改事件
+	$(document).on('change key', '.clSum', function(event){
+		setClTotal();
+	});
+	
 	//计算总计
 	function setClTotal(){
 		var clTotal = 0;

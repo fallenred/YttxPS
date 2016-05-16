@@ -82,6 +82,11 @@ jQuery(function($) {
 		node.find(".ylProfit").val(profit);
 	}
 	
+	//娱乐利润变更事件
+	$(document).on('change key', '.ylProfit', function(event){
+		setYlTotal();
+	});
+	
 	//设置娱乐总计
 	function setYlTotal(){
 		var ylTotal = 0;

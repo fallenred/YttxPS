@@ -94,6 +94,11 @@ jQuery(function($) {
 		node.find(".cfSum").val((parseFloat(cfPrice)*parseFloat(cfCount)).toFixed(2));
 	}
 	
+	//小计修改事件
+	$(document).on('change key', '.cfSum', function(event){
+		setCfTotal();
+	});
+	
 	//计算总计
 	function setCfTotal(){
 		var cfTotal = 0;

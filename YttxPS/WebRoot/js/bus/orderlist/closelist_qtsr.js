@@ -80,6 +80,11 @@ jQuery(function($) {
 		node.find(".qtsrSum").val(ignoreSingleDigits(parseFloat(qtsrPrice)*parseFloat(qtsrCount)).toFixed(2));
 	}
 	
+	//其他收入小计修改事件
+	$(document).on('change key', '.qtsrSum', function(event){
+		setQtsrTotal();
+	});
+	
 	//计算总计
 	function setQtsrTotal(){
 		var qtsrTotal = 0;

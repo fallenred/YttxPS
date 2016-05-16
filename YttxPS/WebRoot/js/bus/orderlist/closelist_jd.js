@@ -118,6 +118,11 @@ jQuery(function($) {
 		node.find(".jdSum").val((parseFloat(jdPrice)*parseFloat(jdCount)).toFixed(2));
 	}
 	
+	//酒店小计修改事件
+	$(document).on('change key', '.jdSum', function(event){
+		setJdTotal();
+	});
+	
 	//设置酒店总计
 	function setJdTotal(){
 		var jdTotal = 0;
