@@ -111,14 +111,14 @@ jQuery(function($) {
 		getExpenditure();
 	}
 	
-	//初始计算
+/*	//初始计算
 	$(document).on('ready',function(){
 		$(".cfSum").each(function(){
 			setCfSum($(this));
 		});
 		//setCfTotal();
 	});
-	
+	*/
 	//隐藏域值设置
 	$(document).on('change key', '.cf', function(){
 		$(this).next().next().val($(this).find("option:selected").text());

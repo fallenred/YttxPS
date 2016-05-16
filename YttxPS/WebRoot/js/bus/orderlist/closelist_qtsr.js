@@ -97,13 +97,13 @@ jQuery(function($) {
 		getIncome();
 	}
 	
-	//初始计算
+/*	//初始计算
 	$(document).on('ready',function(){
 		$(".qtsrSum").each(function(){
 			setQtsrSum($(this));
 		});
 //		setQtsrTotal();
-	});
+	});*/
 	
 	//隐藏域值设置
 	$(document).on('change key', '.qtsr', function(){

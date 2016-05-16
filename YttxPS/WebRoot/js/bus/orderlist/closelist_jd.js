@@ -143,13 +143,13 @@ jQuery(function($) {
 		$(this).next().next().val($(this).find("option:selected").text());
 	});
 	
-	//初始计算
+/*	//初始计算
 	$(document).on('ready',function(){
 		$(".jdSum").each(function(){
 			setJdSum($(this));
 		});
 //		setJdTotal();
-	});
+	});*/
 	
 	//事件计算
 	$(document).on('change key','.jdPrice',function(){

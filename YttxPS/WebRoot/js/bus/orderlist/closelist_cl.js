@@ -95,13 +95,13 @@ jQuery(function($) {
 		getExpenditure();
 	}
 	
-	//初始计算
+/*	//初始计算
 	$(document).on('ready',function(){
 		$(".clSum").each(function(){
 			setClSum($(this));
 		});
 //		setClTotal();
-	});
+	});*/
 	
 	//设置隐藏域
 	$(document).on('change key', '.cl', function(){

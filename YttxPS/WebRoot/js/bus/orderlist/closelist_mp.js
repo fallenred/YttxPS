@@ -126,13 +126,13 @@ jQuery(function($) {
 		getExpenditure();
 	}
 	
-	//初始计算
+/*	//初始计算
 	$(document).on('ready',function(){
 		$(".mpSum").each(function(){
 			setMpSum($(this));
 		});
 		//setMpTotal();
-	});
+	});*/
 	
 	//设置隐藏域
 	$(document).on('change key', '.mp', function(){

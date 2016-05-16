@@ -98,14 +98,14 @@ jQuery(function($) {
 		$("#ylTotal").val(ylTotal.toFixed(2));
 		getIncome();
 	}
-	
+/*	
 	//初始计算
 	$(document).on('ready',function(){
 		$(".ylProfit").each(function(){
 			setYlProfit($(this));
 		});
 //		setYlTotal();
-	});
+	});*/
 	$(document).on('change key', '.ylCount',function(){
 		$(this).val($(this).val().trim());
 		$(this).valid();

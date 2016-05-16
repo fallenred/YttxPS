@@ -97,13 +97,13 @@ jQuery(function($) {
 		getExpenditure();
 	}
 	
-	//初始计算
+/*	//初始计算
 	$(document).on('ready',function(){
 		$(".qtzcSum").each(function(){
 			setQtzcSum($(this));
 		});
 //		setQtzcTotal();
-	});
+	});*/
 	
 	//隐藏域值设置
 	$(document).on('change key', '.qtzc', function(){
