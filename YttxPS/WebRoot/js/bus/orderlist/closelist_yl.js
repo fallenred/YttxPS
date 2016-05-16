@@ -84,6 +84,7 @@ jQuery(function($) {
 	
 	//娱乐利润变更事件
 	$(document).on('change key', '.ylProfit', function(event){
+		$(this).val(parseFloat($(this).val()).toFixed(2));
 		setYlTotal();
 	});
 	

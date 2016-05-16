@@ -80,6 +80,7 @@ jQuery(function($) {
 	
 	//小计修改事件
 	$(document).on('change key', '.clSum', function(event){
+		$(this).val(parseFloat($(this).val()).toFixed(2));
 		setClTotal();
 	});
 	
