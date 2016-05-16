@@ -6,7 +6,7 @@ jQuery(function($) {
 		type: "GET",
 		url: "/dict/selectDict.htm",
 		data: {
-			"dict.fsParentno": "income",
+			"dict.fsParentno": "other_ico",
 		},
 		dataType: "json",
 		success: function(data){
