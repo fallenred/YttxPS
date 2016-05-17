@@ -36,7 +36,7 @@
 						<input type="hidden" name="body.costdetails.car.reslist[${status.index }].name" value="${reslist.name }" class="clName" /> </td>
 					<td><input type="text" value="${reslist.unitprice }"  class="clPrice isFloatGteZero required input-text" name="body.costdetails.car.reslist[${status.index }].unitprice"></td>
 					<td><input type="text" value="${reslist.number }"  class="clCount required digits input-text" name="body.costdetails.car.reslist[${status.index }].number"></td>
-					<td><input type="text" value="${reslist.totalprice }"  class="clSum input-text"  name="body.costdetails.car.reslist[${status.index }].totalprice"></td>
+					<td><input type="text" value="${reslist.totalprice }"  class="clSum input-text isFloatGteZero number"  name="body.costdetails.car.reslist[${status.index }].totalprice"></td>
 					<td><input type="text" value="${reslist.remark }"  class="clRemark input-text" name="body.costdetails.car.reslist[${status.index }].remark"></td>
 					<td><a style="cursor:pointer;" class="deleteCl remove_tr">删除</a></td>
 				</tr>
@@ -57,7 +57,7 @@
 			<input type="hidden" name="body.costdetails.car.reslist[{{index}}].name" value=""/> </td>
 		<td><input type="text" value="{{clPrice}}"  class="clPrice isFloatGteZero required input-text" name="body.costdetails.car.reslist[{{index}}].unitprice"></td>
 		<td><input type="text" value="{{clCount}}" class="clCount isFloatGteZero digits required input-text" name="body.costdetails.car.reslist[{{index}}].number"></td>
-		<td><input type="text" value="{{clSum}}"  class="clSum input-text" name="body.costdetails.car.reslist[{{index}}].totalprice"></td>
+		<td><input type="text" value="{{clSum}}"  class="clSum input-text isFloatGteZero number" name="body.costdetails.car.reslist[{{index}}].totalprice"></td>
 		<td><input type="text" value="{{clRemark}}"  class="clRemark input-text" name="body.costdetails.car.reslist[{{index}}].remark"></td>
 		<td><a style="cursor:pointer;" class="deleteCl">删除</a></td>
 	</tr>

@@ -43,7 +43,7 @@
 					<td><input type="text" value="${reslist.time }" class="form-control datetimepicker jdDate input-text" data-date-format="yyyy-mm-dd" placeholder="入住日期" name="body.costdetails.accomadation.reslist[${status.index }].time"/></td>
 					<td><input type="text" value="${reslist.unitprice }"  class="jdPrice isFloatGteZero required number input-text" name="body.costdetails.accomadation.reslist[${status.index }].unitprice"></td>
 					<td><input type="text" value="${reslist.number }"  class="jdCount isFloatGteZero required input-text" name="body.costdetails.accomadation.reslist[${status.index }].number"></td>
-					<td><input type="text" value="${reslist.totalprice }" class="jdSum input-text" name="body.costdetails.accomadation.reslist[${status.index }].totalprice"></td>
+					<td><input type="text" value="${reslist.totalprice }" class="jdSum input-text isFloatGteZero number" name="body.costdetails.accomadation.reslist[${status.index }].totalprice"></td>
 					<td><input type="text" value="${reslist.remark }" class="jdRemark input-text" name="body.costdetails.accomadation.reslist[${status.index }].remark"></td>
 					<td><a style="cursor:pointer;" class="deleteJd remove_tr">删除</a></td>
 				</tr>
@@ -67,7 +67,7 @@
 		<td><input type="text" class="form-control datetimepicker" data-date-format="yyyy-mm-dd" placeholder="入住日期" class="jdDate" name="body.costdetails.accomadation.reslist[{{index}}].time"/></td>
 		<td><input type="text" value="{{jdPrice}}" class="jdPrice isFloatGteZero number required input-text" name="body.costdetails.accomadation.reslist[{{index}}].unitprice"></td>
 		<td><input type="text" value="{{jdCount}}" class="jdCount isFloatGteZero required input-text" name="body.costdetails.accomadation.reslist[{{index}}].number"></td>
-		<td><input type="text" value="{{jdSum}}" class="jdSum input-text" name="body.costdetails.accomadation.reslist[{{index}}].totalprice"></td>
+		<td><input type="text" value="{{jdSum}}" class="jdSum input-text isFloatGteZero number" name="body.costdetails.accomadation.reslist[{{index}}].totalprice"></td>
 		<td><input type="text" value="{{jdRemark}}" class="jdRemark input-text" name="body.costdetails.accomadation.reslist[{{index}}].remark"></td>
 		<td><a style="cursor:pointer;" class="deleteJd">删除</a></td>
 	</tr>

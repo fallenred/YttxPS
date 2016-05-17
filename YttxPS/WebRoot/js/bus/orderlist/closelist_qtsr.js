@@ -82,8 +82,9 @@ jQuery(function($) {
 	
 	//其他收入小计修改事件
 	$(document).on('change key', '.qtsrSum', function(event){
-		$(this).val(parseFloat($(this).val()).toFixed(2));
-		setQtsrTotal();
+		if($(this).valid()){
+			setQtsrTotal();
+		}
 	});
 	
 	//计算总计

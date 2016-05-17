@@ -96,8 +96,9 @@ jQuery(function($) {
 	
 	//小计修改事件
 	$(document).on('change key', '.cfSum', function(event){
-		$(this).val(parseFloat($(this).val()).toFixed(2));
-		setCfTotal();
+		if($(this).valid()){
+			setCfTotal();
+		}
 	});
 	
 	//计算总计

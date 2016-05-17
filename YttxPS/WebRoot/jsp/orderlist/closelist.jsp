@@ -112,7 +112,7 @@ input {
 								<td><input type="text" id="minproceeds" value="${content.minproceeds }" class="form-control number required total" name="body.minproceeds"></td>
 								<td><input type="text" id="customExpenditure" value="${content.expenditure - content.minproceeds}" class="form-control number required total" name="body.custexpend"></td>
 								<td>
-									<input type="text" id="customIncome" value="${content.custprofit}" class="form-control number required total" name="body.custprofit">
+									<input type="text" id="customIncome" value="${content.custprofit}" class="form-control isFloatGteZero number required total" name="body.custprofit">
 								</td>
 								<td>
 									<c:choose>  
@@ -276,6 +276,11 @@ input {
 	function ignoreSingleDigits(number){
 		return (Math.floor(number/10))*10;
 	}
+	
+	//验证
+	$(document).on('change key', '#customIncome', function(){
+		$(this).valid();
+	});
 	/* $(document).on('change key', '.total',function(){
 		if(isNaN($(this).val()) || $(this).val() == '') {
 			$(this).val(0);

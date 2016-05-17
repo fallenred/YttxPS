@@ -44,7 +44,7 @@
 						<input type="text" value="${reslist.number }" class="qtsrCount required isFloatGteZero digits input-text" name="body.incomedetails.other.reslist[${status.index }].number">
 					</td>
 					<td>
-						<input type="text" value="${reslist.totalprice }" class="qtsrSum required input-text" name="body.incomedetails.other.reslist[${status.index }].totalprice">
+						<input type="text" value="${reslist.totalprice }" class="qtsrSum required input-text isFloatGteZero number" name="body.incomedetails.other.reslist[${status.index }].totalprice">
 					</td>
 					<td><input type="text" value="${reslist.remark }" class="qtsrRemark input-text" name="body.incomedetails.other.reslist[${status.index }].remark"></td>
 					<td><a style="cursor:pointer;" class="deleteQtsr remove_tr">删除</a></td>
@@ -68,7 +68,7 @@
 		</td>
 		<td><input type="text" value="{{qtsrPrice}}" class="qtsrPrice required isFloatGteZero number input-text" name="body.incomedetails.other.reslist[{{index}}].unitprice"></td>
 		<td><input type="text" value="{{qtsrCount}}" class="qtsrCount required isFloatGteZero digits input-text" name="body.incomedetails.other.reslist[{{index}}].number"></td>
-		<td><input type="text" value="{{qtsrSum}}" class="qtsrSum required input-text" name="body.incomedetails.other.reslist[{{index}}].totalprice"></td>
+		<td><input type="text" value="{{qtsrSum}}" class="qtsrSum required input-text isFloatGteZero number" name="body.incomedetails.other.reslist[{{index}}].totalprice"></td>
 		<td><input type="text" value="{{qtsrRemark}}" class="qtsrRemark input-text" name="body.incomedetails.other.reslist[{{index}}].remark"></td>
 		<td><a style="cursor:pointer;" class="deleteQtsr">删除</a></td>
 	</tr>

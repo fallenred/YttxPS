@@ -39,7 +39,7 @@
 						<input type="hidden" name="body.costdetails.ticket.reslist[${status.index }].typename" value="${reslist.typename }" /></td>
 					<td><input type="text" value="${reslist.unitprice }" class="mpPrice isFloatGteZero number required input-text" name="body.costdetails.ticket.reslist[${status.index }].unitprice"></td>
 					<td><input type="text" value="${reslist.number }" class="mpCount isFloatGteZero number required input-text" name="body.costdetails.ticket.reslist[${status.index }].number"></td>
-					<td><input type="text" value="${reslist.totalprice }" class="mpSum input-text" name="body.costdetails.ticket.reslist[${status.index }].totalprice"></td>
+					<td><input type="text" value="${reslist.totalprice }" class="mpSum input-text isFloatGteZero number" name="body.costdetails.ticket.reslist[${status.index }].totalprice"></td>
 					<td><input type="text" value="${reslist.remark }" class="mpRemark input-text" name="body.costdetails.ticket.reslist[${status.index }].remark"></td>
 					<td><a style="cursor:pointer;" class="deleteMp remove_tr">删除</a></td>
 				</tr>
@@ -62,7 +62,7 @@
 			<input type="hidden" name="body.costdetails.ticket.reslist[{{index}}].typename" value="${reslist.typename }"/></td>
 		<td><input type="text" value="{{mpPrice}}" class="mpPrice isFloatGteZero number required input-text" name="body.costdetails.ticket.reslist[{{index}}].unitprice"></td>
 		<td><input type="text" value="{{mpCount}}" class="mpCount isFloatGteZero number required input-text" name="body.costdetails.ticket.reslist[{{index}}].number"></td>
-		<td><input type="text" value="{{mpSum}}" class="mpSum input-text" name="body.costdetails.ticket.reslist[{{index}}].totalprice"></td>
+		<td><input type="text" value="{{mpSum}}" class="mpSum input-text isFloatGteZero number" name="body.costdetails.ticket.reslist[{{index}}].totalprice"></td>
 		<td><input type="text" value="{{mpRemark}}" class="mpRemark input-text" name="body.costdetails.ticket.reslist[{{index}}].remark"></td>
 		<td><a style="cursor:pointer;" class="deleteMp">删除</a></td>
 	</tr>

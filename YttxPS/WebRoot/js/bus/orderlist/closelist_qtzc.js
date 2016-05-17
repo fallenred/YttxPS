@@ -82,8 +82,9 @@ jQuery(function($) {
 	
 	//小计修改事件
 	$(document).on('change key', '.qtzcSum', function(event){
-		$(this).val(parseFloat($(this).val()).toFixed(2));
-		setQtzcTotal();
+		if($(this).valid()){
+			setQtzcTotal();
+		}
 	});
 	
 	//计算总计

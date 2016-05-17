@@ -120,8 +120,9 @@ jQuery(function($) {
 	
 	//酒店小计修改事件
 	$(document).on('change key', '.jdSum', function(event){
-		$(this).val(parseFloat($(this).val()).toFixed(2));
-		setJdTotal();
+		if($(this).valid()){
+			setJdTotal();
+		}
 	});
 	
 	//设置酒店总计

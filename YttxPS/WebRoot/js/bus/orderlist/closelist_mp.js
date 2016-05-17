@@ -111,8 +111,9 @@ jQuery(function($) {
 	
 	//门票小计修改事件
 	$(document).on('change key', '.mpSum', function(event){
-		$(this).val(parseFloat($(this).val()).toFixed(2));
-		setMpTotal();
+		if($(this).valid()){
+			setMpTotal();
+		}
 	});
 	
 	//设置门票总计
