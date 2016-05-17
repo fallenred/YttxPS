@@ -106,7 +106,7 @@ jQuery(function($) {
 		var mpPrice = node.find(".mpPrice").val(node.find(".mpPrice").val().trim()).val();
 		var mpCount = node.find(".mpCount").val(node.find(".mpCount").val().trim()).val();
 		if(isNaN(mpPrice) || isNaN(mpCount) || mpPrice == '' || mpCount == '')return;
-		node.find(".mpSum").val((parseFloat(mpPrice)*parseFloat(mpCount)).toFixed(2));
+		node.find(".mpSum").val((parseFloat(mpPrice)*parseFloat(mpCount)));
 	}
 	
 	//门票小计修改事件
@@ -124,7 +124,7 @@ jQuery(function($) {
 			if(isNaN(value) || value == '')return;
 			mpTotal += value;
 		});
-		$("#mpTotal").val(mpTotal.toFixed(2));
+		$("#mpTotal").val(mpTotal);
 		getExpenditure();
 	}
 	

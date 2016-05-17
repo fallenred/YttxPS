@@ -74,7 +74,7 @@ jQuery(function($) {
 		var clPrice = node.find(".clPrice").val(node.find(".clPrice").val().trim()).val();
 		var clCount = node.find(".clCount").val(node.find(".clCount").val().trim()).val();
 		if(isNaN(clPrice) || isNaN(clCount) || clPrice == '' || clCount == '')return;
-		node.find(".clSum").val((parseFloat(clPrice)*parseFloat(clCount)).toFixed(2));
+		node.find(".clSum").val((parseFloat(clPrice)*parseFloat(clCount)));
 	}
 	
 	
@@ -93,7 +93,7 @@ jQuery(function($) {
 			if(isNaN(clSum) || clSum == '')return;
 			clTotal += clSum;
 		});
-		$("#clTotal").val(clTotal.toFixed(2));
+		$("#clTotal").val(clTotal);
 		getExpenditure();
 	}
 	

@@ -91,7 +91,7 @@ jQuery(function($) {
 		var cfPrice = node.find(".cfPrice").val(node.find(".cfPrice").val().trim()).val();
 		var cfCount = node.find(".cfCount").val(node.find(".cfCount").val().trim()).val();
 		if(isNaN(cfPrice) || isNaN(cfCount) || cfPrice == '' || cfCount == '')return;
-		node.find(".cfSum").val((parseFloat(cfPrice)*parseFloat(cfCount)).toFixed(2));
+		node.find(".cfSum").val((parseFloat(cfPrice)*parseFloat(cfCount)));
 	}
 	
 	//小计修改事件
@@ -109,7 +109,7 @@ jQuery(function($) {
 			if(isNaN(cfSum) || cfSum == '')return;
 			cfTotal += cfSum;
 		});
-		$("#cfTotal").val(cfTotal.toFixed(2));
+		$("#cfTotal").val(cfTotal);
 		getExpenditure();
 	}
 	

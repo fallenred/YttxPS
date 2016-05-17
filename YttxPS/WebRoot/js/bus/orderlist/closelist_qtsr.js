@@ -77,7 +77,7 @@ jQuery(function($) {
 		var qtsrPrice = node.find(".qtsrPrice").val(node.find(".qtsrPrice").val().trim()).val();
 		var qtsrCount = node.find(".qtsrCount").val(node.find(".qtsrCount").val().trim()).val();
 		if(isNaN(qtsrPrice) || isNaN(qtsrCount) || qtsrPrice == '' || qtsrCount == '')return;
-		node.find(".qtsrSum").val(ignoreSingleDigits(parseFloat(qtsrPrice)*parseFloat(qtsrCount)).toFixed(2));
+		node.find(".qtsrSum").val(ignoreSingleDigits(parseFloat(qtsrPrice)*parseFloat(qtsrCount)));
 	}
 	
 	//其他收入小计修改事件
@@ -95,7 +95,7 @@ jQuery(function($) {
 			if(isNaN(qtsrSum) || qtsrSum == '')return;
 			qtsrTotal += qtsrSum;
 		});
-		$("#qtsrTotal").val(qtsrTotal.toFixed(2));
+		$("#qtsrTotal").val(qtsrTotal);
 		getIncome();
 	}
 	

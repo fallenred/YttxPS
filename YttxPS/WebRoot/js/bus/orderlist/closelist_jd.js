@@ -115,7 +115,7 @@ jQuery(function($) {
 		var jdPrice = node.find(".jdPrice").val(node.find(".jdPrice").val().trim()).val();
 		var jdCount = node.find(".jdCount").val(node.find(".jdCount").val().trim()).val();
 		if(isNaN(jdPrice) || isNaN(jdCount) || jdPrice == '' || jdCount == '')return;
-		node.find(".jdSum").val((parseFloat(jdPrice)*parseFloat(jdCount)).toFixed(2));
+		node.find(".jdSum").val((parseFloat(jdPrice)*parseFloat(jdCount)));
 	}
 	
 	//酒店小计修改事件
@@ -133,7 +133,7 @@ jQuery(function($) {
 			if(isNaN(value) || value == '')return;
 			jdTotal += value;
 		});
-		$("#jdTotal").val(jdTotal.toFixed(2));
+		$("#jdTotal").val(jdTotal);
 		getExpenditure();
 	}
 	

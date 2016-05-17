@@ -78,7 +78,7 @@ jQuery(function($) {
 		var ylCount = node.find(".ylCount").val(node.find(".ylCount").val().trim()).val();
 		var proportion = node.find(".proportion").val(node.find(".proportion").val().trim()).val();
 		if(isNaN(ylFee) || isNaN(ylCost) || isNaN(proportion) || ylFee == '' || ylCost == '' || proportion == '')return;
-		profit = ignoreSingleDigits((parseFloat(ylFee) - parseFloat(ylCost))*parseFloat(ylCount)*parseFloat(proportion)*parseFloat(0.01)).toFixed(2);
+		profit = ignoreSingleDigits((parseFloat(ylFee) - parseFloat(ylCost))*parseFloat(ylCount)*parseFloat(proportion)*parseFloat(0.01));
 		node.find(".ylProfit").val(profit);
 	}
 	
@@ -97,7 +97,7 @@ jQuery(function($) {
 			if(isNaN(value) || value == '')return;
 			ylTotal += value;
 		});
-		$("#ylTotal").val(ylTotal.toFixed(2));
+		$("#ylTotal").val(ylTotal);
 		getIncome();
 	}
 /*	

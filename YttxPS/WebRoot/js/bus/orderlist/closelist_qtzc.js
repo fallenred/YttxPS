@@ -77,7 +77,7 @@ jQuery(function($) {
 		var qtzcPrice = node.find(".qtzcPrice").val(node.find(".qtzcPrice").val().trim()).val();
 		var qtzcCount = node.find(".qtzcCount").val(node.find(".qtzcCount").val().trim()).val();
 		if(isNaN(qtzcPrice) || isNaN(qtzcCount) || qtzcPrice == '' || qtzcCount == '')return;
-		node.find(".qtzcSum").val((parseFloat(qtzcPrice)*parseFloat(qtzcCount)).toFixed(2));
+		node.find(".qtzcSum").val((parseFloat(qtzcPrice)*parseFloat(qtzcCount)));
 	}
 	
 	//小计修改事件
@@ -95,7 +95,7 @@ jQuery(function($) {
 			if(isNaN(qtzcSum) || qtzcSum == '')return;
 			qtzcTotal += qtzcSum;
 		});
-		$("#qtzcTotal").val(qtzcTotal.toFixed(2));
+		$("#qtzcTotal").val(qtzcTotal);
 		getExpenditure();
 	}
 	
