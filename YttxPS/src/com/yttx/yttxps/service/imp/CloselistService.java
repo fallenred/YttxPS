@@ -120,6 +120,13 @@ public class CloselistService implements ICloselistService {
 		closeBody.setCustopername(customOper.getName());
 		closeBody.setOpername(sysOper.getSysOperName().trim());
 		closeBody.setVisitornum(orderList.getFiVisitornum().toString());
+		
+		Root scheduleRoot = ResScheduleXMLConverter.fromXml("http://www.cnacex.com/", orderList.getFcSchedule(), Root.class);
+		Body scheduleBody = scheduleRoot.getBody();
+		closeBody.setAdult(scheduleBody.getAdult());
+		closeBody.setChildren(scheduleBody.getChildren());
+		closeBody.setFullguide(scheduleBody.getFullguide());
+		
 		closeBody.setIncome(BigDecimal.ZERO);
 		closeBody.setProfit(BigDecimal.ZERO);
 		closeBody.setMinproceeds(BigDecimal.ZERO);

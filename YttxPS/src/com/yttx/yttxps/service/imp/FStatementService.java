@@ -124,6 +124,9 @@ public class FStatementService implements IFStatementService{
 		body.setCustopername(origRoot.getBody().getCustopername());
 		body.setOpername(origRoot.getBody().getOpername());
 		body.setVisitornum(origRoot.getBody().getVisitornum());
+		body.setAdult(origRoot.getBody().getAdult());
+		body.setChildren(origRoot.getBody().getChildren());
+		body.setFullguide(origRoot.getBody().getFullguide());
 		Shop shop = incomeDetails.getShop();
 		CostDetails costDetails = body.getCostdetails();
 		BigDecimal income = body.getIncome();

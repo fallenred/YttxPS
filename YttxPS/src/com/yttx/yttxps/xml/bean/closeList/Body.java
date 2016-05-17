@@ -37,6 +37,22 @@ public class Body {
 	private String visitornum;
 
 	/**
+	 * 成人人数
+	 */
+	private String adult;
+	
+	/**
+	 * 儿童人数
+	 */
+	private String children;
+	
+	/**
+	 * 全陪人数
+	 */
+	private String fullguide;
+	
+	
+	/**
 	 * 成本明细
 	 */
 	@XStreamAlias("costdetails")
@@ -114,6 +130,30 @@ public class Body {
 
 	public void setVisitornum(String visitornum) {
 		this.visitornum = visitornum;
+	}
+
+	public String getAdult() {
+		return adult;
+	}
+
+	public void setAdult(String adult) {
+		this.adult = adult;
+	}
+
+	public String getChildren() {
+		return children;
+	}
+
+	public void setChildren(String children) {
+		this.children = children;
+	}
+
+	public String getFullguide() {
+		return fullguide;
+	}
+
+	public void setFullguide(String fullguide) {
+		this.fullguide = fullguide;
 	}
 
 	public CostDetails getCostdetails() {
