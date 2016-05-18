@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.yttx.except.BusinessException;
 import com.yttx.yttxps.mapper.ClearOrderMapper;
 import com.yttx.yttxps.mapper.FStatementMapper;
+import com.yttx.yttxps.mapper.TCloselistMapper;
 import com.yttx.yttxps.mapper.TOrderlistMapper;
 import com.yttx.yttxps.mapper.TrlistMapper;
+import com.yttx.yttxps.model.TCloselist;
 import com.yttx.yttxps.model.TOrderlist;
 import com.yttx.yttxps.model.TOrderlistWithBLOBs;
 import com.yttx.yttxps.model.Trlist;
@@ -24,6 +26,8 @@ import com.yttx.yttxps.model.corder.FStatement;
 import com.yttx.yttxps.model.corder.SimpleOrder;
 import com.yttx.yttxps.service.IPayConfirService;
 import com.yttx.yttxps.service.IPubService;
+import com.yttx.yttxps.xml.ResScheduleXMLConverter;
+import com.yttx.yttxps.xml.bean.Root;
 
 @Service("payConfirService")
 public class PayConfirService implements IPayConfirService{
@@ -36,6 +40,9 @@ public class PayConfirService implements IPayConfirService{
 	
 	@Autowired
 	private TOrderlistMapper<TOrderlist> orderlistMapper;
+	
+	@Autowired
+	private TCloselistMapper<TCloselist> closelistMapper;
 	
 	@Autowired
 	private TrlistMapper<Trlist> trlistMapper;
@@ -81,6 +88,11 @@ public class PayConfirService implements IPayConfirService{
 		trlist.setFdAmt(order.getFdPaidamt());
 		trlist.setFiStat(BigDecimal.ONE);
 		trlistMapper.updateByPrimaryKeySelective(trlist);
+		
+		TCloselist closeList = closelistMapper.selectByPrimaryKey(order.getFsNo());
+		closeList.setFdPaidamt(order.getFdPaidamt());
+		closeList.setFdAmt(closeList.getFdTotalfee().subtract(order.getFdPaidamt()));
+		closelistMapper.updateByPrimaryKeySelective(closeList);
 	}
 	
 	@Override
