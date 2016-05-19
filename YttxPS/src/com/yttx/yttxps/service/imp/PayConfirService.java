@@ -91,7 +91,6 @@ public class PayConfirService implements IPayConfirService{
 		
 		TCloselist closeList = closelistMapper.selectByPrimaryKey(order.getFsNo());
 		closeList.setFdPaidamt(order.getFdPaidamt());
-		closeList.setFdAmt(closeList.getFdTotalfee().subtract(order.getFdPaidamt()));
 		closelistMapper.updateByPrimaryKeySelective(closeList);
 	}
 	
