@@ -246,7 +246,8 @@ public class CloselistService implements ICloselistService {
 							Cclist bglist = reslist.getCclist().get(0);
 							Room tmp = roomMapper.selectByPrimaryKey(reslist.getResno());
 							bgResList.setAccomno(tmp == null ? "" : tmp.getFsAccomno());
-							bgResList.setName(reslist.getResname());
+							String [] name = reslist.getResname().split("-");
+							bgResList.setName(name[1]);
 							Dict dict = null;
 							if(tmp != null) {
 								DictKey dictKey = new DictKey();
